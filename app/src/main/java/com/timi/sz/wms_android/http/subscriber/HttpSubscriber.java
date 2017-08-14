@@ -6,7 +6,10 @@ import com.timi.sz.wms_android.http.callback.OnResultCallBack;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 
-
+/**
+ * 自定义的观察者
+  * @param <T>
+ */
 public class HttpSubscriber<T> implements Observer<T> {
     private OnResultCallBack mOnResultListener;
     private Disposable mDisposable;
