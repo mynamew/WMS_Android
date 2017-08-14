@@ -14,4 +14,9 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+    <string name="text_login_login">登录</string>
+    <string name="text_login_inpiut_psw">请输入密码</string>
+    <string name="text_login_input_username">请输入用户名</string>
+    <string name="text_login_choose_servers">请选择服务器</string>
+    <string name="title_login_app_name">智能仓库管理系统</string>
 </resources>

@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.zhy.autolayout.AutoRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="120px"
-    android:background="@color/colorPrimary">
+    android:background="@color/statuscolor">
 
     <ImageView
         android:id="@+id/iv_title_back"
         android:layout_width="wrap_content"
+        android:padding="30px"
         android:layout_height="match_parent"
         android:src="@mipmap/back" />
 
@@ -14,6 +15,8 @@
         android:id="@+id/tv_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:textColor="#fff"
         android:layout_centerInParent="true" />
 
     <ImageView
@@ -30,4 +33,4 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:visibility="gone" />
-</RelativeLayout>
+</com.zhy.autolayout.AutoRelativeLayout>
