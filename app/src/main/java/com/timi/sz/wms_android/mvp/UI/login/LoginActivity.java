@@ -1,7 +1,9 @@
 package com.timi.sz.wms_android.mvp.UI.login;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -17,12 +19,16 @@ import com.timi.sz.wms_android.R;
 import com.timi.sz.wms_android.bean.LoginBean;
 import com.timi.sz.wms_android.http.api.ApiService;
 import com.timi.sz.wms_android.mvp.base.BaseActivity;
+import com.timi.sz.wms_android.receiver.ExampleUtil;
 
 import org.xml.sax.helpers.XMLReaderFactory;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Set;
 
+import cn.jpush.android.api.JPushInterface;
+import cn.jpush.android.api.TagAliasCallback;
 import io.reactivex.Observable;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -34,7 +40,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import static cn.jpush.android.api.JPushInterface.a.s;
 
 public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> implements LoginView, View.OnClickListener {
-
+    //view
     private TextView tv_login_name;
     private TextView tv_login_version;
     private TextView tv_login_setvers_name;
@@ -52,29 +58,11 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
 
     @Override
     public void initBundle(Bundle savedInstanceState) {
-        setActivityTitle(getString(R.string.text_login_login));
     }
 
     @Override
     public void initView() {
-        tv_login_name = (TextView) findViewById(R.id.tv_login_name);
-        tv_login_name.setOnClickListener(this);
-        tv_login_version = (TextView) findViewById(R.id.tv_login_version);
-        tv_login_version.setOnClickListener(this);
-        tv_login_setvers_name = (TextView) findViewById(R.id.tv_login_setvers_name);
-        tv_login_setvers_name.setOnClickListener(this);
-        tv_login_setvers_select = (ImageView) findViewById(R.id.tv_login_setvers_select);
-        tv_login_setvers_select.setOnClickListener(this);
-        tv_login_username = (EditText) findViewById(R.id.tv_login_username);
-        tv_login_username.setOnClickListener(this);
-        tv_login_password = (EditText) findViewById(R.id.tv_login_password);
-        tv_login_password.setOnClickListener(this);
-        cb_login_rempsw = (CheckBox) findViewById(R.id.cb_login_rempsw);
-        cb_login_rempsw.setOnClickListener(this);
-        tv_login_info = (TextView) findViewById(R.id.tv_login_info);
-        tv_login_info.setOnClickListener(this);
-        btn_login = (Button) findViewById(R.id.btn_login);
-        btn_login.setOnClickListener(this);
+
     }
 
     @Override
@@ -115,8 +103,14 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
             Toast.makeText(this, "请输入密码", Toast.LENGTH_SHORT).show();
             return;
         }
+        //如果记录密码 存储用户名和密码
+        if(cb_login_rempsw.isChecked()){
+
+        }
         //登录请求
         getPresenter().getLoginResult(username, password);
+        //设置别名
+        setAlias();
     }
 
     @Override
@@ -124,4 +118,58 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
         Logger.d("登录的返回的Code--->" + bean.getCode());
         Toast.makeText(this, "登录成功", Toast.LENGTH_SHORT).show();
     }
+
+    /*********************设置别名**************************************************************************************/
+    private void setAlias() {
+        String alias="a123456";
+        if (!ExampleUtil.isValidTagAndAlias(alias)) {
+            Toast.makeText(LoginActivity.this,"别名设置格式不正确", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // 调用 Handler 来异步设置别名
+        mHandler.sendMessage(mHandler.obtainMessage(MSG_SET_ALIAS, alias));
+    }
+
+    private final TagAliasCallback mAliasCallback = new TagAliasCallback() {
+        @Override
+        public void gotResult(int code, String alias, Set<String> tags) {
+            String logs ;
+            switch (code) {
+                case 0:
+                    logs = "Set tag and alias success";
+                    Logger.i(TAG+ logs);
+                    // 建议这里往 SharePreference 里写一个成功设置的状态。成功设置一次后，以后不必再次设置了。
+                    break;
+                case 6002:
+                    logs = "Failed to set alias and tags due to timeout. Try again after 60s.";
+                    Logger.i(TAG+ logs);
+                    // 延迟 60 秒来调用 Handler 设置别名
+                    mHandler.sendMessageDelayed(mHandler.obtainMessage(MSG_SET_ALIAS, alias), 1000 * 60);
+                    break;
+                default:
+                    logs = "Failed with errorCode = " + code;
+                    Log.e(TAG, logs);
+            }
+        }
+    };
+    private static final int MSG_SET_ALIAS = 1001;
+    private final Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(android.os.Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case MSG_SET_ALIAS:
+                    Logger.d(TAG+ "Set alias in handler.");
+                    // 调用 JPush 接口来设置别名。
+                    JPushInterface.setAliasAndTags(getApplicationContext(),
+                            (String) msg.obj,
+                            null,
+                            mAliasCallback);
+                    break;
+                default:
+                    Logger.i(TAG+ "Unhandled msg - " + msg.what);
+            }
+        }
+    };
 }

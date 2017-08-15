@@ -1,12 +1,10 @@
-package com.timi.sz.wms_android.base.uils;
+package com.timi.sz.wms_android.http.uitls;
 
 import com.google.gson.Gson;
-import com.timi.sz.wms_android.bean.TestBean;
 
 import java.io.IOException;
 
 import okhttp3.ResponseBody;
-import retrofit2.Response;
 
 /**
  * 用于 webservice xml 返回 做处理

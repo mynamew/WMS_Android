@@ -20,6 +20,8 @@ public class MainActivity extends BaseActivity<MainView, MainPresenter> implemen
     private static final String TAG = MainActivity.class.getSimpleName();
     private TextView resultTv;
     private String result;
+    //是否处于后台
+    public static boolean isForeground = false;
 
     @Override
     public int setLayoutId() {
@@ -34,11 +36,9 @@ public class MainActivity extends BaseActivity<MainView, MainPresenter> implemen
     @Override
     public void initView() {
         resultTv = (TextView) findViewById(R.id.result);
-        findViewById(R.id.btn).setOnClickListener(new View.OnClickListener()
-        {
+        findViewById(R.id.btn).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
+            public void onClick(View v) {
                 result = "";
                 resultTv.setText("");
                 RxBus.get().send(RxBusCode.CODE_TEST, new RxBusMsg("23333", "23"));
@@ -84,6 +84,19 @@ public class MainActivity extends BaseActivity<MainView, MainPresenter> implemen
             result += bean.toString();
         }
         resultTv.setText(result);
+    }
+
+    @Override
+    protected void onResume() {
+        isForeground = true;
+        super.onResume();
+    }
+
+
+    @Override
+    protected void onPause() {
+        isForeground = false;
+        super.onPause();
     }
 }
 

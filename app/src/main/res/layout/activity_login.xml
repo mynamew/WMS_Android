@@ -12,9 +12,18 @@
         android:scaleType="centerCrop"
         android:src="@mipmap/jzk_login_bg" />
 
-    <include
+   <!-- <include
         android:id="@+id/head_login"
-        layout="@layout/title_head" />
+        layout="@layout/title_head" />-->
+    <TextView
+        android:id="@+id/head_login"
+        android:layout_width="match_parent"
+        android:layout_height="100px"
+        android:background="@color/statuscolor"
+        android:gravity="center"
+        android:text="登录"
+        android:textColor="#fff"
+        android:textSize="18sp" />
 
     <ImageView
         android:id="@+id/iv_login_logo"
@@ -51,7 +60,7 @@
     <RelativeLayout
         android:id="@+id/rl_login_input"
         android:layout_width="match_parent"
-        android:layout_height="350px"
+        android:layout_height="250px"
         android:layout_below="@id/tv_login_version"
         android:layout_margin="30px"
         android:orientation="vertical">
@@ -70,21 +79,22 @@
             android:padding="20px">
 
             <ImageView
-                android:layout_width="60px"
-                android:layout_height="60px"
+                android:layout_width="40px"
+                android:layout_height="40px"
                 android:scaleType="centerCrop"
                 android:src="@mipmap/jzk_login_setvers" />
 
             <TextView
                 android:id="@+id/tv_login_setvers_name"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="20px"
                 android:layout_weight="1"
+                android:gravity="center_vertical"
                 android:text="@string/text_login_choose_servers"
                 android:textColor="#fff"
-                android:textSize="18sp" />
+                android:textSize="16sp" />
 
             <ImageView
                 android:id="@+id/tv_login_setvers_select"
@@ -104,23 +114,25 @@
             android:padding="20px">
 
             <ImageView
-                android:layout_width="60px"
-                android:layout_height="60px"
+                android:layout_width="40px"
+                android:layout_height="40px"
                 android:scaleType="centerCrop"
                 android:src="@mipmap/jzk_login_username" />
 
             <EditText
                 android:id="@+id/tv_login_username"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="20px"
                 android:layout_weight="1"
                 android:background="@null"
+
+                android:gravity="center_vertical"
                 android:hint="@string/text_login_input_username"
                 android:textColor="#fff"
                 android:textColorHint="#fff"
-                android:textSize="18sp" />
+                android:textSize="16sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -132,24 +144,31 @@
             android:padding="20px">
 
             <ImageView
-                android:layout_width="60px"
-                android:layout_height="60px"
+                android:layout_width="40px"
+                android:layout_height="40px"
                 android:scaleType="centerCrop"
                 android:src="@mipmap/jzk_login_password" />
 
             <EditText
                 android:id="@+id/tv_login_password"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="20px"
                 android:layout_weight="1"
-                android:inputType="textPassword"
-                android:hint="@string/text_login_inpiut_psw"
                 android:background="@null"
+                android:gravity="center_vertical"
+                android:hint="@string/text_login_inpiut_psw"
+                android:inputType="textPassword"
                 android:textColor="#fff"
                 android:textColorHint="#fff"
-                android:textSize="18sp" />
+                android:textSize="16sp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="20px"
+                android:src="@mipmap/jzk_eye_org" />
         </LinearLayout>
     </RelativeLayout>
 
@@ -167,7 +186,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="10px"
+        android:layout_marginBottom="30px"
         android:gravity="center_horizontal"
         android:text="版权所有：玖坤信息"
         android:textColor="#999" />

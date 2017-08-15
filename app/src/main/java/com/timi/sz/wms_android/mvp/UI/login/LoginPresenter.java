@@ -7,8 +7,6 @@ import com.timi.sz.wms_android.http.callback.OnResultCallBack;
 import com.timi.sz.wms_android.http.subscriber.HttpSubscriber;
 import com.timi.sz.wms_android.mvp.base.presenter.impl.MvpBasePresenter;
 
-import java.util.List;
-
 /**
  * Created by jzk on 2017/8/14.
  */
@@ -37,12 +35,12 @@ public class LoginPresenter extends MvpBasePresenter<LoginView> {
                 }
 
                 @Override
-                public void onError(int code, String errorMsg) {
+                public void onError(String errorMsg) {
 
                 }
             });
         }
-        mLoginModel.getLoginResult(mLoginBeanHttpSubscriber, username, password);
+        mLoginModel.login(username, password,mLoginBeanHttpSubscriber);
     }
 
     @Override

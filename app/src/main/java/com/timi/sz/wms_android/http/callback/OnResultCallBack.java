@@ -1,12 +1,13 @@
 package com.timi.sz.wms_android.http.callback;
 
 /**
- * 网络请求  回调接口
- * @param <T>
+ * 网络请求的返回
+ * author: timi
+ * create at: 2017-08-15 11:26
  */
 public interface OnResultCallBack<T> {
-
+    //成功的返回
     void onSuccess(T t);
-
-    void onError(int code, String errorMsg);
+    //失败的返回
+    void onError(String errorMsg);
 }

@@ -39,9 +39,10 @@ public class MainPresenter extends MvpBasePresenter<MainView> {
                 }
 
                 @Override
-                public void onError(int code, String errorMsg) {
+                public void onError(String errorMsg) {
 
                 }
+
             });
         }
         mainModel.getMainMsg(pno, ps, dtype, testBeanHttpSubscriber);

@@ -4,4 +4,7 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="statuscolor">#c6ae75</color>
+    <color name="app_background">#FDF8F4</color>
+    <color name="theme_black_7f">#8f000000</color>
+
 </resources>

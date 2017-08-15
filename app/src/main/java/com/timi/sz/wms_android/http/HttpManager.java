@@ -1,20 +1,12 @@
 package com.timi.sz.wms_android.http;
 
-import android.content.Context;
-import android.util.Log;
-
+import com.google.gson.Gson;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
-import com.timi.sz.wms_android.base.uils.Xml2JsonUtils;
-import com.timi.sz.wms_android.bean.LoginBean;
-import com.timi.sz.wms_android.bean.TestBean;
+import com.orhanobut.logger.Logger;
 import com.timi.sz.wms_android.base.uils.Constants;
-import com.timi.sz.wms_android.http.api.ApiResponse;
 import com.timi.sz.wms_android.http.api.ApiService;
-import com.timi.sz.wms_android.http.exception.ApiException;
-
-import java.util.HashMap;
-import java.util.Map;
-import java.util.concurrent.TimeUnit;
+import com.timi.sz.wms_android.http.callback.ApiServiceMethodCallBack;
+import com.timi.sz.wms_android.http.uitls.Xml2JsonUtils;
 
 import io.reactivex.Observable;
 import io.reactivex.Observer;
@@ -28,124 +20,118 @@ import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class HttpManager<T> {
-    public static final String TAG = HttpManager.class.getSimpleName();
-    private static final int DEFAULT_TIMEOUT = 5;
-    private Retrofit mRetrofit;
-    private ApiService mApiService;
-    private static Context mContext;
-    private volatile static HttpManager instance;
-    /**************************************************************************************************************/
-    /**
-     * 初始化
-     */
-    private HttpManager() {
-        //设置拦截器
-        HttpLoggingInterceptor.Level level = HttpLoggingInterceptor.Level.BODY;
-        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
-            @Override
-            public void log(String message) {
-                Log.i("HttpManager", message);
-            }
-        });
-        loggingInterceptor.setLevel(level);
-        //拦截请求和响应日志并输出，其实有很多封装好的日志拦截插件，大家也可以根据个人喜好选择。
-        OkHttpClient.Builder builder = new OkHttpClient.Builder();
-        builder.connectTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)
-                .retryOnConnectionFailure(true)
-                .addInterceptor(loggingInterceptor);
+/**
+ * 用于网络请求的管理类$
+ * author: timi
+ * create at: 2017-08-15 09:53
+ */
+public class HttpManager {
+    //实例
+    private static volatile HttpManager instancce = null;
+    //retrofit
+    private Retrofit mRetrofit = null;
+    //api service
+    private ApiService mApiService = null;
 
-        OkHttpClient okHttpClient = builder.build();
-        //初始化retrofit
-        mRetrofit = new Retrofit.Builder()
-                .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .baseUrl(Constants.BASE_URL)
-                .client(okHttpClient)
-                .build();
-
-        //获得 apiservice
-        mApiService = mRetrofit.create(ApiService.class);
-    }
-    /**************************************************************************************************************/
     /**
-     * 单例
+     * 获取实例的方法
+     * author: timi
+     * create at: 2017/8/15 10:05
      *
-     * @return
+     * @return 返回当前实例
      */
     public static HttpManager getInstance() {
-        if (instance == null) {
+        if (null == instancce) {
             synchronized (HttpManager.class) {
-                if (instance == null) {
-                    instance = new HttpManager();
+                if (null == instancce) {
+                    instancce = new HttpManager();
                 }
             }
         }
-        return instance;
+        return instancce;
     }
 
     /**
-     * 保存 上下文
-     *
-     * @param context
+     * 实例化 instance
+     * author: timi
+     * create at: 2017/8/15 10:06
      */
-    public static void init(Context context) {
-        mContext = context;
+    public HttpManager() {
+        /**
+         * 初始化拦截器
+         */
+        HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
+            @Override
+            public void log(String message) {
+                Logger.d("网络请求----->", message);
+            }
+        });
+        httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        /**
+         * 初始化 okhttp client
+         */
+        OkHttpClient mClient = new OkHttpClient.Builder()
+//                .addInterceptor(new Interceptor() {
+//                    @Override
+//                    public Response intercept(Chain chain) throws IOException {
+//                        Request mRequest = chain.request();
+//                        Logger.d("网络请求----->", mRequest.toString());
+//                        okhttp3.Response mProceed = chain.proceed(mRequest);
+//                        return mProceed;
+//                    }
+//                })
+                .addInterceptor(httpLoggingInterceptor)
+                .build();
+        /**
+         * 初始化 retrofit
+         */
+        mRetrofit = new Retrofit.Builder()
+                //base url
+                .baseUrl(Constants.BASE_URL)
+                //gosn 转换器
+                .addConverterFactory(GsonConverterFactory.create())
+                //rxjava2
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                //okhttp client
+                .client(mClient)
+                .build();
+        mApiService = mRetrofit.create(ApiService.class);
     }
-    /**************************************************************************************************************/
-    /**p
+
+    /**
      * 普通的网络请求注册
+     *
      * @param o
      * @param s
      * @param <T>
      */
-    private <T> void toSubscribe(Observable<ApiResponse<T>> o, Observer<T> s) {
+    private <T> void toSubscribe(Observable<ResponseBody> o, Observer<T> s, final Class<T> clazz)throws Exception {
         o.subscribeOn(Schedulers.io())
-                .map(new Function<ApiResponse<T>, T>() {
+                .map(new Function<ResponseBody, T>() {
                     @Override
-                    public T apply(@NonNull ApiResponse<T> response) throws Exception {
-                        int code = response.getCode();
-                        if (code != Constants.SUCCESS_CODE) {
-                            throw new ApiException(code, response.getMsg());
-                        } else {
-                            return response.getDatas();
-                        }
+                    public T apply(@NonNull ResponseBody response) throws Exception {
+                        //转换 ResponseBody 成 包装的对象
+                        T t = new Gson().fromJson(response.string(), clazz);
+                        return t;
                     }
                 })
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(s);
     }
-
     /**
-     * 测试普通的api接口的方法
-     *
-     * @param subscriber
-     * @param pno
-     * @param ps
-     * @param dtype
-     */
-    public void getDatasUser(Observer<TestBean> subscriber, int pno, int ps, String dtype) {
-        Map<String, Object> params = new HashMap<>();
-        params.put("pno", pno);
-        params.put("ps", ps);
-        params.put("dtype", dtype);
-        toSubscribe(mApiService.getUserList(params), subscriber);
-    }
-    /**************************************************************************************************************/
-    /**
-     * 为 webservice服务的注册观察者的方法
+     * 来自webservice的网络请求注册
      *
      * @param o
      * @param s
-     * @param clazz
      * @param <T>
      */
-    private <T> void toSubscribe1(Observable<ResponseBody> o, Observer<T> s, final Class<T> clazz) {
+    private <T> void toSubscribeByWebService(Observable<ResponseBody> o, Observer<T> s, final Class<T> clazz)throws Exception {
         o.subscribeOn(Schedulers.io())
                 .map(new Function<ResponseBody, T>() {
                     @Override
                     public T apply(@NonNull ResponseBody response) throws Exception {
+                        //转换 ResponseBody 成 包装的对象
                         T t = new Xml2JsonUtils<T>().toJson(response, clazz);
                         return t;
                     }
@@ -154,17 +140,36 @@ public class HttpManager<T> {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(s);
     }
-    /**************************************************************************************************************/
     /**
-     * 登录的返回
+     * 公共的外部调用请求的方法
      *
-     * @param usercode
-     * @param password
-     * @param subscriber
+     * @param subscriber 观察者
+     * @param clazz      类
+     * @param callBack   回调
+     * @param <T>
      */
-    public void postLoginResult(String usercode, String password, Observer<LoginBean> subscriber) {
-        toSubscribe1(mApiService.login(usercode, password), subscriber, LoginBean.class);
+    public <T> void HttpManagerRequest(Observer<T> subscriber, Class<T> clazz, ApiServiceMethodCallBack callBack) {
+        try {
+            toSubscribe(callBack.createObservable(mApiService), subscriber, clazz);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
-    /**************************************************************************************************************/
+    /**
+     * 公共的外部调用请求的方法  （来自webservice）
+     *
+     * @param subscriber 观察者
+     * @param clazz      类
+     * @param callBack   回调
+     * @param <T>
+     */
+    public <T> void HttpManagerRequestByWebservice(Observer<T> subscriber, Class<T> clazz, ApiServiceMethodCallBack callBack) {
+        try {
+            toSubscribeByWebService(callBack.createObservable(mApiService), subscriber, clazz);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
 }
