@@ -1,5 +1,8 @@
 package com.timi.sz.wms_android.bean;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.List;
 
 /**
@@ -17,6 +20,12 @@ public class LoginBean {
     private int code;
     private List<DataBean> data;
 
+    protected LoginBean(Parcel in) {
+        code = in.readInt();
+    }
+
+
+
     public int getCode() {
         return code;
     }
@@ -33,7 +42,9 @@ public class LoginBean {
         this.data = data;
     }
 
-    public static class DataBean {
+
+
+    public static class DataBean implements Parcelable {
         /**
          * cuserid : 1001A610000000000007
          * user_name : 葛佩
@@ -107,6 +118,56 @@ public class LoginBean {
         private String user_name4;
         private String user_name5;
         private String user_name6;
+
+        protected DataBean(Parcel in) {
+            cuserid = in.readString();
+            user_name = in.readString();
+            user_code = in.readString();
+            user_password = in.readString();
+            user_note = in.readString();
+            pwdlevelcode = in.readString();
+            pwdparam = in.readString();
+            identityverifycode = in.readString();
+            abledate = in.readString();
+            disabledate = in.readString();
+            islocked = in.readString();
+            pk_base_doc = in.readString();
+            pk_psndoc = in.readString();
+            base_doc_type = in.readInt();
+            pk_org = in.readString();
+            pk_group = in.readString();
+            creator = in.readString();
+            creationtime = in.readString();
+            modifier = in.readString();
+            modifiedtime = in.readString();
+            user_type = in.readInt();
+            pk_usergroupforcreate = in.readString();
+            format = in.readString();
+            isca = in.readString();
+            enablestate = in.readInt();
+            contentlang = in.readString();
+            user_code_q = in.readString();
+            dataoriginflag = in.readString();
+            email = in.readString();
+            systype = in.readString();
+            user_name2 = in.readString();
+            user_name3 = in.readString();
+            user_name4 = in.readString();
+            user_name5 = in.readString();
+            user_name6 = in.readString();
+        }
+
+        public static final Creator<DataBean> CREATOR = new Creator<DataBean>() {
+            @Override
+            public DataBean createFromParcel(Parcel in) {
+                return new DataBean(in);
+            }
+
+            @Override
+            public DataBean[] newArray(int size) {
+                return new DataBean[size];
+            }
+        };
 
         public String getCuserid() {
             return cuserid;
@@ -386,6 +447,50 @@ public class LoginBean {
 
         public void setUser_name6(String user_name6) {
             this.user_name6 = user_name6;
+        }
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        @Override
+        public void writeToParcel(Parcel dest, int flags) {
+            dest.writeString(cuserid);
+            dest.writeString(user_name);
+            dest.writeString(user_code);
+            dest.writeString(user_password);
+            dest.writeString(user_note);
+            dest.writeString(pwdlevelcode);
+            dest.writeString(pwdparam);
+            dest.writeString(identityverifycode);
+            dest.writeString(abledate);
+            dest.writeString(disabledate);
+            dest.writeString(islocked);
+            dest.writeString(pk_base_doc);
+            dest.writeString(pk_psndoc);
+            dest.writeInt(base_doc_type);
+            dest.writeString(pk_org);
+            dest.writeString(pk_group);
+            dest.writeString(creator);
+            dest.writeString(creationtime);
+            dest.writeString(modifier);
+            dest.writeString(modifiedtime);
+            dest.writeInt(user_type);
+            dest.writeString(pk_usergroupforcreate);
+            dest.writeString(format);
+            dest.writeString(isca);
+            dest.writeInt(enablestate);
+            dest.writeString(contentlang);
+            dest.writeString(user_code_q);
+            dest.writeString(dataoriginflag);
+            dest.writeString(email);
+            dest.writeString(systype);
+            dest.writeString(user_name2);
+            dest.writeString(user_name3);
+            dest.writeString(user_name4);
+            dest.writeString(user_name5);
+            dest.writeString(user_name6);
         }
     }
 }

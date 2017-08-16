@@ -10,5 +10,4 @@ import com.timi.sz.wms_android.mvp.base.view.iml.MvpBaseView;
  * 
  */
 public interface MainView extends MvpBaseView{
-	public void onGetMainMsg(TestBean bean);
 }

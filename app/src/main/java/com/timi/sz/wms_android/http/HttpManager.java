@@ -2,7 +2,6 @@ package com.timi.sz.wms_android.http;
 
 import com.google.gson.Gson;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
-import com.orhanobut.logger.Logger;
 import com.timi.sz.wms_android.base.uils.Constants;
 import com.timi.sz.wms_android.http.api.ApiService;
 import com.timi.sz.wms_android.http.callback.ApiServiceMethodCallBack;
@@ -14,9 +13,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
-import okhttp3.OkHttpClient;
 import okhttp3.ResponseBody;
-import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -58,31 +55,6 @@ public class HttpManager {
      */
     public HttpManager() {
         /**
-         * 初始化拦截器
-         */
-        HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
-            @Override
-            public void log(String message) {
-                Logger.d("网络请求----->", message);
-            }
-        });
-        httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-        /**
-         * 初始化 okhttp client
-         */
-        OkHttpClient mClient = new OkHttpClient.Builder()
-//                .addInterceptor(new Interceptor() {
-//                    @Override
-//                    public Response intercept(Chain chain) throws IOException {
-//                        Request mRequest = chain.request();
-//                        Logger.d("网络请求----->", mRequest.toString());
-//                        okhttp3.Response mProceed = chain.proceed(mRequest);
-//                        return mProceed;
-//                    }
-//                })
-                .addInterceptor(httpLoggingInterceptor)
-                .build();
-        /**
          * 初始化 retrofit
          */
         mRetrofit = new Retrofit.Builder()
@@ -92,8 +64,6 @@ public class HttpManager {
                 .addConverterFactory(GsonConverterFactory.create())
                 //rxjava2
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                //okhttp client
-                .client(mClient)
                 .build();
         mApiService = mRetrofit.create(ApiService.class);
     }

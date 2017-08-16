@@ -19,4 +19,12 @@
     <string name="text_login_input_username">请输入用户名</string>
     <string name="text_login_choose_servers">请选择服务器</string>
     <string name="title_login_app_name">智能仓库管理系统</string>
+    <string name="txt_login_success_tip">提示：首次登录需进行个人信息确认，如有问题，请到ERP中进行修改。</string>
+    <string name="name_login_success">姓名：</string>
+    <string name="sex_login_success">性别：</string>
+    <string name="num_login_success">工号：</string>
+    <string name="depart_login_success">部门：</string>
+    <string name="tel_login_success">手机：</string>
+    <string name="txt_confirm">确定</string>
+    <string name="zhuye_home">主页</string>
 </resources>

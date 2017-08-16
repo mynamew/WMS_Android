@@ -55,11 +55,11 @@ public abstract class BaseActivity<V extends MvpView, P extends MvpPresenter<V>>
         //设置布局id
         // 不需要侧滑的布局id  进行过滤
         if (layoutResID == R.layout.activity_main) {
-            super.setContentView(layoutResID);
+           setContentView(layoutResID);
         }
         //添加 侧滑布局
         else {
-            super.setContentView(getContainer());
+            setContentView(getContainer());
             View view = LayoutInflater.from(this).inflate(layoutResID, null);
             view.setBackgroundColor(getResources().getColor(R.color.app_background));
             swipeBackLayout.addView(view);

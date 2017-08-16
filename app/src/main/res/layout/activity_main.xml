@@ -1,20 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
-    <include layout="@layout/title_head"/>
-    <Button
-        android:id="@+id/btn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="开始请求"
-      />
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="#fff"
+              android:orientation="vertical">
 
     <TextView
-        android:id="@+id/result"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:textSize="12sp" />
+        android:layout_height="100px"
+        android:background="@color/statuscolor"
+        android:gravity="center"
+        android:text="@string/zhuye_home"
+        android:textColor="#fff"
+        android:textSize="16sp"/>
+
 
 </LinearLayout>

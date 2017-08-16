@@ -18,8 +18,6 @@ import gorden.rxbus2.ThreadMode;
 
 public class MainActivity extends BaseActivity<MainView, MainPresenter> implements MainView {
     private static final String TAG = MainActivity.class.getSimpleName();
-    private TextView resultTv;
-    private String result;
     //是否处于后台
     public static boolean isForeground = false;
 
@@ -35,16 +33,6 @@ public class MainActivity extends BaseActivity<MainView, MainPresenter> implemen
 
     @Override
     public void initView() {
-        resultTv = (TextView) findViewById(R.id.result);
-        findViewById(R.id.btn).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                result = "";
-                resultTv.setText("");
-                RxBus.get().send(RxBusCode.CODE_TEST, new RxBusMsg("23333", "23"));
-                getPresenter().getMainMsg(1, 10, "json1");
-            }
-        });
 
     }
 
@@ -68,7 +56,6 @@ public class MainActivity extends BaseActivity<MainView, MainPresenter> implemen
      */
     @Subscribe(code = RxBusCode.CODE_TEST, threadMode = ThreadMode.MAIN)
     public void getRxBusPost(RxBusMsg msg) {
-        Logger.e("接收到的post--->" + msg.getName());
     }
 
     @Override
@@ -78,13 +65,6 @@ public class MainActivity extends BaseActivity<MainView, MainPresenter> implemen
         super.onDestroy();
     }
 
-    @Override
-    public void onGetMainMsg(TestBean tb) {
-        for (TestBean.ListBean bean : tb.getList()) {
-            result += bean.toString();
-        }
-        resultTv.setText(result);
-    }
 
     @Override
     protected void onResume() {

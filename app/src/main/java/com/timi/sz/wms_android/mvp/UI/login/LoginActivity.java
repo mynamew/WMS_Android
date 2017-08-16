@@ -1,55 +1,64 @@
 package com.timi.sz.wms_android.mvp.UI.login;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
+import android.os.Parcelable;
 import android.text.TextUtils;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.orhanobut.logger.Logger;
 import com.timi.sz.wms_android.R;
+import com.timi.sz.wms_android.base.uils.Constants;
+import com.timi.sz.wms_android.base.uils.SpUtils;
+import com.timi.sz.wms_android.base.uils.ToastUtils;
 import com.timi.sz.wms_android.bean.LoginBean;
-import com.timi.sz.wms_android.http.api.ApiService;
+import com.timi.sz.wms_android.mvp.UI.home.MainActivity;
 import com.timi.sz.wms_android.mvp.base.BaseActivity;
 import com.timi.sz.wms_android.receiver.ExampleUtil;
 
-import org.xml.sax.helpers.XMLReaderFactory;
-
-import java.io.IOException;
-import java.util.List;
+import java.util.ArrayList;
 import java.util.Set;
 
+import butterknife.Bind;
+import butterknife.OnClick;
 import cn.jpush.android.api.JPushInterface;
 import cn.jpush.android.api.TagAliasCallback;
-import io.reactivex.Observable;
-import okhttp3.ResponseBody;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
+/** 
+  * 登录界面
+  * author: timi    
+  * create at: 2017/8/16 8:57
+  */  
+public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> implements LoginView {
+    @Bind(R.id.tv_login_version)
+    TextView tvLoginVersion;
+    @Bind(R.id.tv_login_setvers_name)
+    TextView tvLoginSetversName;
+    @Bind(R.id.ll_servers)
+    LinearLayout llServers;
+    @Bind(R.id.et_login_username)
+    EditText etLoginUsername;
+    @Bind(R.id.et_login_password)
+    EditText etLoginPassword;
+    @Bind(R.id.cb_login_rempsw)
+    CheckBox cbLoginRempsw;
+    @Bind(R.id.btn_login)
+    Button btnLogin;
+    @Bind(R.id.iv_login_eye)
+    ImageView ivLoginEye;
 
-import static cn.jpush.android.api.JPushInterface.a.s;
-
-public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> implements LoginView, View.OnClickListener {
-    //view
-    private TextView tv_login_name;
-    private TextView tv_login_version;
-    private TextView tv_login_setvers_name;
-    private ImageView tv_login_setvers_select;
-    private EditText tv_login_username;
-    private EditText tv_login_password;
-    private CheckBox cb_login_rempsw;
-    private TextView tv_login_info;
-    private Button btn_login;
+    //flag
+    private boolean isCanSeePsw = false;
 
     @Override
     public int setLayoutId() {
@@ -58,6 +67,26 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
 
     @Override
     public void initBundle(Bundle savedInstanceState) {
+        /**
+         * 获取用户名
+         */
+        String userName = SpUtils.getInstance().getString(Constants.USER_NAME);
+        if (!TextUtils.isEmpty(userName)) {
+            etLoginUsername.setText(userName);
+        }
+        /**
+         * 获取 存储的密码
+         */
+        String password = SpUtils.getInstance().getString(Constants.USER_PSW);
+        if (!TextUtils.isEmpty(password)) {
+            etLoginPassword.setText(password);
+        }
+        /**
+         * 设置是否记录密码
+         */
+        boolean isRememberPsw = SpUtils.getInstance().getBoolean(Constants.REMENBER_PSW);
+        cbLoginRempsw.setChecked(isRememberPsw);
+        Logger.d("是否记录密码-->" + isRememberPsw);
     }
 
     @Override
@@ -80,50 +109,98 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
         return this;
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.btn_login://登录
-                submit();
-                break;
-        }
-    }
-
     /**
-     * 登录
+     * 登录的请求
+     * author: timi
+     * create at: 2017/8/15 18:24
      */
-    private void submit() {
-        String username = tv_login_username.getText().toString().trim();
+    @OnClick(R.id.btn_login)
+    public void submit() {
+        String username = etLoginUsername.getText().toString().trim();
         if (TextUtils.isEmpty(username)) {
-            Toast.makeText(this, "请输入用户名", Toast.LENGTH_SHORT).show();
+            ToastUtils.showShort(this, "请输入用户名");
             return;
         }
-        String password = tv_login_password.getText().toString().trim();
+        String password = etLoginPassword.getText().toString().trim();
         if (TextUtils.isEmpty(password)) {
-            Toast.makeText(this, "请输入密码", Toast.LENGTH_SHORT).show();
+            ToastUtils.showShort(this, "请输入密码");
             return;
         }
         //如果记录密码 存储用户名和密码
-        if(cb_login_rempsw.isChecked()){
-
+        Logger.d("是否存入密码-->" + cbLoginRempsw.isChecked());
+        if (cbLoginRempsw.isChecked()) {
+            //存储用户名和密码
+            SpUtils.getInstance()
+                    .putString(Constants.USER_NAME, username)
+                    .putString(Constants.USER_PSW, password)
+                    .putBoolean(Constants.REMENBER_PSW, true);
+        } else {
+            //清空用户名和密码
+            SpUtils.getInstance()
+                    .putString(Constants.USER_NAME, "")
+                    .putString(Constants.USER_PSW, "")
+                    .putBoolean(Constants.REMENBER_PSW, false);
         }
         //登录请求
         getPresenter().getLoginResult(username, password);
-        //设置别名
-        setAlias();
+
     }
 
+    /**
+     * 是否显示密码
+     */
+    @OnClick(R.id.iv_login_eye)
+    public void showPassword() {
+        isCanSeePsw = !isCanSeePsw;
+        if (!isCanSeePsw) {
+            etLoginPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());    //将文本框的内容以密文形式显示
+        } else {
+            etLoginPassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance()); // 以明文显示
+        }
+    }
+    private LoginBean bean=null;
     @Override
     public void getLoginResult(LoginBean bean) {
-        Logger.d("登录的返回的Code--->" + bean.getCode());
+        //存储 登录的返回
+        this.bean=bean;
+//        Logger.d("登录的返回的Code--->" + bean.getCode());
         Toast.makeText(this, "登录成功", Toast.LENGTH_SHORT).show();
+        //第一次登录以及设置别名
+//        boolean isFirstLog = SpUtils.getInstance().getBoolean(Constants.IS_FIRST_LOG);
+//        if (isFirstLog) {
+            jumpToMainActivity();
+//        } else {
+//            设置别名
+//            setAlias(isFirstLog);
+//        }
     }
-
-    /*********************设置别名**************************************************************************************/
-    private void setAlias() {
-        String alias="a123456";
+    /**
+     * 跳转到主页的方法
+     */
+    private void jumpToMainActivity() {
+        //是否第一次登录
+        boolean isFirstLog = SpUtils.getInstance().getBoolean(Constants.IS_FIRST_LOG);
+        //判断跳转到不同界面
+        if (!isFirstLog) {
+            Intent intent = new Intent(LoginActivity.this, LoginSuccessActivity.class);
+            if(null!=bean){
+                intent.putParcelableArrayListExtra("userinfo", (ArrayList<? extends Parcelable>) bean.getData());
+            }
+            startActivity(intent);
+        } else {
+            startActivity(new Intent(LoginActivity.this, MainActivity.class));
+        }
+        //设置 第一次登录为 false
+        SpUtils.getInstance().putBoolean(Constants.IS_FIRST_LOG, false);
+        onBackPressed();
+    }
+    /*********************
+     * 设置别名
+     **************************************************************************************/
+    private void setAlias(boolean isFirstLog) {
+        String alias = "a123456";
         if (!ExampleUtil.isValidTagAndAlias(alias)) {
-            Toast.makeText(LoginActivity.this,"别名设置格式不正确", Toast.LENGTH_SHORT).show();
+            Toast.makeText(LoginActivity.this, "别名设置格式不正确", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -134,16 +211,15 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
     private final TagAliasCallback mAliasCallback = new TagAliasCallback() {
         @Override
         public void gotResult(int code, String alias, Set<String> tags) {
-            String logs ;
+            String logs;
             switch (code) {
-                case 0:
-                    logs = "Set tag and alias success";
-                    Logger.i(TAG+ logs);
-                    // 建议这里往 SharePreference 里写一个成功设置的状态。成功设置一次后，以后不必再次设置了。
+                case 0://第一次登录 和设置别名一起操作 （设置别名也只设置一次）
+                    //获取第一次登录标识
+                    jumpToMainActivity();
                     break;
                 case 6002:
                     logs = "Failed to set alias and tags due to timeout. Try again after 60s.";
-                    Logger.i(TAG+ logs);
+                    Logger.i(TAG + logs);
                     // 延迟 60 秒来调用 Handler 设置别名
                     mHandler.sendMessageDelayed(mHandler.obtainMessage(MSG_SET_ALIAS, alias), 1000 * 60);
                     break;
@@ -153,14 +229,17 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
             }
         }
     };
+
+
+
     private static final int MSG_SET_ALIAS = 1001;
     private final Handler mHandler = new Handler() {
         @Override
-        public void handleMessage(android.os.Message msg) {
+        public void handleMessage(Message msg) {
             super.handleMessage(msg);
             switch (msg.what) {
                 case MSG_SET_ALIAS:
-                    Logger.d(TAG+ "Set alias in handler.");
+                    Logger.d(TAG + "Set alias in handler.");
                     // 调用 JPush 接口来设置别名。
                     JPushInterface.setAliasAndTags(getApplicationContext(),
                             (String) msg.obj,
@@ -168,7 +247,7 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
                             mAliasCallback);
                     break;
                 default:
-                    Logger.i(TAG+ "Unhandled msg - " + msg.what);
+                    Logger.i(TAG + "Unhandled msg - " + msg.what);
             }
         }
     };

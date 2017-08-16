@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_login_success"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff"
+    android:orientation="vertical"
+    tools:context="com.timi.sz.wms_android.mvp.UI.login.LoginSuccessActivity">
+     <include layout="@layout/title_head"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100px"
+        android:layout_marginTop="20px"
+        android:background="#ecded3">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="40px"
+            android:src="@drawable/szk_ic_wasrning30"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="30px"
+            android:gravity="center_vertical"
+            android:text="@string/txt_login_success_tip"/>
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/tv_login_success_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="40px"
+        android:layout_marginTop="60px"
+        android:text="@string/name_login_success"
+        android:textColor="#333"
+        android:textSize="16sp"/>
+
+    <TextView
+        android:id="@+id/tv_login_success_sex"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="40px"
+        android:layout_marginTop="30px"
+        android:text="@string/sex_login_success"
+        android:textColor="#333"
+        android:textSize="16sp"/>
+    <TextView
+        android:id="@+id/tv_login_success_num"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="40px"
+        android:layout_marginTop="30px"
+        android:text="@string/num_login_success"
+        android:textColor="#333"
+        android:textSize="16sp"/>
+
+
+    <TextView
+        android:id="@+id/tv_login_success_depart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="40px"
+        android:layout_marginTop="30px"
+        android:text="@string/depart_login_success"
+        android:textColor="#333"
+        android:textSize="16sp"/>
+        <TextView
+        android:id="@+id/tv_login_success_tel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="40px"
+        android:layout_marginTop="30px"
+        android:text="@string/tel_login_success"
+        android:textColor="#333"
+        android:textSize="16sp"/>
+    <Button
+        android:id="@+id/btn_login_success_confirm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/txt_confirm"
+        android:textColor="#fff"
+        android:layout_marginLeft="100px"
+        android:layout_marginRight="100px"
+        android:layout_marginTop="200px"
+        android:background="@drawable/selector_btn_bg_login"/>
+</LinearLayout>

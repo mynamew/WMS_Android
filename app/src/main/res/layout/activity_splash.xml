@@ -15,7 +15,6 @@
         android:id="@+id/iv_login_logo"
         android:layout_width="150px"
         android:layout_height="150px"
-        android:layout_below="@id/head_login"
         android:layout_marginLeft="10px"
         android:layout_marginTop="20px"
         android:src="@mipmap/logo2" />

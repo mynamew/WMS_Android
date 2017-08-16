@@ -9,7 +9,10 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
 import com.timi.sz.wms_android.R;
+import com.timi.sz.wms_android.base.uils.Constants;
+import com.timi.sz.wms_android.base.uils.SpUtils;
 import com.timi.sz.wms_android.base.uils.statusutils.StatusBarUtil;
+import com.timi.sz.wms_android.mvp.UI.home.MainActivity;
 import com.timi.sz.wms_android.mvp.UI.login.LoginActivity;
 import com.zhy.autolayout.AutoLayoutActivity;
 
@@ -18,7 +21,12 @@ public class SplashActivity extends AutoLayoutActivity {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            startActivity(new Intent(SplashActivity.this, LoginActivity.class));
+            //是否是第一次登录  跳转登录还是主页
+            if (SpUtils.getInstance().getBoolean(Constants.IS_FIRST_LOG)) {
+                startActivity(new Intent(SplashActivity.this, LoginActivity.class));
+            } else {
+                startActivity(new Intent(SplashActivity.this, MainActivity.class));
+            }
             onBackPressed();
         }
     };

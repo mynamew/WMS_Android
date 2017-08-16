@@ -103,12 +103,17 @@
                 android:layout_gravity="center_vertical"
                 android:src="@mipmap/jzk_login_down" />
         </LinearLayout>
-
+        <View
+            android:id="@+id/view1"
+            android:layout_width="match_parent"
+            android:layout_height="2px"
+            android:layout_below="@id/ll_servers"
+            android:background="#fff"/>
         <LinearLayout
             android:id="@+id/ll_username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/ll_servers"
+            android:layout_below="@id/view1"
             android:gravity="center_vertical"
             android:orientation="horizontal"
             android:padding="20px">
@@ -120,7 +125,7 @@
                 android:src="@mipmap/jzk_login_username" />
 
             <EditText
-                android:id="@+id/tv_login_username"
+                android:id="@+id/et_login_username"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_gravity="center_vertical"
@@ -134,11 +139,16 @@
                 android:textColorHint="#fff"
                 android:textSize="16sp" />
         </LinearLayout>
-
+        <View
+            android:id="@+id/view2"
+            android:layout_below="@id/ll_username"
+            android:layout_width="match_parent"
+            android:layout_height="2px"
+            android:background="#fff"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/ll_username"
+            android:layout_below="@id/view2"
             android:gravity="center_vertical"
             android:orientation="horizontal"
             android:padding="20px">
@@ -150,7 +160,7 @@
                 android:src="@mipmap/jzk_login_password" />
 
             <EditText
-                android:id="@+id/tv_login_password"
+                android:id="@+id/et_login_password"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_gravity="center_vertical"
@@ -165,9 +175,13 @@
                 android:textSize="16sp" />
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="20px"
+                android:id="@+id/iv_login_eye"
+                android:layout_width="60px"
+                android:layout_height="60px"
+                android:paddingLeft="20px"
+                android:paddingTop="20px"
+                android:paddingBottom="20px"
+                android:scaleType="centerCrop"
                 android:src="@mipmap/jzk_eye_org" />
         </LinearLayout>
     </RelativeLayout>
