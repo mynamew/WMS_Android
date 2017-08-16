@@ -6,5 +6,10 @@
     <color name="statuscolor">#c6ae75</color>
     <color name="app_background">#FDF8F4</color>
     <color name="theme_black_7f">#8f000000</color>
+    <color name="home_in_lib">#67c4fc</color>
+    <color name="white">#ffffff</color>
+    <color name="home_lib_in">#ef524d</color>
+    <color name="home_lib_out">#ffb544</color>
+    <color name="home_quality_color">#768afa</color>
 
 </resources>

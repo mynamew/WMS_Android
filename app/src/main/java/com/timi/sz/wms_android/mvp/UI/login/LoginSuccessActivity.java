@@ -18,31 +18,31 @@ import com.zhy.autolayout.AutoLayoutActivity;
 
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class LoginSuccessActivity extends AutoLayoutActivity {
 
-    @Bind(R.id.tv_login_success_name)
+    @BindView(R.id.tv_login_success_name)
     TextView tvLoginSuccessName;
-    @Bind(R.id.tv_login_success_sex)
+    @BindView(R.id.tv_login_success_sex)
     TextView tvLoginSuccessSex;
-    @Bind(R.id.tv_login_success_num)
+    @BindView(R.id.tv_login_success_num)
     TextView tvLoginSuccessNum;
-    @Bind(R.id.tv_login_success_depart)
+    @BindView(R.id.tv_login_success_depart)
     TextView tvLoginSuccessDepart;
-    @Bind(R.id.tv_login_success_tel)
+    @BindView(R.id.tv_login_success_tel)
     TextView tvLoginSuccessTel;
-    @Bind(R.id.btn_login_success_confirm)
+    @BindView(R.id.btn_login_success_confirm)
     Button btnLoginSuccessConfirm;
-    @Bind(R.id.iv_title_back)
+    @BindView(R.id.iv_title_back)
     ImageView ivTitleBack;
-    @Bind(R.id.tv_title)
+    @BindView(R.id.tv_title)
     TextView tvTitle;
-    @Bind(R.id.tv_title_right)
+    @BindView(R.id.tv_title_right)
     TextView tvTitleRight;
-    @Bind(R.id.activity_login_success)
+    @BindView(R.id.activity_login_success)
     LinearLayout activityLoginSuccess;
 
     @Override
@@ -67,7 +67,6 @@ public class LoginSuccessActivity extends AutoLayoutActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        ButterKnife.unbind(this);
     }
 
     @OnClick(R.id.btn_login_success_confirm)

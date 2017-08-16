@@ -26,5 +26,12 @@
     <string name="depart_login_success">部门：</string>
     <string name="tel_login_success">手机：</string>
     <string name="txt_confirm">确定</string>
-    <string name="zhuye_home">主页</string>
+    <string name="home">主页</string>
+    <string name="home_in_lib">入库作业</string>
+    <string name="home_out_lib">出库作业</string>
+    <string name="home_today_in">今日入库</string>
+    <string name="home_today_out">今日出库</string>
+    <string name="home_detail">查看详情</string>
+    <string name="home_query">综合查询</string>
+    <string name="home_lib_in_deal">库内作业</string>
 </resources>
