@@ -8,9 +8,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.orhanobut.logger.Logger;
 import com.timi.sz.wms_android.R;
 import com.timi.sz.wms_android.base.uils.Constants;
+import com.timi.sz.wms_android.base.uils.LogUitls;
 import com.timi.sz.wms_android.base.uils.statusutils.StatusBarUtil;
 import com.timi.sz.wms_android.bean.LoginBean;
 import com.timi.sz.wms_android.mvp.UI.home.MainActivity;
@@ -54,7 +54,7 @@ public class LoginSuccessActivity extends AutoLayoutActivity {
         tvTitle.setText("首次登陆");
         List<LoginBean.DataBean> datas = getIntent().getParcelableArrayListExtra("userinfo");
         if (null != datas) {
-            Logger.d("传递过来的数据--->"+ datas.get(0).toString());
+//            LogUitls.d("传递过来的数据--->"+ datas.get(0).toString());
             LoginBean.DataBean dataBean = datas.get(0);
             tvLoginSuccessName.setText(String.format(getString(R.string.login_success_name), dataBean.getUser_name()));
             tvLoginSuccessSex.setText(String.format(getString(R.string.login_success_sex), "男"));

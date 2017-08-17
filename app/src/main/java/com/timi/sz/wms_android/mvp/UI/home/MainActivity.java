@@ -2,28 +2,18 @@ package com.timi.sz.wms_android.mvp.UI.home;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
-import com.orhanobut.logger.Logger;
 import com.timi.sz.wms_android.R;
 import com.timi.sz.wms_android.base.uils.ToastUtils;
 import com.timi.sz.wms_android.base.uils.statusutils.StatusBarUtil;
 import com.timi.sz.wms_android.http.RxBusMsg.RxBusCode;
 import com.timi.sz.wms_android.http.RxBusMsg.RxBusMsg;
 import com.timi.sz.wms_android.mvp.base.BaseActivity;
-import com.timi.sz.wms_android.receiver.ExampleUtil;
-
-import java.util.Set;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
-import cn.jpush.android.api.JPushInterface;
-import cn.jpush.android.api.TagAliasCallback;
 import gorden.rxbus2.RxBus;
 import gorden.rxbus2.Subscribe;
 import gorden.rxbus2.ThreadMode;

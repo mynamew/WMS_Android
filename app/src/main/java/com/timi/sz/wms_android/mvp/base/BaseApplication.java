@@ -5,6 +5,7 @@ import android.content.Context;
 
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.Logger;
+import com.timi.sz.wms_android.base.uils.LogUitls;
 
 import cn.jpush.android.api.JPushInterface;
 
@@ -25,7 +26,7 @@ public class BaseApplication extends Application {
         Logger.addLogAdapter(new AndroidLogAdapter());
         JPushInterface.init(this);
         JPushInterface.setDebugMode(IS_DEBUG);
-        Logger.d("程序是否是 debug状态--->"+IS_DEBUG);
+//        LogUitls.d("程序是否是 debug状态--->"+IS_DEBUG);
     }
 
     /**

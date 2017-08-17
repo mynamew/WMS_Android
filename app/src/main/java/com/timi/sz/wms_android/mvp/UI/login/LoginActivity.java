@@ -17,9 +17,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.orhanobut.logger.Logger;
 import com.timi.sz.wms_android.R;
 import com.timi.sz.wms_android.base.uils.Constants;
+import com.timi.sz.wms_android.base.uils.LogUitls;
 import com.timi.sz.wms_android.base.uils.SpUtils;
 import com.timi.sz.wms_android.base.uils.ToastUtils;
 import com.timi.sz.wms_android.bean.LoginBean;
@@ -87,7 +87,7 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
          */
         boolean isRememberPsw = SpUtils.getInstance().getBoolean(Constants.REMENBER_PSW);
         cbLoginRempsw.setChecked(isRememberPsw);
-//        Logger.d("是否记录密码-->" + isRememberPsw);
+//        LogUitls.d("是否记录密码-->" + isRememberPsw);
     }
 
     @Override
@@ -128,7 +128,7 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
             return;
         }
         //如果记录密码 存储用户名和密码
-//        Logger.d("是否存入密码-->" + cbLoginRempsw.isChecked());
+//        LogUitls.d("是否存入密码-->" + cbLoginRempsw.isChecked());
         if (cbLoginRempsw.isChecked()) {
             //存储用户名和密码
             SpUtils.getInstance()
@@ -166,7 +166,7 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
     public void getLoginResult(LoginBean bean) {
         //存储 登录的返回
         this.bean = bean;
-//        Logger.d("登录的返回的Code--->" + bean.getCode());
+//        LogUitls.d("登录的返回的Code--->" + bean.getCode());
         Toast.makeText(this, R.string.login_success, Toast.LENGTH_SHORT).show();
         //第一次登录以及设置别名
         jumpToMainActivity();
@@ -194,7 +194,7 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
      **************************************************************************************/
     private void setAlias() {
         String alias = bean.getData().get(0).getUser_code();
-        Logger.e("alias--->",alias);
+        LogUitls.d("alias--->"+alias);
         if (!ExampleUtil.isValidTagAndAlias(alias)) {
             ToastUtils.showShort(LoginActivity.this, "别名设置格式不正确");
             return;
@@ -219,7 +219,7 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
                     break;
                 case 6002:
                     logs = "Failed to set alias and tags due to timeout. Try again after 60s.";
-//                    Logger.i(TAG + logs);
+//                    LogUitls.i(TAG + logs);
                     // 延迟 60 秒来调用 Handler 设置别名
                     mHandler.sendMessageDelayed(mHandler.obtainMessage(MSG_SET_ALIAS, alias), 1000 * 60);
                     break;
@@ -238,7 +238,7 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
             super.handleMessage(msg);
             switch (msg.what) {
                 case MSG_SET_ALIAS:
-//                    Logger.d(TAG + "Set alias in handler.");
+//                    LogUitls.d(TAG + "Set alias in handler.");
                     // 调用 JPush 接口来设置别名。
                     JPushInterface.setAliasAndTags(getApplicationContext(),
                             (String) msg.obj,
@@ -246,7 +246,7 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
                             mAliasCallback);
                     break;
                 default:
-//                    Logger.i(TAG + "Unhandled msg - " + msg.what);
+//                    LogUitls.i(TAG + "Unhandled msg - " + msg.what);
             }
         }
     };
