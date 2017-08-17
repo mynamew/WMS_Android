@@ -54,13 +54,13 @@ public class LoginSuccessActivity extends AutoLayoutActivity {
         tvTitle.setText("首次登陆");
         List<LoginBean.DataBean> datas = getIntent().getParcelableArrayListExtra("userinfo");
         if (null != datas) {
-            Logger.d("传递过来的数据--->",datas.get(0).toString());
+            Logger.d("传递过来的数据--->"+ datas.get(0).toString());
             LoginBean.DataBean dataBean = datas.get(0);
-            tvLoginSuccessName.setText(getString(R.string.name_login_success) + dataBean.getUser_name());
-            tvLoginSuccessSex.setText(getString(R.string.sex_login_success) + "男");
-            tvLoginSuccessTel.setText(getString(R.string.tel_login_success) + "159958444889");
-            tvLoginSuccessNum.setText(getString(R.string.num_login_success) + "2345311");
-            tvLoginSuccessDepart.setText(getString(R.string.num_login_success) + "假的数据的部门");
+            tvLoginSuccessName.setText(String.format(getString(R.string.login_success_name), dataBean.getUser_name()));
+            tvLoginSuccessSex.setText(String.format(getString(R.string.login_success_sex), "男"));
+            tvLoginSuccessTel.setText(String.format(getString(R.string.login_success_tel), "159958444889"));
+            tvLoginSuccessNum.setText(String.format(getString(R.string.login_success_name), "2345311"));
+            tvLoginSuccessDepart.setText(String.format(getString(R.string.login_success_depart), "假的数据的部门"));
         }
     }
 

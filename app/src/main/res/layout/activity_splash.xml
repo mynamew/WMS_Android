@@ -13,10 +13,10 @@
         android:src="@mipmap/jzk_login_bg" />
     <ImageView
         android:id="@+id/iv_login_logo"
-        android:layout_width="150px"
-        android:layout_height="150px"
-        android:layout_marginLeft="10px"
-        android:layout_marginTop="20px"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
         android:src="@mipmap/logo2" />
 
     <TextView
@@ -25,9 +25,9 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="20px"
-        android:layout_marginTop="20px"
-        android:text="@string/title_login_app_name"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/login_app_name"
         android:textColor="#fff"
         android:textSize="25sp" />
 
@@ -47,7 +47,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="10px"
+        android:layout_marginBottom="10dp"
         android:gravity="center_horizontal"
         android:text="版权所有：玖坤信息"
         android:textColor="#999" />

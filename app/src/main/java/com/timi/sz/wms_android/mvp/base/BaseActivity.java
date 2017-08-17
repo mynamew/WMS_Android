@@ -193,7 +193,6 @@ public abstract class BaseActivity<V extends MvpView, P extends MvpPresenter<V>>
             this.presenter.dettachView();
             this.presenter = null;
         }
-        ButterKnife.unbind(this);
     }
 
     /**

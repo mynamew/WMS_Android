@@ -1,6 +1,7 @@
 package com.timi.sz.wms_android.base.uils;
 
 import android.content.Context;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.util.Log;
@@ -29,5 +30,20 @@ public class PackageUtils {
         } catch (Exception e) {
         }
         return versionName;
+    }
+
+    /**
+     * 获取当前是否是 debug 状态
+     * @param context
+     * @return
+     */
+    public static boolean isApkDebugable(Context context) {
+        try {
+            ApplicationInfo info= context.getApplicationInfo();
+            return (info.flags&ApplicationInfo.FLAG_DEBUGGABLE)!=0;
+        } catch (Exception e) {
+
+        }
+        return false;
     }
 }

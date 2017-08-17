@@ -14,19 +14,19 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
-    <string name="text_login_login">登录</string>
-    <string name="text_login_inpiut_psw">请输入密码</string>
-    <string name="text_login_input_username">请输入用户名</string>
-    <string name="text_login_choose_servers">请选择服务器</string>
-    <string name="title_login_app_name">智能仓库管理系统</string>
-    <string name="txt_login_success_tip">提示：首次登录需进行个人信息确认，如有问题，请到ERP中进行修改。</string>
-    <string name="name_login_success">姓名：</string>
-    <string name="sex_login_success">性别：</string>
-    <string name="num_login_success">工号：</string>
-    <string name="depart_login_success">部门：</string>
-    <string name="tel_login_success">手机：</string>
-    <string name="txt_confirm">确定</string>
-    <string name="home">主页</string>
+    <string name="login_login">登录</string>
+    <string name="login_inpiut_psw">请输入密码</string>
+    <string name="login_input_username">请输入用户名</string>
+    <string name="login_choose_servers">请选择服务器</string>
+    <string name="login_app_name">智能仓库管理系统</string>
+    <string name="login_success_tip">提示：首次登录需进行个人信息确认，如有问题，请到ERP中进行修改。</string>
+    <string name="login_success_name">姓名：%1$s</string>
+    <string name="login_success_sex">性别：%1$s</string>
+    <string name="login_success_num">工号：%1$s</string>
+    <string name="login_success_depart">部门：%1$s</string>
+    <string name="login_success_tel">手机：%1$s</string>
+    <string name="confirm">确定</string>
+    <string name="home">首页</string>
     <string name="home_in_lib">入库作业</string>
     <string name="home_out_lib">出库作业</string>
     <string name="home_today_in">今日入库</string>
@@ -34,4 +34,7 @@
     <string name="home_detail">查看详情</string>
     <string name="home_query">综合查询</string>
     <string name="home_lib_in_deal">库内作业</string>
+    <string name="login_remember_psw">记录密码</string>
+    <string name="login_version">V</string>
+    <string name="login_success">登录成功</string>
 </resources>

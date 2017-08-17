@@ -18,20 +18,20 @@
     <TextView
         android:id="@+id/head_login"
         android:layout_width="match_parent"
-        android:layout_height="100px"
+        android:layout_height="50dp"
         android:background="@color/statuscolor"
         android:gravity="center"
-        android:text="登录"
+        android:text="@string/login_login"
         android:textColor="#fff"
         android:textSize="18sp" />
 
     <ImageView
         android:id="@+id/iv_login_logo"
-        android:layout_width="150px"
-        android:layout_height="150px"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
         android:layout_below="@id/head_login"
-        android:layout_marginLeft="10px"
-        android:layout_marginTop="20px"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
         android:src="@mipmap/logo2" />
 
     <TextView
@@ -40,9 +40,9 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/iv_login_logo"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="20px"
-        android:layout_marginTop="20px"
-        android:text="@string/title_login_app_name"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/login_app_name"
         android:textColor="#fff"
         android:textSize="25sp" />
 
@@ -52,8 +52,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/tv_login_name"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="20px"
-        android:text="V 1.0"
+        android:layout_marginBottom="10dp"
+        android:text="@string/login_version"
         android:textColor="#fff"
         android:textSize="20sp" />
 
@@ -76,11 +76,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:padding="20px">
+            android:padding="10dp">
 
             <ImageView
-                android:layout_width="40px"
-                android:layout_height="40px"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:scaleType="centerCrop"
                 android:src="@mipmap/jzk_login_setvers" />
 
@@ -89,10 +89,10 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_gravity="center_vertical"
-                android:layout_marginLeft="20px"
+                android:layout_marginLeft="10dp"
                 android:layout_weight="1"
                 android:gravity="center_vertical"
-                android:text="@string/text_login_choose_servers"
+                android:text="@string/login_choose_servers"
                 android:textColor="#fff"
                 android:textSize="16sp" />
 
@@ -106,7 +106,7 @@
         <View
             android:id="@+id/view1"
             android:layout_width="match_parent"
-            android:layout_height="2px"
+            android:layout_height="1dp"
             android:layout_below="@id/ll_servers"
             android:background="#fff"/>
         <LinearLayout
@@ -119,8 +119,8 @@
             android:padding="20px">
 
             <ImageView
-                android:layout_width="40px"
-                android:layout_height="40px"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:scaleType="centerCrop"
                 android:src="@mipmap/jzk_login_username" />
 
@@ -129,12 +129,12 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_gravity="center_vertical"
-                android:layout_marginLeft="20px"
+                android:layout_marginLeft="10dp"
                 android:layout_weight="1"
                 android:background="@null"
 
                 android:gravity="center_vertical"
-                android:hint="@string/text_login_input_username"
+                android:hint="@string/login_input_username"
                 android:textColor="#fff"
                 android:textColorHint="#fff"
                 android:textSize="16sp" />
@@ -154,8 +154,8 @@
             android:padding="20px">
 
             <ImageView
-                android:layout_width="40px"
-                android:layout_height="40px"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:scaleType="centerCrop"
                 android:src="@mipmap/jzk_login_password" />
 
@@ -164,11 +164,11 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_gravity="center_vertical"
-                android:layout_marginLeft="20px"
+                android:layout_marginLeft="10dp"
                 android:layout_weight="1"
                 android:background="@null"
                 android:gravity="center_vertical"
-                android:hint="@string/text_login_inpiut_psw"
+                android:hint="@string/login_inpiut_psw"
                 android:inputType="textPassword"
                 android:textColor="#fff"
                 android:textColorHint="#fff"
@@ -176,11 +176,11 @@
 
             <ImageView
                 android:id="@+id/iv_login_eye"
-                android:layout_width="60px"
-                android:layout_height="60px"
-                android:paddingLeft="20px"
-                android:paddingTop="20px"
-                android:paddingBottom="20px"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:paddingLeft="10dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
                 android:scaleType="centerCrop"
                 android:src="@mipmap/jzk_eye_org" />
         </LinearLayout>
@@ -192,7 +192,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/rl_login_input"
         android:layout_marginLeft="30px"
-        android:text="记录密码"
+        android:text="@string/login_remember_psw"
         android:textColor="@color/statuscolor" />
 
     <TextView
@@ -212,7 +212,7 @@
         android:layout_below="@id/cb_login_rempsw"
         android:layout_margin="30px"
         android:background="@drawable/selector_btn_bg_login"
-        android:text="@string/text_login_login"
+        android:text="@string/confirm"
         android:textColor="#fff"
         android:textSize="18sp" />
 </RelativeLayout>

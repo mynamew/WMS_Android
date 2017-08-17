@@ -1,5 +1,9 @@
 package com.timi.sz.wms_android.base.uils;
 
+import com.timi.sz.wms_android.mvp.base.BaseApplication;
+
+import static com.timi.sz.wms_android.base.uils.PackageUtils.isApkDebugable;
+
 /**
  * 需要的静态变量
  */
@@ -23,4 +27,6 @@ public class Constants {
     public static final String REMENBER_PSW="remenber_password";
     //是否是第一次登录
     public static final String IS_FIRST_LOG="isFirstLog";
+   //是否是 debug的状态
+    public  static final boolean  IS_DEBUG=isApkDebugable(BaseApplication.getMApplicationContext());
 }

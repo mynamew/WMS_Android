@@ -124,7 +124,7 @@ public class SpUtils {
     public SpUtils putBoolean(String key, boolean value) {
         getSharedPreferences();
         editor.putBoolean(key, value).commit();
-        Logger.d("存入的boolean 型数据--->"+mPreference.getBoolean(key,false));
+//        Logger.d("存入的boolean 型数据--->"+mPreference.getBoolean(key,false));
         return this;
     }
 
