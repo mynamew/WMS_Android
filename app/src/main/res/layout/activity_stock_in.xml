@@ -23,7 +23,7 @@
 
             <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="200dp"
                 android:scaleType="centerCrop"
                 android:src="@mipmap/stock_in_bg"
                 android:visibility="visible"/>
@@ -41,12 +41,10 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="80dp"
                 android:layout_marginTop="1dp"
                 android:background="#fff"
-                android:orientation="horizontal"
-                android:paddingBottom="5dp"
-                android:paddingTop="5dp">
+                android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/tv_stockin_buy_order"
@@ -80,12 +78,10 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="80dp"
                 android:layout_marginTop="1dp"
                 android:background="#fff"
-                android:orientation="horizontal"
-                android:paddingBottom="5dp"
-                android:paddingTop="5dp">
+                android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/tv_stockin_inlib"
@@ -108,11 +104,9 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="80dp"
                 android:background="#fff"
-                android:orientation="horizontal"
-                android:paddingBottom="5dp"
-                android:paddingTop="5dp">
+                android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/tv_stockin_other_inlib_check"
@@ -147,12 +141,10 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="80dp"
                 android:layout_marginTop="1dp"
                 android:background="#fff"
-                android:orientation="horizontal"
-                android:paddingBottom="5dp"
-                android:paddingTop="5dp">
+                android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/tv_stockin_out_return"

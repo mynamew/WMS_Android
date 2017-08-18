@@ -5,24 +5,31 @@
                 android:background="#fff"
                 android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/tv_main_top"
+    <RelativeLayout
+        android:id="@+id/rl_main_top"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="#353338"
-        android:gravity="center"
-        android:text="@string/home"
-        android:textColor="#fff"
-        android:textSize="16sp"/>
+        android:layout_height="50dp">
 
-    <ImageView
-        android:id="@+id/iv_home_scan"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_alignRight="@id/tv_main_top"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="10dp"
-        android:src="@mipmap/home_scan"/>
+        <TextView
+            android:id="@+id/tv_main_top"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="#353338"
+            android:gravity="center"
+            android:text="@string/home"
+            android:textColor="#fff"
+            android:textSize="16sp"/>
+
+        <ImageView
+            android:id="@+id/iv_home_scan"
+            android:layout_width="40dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:src="@mipmap/home_scan"/>
+    </RelativeLayout>
 
     <RadioGroup
         android:id="@+id/rl_home_botom"
@@ -57,5 +64,5 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@id/rl_home_botom"
-        android:layout_below="@id/tv_main_top"/>
+        android:layout_below="@id/rl_main_top"/>
 </RelativeLayout>

@@ -1,11 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_quity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#fff"
+    android:background="@color/set_bg"
+    android:orientation="vertical"
     tools:context="com.timi.sz.wms_android.mvp.UI.quity.QulityActivity">
 
-</RelativeLayout>
+    <include layout="@layout/title_head"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="200dp"
+        android:scaleType="centerCrop"
+        android:src="@mipmap/query_bg"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="#fff"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_qulity_inspection"
+            style="@style/stock_in_tab"
+            android:drawableTop="@mipmap/stock_in_other_check"
+            android:text="@string/qulity_inspection"/>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/set_bg"/>
+
+        <TextView
+            android:id="@+id/tv_qulity_mrp_inspection"
+            style="@style/stock_in_tab"
+            android:drawableTop="@mipmap/stock_in_other_create_order"
+            android:text="@string/qulity_mrp_inspection"/>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/set_bg"/>
+
+        <TextView
+            android:id="@+id/tv_qulity_update_qr"
+            style="@style/stock_in_tab"
+            android:drawableTop="@mipmap/stock_in_buy_order"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
+            android:text="@string/qulity_update_qr"/>
+    </LinearLayout>
+</LinearLayout>
