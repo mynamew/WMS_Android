@@ -6,6 +6,8 @@ import android.content.SharedPreferences;
 import com.orhanobut.logger.Logger;
 import com.timi.sz.wms_android.mvp.base.BaseApplication;
 
+import static com.timi.sz.wms_android.base.uils.Constants.CUSER_ID;
+
 
 /**
  * sharepreference 的工具类
@@ -137,5 +139,23 @@ public class SpUtils {
     public boolean getBoolean(String key) {
         getSharedPreferences();
         return mPreference.getBoolean(key, false);
+    }
+    /** 
+      * 获取 用户id
+      * author: timi    
+      * create at: 2017/8/18 9:23
+      */  
+    public String  getUserId(){
+        getSharedPreferences();
+        return  mPreference.getString(CUSER_ID,"");
+    }
+    /** 
+      * 存入 用户id
+      * author: timi    
+      * create at: 2017/8/18 9:56
+      */  
+    public void  putUserid(String userid){
+        getSharedPreferences();
+        editor.putString(CUSER_ID,userid).commit();
     }
 }

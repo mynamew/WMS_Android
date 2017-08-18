@@ -3,64 +3,87 @@ package com.timi.sz.wms_android.base.uils;
 import android.content.Context;
 import android.os.Handler;
 import android.widget.Toast;
-/** 
-  *  Toast 工具类
-  * author: timi    
-  * create at: 2017/8/15 18:32
-  */  
+
+import com.timi.sz.wms_android.mvp.base.BaseApplication;
+
+/**
+ * Toast 工具类
+ * author: timi
+ * create at: 2017/8/15 18:32
+ */
 public class ToastUtils {
-	private static Toast mToast;
-	private static Handler mHandler = new Handler();
-	private static Runnable r = new Runnable() {
+    private static Toast mToast;
+    private static Handler mHandler = new Handler();
+    private static Runnable r = new Runnable() {
 
-		public void run() {
+        public void run() {
 
-			mToast.cancel();
+            mToast.cancel();
 
-		}
+        }
 
-	};
+    };
 
-	public static void showLong(Context context, Object o) {
-		  if (mToast == null) {
-			  mToast = Toast.makeText(context, o.toString(), Toast.LENGTH_LONG);
+    public static void showLong(Object o) {
+        if (mToast == null) {
+            mToast = Toast.makeText(BaseApplication.getMApplicationContext(), o.toString(), Toast.LENGTH_LONG);
 
-	        } else {
-	        	mToast.setText( o.toString());
-	        }
-		  mToast.show();
-	}
+        } else {
+            mToast.setText(o.toString());
+        }
+        mToast.show();
+    }
 
-	public static void showShort(Context context, Object o) {
-		  if (mToast == null) {
-			  mToast = Toast.makeText(context, o.toString(), Toast.LENGTH_SHORT);
+    public static void showLong(Context context, Object o) {
+        if (mToast == null) {
+            mToast = Toast.makeText(context, o.toString(), Toast.LENGTH_LONG);
 
-	        } else {
-	        	mToast.setText( o.toString());
-	        }
-		  mToast.show();
-	}
+        } else {
+            mToast.setText(o.toString());
+        }
+        mToast.show();
+    }
 
-	public static void showToast(Context mContext, int resId, int duration) {
+    public static void showShort(Object o) {
+        if (mToast == null) {
+            mToast = Toast.makeText(BaseApplication.getMApplicationContext(), o.toString(), Toast.LENGTH_SHORT);
 
-		showToast(mContext, mContext.getResources().getString(resId), duration);
-	}
+        } else {
+            mToast.setText(o.toString());
+        }
+        mToast.show();
+    }
 
-	public static void showToast(Context mContext, String text, int duration) {
+    public static void showShort(Context context, Object o) {
+        if (mToast == null) {
+            mToast = Toast.makeText(context, o.toString(), Toast.LENGTH_SHORT);
 
-		mHandler.removeCallbacks(r);
+        } else {
+            mToast.setText(o.toString());
+        }
+        mToast.show();
+    }
 
-		if (mToast != null)
+    public static void showToast(Context mContext, int resId, int duration) {
 
-			mToast.setText(text);
+        showToast(mContext, mContext.getResources().getString(resId), duration);
+    }
 
-		else
+    public static void showToast(Context mContext, String text, int duration) {
 
-			mToast = Toast.makeText(mContext, text, duration);
+        mHandler.removeCallbacks(r);
 
-		mHandler.postDelayed(r, duration);
+        if (mToast != null)
 
-		mToast.show();
+            mToast.setText(text);
 
-	}
+        else
+
+            mToast = Toast.makeText(mContext, text, duration);
+
+        mHandler.postDelayed(r, duration);
+
+        mToast.show();
+
+    }
 }

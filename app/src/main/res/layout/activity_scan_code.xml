@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/capture_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white" >
+    <SurfaceView
+        android:id="@+id/capture_preview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
+    <!-- 扫描框上面的布局 -->
+    <RelativeLayout
+        android:id="@+id/top_mask"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_alignParentTop="true"
+        android:background="@color/scan_bg">
+        <RelativeLayout
+            android:id="@+id/title_bar"
+            android:layout_width="fill_parent"
+            android:layout_height="45dip"
+            android:background="@color/statuscolor" >
+
+            <ImageView
+                android:id="@+id/authorize_return"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:background="@null"
+                android:paddingLeft="12dp"
+                android:paddingRight="20dp"
+                android:src="@mipmap/back"
+                />
+            <TextView
+                android:id="@+id/common_title_TV_center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:ellipsize="middle"
+                android:textColor="#fff"
+                android:singleLine="true"
+                android:text="二维码扫描"
+                android:textSize="18sp" />
+        </RelativeLayout>
+    </RelativeLayout>
+    <!-- 扫描框底部的布局 -->
+    <RelativeLayout
+        android:id="@+id/bottom_mask"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/scan_bg"
+        android:orientation="vertical"
+        android:paddingBottom="16dp">
+        <TextView
+            android:id="@+id/scan_hint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="@string/scan_allcode_hint"
+            android:textColor="#b4b4b4"
+            android:textSize="14sp"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp" />
+        <LinearLayout
+            android:id="@+id/ll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/scan_hint"
+            android:gravity="center">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:visibility="gone">
+                <TextView
+                    android:id="@+id/qrcode_g_gallery"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/shouquan_qrcode_g_gallery"
+                    android:clickable="true"
+                    android:textSize="20sp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center">
+                <TextView
+                    android:id="@+id/qrcode_ic_back"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:background="@drawable/shouquan_qrcode_ic_back"
+                    android:clickable="true" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center">
+                <TextView
+                    android:id="@+id/iv_light"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:background="@drawable/shouquan_qrcode_s_flashgun"
+                    android:clickable="true" />
+            </LinearLayout>
+
+        </LinearLayout>
+        <Button
+            android:id="@+id/service_register_rescan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/rescan_shape_button"
+            android:padding="10dp"
+            android:text="再次扫描"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/ll"
+            android:visibility="gone"
+            android:layout_marginTop="20dp" />
+    </RelativeLayout>
+    <!-- 扫描框中间的布局 -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/top_mask"
+        android:layout_above="@id/bottom_mask"
+        >
+        <ImageView
+            android:id="@+id/left_mask"
+            android:layout_width="34dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:background="@color/scan_bg"
+            android:contentDescription="@string/app_name" />
+        <ImageView
+            android:id="@+id/right_mask"
+            android:layout_width="34dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:background="@color/scan_bg" />
+        <RelativeLayout
+            android:id="@+id/capture_crop_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_toLeftOf="@id/right_mask"
+            android:layout_toRightOf="@id/left_mask"
+            android:layout_centerHorizontal="true"
+            android:background="@android:color/transparent" >
+            <ImageView
+                android:id="@+id/capture_scan_line"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_margin="5dp"
+                android:background="@mipmap/scanning_line" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+</RelativeLayout>

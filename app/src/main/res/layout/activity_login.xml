@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
-        android:src="@mipmap/jzk_login_bg" />
+        android:src="@mipmap/login_bg" />
 
    <!-- <include
         android:id="@+id/head_login"
@@ -82,7 +82,7 @@
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:scaleType="centerCrop"
-                android:src="@mipmap/jzk_login_setvers" />
+                android:src="@mipmap/login_setvers" />
 
             <TextView
                 android:id="@+id/tv_login_setvers_name"
@@ -101,7 +101,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:src="@mipmap/jzk_login_down" />
+                android:src="@mipmap/login_down" />
         </LinearLayout>
         <View
             android:id="@+id/view1"
@@ -122,7 +122,7 @@
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:scaleType="centerCrop"
-                android:src="@mipmap/jzk_login_username" />
+                android:src="@mipmap/login_username" />
 
             <EditText
                 android:id="@+id/et_login_username"
@@ -157,7 +157,7 @@
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:scaleType="centerCrop"
-                android:src="@mipmap/jzk_login_password" />
+                android:src="@mipmap/login_password" />
 
             <EditText
                 android:id="@+id/et_login_password"
@@ -182,7 +182,7 @@
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp"
                 android:scaleType="centerCrop"
-                android:src="@mipmap/jzk_eye_org" />
+                android:src="@drawable/selector_login_psw" />
         </LinearLayout>
     </RelativeLayout>
 

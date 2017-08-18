@@ -59,8 +59,12 @@ dependencies {
     //Okhttp-interceptor
     compile 'com.squareup.okhttp3:logging-interceptor:3.6.0'
     //jpush
-    compile 'cn.jiguang.sdk:jpush:3.0.8'  // 此处以JPush 3.0.8 版本为例。
-    compile 'cn.jiguang.sdk:jcore:1.1.6'  // 此处以JCore 1.1.6 版本为例。
+    compile 'cn.jiguang.sdk:jpush:3.0.8'
+    // 此处以JPush 3.0.8 版本为例。
+    compile 'cn.jiguang.sdk:jcore:1.1.6'
+    // 此处以JCore 1.1.6 版本为例。
     //butter knife
     compile 'com.jakewharton:butterknife:8.8.1'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'}
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+    compile files('libs/zxing.jar')
+}

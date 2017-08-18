@@ -14,11 +14,13 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+    /**====== 登录 ======**/
     <string name="login_login">登录</string>
     <string name="login_inpiut_psw">请输入密码</string>
     <string name="login_input_username">请输入用户名</string>
     <string name="login_choose_servers">请选择服务器</string>
     <string name="login_app_name">智能仓库管理系统</string>
+    /**====== 个人信息 ======**/
     <string name="login_success_tip">提示：首次登录需进行个人信息确认，如有问题，请到ERP中进行修改。</string>
     <string name="login_success_name">姓名：%1$s</string>
     <string name="login_success_sex">性别：%1$s</string>
@@ -26,6 +28,7 @@
     <string name="login_success_depart">部门：%1$s</string>
     <string name="login_success_tel">手机：%1$s</string>
     <string name="confirm">确定</string>
+    /**====== 首页 ======**/
     <string name="home">首页</string>
     <string name="home_in_lib">入库作业</string>
     <string name="home_out_lib">出库作业</string>
@@ -37,4 +40,33 @@
     <string name="login_remember_psw">记录密码</string>
     <string name="login_version">V</string>
     <string name="login_success">登录成功</string>
+    <string name="home_set">设置</string>
+    <string name="set_exit">退出登录</string>
+    <string name="set_update_version">版本更新</string>
+    <string name="set_about">关于软件</string>
+    <string name="set_update_psw">修改密码</string>
+    <string name="set_device_info">设备信息</string>
+    <string name="set_userinfo">用户信息</string>
+    /**====== 入库 ======**/
+    <string name="stock_in_receive_pro">收货</string>
+    <string name="stock_in">入库</string>
+    <string name="stock_in_other_iblib_check">其他入库-审核</string>
+    <string name="stock_in_othre_inlib_create_order">其他入库-生单</string>
+    <string name="stock_in_come_pro_in">来料入库</string>
+    <string name="stock_in_check">产成品审核</string>
+    <string name="stock_in_create_order">产成品-生单</string>
+    <string name="stock_in_buy_order">采购单</string>
+    <string name="stock_in_send_order">送货单</string>
+    <string name="stock_in_return_pro">退料</string>
+    <string name="stock_in_out_return">委外退料</string>
+    <string name="stock_in_produce_return">生产退料</string>
+    <string name="stock_in_sale_return">销售退料</string>
+    /**====== QRCode ======**/
+    <string name="scan_allcode_title">二维码或条形码扫描</string>
+    <string name="scan_barcode_hint">将条形码对入取景框，即可自动扫描</string>
+    <string name="scan_qrcode_hint">将二维码对入取景框，即可自动扫描</string>
+    <string name="scan_allcode_hint">将二维码或条形码对入取景框，即可自动扫描</string>
+    <string name="scan_barcode_title">条形码扫描</string>
+    <string name="scan_qrcode_title">二维码扫描</string>
+    <string name="scan_point_title">此采购订单系统中未找到，请确认后，再进行查询！</string>
 </resources>

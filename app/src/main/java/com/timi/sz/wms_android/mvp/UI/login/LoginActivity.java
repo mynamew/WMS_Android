@@ -153,6 +153,9 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
     @OnClick(R.id.iv_login_eye)
     public void showPassword() {
         isCanSeePsw = !isCanSeePsw;
+        //selector 切换
+        ivLoginEye.setSelected(isCanSeePsw);
+        //设置是否显示密码
         if (!isCanSeePsw) {
             etLoginPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());    //将文本框的内容以密文形式显示
         } else {
@@ -168,6 +171,8 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
         this.bean = bean;
 //        LogUitls.d("登录的返回的Code--->" + bean.getCode());
         Toast.makeText(this, R.string.login_success, Toast.LENGTH_SHORT).show();
+        //登录成功  存储 id
+        SpUtils.getInstance().putUserid(bean.getData().get(0).getCuserid());
         //第一次登录以及设置别名
         jumpToMainActivity();
     }

@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
-        android:src="@mipmap/jzk_login_bg" />
+        android:src="@mipmap/login_bg" />
     <ImageView
         android:id="@+id/iv_login_logo"
         android:layout_width="75dp"

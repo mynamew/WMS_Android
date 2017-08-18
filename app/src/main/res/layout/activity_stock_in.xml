@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_stock_in"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/set_bg"
+    android:orientation="vertical"
+    tools:context="com.timi.sz.wms_android.mvp.UI.stock_in.StockInActivity">
+
+    <include layout="@layout/title_head"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scaleType="centerCrop"
+                android:src="@mipmap/stock_in_bg"
+                android:visibility="visible"/>
+            <!--收货-->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginBottom="1dp"
+                android:background="#fff">
+
+                <TextView
+                    style="@style/stock_in_title"
+                    android:text="@string/stock_in_receive_pro"/>
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
+                android:background="#fff"
+                android:orientation="horizontal"
+                android:paddingBottom="5dp"
+                android:paddingTop="5dp">
+
+                <TextView
+                    android:id="@+id/tv_stockin_buy_order"
+                    style="@style/stock_in_tab"
+                    android:drawableTop="@mipmap/stock_in_sendpro_order"
+                    android:text="@string/stock_in_buy_order"/>
+
+                <TextView
+                    android:id="@+id/tv_stock_in_send_order"
+                    style="@style/stock_in_tab"
+                    android:drawableTop="@mipmap/stock_in_buy_order"
+                    android:text="@string/stock_in_send_order"/>
+
+                <TextView
+                    style="@style/stock_in_tab"
+                    android:visibility="invisible"/>
+            </LinearLayout>
+            <!--入库-->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginBottom="1dp"
+                android:layout_marginTop="1dp"
+                android:background="#fff"
+                android:paddingTop="1dp">
+
+                <TextView
+                    style="@style/stock_in_title"
+                    android:text="@string/stock_in"/>
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
+                android:background="#fff"
+                android:orientation="horizontal"
+                android:paddingBottom="5dp"
+                android:paddingTop="5dp">
+
+                <TextView
+                    android:id="@+id/tv_stockin_inlib"
+                    style="@style/stock_in_tab"
+                    android:drawableTop="@mipmap/stock_in_pro_come_in"
+                    android:text="@string/stock_in_come_pro_in"/>
+
+                <TextView
+                    android:id="@+id/tv_stock_in_check"
+                    style="@style/stock_in_tab"
+                    android:drawableTop="@mipmap/stock_in_check"
+                    android:text="@string/stock_in_check"/>
+
+                <TextView
+                    android:id="@+id/tv_stock_in_create_order"
+                    style="@style/stock_in_tab"
+                    android:drawableTop="@mipmap/stock_in_create_order"
+                    android:text="@string/stock_in_create_order"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#fff"
+                android:orientation="horizontal"
+                android:paddingBottom="5dp"
+                android:paddingTop="5dp">
+
+                <TextView
+                    android:id="@+id/tv_stockin_other_inlib_check"
+                    style="@style/stock_in_tab"
+                    android:drawableTop="@mipmap/stock_in_other_check"
+                    android:text="@string/stock_in_other_iblib_check"/>
+
+                <TextView
+                    android:id="@+id/tv_stockin_other_inlib_create_order"
+                    style="@style/stock_in_tab"
+                    android:drawableTop="@mipmap/stock_in_other_create_order"
+                    android:text="@string/stock_in_othre_inlib_create_order"/>
+
+                <TextView
+                    style="@style/stock_in_tab"
+                    android:drawableTop="@mipmap/stock_in_buy_order"
+                    android:visibility="invisible"/>
+            </LinearLayout>
+            <!--退料-->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginBottom="1dp"
+                android:layout_marginTop="1dp"
+                android:background="#fff"
+                android:paddingTop="1dp">
+
+                <TextView
+                    style="@style/stock_in_title"
+                    android:text="@string/stock_in_return_pro"/>
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
+                android:background="#fff"
+                android:orientation="horizontal"
+                android:paddingBottom="5dp"
+                android:paddingTop="5dp">
+
+                <TextView
+                    android:id="@+id/tv_stockin_out_return"
+                    style="@style/stock_in_tab"
+                    android:drawableTop="@mipmap/stock_in_out_return"
+                    android:text="@string/stock_in_out_return"/>
+
+                <TextView
+                    android:id="@+id/tv_stock_in_produce_return"
+                    style="@style/stock_in_tab"
+                    android:drawableTop="@mipmap/stock_in_produce_return"
+                    android:text="@string/stock_in_produce_return"/>
+
+                <TextView
+                    android:id="@+id/tv_stock_in_sale_return"
+                    style="@style/stock_in_tab"
+                    android:drawableTop="@mipmap/stock_in_sale_return"
+                    android:text="@string/stock_in_sale_return"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"/>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
