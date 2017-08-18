@@ -50,7 +50,7 @@ public class LoginSuccessActivity extends AutoLayoutActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_success);
         ButterKnife.bind(this);
-        StatusBarUtil.setColor(this, Color.parseColor(Constants.StatusColorStr));
+        StatusBarUtil.setColor(this,getResources().getColor(R.color.statuscolor));
         tvTitle.setText("首次登陆");
         List<LoginBean.DataBean> datas = getIntent().getParcelableArrayListExtra("userinfo");
         if (null != datas) {

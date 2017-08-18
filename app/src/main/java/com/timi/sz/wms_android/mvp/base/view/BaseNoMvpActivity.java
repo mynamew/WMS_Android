@@ -69,7 +69,7 @@ public abstract class BaseNoMvpActivity extends AutoLayoutActivity implements Mv
             });
         }
         //设置状态栏颜色 默认
-        StatusBarUtil.setColor(this, Color.parseColor(Constants.StatusColorStr));
+        StatusBarUtil.setColor(this, getResources().getColor(R.color.statuscolor));
         //初始化各种数据
         initBundle(savedInstanceState);
         initView();

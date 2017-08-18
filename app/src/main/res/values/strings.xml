@@ -97,4 +97,12 @@
     <string name="qulity_inspection">品质检验</string>
     <string name="qulity_mrp_inspection">MRP评审</string>
     <string name="qulity_update_qr">条码修改</string>
+    <string name="siw_storage_location_change">库位调整</string>
+    <string name="siw_scan_in">调拨-扫描调入</string>
+    <string name="siw_one_step_in">调拨-一步掉入</string>
+    <string name="siw_group_change">容器调整</string>
+    <string name="siw_form_change_stock_in">形态转换-入库</string>
+    <string name="siw_form_change_stock_out">形态转换-出库</string>
+    <string name="siw_query_repertory">库存查询</string>
+    <string name="siw_check">盘点</string>
 </resources>

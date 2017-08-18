@@ -52,11 +52,17 @@
                     android:drawableTop="@mipmap/stock_out_out_add_materail"
                     android:text="@string/stock_out_out_add_materail"/>
 
+                <View
+                    style="@style/LineDirection"/>
+
                 <TextView
                     android:id="@+id/tv_stock_out_out_check"
                     style="@style/stock_in_tab"
                     android:drawableTop="@mipmap/stock_out_out_check"
                     android:text="@string/stock_out_out_check"/>
+
+                <View
+                    style="@style/LineDirection"/>
 
                 <TextView
                     android:id="@+id/tv_stock_out_out_create_order"
@@ -90,11 +96,17 @@
                     android:drawableTop="@mipmap/stock_out_create_add_materail"
                     android:text="@string/stock_out_create_add_materail"/>
 
+                <View
+                    style="@style/LineDirection"/>
+
                 <TextView
                     android:id="@+id/tv_stock_out_create_check"
                     style="@style/stock_in_tab"
                     android:drawableTop="@mipmap/stock_out_create_check"
                     android:text="@string/stock_out_create_check"/>
+
+                <View
+                    style="@style/LineDirection"/>
 
                 <TextView
                     android:id="@+id/tv_stock_out_create_create_order"
@@ -128,11 +140,17 @@
                     android:drawableTop="@mipmap/stock_out_sale_trans"
                     android:text="@string/stock_out_sale_trans"/>
 
+                <View
+                    style="@style/LineDirection"/>
+
                 <TextView
                     android:id="@+id/tv_stock_out_sale_check"
                     style="@style/stock_in_tab"
                     android:drawableTop="@mipmap/stock_out_sale_check"
                     android:text="@string/stock_out_sale_check"/>
+
+                <View
+                    style="@style/LineDirection"/>
 
                 <TextView
                     android:id="@+id/tv_stock_out_sale_create_order"
@@ -168,11 +186,17 @@
                     android:drawableTop="@mipmap/stock_out_other_buy_return"
                     android:text="@string/stock_out_other_buy_return"/>
 
+                <View
+                    style="@style/LineDirection"/>
+
                 <TextView
                     android:id="@+id/tv_stock_out_other_check"
                     style="@style/stock_in_tab"
                     android:drawableTop="@mipmap/stock_out_other_check"
                     android:text="@string/stock_out_other_check"/>
+
+                <View
+                    style="@style/LineDirection"/>
 
                 <TextView
                     android:id="@+id/tv_stock_out_other_create_order"

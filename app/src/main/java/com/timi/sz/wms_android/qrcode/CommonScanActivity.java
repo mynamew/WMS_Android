@@ -85,7 +85,7 @@ public final class CommonScanActivity extends Activity implements ScanListener, 
         Window window = getWindow();
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         setContentView(R.layout.activity_scan_code);
-        StatusBarUtil.setColor(this, Color.parseColor(Constants.StatusColorStr));
+        StatusBarUtil.setColor(this,getResources().getColor(R.color.statuscolor));
         ButterKnife.bind(this);
         Intent intent = getIntent();
         scanMode=intent.getIntExtra(Constant.REQUEST_SCAN_MODE,Constant.REQUEST_SCAN_MODE_ALL_MODE);

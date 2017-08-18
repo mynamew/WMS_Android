@@ -36,7 +36,7 @@
                 android:paddingBottom="5dp"
                 android:paddingTop="10dp"
                 android:text="@string/home_today_in"
-                android:textColor="@color/statuscolor"
+                android:textColor="#c6ae75"
                 android:textSize="16sp"/>
 
             <TextView
@@ -47,7 +47,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="5dp"
                 android:text="0 笔"
-                android:textColor="@color/statuscolor"
+                android:textColor="#c6ae75"
                 android:textSize="20sp"/>
 
             <TextView

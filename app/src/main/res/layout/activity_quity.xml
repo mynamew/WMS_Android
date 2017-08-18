@@ -31,20 +31,15 @@
             android:text="@string/qulity_inspection"/>
 
         <View
-            android:layout_width="1dp"
-            android:layout_height="match_parent"
-            android:background="@color/set_bg"/>
+           style="@style/LineDirection"/>
 
         <TextView
             android:id="@+id/tv_qulity_mrp_inspection"
             style="@style/stock_in_tab"
             android:drawableTop="@mipmap/stock_in_other_create_order"
             android:text="@string/qulity_mrp_inspection"/>
-
         <View
-            android:layout_width="1dp"
-            android:layout_height="match_parent"
-            android:background="@color/set_bg"/>
+            style="@style/LineDirection"/>
 
         <TextView
             android:id="@+id/tv_qulity_update_qr"

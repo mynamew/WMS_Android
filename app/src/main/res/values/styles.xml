@@ -70,4 +70,10 @@
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowIsFloating">true</item>
     </style>
+    <!--分割线 view的样式-->
+    <style name="LineDirection" parent="android:style/Theme.Dialog">
+        <item name="android:layout_width">1dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:background">@color/set_bg</item>
+    </style>
 </resources>
