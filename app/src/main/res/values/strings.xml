@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">WMS_Android</string>
+    <string name="app_name">智能仓库管理系统</string>
     <string name="title_activity_login">Sign in</string>
 
     <!-- Strings related to login -->
@@ -105,4 +105,6 @@
     <string name="siw_form_change_stock_out">形态转换-出库</string>
     <string name="siw_query_repertory">库存查询</string>
     <string name="siw_check">盘点</string>
+    <string name="stock_in_point">物品清点</string>
+    <string name="stock_in_point_record">清点记录</string>
 </resources>

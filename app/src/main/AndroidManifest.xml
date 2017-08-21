@@ -3,13 +3,14 @@
           package="com.timi.sz.wms_android">
 
     <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.VIBRATE" />
-    <uses-permission android:name="android.permission.CAMERA" />
-    <!--zxing-->
-    <uses-feature android:name="android.hardware.camera" />
-    <uses-feature android:name="android.hardware.camera.autofocus" />
-    <uses-permission android:name="android.permission.VIBRATE" />
-    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <!-- zxing -->
+    <uses-feature android:name="android.hardware.camera"/>
+    <uses-feature android:name="android.hardware.camera.autofocus"/>
+
+    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
     <!-- Required -->
     <permission
         android:name="com.timi.sz.wms_android.permission.JPUSH_MESSAGE"
@@ -68,8 +69,10 @@
         <activity
             android:name=".mvp.UI.login.LoginActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name=".qrcode.CommonScanActivity"
+        <activity
+            android:name=".qrcode.CommonScanActivity"
             android:screenOrientation="portrait"/>
+
         <meta-data
             android:name="JPUSH_APPKEY"
             android:value="2abc5c75142070b3a33880ac"/>
@@ -172,6 +175,10 @@
         <activity android:name=".mvp.UI.quity.QulityActivity">
         </activity>
         <activity android:name=".mvp.UI.query.QueryActivity">
+        </activity>
+        <activity android:name=".mvp.UI.stock_in.query.SearchBuyOrderActivity">
+        </activity>
+        <activity android:name=".mvp.UI.stock_in.point.StockInPointActivity">
         </activity>
     </application>
 
