@@ -132,13 +132,13 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
         if (cbLoginRempsw.isChecked()) {
             //存储用户名和密码
             SpUtils.getInstance()
-                    .putString(Constants.USER_NAME, username)
+                    .putString(Constants.USER_TEL, username)
                     .putString(Constants.USER_PSW, password)
                     .putBoolean(Constants.REMENBER_PSW, true);
         } else {
             //清空用户名和密码
             SpUtils.getInstance()
-                    .putString(Constants.USER_NAME, "")
+                    .putString(Constants.USER_TEL, "")
                     .putString(Constants.USER_PSW, "")
                     .putBoolean(Constants.REMENBER_PSW, false);
         }
@@ -173,6 +173,12 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
         Toast.makeText(this, R.string.login_success, Toast.LENGTH_SHORT).show();
         //登录成功  存储 id
         SpUtils.getInstance().putUserid(bean.getData().get(0).getCuserid());
+        SpUtils.getInstance().putString(Constants.USER_NAME,"邢力丰");
+        SpUtils.getInstance().putString(Constants.USER_SEX,"男");
+        SpUtils.getInstance().putString(Constants.USER_NUM,"123456789");
+        SpUtils.getInstance().putString(Constants.USER_DEPART,"研发部");
+        SpUtils.getInstance().putString(Constants.USER_FROM,"玖坤深圳总部");
+        SpUtils.getInstance().putString(Constants.USER_ROOT,"玖坤苏州分公司");
         //第一次登录以及设置别名
         jumpToMainActivity();
     }

@@ -1,16 +1,14 @@
-package com.timi.sz.wms_android.mvp.UI.home;
+package com.timi.sz.wms_android.mvp.UI.userinfo;
 
-
-import com.timi.sz.wms_android.bean.TestBean;
 import com.timi.sz.wms_android.bean.UserInfoBean;
 import com.timi.sz.wms_android.mvp.base.view.iml.MvpBaseView;
 
 /**
- * View接口
- * @author Dream
- * 
+ * author: timi
+ * create at: 2017-08-21 09:18
  */
-public interface MainView extends MvpBaseView{
+public interface UserInfoView extends MvpBaseView {
+
     /**
      * 从sp 获取用户信息
      *

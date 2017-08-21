@@ -3,6 +3,7 @@ package com.timi.sz.wms_android.mvp.UI.home;
 import android.content.Context;
 
 import com.timi.sz.wms_android.bean.TestBean;
+import com.timi.sz.wms_android.bean.UserInfoBean;
 import com.timi.sz.wms_android.http.subscriber.HttpSubscriber;
 import com.timi.sz.wms_android.mvp.base.presenter.impl.MvpBasePresenter;
 
@@ -21,6 +22,14 @@ public class MainPresenter extends MvpBasePresenter<MainView> {
     public MainPresenter(Context context) {
         super(context);
         this.mainModel = new MainModel();
+    }
+
+    /***
+     * 获取用户信息
+     * @return
+     */
+    public void getUserInfoFromSp(){
+       getView().setSpUserInfo(mainModel.getSpUserInfo());
     }
     /**
      * 解除 观察者

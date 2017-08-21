@@ -2,6 +2,7 @@ package com.timi.sz.wms_android.base.uils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.text.TextUtils;
 
 import com.orhanobut.logger.Logger;
 import com.timi.sz.wms_android.mvp.base.BaseApplication;
@@ -140,22 +141,49 @@ public class SpUtils {
         getSharedPreferences();
         return mPreference.getBoolean(key, false);
     }
-    /** 
-      * 获取 用户id
-      * author: timi    
-      * create at: 2017/8/18 9:23
-      */  
-    public String  getUserId(){
+
+    /**
+     * 获取 用户id
+     * author: timi
+     * create at: 2017/8/18 9:23
+     */
+    public String getUserId() {
         getSharedPreferences();
-        return  mPreference.getString(CUSER_ID,"");
+        return mPreference.getString(CUSER_ID, "");
     }
-    /** 
-      * 存入 用户id
-      * author: timi    
-      * create at: 2017/8/18 9:56
-      */  
-    public void  putUserid(String userid){
+
+    /**
+     * 存入 用户id
+     * author: timi
+     * create at: 2017/8/18 9:56
+     */
+    public void putUserid(String userid) {
         getSharedPreferences();
-        editor.putString(CUSER_ID,userid).commit();
+        editor.putString(CUSER_ID, userid).commit();
+    }
+
+    /**
+     * 存入token
+     *
+     * @param value
+     */
+    public SpUtils putAuthorization(String value) {
+        getSharedPreferences();
+        editor.putString(Constants.AUTHORIZATION, value).commit();
+        return this;
+    }
+
+    /**
+     * 获取字符串的value
+     *
+     * @return
+     */
+    public String getAuthorization() {
+        getSharedPreferences();
+        String authorization = mPreference.getString(Constants.AUTHORIZATION, "");
+        if (TextUtils.isEmpty(authorization)) {
+            return "";
+        }
+        return Constants.AUTHORIZATION_VALUE + authorization;
     }
 }

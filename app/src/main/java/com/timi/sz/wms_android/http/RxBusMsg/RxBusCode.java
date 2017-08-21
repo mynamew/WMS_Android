@@ -7,4 +7,5 @@ package com.timi.sz.wms_android.http.RxBusMsg;
 
 public class RxBusCode {
     public static final int CODE_TEST = 1001;//测试的code码
+    public static final int CODE_USERINFO = 1002;//设置用户信息
 }

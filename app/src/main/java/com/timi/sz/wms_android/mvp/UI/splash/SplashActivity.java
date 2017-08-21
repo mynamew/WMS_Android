@@ -24,16 +24,16 @@ public class SplashActivity extends AutoLayoutActivity {
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             //是否是第一次登录  跳转登录还是主页
-//            if (!SpUtils.getInstance().getBoolean(Constants.IS_FIRST_LOG)) {
-//                startActivity(new Intent(SplashActivity.this, LoginActivity.class));
-//            } else {
-//                startActivity(new Intent(SplashActivity.this, MainActivity.class));
-//            }
-            if (SpUtils.getInstance().getBoolean(Constants.IS_FIRST_LOG)) {
+            if (!SpUtils.getInstance().getBoolean(Constants.IS_FIRST_LOG)) {
                 startActivity(new Intent(SplashActivity.this, LoginActivity.class));
             } else {
                 startActivity(new Intent(SplashActivity.this, MainActivity.class));
             }
+//            if (SpUtils.getInstance().getBoolean(Constants.IS_FIRST_LOG)) {
+//                startActivity(new Intent(SplashActivity.this, LoginActivity.class));
+//            } else {
+//                startActivity(new Intent(SplashActivity.this, MainActivity.class));
+//            }
             onBackPressed();
         }
     };
@@ -43,6 +43,15 @@ public class SplashActivity extends AutoLayoutActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         StatusBarUtil.setTranslucentBackground(this);
+        //设置用户信息
+        SpUtils.getInstance().putUserid("a12345678");
+        SpUtils.getInstance().putString(Constants.USER_NAME,"邢力丰");
+        SpUtils.getInstance().putString(Constants.USER_SEX,"男");
+        SpUtils.getInstance().putString(Constants.USER_NUM,"123456789");
+        SpUtils.getInstance().putString(Constants.USER_DEPART,"研发部");
+        SpUtils.getInstance().putString(Constants.USER_TEL,"15754628825");
+        SpUtils.getInstance().putString(Constants.USER_FROM,"玖坤深圳总部");
+        SpUtils.getInstance().putString(Constants.USER_ROOT,"玖坤苏州分公司");
         handler.sendEmptyMessageDelayed(0, 2000);
     }
 }

@@ -107,4 +107,13 @@
     <string name="siw_check">盘点</string>
     <string name="stock_in_point">物品清点</string>
     <string name="stock_in_point_record">清点记录</string>
+    /**====== 用户信息 ======**/
+    <string name="set_userinfo_num">编号：%1$s</string>
+    <string name="set_userinfo_name">姓名：%1$s</string>
+    <string name="set_userinfo_sex">性别：%1$s</string>
+    <string name="set_userinfo_tel">手机：%1$s</string>
+    <string name="set_userinfo_from">所属组织：%1$s</string>
+    <string name="set_userinfo_depart">部门：%1$s</string>
+    <string name="set_userinfo_root">权限组织：%1$s</string>
+    /**====== 设备信息 ======**/
 </resources>

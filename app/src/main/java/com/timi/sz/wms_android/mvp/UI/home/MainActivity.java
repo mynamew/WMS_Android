@@ -21,6 +21,7 @@ import com.timi.sz.wms_android.R;
 import com.timi.sz.wms_android.base.uils.Constants;
 import com.timi.sz.wms_android.base.uils.LogUitls;
 import com.timi.sz.wms_android.base.uils.statusutils.StatusBarUtil;
+import com.timi.sz.wms_android.bean.UserInfoBean;
 import com.timi.sz.wms_android.http.RxBusMsg.RxBusCode;
 import com.timi.sz.wms_android.http.RxBusMsg.RxBusMsg;
 import com.timi.sz.wms_android.mvp.base.BaseActivity;
@@ -61,7 +62,6 @@ public class MainActivity extends BaseActivity<MainView, MainPresenter> implemen
 
     @Override
     public void initBundle(Bundle savedInstanceState) {
-        RxBus.get().register(this);
     }
 
     @Override
@@ -85,17 +85,8 @@ public class MainActivity extends BaseActivity<MainView, MainPresenter> implemen
     public MainView createView() {
         return this;
     }
-
-    /**
-     * rxbus
-     */
-    @Subscribe(code = RxBusCode.CODE_TEST, threadMode = ThreadMode.MAIN)
-    public void getRxBusPost(RxBusMsg msg) {
-    }
-
     @Override
     protected void onDestroy() {
-        RxBus.get().unRegister(this);
         getPresenter().unRegistHttpSubscriber();
         super.onDestroy();
     }
@@ -117,7 +108,7 @@ public class MainActivity extends BaseActivity<MainView, MainPresenter> implemen
     /**
      * @param view
      */
-    @OnClick({R.id.rd_home_home, R.id.rd_home_set,R.id.iv_home_scan})
+    @OnClick({R.id.rd_home_home, R.id.rd_home_set, R.id.iv_home_scan})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.rd_home_home://主页
@@ -146,6 +137,7 @@ public class MainActivity extends BaseActivity<MainView, MainPresenter> implemen
                 break;
         }
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -154,12 +146,13 @@ public class MainActivity extends BaseActivity<MainView, MainPresenter> implemen
                 if (resultCode == RESULT_OK) {
                     Bundle bundle = data.getExtras();
                     if (bundle != null) {
-                        LogUitls.d("扫码的结果--->",bundle.getString("result"));
+                        LogUitls.d("扫码的结果--->", bundle.getString("result"));
                     }
                 }
                 break;
         }
     }
+
     /**
      * 主页下方按钮的点击事件
      *
@@ -169,10 +162,10 @@ public class MainActivity extends BaseActivity<MainView, MainPresenter> implemen
         FragmentTransaction trans = super.getSupportFragmentManager().beginTransaction();
         hideFragment(trans);
         //设置按钮状态
-        rdHomeHome.setChecked(index==0);
-        rdHomeSet.setChecked(index==1);
+        rdHomeHome.setChecked(index == 0);
+        rdHomeSet.setChecked(index == 1);
         //首页上方的文字
-        tvMainTop.setText(index==0?getString(R.string.home):getString(R.string.home_set));
+        tvMainTop.setText(index == 0 ? getString(R.string.home) : getString(R.string.home_set));
         switch (index) {
             case 0://主页
                 if (homeFM == null) {
@@ -183,12 +176,15 @@ public class MainActivity extends BaseActivity<MainView, MainPresenter> implemen
                 }
                 break;
             case 1://个人设置
+                //初始化fragment
                 if (setFM == null) {
                     setFM = new SettingFragment();
                     trans.add(R.id.fl_home_content, setFM);
                 } else {
                     trans.show(setFM);
                 }
+                //加载用户信息数据
+                getPresenter().getUserInfoFromSp();
                 break;
 
             default:
@@ -205,11 +201,20 @@ public class MainActivity extends BaseActivity<MainView, MainPresenter> implemen
 
     /**
      * 隐藏
+     *
      * @param trans
      */
     private void hideFragment(FragmentTransaction trans) {
         if (homeFM != null) trans.hide(homeFM);
         if (setFM != null) trans.hide(setFM);
     }
+
+    @Override
+    public void setSpUserInfo(UserInfoBean bean) {
+        LogUitls.e(bean.userName);
+        //设置数据
+        ((SetFragmentDataCallBack) setFM).setData(bean);
+    }
+
 }
 

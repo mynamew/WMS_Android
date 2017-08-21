@@ -23,25 +23,38 @@ public class Constants {
     /**********
      * SharePerference 相关
      *********************************************************************************************/
-    //用户名
-    public static final String USER_NAME = "USER_NAME";
-    //用户 真实姓名
-    public static final String USER_TRUE_NAME = "USER_TRUE_NAME";
-    //用户 部门信息
-    public static final String USER_DEPARTMENT = "USER_DEPARTMENT";
-    //密码
-    public static final String USER_PSW = "USER_PSW";
     //记录密码
     public static final String REMENBER_PSW = "REMENBER_PSW";
     //是否是第一次登录
     public static final String IS_FIRST_LOG = "IS_FIRST_LOG";
+    //用户名
+    public static final String USER_NAME = "USER_NAME";
+    //用户编号
+    public static final String USER_NUM = "USER_NUM";
+    //用户密码
+    public static final String USER_PSW = "USER_PSW";
+    //用户部门
+    public static final String USER_DEPART = "USER_DEPART";
+    //用户性别
+    public static final String USER_SEX = "USER_SEX";
+    //用户手机
+    public static final String USER_TEL = "USER_TEL";
+    //用户所属组织
+    public static final String USER_FROM = "USER_FROM";
+    //用户权限组织
+    public static final String USER_ROOT = "USER_ROOT";
     //登录的id
-    public static final String CUSER_ID = "CUSER_ID";
+    public static final String CUSER_ID = "USER_ID";
     //是否是 debug的状态
     public static final boolean IS_DEBUG = isApkDebugable(BaseApplication.getMApplicationContext());
     /***********
      * 扫码相关
      *********************************************************************************************/
     public static final int REQUEST_CODE = 1001;//主页跳转到扫码
+    /***********
+     * token   key /  value的前缀
+     *********************************************************************************************/
+    public static  final String AUTHORIZATION="Authorization";
+    public static  final String AUTHORIZATION_VALUE="Bearer ";
 
 }

@@ -180,6 +180,8 @@
         </activity>
         <activity android:name=".mvp.UI.stock_in.point.StockInPointActivity">
         </activity>
+        <activity android:name=".mvp.UI.userinfo.UserInfoActivity">
+        </activity>
     </application>
 
 </manifest>

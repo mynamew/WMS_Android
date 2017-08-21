@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_user_info"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/set_bg"
+    android:orientation="vertical"
+    tools:context="com.timi.sz.wms_android.mvp.UI.userinfo.UserInfoActivity">
+
+    <include layout="@layout/title_head"/>
+
+    <TextView
+        android:id="@+id/tv_set_userinfo_num"
+        style="@style/tv_userinfo"
+        android:text="@string/set_userinfo_num"/>
+
+    <TextView
+        android:id="@+id/tv_set_userinfo_name"
+        style="@style/tv_userinfo"
+        android:text="@string/set_userinfo_name"/>
+
+    <TextView
+        android:id="@+id/tv_set_userinfo_sex"
+        style="@style/tv_userinfo"
+        android:text="@string/set_userinfo_sex"/>
+
+    <TextView
+        android:id="@+id/tv_set_userinfo_tel"
+        style="@style/tv_userinfo"
+        android:text="@string/set_userinfo_tel"/>
+    <TextView
+        android:id="@+id/tv_set_userinfo_depart"
+        style="@style/tv_userinfo"
+        android:text="@string/set_userinfo_depart"/>
+
+    <TextView
+        android:id="@+id/tv_set_userinfo_from"
+        style="@style/tv_userinfo"
+        android:text="@string/set_userinfo_from"/>
+
+    <TextView
+        android:id="@+id/tv_set_userinfo_root"
+        style="@style/tv_userinfo"
+        android:text="@string/set_userinfo_root"/>
+
+
+</LinearLayout>

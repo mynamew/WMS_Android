@@ -3,6 +3,7 @@ package com.timi.sz.wms_android.mvp.UI.login;
 import com.timi.sz.wms_android.bean.LoginBean;
 import com.timi.sz.wms_android.http.HttpManager;
 import com.timi.sz.wms_android.http.api.ApiService;
+import com.timi.sz.wms_android.http.api.CommonResult;
 import com.timi.sz.wms_android.http.callback.ApiServiceMethodCallBack;
 import com.timi.sz.wms_android.mvp.base.model.impl.MvpBaseModel;
 
@@ -23,9 +24,9 @@ public class LoginModel extends MvpBaseModel {
      * create at: 2017/8/15 14:26
      */
     public void login(final String username, final String password, Observer<LoginBean> observer) {
-        HttpManager.getInstance().HttpManagerRequestByWebservice(observer, LoginBean.class, new ApiServiceMethodCallBack() {
+        HttpManager.getInstance().HttpManagerRequest(observer,  new ApiServiceMethodCallBack<LoginBean>() {
             @Override
-            public Observable<ResponseBody> createObservable(ApiService apiService) {
+            public Observable<CommonResult<LoginBean>> createObservable(ApiService apiService) {
                 return apiService.login(username, password);
             }
         });

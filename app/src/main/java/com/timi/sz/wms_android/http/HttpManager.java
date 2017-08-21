@@ -1,11 +1,10 @@
 package com.timi.sz.wms_android.http;
 
-import com.google.gson.Gson;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import com.timi.sz.wms_android.base.uils.Constants;
 import com.timi.sz.wms_android.http.api.ApiService;
+import com.timi.sz.wms_android.http.api.CommonResult;
 import com.timi.sz.wms_android.http.callback.ApiServiceMethodCallBack;
-import com.timi.sz.wms_android.http.uitls.Xml2JsonUtils;
 
 import io.reactivex.Observable;
 import io.reactivex.Observer;
@@ -13,7 +12,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
-import okhttp3.ResponseBody;
+import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -55,6 +54,10 @@ public class HttpManager {
      */
     public HttpManager() {
         /**
+         * 初始化 okhttp
+         */
+          OkHttpClient okHttpClient=new OkHttpClient.Builder().addInterceptor(new CommonInterceptor()).build();
+        /**
          * 初始化 retrofit
          */
         mRetrofit = new Retrofit.Builder()
@@ -64,6 +67,8 @@ public class HttpManager {
                 .addConverterFactory(GsonConverterFactory.create())
                 //rxjava2
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                //OkHttpClient
+                .client(okHttpClient)
                 .build();
         mApiService = mRetrofit.create(ApiService.class);
     }
@@ -75,35 +80,12 @@ public class HttpManager {
      * @param s
      * @param <T>
      */
-    private <T> void toSubscribe(Observable<ResponseBody> o, Observer<T> s, final Class<T> clazz)throws Exception {
+    private <T> void toSubscribe(Observable<CommonResult<T>> o, Observer<T> s)throws Exception {
         o.subscribeOn(Schedulers.io())
-                .map(new Function<ResponseBody, T>() {
+                .map(new Function<CommonResult<T>, T>() {
                     @Override
-                    public T apply(@NonNull ResponseBody response) throws Exception {
-                        //转换 ResponseBody 成 包装的对象
-                        T t = new Gson().fromJson(response.string(), clazz);
-                        return t;
-                    }
-                })
-                .unsubscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(s);
-    }
-    /**
-     * 来自webservice的网络请求注册
-     *
-     * @param o
-     * @param s
-     * @param <T>
-     */
-    private <T> void toSubscribeByWebService(Observable<ResponseBody> o, Observer<T> s, final Class<T> clazz)throws Exception {
-        o.subscribeOn(Schedulers.io())
-                .map(new Function<ResponseBody, T>() {
-                    @Override
-                    public T apply(@NonNull ResponseBody response) throws Exception {
-                        //转换 ResponseBody 成 包装的对象
-                        T t = new Xml2JsonUtils<T>().toJson(response, clazz);
-                        return t;
+                    public T apply(@NonNull CommonResult<T> t) throws Exception {
+                        return t.getResult();
                     }
                 })
                 .unsubscribeOn(Schedulers.io())
@@ -114,32 +96,14 @@ public class HttpManager {
      * 公共的外部调用请求的方法
      *
      * @param subscriber 观察者
-     * @param clazz      类
      * @param callBack   回调
      * @param <T>
      */
-    public <T> void HttpManagerRequest(Observer<T> subscriber, Class<T> clazz, ApiServiceMethodCallBack callBack) {
+    public <T> void HttpManagerRequest(Observer<T> subscriber, ApiServiceMethodCallBack<T> callBack) {
         try {
-            toSubscribe(callBack.createObservable(mApiService), subscriber, clazz);
+            toSubscribe(callBack.createObservable(mApiService), subscriber);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    /**
-     * 公共的外部调用请求的方法  （来自webservice）
-     *
-     * @param subscriber 观察者
-     * @param clazz      类
-     * @param callBack   回调
-     * @param <T>
-     */
-    public <T> void HttpManagerRequestByWebservice(Observer<T> subscriber, Class<T> clazz, ApiServiceMethodCallBack callBack) {
-        try {
-            toSubscribeByWebService(callBack.createObservable(mApiService), subscriber, clazz);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-
 }

@@ -19,7 +19,7 @@
         android:id="@+id/head_login"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="@color/statuscolor"
+        android:background="#353338"
         android:gravity="center"
         android:text="@string/login_login"
         android:textColor="#fff"

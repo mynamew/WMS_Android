@@ -58,21 +58,25 @@
     <TextView
         android:id="@+id/tv_set_userinfo"
         style="@style/set_tab_item"
+        android:drawableLeft="@mipmap/set_userinfo"
         android:text="@string/set_userinfo"/>
 
     <TextView
         android:id="@+id/tv_set_deviceinfo"
         style="@style/set_tab_item"
+        android:drawableLeft="@mipmap/set_device"
         android:text="@string/set_device_info"/>
 
     <TextView
         android:id="@+id/tv_set_update_psw"
         style="@style/set_tab_item"
+        android:drawableLeft="@mipmap/set_password"
         android:text="@string/set_update_psw"/>
 
     <TextView
         android:id="@+id/tv_set_about"
         style="@style/set_tab_item"
+        android:drawableLeft="@mipmap/set_about"
         android:text="@string/set_about"/>
 
     <RelativeLayout
@@ -87,7 +91,7 @@
             android:id="@+id/tv_set_update_version"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:drawableLeft="@mipmap/set_userinfo_icon"
+            android:drawableLeft="@mipmap/set_update"
             android:drawablePadding="10dp"
             android:gravity="center_vertical"
             android:text="@string/set_update_version"/>
