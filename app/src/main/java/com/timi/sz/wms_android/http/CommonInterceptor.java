@@ -59,13 +59,19 @@ public class CommonInterceptor implements Interceptor {
          */
         if (!oldUrl.toString().contains("ClientLogin")) {
             // 普通请求
-            newRequest = oldRequest.newBuilder().addHeader(Constants.AUTHORIZATION, SpUtils.getInstance().getAuthorization())
+            newRequest = oldRequest.newBuilder()
+                    //请求的token
+                    .addHeader(Constants.AUTHORIZATION, SpUtils.getInstance().getAuthorization())
+                    //请求的语言
+                    .addHeader(Constants.LOCALE_LAUGUAGE, SpUtils.getInstance().getLocaleLanguage())
                     .method(oldRequest.method(), oldRequest.body())
                     .url(parseUrl)
                     .build();
         } else {
             // 登录请求
             newRequest = oldRequest.newBuilder()
+                    //请求的语言
+                    .addHeader(Constants.LOCALE_LAUGUAGE, SpUtils.getInstance().getLocaleLanguage())
                     .method(oldRequest.method(), oldRequest.body())
                     .url(parseUrl)
                     .build();

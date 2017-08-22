@@ -6,11 +6,9 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
@@ -24,7 +22,6 @@ import com.timi.sz.wms_android.base.uils.PackageUtils;
 import com.timi.sz.wms_android.base.uils.SpUtils;
 import com.timi.sz.wms_android.mvp.UI.login.LoginActivity;
 import com.timi.sz.wms_android.mvp.base.view.BaseNoMvpActivity;
-import com.timi.sz.wms_android.qrcode.utils.Constant;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -38,13 +35,17 @@ import butterknife.OnClick;
  * author: timi
  * create at: 2017/8/22 13:11
  */
-public class ServerSettingActivity extends BaseNoMvpActivity {
-    @BindView(R.id.tv_ss_setvers_name)
+public class ServerSettingActivity extends BaseNoMvpActivity implements View.OnClickListener {
+    @BindView(R.id.tv_ss_name)
     TextView tvSsSetversName;
     @BindView(R.id.tv_ss_language)
     TextView tvSsLanguage;
     @BindView(R.id.tv_ss_version)
     TextView tvSsVersion;
+    @BindView(R.id.ll_ss_servers)
+    LinearLayout llSsServers;
+    @BindView(R.id.ll_language)
+    LinearLayout llLanguage;
 
     @Override
     public int setLayoutId() {
@@ -57,36 +58,14 @@ public class ServerSettingActivity extends BaseNoMvpActivity {
 
     @Override
     public void initView() {
-
+        //设置监听器
+        llSsServers.setOnClickListener(this);
+        llLanguage.setOnClickListener(this);
     }
 
     @Override
     public void initData() {
-        tvSsVersion.setText(PackageUtils.getAppVersionName(this));
-    }
-
-    @OnClick({R.id.ll_ss_servers, R.id.ll_language, R.id.btn_ss__confirm})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.ll_ss_servers://选择服务器
-                showSelectServerPopwindow(view);
-                break;
-            case R.id.ll_language://选择语言
-                showSelectLanguagePopwindow(view);
-                break;
-            case R.id.btn_ss__confirm://确认选择
-                startActivity(new Intent(this, LoginActivity.class));
-                break;
-        }
-    }
-
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        //隐藏下拉框
-        if (mPop.isShowing()) {
-            mPop.dismiss();
-        }
-        return super.onTouchEvent(event);
+        tvSsVersion.setText(String.format(getString(R.string.login_version), PackageUtils.getAppVersionName(this)));
     }
 
     /**
@@ -105,7 +84,7 @@ public class ServerSettingActivity extends BaseNoMvpActivity {
                 @Override
                 public void onClick(View v) {
                     tvSsLanguage.setText(getString(R.string.language_simple));
-                    SpUtils.getInstance().putString(Constants.LOCALE_LAUGUAGE, "zh-CN");
+                    SpUtils.getInstance().putLocaleLanguage("zh-CN");
                     LanguageUtils.switchAppLanguage(ServerSettingActivity.this);
                     mPop.dismiss();
                 }
@@ -114,7 +93,7 @@ public class ServerSettingActivity extends BaseNoMvpActivity {
                 @Override
                 public void onClick(View v) {
                     tvSsLanguage.setText(getString(R.string.language_tradtional));
-                    SpUtils.getInstance().putString(Constants.LOCALE_LAUGUAGE, "zh-TW");
+                    SpUtils.getInstance().putLocaleLanguage("zh-TW");
                     LanguageUtils.switchAppLanguage(ServerSettingActivity.this);
                     mPop.dismiss();
                 }
@@ -123,21 +102,18 @@ public class ServerSettingActivity extends BaseNoMvpActivity {
                 @Override
                 public void onClick(View v) {
                     tvSsLanguage.setText(getString(R.string.language_english));
-                    SpUtils.getInstance().putString(Constants.LOCALE_LAUGUAGE, "en");
+                    SpUtils.getInstance().putLocaleLanguage("en");
                     LanguageUtils.switchAppLanguage(ServerSettingActivity.this);
                     mPop.dismiss();
                 }
             });
             mPop.setContentView(content);
-            mPop.setOutsideTouchable(true);
+            mPop.setOutsideTouchable(false);
             mPop.setTouchable(true);
             mPop.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#00ffffff")));
             mPop.setAnimationStyle(R.style.popWindow_animation_top);
         }
-        //2次点击处理
-        if (mPop.isShowing()) {
-            mPop.dismiss();
-        } else {
+        if (null != mPop) {
             mPop.showAsDropDown(view);
         }
     }
@@ -191,16 +167,45 @@ public class ServerSettingActivity extends BaseNoMvpActivity {
                 }
             });
             mPopSelectServer.setContentView(content);
-            mPopSelectServer.setOutsideTouchable(true);
+            mPopSelectServer.setOutsideTouchable(false);
             mPopSelectServer.setTouchable(true);
             mPopSelectServer.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#00ffffff")));
             mPopSelectServer.setAnimationStyle(R.style.popWindow_animation_top);
         }
-        //2次点击处理
-        if (mPopSelectServer.isShowing()) {
-            mPopSelectServer.dismiss();
-        } else {
+        if (null != mPopSelectServer) {
             mPopSelectServer.showAsDropDown(view);
+        }
+    }
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.ll_ss_servers://选择服务器
+                //隐藏选择语言的下拉框
+                if (null != mPop && mPop.isShowing()) {
+                    mPop.dismiss();
+                }
+                //显示和隐藏选择服务器的下拉框
+                if (null != mPopSelectServer && mPopSelectServer.isShowing()) {
+                    mPopSelectServer.dismiss();
+                } else {
+                    showSelectServerPopwindow(view);
+                }
+                break;
+            case R.id.ll_language://选择语言
+                //隐藏选择服务器的下拉框
+                if (null != mPopSelectServer && mPopSelectServer.isShowing()) {
+                    mPopSelectServer.dismiss();
+                }
+                //显示和隐藏选择语言的下拉框
+                if (null != mPop && mPop.isShowing()) {
+                    mPop.dismiss();
+                } else {
+                    showSelectLanguagePopwindow(view);
+                }
+                break;
+            case R.id.btn_ss__confirm://确认选择
+                startActivity(new Intent(this, LoginActivity.class));
+                break;
         }
     }
 }

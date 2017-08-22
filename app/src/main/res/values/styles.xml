@@ -10,8 +10,15 @@
         <item name="windowNoTitle">true</item>
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowBackground">@android:color/transparent</item>
-    </style>
+        <item name="android:windowAnimationStyle">@style/MyInterludeStyle</item>
 
+    </style>
+    <style name="MyInterludeStyle">
+        <item name="android:activityOpenEnterAnimation">@transition/slide_in_right</item>
+        <item name="android:activityOpenExitAnimation">@transition/slide_out_left</item>
+        <item name="android:activityCloseEnterAnimation">@transition/slide_in_left</item>
+        <item name="android:activityCloseExitAnimation">@transition/slide_out_right</item>
+    </style>
     <style name="tab_menu_item">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_weight">1</item>

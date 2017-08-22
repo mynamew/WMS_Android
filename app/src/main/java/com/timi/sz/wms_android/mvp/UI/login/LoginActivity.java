@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.timi.sz.wms_android.R;
 import com.timi.sz.wms_android.base.uils.Constants;
 import com.timi.sz.wms_android.base.uils.LogUitls;
+import com.timi.sz.wms_android.base.uils.PackageUtils;
 import com.timi.sz.wms_android.base.uils.SpUtils;
 import com.timi.sz.wms_android.base.uils.ToastUtils;
 import com.timi.sz.wms_android.bean.LoginBean;
@@ -93,7 +94,7 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
 
     @Override
     public void initData() {
-
+        tvLoginVersion.setText(String.format(getString(R.string.login_version), PackageUtils.getAppVersionName(this)));
     }
 
     @Override

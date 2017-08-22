@@ -60,9 +60,9 @@ public class Constants {
     public static final String AUTHORIZATION = "Authorization";
     public static final String AUTHORIZATION_VALUE = "Bearer ";
     /***********
-     * 系统设置
+     * 应用语言设置 中文简体（zh-CN）、中文繁体（zh-TW）、English（en）
      *********************************************************************************************/
-    public static final String LOCALE_LAUGUAGE = "LOCALE_LAUGUAGE";// 0 简体中文 1 繁体中文 2 英文
+    public static final String LOCALE_LAUGUAGE = "Abp.Localization.CultureName";
     /***********
      * sp 存储用户选的baseurl
      *********************************************************************************************/

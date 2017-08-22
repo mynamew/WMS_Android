@@ -117,5 +117,6 @@
     <string name="set_userinfo_depart">部门：%1$s</string>
     <string name="set_userinfo_root">权限组织：%1$s</string>
     <string name="server_set">ServerSet</string>
+    <string name="login_select_language">please select language</string>
     /**====== 设备信息 ======**/
 </resources>

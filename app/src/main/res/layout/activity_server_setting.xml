@@ -8,17 +8,12 @@
     android:background="@color/set_bg"
     tools:context="com.timi.sz.wms_android.mvp.UI.setserver.ServerSettingActivity">
 
-    <include layout="@layout/title_head"/>
-
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
         android:src="@mipmap/login_bg"/>
 
-    <!-- <include
-         android:id="@+id/head_login"
-         layout="@layout/title_head" />-->
     <TextView
         android:id="@+id/head_login"
         android:layout_width="match_parent"
@@ -90,7 +85,7 @@
                 android:src="@mipmap/login_setvers"/>
 
             <TextView
-                android:id="@+id/tv_ss_setvers_name"
+                android:id="@+id/tv_ss_name"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_gravity="center_vertical"
@@ -144,7 +139,6 @@
                 android:textSize="16sp"/>
 
             <ImageView
-                android:id="@+id/tv_login_setvers_select"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -157,7 +151,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="30px"
+        android:layout_marginBottom="15dp"
         android:gravity="center_horizontal"
         android:text="版权所有：玖坤信息"
         android:textColor="#999"/>

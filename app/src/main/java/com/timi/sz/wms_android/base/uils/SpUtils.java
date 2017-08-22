@@ -206,4 +206,24 @@ public class SpUtils {
         getSharedPreferences();
         return mPreference.getString(Constants.SP_BASE_URL, "");
     }
+    /**
+     * 存入token
+     *
+     * @param value
+     */
+    public SpUtils putLocaleLanguage(String value) {
+        getSharedPreferences();
+        editor.putString(Constants.LOCALE_LAUGUAGE, value).commit();
+        return this;
+    }
+
+    /**
+     * 获取字符串的value
+     *
+     * @return
+     */
+    public String getLocaleLanguage() {
+        getSharedPreferences();
+        return mPreference.getString(Constants.LOCALE_LAUGUAGE, "");
+    }
 }

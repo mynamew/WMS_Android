@@ -40,4 +40,5 @@
     <string name="set_device_info">設備信息</string>
     <string name="set_userinfo">用戶信息</string>
     <string name="server_set">服務設置</string>
+    <string name="login_select_language">請選擇語言</string>
 </resources>

@@ -19,7 +19,7 @@ public class LanguageUtils {
      * create at: 2017/8/22 11:08
      */
     public static  void switchAppLanguage(Context context) {
-        String spLanguage = SpUtils.getInstance().getString(Constants.LOCALE_LAUGUAGE);
+        String spLanguage = SpUtils.getInstance().getLocaleLanguage();
         Resources resources = context.getApplicationContext().getResources();
         Configuration config = resources.getConfiguration();
         DisplayMetrics dm = resources.getDisplayMetrics();
