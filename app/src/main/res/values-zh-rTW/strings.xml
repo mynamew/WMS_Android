@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">智能倉庫管理系統</string>
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password (optional)</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+    /**====== 登录 ======**/
+    <string name="login_login">登錄</string>
+    <string name="login_inpiut_psw">請輸入密碼</string>
+    <string name="login_input_username">請輸入用戶名</string>
+    <string name="login_choose_servers">請選擇服務器</string>
+    <string name="login_app_name">智能倉庫管理系統</string>
+    <string name="login_remember_psw">記錄密碼</string>
+    <string name="login_version">V %1$s</string>
+
+    /**====== 首页 ======**/
+    <string name="home">首頁</string>
+    <string name="home_in_lib">入庫作業</string>
+    <string name="home_out_lib">出庫作業</string>
+    <string name="home_today_in">今日入庫</string>
+    <string name="home_today_out">今日出庫</string>
+    <string name="home_detail">查看詳情</string>
+    <string name="home_query">綜合查詢</string>
+    <string name="home_lib_in_deal">庫內作業</string>
+    <string name="login_success">登錄成功</string>
+    <string name="home_set">設置</string>
+    <string name="set_exit">退出登錄</string>
+    <string name="set_update_version">版本更新</string>
+    <string name="set_about">關於軟件</string>
+    <string name="set_update_psw">修改密碼</string>
+    <string name="set_device_info">設備信息</string>
+    <string name="set_userinfo">用戶信息</string>
+    <string name="server_set">服務設置</string>
+</resources>

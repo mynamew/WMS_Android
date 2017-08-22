@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rlv_select_server"
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        android:background="@drawable/bg_rectangle_pull_down"/>
+</RelativeLayout>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="130dp"
+        android:src="@drawable/bg_rectangle_pull_down"/>
+
+    <TextView
+        android:id="@+id/tv_language_simple"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="center"
+        android:text="@string/language_simple"
+        android:textColor="#fff"/>
+
+    <View
+        android:id="@+id/view1"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/tv_language_simple"
+        android:background="#fff"/>
+
+    <TextView
+        android:id="@+id/tv_language_trad"
+
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_below="@id/view1"
+        android:gravity="center"
+        android:text="@string/language_tradtional"
+        android:textColor="#fff"/>
+
+    <View
+        android:id="@+id/view2"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/tv_language_trad"
+        android:background="#fff"/>
+
+    <TextView
+        android:id="@+id/tv_language_en"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_below="@id/view2"
+        android:gravity="center"
+        android:text="@string/language_english"
+        android:textColor="#fff"/>
+</RelativeLayout>

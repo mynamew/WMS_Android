@@ -17,7 +17,7 @@ public class PackageUtils {
      */
     public static String getAppVersionName(Context context) {
         String versionName = "";
-        int versioncode=0;
+        int versioncode = 0;
         try {
             // ---get the package info---
             PackageManager pm = context.getPackageManager();
@@ -34,16 +34,33 @@ public class PackageUtils {
 
     /**
      * 获取当前是否是 debug 状态
+     *
      * @param context
      * @return
      */
     public static boolean isApkDebugable(Context context) {
         try {
-            ApplicationInfo info= context.getApplicationInfo();
-            return (info.flags&ApplicationInfo.FLAG_DEBUGGABLE)!=0;
+            ApplicationInfo info = context.getApplicationInfo();
+            return (info.flags & ApplicationInfo.FLAG_DEBUGGABLE) != 0;
         } catch (Exception e) {
 
         }
         return false;
+    }
+
+    /**
+     * 获取当前版本号
+     *
+     * @param context
+     * @return
+     * @throws Exception
+     */
+    public static String getVersionName(Context context) throws Exception {
+        // 获取packagemanager的实例
+        PackageManager packageManager = context.getPackageManager();
+        // getPackageName()是你当前类的包名，0代表是获取版本信息
+        PackageInfo packInfo = packageManager.getPackageInfo(context.getPackageName(), 0);
+        String version = packInfo.versionName;
+        return version;
     }
 }

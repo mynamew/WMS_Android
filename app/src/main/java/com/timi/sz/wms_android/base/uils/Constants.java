@@ -2,6 +2,9 @@ package com.timi.sz.wms_android.base.uils;
 
 import com.timi.sz.wms_android.mvp.base.BaseApplication;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import static com.timi.sz.wms_android.base.uils.PackageUtils.isApkDebugable;
 
 /**
@@ -54,14 +57,26 @@ public class Constants {
     /***********
      * token   key /  value的前缀
      *********************************************************************************************/
-    public static  final String AUTHORIZATION="Authorization";
-    public static  final String AUTHORIZATION_VALUE="Bearer ";
+    public static final String AUTHORIZATION = "Authorization";
+    public static final String AUTHORIZATION_VALUE = "Bearer ";
+    /***********
+     * 系统设置
+     *********************************************************************************************/
+    public static final String LOCALE_LAUGUAGE = "LOCALE_LAUGUAGE";// 0 简体中文 1 繁体中文 2 英文
     /***********
      * sp 存储用户选的baseurl
      *********************************************************************************************/
-    public static  final String SP_BASE_URL="SP_BASE_URL";
+    public static final String SP_BASE_URL = "SP_BASE_URL";
     /***********
      * 用户所有的服务器url
      *********************************************************************************************/
+    public static final Map<String, String> SERVER_URLS = new HashMap<>();
 
+    static {
+        SERVER_URLS.put("百度服务器", "www.baidu.com");
+        SERVER_URLS.put("天猫服务器", "www.tianmao.com");
+        SERVER_URLS.put("淘宝服务器", "www.taobao.com");
+        SERVER_URLS.put("谷歌服务器", "www.google.com");
+        SERVER_URLS.put("火狐服务器", "www.huhu.com");
+    }
 }

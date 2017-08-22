@@ -1,10 +1,13 @@
 package com.timi.sz.wms_android.mvp.UI.splash;
 
 import android.content.Intent;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
+import android.util.DisplayMetrics;
 
 import com.timi.sz.wms_android.R;
 import com.timi.sz.wms_android.base.uils.Constants;
@@ -12,12 +15,16 @@ import com.timi.sz.wms_android.base.uils.SpUtils;
 import com.timi.sz.wms_android.base.uils.statusutils.StatusBarUtil;
 import com.timi.sz.wms_android.mvp.UI.home.MainActivity;
 import com.timi.sz.wms_android.mvp.UI.login.LoginActivity;
+import com.timi.sz.wms_android.mvp.UI.setserver.ServerSettingActivity;
 import com.zhy.autolayout.AutoLayoutActivity;
-/** 
+
+import java.util.Locale;
+
+/**
   * splash activity
-  * author: timi    
+  * author: timi
   * create at: 2017/8/16 9:51
-  */  
+  */
 public class SplashActivity extends AutoLayoutActivity {
     private Handler handler = new Handler() {
         @Override
@@ -25,7 +32,7 @@ public class SplashActivity extends AutoLayoutActivity {
             super.handleMessage(msg);
             //是否是第一次登录  跳转登录还是主页
             if (!SpUtils.getInstance().getBoolean(Constants.IS_FIRST_LOG)) {
-                startActivity(new Intent(SplashActivity.this, LoginActivity.class));
+                startActivity(new Intent(SplashActivity.this, ServerSettingActivity.class));
             } else {
                 startActivity(new Intent(SplashActivity.this, MainActivity.class));
             }

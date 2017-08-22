@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:tools="http://schemas.android.com/tools"
-                android:id="@+id/activity_login"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                tools:context="com.timi.sz.wms_android.mvp.UI.login.LoginActivity">
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_server_setting"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/set_bg"
+    tools:context="com.timi.sz.wms_android.mvp.UI.setserver.ServerSettingActivity">
+
+    <include layout="@layout/title_head"/>
 
     <ImageView
         android:layout_width="match_parent"
@@ -21,7 +25,7 @@
         android:layout_height="50dp"
         android:background="#353338"
         android:gravity="center"
-        android:text="@string/login_login"
+        android:text="@string/server_set"
         android:textColor="#fff"
         android:textSize="18sp"/>
 
@@ -47,7 +51,7 @@
         android:textSize="25sp"/>
 
     <TextView
-        android:id="@+id/tv_login_version"
+        android:id="@+id/tv_ss_version"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/tv_login_name"
@@ -61,7 +65,7 @@
         android:id="@+id/rl_login_input"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:layout_below="@id/tv_login_version"
+        android:layout_below="@id/tv_ss_version"
         android:layout_margin="15dp"
         android:orientation="vertical">
 
@@ -72,91 +76,81 @@
             android:src="@drawable/bg_rectangle_statuscolor"/>
 
         <LinearLayout
-            android:id="@+id/ll_username"
+            android:id="@+id/ll_ss_servers"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:padding="20px">
+            android:padding="10dp">
 
             <ImageView
                 android:layout_width="20dp"
                 android:layout_height="20dp"
+                android:layout_gravity="center_vertical"
                 android:scaleType="centerCrop"
-                android:src="@mipmap/login_username"/>
+                android:src="@mipmap/login_setvers"/>
 
-            <EditText
-                android:id="@+id/et_login_username"
+            <TextView
+                android:id="@+id/tv_ss_setvers_name"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="10dp"
                 android:layout_weight="1"
-                android:background="@null"
-
                 android:gravity="center_vertical"
-                android:hint="@string/login_input_username"
+                android:text="@string/login_choose_servers"
                 android:textColor="#fff"
-                android:textColorHint="#fff"
                 android:textSize="16sp"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:src="@mipmap/login_down"/>
         </LinearLayout>
 
         <View
-            android:id="@+id/view2"
+            android:id="@+id/view1"
             android:layout_width="match_parent"
-            android:layout_height="2px"
-            android:layout_below="@id/ll_username"
+            android:layout_height="1dp"
+            android:layout_below="@id/ll_ss_servers"
             android:background="#fff"/>
 
         <LinearLayout
+            android:id="@+id/ll_language"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_below="@id/view2"
+            android:layout_below="@id/view1"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:padding="20px">
+            android:padding="10dp">
 
             <ImageView
                 android:layout_width="20dp"
                 android:layout_height="20dp"
+                android:layout_gravity="center_vertical"
                 android:scaleType="centerCrop"
-                android:src="@mipmap/login_password"/>
+                android:src="@mipmap/login_setvers"/>
 
-            <EditText
-                android:id="@+id/et_login_password"
+            <TextView
+                android:id="@+id/tv_ss_language"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="10dp"
                 android:layout_weight="1"
-                android:background="@null"
                 android:gravity="center_vertical"
-                android:hint="@string/login_inpiut_psw"
-                android:inputType="textPassword"
+                android:text="@string/login_select_language"
                 android:textColor="#fff"
-                android:textColorHint="#fff"
                 android:textSize="16sp"/>
 
             <ImageView
-                android:id="@+id/iv_login_eye"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:paddingBottom="10dp"
-                android:paddingLeft="10dp"
-                android:paddingTop="10dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/selector_login_psw"/>
+                android:id="@+id/tv_login_setvers_select"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:src="@mipmap/login_down"/>
         </LinearLayout>
     </RelativeLayout>
-
-    <CheckBox
-        android:id="@+id/cb_login_rempsw"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/rl_login_input"
-        android:layout_marginLeft="30px"
-        android:text="@string/login_remember_psw"
-        android:textColor="@color/statuscolor"/>
 
     <TextView
         android:id="@+id/tv_login_info"
@@ -169,11 +163,15 @@
         android:textColor="#999"/>
 
     <Button
-        android:id="@+id/btn_login"
+        android:id="@+id/btn_ss__confirm"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/cb_login_rempsw"
-        android:layout_margin="30px"
+        android:layout_alignLeft="@+id/rl_login_input"
+        android:layout_alignStart="@+id/rl_login_input"
+        android:layout_below="@+id/rl_login_input"
+        android:layout_alignRight="@+id/rl_login_input"
+        android:layout_alignEnd="@+id/rl_login_input"
+        android:layout_marginTop="15dp"
         android:background="@drawable/selector_btn_bg_login"
         android:text="@string/confirm"
         android:textColor="#fff"

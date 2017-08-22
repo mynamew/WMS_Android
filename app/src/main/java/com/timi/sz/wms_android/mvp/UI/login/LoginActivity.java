@@ -43,10 +43,6 @@ import cn.jpush.android.api.TagAliasCallback;
 public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> implements LoginView {
     @BindView(R.id.tv_login_version)
     TextView tvLoginVersion;
-    @BindView(R.id.tv_login_setvers_name)
-    TextView tvLoginSetversName;
-    @BindView(R.id.ll_servers)
-    LinearLayout llServers;
     @BindView(R.id.et_login_username)
     EditText etLoginUsername;
     @BindView(R.id.et_login_password)

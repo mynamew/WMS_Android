@@ -5,6 +5,7 @@ import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 /**
  * Created by timi on 2016/12/19.
@@ -38,6 +39,19 @@ public class CommonViewHolder extends RecyclerView.ViewHolder {
         View view = mViews.get(viewId);
         if (view == null) {
             view = mConvertView.findViewById(viewId);
+            mViews.put(viewId, view);
+        }
+        return view;
+    }
+    /**
+     * 根据ItemView的id获取子视图View
+     * @param viewId
+     * @return
+     */
+    public TextView getTextView(int viewId) {
+        TextView view = (TextView) mViews.get(viewId);
+        if (view == null) {
+            view = (TextView) mConvertView.findViewById(viewId);
             mViews.put(viewId, view);
         }
         return view;
