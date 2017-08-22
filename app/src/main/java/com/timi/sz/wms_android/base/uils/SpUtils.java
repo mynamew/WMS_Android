@@ -186,4 +186,24 @@ public class SpUtils {
         }
         return Constants.AUTHORIZATION_VALUE + authorization;
     }
+    /**
+     * 存入token
+     *
+     * @param value
+     */
+    public SpUtils putBaseUrl(String value) {
+        getSharedPreferences();
+        editor.putString(Constants.SP_BASE_URL, value).commit();
+        return this;
+    }
+
+    /**
+     * 获取字符串的value
+     *
+     * @return
+     */
+    public String getBaseUrl() {
+        getSharedPreferences();
+        return mPreference.getString(Constants.SP_BASE_URL, "");
+    }
 }

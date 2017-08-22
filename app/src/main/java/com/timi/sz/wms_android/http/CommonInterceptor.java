@@ -5,14 +5,11 @@ package com.timi.sz.wms_android.http;
  * create at: 2017-08-21 16:17
  */
 
-import android.support.v4.os.IResultReceiver;
-
 import com.timi.sz.wms_android.base.uils.Constants;
 import com.timi.sz.wms_android.base.uils.LogUitls;
 import com.timi.sz.wms_android.base.uils.SpUtils;
 
 import java.io.IOException;
-import java.net.URL;
 
 import okhttp3.HttpUrl;
 import okhttp3.Interceptor;
@@ -27,31 +24,53 @@ public class CommonInterceptor implements Interceptor {
     @Override
     public Response intercept(Interceptor.Chain chain) throws IOException {
         Request oldRequest = chain.request();
-
-        // 添加新的参数
-        HttpUrl.Builder authorizedUrlBuilder = oldRequest.url()
-                .newBuilder()
-                .scheme(oldRequest.url().scheme())
-                .host(oldRequest.url().host());
-        URL url = authorizedUrlBuilder.build().url();
-        Request newRequest=null;
+        /**
+         * 请求中的Url
+         */
+        HttpUrl oldUrl = oldRequest.url();
+        LogUitls.e("oldUrl--->" + oldUrl.toString());
+        /**
+         * 应用配置的服务器Url
+         */
+        String spBaseUrl = SpUtils.getInstance().getBaseUrl();
+        /**
+         * Request的url
+         */
+        HttpUrl parseUrl = null;
+        /**
+         * 对url 进行处理 当本地sp 存储的是和Constants不同的url 的时候进行替换BaseUrl的操作
+         */
+        if (!spBaseUrl.equals(oldUrl.toString())) {
+            try {
+                    //生成转换的url
+                    parseUrl = HttpUrl.parse(spBaseUrl+oldUrl.toString().replace(Constants.BASE_URL,""));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {//相同的则直接转换
+            parseUrl = oldUrl;
+        }
+        /**
+         * Request 对象
+         */
+        Request newRequest = null;
         /**
          * 拦截器  登录的请求的时候不进行header 的设置
          */
-        if (!url.toString().contains("ClientLogin")) {
+        if (!oldUrl.toString().contains("ClientLogin")) {
             // 普通请求
-             newRequest = oldRequest.newBuilder().addHeader(Constants.AUTHORIZATION,SpUtils.getInstance().getAuthorization())
+            newRequest = oldRequest.newBuilder().addHeader(Constants.AUTHORIZATION, SpUtils.getInstance().getAuthorization())
                     .method(oldRequest.method(), oldRequest.body())
-                    .url(authorizedUrlBuilder.build())
+                    .url(parseUrl)
                     .build();
-        }else{
+        } else {
             // 登录请求
             newRequest = oldRequest.newBuilder()
                     .method(oldRequest.method(), oldRequest.body())
-                    .url(authorizedUrlBuilder.build())
+                    .url(parseUrl)
                     .build();
         }
-        LogUitls.e("处理后的url-->"+newRequest.url().toString());
+        LogUitls.e("处理后的url-->" + newRequest.url().toString());
         return chain.proceed(newRequest);
     }
 }

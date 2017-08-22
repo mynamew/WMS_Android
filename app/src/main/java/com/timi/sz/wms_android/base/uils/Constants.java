@@ -10,7 +10,7 @@ import static com.timi.sz.wms_android.base.uils.PackageUtils.isApkDebugable;
 
 public class Constants {
     //base url
-    public static final String BASE_URL = "http://222.92.132.196:9000/index.asmx/";
+    public static final String BASE_URL = "http://v.juhe.cn/weixin/";
     //    public static final String BASE_URL = "http://v.juhe.cn/weixin/";
     //超时时间   5s
     public static int DEFAULT_TIMEOUT = 5000;
@@ -56,5 +56,12 @@ public class Constants {
      *********************************************************************************************/
     public static  final String AUTHORIZATION="Authorization";
     public static  final String AUTHORIZATION_VALUE="Bearer ";
+    /***********
+     * sp 存储用户选的baseurl
+     *********************************************************************************************/
+    public static  final String SP_BASE_URL="SP_BASE_URL";
+    /***********
+     * 用户所有的服务器url
+     *********************************************************************************************/
 
 }
