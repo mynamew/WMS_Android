@@ -21,6 +21,16 @@
     <string name="login_input_username">please input username</string>
     <string name="login_choose_servers">please select the server</string>
     <string name="login_app_name">SWMS</string>
+    <string name="server_set">ServerSet</string>
+    <string name="login_select_language">please select language</string>
+    <string name="login_url_tip">Location：</string>
+    <string name="login_zuhu">租户：</string>
+    <string name="login_language">Language：</string>
+    <string-array name="spingarr">
+        <item>Simple</item>
+        <item>Tradtional</item>
+        <item>English</item>
+    </string-array>
     /**====== 个人信息 ======**/
     <string name="login_success_tip">提示：首次登录需进行个人信息确认，如有问题，请到ERP中进行修改。</string>
     <string name="login_success_name">姓名：%1$s</string>
@@ -116,7 +126,5 @@
     <string name="set_userinfo_from">所属组织：%1$s</string>
     <string name="set_userinfo_depart">部门：%1$s</string>
     <string name="set_userinfo_root">权限组织：%1$s</string>
-    <string name="server_set">ServerSet</string>
-    <string name="login_select_language">please select language</string>
     /**====== 设备信息 ======**/
 </resources>

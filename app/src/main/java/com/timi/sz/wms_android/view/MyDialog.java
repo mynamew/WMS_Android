@@ -5,11 +5,14 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.text.TextUtils;
+import android.util.SparseArray;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -27,6 +30,7 @@ import com.timi.sz.wms_android.R;
 public class MyDialog extends Dialog {
     private Context ctx;
     private View rootView;
+    private SparseArray<View> views = new SparseArray<>();
     /**
      * 0 :  默认的弹出框优先级
      * 1 ： 系统公告
@@ -38,7 +42,6 @@ public class MyDialog extends Dialog {
     public MyDialog(Context context, int layoutId) {
         super(context, R.style.Dialog);
         initView(context, layoutId);
-
     }
 
     public void initView(Context ctx, int layoutId) {
@@ -56,7 +59,7 @@ public class MyDialog extends Dialog {
         this.setOnDismissListener(new OnDismissListener() {
             @Override
             public void onDismiss(DialogInterface dialogInterface) {
-               //弹框消失的回调
+                //弹框消失的回调
                 myDialogDismiss();
             }
         });
@@ -69,10 +72,13 @@ public class MyDialog extends Dialog {
      * create at 2017/5/5 14:34
      */
     public MyDialog setTextViewContent(int resId, String content) {
-        if(!(rootView.findViewById(resId) instanceof TextView)){
+        if (!(rootView.findViewById(resId) instanceof TextView)) {
             return this;
         }
         TextView tv = (TextView) rootView.findViewById(resId);
+        //存储控件
+        views.put(resId, tv);
+        //设置内容
         if (null != tv && null != content && !TextUtils.isEmpty(content)) {
             tv.setText(content);
         }
@@ -86,14 +92,43 @@ public class MyDialog extends Dialog {
      * create at 2017/5/5 14:37
      */
     public MyDialog setButtonListener(int resId, String content, final DialogClickListener listener) {
-        if(!(rootView.findViewById(resId) instanceof Button)){
+        if (!(rootView.findViewById(resId) instanceof Button)) {
             return this;
         }
         Button bt = (Button) rootView.findViewById(resId);
         if (null != bt) {
+            //存储控件
+            views.put(resId, bt);
+            //设置内容
             if (null != content && !TextUtils.isEmpty(content)) {
                 bt.setText(content);
             }
+            if (null != listener) {
+                bt.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        listener.dialogClick(MyDialog.this);
+                    }
+                });
+            }
+        }
+        return this;
+    }
+
+    /**
+     * 设置TextView文本及点击事件
+     *
+     * @autor timi
+     * create at 2017/5/5 14:37
+     */
+    public MyDialog setTextViewListener(int resId, final DialogClickListener listener) {
+        if (!(rootView.findViewById(resId) instanceof TextView)) {
+            return this;
+        }
+        TextView bt = (TextView) rootView.findViewById(resId);
+        if (null != bt) {
+            //存储控件
+            views.put(resId, bt);
             if (null != listener) {
                 bt.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -113,11 +148,13 @@ public class MyDialog extends Dialog {
      * create at 2017/5/5 14:37
      */
     public MyDialog setImageViewListener(int resId, final DialogClickListener listener) {
-        if(!(rootView.findViewById(resId) instanceof ImageView)){
+        if (!(rootView.findViewById(resId) instanceof ImageView)) {
             return this;
         }
         ImageView iv = (ImageView) rootView.findViewById(resId);
         if (null != iv) {
+            //存储控件
+            views.put(resId, iv);
             if (null != listener) {
                 iv.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -129,18 +166,21 @@ public class MyDialog extends Dialog {
         }
         return this;
     }
+
     /**
      * 设置图片及点击事件
      *
      * @autor timi
      * create at 2017/5/5 14:37
      */
-    public MyDialog setImageViewListener(int resId, Bitmap bp,final DialogClickListener listener) {
-        if(!(rootView.findViewById(resId) instanceof ImageView)){
+    public MyDialog setImageViewListener(int resId, Bitmap bp, final DialogClickListener listener) {
+        if (!(rootView.findViewById(resId) instanceof ImageView)) {
             return this;
         }
         ImageView iv = (ImageView) rootView.findViewById(resId);
         if (null != iv) {
+            //存储控件
+            views.put(resId, iv);
             if (null != listener) {
                 iv.setImageBitmap(bp);
                 iv.setOnClickListener(new View.OnClickListener() {
@@ -153,6 +193,7 @@ public class MyDialog extends Dialog {
         }
         return this;
     }
+
     /**
      * 设置View的点击事件
      *
@@ -162,6 +203,8 @@ public class MyDialog extends Dialog {
     public MyDialog setViewListener(int resId, final DialogClickListener listener) {
         View viewById = rootView.findViewById(resId);
         if (null != viewById) {
+            //存储控件
+            views.put(resId, viewById);
             if (null != listener) {
                 viewById.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -213,6 +256,83 @@ public class MyDialog extends Dialog {
                 });
             }
         }
+        return this;
+    }
+
+    /**
+     * 设置Dialog的Edittext
+     *
+     * @param resId
+     * @return
+     */
+    public MyDialog setEdittextContent(int resId, String content) {
+        View viewById = rootView.findViewById(resId);
+        if (null != viewById && viewById instanceof EditText) {
+            views.put(resId, viewById);
+            ((EditText) viewById).setText(content);
+        }
+        return this;
+    }
+
+    /**
+     * 返回Dialog的Edittext
+     *
+     * @param resId
+     * @return
+     */
+    public EditText getEdittext(int resId) {
+        View viewById = views.get(resId);
+        if (null != viewById && viewById instanceof TextView) {
+            return (EditText) viewById;
+        } else {
+            viewById = rootView.findViewById(resId);
+            if (null != viewById && viewById instanceof TextView) {
+                return (EditText) viewById;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * 返回Dialog的TextView
+     *
+     * @param resId
+     * @return
+     */
+    public TextView getTextView(int resId) {
+        View viewById = views.get(resId);
+        if (null != viewById && viewById instanceof TextView) {
+            return (TextView) viewById;
+        } else {
+            viewById = rootView.findViewById(resId);
+            if (null != viewById && viewById instanceof TextView) {
+                return (TextView) viewById;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * 返回Dialog的View
+     *
+     * @param resId
+     * @return
+     */
+    public View getView(int resId) {
+        View viewById = views.get(resId);
+        if (null != viewById && viewById instanceof View) {
+            return viewById;
+        } else {
+            viewById = rootView.findViewById(resId);
+            if (null != viewById && viewById instanceof View) {
+                return viewById;
+            }
+        }
+        return null;
+    }
+
+    public MyDialog addViewToWindow(View view, LinearLayout.LayoutParams params) {
+        getWindow().addContentView(view, params);
         return this;
     }
 

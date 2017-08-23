@@ -168,14 +168,32 @@
         android:text="版权所有：玖坤信息"
         android:textColor="#999"/>
 
-    <Button
-        android:id="@+id/btn_login"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+    <LinearLayout
         android:layout_below="@id/cb_login_rempsw"
-        android:layout_margin="30px"
-        android:background="@drawable/selector_btn_bg_login"
-        android:text="@string/confirm"
-        android:textColor="#fff"
-        android:textSize="18sp"/>
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:layout_height="50dp">
+        <Button
+            android:id="@+id/btn_login"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:background="@drawable/selector_btn_bg_login"
+            android:text="@string/confirm"
+            android:textColor="#fff"
+            android:layout_marginRight="5dp"
+            android:textSize="18sp"/>
+        <Button
+            android:id="@+id/btn_set"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_marginLeft="5dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/selector_btn_bg_login"
+            android:text="配置"
+            android:textColor="#fff"
+            android:textSize="18sp"/>
+    </LinearLayout>
 </RelativeLayout>

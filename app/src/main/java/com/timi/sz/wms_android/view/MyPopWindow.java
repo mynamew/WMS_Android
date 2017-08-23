@@ -56,7 +56,7 @@ public class MyPopWindow
 		return pop;
 	}
 	
-	static private void setWindowAlpha(final Activity ct, final float alpha)
+	static public void setWindowAlpha(final Activity ct, final float alpha)
 	{
 		if(_td!=null && _td.isAlive()) {
 			_td.interrupt();

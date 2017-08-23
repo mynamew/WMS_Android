@@ -21,7 +21,25 @@
     <string name="login_app_name">智能倉庫管理系統</string>
     <string name="login_remember_psw">記錄密碼</string>
     <string name="login_version">V %1$s</string>
+    <string name="server_set">服務設置</string>
+    <string name="login_select_language">請選擇語言</string>
+    <string name="login_url_tip">地址：</string>
+    <string name="login_zuhu">租户：</string>
+    <string name="login_language">语言：</string>
 
+    <string-array name="spingarr">
+        <item>簡體</item>
+        <item>繁體</item>
+        <item>英文</item>
+    </string-array>
+    /**====== 个人信息 ======**/
+    <string name="login_success_tip">提示：首次登錄需進行個人信息確認，如有問題，請到ERP中修改。</string>
+    <string name="login_success_name">姓名：%1$s</string>
+    <string name="login_success_sex">性別：%1$s</string>
+    <string name="login_success_num">工號：%1$s</string>
+    <string name="login_success_depart">部門：%1$s</string>
+    <string name="login_success_tel">手機：%1$s</string>
+    <string name="confirm">確定</string>
     /**====== 首页 ======**/
     <string name="home">首頁</string>
     <string name="home_in_lib">入庫作業</string>
@@ -39,6 +57,4 @@
     <string name="set_update_psw">修改密碼</string>
     <string name="set_device_info">設備信息</string>
     <string name="set_userinfo">用戶信息</string>
-    <string name="server_set">服務設置</string>
-    <string name="login_select_language">請選擇語言</string>
 </resources>

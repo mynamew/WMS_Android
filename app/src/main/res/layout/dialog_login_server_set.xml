@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="10dp"
+                android:gravity="center"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/ll_login_serverset"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:background="@drawable/bg_rectangle_login_server"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:gravity="center"
+                android:text="@string/server_set"
+                android:textColor="#333"
+                android:textSize="18sp"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#333"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="horizontal"
+                android:paddingLeft="15dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="@string/login_url_tip"
+                    android:textColor="#333"
+                    android:textSize="16sp"/>
+
+                <EditText
+                    android:id="@+id/et_login_server"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@null"
+                    android:hint="请输入服务地址"
+                    android:paddingLeft="15dp"
+                    android:textColor="#333"
+                    android:textColorHint="#666"
+                    android:textSize="16sp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="horizontal"
+                android:paddingLeft="15dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="@string/login_zuhu"
+                    android:textColor="#333"
+                    android:textSize="16sp"/>
+
+                <EditText
+                    android:id="@+id/et_login_zuhu"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@null"
+                    android:hint="请输入租户信息"
+                    android:paddingLeft="15dp"
+                    android:textColor="#333"
+                    android:textColorHint="#666"
+                    android:textSize="16sp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_login_language"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="horizontal"
+                android:paddingLeft="15dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="@string/login_language"
+                    android:textColor="#333"
+                    android:textSize="16sp"/>
+
+                <TextView
+                    android:id="@+id/tv_login_language"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp"
+                    android:text="@string/login_select_language"
+                    android:textColor="#666"
+                    android:textSize="16sp"
+                    android:visibility="visible"/>
+
+                <ImageView
+                    android:id="@+id/iv_login_down"
+                    android:layout_width="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="10dp"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/login_language_down"/>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/bt_login__confirm"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/bg_rectangle_blue_login_confrim"
+                android:gravity="center"
+                android:text="设置"
+                android:textColor="#fff"/>
+        </LinearLayout>
+    </RelativeLayout>
+</RelativeLayout>

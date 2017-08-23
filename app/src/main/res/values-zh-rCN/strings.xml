@@ -21,6 +21,16 @@
     <string name="login_input_username">请输入用户名</string>
     <string name="login_choose_servers">请选择服务器</string>
     <string name="login_app_name">智能仓库管理系统</string>
+    <string name="server_set">服务设置</string>
+    <string name="login_select_language">请选择语言</string>
+    <string name="login_url_tip">地址：</string>
+    <string name="login_zuhu">租户：</string>
+    <string name="login_language">语言：</string>
+    <string-array name="spingarr">
+        <item>简体</item>
+        <item>繁体</item>
+        <item>英文</item>
+    </string-array>
     /**====== 个人信息 ======**/
     <string name="login_success_tip">提示：首次登录需进行个人信息确认，如有问题，请到ERP中进行修改。</string>
     <string name="login_success_name">姓名：%1$s</string>
@@ -116,7 +126,5 @@
     <string name="set_userinfo_from">所属组织：%1$s</string>
     <string name="set_userinfo_depart">部门：%1$s</string>
     <string name="set_userinfo_root">权限组织：%1$s</string>
-    <string name="server_set">服务设置</string>
-    <string name="login_select_language">请选择语言</string>
     /**====== 设备信息 ======**/
 </resources>
