@@ -36,7 +36,6 @@ import com.timi.sz.wms_android.mvp.UI.home.MainActivity;
 import com.timi.sz.wms_android.mvp.base.BaseActivity;
 import com.timi.sz.wms_android.receiver.ExampleUtil;
 import com.timi.sz.wms_android.view.MyDialog;
-import com.timi.sz.wms_android.view.MyPopWindow;
 
 import java.util.ArrayList;
 import java.util.Set;

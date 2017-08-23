@@ -19,7 +19,7 @@
         android:id="@+id/head_login"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="#353338"
+        android:background="@color/colorPrimary"
         android:gravity="center"
         android:text="@string/login_login"
         android:textColor="#fff"
@@ -156,7 +156,9 @@
         android:layout_below="@id/rl_login_input"
         android:layout_marginLeft="30px"
         android:text="@string/login_remember_psw"
-        android:textColor="@color/statuscolor"/>
+        android:textColorHint="@color/colorPrimary"
+        android:textColorLink="@color/colorPrimary"
+        android:textColor="@color/colorPrimary"/>
 
     <TextView
         android:id="@+id/tv_login_info"
