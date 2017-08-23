@@ -1,6 +1,7 @@
 package com.timi.sz.wms_android.mvp.base;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.DrawableRes;
@@ -16,6 +17,7 @@ import com.orhanobut.logger.Logger;
 import com.timi.sz.wms_android.R;
 import com.timi.sz.wms_android.base.uils.Constants;
 import com.timi.sz.wms_android.base.uils.statusutils.StatusBarUtil;
+import com.timi.sz.wms_android.mvp.UI.login.LoginActivity;
 import com.timi.sz.wms_android.mvp.base.presenter.MvpPresenter;
 import com.timi.sz.wms_android.mvp.base.view.MvpView;
 import com.timi.sz.wms_android.mvp.base.view.iml.MvpBaseView;
@@ -55,7 +57,7 @@ public abstract class BaseActivity<V extends MvpView, P extends MvpPresenter<V>>
         //设置布局id
         // 不需要侧滑的布局id  进行过滤
         if (layoutResID == R.layout.activity_main) {
-           setContentView(layoutResID);
+            setContentView(layoutResID);
         }
         //添加 侧滑布局
         else {
@@ -195,6 +197,46 @@ public abstract class BaseActivity<V extends MvpView, P extends MvpPresenter<V>>
         }
     }
 
+    /********
+     * 页面跳转相关的方法
+     **********************************************************************************************/
+    public enum Interlude {
+
+        DEFAULT,
+        POP_FROM_BOTTOM
+    }
+
+    final private String keyInterlude = "keyInterlude";
+    private Interlude curInterlude = Interlude.DEFAULT;
+
+    @Override
+    public void startActivity(Intent intent) {
+        startActivity(intent, Interlude.DEFAULT);
+    }
+
+    public void startActivity(Intent intent, Interlude interlude) {
+        intent.putExtra(keyInterlude, interlude.ordinal());
+        super.startActivity(intent);
+
+        if (interlude == Interlude.DEFAULT) {
+            //默认情况，什么都不做，已经在style文件中配置
+        } else if (interlude == Interlude.POP_FROM_BOTTOM) {
+            //从下方弹出
+            overridePendingTransition(R.transition.pop_in_bottom, R.anim.none);
+        }
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
+        if (curInterlude == Interlude.DEFAULT) {
+            //默认情况，什么都不做，已经在style文件中配置
+        } else if (curInterlude == Interlude.POP_FROM_BOTTOM) {
+            //从下方弹出
+            overridePendingTransition(R.anim.none, R.transition.pop_out_bottom);
+        }
+    }
+
     /**
      * 侧滑 返回
      *
@@ -214,10 +256,20 @@ public abstract class BaseActivity<V extends MvpView, P extends MvpPresenter<V>>
         swipeBackLayout.setOnSwipeBackListener(new SwipeBackLayout.SwipeBackListener() {
             @Override
             public void onViewPositionChanged(float fractionAnchor, float fractionScreen) {
-                Logger.d("打印侧滑的fload--->"+fractionScreen);
+                Logger.d("打印侧滑的fload--->" + fractionScreen);
                 ivShadow.setAlpha(1 - fractionScreen);
             }
         });
         return container;
+    }
+
+    /**
+     * 跳转到登录的公共方法
+     */
+    public void jumpToLoginActivity() {
+        //做清除数据的操作
+        // 做跳转的操作
+        Intent it = new Intent(currentActivity, LoginActivity.class);
+        startActivity(it, Interlude.POP_FROM_BOTTOM);
     }
 }

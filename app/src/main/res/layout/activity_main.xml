@@ -13,7 +13,7 @@
             android:id="@+id/tv_main_top"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:background="#353338"
+            android:background="@color/statuscolor"
             android:gravity="center"
             android:text="@string/home"
             android:textColor="#fff"
@@ -35,7 +35,7 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_alignParentBottom="true"
-        android:background="#353338"
+        android:background="#fff"
         android:gravity="center"
         android:orientation="horizontal"
         android:paddingTop="5dp">

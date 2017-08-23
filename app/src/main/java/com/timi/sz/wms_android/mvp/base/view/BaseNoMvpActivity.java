@@ -1,6 +1,7 @@
 package com.timi.sz.wms_android.mvp.base.view;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.DrawableRes;
@@ -16,6 +17,8 @@ import com.orhanobut.logger.Logger;
 import com.timi.sz.wms_android.R;
 import com.timi.sz.wms_android.base.uils.Constants;
 import com.timi.sz.wms_android.base.uils.statusutils.StatusBarUtil;
+import com.timi.sz.wms_android.mvp.UI.login.LoginActivity;
+import com.timi.sz.wms_android.mvp.base.BaseActivity;
 import com.timi.sz.wms_android.mvp.base.presenter.MvpPresenter;
 import com.timi.sz.wms_android.mvp.base.view.iml.MvpBaseView;
 import com.timi.sz.wms_android.view.SwipeBackLayout;
@@ -27,8 +30,6 @@ import butterknife.ButterKnife;
  * 所有Acitity的基类  封装基类的方法
  */
 public abstract class BaseNoMvpActivity extends AutoLayoutActivity implements MvpBaseView {
-
-
     public String TAG = "";
     //当前Activity的实例
     public Activity currentActivity;
@@ -172,5 +173,53 @@ public abstract class BaseNoMvpActivity extends AutoLayoutActivity implements Mv
             }
         });
         return container;
+    }
+    /********
+     * 页面跳转相关的方法
+     **********************************************************************************************/
+    public enum Interlude {
+
+        DEFAULT,
+        POP_FROM_BOTTOM
+    }
+
+    final private String keyInterlude = "keyInterlude";
+    private BaseActivity.Interlude curInterlude = BaseActivity.Interlude.DEFAULT;
+
+    @Override
+    public void startActivity(Intent intent) {
+        startActivity(intent, BaseActivity.Interlude.DEFAULT);
+    }
+
+    public void startActivity(Intent intent, BaseActivity.Interlude interlude) {
+        intent.putExtra(keyInterlude, interlude.ordinal());
+        super.startActivity(intent);
+
+        if (interlude == BaseActivity.Interlude.DEFAULT) {
+            //默认情况，什么都不做，已经在style文件中配置
+        } else if (interlude == BaseActivity.Interlude.POP_FROM_BOTTOM) {
+            //从下方弹出
+            overridePendingTransition(R.transition.pop_in_bottom, R.anim.none);
+        }
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
+        if (curInterlude == BaseActivity.Interlude.DEFAULT) {
+            //默认情况，什么都不做，已经在style文件中配置
+        } else if (curInterlude == BaseActivity.Interlude.POP_FROM_BOTTOM) {
+            //从下方弹出
+            overridePendingTransition(R.anim.none, R.transition.pop_out_bottom);
+        }
+    }
+    /**
+     * 跳转到登录的公共方法
+     */
+    public void jumpToLoginActivity() {
+        //做清除数据的操作
+        // 做跳转的操作
+        Intent it = new Intent(currentActivity, LoginActivity.class);
+        startActivity(it, BaseActivity.Interlude.POP_FROM_BOTTOM);
     }
 }

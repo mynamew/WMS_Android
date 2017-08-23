@@ -128,5 +128,5 @@
         android:layout_marginTop="50dp"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
-        android:background="@drawable/bg_set_new_version"/>
+        android:background="@drawable/selector_btn_bg_login"/>
 </LinearLayout>

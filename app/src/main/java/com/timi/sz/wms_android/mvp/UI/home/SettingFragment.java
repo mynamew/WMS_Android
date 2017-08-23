@@ -53,7 +53,8 @@ public class SettingFragment extends Fragment implements SetFragmentDataCallBack
     TextView tvSetNewVersion;
     private Unbinder unbinder;
 
-    private UserInfoBean bean=null;
+    private UserInfoBean bean = null;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -96,6 +97,8 @@ public class SettingFragment extends Fragment implements SetFragmentDataCallBack
             case R.id.rl_set_update_version://更新版本
                 break;
             case R.id.btn_set_exit://退出登录
+                //退出登录 跳转到登录界面
+                ((MainActivity) getActivity()).jumpToLoginActivity();
                 break;
         }
     }
@@ -117,7 +120,7 @@ public class SettingFragment extends Fragment implements SetFragmentDataCallBack
 
     @Override
     public void setData(UserInfoBean bean) {
-        this.bean=bean;
+        this.bean = bean;
     }
 
 

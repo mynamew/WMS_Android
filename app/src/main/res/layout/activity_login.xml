@@ -149,17 +149,6 @@
         </LinearLayout>
     </RelativeLayout>
 
-    <CheckBox
-        android:id="@+id/cb_login_rempsw"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/rl_login_input"
-        android:layout_marginLeft="30px"
-        android:text="@string/login_remember_psw"
-        android:textColorHint="@color/colorPrimary"
-        android:textColorLink="@color/colorPrimary"
-        android:textColor="@color/colorPrimary"/>
-
     <TextView
         android:id="@+id/tv_login_info"
         android:layout_width="match_parent"
@@ -170,6 +159,19 @@
         android:text="版权所有：玖坤信息"
         android:textColor="#999"/>
 
+
+
+    <CheckBox
+        android:id="@+id/cb_login_rempsw"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/login_remember_psw"
+        android:textColorHint="@color/colorPrimary"
+        android:textColorLink="@color/colorPrimary"
+        android:textColor="@color/colorPrimary"
+        android:layout_below="@+id/rl_login_input"
+        android:layout_alignLeft="@+id/rl_login_input"
+        android:layout_alignStart="@+id/rl_login_input"/>
     <LinearLayout
         android:layout_below="@id/cb_login_rempsw"
         android:layout_width="match_parent"
@@ -194,7 +196,7 @@
             android:layout_marginLeft="5dp"
             android:layout_height="wrap_content"
             android:background="@drawable/selector_btn_bg_login"
-            android:text="配置"
+            android:text="@string/login_set"
             android:textColor="#fff"
             android:textSize="18sp"/>
     </LinearLayout>

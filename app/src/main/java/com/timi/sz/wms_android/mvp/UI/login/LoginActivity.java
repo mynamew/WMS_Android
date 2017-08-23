@@ -41,6 +41,7 @@ import java.util.ArrayList;
 import java.util.Set;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.jpush.android.api.JPushInterface;
 import cn.jpush.android.api.TagAliasCallback;
@@ -51,6 +52,10 @@ import cn.jpush.android.api.TagAliasCallback;
  * create at: 2017/8/16 8:57
  */
 public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> implements LoginView {
+    @BindView(R.id.iv_login_eye)
+    ImageView ivLoginEye;
+    @BindView(R.id.tv_login_name)
+    TextView tvLoginName;
     @BindView(R.id.tv_login_version)
     TextView tvLoginVersion;
     @BindView(R.id.et_login_username)
@@ -61,8 +66,8 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
     CheckBox cbLoginRempsw;
     @BindView(R.id.btn_login)
     Button btnLogin;
-    @BindView(R.id.iv_login_eye)
-    ImageView ivLoginEye;
+    @BindView(R.id.btn_set)
+    Button btnSet;
 
     //flag
     private boolean isCanSeePsw = false;
@@ -129,38 +134,40 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
      */
     @OnClick(R.id.btn_login)
     public void submit() {
-        String baseUrl = SpUtils.getInstance().getBaseUrl();
-        if (TextUtils.isEmpty(baseUrl)) {
-            ToastUtils.showShort(this, "请先配置服务地址");
-            return;
-        }
-        String username = etLoginUsername.getText().toString().trim();
-        if (TextUtils.isEmpty(username)) {
-            ToastUtils.showShort(this, "请输入用户名");
-            return;
-        }
-        String password = etLoginPassword.getText().toString().trim();
-        if (TextUtils.isEmpty(password)) {
-            ToastUtils.showShort(this, "请输入密码");
-            return;
-        }
-        //如果记录密码 存储用户名和密码
-//        LogUitls.d("是否存入密码-->" + cbLoginRempsw.isChecked());
-        if (cbLoginRempsw.isChecked()) {
-            //存储用户名和密码
-            SpUtils.getInstance()
-                    .putString(Constants.USER_TEL, username)
-                    .putString(Constants.USER_PSW, password)
-                    .putBoolean(Constants.REMENBER_PSW, true);
-        } else {
-            //清空用户名和密码
-            SpUtils.getInstance()
-                    .putString(Constants.USER_TEL, "")
-                    .putString(Constants.USER_PSW, "")
-                    .putBoolean(Constants.REMENBER_PSW, false);
-        }
-        //登录请求
-        getPresenter().getLoginResult(username, password);
+//        String baseUrl = SpUtils.getInstance().getBaseUrl();
+//        if (TextUtils.isEmpty(baseUrl)) {
+//            ToastUtils.showShort(this, "请先配置服务地址");
+//            return;
+//        }
+//        String username = etLoginUsername.getText().toString().trim();
+//        if (TextUtils.isEmpty(username)) {
+//            ToastUtils.showShort(this, "请输入用户名");
+//            return;
+//        }
+//        String password = etLoginPassword.getText().toString().trim();
+//        if (TextUtils.isEmpty(password)) {
+//            ToastUtils.showShort(this, "请输入密码");
+//            return;
+//        }
+//        //如果记录密码 存储用户名和密码
+////        LogUitls.d("是否存入密码-->" + cbLoginRempsw.isChecked());
+//        if (cbLoginRempsw.isChecked()) {
+//            //存储用户名和密码
+//            SpUtils.getInstance()
+//                    .putString(Constants.USER_TEL, username)
+//                    .putString(Constants.USER_PSW, password)
+//                    .putBoolean(Constants.REMENBER_PSW, true);
+//        } else {
+//            //清空用户名和密码
+//            SpUtils.getInstance()
+//                    .putString(Constants.USER_TEL, "")
+//                    .putString(Constants.USER_PSW, "")
+//                    .putBoolean(Constants.REMENBER_PSW, false);
+//        }
+//        //登录请求
+//        getPresenter().getLoginResult(username, password);
+        startActivity(new Intent(LoginActivity.this, MainActivity.class));
+        onBackPressed();
 
     }
 
@@ -294,37 +301,31 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
     private PopupWindow mPop = null;
 
     public void showSelectLanguagePopwindow(View view) {
-        final TextView tvLanguage=myDialog.getTextView(R.id.tv_login_language);
-        //初始化
         if (null == mPop) {
             mPop = new PopupWindow(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
             View content = LayoutInflater.from(this).inflate(R.layout.popwindow_select_language, null);
-            content.findViewById(R.id.tv_language_simple).setOnClickListener(new View.OnClickListener() {
+            final TextView tvSimple = (TextView) content.findViewById(R.id.tv_language_simple);
+            tvSimple.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    tvLanguage.setText(getString(R.string.language_simple));
-                    SpUtils.getInstance().putLocaleLanguage("zh-CN");
-                    LanguageUtils.switchAppLanguage(LoginActivity.this);
-                    mPop.dismiss();
+                    tvSimple.setText(getResources().getString(R.string.language_simple));
+                    setCurrentActivityLanguage(0);
                 }
             });
-            content.findViewById(R.id.tv_language_trad).setOnClickListener(new View.OnClickListener() {
+            final TextView tvTrad = (TextView) content.findViewById(R.id.tv_language_trad);
+            tvTrad.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    tvLanguage.setText(getString(R.string.language_tradtional));
-                    SpUtils.getInstance().putLocaleLanguage("zh-TW");
-                    LanguageUtils.switchAppLanguage(LoginActivity.this);
-                    mPop.dismiss();
+                    tvTrad.setText(getResources().getString(R.string.language_tradtional));
+                    setCurrentActivityLanguage(1);
                 }
             });
-            content.findViewById(R.id.tv_language_en).setOnClickListener(new View.OnClickListener() {
+            final TextView tvEnglish = (TextView) content.findViewById(R.id.tv_language_en);
+            tvEnglish.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    tvLanguage.setText(getString(R.string.language_english));
-                    SpUtils.getInstance().putLocaleLanguage("en");
-                    LanguageUtils.switchAppLanguage(LoginActivity.this);
-                    //窗体消失
-                    mPop.dismiss();
+                    tvEnglish.setText(getResources().getString(R.string.language_tradtional));
+                    setCurrentActivityLanguage(2);
                 }
             });
             mPop.setContentView(content);
@@ -338,7 +339,60 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
             mPop.showAsDropDown(view);
         }
     }
-    private ImageView ivLoginDown=null;
+
+    /**
+     * 选择不同的语言 显示不同的语言文字以及Dialog的消失
+     *
+     * @param index
+     */
+    private void setCurrentActivityLanguage(int index) {
+        final TextView tvLoginLanguage = myDialog.getTextView(R.id.tv_login_language);
+        final TextView tvLoginServerSet = myDialog.getTextView(R.id.login_server_set);
+        final TextView tvLoginZuhuTip = myDialog.getTextView(R.id.login_zuhu_tip);
+        final TextView tvLoginUrlTip = myDialog.getTextView(R.id.login_url_tip);
+        final TextView tvLoginLanguageTip = myDialog.getTextView(R.id.login_language_tip);
+        final TextView btnLoginComfirmSet = (TextView) myDialog.getView(R.id.bt_login__confirm);
+        EditText etLoginUrl = (EditText) myDialog.findViewById(R.id.et_login_server);
+        EditText etLoginZuhu = (EditText) myDialog.findViewById(R.id.et_login_zuhu);
+        switch (index) {
+            case 0://简体
+                tvLoginLanguage.setText(getString(R.string.language_simple));
+                SpUtils.getInstance().putLocaleLanguage("zh-CN");
+                break;
+            case 1://繁体
+                tvLoginLanguage.setText(getString(R.string.language_tradtional));
+                SpUtils.getInstance().putLocaleLanguage("zh-TW");
+                break;
+            case 2://英文
+                tvLoginLanguage.setText(getString(R.string.language_english));
+                SpUtils.getInstance().putLocaleLanguage("en");
+                break;
+        }
+        //存储选择的语言
+        LanguageUtils.switchAppLanguage(LoginActivity.this);
+        //切换界面的语言
+        btnLogin.setText(getResources().getString(R.string.login_login));
+        btnSet.setText(getResources().getString(R.string.login_set));
+        tvLoginName.setText(getResources().getString(R.string.app_name));
+        cbLoginRempsw.setText(getResources().getString(R.string.login_remember_psw));
+        //Dialog 内部
+        tvLoginServerSet.setText(getResources().getString(R.string.server_set));
+        tvLoginUrlTip.setText(getResources().getString(R.string.login_url_tip));
+        tvLoginZuhuTip.setText(getResources().getString(R.string.login_zuhu));
+        tvLoginLanguageTip.setText(getResources().getString(R.string.login_language));
+        btnLoginComfirmSet.setText(getResources().getString(R.string.login_confirm_set));
+
+        etLoginUrl.setHint(getResources().getString(R.string.login_please_input_serverurl));
+        etLoginZuhu.setHint(getResources().getString(R.string.login_please_input_zuhu));
+        //Dialog消失
+        mPop.dismiss();
+    }
+
+    private ImageView ivLoginDown = null;
+
+    /**
+     * 显示配置服务的dialog
+     */
     private void showServerSetDialogShow() {
         if (null == myDialog) {
             myDialog = new MyDialog(this, R.layout.dialog_login_server_set)
@@ -390,8 +444,9 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
                             }
                         }
                     });
-            ivLoginDown= (ImageView) myDialog.getView(R.id.iv_login_down);
+            ivLoginDown = (ImageView) myDialog.getView(R.id.iv_login_down);
         }
         myDialog.show();
     }
+
 }

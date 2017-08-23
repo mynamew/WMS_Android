@@ -23,9 +23,13 @@
     <string name="login_app_name">SWMS</string>
     <string name="server_set">ServerSet</string>
     <string name="login_select_language">please select language</string>
-    <string name="login_url_tip">Location：</string>
+    <string name="login_url_tip">URL：</string>
     <string name="login_zuhu">租户：</string>
     <string name="login_language">Language：</string>
+    <string name="login_set">ServerSet</string>
+    <string name="login_please_input_serverurl">login_please_input_serverurl</string>
+    <string name="login_confirm_set">confirm set</string>
+    <string name="login_please_input_zuhu">please input zuhu</string>
     <string-array name="spingarr">
         <item>Simple</item>
         <item>Tradtional</item>
@@ -33,15 +37,15 @@
     </string-array>
     /**====== 个人信息 ======**/
     <string name="login_success_tip">提示：首次登录需进行个人信息确认，如有问题，请到ERP中进行修改。</string>
-    <string name="login_success_name">姓名：%1$s</string>
-    <string name="login_success_sex">性别：%1$s</string>
-    <string name="login_success_num">工号：%1$s</string>
-    <string name="login_success_depart">部门：%1$s</string>
-    <string name="login_success_tel">手机：%1$s</string>
-    <string name="confirm">确定</string>
-    <string name="login_remember_psw">记录密码</string>
+    <string name="login_success_name">Name：%1$s</string>
+    <string name="login_success_sex">Sex：%1$s</string>
+    <string name="login_success_num">WorkNum：%1$s</string>
+    <string name="login_success_depart">Department：%1$s</string>
+    <string name="login_success_tel">Tel：%1$s</string>
+    <string name="confirm">Confirm</string>
+    <string name="login_remember_psw">Remember Password</string>
     <string name="login_version">V %1$s</string>
-    <string name="login_success">登录成功</string>
+    <string name="login_success">Login Success</string>
     /**====== 首页 ======**/
     <string name="home">首页</string>
     <string name="home_in_lib">入库作业</string>

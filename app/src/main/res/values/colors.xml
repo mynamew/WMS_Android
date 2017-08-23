@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorPrimary">#1983d1</color>
+    <color name="colorPrimaryDark">#12619a</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="statuscolor">#3F51B5</color>
+    <color name="statuscolor">#1983d1</color>
     <color name="app_background">#FDF8F4</color>
     <color name="theme_black_7f">#8f000000</color>
     <color name="home_in_lib">#67c4fc</color>
@@ -11,8 +11,8 @@
     <color name="home_lib_in">#ef524d</color>
     <color name="home_lib_out">#ffb544</color>
     <color name="home_quality_color">#768afa</color>
-    <color name="tab_txt_select">#c6ae75</color>
-    <color name="tab_txt_unselect">#a87d2b</color>
+    <color name="tab_txt_select">#27a1f6</color>
+    <color name="tab_txt_unselect">#8d8d8d</color>
     <color name="set_userinfo">#2588fd</color>
     <color name="set_bg">#fdf8f4</color>
     <color name="scan_bg">#7f000000</color>

@@ -25,7 +25,8 @@
                 android:gravity="center"
                 android:text="@string/server_set"
                 android:textColor="#333"
-                android:textSize="18sp"/>
+                android:textSize="18sp"
+                android:id="@+id/login_server_set"/>
 
             <View
                 android:layout_width="match_parent"
@@ -39,6 +40,7 @@
                 android:paddingLeft="15dp">
 
                 <TextView
+                    android:id="@+id/login_url_tip"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:gravity="center"
@@ -51,8 +53,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:background="@null"
-                    android:hint="请输入服务地址"
-                    android:paddingLeft="15dp"
+                    android:hint="@string/login_please_input_serverurl"
+                    android:paddingLeft="5dp"
                     android:textColor="#333"
                     android:textColorHint="#666"
                     android:textSize="16sp"/>
@@ -65,6 +67,7 @@
                 android:paddingLeft="15dp">
 
                 <TextView
+                    android:id="@+id/login_zuhu_tip"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:gravity="center"
@@ -77,8 +80,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:background="@null"
-                    android:hint="请输入租户信息"
-                    android:paddingLeft="15dp"
+                    android:hint="@string/login_please_input_zuhu"
+                    android:paddingLeft="5dp"
                     android:textColor="#333"
                     android:textColorHint="#666"
                     android:textSize="16sp"/>
@@ -92,6 +95,7 @@
                 android:paddingLeft="15dp">
 
                 <TextView
+                    android:id="@+id/login_language_tip"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:gravity="center"
@@ -105,8 +109,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center_vertical"
-                    android:paddingLeft="15dp"
-                    android:paddingRight="15dp"
+                    android:paddingLeft="5dp"
                     android:text="@string/login_select_language"
                     android:textColor="#666"
                     android:textSize="16sp"
@@ -125,9 +128,9 @@
                 android:id="@+id/bt_login__confirm"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:background="@drawable/bg_rectangle_blue_login_confrim"
+                android:background="@drawable/bg_rectangle_blue_login_confrim_select"
                 android:gravity="center"
-                android:text="设置"
+                android:text="@string/login_confirm_set"
                 android:textColor="#fff"/>
         </LinearLayout>
     </RelativeLayout>
