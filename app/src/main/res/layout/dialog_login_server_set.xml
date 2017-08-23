@@ -128,7 +128,7 @@
                 android:id="@+id/bt_login__confirm"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:background="@drawable/bg_rectangle_blue_login_confrim_select"
+                android:background="@drawable/selector_login_serverset_confirm"
                 android:gravity="center"
                 android:text="@string/login_confirm_set"
                 android:textColor="#fff"/>

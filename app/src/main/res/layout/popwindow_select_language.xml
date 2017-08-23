@@ -9,6 +9,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingBottom="5dp"
+        android:paddingTop="5dp"
         android:layout_alignParentBottom="true"
         android:background="@drawable/bg_rectangle_login_server"
         android:orientation="vertical">
@@ -17,6 +19,7 @@
             android:id="@+id/tv_language_simple"
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:background="@drawable/bg_set_tab_check"
             android:gravity="center"
             android:text="@string/language_simple"
             android:textColor="#333"/>
@@ -34,7 +37,9 @@
 
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:background="@drawable/bg_set_tab_check"
             android:gravity="center"
+
             android:text="@string/language_tradtional"
             android:textColor="#333"/>
 
@@ -50,6 +55,7 @@
             android:id="@+id/tv_language_en"
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:background="@drawable/bg_set_tab_check"
             android:gravity="center"
             android:text="@string/language_english"
             android:textColor="#333"/>

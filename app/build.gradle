@@ -50,8 +50,6 @@ dependencies {
     //Rxjava2
     compile 'io.reactivex.rxjava2:rxjava:2.0.7'
     compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
-    //rxbus
-    compile 'lib.gorden.rxbus2:rxbus:2.0.1'
     //Retrofit2
     compile 'com.squareup.retrofit2:retrofit:latest.release'
     compile 'com.squareup.retrofit2:converter-gson:latest.release'
@@ -67,4 +65,7 @@ dependencies {
     compile 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     compile files('libs/zxing.jar')
+    //evnet bus
+    compile 'org.greenrobot:eventbus:3.0.0'
+
 }

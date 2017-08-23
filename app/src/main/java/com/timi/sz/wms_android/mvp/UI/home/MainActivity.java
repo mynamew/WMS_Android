@@ -1,48 +1,31 @@
 package com.timi.sz.wms_android.mvp.UI.home;
 
-import android.Manifest;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.RequiresApi;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.TextView;
 
 import com.timi.sz.wms_android.R;
-import com.timi.sz.wms_android.base.uils.Constants;
 import com.timi.sz.wms_android.base.uils.LogUitls;
-import com.timi.sz.wms_android.base.uils.statusutils.StatusBarUtil;
 import com.timi.sz.wms_android.bean.UserInfoBean;
-import com.timi.sz.wms_android.http.RxBusMsg.RxBusCode;
-import com.timi.sz.wms_android.http.RxBusMsg.RxBusMsg;
+import com.timi.sz.wms_android.http.message.BaseMessage;
+import com.timi.sz.wms_android.http.message.event.HomeEvent;
 import com.timi.sz.wms_android.mvp.base.BaseActivity;
-import com.timi.sz.wms_android.qrcode.CommonScanActivity;
-import com.timi.sz.wms_android.qrcode.utils.Constant;
+
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import gorden.rxbus2.RxBus;
-import gorden.rxbus2.Subscribe;
-import gorden.rxbus2.ThreadMode;
-
-import static com.timi.sz.wms_android.base.uils.Constants.REQUEST_CODE;
 
 
 public class MainActivity extends BaseActivity<MainView, MainPresenter> implements MainView {
     private static final String TAG = MainActivity.class.getSimpleName();
     //是否处于后台
     public static boolean isForeground = false;
-    @BindView(R.id.tv_main_top)
-    TextView tvMainTop;
     @BindView(R.id.rd_home_home)
     RadioButton rdHomeHome;
     @BindView(R.id.rd_home_set)
@@ -62,6 +45,7 @@ public class MainActivity extends BaseActivity<MainView, MainPresenter> implemen
 
     @Override
     public void initBundle(Bundle savedInstanceState) {
+        BaseMessage.register(this);
     }
 
     @Override
@@ -88,6 +72,7 @@ public class MainActivity extends BaseActivity<MainView, MainPresenter> implemen
     @Override
     protected void onDestroy() {
         getPresenter().unRegistHttpSubscriber();
+        BaseMessage.unregister(this);
         super.onDestroy();
     }
 
@@ -108,7 +93,7 @@ public class MainActivity extends BaseActivity<MainView, MainPresenter> implemen
     /**
      * @param view
      */
-    @OnClick({R.id.rd_home_home, R.id.rd_home_set, R.id.iv_home_scan})
+    @OnClick({R.id.rd_home_home, R.id.rd_home_set})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.rd_home_home://主页
@@ -117,42 +102,9 @@ public class MainActivity extends BaseActivity<MainView, MainPresenter> implemen
             case R.id.rd_home_set://设置
                 intentIndex(1);
                 break;
-            case R.id.iv_home_scan://扫码
-                if (ContextCompat.checkSelfPermission(this,
-                        Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-                    //权限还没有授予，需要在这里写申请权限的代码
-                    ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, 60);
-                } else {
-                    //权限已经被授予，在这里直接写要执行的相应方法即可
-                    Intent intent = new Intent(this, CommonScanActivity.class);
 
-                    String pointMsg = getResources().getString(R.string.scan_point_title);
-                    Bundle bundle = new Bundle();
-                    bundle.putString("pointMsg", pointMsg);
-                    intent.putExtras(bundle);
-
-                    intent.putExtra(Constant.REQUEST_SCAN_MODE, Constant.REQUEST_SCAN_MODE_ALL_MODE);
-                    startActivityForResult(intent, REQUEST_CODE);
-                }
-                break;
         }
     }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        switch (requestCode) {
-            case REQUEST_CODE:
-                if (resultCode == RESULT_OK) {
-                    Bundle bundle = data.getExtras();
-                    if (bundle != null) {
-                        LogUitls.d("扫码的结果--->", bundle.getString("result"));
-                    }
-                }
-                break;
-        }
-    }
-
     /**
      * 主页下方按钮的点击事件
      *
@@ -165,7 +117,6 @@ public class MainActivity extends BaseActivity<MainView, MainPresenter> implemen
         rdHomeHome.setChecked(index == 0);
         rdHomeSet.setChecked(index == 1);
         //首页上方的文字
-        tvMainTop.setText(index == 0 ? getString(R.string.home) : getString(R.string.home_set));
         switch (index) {
             case 0://主页
                 if (homeFM == null) {
@@ -209,6 +160,15 @@ public class MainActivity extends BaseActivity<MainView, MainPresenter> implemen
         if (setFM != null) trans.hide(setFM);
     }
 
+    /**
+     * 接受语言改变的事件 更改文字
+     * @param event
+     */
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void getMessageLanguageUpdata(HomeEvent event){
+        rdHomeHome.setText(getResources().getString(R.string.home));
+        rdHomeSet.setText(getResources().getString(R.string.home_set));
+    }
     @Override
     public void setSpUserInfo(UserInfoBean bean) {
         LogUitls.e(bean.userName);

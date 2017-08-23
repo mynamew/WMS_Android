@@ -3,7 +3,30 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:orientation="vertical">
+    <RelativeLayout
+        android:id="@+id/rl_main_top"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+        <TextView
+            android:id="@+id/tv_main_top"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/statuscolor"
+            android:gravity="center"
+            android:text="@string/home"
+            android:textColor="#fff"
+            android:textSize="16sp"/>
 
+        <ImageView
+            android:id="@+id/iv_home_scan"
+            android:layout_width="40dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:src="@mipmap/home_scan"/>
+    </RelativeLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="150dp"
@@ -37,7 +60,7 @@
                 android:paddingTop="10dp"
                 android:text="@string/home_today_in"
                 android:textColor="#c6ae75"
-                android:textSize="16sp"/>
+                android:textSize="14sp"/>
 
             <TextView
                 android:id="@+id/tv_home_todayin_num"
@@ -87,7 +110,7 @@
                 android:paddingTop="10dp"
                 android:text="@string/home_today_out"
                 android:textColor="@color/home_in_lib"
-                android:textSize="16sp"/>
+                android:textSize="14sp"/>
 
 
             <TextView
@@ -127,6 +150,7 @@
             android:background="@color/home_in_lib">
 
             <TextView
+                android:id="@+id/tv_home_instock"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -162,6 +186,7 @@
                 android:src="@mipmap/home_out_lib"/>
 
             <TextView
+                android:id="@+id/tv_home_outstock"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
@@ -190,7 +215,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/tv_home_lib_in"
+                android:id="@+id/tv_home_stock_in"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
@@ -233,13 +258,14 @@
                 android:src="@mipmap/home_quality"/>
 
             <TextView
+                android:id="@+id/tv_home_quilty"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="15dp"
                 android:layout_marginTop="15dp"
                 android:gravity="center_horizontal"
-                android:text="质量作业"
+                android:text="@string/home_quilty"
                 android:textColor="@color/white"
                 android:textSize="24sp"/>
         </LinearLayout>

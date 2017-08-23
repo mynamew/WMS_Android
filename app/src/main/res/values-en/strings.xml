@@ -30,11 +30,9 @@
     <string name="login_please_input_serverurl">login_please_input_serverurl</string>
     <string name="login_confirm_set">confirm set</string>
     <string name="login_please_input_zuhu">please input zuhu</string>
-    <string-array name="spingarr">
-        <item>Simple</item>
-        <item>Tradtional</item>
-        <item>English</item>
-    </string-array>
+    <string name="language_simple">Simple</string>
+    <string name="language_tradtional">Tradtional</string>
+    <string name="language_english">English</string>
     /**====== 个人信息 ======**/
     <string name="login_success_tip">提示：首次登录需进行个人信息确认，如有问题，请到ERP中进行修改。</string>
     <string name="login_success_name">Name：%1$s</string>
@@ -47,21 +45,16 @@
     <string name="login_version">V %1$s</string>
     <string name="login_success">Login Success</string>
     /**====== 首页 ======**/
-    <string name="home">首页</string>
-    <string name="home_in_lib">入库作业</string>
-    <string name="home_out_lib">出库作业</string>
-    <string name="home_today_in">今日入库</string>
-    <string name="home_today_out">今日出库</string>
-    <string name="home_detail">查看详情</string>
-    <string name="home_query">综合查询</string>
-    <string name="home_lib_in_deal">库内作业</string>
-    <string name="home_set">设置</string>
-    <string name="set_exit">退出登录</string>
-    <string name="set_update_version">版本更新</string>
-    <string name="set_about">关于软件</string>
-    <string name="set_update_psw">修改密码</string>
-    <string name="set_device_info">设备信息</string>
-    <string name="set_userinfo">用户信息</string>
+    <string name="home">Home</string>
+    <string name="home_in_lib">InStock</string>
+    <string name="home_out_lib">OutStock</string>
+    <string name="home_today_in">TodayIn</string>
+    <string name="home_today_out">TodayOut</string>
+    <string name="home_detail">Detail</string>
+    <string name="home_query">Query</string>
+    <string name="home_lib_in_deal">StockIn</string>
+    <string name="home_set">Set</string>
+    <string name="home_quilty">Quilty</string>
     /**====== 入库 ======**/
     <string name="stock_in_receive_pro">收货</string>
     <string name="stock_in">入库</string>
@@ -130,5 +123,13 @@
     <string name="set_userinfo_from">所属组织：%1$s</string>
     <string name="set_userinfo_depart">部门：%1$s</string>
     <string name="set_userinfo_root">权限组织：%1$s</string>
+    /**====== 设置 ======**/
+    <string name="set_exit">log out</string>
+    <string name="set_update_version">update version</string>
+    <string name="set_about">about app</string>
+    <string name="set_update_psw">update password</string>
+    <string name="set_device_info">device info</string>
+    <string name="set_userinfo">userinfo</string>
+    <string name="set_language">select language</string>
     /**====== 设备信息 ======**/
 </resources>

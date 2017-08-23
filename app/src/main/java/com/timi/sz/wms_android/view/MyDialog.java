@@ -359,6 +359,16 @@ public class MyDialog extends Dialog {
     }
 
     /**
+     * 设置Dialog的动画 不设置默认是渐变
+     * @param stryleId
+     * @return
+     */
+    public MyDialog setAnimation(int stryleId) {
+        getWindow().setWindowAnimations(stryleId);
+        return this;
+    }
+
+    /**
      * 设置弹出框 不能够被返回键取消掉
      *
      * @autor timi

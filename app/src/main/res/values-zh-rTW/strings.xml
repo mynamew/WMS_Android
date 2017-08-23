@@ -30,11 +30,10 @@
     <string name="login_please_input_serverurl">請輸入服務地址</string>
     <string name="login_confirm_set">確認設置</string>
     <string name="login_please_input_zuhu">請輸入租戶</string>
-    <string-array name="spingarr">
-        <item>簡體</item>
-        <item>繁體</item>
-        <item>英文</item>
-    </string-array>
+    <string name="language_simple">簡體</string>
+    <string name="language_tradtional">繁體</string>
+    <string name="language_english">英文</string>
+    <string name="login_success">登錄成功</string>
     /**====== 个人信息 ======**/
     <string name="login_success_tip">提示：首次登錄需進行個人信息確認，如有問題，請到ERP中修改。</string>
     <string name="login_success_name">姓名：%1$s</string>
@@ -52,12 +51,15 @@
     <string name="home_detail">查看詳情</string>
     <string name="home_query">綜合查詢</string>
     <string name="home_lib_in_deal">庫內作業</string>
-    <string name="login_success">登錄成功</string>
     <string name="home_set">設置</string>
+    <string name="home_quilty">質量作業</string>
+    /**====== 設置 ======**/
+    <string name="set_language">選擇語言</string>
     <string name="set_exit">退出登錄</string>
     <string name="set_update_version">版本更新</string>
     <string name="set_about">關於軟件</string>
     <string name="set_update_psw">修改密碼</string>
     <string name="set_device_info">設備信息</string>
     <string name="set_userinfo">用戶信息</string>
+
 </resources>

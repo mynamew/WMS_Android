@@ -30,11 +30,9 @@
     <string name="login_please_input_serverurl">请输入服务地址</string>
     <string name="login_confirm_set">确认设置</string>
     <string name="login_please_input_zuhu">请输入租户信息</string>
-    <string-array name="spingarr">
-        <item>简体</item>
-        <item>繁体</item>
-        <item>英文</item>
-    </string-array>
+    <string name="language_simple">简体</string>
+    <string name="language_tradtional">繁体</string>
+    <string name="language_english">英文</string>
     /**====== 个人信息 ======**/
     <string name="login_success_tip">提示：首次登录需进行个人信息确认，如有问题，请到ERP中进行修改。</string>
     <string name="login_success_name">姓名：%1$s</string>
@@ -130,5 +128,8 @@
     <string name="set_userinfo_from">所属组织：%1$s</string>
     <string name="set_userinfo_depart">部门：%1$s</string>
     <string name="set_userinfo_root">权限组织：%1$s</string>
+    /**====== 設置 ======**/
+    <string name="set_language">选择语言</string>
+    <string name="home_quilty">质量作业</string>
     /**====== 设备信息 ======**/
 </resources>

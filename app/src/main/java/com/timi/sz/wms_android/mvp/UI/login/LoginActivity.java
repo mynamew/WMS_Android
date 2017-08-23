@@ -134,36 +134,36 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
      */
     @OnClick(R.id.btn_login)
     public void submit() {
-//        String baseUrl = SpUtils.getInstance().getBaseUrl();
+        String baseUrl = SpUtils.getInstance().getBaseUrl();
 //        if (TextUtils.isEmpty(baseUrl)) {
 //            ToastUtils.showShort(this, "请先配置服务地址");
 //            return;
 //        }
-//        String username = etLoginUsername.getText().toString().trim();
+        String username = etLoginUsername.getText().toString().trim();
 //        if (TextUtils.isEmpty(username)) {
 //            ToastUtils.showShort(this, "请输入用户名");
 //            return;
 //        }
-//        String password = etLoginPassword.getText().toString().trim();
+        String password = etLoginPassword.getText().toString().trim();
 //        if (TextUtils.isEmpty(password)) {
 //            ToastUtils.showShort(this, "请输入密码");
 //            return;
 //        }
 //        //如果记录密码 存储用户名和密码
-////        LogUitls.d("是否存入密码-->" + cbLoginRempsw.isChecked());
-//        if (cbLoginRempsw.isChecked()) {
-//            //存储用户名和密码
-//            SpUtils.getInstance()
-//                    .putString(Constants.USER_TEL, username)
-//                    .putString(Constants.USER_PSW, password)
-//                    .putBoolean(Constants.REMENBER_PSW, true);
-//        } else {
-//            //清空用户名和密码
-//            SpUtils.getInstance()
-//                    .putString(Constants.USER_TEL, "")
-//                    .putString(Constants.USER_PSW, "")
-//                    .putBoolean(Constants.REMENBER_PSW, false);
-//        }
+//        LogUitls.d("是否存入密码-->" + cbLoginRempsw.isChecked());
+        if (cbLoginRempsw.isChecked()) {
+            //存储用户名和密码
+            SpUtils.getInstance()
+                    .putString(Constants.USER_TEL, username)
+                    .putString(Constants.USER_PSW, password)
+                    .putBoolean(Constants.REMENBER_PSW, true);
+        } else {
+            //清空用户名和密码
+            SpUtils.getInstance()
+                    .putString(Constants.USER_TEL, "")
+                    .putString(Constants.USER_PSW, "")
+                    .putBoolean(Constants.REMENBER_PSW, false);
+        }
 //        //登录请求
 //        getPresenter().getLoginResult(username, password);
         startActivity(new Intent(LoginActivity.this, MainActivity.class));
@@ -356,20 +356,24 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
         EditText etLoginZuhu = (EditText) myDialog.findViewById(R.id.et_login_zuhu);
         switch (index) {
             case 0://简体
-                tvLoginLanguage.setText(getString(R.string.language_simple));
                 SpUtils.getInstance().putLocaleLanguage("zh-CN");
+                //存储选择的语言
+                LanguageUtils.switchAppLanguage(LoginActivity.this);
+                tvLoginLanguage.setText(getString(R.string.language_simple));
                 break;
             case 1://繁体
-                tvLoginLanguage.setText(getString(R.string.language_tradtional));
                 SpUtils.getInstance().putLocaleLanguage("zh-TW");
+                LanguageUtils.switchAppLanguage(LoginActivity.this);
+                tvLoginLanguage.setText(getString(R.string.language_tradtional));
+
                 break;
             case 2://英文
-                tvLoginLanguage.setText(getString(R.string.language_english));
                 SpUtils.getInstance().putLocaleLanguage("en");
+                LanguageUtils.switchAppLanguage(LoginActivity.this);
+                tvLoginLanguage.setText(getString(R.string.language_english));
+
                 break;
         }
-        //存储选择的语言
-        LanguageUtils.switchAppLanguage(LoginActivity.this);
         //切换界面的语言
         btnLogin.setText(getResources().getString(R.string.login_login));
         btnSet.setText(getResources().getString(R.string.login_set));
@@ -384,6 +388,8 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
 
         etLoginUrl.setHint(getResources().getString(R.string.login_please_input_serverurl));
         etLoginZuhu.setHint(getResources().getString(R.string.login_please_input_zuhu));
+        etLoginPassword.setHint(getResources().getString(R.string.login_inpiut_psw));
+        etLoginUsername.setHint(getResources().getString(R.string.login_input_username));
         //Dialog消失
         mPop.dismiss();
     }
