@@ -32,6 +32,8 @@ import com.timi.sz.wms_android.base.uils.PackageUtils;
 import com.timi.sz.wms_android.base.uils.SpUtils;
 import com.timi.sz.wms_android.base.uils.ToastUtils;
 import com.timi.sz.wms_android.bean.LoginBean;
+import com.timi.sz.wms_android.http.message.BaseMessage;
+import com.timi.sz.wms_android.http.message.event.HomeEvent;
 import com.timi.sz.wms_android.mvp.UI.home.MainActivity;
 import com.timi.sz.wms_android.mvp.base.BaseActivity;
 import com.timi.sz.wms_android.receiver.ExampleUtil;
@@ -124,7 +126,11 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
     @Override
     protected void onResume() {
         super.onResume();
-        showServerSetDialogShow();
+        //如果  url或语言设置为空 则弹出填写框
+        if (TextUtils.isEmpty(SpUtils.getInstance().getBaseUrl())
+                || TextUtils.isEmpty(SpUtils.getInstance().getLocaleLanguage())) {
+            showServerSetDialogShow();
+        }
     }
 
     /**
@@ -135,22 +141,22 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
     @OnClick(R.id.btn_login)
     public void submit() {
         String baseUrl = SpUtils.getInstance().getBaseUrl();
-//        if (TextUtils.isEmpty(baseUrl)) {
-//            ToastUtils.showShort(this, "请先配置服务地址");
-//            return;
-//        }
+        if (TextUtils.isEmpty(baseUrl)) {
+            ToastUtils.showShort(this, "请先配置服务地址");
+            return;
+        }
         String username = etLoginUsername.getText().toString().trim();
-//        if (TextUtils.isEmpty(username)) {
-//            ToastUtils.showShort(this, "请输入用户名");
-//            return;
-//        }
+        if (TextUtils.isEmpty(username)) {
+            ToastUtils.showShort(this, "请输入用户名");
+            return;
+        }
         String password = etLoginPassword.getText().toString().trim();
-//        if (TextUtils.isEmpty(password)) {
-//            ToastUtils.showShort(this, "请输入密码");
-//            return;
-//        }
+        if (TextUtils.isEmpty(password)) {
+            ToastUtils.showShort(this, "请输入密码");
+            return;
+        }
 //        //如果记录密码 存储用户名和密码
-//        LogUitls.d("是否存入密码-->" + cbLoginRempsw.isChecked());
+        LogUitls.d("是否存入密码-->" + cbLoginRempsw.isChecked());
         if (cbLoginRempsw.isChecked()) {
             //存储用户名和密码
             SpUtils.getInstance()
@@ -164,8 +170,12 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
                     .putString(Constants.USER_PSW, "")
                     .putBoolean(Constants.REMENBER_PSW, false);
         }
+        //获取租户地址
+        String tenancyName = SpUtils.getInstance().gettenancyName();
+        //获取mac地址
+        String mac = PackageUtils.getLocalMacAddressFromBusybox();
 //        //登录请求
-//        getPresenter().getLoginResult(username, password);
+        getPresenter().getLoginResult(TextUtils.isEmpty(tenancyName) ? "" : tenancyName, username, password, TextUtils.isEmpty(mac) ? "" : mac);
         startActivity(new Intent(LoginActivity.this, MainActivity.class));
         onBackPressed();
 
@@ -310,6 +320,7 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
                 public void onClick(View v) {
                     tvSimple.setText(getResources().getString(R.string.language_simple));
                     setCurrentActivityLanguage(0);
+                    //发送事件 更新主界面的文字
                 }
             });
             final TextView tvTrad = (TextView) content.findViewById(R.id.tv_language_trad);
@@ -390,6 +401,8 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
         etLoginZuhu.setHint(getResources().getString(R.string.login_please_input_zuhu));
         etLoginPassword.setHint(getResources().getString(R.string.login_inpiut_psw));
         etLoginUsername.setHint(getResources().getString(R.string.login_input_username));
+        //发送事件 更新主界面的文字
+        BaseMessage.post(new HomeEvent(HomeEvent.LANGUAGE_UPDATE));
         //Dialog消失
         mPop.dismiss();
     }
@@ -428,7 +441,7 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
                             String zuhuStr = etLoginZuhu.getText().toString();
                             if (TextUtils.isEmpty(zuhuStr)) {
                                 //存储url
-                                SpUtils.getInstance().putString("zuhuStr", zuhuStr);
+                                SpUtils.getInstance().puttenancyName( zuhuStr);
                             }
                             dialog.dismiss();
                         }

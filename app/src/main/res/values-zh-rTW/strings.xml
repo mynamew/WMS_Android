@@ -61,5 +61,6 @@
     <string name="set_update_psw">修改密碼</string>
     <string name="set_device_info">設備信息</string>
     <string name="set_userinfo">用戶信息</string>
+    <string name="set_team">组织切换</string>
 
 </resources>

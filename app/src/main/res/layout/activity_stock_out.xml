@@ -30,8 +30,8 @@
             <!--委外-->
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginBottom="1dp"
+                android:layout_height="100px"
+                android:layout_marginBottom="2px"
                 android:background="#fff">
 
                 <TextView
@@ -41,8 +41,8 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:layout_marginTop="1dp"
+                android:layout_height="160px"
+                android:layout_marginTop="2px"
                 android:background="#fff"
                 android:orientation="horizontal">
 
@@ -73,9 +73,9 @@
             <!--生产-->
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginBottom="1dp"
-                android:layout_marginTop="1dp"
+                android:layout_height="100px"
+                android:layout_marginBottom="2px"
+                android:layout_marginTop="2px"
                 android:background="#fff">
 
                 <TextView
@@ -85,8 +85,8 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:layout_marginTop="1dp"
+                android:layout_height="160px"
+                android:layout_marginTop="2px"
                 android:background="#fff"
                 android:orientation="horizontal">
 
@@ -117,9 +117,9 @@
             <!--销售-->
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginBottom="1dp"
-                android:layout_marginTop="1dp"
+                android:layout_height="100px"
+                android:layout_marginBottom="2px"
+                android:layout_marginTop="2px"
                 android:background="#fff">
 
                 <TextView
@@ -129,8 +129,8 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:layout_marginTop="1dp"
+                android:layout_height="160px"
+                android:layout_marginTop="2px"
                 android:background="#fff"
                 android:orientation="horizontal">
 
@@ -161,9 +161,9 @@
             <!--其他-->
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginBottom="1dp"
-                android:layout_marginTop="1dp"
+                android:layout_height="100px"
+                android:layout_marginBottom="2px"
+                android:layout_marginTop="2px"
                 android:background="#fff">
 
                 <TextView
@@ -173,12 +173,12 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:layout_marginTop="1dp"
+                android:layout_height="160px"
+                android:layout_marginTop="2px"
                 android:background="#fff"
                 android:orientation="horizontal"
-                android:paddingBottom="5dp"
-                android:paddingTop="5dp">
+                android:paddingBottom="10px"
+                android:paddingTop="10px">
 
                 <TextView
                     android:id="@+id/tv_stock_out_other_buy_return"
@@ -207,7 +207,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dp"/>
+                android:layout_height="100px"/>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

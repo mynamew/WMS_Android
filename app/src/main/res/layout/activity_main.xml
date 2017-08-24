@@ -8,12 +8,12 @@
     <RadioGroup
         android:id="@+id/rl_home_botom"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="120px"
         android:layout_alignParentBottom="true"
         android:background="#fff"
         android:gravity="center"
         android:orientation="horizontal"
-        android:paddingTop="5dp">
+        android:paddingTop="10px">
 
         <RadioButton
             android:id="@+id/rd_home_home"

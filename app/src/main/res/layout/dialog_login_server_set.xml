@@ -21,7 +21,7 @@
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="100px"
                 android:gravity="center"
                 android:text="@string/server_set"
                 android:textColor="#333"
@@ -30,12 +30,12 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
+                android:layout_height="2px"
                 android:background="#333"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="100px"
                 android:orientation="horizontal"
                 android:paddingLeft="15dp">
 
@@ -51,10 +51,10 @@
                 <EditText
                     android:id="@+id/et_login_server"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="100px"
                     android:background="@null"
                     android:hint="@string/login_please_input_serverurl"
-                    android:paddingLeft="5dp"
+                    android:paddingLeft="10px"
                     android:textColor="#333"
                     android:textColorHint="#666"
                     android:textSize="16sp"/>
@@ -62,9 +62,9 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="100px"
                 android:orientation="horizontal"
-                android:paddingLeft="15dp">
+                android:paddingLeft="30px">
 
                 <TextView
                     android:id="@+id/login_zuhu_tip"
@@ -78,10 +78,10 @@
                 <EditText
                     android:id="@+id/et_login_zuhu"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="100px"
                     android:background="@null"
                     android:hint="@string/login_please_input_zuhu"
-                    android:paddingLeft="5dp"
+                    android:paddingLeft="10px"
                     android:textColor="#333"
                     android:textColorHint="#666"
                     android:textSize="16sp"/>
@@ -90,9 +90,9 @@
             <LinearLayout
                 android:id="@+id/ll_login_language"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="100px"
                 android:orientation="horizontal"
-                android:paddingLeft="15dp">
+                android:paddingLeft="30px">
 
                 <TextView
                     android:id="@+id/login_language_tip"
@@ -109,7 +109,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center_vertical"
-                    android:paddingLeft="5dp"
+                    android:paddingLeft="10px"
                     android:text="@string/login_select_language"
                     android:textColor="#666"
                     android:textSize="16sp"
@@ -119,7 +119,7 @@
                     android:id="@+id/iv_login_down"
                     android:layout_width="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginRight="10dp"
+                    android:layout_marginRight="20px"
                     android:layout_height="wrap_content"
                     android:src="@mipmap/login_language_down"/>
             </LinearLayout>

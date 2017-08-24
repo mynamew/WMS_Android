@@ -130,6 +130,7 @@
     <string name="set_device_info">设备信息</string>
     <string name="set_userinfo">用户信息</string>
     <string name="server_set">服务设置</string>
+    <string name="set_team">组织切换</string>
     /**====== 设备信息 ======**/
 
 </resources>

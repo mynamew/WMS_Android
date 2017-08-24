@@ -23,11 +23,11 @@ public class LoginModel extends MvpBaseModel {
      * author: timi
      * create at: 2017/8/15 14:26
      */
-    public void login(final String username, final String password, Observer<LoginBean> observer) {
-        HttpManager.getInstance().HttpManagerRequest(observer,  new ApiServiceMethodCallBack<LoginBean>() {
+    public void login(final String tenancyName, final String usernameOrEmailAddress, final String password, final String mac, Observer<LoginBean> observer) {
+        HttpManager.getInstance().HttpManagerRequest(observer, new ApiServiceMethodCallBack<LoginBean>() {
             @Override
             public Observable<CommonResult<LoginBean>> createObservable(ApiService apiService) {
-                return apiService.login(username, password);
+                return apiService.login(tenancyName, usernameOrEmailAddress, password, 2, mac);
             }
         });
     }

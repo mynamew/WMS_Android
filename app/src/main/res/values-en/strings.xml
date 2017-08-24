@@ -24,7 +24,7 @@
     <string name="server_set">ServerSet</string>
     <string name="login_select_language">please select language</string>
     <string name="login_url_tip">URL：</string>
-    <string name="login_zuhu">租户：</string>
+    <string name="login_zuhu">Tenant：</string>
     <string name="login_language">Language：</string>
     <string name="login_set">ServerSet</string>
     <string name="login_please_input_serverurl">login_please_input_serverurl</string>
@@ -131,5 +131,6 @@
     <string name="set_device_info">device info</string>
     <string name="set_userinfo">userinfo</string>
     <string name="set_language">select language</string>
+    <string name="set_team">change organization</string>
     /**====== 设备信息 ======**/
 </resources>

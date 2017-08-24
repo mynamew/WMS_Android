@@ -11,14 +11,14 @@
     <include layout="@layout/title_head"/>
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp">
+        android:layout_height="100px">
 
         <TextView
             android:id="@+id/tv_sbo_tip"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="15dp"
+            android:layout_marginLeft="30px"
             android:text="单号："
             android:textColor="#333"
             android:textSize="16sp"/>
@@ -27,25 +27,25 @@
             android:id="@+id/et_sbo_input"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="10dp"
+            android:layout_margin="20px"
             android:layout_toRightOf="@id/tv_sbo_tip"
             android:background="@drawable/bg_sbo_rectangle_et"
             android:ellipsize="end"
             android:hint="情输入单号进行查询"
-            android:paddingLeft="10dp"
-            android:paddingRight="40dp"
+            android:paddingLeft="20px"
+            android:paddingRight="80px"
             android:singleLine="true"
             android:text=""
             android:textSize="14sp"/>
 
         <ImageView
             android:id="@+id/iv_sbo_scan"
-            android:layout_width="50dp"
+            android:layout_width="100px"
             android:layout_height="match_parent"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_marginRight="15dp"
-            android:paddingLeft="30dp"
+            android:layout_marginRight="30px"
+            android:paddingLeft="60px"
             android:src="@mipmap/ic_scan"/>
     </RelativeLayout>
 </LinearLayout>

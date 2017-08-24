@@ -6,8 +6,11 @@ import com.timi.sz.wms_android.bean.TestBean;
 import com.timi.sz.wms_android.bean.UserInfoBean;
 import com.timi.sz.wms_android.http.HttpManager;
 import com.timi.sz.wms_android.http.api.ApiService;
+import com.timi.sz.wms_android.http.api.CommonResult;
 import com.timi.sz.wms_android.http.callback.ApiServiceMethodCallBack;
 import com.timi.sz.wms_android.mvp.base.model.impl.MvpBaseModel;
+
+import java.io.File;
 
 import io.reactivex.Observable;
 import io.reactivex.Observer;
@@ -34,5 +37,14 @@ public class MainModel extends MvpBaseModel {
         bean.userRoot = SpUtils.getInstance().getString(Constants.USER_ROOT);
         bean.userNum = SpUtils.getInstance().getString(Constants.USER_NUM);
         return bean;
+    }
+
+    /**
+     * 下载APK
+     * @param url
+     * @param observer
+     */
+    public void downLoadApk(final String url, Observer<File> observer){
+        HttpManager.getInstance().downLoadAPkRequest(observer,url);
     }
 }

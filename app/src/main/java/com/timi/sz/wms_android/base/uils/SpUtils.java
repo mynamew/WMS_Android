@@ -186,6 +186,7 @@ public class SpUtils {
         }
         return Constants.AUTHORIZATION_VALUE + authorization;
     }
+
     /**
      * 存入token
      *
@@ -206,6 +207,28 @@ public class SpUtils {
         getSharedPreferences();
         return mPreference.getString(Constants.SP_BASE_URL, "");
     }
+
+    /**
+     * 存入tenancyName
+     *
+     * @param value
+     */
+    public SpUtils puttenancyName(String value) {
+        getSharedPreferences();
+        editor.putString(Constants.SP_BASE_URL, value).commit();
+        return this;
+    }
+
+    /**
+     * tenancyName
+     *
+     * @return
+     */
+    public String gettenancyName() {
+        getSharedPreferences();
+        return mPreference.getString(Constants.SP_BASE_URL, "");
+    }
+
     /**
      * 存入token
      *

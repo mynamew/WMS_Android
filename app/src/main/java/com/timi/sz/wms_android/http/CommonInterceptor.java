@@ -37,18 +37,23 @@ public class CommonInterceptor implements Interceptor {
          * Request的url
          */
         HttpUrl parseUrl = null;
-        /**
-         * 对url 进行处理 当本地sp 存储的是和Constants不同的url 的时候进行替换BaseUrl的操作
-         */
-        if (!spBaseUrl.equals(oldUrl.toString())) {
-            try {
-                    //生成转换的url
-                    parseUrl = HttpUrl.parse(spBaseUrl+oldUrl.toString().replace(Constants.BASE_URL,""));
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        } else {//相同的则直接转换
+        // 为了测试下载
+        if (oldUrl.toString().contains("http://7xk9dj.com1.z0.glb.clouddn.com/BGAUpdateDemo_v1.0.1_debug.apk")) {
             parseUrl = oldUrl;
+        } else {
+            /**
+             * 对url 进行处理 当本地sp 存储的是和Constants不同的url 的时候进行替换BaseUrl的操作
+             */
+            if (!spBaseUrl.equals(oldUrl.toString())) {
+                try {
+                    //生成转换的url
+                    parseUrl = HttpUrl.parse(spBaseUrl + oldUrl.toString().replace(Constants.BASE_URL, ""));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            } else {//相同的则直接转换
+                parseUrl = oldUrl;
+            }
         }
         /**
          * Request 对象

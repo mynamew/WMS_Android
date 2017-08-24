@@ -13,7 +13,7 @@ import static com.timi.sz.wms_android.base.uils.PackageUtils.isApkDebugable;
 
 public class Constants {
     //base url
-    public static final String BASE_URL = "http://v.juhe.cn/weixin/";
+    public static final String BASE_URL = "http://szjuqent.imwork.net:83/";
     //    public static final String BASE_URL = "http://v.juhe.cn/weixin/";
     //超时时间   5s
     public static int DEFAULT_TIMEOUT = 5000;
@@ -24,7 +24,7 @@ public class Constants {
      *********************************************************************************************/
     public static final String StatusColorStr = "#c6ae75";
     /**********
-     * SharePerference 相关
+     * SharePerference　存储用户信息 相关
      *********************************************************************************************/
     //记录密码
     public static final String REMENBER_PSW = "REMENBER_PSW";
@@ -55,28 +55,25 @@ public class Constants {
      *********************************************************************************************/
     public static final int REQUEST_CODE = 1001;//主页跳转到扫码
     /***********
-     * token   key /  value的前缀
+     * SharePerference存储token   key /  value的前缀
      *********************************************************************************************/
     public static final String AUTHORIZATION = "Authorization";
     public static final String AUTHORIZATION_VALUE = "Bearer ";
     /***********
-     * 应用语言设置 中文简体（zh-CN）、中文繁体（zh-TW）、English（en）
+     *SharePerference　存储 应用语言设置 中文简体（zh-CN）、中文繁体（zh-TW）、English（en）
      *********************************************************************************************/
     public static final String LOCALE_LAUGUAGE = "Abp.Localization.CultureName";
     /***********
-     * sp 存储用户选的baseurl
+     * SharePerference存储用户选的baseurl
      *********************************************************************************************/
     public static final String SP_BASE_URL = "SP_BASE_URL";
     /***********
-     * 用户所有的服务器url
+     * SharePerference 存储用户的租户
      *********************************************************************************************/
-    public static final Map<String, String> SERVER_URLS = new HashMap<>();
+    public static final String TENANCY_NAME = "TENANCY_NAME";
+    /***********
+     * SharePerference 软件更新相关
+     *********************************************************************************************/
+    public static final String APK_NAME = "wms.apk";      //apk 名称
 
-    static {
-        SERVER_URLS.put("百度服务器", "www.baidu.com");
-        SERVER_URLS.put("天猫服务器", "www.tianmao.com");
-        SERVER_URLS.put("淘宝服务器", "www.taobao.com");
-        SERVER_URLS.put("谷歌服务器", "www.google.com");
-        SERVER_URLS.put("火狐服务器", "www.huhu.com");
-    }
 }

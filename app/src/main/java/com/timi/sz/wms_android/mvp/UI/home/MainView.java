@@ -17,4 +17,8 @@ public interface MainView extends MvpBaseView{
      * @param bean
      */
     public void setSpUserInfo(UserInfoBean bean);
+    /**
+     * apk 下载完成 提示安装
+     */
+    public void installApk();
 }

@@ -19,8 +19,8 @@ import retrofit2.http.Url;
  */
 public interface ApiService {
     @FormUrlEncoded
-    @POST("index.asmx/CheckLogin")
-    Observable<CommonResult<LoginBean>> login(@Field("usercode") String usercode, @Field("password") String password);
+    @POST("api/Account/ClientLogin")
+    Observable<CommonResult<LoginBean>> login(@Field("tenancyName") String tenancyName,@Field("usernameOrEmailAddress") String usernameOrEmailAddress, @Field("password") String password,@Field("deviceType") int deviceType,@Field("mac") String mac);
     //下载更新
     @Streaming
     @GET

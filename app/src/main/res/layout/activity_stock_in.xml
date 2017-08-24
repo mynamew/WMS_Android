@@ -23,15 +23,15 @@
 
             <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="400px"
                 android:scaleType="centerCrop"
                 android:src="@mipmap/stock_in_bg"
                 android:visibility="visible"/>
             <!--收货-->
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginBottom="1dp"
+                android:layout_height="100px"
+                android:layout_marginBottom="2px"
                 android:background="#fff">
 
                 <TextView
@@ -41,8 +41,8 @@
 
             <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:layout_marginTop="1dp"
+            android:layout_height="160px"
+            android:layout_marginTop="2px"
             android:background="#fff"
             android:orientation="horizontal">
 
@@ -66,11 +66,11 @@
             <!--入库-->
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginBottom="1dp"
-                android:layout_marginTop="1dp"
+                android:layout_height="100px"
+                android:layout_marginBottom="2px"
+                android:layout_marginTop="2px"
                 android:background="#fff"
-                android:paddingTop="1dp">
+                android:paddingTop="2px">
 
                 <TextView
                     style="@style/stock_in_title"
@@ -79,8 +79,8 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:layout_marginTop="1dp"
+                android:layout_height="160px"
+                android:layout_marginTop="2px"
                 android:background="#fff"
                 android:orientation="horizontal">
 
@@ -107,7 +107,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
+                android:layout_height="160px"
                 android:background="#fff"
                 android:orientation="horizontal">
 
@@ -132,9 +132,9 @@
             <!--退料-->
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginBottom="1dp"
-                android:layout_marginTop="1dp"
+                android:layout_height="160px"
+                android:layout_marginBottom="2px"
+                android:layout_marginTop="2px"
                 android:background="#fff"
                 android:paddingTop="1dp">
 
@@ -145,8 +145,8 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:layout_marginTop="1dp"
+                android:layout_height="160px"
+                android:layout_marginTop="2px"
                 android:background="#fff"
                 android:orientation="horizontal">
 
@@ -173,7 +173,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dp"/>
+                android:layout_height="100px"/>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

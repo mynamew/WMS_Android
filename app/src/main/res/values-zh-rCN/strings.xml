@@ -131,5 +131,6 @@
     /**====== 設置 ======**/
     <string name="set_language">选择语言</string>
     <string name="home_quilty">质量作业</string>
+    <string name="set_team">组织切换</string>
     /**====== 设备信息 ======**/
 </resources>

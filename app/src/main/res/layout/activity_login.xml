@@ -11,28 +11,18 @@
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
         android:src="@mipmap/login_bg"/>
-
-    <!-- <include
-         android:id="@+id/head_login"
-         layout="@layout/title_head" />-->
     <TextView
         android:id="@+id/head_login"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="100px"
         android:background="@color/colorPrimary"
         android:gravity="center"
         android:text="@string/login_login"
         android:textColor="#fff"
-        android:textSize="18sp"/>
-
-    <ImageView
-        android:id="@+id/iv_login_logo"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
-        android:layout_below="@id/head_login"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
-        android:src="@mipmap/logo2"/>
+        android:textSize="18sp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"/>
 
     <TextView
         android:id="@+id/tv_login_name"
@@ -40,19 +30,26 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/iv_login_logo"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="10dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginBottom="20px"
+        android:layout_marginTop="20px"
         android:text="@string/login_app_name"
         android:textColor="#fff"
         android:textSize="25sp"/>
-
+    <ImageView
+        android:id="@+id/iv_login_logo"
+        android:layout_width="150px"
+        android:layout_height="150px"
+        android:layout_marginLeft="20px"
+        android:layout_below="@id/head_login"
+        android:layout_marginTop="20px"
+        android:src="@mipmap/logo2"/>
     <TextView
         android:id="@+id/tv_login_version"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/tv_login_name"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="20px"
         android:text="@string/login_version"
         android:textColor="#fff"
         android:textSize="20sp"/>
@@ -60,9 +57,9 @@
     <RelativeLayout
         android:id="@+id/rl_login_input"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="200px"
         android:layout_below="@id/tv_login_version"
-        android:layout_margin="15dp"
+        android:layout_margin="30px"
         android:orientation="vertical">
 
         <ImageView
@@ -74,14 +71,14 @@
         <LinearLayout
             android:id="@+id/ll_username"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="100px"
             android:gravity="center_vertical"
             android:orientation="horizontal"
             android:padding="20px">
 
             <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
+                android:layout_width="40px"
+                android:layout_height="40px"
                 android:scaleType="centerCrop"
                 android:src="@mipmap/login_username"/>
 
@@ -110,15 +107,15 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="100px"
             android:layout_below="@id/view2"
             android:gravity="center_vertical"
             android:orientation="horizontal"
             android:padding="20px">
 
             <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
+                android:layout_width="40px"
+                android:layout_height="40px"
                 android:scaleType="centerCrop"
                 android:src="@mipmap/login_password"/>
 
@@ -176,9 +173,9 @@
         android:layout_below="@id/cb_login_rempsw"
         android:layout_width="match_parent"
         android:orientation="horizontal"
-        android:paddingLeft="15dp"
-        android:paddingRight="15dp"
-        android:layout_height="50dp">
+        android:paddingLeft="30px"
+        android:paddingRight="30px"
+        android:layout_height="100px">
         <Button
             android:id="@+id/btn_login"
             android:layout_width="0dp"
@@ -187,17 +184,19 @@
             android:background="@drawable/selector_btn_bg_login"
             android:text="@string/confirm"
             android:textColor="#fff"
-            android:layout_marginRight="5dp"
+            android:layout_marginRight="10px"
             android:textSize="18sp"/>
         <Button
             android:id="@+id/btn_set"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:layout_marginLeft="5dp"
+            android:layout_marginLeft="10px"
             android:layout_height="wrap_content"
             android:background="@drawable/selector_btn_bg_login"
             android:text="@string/login_set"
             android:textColor="#fff"
             android:textSize="18sp"/>
     </LinearLayout>
+
+
 </RelativeLayout>

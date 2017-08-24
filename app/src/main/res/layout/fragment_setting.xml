@@ -55,98 +55,124 @@
             android:src="@mipmap/set_user_qr"/>
     </RelativeLayout>
 
-    <TextView
-        android:id="@+id/tv_set_userinfo"
-        style="@style/set_tab_item"
-        android:drawableLeft="@mipmap/set_userinfo"
-        android:text="@string/set_userinfo"/>
-
-    <TextView
-        android:id="@+id/tv_set_deviceinfo"
-        style="@style/set_tab_item"
-        android:drawableLeft="@mipmap/set_device"
-        android:text="@string/set_device_info"/>
-
-    <TextView
-        android:id="@+id/tv_set_update_psw"
-        style="@style/set_tab_item"
-        android:drawableLeft="@mipmap/set_password"
-        android:text="@string/set_update_psw"/>
-
-
-    <TextView
-        android:id="@+id/tv_set_language"
-        android:layout_marginTop="10dp"
-        style="@style/set_tab_item"
-        android:drawableLeft="@mipmap/set_language"
-        android:text="@string/set_language"/>
-    <TextView
-        android:id="@+id/tv_set_server"
-        style="@style/set_tab_item"
-        android:drawableLeft="@mipmap/set_server"
-        android:text="@string/server_set"/>
-    <TextView
-        android:id="@+id/tv_set_about"
-        style="@style/set_tab_item"
-        android:layout_marginTop="10dp"
-        android:drawableLeft="@mipmap/set_about"
-        android:text="@string/set_about"/>
-    <RelativeLayout
-        android:id="@+id/rl_set_update_version"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:paddingLeft="15dp"
-        android:background="@drawable/bg_set_tab_check"
-        >
+        android:layout_height="match_parent"
+        android:scrollbars="none">
 
-        <TextView
-            android:id="@+id/tv_set_update_version"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:drawableLeft="@mipmap/set_update"
-            android:drawablePadding="10dp"
-            android:gravity="center_vertical"
-            android:text="@string/set_update_version"/>
-
-        <TextView
-            android:id="@+id/tv_set_new_version"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="10dp"
-            android:layout_toRightOf="@id/tv_set_update_version"
-            android:background="@drawable/bg_set_new_version"
-            android:paddingLeft="5dp"
-            android:paddingRight="5dp"
-            android:text="new"
-            android:textColor="#fff"/>
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/tv_set_now_version"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="15dp"
-            android:text="v 1.0"
-            android:textColor="#333"/>
-    </RelativeLayout>
-    <TextView
-        android:id="@+id/tv_set_exit"
-        style="@style/set_tab_item"
-        android:layout_marginTop="10dp"
-        android:drawableLeft="@mipmap/set_exit"
-        android:drawableRight="@null"
-        android:text="@string/set_exit"/>
+            <TextView
+                android:id="@+id/tv_set_userinfo"
+                style="@style/set_tab_item"
+                android:drawableLeft="@mipmap/set_userinfo"
+                android:text="@string/set_userinfo"/>
+
+            <TextView
+                android:id="@+id/tv_set_deviceinfo"
+                style="@style/set_tab_item"
+                android:drawableLeft="@mipmap/set_device"
+                android:text="@string/set_device_info"/>
+
+            <TextView
+                android:id="@+id/tv_set_update_psw"
+                style="@style/set_tab_item"
+                android:drawableLeft="@mipmap/set_password"
+                android:text="@string/set_update_psw"/>
+
+            <TextView
+                android:id="@+id/tv_set_update_team"
+                style="@style/set_tab_item"
+                android:drawableLeft="@mipmap/set_team"
+                android:text="@string/set_team"/>
+
+            <TextView
+                android:id="@+id/tv_set_language"
+                style="@style/set_tab_item"
+                android:layout_marginTop="10dp"
+                android:drawableLeft="@mipmap/set_language"
+                android:text="@string/set_language"/>
+
+            <TextView
+                android:id="@+id/tv_set_server"
+                style="@style/set_tab_item"
+                android:drawableLeft="@mipmap/set_server"
+                android:text="@string/server_set"/>
+
+            <TextView
+                android:id="@+id/tv_set_about"
+                style="@style/set_tab_item"
+                android:layout_marginTop="10dp"
+                android:drawableLeft="@mipmap/set_about"
+                android:text="@string/set_about"/>
+
+            <RelativeLayout
+                android:id="@+id/rl_set_update_version"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/bg_set_tab_check"
+                android:paddingLeft="15dp"
+                >
+
+                <TextView
+                    android:id="@+id/tv_set_update_version"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:drawableLeft="@mipmap/set_update"
+                    android:drawablePadding="10dp"
+                    android:gravity="center_vertical"
+                    android:text="@string/set_update_version"/>
+
+                <TextView
+                    android:id="@+id/tv_set_new_version"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@id/tv_set_update_version"
+                    android:background="@drawable/bg_set_new_version"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:text="new"
+                    android:textColor="#fff"/>
+
+                <TextView
+                    android:id="@+id/tv_set_now_version"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="15dp"
+                    android:text="v 1.0"
+                    android:textColor="#333"/>
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/tv_set_exit"
+                style="@style/set_tab_item"
+                android:layout_marginTop="10dp"
+                android:drawableLeft="@mipmap/set_exit"
+                android:drawableRight="@null"
+                android:text="@string/set_exit"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="50dp"/>
+        </LinearLayout>
+    </ScrollView>
+
     <Button
         android:id="@+id/btn_set_exit"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:text="@string/set_exit"
-        android:textColor="#ffff"
-        android:visibility="gone"
-        android:layout_marginTop="50dp"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
-        android:background="@drawable/selector_btn_bg_login"/>
+        android:layout_marginTop="50dp"
+        android:background="@drawable/selector_btn_bg_login"
+        android:text="@string/set_exit"
+        android:textColor="#ffff"
+        android:visibility="gone"/>
 </LinearLayout>

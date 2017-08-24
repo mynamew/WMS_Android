@@ -1,5 +1,7 @@
 package com.timi.sz.wms_android.mvp.UI.home;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -9,7 +11,10 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import com.timi.sz.wms_android.R;
+import com.timi.sz.wms_android.base.uils.Constants;
 import com.timi.sz.wms_android.base.uils.LogUitls;
+import com.timi.sz.wms_android.base.uils.SDCardUtils;
+import com.timi.sz.wms_android.base.uils.ToastUtils;
 import com.timi.sz.wms_android.bean.UserInfoBean;
 import com.timi.sz.wms_android.http.message.BaseMessage;
 import com.timi.sz.wms_android.http.message.event.HomeEvent;
@@ -17,6 +22,8 @@ import com.timi.sz.wms_android.mvp.base.BaseActivity;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+
+import java.io.File;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -174,6 +181,16 @@ public class MainActivity extends BaseActivity<MainView, MainPresenter> implemen
         LogUitls.e(bean.userName);
         //设置数据
         ((SetFragmentDataCallBack) setFM).setData(bean);
+    }
+
+    @Override
+    public void installApk() {
+        // TODO: 2017/8/24  提示安装安装包
+        ToastUtils.showShort(this,"安装包下载完成请安装");
+        Uri uri = Uri.fromFile(new File(SDCardUtils.getAPKPath(this), Constants.APK_NAME));
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setDataAndType(uri, "application/vnd.android.package-archive");
+        startActivity(intent);
     }
 
 }

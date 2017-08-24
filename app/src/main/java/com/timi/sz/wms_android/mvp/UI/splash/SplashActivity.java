@@ -53,7 +53,7 @@ public class SplashActivity extends AutoLayoutActivity {
         SpUtils.getInstance().putString(Constants.USER_TEL,"15754628825");
         SpUtils.getInstance().putString(Constants.USER_FROM,"玖坤深圳总部");
         SpUtils.getInstance().putString(Constants.USER_ROOT,"玖坤苏州分公司");
-        SpUtils.getInstance().putBaseUrl("http://222.92.132.196:9000/");
+        SpUtils.getInstance().putBaseUrl("http://szjuqent.imwork.net:83/");
         handler.sendEmptyMessageDelayed(0, 2000);
     }
 }

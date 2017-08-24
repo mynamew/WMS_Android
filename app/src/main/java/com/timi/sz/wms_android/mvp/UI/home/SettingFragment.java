@@ -75,8 +75,10 @@ public class SettingFragment extends Fragment implements SetFragmentDataCallBack
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_setting, null);
         unbinder = ButterKnife.bind(this, view);
-        tvSetUsername.setText(bean.userName);
-        tvSetUsercode.setText(bean.userDepart);
+        if(null!=bean){
+            tvSetUsername.setText(bean.userName);
+            tvSetUsercode.setText(bean.userDepart);
+        }
         return view;
     }
 
@@ -91,7 +93,7 @@ public class SettingFragment extends Fragment implements SetFragmentDataCallBack
      *
      * @param view
      */
-    @OnClick({R.id.tv_set_language, R.id.tv_set_exit, R.id.tv_set_server, R.id.btn_set_exit, R.id.rl_set_update_version, R.id.iv_set_qr, R.id.rl_set_qr, R.id.tv_set_userinfo, R.id.tv_set_deviceinfo, R.id.tv_set_update_psw, R.id.tv_set_about})
+    @OnClick({R.id.tv_set_update_team,R.id.tv_set_language, R.id.tv_set_exit, R.id.tv_set_server, R.id.btn_set_exit, R.id.rl_set_update_version, R.id.iv_set_qr, R.id.rl_set_qr, R.id.tv_set_userinfo, R.id.tv_set_deviceinfo, R.id.tv_set_update_psw, R.id.tv_set_about})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_set_qr://二维码 弹窗 生成二维码
@@ -110,6 +112,8 @@ public class SettingFragment extends Fragment implements SetFragmentDataCallBack
             case R.id.tv_set_about://跳转到关于
                 break;
             case R.id.rl_set_update_version://更新版本
+                //开始下载的操作
+                ((MainActivity)getActivity()).getPresenter().downLoadApk("http://7xk9dj.com1.z0.glb.clouddn.com/BGAUpdateDemo_v1.0.1_debug.apk");
                 break;
             case R.id.btn_set_exit://退出登录
                 //退出登录 跳转到登录界面
@@ -123,6 +127,8 @@ public class SettingFragment extends Fragment implements SetFragmentDataCallBack
                 showSelectLanguageDialog(view);
                 break;
             case R.id.tv_set_server://服务配置
+                break;
+            case R.id.tv_set_update_team://组织切换
                 break;
         }
     }
@@ -199,7 +205,7 @@ public class SettingFragment extends Fragment implements SetFragmentDataCallBack
         mSelectLanguageDialog.getTextView(R.id.tv_language_en).setText(getResources().getString(R.string.language_english));
         //设置 设置界面的文字
         tvSetUserinfo.setText(getResources().getString(R.string.set_userinfo));
-        tvSetDeviceinfo.setText(getResources().getString(R.string.set_userinfo));
+        tvSetDeviceinfo.setText(getResources().getString(R.string.set_device_info));
         tvSetUpdatePsw.setText(getResources().getString(R.string.set_update_psw));
         tvSetLanguage.setText(getResources().getString(R.string.set_language));
         tvSetServer.setText(getResources().getString(R.string.server_set));

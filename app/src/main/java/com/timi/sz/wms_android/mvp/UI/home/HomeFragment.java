@@ -173,6 +173,7 @@ public class HomeFragment extends Fragment {
         tvHomeTodayoutDetail.setText(getResources().getString(R.string.home_detail));
         tvHomeInstock.setText(getResources().getString(R.string.home_in_lib));
         tvHomeOutstock.setText(getResources().getString(R.string.home_out_lib));
+        tvHomeStockIn.setText(getResources().getString(R.string.home_lib_in_deal));
         tvHomeQuery.setText(getResources().getString(R.string.home_query));
         tvHomeQuilty.setText(getResources().getString(R.string.home_quilty));
     }

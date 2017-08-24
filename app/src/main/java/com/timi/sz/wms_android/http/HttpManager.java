@@ -2,9 +2,15 @@ package com.timi.sz.wms_android.http;
 
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import com.timi.sz.wms_android.base.uils.Constants;
+import com.timi.sz.wms_android.base.uils.LogUitls;
+import com.timi.sz.wms_android.base.uils.SDCardUtils;
 import com.timi.sz.wms_android.http.api.ApiService;
 import com.timi.sz.wms_android.http.api.CommonResult;
 import com.timi.sz.wms_android.http.callback.ApiServiceMethodCallBack;
+import com.timi.sz.wms_android.mvp.base.BaseActivity;
+import com.timi.sz.wms_android.mvp.base.BaseApplication;
+
+import java.io.File;
 
 import io.reactivex.Observable;
 import io.reactivex.Observer;
@@ -13,6 +19,7 @@ import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 import okhttp3.OkHttpClient;
+import okhttp3.ResponseBody;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -56,7 +63,7 @@ public class HttpManager {
         /**
          * 初始化 okhttp
          */
-          OkHttpClient okHttpClient=new OkHttpClient.Builder().addInterceptor(new CommonInterceptor()).build();
+        OkHttpClient okHttpClient = new OkHttpClient.Builder().addInterceptor(new CommonInterceptor()).build();
         /**
          * 初始化 retrofit
          */
@@ -80,7 +87,7 @@ public class HttpManager {
      * @param s
      * @param <T>
      */
-    private <T> void toSubscribe(Observable<CommonResult<T>> o, Observer<T> s)throws Exception {
+    private <T> void toSubscribe(Observable<CommonResult<T>> o, Observer<T> s) throws Exception {
         o.subscribeOn(Schedulers.io())
                 .map(new Function<CommonResult<T>, T>() {
                     @Override
@@ -92,6 +99,7 @@ public class HttpManager {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(s);
     }
+
     /**
      * 公共的外部调用请求的方法
      *
@@ -105,5 +113,23 @@ public class HttpManager {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * 下载的方法
+     */
+    public void downLoadAPkRequest(Observer<File> subscriber, String url) {
+        LogUitls.e("存储APK的路径---->", SDCardUtils.getAPKPath(BaseApplication.getMApplicationContext()));
+        Observable<ResponseBody> responseBodyObservable = mApiService.downloadFile(url);
+        responseBodyObservable.subscribeOn(Schedulers.io())
+                .map(new Function<ResponseBody, File>() {
+                    @Override
+                    public File apply(@NonNull ResponseBody reponse) throws Exception {
+                        return SDCardUtils.saveFile(reponse, SDCardUtils.getAPKPath(BaseApplication.getMApplicationContext()), Constants.APK_NAME);
+                    }
+                })
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
     }
 }

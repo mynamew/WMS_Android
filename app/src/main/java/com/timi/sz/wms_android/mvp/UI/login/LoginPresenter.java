@@ -23,10 +23,10 @@ public class LoginPresenter extends MvpBasePresenter<LoginView> {
     /**
      * 网络请求 获取登录结果
      *
-     * @param username
+     * @param tenancyName
      * @param password
      */
-    public void getLoginResult(String username, String password) {
+    public void getLoginResult(String tenancyName,String usernameOrEmailAddress, String password,String mac) {
         if (null == mLoginBeanHttpSubscriber) {
             mLoginBeanHttpSubscriber = new HttpSubscriber<>(new OnResultCallBack<LoginBean>() {
                 @Override
@@ -40,7 +40,7 @@ public class LoginPresenter extends MvpBasePresenter<LoginView> {
                 }
             });
         }
-        mLoginModel.login(username, password,mLoginBeanHttpSubscriber);
+        mLoginModel.login(tenancyName,usernameOrEmailAddress, password,mac,mLoginBeanHttpSubscriber);
     }
 
     @Override
