@@ -66,6 +66,8 @@ public class SettingFragment extends Fragment implements SetFragmentDataCallBack
     TextView tvSetAbout;
     @BindView(R.id.tv_set_update_version)
     TextView tvSetUpdateVersion;
+    @BindView(R.id.tv_set_update_team)
+    TextView tvSetUpdateTeam;
     @BindView(R.id.tv_set_exit)
     TextView btnSetExit;
     private Unbinder unbinder;
@@ -216,6 +218,7 @@ public class SettingFragment extends Fragment implements SetFragmentDataCallBack
         tvSetAbout.setText(getResources().getString(R.string.set_about));
         tvSetUpdateVersion.setText(getResources().getString(R.string.set_update_version));
         btnSetExit.setText(getResources().getString(R.string.set_exit));
+        tvSetUpdateTeam.setText(getResources().getString(R.string.set_team));
         //发送事件 更新主界面的文字
         BaseMessage.post(new HomeEvent(HomeEvent.LANGUAGE_UPDATE));
         //弹出框消失

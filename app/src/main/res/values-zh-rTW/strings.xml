@@ -89,11 +89,11 @@
     <string name="comfirm_set">確認設置</string>
     /**====== 更改密码 ======**/
     <string name="update_password">更改密碼</string>
-    <string name="update_password_oldpsw">原密碼</string>
+    <string name="update_password_oldpsw">原密碼：</string>
     <string name="please_input_old_psw">請輸入原密碼</string>
-    <string name="update_password_newpsw">新密碼</string>
+    <string name="update_password_newpsw">新密碼：</string>
     <string name="please_input_new_password">請輸入新密碼</string>
-    <string name="upadte_password_repeat">再一次密碼</string>
+    <string name="upadte_password_repeat">再一次密碼：</string>
     <string name="please_repeat_input_password">請再次輸入新密碼</string>
     <string name="show_password">顯示密碼</string>
 

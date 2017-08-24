@@ -159,11 +159,11 @@
     <string name="comfirm_set">Confirm Set</string>
     /**====== 更改密码 ======**/
     <string name="update_password">Update Password</string>
-    <string name="update_password_oldpsw">Old Passwor</string>
+    <string name="update_password_oldpsw">Old Passwor：</string>
     <string name="please_input_old_psw">please input old password</string>
-    <string name="update_password_newpsw">New Password</string>
+    <string name="update_password_newpsw">New Password：</string>
     <string name="please_input_new_password">please input new password</string>
-    <string name="upadte_password_repeat">Repeat New Password</string>
+    <string name="upadte_password_repeat">Repeat New Password：</string>
     <string name="please_repeat_input_password">please repeat input new password</string>
     <string name="show_password">Show Password</string>
 </resources>

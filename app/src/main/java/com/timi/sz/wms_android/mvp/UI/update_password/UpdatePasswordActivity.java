@@ -1,7 +1,9 @@
 package com.timi.sz.wms_android.mvp.UI.update_password;
 
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.view.View;
@@ -48,7 +50,69 @@ public class UpdatePasswordActivity extends BaseActivity<UpdatePassworView, Upda
 
     @Override
     public void initView() {
+        etSetUpdatePasswordNewpsw.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                String username=s.toString();
+                if(!TextUtils.isEmpty(username)){
+                    ivSetUpdatePasswordClearNewPassword.setVisibility(View.VISIBLE);
+                }else{
+                    ivSetUpdatePasswordClearNewPassword.setVisibility(View.GONE);
+                }
+            }
+        });
+        etSetUpdatePasswordOldpsw.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                String username=s.toString();
+                if(!TextUtils.isEmpty(username)){
+                    ivSetUpdatePasswordClearOldPassword.setVisibility(View.VISIBLE);
+                }else{
+                    ivSetUpdatePasswordClearOldPassword.setVisibility(View.GONE);
+                }
+            }
+        });
+        etSetUpdatePasswprdRepeat.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                String username=s.toString();
+                if(!TextUtils.isEmpty(username)){
+                    ivSetUpdatePasswordClearRepeatPassword.setVisibility(View.VISIBLE);
+                }else{
+                    ivSetUpdatePasswordClearRepeatPassword.setVisibility(View.GONE);
+                }
+            }
+        });
     }
 
     @Override
