@@ -43,7 +43,6 @@
     <TextView
         android:id="@+id/tv_set_userinfo_root"
         style="@style/tv_userinfo"
+        android:visibility="gone"
         android:text="@string/set_userinfo_root"/>
-
-
 </LinearLayout>

@@ -112,9 +112,6 @@
     <string name="siw_form_change_stock_in">形态转换-入库</string>
     <string name="siw_form_change_stock_out">形态转换-出库</string>
     <string name="siw_query_repertory">库存查询</string>
-    <string name="siw_check">盘点</string>
-    <string name="stock_in_point">物品清点</string>
-    <string name="stock_in_point_record">清点记录</string>
     /**====== 用户信息 ======**/
     <string name="set_userinfo_num">编号：%1$s</string>
     <string name="set_userinfo_name">姓名：%1$s</string>
@@ -132,5 +129,41 @@
     <string name="set_userinfo">userinfo</string>
     <string name="set_language">select language</string>
     <string name="set_team">change organization</string>
+    /**====== 清点 ======**/
+    <string name="sip_order_num">OrderNum：%1$s</string>
+    <string name="sip_buy_date">BuyDate：%1$s</string>
+    <string name="sip_buy_from">Provider：%1$s</string>
+    <string name="sip_buyer">Buyer：%1$s</string>
+    <string name="cancel">cancel</string>
+    <string name="save">save</string>
+    <string name="stockin_point_pro_num">ProductNumber：%1$s</string>
+    <string name="stockin_point_pro_name">ProductName：%1$s</string>
+    <string name="stockin_point_promodel">ProductModel：%1$s</string>
+    <string name="stockin_point_buynum">BuyNumber：%1$s</string>
+    <string name="stockin_point_receive_pro_num">GoodsNumber：%1$s</string>
+    <string name="tstockin_point_pro_point_num">PointNumber：</string>
+    <string name="please_input_point_num">please input point number</string>
+    <string name="stockin_point_sparenum">SpareNumber：</string>
+    <string name="please_input_spare_num">please input spare number</string>
+    <string name="siw_check">Point</string>
+    <string name="stock_in_point">ProductPoint</string>
+    <string name="stock_in_point_record">PointRecord</string>
+    <string name="point_record">PointRecord</string>
+    <string name="goods_point">GoodsPoint</string>
     /**====== 设备信息 ======**/
+    <string name="deviceinfo">DeviceInfo</string>
+    <string name="set_deviceinfo_num">DeviceNumber：</string>
+    <string name="please_input_device_num">please input device number</string>
+    <string name="set_deviceinfo_mac">DeviceMAC：%1$s</string>
+    <string name="set_deviceinfo_ip">IPLocation：%1$s</string>
+    <string name="comfirm_set">Confirm Set</string>
+    /**====== 更改密码 ======**/
+    <string name="update_password">Update Password</string>
+    <string name="update_password_oldpsw">Old Passwor</string>
+    <string name="please_input_old_psw">please input old password</string>
+    <string name="update_password_newpsw">New Password</string>
+    <string name="please_input_new_password">please input new password</string>
+    <string name="upadte_password_repeat">Repeat New Password</string>
+    <string name="please_repeat_input_password">please repeat input new password</string>
+    <string name="show_password">Show Password</string>
 </resources>

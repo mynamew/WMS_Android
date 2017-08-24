@@ -7,7 +7,9 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.os.Parcelable;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
@@ -45,6 +47,7 @@ import java.util.Set;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.OnTextChanged;
 import cn.jpush.android.api.JPushInterface;
 import cn.jpush.android.api.TagAliasCallback;
 
@@ -70,6 +73,8 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
     Button btnLogin;
     @BindView(R.id.btn_set)
     Button btnSet;
+    @BindView(R.id.iv_login_clear_username)
+    ImageView ivLoginClearUsername;
 
     //flag
     private boolean isCanSeePsw = false;
@@ -87,6 +92,7 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
         String userName = SpUtils.getInstance().getString(Constants.USER_NAME);
         if (!TextUtils.isEmpty(userName)) {
             etLoginUsername.setText(userName);
+            ivLoginClearUsername.setVisibility(View.VISIBLE);
         }
         /**
          * 获取 存储的密码
@@ -105,7 +111,27 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
 
     @Override
     public void initView() {
+        etLoginUsername.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+               String username=s.toString();
+                if(!TextUtils.isEmpty(username)){
+                    ivLoginClearUsername.setVisibility(View.VISIBLE);
+                }else{
+                    ivLoginClearUsername.setVisibility(View.GONE);
+                }
+            }
+        });
     }
 
     @Override
@@ -304,6 +330,14 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
     }
 
     /**
+     * 清楚用户名
+     */
+    @OnClick(R.id.iv_login_clear_username)
+    public void clearUsername(){
+        etLoginUsername.setText("");
+        ivLoginClearUsername.setVisibility(View.GONE);
+    }
+    /**
      * 显示下拉框 选择语言
      *
      * @param view
@@ -441,7 +475,7 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
                             String zuhuStr = etLoginZuhu.getText().toString();
                             if (TextUtils.isEmpty(zuhuStr)) {
                                 //存储url
-                                SpUtils.getInstance().puttenancyName( zuhuStr);
+                                SpUtils.getInstance().puttenancyName(zuhuStr);
                             }
                             dialog.dismiss();
                         }
@@ -467,5 +501,6 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
         }
         myDialog.show();
     }
+
 
 }

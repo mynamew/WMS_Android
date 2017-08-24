@@ -23,7 +23,14 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"/>
-
+    <ImageView
+        android:id="@+id/iv_login_logo"
+        android:layout_width="150px"
+        android:layout_height="150px"
+        android:layout_marginLeft="20px"
+        android:layout_below="@id/head_login"
+        android:layout_marginTop="20px"
+        android:src="@mipmap/logo2"/>
     <TextView
         android:id="@+id/tv_login_name"
         android:layout_width="wrap_content"
@@ -35,14 +42,6 @@
         android:text="@string/login_app_name"
         android:textColor="#fff"
         android:textSize="25sp"/>
-    <ImageView
-        android:id="@+id/iv_login_logo"
-        android:layout_width="150px"
-        android:layout_height="150px"
-        android:layout_marginLeft="20px"
-        android:layout_below="@id/head_login"
-        android:layout_marginTop="20px"
-        android:src="@mipmap/logo2"/>
     <TextView
         android:id="@+id/tv_login_version"
         android:layout_width="wrap_content"
@@ -90,16 +89,24 @@
                 android:layout_marginLeft="10dp"
                 android:layout_weight="1"
                 android:background="@null"
-
                 android:gravity="center_vertical"
                 android:hint="@string/login_input_username"
                 android:textColor="#fff"
                 android:textColorHint="#fff"
                 android:textSize="16sp"/>
+            <ImageView
+                android:id="@+id/iv_login_clear_username"
+                android:layout_width="60px"
+                android:layout_height="60px"
+                android:paddingLeft="20px"
+                android:visibility="gone"
+                android:src="@mipmap/login_close"/>
         </LinearLayout>
 
         <View
             android:id="@+id/view2"
+            android:layout_marginLeft="20px"
+            android:layout_marginRight="20px"
             android:layout_width="match_parent"
             android:layout_height="2px"
             android:layout_below="@id/ll_username"
@@ -124,7 +131,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_gravity="center_vertical"
-                android:layout_marginLeft="10dp"
+                android:layout_marginLeft="20px"
                 android:layout_weight="1"
                 android:background="@null"
                 android:gravity="center_vertical"
@@ -136,11 +143,11 @@
 
             <ImageView
                 android:id="@+id/iv_login_eye"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:paddingBottom="10dp"
-                android:paddingLeft="10dp"
-                android:paddingTop="10dp"
+                android:layout_width="60px"
+                android:layout_height="60px"
+                android:paddingBottom="20px"
+                android:paddingLeft="20px"
+                android:paddingTop="20px"
                 android:scaleType="centerCrop"
                 android:src="@drawable/selector_login_psw"/>
         </LinearLayout>

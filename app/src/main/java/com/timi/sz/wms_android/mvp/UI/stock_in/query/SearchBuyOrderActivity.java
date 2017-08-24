@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.timi.sz.wms_android.R;
 import com.timi.sz.wms_android.base.uils.InputMethodUtils;
+import com.timi.sz.wms_android.mvp.UI.stock_in.point.StockInPointActivity;
 import com.timi.sz.wms_android.mvp.base.BaseActivity;
 import com.timi.sz.wms_android.qrcode.CommonScanActivity;
 import com.timi.sz.wms_android.qrcode.utils.Constant;
@@ -45,7 +46,8 @@ public class SearchBuyOrderActivity extends BaseActivity<SearchBuyOrderView, Sea
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if(keyCode == KeyEvent.KEYCODE_ENTER && event.getAction() == KeyEvent.ACTION_UP){
                     InputMethodUtils.hide(SearchBuyOrderActivity.this);
-                    //// TODO: 2017/8/18 请求单号接口返回信息 
+                    // TODO: 2017/8/18 请求单号接口返回信息
+                    startActivity(new Intent(SearchBuyOrderActivity.this, StockInPointActivity.class));
                 }
                 return false;
             }

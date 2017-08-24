@@ -27,8 +27,6 @@ public class UserInfoActivity extends BaseActivity<UserInfoView,UserInfroPresent
     TextView tvSetUserinfoDepart;
     @BindView(R.id.tv_set_userinfo_from)
     TextView tvSetUserinfoFrom;
-    @BindView(R.id.tv_set_userinfo_root)
-    TextView tvSetUserinfoRoot;
 
     @Override
     public int setLayoutId() {
@@ -63,20 +61,18 @@ public class UserInfoActivity extends BaseActivity<UserInfoView,UserInfroPresent
 
     @Override
     public void setSpUserInfo(UserInfoBean bean) {
-        //用户编号
+        //用户工号
         tvSetUserinfoNum.setText(String.format(getString(R.string.set_userinfo_num),bean.userNum));
-        //用户编号
+        //用户名字
         tvSetUserinfoName.setText(String.format(getString(R.string.set_userinfo_name),bean.userName));
-        //用户编号
+        //用户性别
         tvSetUserinfoSex.setText(String.format(getString(R.string.set_userinfo_sex),bean.userSex));
-        //用户编号
+        //用户部门
         tvSetUserinfoDepart.setText(String.format(getString(R.string.set_userinfo_depart),bean.userDepart));
-        //用户编号
+        //用户电话
         tvSetUserinfoTel.setText(String.format(getString(R.string.set_userinfo_tel),bean.userTel));
-        //用户编号
+        //用户组织
         tvSetUserinfoFrom.setText(String.format(getString(R.string.set_userinfo_from),bean.userFrom));
-        //用户编号
-        tvSetUserinfoRoot.setText(String.format(getString(R.string.set_userinfo_root),bean.userRoot));
         //用户编号
         tvSetUserinfoNum.setText(String.format(getString(R.string.set_userinfo_num),bean.userNum));
     }

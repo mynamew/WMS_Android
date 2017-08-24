@@ -182,6 +182,10 @@
         </activity>
         <activity android:name=".mvp.UI.userinfo.UserInfoActivity">
         </activity>
+        <activity android:name=".mvp.UI.deviceinfo.DeviceInfoActivity">
+        </activity>
+        <activity android:name=".mvp.UI.update_password.UpdatePasswordActivity">
+        </activity>
     </application>
 
 </manifest>

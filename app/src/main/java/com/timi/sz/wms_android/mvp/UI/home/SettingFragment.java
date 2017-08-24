@@ -23,7 +23,9 @@ import com.timi.sz.wms_android.base.uils.SpUtils;
 import com.timi.sz.wms_android.bean.UserInfoBean;
 import com.timi.sz.wms_android.http.message.BaseMessage;
 import com.timi.sz.wms_android.http.message.event.HomeEvent;
+import com.timi.sz.wms_android.mvp.UI.deviceinfo.DeviceInfoActivity;
 import com.timi.sz.wms_android.mvp.UI.login.LoginActivity;
+import com.timi.sz.wms_android.mvp.UI.update_password.UpdatePasswordActivity;
 import com.timi.sz.wms_android.mvp.UI.userinfo.UserInfoActivity;
 import com.timi.sz.wms_android.view.MyDialog;
 
@@ -106,8 +108,10 @@ public class SettingFragment extends Fragment implements SetFragmentDataCallBack
                 startActivity(new Intent(getActivity(), UserInfoActivity.class));
                 break;
             case R.id.tv_set_deviceinfo://跳转到设备信息
+                startActivity(new Intent(getActivity(), DeviceInfoActivity.class));
                 break;
             case R.id.tv_set_update_psw://跳转到设置密码
+                startActivity(new Intent(getActivity(), UpdatePasswordActivity.class));
                 break;
             case R.id.tv_set_about://跳转到关于
                 break;

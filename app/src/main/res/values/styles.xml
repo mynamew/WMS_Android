@@ -116,4 +116,15 @@
         <item name="android:windowEnterAnimation">@anim/popupwindow_enter</item>
         <item name="android:windowExitAnimation">@anim/popupwindow_exit</item>
     </style>
+
+    <!-- 消息界面TabLayout的切换样式 -->
+    <style name="MyCustomTabLayout" parent="Widget.Design.TabLayout">  <!--Tablayout 使用的样式-->
+        <item name="tabIndicatorColor">?attr/colorAccent</item>    <!--TAB底部滑块颜色-->
+        <item name="tabIndicatorHeight">2dp</item>     <!--TAB底部滑块高度-->
+        <item name="tabPaddingStart">12dp</item>    <!--TAB左边padding-->
+        <item name="tabPaddingEnd">12dp</item>    <!--TAB右边padding-->
+        <item name="android:textSize">19dp</item>
+        <item name="tabBackground">?attr/selectableItemBackground</item>    <!--TAB背景色-->
+        <item name="tabSelectedTextColor">?android:textColorPrimary</item>    <!--TAB选中文字颜色-->
+    </style>
 </resources>

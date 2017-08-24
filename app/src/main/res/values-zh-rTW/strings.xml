@@ -62,5 +62,39 @@
     <string name="set_device_info">設備信息</string>
     <string name="set_userinfo">用戶信息</string>
     <string name="set_team">组织切换</string>
+    /**====== 清點 ======**/
+    <string name="sip_order_num">訂單號：%1$s</string>
+    <string name="sip_buy_date">采購日期：%1$s</string>
+    <string name="sip_buy_from">供應商：%1$s</string>
+    <string name="sip_buyer">採購員：%1$s</string>
+    <string name="cancel">取消</string>
+    <string name="save">保存</string>
+    <string name="stockin_point_pro_num">物品編碼：%1$s</string>
+    <string name="stockin_point_pro_name">物品名稱：%1$s</string>
+    <string name="stockin_point_promodel">規格型號：%1$s</string>
+    <string name="stockin_point_buynum">    採購數：%1$s</string>
+    <string name="stockin_point_receive_pro_num">    到貨數：%1$s</string>
+    <string name="tstockin_point_pro_point_num">    清點數：</string>
+    <string name="please_input_point_num">請輸入清點數</string>
+    <string name="stockin_point_sparenum">    備品數：</string>
+    <string name="please_input_spare_num">請輸入備品數</string>
+    <string name="point_record">清點記錄</string>
+    <string name="goods_point">物品清點</string>
+    /**====== 設備 ======**/
+    <string name="deviceinfo">設備信息</string>
+    <string name="set_deviceinfo_num">設備編號：</string>
+    <string name="please_input_device_num">請輸入設備編號</string>
+    <string name="set_deviceinfo_mac">設備MAC：%1$s</string>
+    <string name="set_deviceinfo_ip">IP地址：%1$s</string>
+    <string name="comfirm_set">確認設置</string>
+    /**====== 更改密码 ======**/
+    <string name="update_password">更改密碼</string>
+    <string name="update_password_oldpsw">原密碼</string>
+    <string name="please_input_old_psw">請輸入原密碼</string>
+    <string name="update_password_newpsw">新密碼</string>
+    <string name="please_input_new_password">請輸入新密碼</string>
+    <string name="upadte_password_repeat">再一次密碼</string>
+    <string name="please_repeat_input_password">請再次輸入新密碼</string>
+    <string name="show_password">顯示密碼</string>
 
 </resources>

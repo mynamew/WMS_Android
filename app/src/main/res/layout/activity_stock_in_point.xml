@@ -10,10 +10,20 @@
     tools:context="com.timi.sz.wms_android.mvp.UI.stock_in.point.StockInPointActivity">
 
     <include layout="@layout/title_head"/>
-
+    <android.support.design.widget.TabLayout
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/tab_stockin_point"
+        style="@style/MyCustomTabLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:tabIndicatorColor="@color/colorPrimary"
+        app:tabMode="scrollable"
+        app:tabSelectedTextColor="@color/colorPrimary"
+        app:tabTextColor="@color/tab_txt_unselect"/>
     <RadioGroup
         android:layout_width="match_parent"
         android:layout_height="100px"
+        android:visibility="gone"
         android:orientation="horizontal">
 
         <RadioButton
@@ -40,7 +50,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:padding="10dp"
-            android:text="订单号：%1$s"
+            android:text="@string/sip_order_num"
             android:textColor="#333"/>
 
         <TextView
@@ -49,7 +59,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:padding="10dp"
-            android:text="采购日期：%1$s"
+            android:text="@string/sip_buy_date"
             android:textColor="#333"/>
     </LinearLayout>
     <LinearLayout
@@ -63,7 +73,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:padding="10dp"
-            android:text="供应商：%1$s"
+            android:text="@string/sip_buy_from"
             android:textColor="#333"/>
 
         <TextView
@@ -72,9 +82,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:padding="10dp"
-            android:text="采购员：%1$s"
+            android:text="@string/sip_buyer"
             android:textColor="#333"/>
     </LinearLayout>
-
-
 </LinearLayout>
