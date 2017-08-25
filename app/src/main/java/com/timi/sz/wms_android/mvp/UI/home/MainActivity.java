@@ -14,6 +14,7 @@ import com.timi.sz.wms_android.R;
 import com.timi.sz.wms_android.base.uils.Constants;
 import com.timi.sz.wms_android.base.uils.LogUitls;
 import com.timi.sz.wms_android.base.uils.SDCardUtils;
+import com.timi.sz.wms_android.base.uils.SpUtils;
 import com.timi.sz.wms_android.base.uils.ToastUtils;
 import com.timi.sz.wms_android.bean.UserInfoBean;
 import com.timi.sz.wms_android.http.message.BaseMessage;
@@ -187,6 +188,13 @@ public class MainActivity extends BaseActivity<MainView, MainPresenter> implemen
     public void installApk() {
         // TODO: 2017/8/24  提示安装安装包
         ToastUtils.showShort(this,"安装包下载完成请安装");
+        /**
+         * 下载完成 存储已下载更新的安装包的标识
+         */
+        SpUtils.getInstance().putBoolean(Constants.IS_HAVE_DOWNLOAD_NEW,true);
+        /**
+         * 调用系统方法进行安装
+         */
         Uri uri = Uri.fromFile(new File(SDCardUtils.getAPKPath(this), Constants.APK_NAME));
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.setDataAndType(uri, "application/vnd.android.package-archive");

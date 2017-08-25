@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/set_bg"
+    android:orientation="vertical"
+    tools:context="com.timi.sz.wms_android.mvp.UI.about.AboutActivity">
+
+    <include
+        layout="@layout/title_head"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/login_bg"
+            />
+
+        <ImageView
+            android:id="@+id/iv_login_logo"
+            android:layout_width="150px"
+            android:layout_height="150px"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="100px"
+            android:src="@mipmap/logo2"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#fff"
+            android:text="@string/about"
+            android:textColor="#333"
+            android:padding="10px"
+            android:alpha="0.5"
+            android:layout_marginTop="60px"
+            android:lineSpacingExtra="5px"
+            android:textSize="16sp"
+           android:layout_below="@id/iv_login_logo"/>
+    </RelativeLayout>
+</LinearLayout>

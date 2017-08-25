@@ -156,6 +156,12 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
         if (TextUtils.isEmpty(SpUtils.getInstance().getBaseUrl())
                 || TextUtils.isEmpty(SpUtils.getInstance().getLocaleLanguage())) {
             showServerSetDialogShow();
+        }else{
+            //如果界面传过来的参数需要弹出服务配置的弹出框
+            boolean isNeedShowServerSet=getIntent().getBooleanExtra(Constants.IS_NEED_SHOW_SHOW_SERVER_SET,false);
+            if(isNeedShowServerSet){
+                showServerSetDialogShow();
+            }
         }
     }
 

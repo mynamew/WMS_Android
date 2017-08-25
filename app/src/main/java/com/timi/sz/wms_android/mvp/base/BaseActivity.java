@@ -272,4 +272,15 @@ public abstract class BaseActivity<V extends MvpView, P extends MvpPresenter<V>>
         Intent it = new Intent(currentActivity, LoginActivity.class);
         startActivity(it, Interlude.POP_FROM_BOTTOM);
     }
+
+    /**
+     * 跳转到登录的公共方法
+     */
+    public void jumpToLoginActivity(boolean isNeedShowServerSet) {
+        //做清除数据的操作
+        // 做跳转的操作
+        Intent it = new Intent(currentActivity, LoginActivity.class);
+        it.putExtra(Constants.IS_NEED_SHOW_SHOW_SERVER_SET, isNeedShowServerSet);
+        startActivity(it, Interlude.POP_FROM_BOTTOM);
+    }
 }

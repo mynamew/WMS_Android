@@ -1,7 +1,6 @@
 package com.timi.sz.wms_android.mvp.UI.home;
 
 
-import com.timi.sz.wms_android.bean.TestBean;
 import com.timi.sz.wms_android.bean.UserInfoBean;
 import com.timi.sz.wms_android.mvp.base.view.iml.MvpBaseView;
 

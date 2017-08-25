@@ -2,20 +2,14 @@ package com.timi.sz.wms_android.mvp.UI.stock_in.point;
 
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
-import android.text.TextUtils;
-import android.view.View;
-import android.widget.RadioButton;
-import android.widget.TextView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 
 import com.timi.sz.wms_android.R;
 import com.timi.sz.wms_android.base.uils.ToastUtils;
-import com.timi.sz.wms_android.mvp.UI.stock_in.StockInActivity;
 import com.timi.sz.wms_android.mvp.base.BaseActivity;
-import com.timi.sz.wms_android.view.MyDialog;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 /**
  * 入库清点
@@ -23,22 +17,11 @@ import butterknife.OnClick;
  * create at: 2017/8/18 20:58
  */
 public class StockInPointActivity extends BaseActivity<StockInPointView, StockInPointPresenter> implements StockInPointView {
-
-    @BindView(R.id.rd_stock_in_point)
-    RadioButton rdStockInPoint;
-    @BindView(R.id.rd_stock_in_record)
-    RadioButton rdStockInRecord;
-    @BindView(R.id.tv_sip_buy_num)
-    TextView tvSipBuyNum;
-    @BindView(R.id.tv_sip_buy_date)
-    TextView tvSipBuyDate;
-    @BindView(R.id.tv_sip_buy_from)
-    TextView tvSipBuyFrom;
-    @BindView(R.id.tv_sip_buyer)
-    TextView tvSipBuyer;
     @BindView(R.id.tab_stockin_point)
     TabLayout tabStockinPoint;
     private String[] titles;
+    private Fragment mPointFragment;
+    private Fragment mPointRecordFragment;
     @Override
     public int setLayoutId() {
         return R.layout.activity_stock_in_point;
@@ -47,13 +30,6 @@ public class StockInPointActivity extends BaseActivity<StockInPointView, StockIn
     @Override
     public void initBundle(Bundle savedInstanceState) {
         setActivityTitle("收货-物品清点");
-        //设置默认物品清点
-        rdStockInPoint.setChecked(true);
-        //设置初始数据  从上个界面传过来
-        tvSipBuyNum.setText(String.format(getString(R.string.sip_order_num), "P14342143"));
-        tvSipBuyDate.setText(String.format(getString(R.string.sip_buy_date), "2017-8-22"));
-        tvSipBuyFrom.setText(String.format(getString(R.string.sip_buy_from), "深圳超然科技股份有限公司"));
-        tvSipBuyNum.setText(String.format(getString(R.string.sip_order_num), "邢力丰"));
     }
 
     @Override
@@ -70,11 +46,11 @@ public class StockInPointActivity extends BaseActivity<StockInPointView, StockIn
         tabStockinPoint.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                ToastUtils.showShort(StockInPointActivity.this,"点击了"+tab.getText());
-                if(tab.getText().equals(titles[0])){//物品清点
-
-                }else{//清点记录
-
+                ToastUtils.showShort(StockInPointActivity.this, "点击了" + tab.getText());
+                if (tab.getText().equals(titles[0])) {//物品清点
+                    changeFragment(0);
+                } else {//清点记录
+                    changeFragment(1);
                 }
             }
 
@@ -85,7 +61,6 @@ public class StockInPointActivity extends BaseActivity<StockInPointView, StockIn
 
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
-                showGoodsPointDialog();
             }
         });
     }
@@ -101,43 +76,32 @@ public class StockInPointActivity extends BaseActivity<StockInPointView, StockIn
     }
 
     /**
-     * 显示物品清点的弹出框
+     * 切换清点和清点记录的碎片
+      * @param index
      */
-    private MyDialog mPointDialog = null;
-    public void showGoodsPointDialog(){
-        if (null == mPointDialog) {
-            mPointDialog = new MyDialog(this, R.layout.dialog_stockin_point)
-                    .setTextViewContent(R.id.tv_stockin_point_pronum, String.format(getString(R.string.stockin_point_pro_num),"9.05.0022"))
-                    .setTextViewContent(R.id.tv_stockin_point_proname, String.format(getString(R.string.stockin_point_pro_name),"滑轨双孔梁496-蓝色"))
-                    .setTextViewContent(R.id.tv_stockin_point_promodel,String.format(getString(R.string.stockin_point_promodel),"Slide Beam0824-496铝挤压加工"))
-                    .setTextViewContent(R.id.tv_stockin_point_buynum, String.format(getString(R.string.stockin_point_buynum),"50"))
-                    .setTextViewContent(R.id.tv_stockin_point_receive_pro_num, String.format(getString(R.string.stockin_point_receive_pro_num),"50"))
-                    .setButtonListener(R.id.btn_stockin_point_cancel, getString(R.string.cancel), new MyDialog.DialogClickListener() {
-                        @Override
-                        public void dialogClick(MyDialog dialog) {
-                            dialog.dismiss();
-                        }
-                    })
-                    .setButtonListener(R.id.btn_stockin_point_save, getString(R.string.save), new MyDialog.DialogClickListener() {
-                        @Override
-                        public void dialogClick(MyDialog dialog) {
-                            String pointNum = dialog.getEdittext(R.id.et_stockin_point_pro_point_num).getText().toString();
-                            String spareNum = dialog.getEdittext(R.id.et_stockin_point_sparenum).getText().toString();
-                            //判断是否输入了清点的数量
-                            if (TextUtils.isEmpty(pointNum)) {
-                                ToastUtils.showShort(StockInPointActivity.this, getString(R.string.please_input_point_num));
-                                return;
-                            }
-                            //判断是否输入了备品的数量
-                            if (TextUtils.isEmpty(spareNum)) {
-                                ToastUtils.showShort(StockInPointActivity.this, getString(R.string.please_input_spare_num));
-                                return;
-                            }
-                            // TODO: 2017/8/24 网络请求 保存清点信息
-                            dialog.dismiss();
-                        }
-                    });
+    public void changeFragment(int index){
+        FragmentTransaction trans = super.getSupportFragmentManager().beginTransaction();
+        if (mPointFragment != null) trans.hide(mPointFragment);
+        if (mPointRecordFragment != null) trans.hide(mPointRecordFragment);
+        if(index==0){
+            if (mPointFragment == null) {
+                mPointFragment = new FragmentPoint();
+                trans.add(R.id.fl_stockin_point_content, mPointFragment);
+            } else {
+                trans.show(mPointFragment);
+            }
+        }else{
+            if (mPointRecordFragment == null) {
+                mPointRecordFragment = new FragmentPointRecord();
+                trans.add(R.id.fl_stockin_point_content, mPointRecordFragment);
+            } else {
+                trans.show(mPointRecordFragment);
+            }
         }
-        mPointDialog.show();
+        try {
+            trans.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

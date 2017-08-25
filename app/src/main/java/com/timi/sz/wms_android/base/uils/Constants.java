@@ -75,5 +75,16 @@ public class Constants {
      * SharePerference 软件更新相关
      *********************************************************************************************/
     public static final String APK_NAME = "wms.apk";      //apk 名称
+    public static final String IS_HAVE_DOWNLOAD_NEW="is_have_download_new";//是否下载了最新版本的安装包
+
+
+    /***********
+     * 跳转 传递的相关字段
+     *********************************************************************************************/
+    /***********
+     * 跳转到登录界面 是否显示服务配置的弹框（ 可能是来自于服务配置按钮的点击）
+     *********************************************************************************************/
+    public static final String IS_NEED_SHOW_SHOW_SERVER_SET = "isNeedShowServerSet.apk";
+
 
 }

@@ -2,19 +2,13 @@ package com.timi.sz.wms_android.mvp.UI.home;
 
 import com.timi.sz.wms_android.base.uils.Constants;
 import com.timi.sz.wms_android.base.uils.SpUtils;
-import com.timi.sz.wms_android.bean.TestBean;
 import com.timi.sz.wms_android.bean.UserInfoBean;
 import com.timi.sz.wms_android.http.HttpManager;
-import com.timi.sz.wms_android.http.api.ApiService;
-import com.timi.sz.wms_android.http.api.CommonResult;
-import com.timi.sz.wms_android.http.callback.ApiServiceMethodCallBack;
 import com.timi.sz.wms_android.mvp.base.model.impl.MvpBaseModel;
 
 import java.io.File;
 
-import io.reactivex.Observable;
 import io.reactivex.Observer;
-import okhttp3.ResponseBody;
 
 /**
  * main  model

@@ -166,4 +166,8 @@
     <string name="upadte_password_repeat">Repeat New Password：</string>
     <string name="please_repeat_input_password">please repeat input new password</string>
     <string name="show_password">Show Password</string>
+    <string name="about">WMS is a Warehouse Management System (Warehouse Management System), Warehouse Management System is through the warehousing business, outbound business, warehouses, allocating and virtual Warehouse inventory Management, and other functions, the corresponding batch Management, materials, inventory, quality Management, virtual Warehouse inventory Management and just-in-time inventory Management functions such as the integrated use of Management System, effective control and follow up Warehouse logistics and whole process cost Management of the business, implementation or perfect enterprise storage and information </string>
+    <string name="confirm_logout">确认退出登录？</string>
+    <string name="logout">退出登录</string>
+    <string name="reset_server_will_logout">重新配置服务将退出登录</string>
 </resources>

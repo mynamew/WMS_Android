@@ -2,15 +2,11 @@ package com.timi.sz.wms_android.mvp.UI.home;
 
 import android.content.Context;
 
-import com.timi.sz.wms_android.bean.TestBean;
-import com.timi.sz.wms_android.bean.UserInfoBean;
 import com.timi.sz.wms_android.http.callback.OnResultCallBack;
 import com.timi.sz.wms_android.http.subscriber.HttpSubscriber;
 import com.timi.sz.wms_android.mvp.base.presenter.impl.MvpBasePresenter;
 
 import java.io.File;
-
-import okhttp3.ResponseBody;
 
 /**
  * 主页的Presenter

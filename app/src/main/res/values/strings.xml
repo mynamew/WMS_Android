@@ -165,4 +165,8 @@
     <string name="upadte_password_repeat">再一次密码：</string>
     <string name="please_repeat_input_password">请再次输入新密码</string>
     <string name="show_password">显示密码</string>
+    <string name="about">\t\tWMS是仓库管理系统(Warehouse Management System) 的缩写，仓库管理系统是通过入库业务、出库业务、仓库调拨、库存调拨和虚仓管理等功能，对批次管理、物料对应、库存盘点、质检管理、虚仓管理和即时库存管理等功能综合运用的管理系统，有效控制并跟踪仓库业务的物流和成本管理全过程，实现或完善的企业仓储信息管理。该系统可以独立执行库存操作，也可与其他系统的单据和凭证等结合使用，可为企业提供更为完整企业物流管理流程和财务管理信息。</string>
+    <string name="confirm_logout">确认退出登录？</string>
+    <string name="logout">退出登录</string>
+    <string name="reset_server_will_logout">重新配置服务将退出登录</string>
 </resources>

@@ -17,9 +17,9 @@ android {
         }
 
         manifestPlaceholders = [
-                JPUSH_PKGNAME : applicationId,
+                JPUSH_PKGNAME: applicationId,
                 JPUSH_APPKEY : "2abc5c75142070b3a33880ac", //JPush上注册的包名对应的appkey.
-                JPUSH_CHANNEL : "developer-default", //暂时填写默认值即可.
+                JPUSH_CHANNEL: "developer-default", //暂时填写默认值即可.
         ]
 
     }
@@ -36,12 +36,12 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:25.3.1'
-    testCompile 'junit:junit:4.12'
     //适配
+    compile files('libs/zxing.jar')
+    compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.zhy:autolayout:1.4.5'
-    //design
     compile 'com.android.support:recyclerview-v7:25.3.1'
+    //design
     compile 'com.android.support:design:25.3.1'
     //log
     compile 'com.orhanobut:logger:2.1.1'
@@ -57,15 +57,16 @@ dependencies {
     //Okhttp-interceptor
     compile 'com.squareup.okhttp3:logging-interceptor:3.6.0'
     //jpush
-    compile 'cn.jiguang.sdk:jpush:3.0.8'
     // 此处以JPush 3.0.8 版本为例。
-    compile 'cn.jiguang.sdk:jcore:1.1.6'
     // 此处以JCore 1.1.6 版本为例。
+    compile 'cn.jiguang.sdk:jpush:3.0.8'
+    compile 'cn.jiguang.sdk:jcore:1.1.6'
     //butter knife
     compile 'com.jakewharton:butterknife:8.8.1'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
-    compile files('libs/zxing.jar')
     //evnet bus
     compile 'org.greenrobot:eventbus:3.0.0'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    testCompile 'junit:junit:4.12'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+    compile project(':locktableview')
 }
