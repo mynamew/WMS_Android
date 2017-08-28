@@ -38,35 +38,35 @@ dependencies {
     })
     //适配
     compile files('libs/zxing.jar')
-    compile 'com.android.support:appcompat-v7:25.3.1'
-    compile 'com.zhy:autolayout:1.4.5'
-    compile 'com.android.support:recyclerview-v7:25.3.1'
     //design
-    compile 'com.android.support:design:25.3.1'
     //log
-    compile 'com.orhanobut:logger:2.1.1'
     //65535
-    compile 'com.android.support:multidex:1.0.1'
     //Rxjava2
-    compile 'io.reactivex.rxjava2:rxjava:2.0.7'
-    compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
     //Retrofit2
-    compile 'com.squareup.retrofit2:retrofit:latest.release'
-    compile 'com.squareup.retrofit2:converter-gson:latest.release'
-    compile 'com.jakewharton.retrofit:retrofit2-rxjava2-adapter:1.0.0'
     //Okhttp-interceptor
-    compile 'com.squareup.okhttp3:logging-interceptor:3.6.0'
     //jpush
     // 此处以JPush 3.0.8 版本为例。
     // 此处以JCore 1.1.6 版本为例。
+    //butter knife
+    //evnet bus
+    compile project(':locktableview')
+    compile 'com.android.support:appcompat-v7:25.3.1'
+    compile 'com.zhy:autolayout:1.4.5'
+    compile 'com.android.support:recyclerview-v7:25.3.1'
+    compile 'com.android.support:design:25.3.1'
+    compile 'com.orhanobut:logger:2.1.1'
+    compile 'com.android.support:multidex:1.0.1'
+    compile 'io.reactivex.rxjava2:rxjava:2.0.7'
+    compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
+    compile 'com.squareup.retrofit2:retrofit:latest.release'
+    compile 'com.squareup.retrofit2:converter-gson:latest.release'
+    compile 'com.jakewharton.retrofit:retrofit2-rxjava2-adapter:1.0.0'
+    compile 'com.squareup.okhttp3:logging-interceptor:3.6.0'
     compile 'cn.jiguang.sdk:jpush:3.0.8'
     compile 'cn.jiguang.sdk:jcore:1.1.6'
-    //butter knife
     compile 'com.jakewharton:butterknife:8.8.1'
-    //evnet bus
     compile 'org.greenrobot:eventbus:3.0.0'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     testCompile 'junit:junit:4.12'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
-    compile project(':locktableview')
 }

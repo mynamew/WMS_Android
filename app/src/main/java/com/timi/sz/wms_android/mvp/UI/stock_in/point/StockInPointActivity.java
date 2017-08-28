@@ -63,6 +63,8 @@ public class StockInPointActivity extends BaseActivity<StockInPointView, StockIn
             public void onTabReselected(TabLayout.Tab tab) {
             }
         });
+        //初始化 加载fragment
+        changeFragment(0);
     }
 
     @Override

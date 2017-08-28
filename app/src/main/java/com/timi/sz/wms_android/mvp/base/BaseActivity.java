@@ -219,7 +219,7 @@ public abstract class BaseActivity<V extends MvpView, P extends MvpPresenter<V>>
         super.startActivity(intent);
 
         if (interlude == Interlude.DEFAULT) {
-            //默认情况，什么都不做，已经在style文件中配置
+            overridePendingTransition(R.transition.slide_in_right,R.anim.none);
         } else if (interlude == Interlude.POP_FROM_BOTTOM) {
             //从下方弹出
             overridePendingTransition(R.transition.pop_in_bottom, R.anim.none);

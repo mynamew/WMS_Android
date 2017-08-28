@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.zhy.autolayout.AutoRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                                       android:layout_width="match_parent"
-                                       android:layout_height="match_parent">
+                android:layout_width="match_parent"
+
+                android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_centerInParent="true"
         android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
         android:background="@drawable/bg_rectangle_login_server"
         android:orientation="vertical"
-        android:paddingLeft="20px">
+        android:padding="20px">
 
         <TextView
-            android:id="@+id/tv_stockin_point_pronum"
+            android:id="@+id/tv_stockin_point_record_pronum"
             android:layout_width="match_parent"
             android:layout_height="80px"
             android:gravity="center_vertical"
@@ -21,41 +22,21 @@
             android:textSize="14sp"/>
 
         <TextView
-            android:id="@+id/tv_stockin_point_proname"
+            android:id="@+id/tv_stockin_point_record_proname"
             android:layout_width="match_parent"
             android:layout_height="80px"
             android:gravity="center_vertical"
             android:text="@string/stockin_point_pro_name"
             android:textColor="#333"
             android:textSize="14sp"/>
-
+        >
         <TextView
-            android:id="@+id/tv_stockin_point_promodel"
+            android:id="@+id/tv_stockin_point_record_promodel"
             android:layout_width="match_parent"
             android:layout_height="80px"
-            android:gravity="center_vertical"
-            android:text="@string/stockin_point_promodel"
+            android:gravity="center_vertical"            android:textSize="14sp"
             android:textColor="#333"
-            android:textSize="14sp"/>
-
-        <TextView
-            android:id="@+id/tv_stockin_point_buynum"
-            android:layout_width="match_parent"
-            android:layout_height="80px"
-            android:gravity="center_vertical"
-            android:text="@string/stockin_point_buynum"
-            android:textColor="#333"
-            android:textSize="14sp"/>
-
-        <TextView
-            android:id="@+id/tv_stockin_point_receive_pro_num"
-            android:layout_width="match_parent"
-            android:layout_height="80px"
-            android:gravity="center_vertical"
-            android:text="@string/stockin_point_receive_pro_num"
-            android:textColor="#333"
-            android:textSize="14sp"/>
-
+            android:text="@string/stockin_point_promodel"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="80px"
@@ -72,7 +53,7 @@
                 android:textSize="14sp"/>
 
             <EditText
-                android:id="@+id/et_stockin_point_pro_point_num"
+                android:id="@+id/et_stockin_point_record_pro_point_num"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginBottom="10px"
@@ -101,7 +82,7 @@
                 android:textSize="14sp"/>
 
             <EditText
-                android:id="@+id/et_stockin_point_sparenum"
+                android:id="@+id/et_stockin_poin_recordt_sparenum"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginBottom="10px"
@@ -117,26 +98,25 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="80px"
-            android:layout_marginBottom="20px"
-            android:layout_marginTop="20px">
+            android:layout_marginTop="40px">
 
             <Button
-                android:id="@+id/btn_stockin_point_cancel"
+                android:id="@+id/btn_stockin_point_record_delete"
                 android:layout_width="wrap_content"
                 android:layout_height="80px"
                 android:layout_marginLeft="100px"
                 android:background="@drawable/bg_sbo_rectangle_et"
-                android:text="@string/cancel"
+                android:text="@string/delete"
                 android:textColor="#666"/>
 
             <Button
-                android:id="@+id/btn_stockin_point_save"
+                android:id="@+id/btn_stockin_point_record_update"
                 android:layout_width="wrap_content"
                 android:layout_height="80px"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="100px"
                 android:background="@drawable/bg_sbo_rectangle_et"
-                android:text="@string/save"
+                android:text="@string/update"
                 android:textColor="#666"/>
         </RelativeLayout>
     </LinearLayout>

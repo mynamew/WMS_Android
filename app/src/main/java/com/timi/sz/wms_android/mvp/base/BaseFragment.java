@@ -1,5 +1,6 @@
 package com.timi.sz.wms_android.mvp.base;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -83,6 +84,27 @@ public abstract  class BaseFragment <V extends MvpView, P extends MvpPresenter<V
             this.presenter = null;
         }
         unbinder.unbind();
+    }
+    /********
+     * 页面跳转相关的方法
+     **********************************************************************************************/
+    final private String keyInterlude = "keyInterlude";
+
+    @Override
+    public void startActivity(Intent intent) {
+        startActivity(intent, BaseActivity.Interlude.DEFAULT);
+    }
+
+    public void startActivity(Intent intent, BaseActivity.Interlude interlude) {
+        intent.putExtra(keyInterlude, interlude.ordinal());
+        super.startActivity(intent);
+
+        if (interlude == BaseActivity.Interlude.DEFAULT) {
+            getActivity().overridePendingTransition(R.transition.slide_in_right, R.anim.none);
+        } else if (interlude == BaseActivity.Interlude.POP_FROM_BOTTOM) {
+            //从下方弹出
+           getActivity(). overridePendingTransition(R.transition.pop_in_bottom, R.anim.none);
+        }
     }
 
 }

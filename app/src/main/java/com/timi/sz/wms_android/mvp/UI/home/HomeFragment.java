@@ -24,6 +24,7 @@ import com.timi.sz.wms_android.mvp.UI.quity.QulityActivity;
 import com.timi.sz.wms_android.mvp.UI.stock_in.StockInActivity;
 import com.timi.sz.wms_android.mvp.UI.stock_in_work.StockInWorkActivity;
 import com.timi.sz.wms_android.mvp.UI.stock_out.StockOutActivity;
+import com.timi.sz.wms_android.mvp.base.BaseActivity;
 import com.timi.sz.wms_android.qrcode.CommonScanActivity;
 import com.timi.sz.wms_android.qrcode.utils.Constant;
 
@@ -137,7 +138,7 @@ public class HomeFragment extends Fragment {
                 }
                 break;
         }
-        startActivity(it);
+        getActivity().startActivity(it);
     }
 
     @Override

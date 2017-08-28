@@ -177,11 +177,6 @@ public abstract class BaseNoMvpActivity extends AutoLayoutActivity implements Mv
     /********
      * 页面跳转相关的方法
      **********************************************************************************************/
-    public enum Interlude {
-
-        DEFAULT,
-        POP_FROM_BOTTOM
-    }
 
     final private String keyInterlude = "keyInterlude";
     private BaseActivity.Interlude curInterlude = BaseActivity.Interlude.DEFAULT;
@@ -197,6 +192,7 @@ public abstract class BaseNoMvpActivity extends AutoLayoutActivity implements Mv
 
         if (interlude == BaseActivity.Interlude.DEFAULT) {
             //默认情况，什么都不做，已经在style文件中配置
+            overridePendingTransition(R.transition.slide_in_right, R.anim.none);
         } else if (interlude == BaseActivity.Interlude.POP_FROM_BOTTOM) {
             //从下方弹出
             overridePendingTransition(R.transition.pop_in_bottom, R.anim.none);

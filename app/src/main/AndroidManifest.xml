@@ -178,15 +178,13 @@
         </activity>
         <activity android:name=".mvp.UI.stock_in.query.SearchBuyOrderActivity">
         </activity>
-        <activity android:name=".mvp.UI.stock_in.point.StockInPointActivity" android:launchMode="singleTask">
-        </activity>
-        <activity android:name=".mvp.UI.userinfo.UserInfoActivity">
-        </activity>
-        <activity android:name=".mvp.UI.deviceinfo.DeviceInfoActivity">
-        </activity>
-        <activity android:name=".mvp.UI.update_password.UpdatePasswordActivity">
-        </activity>
-        <activity android:name=".mvp.UI.about.AboutActivity">
+        <activity
+            android:name=".mvp.UI.stock_in.point.StockInPointActivity"/>
+        <activity android:name=".mvp.UI.userinfo.UserInfoActivity"/>
+        <activity android:name=".mvp.UI.deviceinfo.DeviceInfoActivity"/>
+        <activity android:name=".mvp.UI.update_password.UpdatePasswordActivity"/>
+        <activity android:name=".mvp.UI.about.AboutActivity"/>
+        <activity android:name=".mvp.UI.stock_in.putaway.PutAwayActivity">
         </activity>
     </application>
 

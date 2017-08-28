@@ -1,7 +1,12 @@
 package com.timi.sz.wms_android.mvp.UI.stock_in.point;
 
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -14,6 +19,8 @@ import com.timi.sz.wms_android.view.MyDialog;
 import java.util.ArrayList;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 /**
  * $dsc
@@ -60,7 +67,7 @@ public class FragmentPoint extends BaseFragment<FragmentPointView,FragmentPointP
         mfristData.add("请点数");
         mfristData.add("备品数");
         mTableDatas.add(mfristData);
-        for (int i = 0; i < 99; i++) {
+        for (int i = 0; i < 20; i++) {
             ArrayList<String> mRowDatas = new ArrayList<String>();
             mRowDatas.add("" + i);
             for (int j = 0; j < 6; j++) {

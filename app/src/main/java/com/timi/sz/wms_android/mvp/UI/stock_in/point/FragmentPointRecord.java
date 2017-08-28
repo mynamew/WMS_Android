@@ -1,11 +1,14 @@
 package com.timi.sz.wms_android.mvp.UI.stock_in.point;
 
+import android.text.TextUtils;
 import android.util.Log;
 import android.widget.LinearLayout;
 
 import com.rmondjone.locktableview.LockTableView;
 import com.timi.sz.wms_android.R;
+import com.timi.sz.wms_android.base.uils.ToastUtils;
 import com.timi.sz.wms_android.mvp.base.BaseFragment;
+import com.timi.sz.wms_android.view.MyDialog;
 
 import java.util.ArrayList;
 
@@ -21,7 +24,6 @@ import butterknife.Unbinder;
 public class FragmentPointRecord extends BaseFragment<FragmentPointRecordView,FragmentPointRecordPresenter> implements FragmentPointRecordView{
     @BindView(R.id.ll_stockin_point_record)
     LinearLayout llStockinPointRecord;
-    Unbinder unbinder;
 
     @Override
     public FragmentPointRecordPresenter createPresenter() {
@@ -45,7 +47,7 @@ public class FragmentPointRecord extends BaseFragment<FragmentPointRecordView,Fr
         mfristData.add("备品数");
         mfristData.add("清点日期");
         mTableDatas.add(mfristData);
-        for (int i = 0; i < 99; i++) {
+        for (int i = 0; i < 20; i++) {
             ArrayList<String> mRowDatas = new ArrayList<String>();
             mRowDatas.add("" + i);
             for (int j = 0; j < 5; j++) {
@@ -74,6 +76,7 @@ public class FragmentPointRecord extends BaseFragment<FragmentPointRecordView,Fr
 
                     @Override
                     public void onTabViewClickListener(int position) {
+                        showGoodsPointRecordDialog();
                     }
                 })//设置滚动回调监听
                 .show(); //显示表格,此方法必须调用
@@ -84,9 +87,43 @@ public class FragmentPointRecord extends BaseFragment<FragmentPointRecordView,Fr
         return R.layout.fragment_stockin_point_record;
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        unbinder.unbind();
+    /**
+     * 显示物品清点的弹出框
+     */
+    private MyDialog mPointRecordDialog = null;
+
+    public void showGoodsPointRecordDialog() {
+        if (null == mPointRecordDialog) {
+            mPointRecordDialog = new MyDialog(getActivity(), R.layout.dialog_stockin_record)
+                    .setTextViewContent(R.id.tv_stockin_point_record_pronum, String.format(getString(R.string.stockin_point_pro_num), "9.05.0022"))
+                    .setTextViewContent(R.id.tv_stockin_point_record_proname, String.format(getString(R.string.stockin_point_pro_name), "滑轨双孔梁496-蓝色"))
+                    .setTextViewContent(R.id.tv_stockin_point_record_promodel, String.format(getString(R.string.stockin_point_promodel), "Slide Beam0824-496铝挤压加工"))
+                    .setButtonListener(R.id.btn_stockin_point_record_delete, getString(R.string.delete), new MyDialog.DialogClickListener() {
+                        @Override
+                        public void dialogClick(MyDialog dialog) {
+                            dialog.dismiss();
+                        }
+                    })
+                    .setButtonListener(R.id.btn_stockin_point_record_update, getString(R.string.update), new MyDialog.DialogClickListener() {
+                        @Override
+                        public void dialogClick(MyDialog dialog) {
+                            String pointNum = dialog.getEdittext(R.id.et_stockin_point_pro_point_num).getText().toString();
+                            String spareNum = dialog.getEdittext(R.id.et_stockin_point_sparenum).getText().toString();
+                            //判断是否输入了清点的数量
+                            if (TextUtils.isEmpty(pointNum)) {
+                                ToastUtils.showShort(getActivity(), getString(R.string.please_input_point_num));
+                                return;
+                            }
+                            //判断是否输入了备品的数量
+                            if (TextUtils.isEmpty(spareNum)) {
+                                ToastUtils.showShort(getActivity(), getString(R.string.please_input_spare_num));
+                                return;
+                            }
+                            // TODO: 2017/8/24 网络请求 保存清点信息
+                            dialog.dismiss();
+                        }
+                    }).setAnimation(R.style.popWindow_animation_push);
+        }
+        mPointRecordDialog.show();
     }
 }

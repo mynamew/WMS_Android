@@ -8,7 +8,9 @@
     android:background="@color/set_bg"
     android:orientation="vertical"
     tools:context="com.timi.sz.wms_android.mvp.UI.stock_in.query.SearchBuyOrderActivity">
+
     <include layout="@layout/title_head"/>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="100px">
@@ -31,7 +33,8 @@
             android:layout_toRightOf="@id/tv_sbo_tip"
             android:background="@drawable/bg_sbo_rectangle_et"
             android:ellipsize="end"
-            android:hint="情输入单号进行查询"
+            android:hint="请输入单号进行查询"
+            android:imeOptions="actionSearch"
             android:paddingLeft="20px"
             android:paddingRight="80px"
             android:singleLine="true"
