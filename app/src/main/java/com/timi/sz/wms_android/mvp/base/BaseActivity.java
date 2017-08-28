@@ -152,6 +152,7 @@ public abstract class BaseActivity<V extends MvpView, P extends MvpPresenter<V>>
         if (null != findViewById(R.id.iv_title_right)) {
             //设置标题  如果titlebar存在的话
             ImageView ivRightImg = (ImageView) findViewById(R.id.iv_title_right);
+            ivRightImg.setVisibility(View.VISIBLE);
             ivRightImg.setImageResource(rightImgId);
             ivRightImg.setOnClickListener(new View.OnClickListener() {
                 @Override

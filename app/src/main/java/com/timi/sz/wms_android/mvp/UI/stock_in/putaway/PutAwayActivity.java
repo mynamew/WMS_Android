@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.timi.sz.wms_android.R;
 import com.timi.sz.wms_android.base.uils.Constants;
 import com.timi.sz.wms_android.base.uils.LogUitls;
+import com.timi.sz.wms_android.mvp.UI.stock_in.detail.StockInDetailActivity;
 import com.timi.sz.wms_android.mvp.base.BaseActivity;
 import com.timi.sz.wms_android.qrcode.CommonScanActivity;
 import com.timi.sz.wms_android.qrcode.utils.Constant;
@@ -93,6 +94,17 @@ public class PutAwayActivity extends BaseActivity<PutAwayView, PutAwayPresenter>
     @Override
     public void initBundle(Bundle savedInstanceState) {
         intentCode = getIntent().getIntExtra(Constants.CODE_STR, Constants.COME_MATERAIL_NUM);
+        setRightImg(R.mipmap.stockin_detail, new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                /**
+                 * 查看详情
+                 */
+                Intent it = new Intent(PutAwayActivity.this, StockInDetailActivity.class);
+                it.putExtra(Constants.CODE_STR, intentCode);
+                startActivity(it);
+            }
+        });
     }
 
     @Override
@@ -298,7 +310,7 @@ public class PutAwayActivity extends BaseActivity<PutAwayView, PutAwayPresenter>
 
     }
 
-    @OnClick({ R.id.tv_putaway_scan_location, R.id.iv_putaway_scan_location, R.id.tv_putaway_scan_material, R.id.iv_putaway_scan_material, R.id.btn_login})
+    @OnClick({R.id.tv_putaway_scan_location, R.id.iv_putaway_scan_location, R.id.tv_putaway_scan_material, R.id.iv_putaway_scan_material, R.id.btn_login})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tv_putaway_scan_location://目的库位码
@@ -342,6 +354,7 @@ public class PutAwayActivity extends BaseActivity<PutAwayView, PutAwayPresenter>
                 break;
         }
     }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (requestCode) {
@@ -365,7 +378,8 @@ public class PutAwayActivity extends BaseActivity<PutAwayView, PutAwayPresenter>
                 break;
         }
     }
-    public void  scan(int requestCode){
+
+    public void scan(int requestCode) {
         if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
             //权限还没有授予，需要在这里写申请权限的代码
