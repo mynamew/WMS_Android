@@ -15,7 +15,7 @@ public class StockInDetailActivity extends BaseActivity<StockInDetailView, Stock
 
     @Override
     public void initBundle(Bundle savedInstanceState) {
-        setActivityTitle("详情");
+        setActivityTitle(getString(R.string.detail));
         intentCode=getIntent().getIntExtra(Constants.CODE_STR,Constants.COME_MATERAIL_NUM);
     }
 

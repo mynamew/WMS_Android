@@ -1,11 +1,16 @@
 package com.timi.sz.wms_android.mvp.base;
 
+import android.Manifest;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +26,8 @@ import com.timi.sz.wms_android.mvp.UI.login.LoginActivity;
 import com.timi.sz.wms_android.mvp.base.presenter.MvpPresenter;
 import com.timi.sz.wms_android.mvp.base.view.MvpView;
 import com.timi.sz.wms_android.mvp.base.view.iml.MvpBaseView;
+import com.timi.sz.wms_android.qrcode.CommonScanActivity;
+import com.timi.sz.wms_android.qrcode.utils.Constant;
 import com.timi.sz.wms_android.view.SwipeBackLayout;
 import com.zhy.autolayout.AutoLayoutActivity;
 
@@ -44,11 +51,13 @@ public abstract class BaseActivity<V extends MvpView, P extends MvpPresenter<V>>
 
     public String TAG = "";
     //当前Activity的实例
-    public Activity currentActivity;
+    static  private   Activity currentActivity;
     //侧滑返回的布局
     private SwipeBackLayout swipeBackLayout;
     //侧滑返回的img
     private ImageView ivShadow;
+    //progress dialog
+    ProgressDialog dialog = null;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -103,12 +112,17 @@ public abstract class BaseActivity<V extends MvpView, P extends MvpPresenter<V>>
 
     @Override
     public void showProgressDialog() {
-
+        if (null == dialog) {
+            dialog = new ProgressDialog(this);
+        }
+        dialog.show();
     }
 
     @Override
     public void dismisProgressDialog() {
-
+        if (null != dialog && dialog.isShowing()) {
+            dialog.dismiss();
+        }
     }
 
     /**
@@ -220,7 +234,7 @@ public abstract class BaseActivity<V extends MvpView, P extends MvpPresenter<V>>
         super.startActivity(intent);
 
         if (interlude == Interlude.DEFAULT) {
-            overridePendingTransition(R.transition.slide_in_right,R.anim.none);
+            overridePendingTransition(R.transition.slide_in_right, R.anim.none);
         } else if (interlude == Interlude.POP_FROM_BOTTOM) {
             //从下方弹出
             overridePendingTransition(R.transition.pop_in_bottom, R.anim.none);
@@ -283,5 +297,37 @@ public abstract class BaseActivity<V extends MvpView, P extends MvpPresenter<V>>
         Intent it = new Intent(currentActivity, LoginActivity.class);
         it.putExtra(Constants.IS_NEED_SHOW_SHOW_SERVER_SET, isNeedShowServerSet);
         startActivity(it, Interlude.POP_FROM_BOTTOM);
+    }
+
+    /**
+     * 调用相机扫描二维码的方法
+     *
+     * @param requestCode
+     */
+    public void scan(int requestCode) {
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            //权限还没有授予，需要在这里写申请权限的代码
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, 60);
+        } else {
+            //权限已经被授予，在这里直接写要执行的相应方法即可
+            Intent intent = new Intent(this, CommonScanActivity.class);
+
+            String pointMsg = getResources().getString(R.string.scan_point_title);
+            Bundle bundle = new Bundle();
+            bundle.putString("pointMsg", pointMsg);
+            intent.putExtras(bundle);
+
+            intent.putExtra(Constant.REQUEST_SCAN_MODE, Constant.REQUEST_SCAN_MODE_ALL_MODE);
+            startActivityForResult(intent, requestCode);
+        }
+    }
+
+    /**
+     * 获取当前Activity的实例
+     * @return
+     */
+    public static Activity getCurrentActivty() {
+        return currentActivity;
     }
 }

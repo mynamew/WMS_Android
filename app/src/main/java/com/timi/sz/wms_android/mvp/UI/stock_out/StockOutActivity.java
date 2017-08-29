@@ -1,9 +1,11 @@
 package com.timi.sz.wms_android.mvp.UI.stock_out;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
 import com.timi.sz.wms_android.R;
+import com.timi.sz.wms_android.mvp.UI.stock_out.buy_return_material.BuyReturnMaterialActivity;
 import com.timi.sz.wms_android.mvp.base.view.BaseNoMvpActivity;
 
 import butterknife.ButterKnife;
@@ -61,6 +63,7 @@ public class StockOutActivity extends BaseNoMvpActivity {
             case R.id.tv_stock_out_sale_create_order://销售生单
                 break;
             case R.id.tv_stock_out_other_buy_return://采购退料
+                startActivity(new Intent(this,BuyReturnMaterialActivity.class));
                 break;
             case R.id.tv_stock_out_other_check://其他审核
                 break;

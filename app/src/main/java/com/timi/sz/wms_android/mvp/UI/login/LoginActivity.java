@@ -1,5 +1,6 @@
 package com.timi.sz.wms_android.mvp.UI.login;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -40,6 +41,7 @@ import com.timi.sz.wms_android.mvp.UI.home.MainActivity;
 import com.timi.sz.wms_android.mvp.base.BaseActivity;
 import com.timi.sz.wms_android.receiver.ExampleUtil;
 import com.timi.sz.wms_android.view.MyDialog;
+import com.timi.sz.wms_android.view.MyProgressDialog;
 
 import java.util.ArrayList;
 import java.util.Set;
@@ -208,8 +210,8 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
         String mac = PackageUtils.getLocalMacAddressFromBusybox();
 //        //登录请求
         getPresenter().getLoginResult(TextUtils.isEmpty(tenancyName) ? "" : tenancyName, username, password, TextUtils.isEmpty(mac) ? "" : mac);
-        startActivity(new Intent(LoginActivity.this, MainActivity.class));
-        onBackPressed();
+//        startActivity(new Intent(LoginActivity.this, MainActivity.class));
+//        onBackPressed();
 
     }
 

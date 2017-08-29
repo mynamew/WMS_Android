@@ -56,6 +56,7 @@ public class Constants {
     public static final int REQUEST_CODE = 1001;//主页跳转到扫码
     public static final int REQUEST_SCAN_CODE_MATERIIAL = 1002;//物料条码 扫码
     public static final int REQUEST_SCAN_CODE_LIB_LOATION= 1003;//库位码  扫码
+    public static final int REQUEST_SCAN_CODE_RETURN_MATERIAL= 1003;//退料单号  扫码
     /***********
      * SharePerference存储token   key /  value的前缀
      *********************************************************************************************/

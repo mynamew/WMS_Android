@@ -2,6 +2,11 @@ package com.timi.sz.wms_android.http.subscriber;
 
 import com.google.gson.stream.MalformedJsonException;
 import com.timi.sz.wms_android.http.callback.OnResultCallBack;
+import com.timi.sz.wms_android.mvp.base.BaseActivity;
+import com.timi.sz.wms_android.view.MyProgressDialog;
+
+import org.reactivestreams.Subscriber;
+import org.reactivestreams.Subscription;
 
 import java.net.ConnectException;
 import java.net.SocketTimeoutException;
@@ -26,11 +31,13 @@ public class HttpSubscriber<T> implements Observer<T> {
 
     @Override
     public void onSubscribe(Disposable d) {
+        MyProgressDialog.showProgressDialog(BaseActivity.getCurrentActivty());
         mDisposable = d;
     }
 
     @Override
     public void onNext(T t) {
+        MyProgressDialog.hideProgressDialog();
         if (mOnResultListener != null) {
             mOnResultListener.onSuccess(t);
         }
@@ -38,6 +45,7 @@ public class HttpSubscriber<T> implements Observer<T> {
 
     @Override
     public void onError(Throwable e) {
+        MyProgressDialog.hideProgressDialog();
         //请求失败的异常
         if (e instanceof CompositeException) {
             CompositeException compositeE = (CompositeException) e;
@@ -65,7 +73,7 @@ public class HttpSubscriber<T> implements Observer<T> {
 
     @Override
     public void onComplete() {
-
+        MyProgressDialog.hideProgressDialog();
     }
 
     public void unSubscribe() {

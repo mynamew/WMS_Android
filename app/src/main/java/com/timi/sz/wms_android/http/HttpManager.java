@@ -92,7 +92,11 @@ public class HttpManager {
                 .map(new Function<CommonResult<T>, T>() {
                     @Override
                     public T apply(@NonNull CommonResult<T> t) throws Exception {
-                        return t.getResult();
+                        if(t.isSuccess()){//请求成功的返回
+                            return t.getResult();
+                        }else{
+                            return  null;
+                        }
                     }
                 })
                 .unsubscribeOn(Schedulers.io())

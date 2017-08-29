@@ -65,7 +65,7 @@ public class StockInActivity extends BaseNoMvpActivity {
                 it.putExtra(CODE_STR,Constants.OTHER_IN_STOCK_SELECT_ORDERNO);
                 break;
             case R.id.tv_stockin_other_inlib_create_order://其他入库扫描
-//                it.putExtra(CODE_STR,Constants.BUY_ORDE_NUM);
+                it.putExtra(CODE_STR,Constants.OTHER_IN_STOCK_SCAN);
                 break;
             case R.id.tv_stockin_out_return://委外退料
                 it.putExtra(CODE_STR,Constants.OUT_RETURN_MATERAIL);

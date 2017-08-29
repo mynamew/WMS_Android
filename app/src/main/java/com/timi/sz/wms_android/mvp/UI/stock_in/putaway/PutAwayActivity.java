@@ -379,22 +379,5 @@ public class PutAwayActivity extends BaseActivity<PutAwayView, PutAwayPresenter>
         }
     }
 
-    public void scan(int requestCode) {
-        if (ContextCompat.checkSelfPermission(this,
-                Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-            //权限还没有授予，需要在这里写申请权限的代码
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, 60);
-        } else {
-            //权限已经被授予，在这里直接写要执行的相应方法即可
-            Intent intent = new Intent(this, CommonScanActivity.class);
 
-            String pointMsg = getResources().getString(R.string.scan_point_title);
-            Bundle bundle = new Bundle();
-            bundle.putString("pointMsg", pointMsg);
-            intent.putExtras(bundle);
-
-            intent.putExtra(Constant.REQUEST_SCAN_MODE, Constant.REQUEST_SCAN_MODE_ALL_MODE);
-            startActivityForResult(intent, requestCode);
-        }
-    }
 }
