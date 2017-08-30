@@ -7,6 +7,7 @@ import com.timi.sz.wms_android.base.uils.SDCardUtils;
 import com.timi.sz.wms_android.http.api.ApiService;
 import com.timi.sz.wms_android.http.api.CommonResult;
 import com.timi.sz.wms_android.http.callback.ApiServiceMethodCallBack;
+import com.timi.sz.wms_android.http.exception.ApiException;
 import com.timi.sz.wms_android.mvp.base.BaseActivity;
 import com.timi.sz.wms_android.mvp.base.BaseApplication;
 
@@ -92,10 +93,22 @@ public class HttpManager {
                 .map(new Function<CommonResult<T>, T>() {
                     @Override
                     public T apply(@NonNull CommonResult<T> t) throws Exception {
-                        if(t.isSuccess()){//请求成功的返回
-                            return t.getResult();
-                        }else{
-                            return  null;
+                        LogUitls.e("返回结果--->", t.toString());
+                        if (t.isUnAuthorizedRequest()) {
+                            if (t.isSuccess()) {//请求成功的返回
+                                return t.getResult();
+                            } else {
+                                //发出异常，当返回的不成功的时候
+                                throw new ApiException(t.getError().getDetails());
+                            }
+                        } else {
+
+                            /**
+                             * 如果返回的tocken 失效
+                             */
+                            BaseActivity currentActivty = (BaseActivity) BaseActivity.getCurrentActivty();
+                            currentActivty.jumpToLoginActivity();
+                            return null;
                         }
                     }
                 })

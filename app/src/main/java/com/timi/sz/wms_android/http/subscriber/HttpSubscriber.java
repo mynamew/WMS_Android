@@ -1,8 +1,10 @@
 package com.timi.sz.wms_android.http.subscriber;
 
 import com.google.gson.stream.MalformedJsonException;
+import com.timi.sz.wms_android.base.uils.ToastUtils;
 import com.timi.sz.wms_android.http.callback.OnResultCallBack;
 import com.timi.sz.wms_android.mvp.base.BaseActivity;
+import com.timi.sz.wms_android.mvp.base.BaseApplication;
 import com.timi.sz.wms_android.view.MyProgressDialog;
 
 import org.reactivestreams.Subscriber;
@@ -67,8 +69,12 @@ public class HttpSubscriber<T> implements Observer<T> {
                     mOnResultListener.onError(MALFORMED_JSON_EXCEPTION);
                 }
             }
-        } else {//其他异常
+        } else {//
+            /**
+             * 弹出提示 所有的后台返回的提示
+             */
         }
+        mOnResultListener.onError(e.getMessage());
     }
 
     @Override

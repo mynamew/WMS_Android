@@ -52,16 +52,16 @@ public class LoginSuccessActivity extends AutoLayoutActivity {
         ButterKnife.bind(this);
         StatusBarUtil.setColor(this,getResources().getColor(R.color.statuscolor));
         tvTitle.setText("首次登陆");
-        List<LoginBean.DataBean> datas = getIntent().getParcelableArrayListExtra("userinfo");
-        if (null != datas) {
+//        List<LoginBean.DataBean> datas = getIntent().getParcelableArrayListExtra("userinfo");
+//        if (null != datas) {
 //            LogUitls.d("传递过来的数据--->"+ datas.get(0).toString());
-            LoginBean.DataBean dataBean = datas.get(0);
-            tvLoginSuccessName.setText(String.format(getString(R.string.login_success_name), dataBean.getUser_name()));
+//            LoginBean.DataBean dataBean = datas.get(0);
+//            tvLoginSuccessName.setText(String.format(getString(R.string.login_success_name), dataBean.getUser_name()));
             tvLoginSuccessSex.setText(String.format(getString(R.string.login_success_sex), "男"));
             tvLoginSuccessTel.setText(String.format(getString(R.string.login_success_tel), "159958444889"));
             tvLoginSuccessNum.setText(String.format(getString(R.string.login_success_name), "2345311"));
             tvLoginSuccessDepart.setText(String.format(getString(R.string.login_success_depart), "假的数据的部门"));
-        }
+//        }
     }
 
     @Override

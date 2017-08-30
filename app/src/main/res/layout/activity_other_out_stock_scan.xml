@@ -21,80 +21,44 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+
             <LinearLayout
-                android:id="@+id/ll_putaway_date"
                 android:layout_width="match_parent"
                 android:layout_height="80px"
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/tv_orderno"
-                    style="@style/tv_header"
-                    android:text="@string/order_no"
+                    android:text="@string/have_count_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="80px"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="20px"
+                    android:paddingTop="10px"
+                    android:textColor="#333"
                     />
 
                 <TextView
-                    android:id="@+id/tv_orderno_date"
-                    style="@style/tv_header"
-                    android:text="@string/orderno_date"
+                    android:id="@+id/tv_have_count_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="80px"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="20px"
+                    android:paddingTop="10px"
+                    android:text=""
+                    android:textColor="#333"
                     />
             </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/ll_putaway_arrive"
-                android:layout_width="match_parent"
-                android:layout_height="80px"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/tv_material_from"
-                    style="@style/tv_header"
-                    android:text="@string/buy_from"
-                    />
-
-                <TextView
-                    android:id="@+id/tv_material_buyer"
-                    style="@style/tv_header"
-                    android:text="@string/buyer"
-                    />
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:id="@+id/ll_putaway_total_num"
-                android:layout_width="match_parent"
-                android:layout_height="80px"
-                android:orientation="horizontal">
-
-
-                <TextView
-                    android:id="@+id/tv_instock_num"
-                    style="@style/tv_header"
-                    android:text="@string/in_stock_num"
-                    />
-
-                <TextView
-                    android:id="@+id/tv_buy_num"
-                    style="@style/tv_header"
-                    android:text="@string/buy_num"
-                    />
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="2px"
-                android:background="@color/tab_txt_unselect"/>
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="100px">
 
                 <TextView
-                    android:id="@+id/tv_material_scan_tip"
+                    android:id="@+id/tv_material_tip"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:paddingLeft="30px"
+                    android:paddingLeft="20px"
                     android:text="@string/scan_material"
                     android:textColor="#333"
                     />
@@ -102,9 +66,9 @@
                 <TextView
                     android:id="@+id/tv_material_scan"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="20px"
-                    android:layout_toRightOf="@id/tv_material_scan_tip"
+                    android:layout_height="80px"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@id/tv_material_tip"
                     android:background="@drawable/bg_sbo_rectangle_et"
                     android:ellipsize="end"
                     android:gravity="center_vertical"
@@ -116,7 +80,7 @@
                     android:textSize="14sp"/>
 
                 <ImageView
-                    android:id="@+id/iv_material_scan"
+                    android:id="@+id/iv_scan_return_material_scan"
                     android:layout_width="100px"
                     android:layout_height="match_parent"
                     android:layout_alignParentRight="true"
@@ -128,96 +92,115 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="80px"
-                android:gravity="center_vertical"
+                android:layout_height="100px"
                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingLeft="30px"
+                    android:layout_height="80px"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="20px"
+                    android:paddingTop="10px"
                     android:text="@string/material_code"
-                    android:textColor="#333"/>
+                    android:textColor="#333"
+                    />
 
                 <TextView
                     android:id="@+id/tv_material_code"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="80px"
+                    android:gravity="center_vertical"
                     android:paddingLeft="20px"
-                    android:text="P1234543212"
-                    android:textColor="#333"/>
+                    android:paddingTop="10px"
+                    android:textColor="#333"
+                    />
             </LinearLayout>
+
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="80px"
-                android:gravity="center_vertical"
+                android:layout_height="100px"
                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingLeft="30px"
+                    android:layout_height="80px"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="20px"
+                    android:paddingTop="10px"
+                    android:text="@string/goods_num"
+                    android:textColor="#333"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_material_num"
+                    android:layout_width="match_parent"
+                    android:layout_height="80px"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="20px"
+                    android:paddingTop="10px"
+                    android:textColor="#333"
+                    />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="100px"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="80px"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="20px"
+                    android:paddingTop="10px"
                     android:text="@string/material_name"
-                    android:textColor="#333"/>
+                    android:textColor="#333"
+                    />
 
                 <TextView
                     android:id="@+id/tv_material_name"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="80px"
+                    android:gravity="center_vertical"
                     android:paddingLeft="20px"
-                    android:text="钕铁硼强磁N52,5*5*2mm"
-                    android:textColor="#333"/>
+                    android:paddingTop="10px"
+                    android:textColor="#333"
+                    />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="80px"
-                android:gravity="center_vertical"
+                android:layout_height="100px"
                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingLeft="30px"
+                    android:layout_height="80px"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="20px"
+                    android:paddingTop="10px"
                     android:text="@string/material_model"
-                    android:textColor="#333"/>
+                    android:textColor="#333"
+                    />
 
                 <TextView
-                    android:id="@+id/tv_material_model"
+                    android:id="@+id/tv_material_nmodel"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="80px"
+                    android:gravity="center_vertical"
                     android:paddingLeft="20px"
-                    android:text="N52,5*5*2mm，钕铁硼,电镀(镀镍)"
-                    android:textColor="#333"/>
+                    android:paddingTop="10px"
+                    android:textColor="#333"
+                    />
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="80px"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingLeft="30px"
-                    android:text="@string/have_return_num"
-                    android:textColor="#333"/>
-
-                <TextView
-                    android:id="@+id/tv_have_return_num"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingLeft="20px"
-                    android:text="0"
-                    android:textColor="#333"/>
-            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 
     <Button
-        android:id="@+id/btn_commit"
+        android:id="@+id/btn_create_other_out_stock_orderno"
         android:layout_width="match_parent"
         android:layout_height="100px"
         android:layout_alignParentBottom="true"
@@ -225,7 +208,7 @@
         android:layout_marginLeft="20px"
         android:layout_marginRight="20px"
         android:background="@drawable/selector_btn_bg_login"
-        android:text="@string/confirm_commit"
+        android:text="@string/create_other_out_stock_orderno"
         android:textColor="#fff"
         android:textSize="18sp"/>
 

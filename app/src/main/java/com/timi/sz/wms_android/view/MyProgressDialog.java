@@ -48,6 +48,7 @@ public class MyProgressDialog  extends MyDialog {
     public static void hideProgressDialog() {
         if(null!=instance&&instance.isShowing()){
             instance.dismiss();
+            instance=null;
         }
     }
 }

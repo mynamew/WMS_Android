@@ -3,10 +3,12 @@ package com.timi.sz.wms_android.mvp.base;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.annotation.StringRes;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.timi.sz.wms_android.R;
 import com.timi.sz.wms_android.mvp.base.presenter.MvpPresenter;
@@ -106,5 +108,13 @@ public abstract  class BaseFragment <V extends MvpView, P extends MvpPresenter<V
            getActivity(). overridePendingTransition(R.transition.pop_in_bottom, R.anim.none);
         }
     }
-
+    /**
+     *设置 文本
+     * @param tv
+     * @param fomat
+     * @param content
+     */
+    public void setTextViewText(TextView tv, @StringRes int fomat, String content) {
+        tv.setText(String.format(getString(fomat), content));
+    }
 }

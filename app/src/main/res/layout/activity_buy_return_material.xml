@@ -4,19 +4,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:orientation="vertical"
-    android:background="@color/set_bg"
     android:layout_height="match_parent"
+    android:background="@color/set_bg"
+    android:orientation="vertical"
     tools:context="com.timi.sz.wms_android.mvp.UI.stock_out.buy_return_material.BuyReturnMaterialActivity">
+
     <include layout="@layout/title_head"/>
+
     <TextView
         android:id="@+id/tv_buy_return_material_tip"
-        android:paddingBottom="10px"
-        android:paddingTop="10px"
-        android:lineSpacingExtra="5dp"
         android:layout_width="wrap_content"
-        android:text="提示：\n\t\t1、扫描物品条码系统自动获取对应供应商的未关闭采购订单，并在ERP自动生成采购退料单；\n\t\t2、在ERP中制作采购退料单，然后通过PDA清点审核;"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:lineSpacingExtra="5dp"
+        android:paddingBottom="10px"
+        android:paddingLeft="20px"
+        android:paddingRight="20px"
+        android:paddingTop="10px"
+        android:text="提示：\n\t\t1、扫描物品条码系统自动获取对应供应商的未关闭采购订单，并在ERP自动生成采购退料单；\n\t\t2、在ERP中制作采购退料单，然后通过PDA清点审核;"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -28,7 +32,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:paddingLeft="20px"
-            android:text="@string/putaway_scan_material"
+            android:text="@string/scan_material"
             android:textColor="#333"
             />
 
@@ -67,13 +71,13 @@
             android:id="@+id/tv_buy_return_material_orderno"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingLeft="20px"
             android:layout_centerVertical="true"
+            android:paddingLeft="20px"
             android:text="@string/buy_return_material_orderno"
             android:textColor="#333"
             />
+
         <EditText
-            android:gravity="center_vertical"
             android:id="@+id/et_buy_return_material_orderno"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -81,7 +85,8 @@
             android:layout_toRightOf="@id/tv_buy_return_material_orderno"
             android:background="@drawable/bg_sbo_rectangle_et"
             android:ellipsize="end"
-            android:hint="输入退了单号或扫码查询"
+            android:gravity="center_vertical"
+            android:hint="@string/please_input_return_material_orderno_or_scan"
             android:paddingLeft="20px"
             android:paddingRight="80px"
             android:singleLine="true"

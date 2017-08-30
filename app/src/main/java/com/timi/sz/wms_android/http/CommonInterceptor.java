@@ -65,22 +65,28 @@ public class CommonInterceptor implements Interceptor {
         if (!oldUrl.toString().contains("ClientLogin")) {
             // 普通请求
             newRequest = oldRequest.newBuilder()
-                    //请求的token
-                    .addHeader(Constants.AUTHORIZATION, SpUtils.getInstance().getAuthorization())
-                    //请求的语言
-                    .addHeader(Constants.LOCALE_LAUGUAGE, SpUtils.getInstance().getLocaleLanguage())
+                    //类型
+//                    .addHeader("Content-Type", "application/json")
+//                    //请求的token
+//                    .addHeader(Constants.AUTHORIZATION, SpUtils.getInstance().getAuthorization())
+//                    //请求的语言
+//                    .addHeader(Constants.LOCALE_LAUGUAGE, SpUtils.getInstance().getLocaleLanguage())
                     .method(oldRequest.method(), oldRequest.body())
                     .url(parseUrl)
                     .build();
         } else {
             // 登录请求
             newRequest = oldRequest.newBuilder()
-                    //请求的语言
-                    .addHeader(Constants.LOCALE_LAUGUAGE, SpUtils.getInstance().getLocaleLanguage())
+                    //类型
+//                    .addHeader("Content-Type", "application/json")
+//                    //请求的语言
+//                    .addHeader(Constants.LOCALE_LAUGUAGE, SpUtils.getInstance().getLocaleLanguage())
                     .method(oldRequest.method(), oldRequest.body())
                     .url(parseUrl)
                     .build();
         }
+        LogUitls.e("处理后的头部-->" + newRequest.headers().toString());
+        LogUitls.e("参数列表-->" + newRequest.toString());
         LogUitls.e("处理后的url-->" + newRequest.url().toString());
         return chain.proceed(newRequest);
     }

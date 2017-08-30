@@ -95,9 +95,9 @@ public class FragmentPointRecord extends BaseFragment<FragmentPointRecordView,Fr
     public void showGoodsPointRecordDialog() {
         if (null == mPointRecordDialog) {
             mPointRecordDialog = new MyDialog(getActivity(), R.layout.dialog_stockin_record)
-                    .setTextViewContent(R.id.tv_stockin_point_record_pronum, String.format(getString(R.string.stockin_point_pro_num), "9.05.0022"))
-                    .setTextViewContent(R.id.tv_stockin_point_record_proname, String.format(getString(R.string.stockin_point_pro_name), "滑轨双孔梁496-蓝色"))
-                    .setTextViewContent(R.id.tv_stockin_point_record_promodel, String.format(getString(R.string.stockin_point_promodel), "Slide Beam0824-496铝挤压加工"))
+                    .setTextViewContent(R.id.tv_stockin_point_record_pronum, String.format(getString(R.string.material_code), "9.05.0022"))
+                    .setTextViewContent(R.id.tv_stockin_point_record_proname, String.format(getString(R.string.material_name), "滑轨双孔梁496-蓝色"))
+                    .setTextViewContent(R.id.tv_stockin_point_record_promodel, String.format(getString(R.string.material_model), "Slide Beam0824-496铝挤压加工"))
                     .setButtonListener(R.id.btn_stockin_point_record_delete, getString(R.string.delete), new MyDialog.DialogClickListener() {
                         @Override
                         public void dialogClick(MyDialog dialog) {

@@ -1,9 +1,9 @@
-package com.timi.sz.wms_android.mvp.UI.stock_out.buy_return_material;
+package com.timi.sz.wms_android.mvp.UI.stock_out.buy_return_material.orderno;
 
 import android.content.Context;
 
 import com.timi.sz.wms_android.bean.buy_return.MaterialBean;
-import com.timi.sz.wms_android.bean.buy_return.OrderNoBean;
+import com.timi.sz.wms_android.bean.buy_return.OrderNoAddMaterial;
 import com.timi.sz.wms_android.http.callback.OnResultCallBack;
 import com.timi.sz.wms_android.http.subscriber.HttpSubscriber;
 import com.timi.sz.wms_android.mvp.base.presenter.impl.MvpBasePresenter;
@@ -11,17 +11,16 @@ import com.timi.sz.wms_android.mvp.base.presenter.impl.MvpBasePresenter;
 /**
  * $dsc
  * author: timi
- * create at: 2017-08-28 17:30
+ * create at: 2017-08-29 14:44
  */
 
-public class BuyReturnMaterialPresenter extends MvpBasePresenter<BuyReturnMaterialView> {
-    BuyReturnMaterialModel model = null;
-    HttpSubscriber<MaterialBean> subscriber = null;
-    HttpSubscriber<OrderNoBean> returnMaterialScanSubscriber = null;
-
-    public BuyReturnMaterialPresenter(Context context) {
+public class BuyReturnMaterialOrderNoPresenter extends MvpBasePresenter<BuyReturnMaterialOrderNoView> {
+    private HttpSubscriber<MaterialBean> subscriber;
+    private HttpSubscriber<OrderNoAddMaterial> OrderNoAddMaterialSubscriber;
+    BuyReturnMaterialOrderNoModel model=null;
+    public BuyReturnMaterialOrderNoPresenter(Context context) {
         super(context);
-        model = new BuyReturnMaterialModel();
+        model=new BuyReturnMaterialOrderNoModel();
         subscriber = new HttpSubscriber<>(new OnResultCallBack<MaterialBean>() {
             @Override
             public void onSuccess(MaterialBean materialBean) {
@@ -34,15 +33,15 @@ public class BuyReturnMaterialPresenter extends MvpBasePresenter<BuyReturnMateri
 
             }
         });
-        returnMaterialScanSubscriber = new HttpSubscriber<>(new OnResultCallBack<OrderNoBean>() {
+        OrderNoAddMaterialSubscriber = new HttpSubscriber<>(new OnResultCallBack<OrderNoAddMaterial>() {
             @Override
-            public void onSuccess(OrderNoBean materialBean) {
-                getView().ReturnMaterialOrderNoScanResult(materialBean);
+            public void onSuccess(OrderNoAddMaterial materialBean) {
+                getView().orderNoAddMaterial();
             }
 
             @Override
             public void onError(String errorMsg) {
-                getView().ReturnMaterialOrderNoScanResult( new OrderNoBean("滑轨双孔梁496-蓝色","CD7000101","2017-8-24","50","22","28"));
+                getView().orderNoAddMaterial();
 
             }
         });
@@ -54,22 +53,21 @@ public class BuyReturnMaterialPresenter extends MvpBasePresenter<BuyReturnMateri
      */
     public void materialScanNetWork(String scanStr) {
         model.materialScanNetWork(scanStr, subscriber);
+    }/**
+     * 退料单添加物料的方法
+     * @param materialCode
+     */
+    public void orderNoAddmaterialNetWork(String materialCode) {
+        model.returnMaterialCommitResultNetWork(materialCode, OrderNoAddMaterialSubscriber);
     }
 
-    /**
-     * 退料单号扫码/输入单号的网络请求
-     * @param scanStr
-     */
-    public void returnMaterialScanNetWork(String scanStr){
-        model.returnMaterialOrderNoScanNetWork(scanStr,returnMaterialScanSubscriber);
-    }
     @Override
     public void dettachView() {
         super.dettachView();
         //反注册
-        if (null != returnMaterialScanSubscriber) {
-            returnMaterialScanSubscriber.unSubscribe();
-            returnMaterialScanSubscriber = null;
+        if (null != OrderNoAddMaterialSubscriber) {
+            OrderNoAddMaterialSubscriber.unSubscribe();
+            OrderNoAddMaterialSubscriber = null;
         }
         if (null != subscriber) {
             subscriber.unSubscribe();

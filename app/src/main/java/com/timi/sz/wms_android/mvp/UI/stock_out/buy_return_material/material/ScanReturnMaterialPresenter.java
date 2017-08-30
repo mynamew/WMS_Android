@@ -1,4 +1,4 @@
-package com.timi.sz.wms_android.mvp.UI.stock_out.buy_return_material.scan_return_material;
+package com.timi.sz.wms_android.mvp.UI.stock_out.buy_return_material.material;
 
 import android.content.Context;
 

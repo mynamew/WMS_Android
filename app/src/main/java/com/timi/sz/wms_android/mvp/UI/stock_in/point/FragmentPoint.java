@@ -52,10 +52,11 @@ public class FragmentPoint extends BaseFragment<FragmentPointView,FragmentPointP
     @Override
     public void initData() {
         //设置初始数据  从上个界面传过来
-        tvSipBuyNum.setText(String.format(getString(R.string.sip_order_num), "P14342143"));
-        tvSipBuyDate.setText(String.format(getString(R.string.sip_buy_date), "2017-8-22"));
-        tvSipBuyFrom.setText(String.format(getString(R.string.sip_buy_from), "深圳超然科技股份有限公司"));
-        tvSipBuyer.setText(String.format(getString(R.string.sip_buyer), "邢力丰"));
+        setTextViewText(tvSipBuyNum, R.string.order_no, "P14342143");
+        setTextViewText(tvSipBuyDate, R.string.buy_date, "2017-8-22");
+        setTextViewText(tvSipBuyFrom, R.string.buy_from, "深圳超然科技股份有限公司");
+        setTextViewText(tvSipBuyer, R.string.buyer,"邢力丰");
+
         //构造假数据
         ArrayList<ArrayList<String>> mTableDatas = new ArrayList<ArrayList<String>>();
         ArrayList<String> mfristData = new ArrayList<String>();
@@ -116,11 +117,11 @@ public class FragmentPoint extends BaseFragment<FragmentPointView,FragmentPointP
     public void showGoodsPointDialog() {
         if (null == mPointDialog) {
             mPointDialog = new MyDialog(getActivity(), R.layout.dialog_stockin_point)
-                    .setTextViewContent(R.id.tv_stockin_point_pronum, String.format(getString(R.string.stockin_point_pro_num), "9.05.0022"))
-                    .setTextViewContent(R.id.tv_stockin_point_proname, String.format(getString(R.string.stockin_point_pro_name), "滑轨双孔梁496-蓝色"))
-                    .setTextViewContent(R.id.tv_stockin_point_promodel, String.format(getString(R.string.stockin_point_promodel), "Slide Beam0824-496铝挤压加工"))
-                    .setTextViewContent(R.id.tv_stockin_point_buynum, String.format(getString(R.string.stockin_point_buynum), "50"))
-                    .setTextViewContent(R.id.tv_stockin_point_receive_pro_num, String.format(getString(R.string.stockin_point_receive_pro_num), "50"))
+                    .setTextViewContent(R.id.tv_stockin_point_pronum, String.format(getString(R.string.material_code), "9.05.0022"))
+                    .setTextViewContent(R.id.tv_stockin_point_proname, String.format(getString(R.string.material_name), "滑轨双孔梁496-蓝色"))
+                    .setTextViewContent(R.id.tv_stockin_point_promodel, String.format(getString(R.string.material_model), "Slide Beam0824-496铝挤压加工"))
+                    .setTextViewContent(R.id.tv_stockin_point_buynum, String.format(getString(R.string.buy_num), "50"))
+                    .setTextViewContent(R.id.tv_stockin_point_receive_pro_num, String.format(getString(R.string.arrive_good_num), "50"))
                     .setButtonListener(R.id.btn_stockin_point_cancel, getString(R.string.cancel), new MyDialog.DialogClickListener() {
                         @Override
                         public void dialogClick(MyDialog dialog) {

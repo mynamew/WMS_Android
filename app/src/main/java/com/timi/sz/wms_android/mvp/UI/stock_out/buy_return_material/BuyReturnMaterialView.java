@@ -1,5 +1,7 @@
 package com.timi.sz.wms_android.mvp.UI.stock_out.buy_return_material;
 
+import com.timi.sz.wms_android.bean.buy_return.MaterialBean;
+import com.timi.sz.wms_android.bean.buy_return.OrderNoBean;
 import com.timi.sz.wms_android.mvp.base.view.iml.MvpBaseView;
 
 /**
@@ -9,4 +11,6 @@ import com.timi.sz.wms_android.mvp.base.view.iml.MvpBaseView;
  */
 
 public interface BuyReturnMaterialView extends MvpBaseView {
+    public void materialScanResult(MaterialBean bean);
+    public void ReturnMaterialOrderNoScanResult(OrderNoBean bean);
 }

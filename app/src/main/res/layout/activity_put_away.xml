@@ -46,7 +46,7 @@
                 <TextView
                     android:id="@+id/tv_arrive_pro_total_num"
                     style="@style/tv_header"
-                    android:text="@string/arrive_pro_total_num"
+                    android:text="@string/arrive_good_num"
                     />
 
                 <TextView
@@ -109,7 +109,6 @@
                     android:id="@+id/tv_putaway_orderno_num"
                     style="@style/tv_header"
                     android:visibility="invisible"
-                    android:text="@string/putaway_orderno_num"
                     />
             </LinearLayout>
             <View
@@ -126,7 +125,7 @@
                 android:gravity="center_vertical"
                 android:paddingLeft="20px"
                 android:visibility="gone"
-                android:text="@string/putaway_have_scan_num"/>
+                android:text="@string/have_scan_num"/>
 
 
             <RelativeLayout
@@ -139,7 +138,7 @@
                     android:layout_height="wrap_content"
                     android:paddingLeft="20px"
                     android:layout_centerVertical="true"
-                    android:text="@string/putaway_lib_code"
+                    android:text="@string/lib_code"
                     android:textColor="#333"
                     />
                 <TextView
@@ -178,7 +177,7 @@
                     android:layout_height="wrap_content"
                     android:paddingLeft="48px"
                     android:layout_centerVertical="true"
-                    android:text="@string/putaway_scan_material"
+                    android:text="@string/scan_material"
                     android:textColor="#333"
                     />
                 <TextView
@@ -214,7 +213,7 @@
                 android:gravity="center_vertical"
                 android:paddingLeft="48px"
                 android:paddingTop="10px"
-                android:text="@string/putaway_material_code"
+                android:text="@string/material_code"
                 android:textColor="#333"
                 />
 
@@ -225,7 +224,7 @@
                 android:gravity="center_vertical"
                 android:paddingLeft="48px"
                 android:paddingTop="10px"
-                android:text="@string/putaway_material_num"
+                android:text="@string/material_num"
                 android:textColor="#333"
                 />
             <TextView
@@ -235,7 +234,7 @@
                 android:gravity="center_vertical"
                 android:paddingLeft="48px"
                 android:paddingTop="10px"
-                android:text="@string/putaway_material_name"
+                android:text="@string/material_name"
                 android:textColor="#333"
                 />
             <TextView
@@ -245,7 +244,7 @@
                 android:gravity="center_vertical"
                 android:paddingLeft="48px"
                 android:paddingTop="10px"
-                android:text="@string/putaway_material_nmodel"
+                android:text="@string/material_model"
                 android:textColor="#333"
                 />
         </LinearLayout>

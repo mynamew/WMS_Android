@@ -155,27 +155,27 @@ public class PutAwayActivity extends BaseActivity<PutAwayView, PutAwayPresenter>
                 /**
                  * 收货单号
                  */
-                tvReceiveProNum.setText(String.format(getString(R.string.in_stock_num), "P12345432422"));
+                setTextViewText(tvReceiveProNum,R.string.in_stock_num, "P12345432422");
                 /**
                  * 到货数
                  */
-                tvArriveProTotalNum.setText(String.format(getString(R.string.arrive_pro_total_num), "1000"));
+                setTextViewText(tvArriveProTotalNum,R.string.arrive_pro_total_num, "1000");
                 /**
                  * 合格总数
                  */
-                tvRightProNum.setText(String.format(getString(R.string.right_pro_num), "800"));
+                setTextViewText(tvRightProNum,R.string.right_pro_num, "800");
                 /**
                  * 已入库总数
                  */
-                tvInStockNum.setText(String.format(getString(R.string.in_stock_num), "300"));
+                setTextViewText(tvInStockNum,R.string.in_stock_num, "300");
                 /**
                  * 可入库总数
                  */
-                tvCanInStockNum.setText(String.format(getString(R.string.can_in_stock_num), "700"));
+                setTextViewText(tvCanInStockNum,R.string.can_in_stock_num, "700");
                 /**
                  * 设置按钮的文字
                  */
-                btnLogin.setText(R.string.putaway_create_instock_orderno);
+                btnLogin.setText(R.string.create_instock_orderno);
                 break;
             case Constants.CREATE_PRO_CHECK_NUM://产成品 审核
                 llPutawayTotalInstockNum.setVisibility(View.VISIBLE);
@@ -183,11 +183,11 @@ public class PutAwayActivity extends BaseActivity<PutAwayView, PutAwayPresenter>
                 /**
                  * 产成品入库单：
                  */
-                tvReceiveProNum.setText(String.format(getString(R.string.product_warehous_warrent_num), "P12345432422"));
+                setTextViewText(tvReceiveProNum,R.string.product_warehous_warrent_num, "P12345432422");
                 /**
                  * 待点总数
                  */
-                tvInStockTotalNum.setText(String.format(getString(R.string.in_stock_total_num), "1200"));
+                setTextViewText(tvInStockTotalNum,R.string.in_stock_total_num, "1200");
                 break;
             case Constants.CREATE_PRO_CREATE_ORDER_NUM://产成品 生单
                 llPutawayTotalInstockNum.setVisibility(View.VISIBLE);
@@ -196,28 +196,27 @@ public class PutAwayActivity extends BaseActivity<PutAwayView, PutAwayPresenter>
                 /**
                  * 生产任务单：
                  */
-                tvReceiveProNum.setText(String.format(getString(R.string.create_task_orderno), "P12345432422"));
+                setTextViewText(tvReceiveProNum,R.string.create_task_orderno, "P12345432422");
                 /**
                  * 待点总数
                  */
-                tvInStockTotalNum.setText(String.format(getString(R.string.in_stock_total_num), "1200"));
                 /**
                  * 已入库总数
                  */
-                tvInStockNum.setText(String.format(getString(R.string.in_stock_num), "300"));
+                setTextViewText(tvInStockNum,R.string.in_stock_num, "300");
                 /**
                  * 可入库总数
                  */
-                tvCanInStockNum.setText(String.format(getString(R.string.can_in_stock_num), "700"));
+                setTextViewText(tvCanInStockNum,R.string.can_in_stock_num, "700");
                 /**
                  * 单据总数
                  */
                 tvPutawayordernoNum.setVisibility(View.VISIBLE);
-                tvPutawayordernoNum.setText(String.format(getString(R.string.putaway_orderno_num), "100"));
+                setTextViewText(tvPutawayordernoNum,R.string.orderno_num, "100");
                 /**
                  * 设置按钮的文字
                  */
-                btnLogin.setText(R.string.putaway_create_orderno);
+                btnLogin.setText(R.string.create_product_orderno);
                 break;
             case Constants.OTHER_IN_STOCK_SELECT_ORDERNO://其他 选单
                 llPutawayTotalInstockNum.setVisibility(View.VISIBLE);
@@ -225,12 +224,11 @@ public class PutAwayActivity extends BaseActivity<PutAwayView, PutAwayPresenter>
                 /**
                  * 其他入库单：
                  */
-                tvReceiveProNum.setText(String.format(getString(R.string.other_instock_orderno), "P12345432422"));
+                setTextViewText(tvReceiveProNum,R.string.other_instock_orderno, "P12345432422");
                 /**
                  * 待点总数
                  */
-                tvInStockTotalNum.setText(String.format(getString(R.string.in_stock_total_num), "1200"));
-
+                setTextViewText(tvInStockTotalNum,R.string.in_stock_total_num, "1200");
                 break;
             case Constants.OTHER_IN_STOCK_SCAN:// 其他扫描 （扫码 不进行单据的查询）
                 tvTitle.setText(getString(R.string.other_scan_title));
@@ -247,7 +245,7 @@ public class PutAwayActivity extends BaseActivity<PutAwayView, PutAwayPresenter>
                  * 已扫的总数
                  */
                 tvPutawayHaveScanNum.setVisibility(View.VISIBLE);
-                tvPutawayHaveScanNum.setText(String.format(getString(R.string.putaway_have_scan_num), "200"));
+                setTextViewText(tvPutawayHaveScanNum,R.string.have_scan_num, "200");
                 break;
             case Constants.OUT_RETURN_MATERAIL://委外退料
                 llPutawayTotalInstockNum.setVisibility(View.VISIBLE);
@@ -255,12 +253,11 @@ public class PutAwayActivity extends BaseActivity<PutAwayView, PutAwayPresenter>
                 /**
                  * 委外退料单：
                  */
-                tvReceiveProNum.setText(String.format(getString(R.string.out_return_material_orderno), "P12345432422"));
+                setTextViewText(tvReceiveProNum,R.string.out_return_material_orderno, "P12345432422");
                 /**
                  * 待点总数
                  */
-                tvInStockTotalNum.setText(String.format(getString(R.string.in_stock_total_num), "1200"));
-
+                setTextViewText(tvInStockTotalNum,R.string.in_stock_total_num, "1200");
                 break;
             case Constants.CREATE_RETURN_MATERAIL://生产退料
                 llPutawayTotalInstockNum.setVisibility(View.VISIBLE);
@@ -268,11 +265,11 @@ public class PutAwayActivity extends BaseActivity<PutAwayView, PutAwayPresenter>
                 /**
                  * 生产退料单号：
                  */
-                tvReceiveProNum.setText(String.format(getString(R.string.create_return_material_orderno), "P12345432422"));
+                setTextViewText(tvReceiveProNum,R.string.create_return_material_orderno, "P12345432422");
                 /**
                  * 待点总数
                  */
-                tvInStockTotalNum.setText(String.format(getString(R.string.in_stock_total_num), "1200"));
+                setTextViewText(tvInStockTotalNum,R.string.in_stock_total_num, "1200");
                 break;
             case Constants.SALE_RETURN_MATERAIL://销售 退料
                 llPutawayTotalInstockNum.setVisibility(View.VISIBLE);
@@ -280,34 +277,32 @@ public class PutAwayActivity extends BaseActivity<PutAwayView, PutAwayPresenter>
                 /**
                  * 生产退料单：
                  */
-                tvReceiveProNum.setText(String.format(getString(R.string.sale_return_material_orderno), "P12345432422"));
+                setTextViewText(tvReceiveProNum,R.string.sale_return_material_orderno, "P12345432422");
                 /**
                  * 待点总数
                  */
-                tvInStockTotalNum.setText(String.format(getString(R.string.in_stock_total_num), "1200"));
-
+                setTextViewText(tvInStockTotalNum,R.string.in_stock_total_num, "1200");
                 break;
         }
         /**
          * 日期
          */
-        tvCreateordernoDate.setText(String.format(getString(R.string.create_orderno_date), "2017-8-29"));
+        setTextViewText(tvCreateordernoDate,R.string.create_orderno_date, "2017-8-29");
         /**
          * 待点总数
          */
-        tvWaitCountNum.setText(String.format(getString(R.string.wait_count_num), "1000"));
+        setTextViewText(tvWaitCountNum,R.string.wait_count_num, "1000");
         /**
          * 已点总数
          */
-        tvHaveCountNum.setText(String.format(getString(R.string.have_count_num), "200"));
+        setTextViewText(tvHaveCountNum,R.string.have_count_num, "200");
         /**
          * 将底部的物料信息置空
          */
-        tvPutawayMaterialCode.setText(String.format(getString(R.string.putaway_material_code), ""));
-        tvPutawayMaterialName.setText(String.format(getString(R.string.putaway_material_name), ""));
-        tvPutawayMaterialNmodel.setText(String.format(getString(R.string.putaway_material_nmodel), ""));
-        tvPutawayMaterialNum.setText(String.format(getString(R.string.putaway_material_num), ""));
-
+        setTextViewText(tvPutawayMaterialCode,R.string.material_code, "");
+        setTextViewText(tvPutawayMaterialName,R.string.material_name, "");
+        setTextViewText(tvPutawayMaterialNmodel,R.string.material_model, "");
+        setTextViewText(tvPutawayMaterialNum,R.string.material_num, "");
     }
 
     @OnClick({R.id.tv_putaway_scan_location, R.id.iv_putaway_scan_location, R.id.tv_putaway_scan_material, R.id.iv_putaway_scan_material, R.id.btn_login})

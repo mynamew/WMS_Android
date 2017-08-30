@@ -5,7 +5,7 @@
 
      <RelativeLayout
          android:layout_centerInParent="true"
-         android:layout_width="400px"
+         android:layout_width="300px"
          android:gravity="center"
          android:background="@drawable/bg_gif"
          android:layout_height="180px">

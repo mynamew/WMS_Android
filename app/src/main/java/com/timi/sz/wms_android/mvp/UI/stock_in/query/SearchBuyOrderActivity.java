@@ -69,40 +69,40 @@ public class SearchBuyOrderActivity extends BaseActivity<SearchBuyOrderView, Sea
                 break;
             case Constants.COME_MATERAIL_NUM://来料单
                 tvSboTip.setText(R.string.orderno);
-                tvTitle.setText("入库-收货单");
-                etSboInput.setHint("请输入收货单号或扫码查询");
+                tvTitle.setText(R.string.in_stock_receivce_goods_orderno);
+                etSboInput.setHint(R.string.please_input_receivce_orderno_or_scan);
                 break;
             case Constants.CREATE_PRO_CHECK_NUM://产成品 审核
                 tvSboTip.setText(String.format(getString(R.string.create_task_orderno),""));
-                tvTitle.setText("产成品-选单");
-                etSboInput.setHint("请输入产成品入库单单号或扫码查询");
+                tvTitle.setText(R.string.produce_create_order);
+                etSboInput.setHint(R.string.please_input_create_product_orderno_or_scan);
                 break;
             case Constants.CREATE_PRO_CREATE_ORDER_NUM://产成品 生单
-                tvSboTip.setText("生产任务单");
-                tvTitle.setText("产成品入库-生单");
-                etSboInput.setHint("请输入生产任务单号或扫码查询");
+                tvSboTip.setText(R.string.create_task_orderno_tip);
+                tvTitle.setText(R.string.product_in_stock_create_orderno);
+                etSboInput.setHint(R.string.please_input_create_task_num_or_scan);
                 break;
             case Constants.OTHER_IN_STOCK_SELECT_ORDERNO://其他 选单
-                tvSboTip.setText("其他入库单");
-                tvTitle.setText("其他入库-选单");
-                etSboInput.setHint("请输入其他入库单号或扫码查询");
+                tvSboTip.setText(R.string.other_in_stock_orderno);
+                tvTitle.setText(R.string.other_select_order_title);
+                etSboInput.setHint(R.string.please_input_other_lin_num_or_scan);
                 break;
             case Constants.OTHER_IN_STOCK_SCAN:// 其他扫描 （扫码 不进行单据的查询）
                 break;
             case Constants.OUT_RETURN_MATERAIL://委外退料
-                tvSboTip.setText("委外退料单");
-                tvTitle.setText("委外退料-选单");
-                etSboInput.setHint("请输入委外退料单号或扫码查询");
+                tvSboTip.setText(R.string.out_return_order);
+                tvTitle.setText(R.string.out_return_material_select_orderno);
+                etSboInput.setHint(R.string.pealse_out_return_material_select_orderno_or_scan);
                 break;
             case Constants.CREATE_RETURN_MATERAIL://生产退料
-                tvSboTip.setText("生产退料单");
-                tvTitle.setText("生产退料-选单");
-                etSboInput.setHint("请输入生产退料单号或扫码查询");
+                tvSboTip.setText(R.string.create_return_orderno);
+                tvTitle.setText(R.string.create_return_orderno_select_orderno);
+                etSboInput.setHint(R.string.please_create_return_material_num_or_scan);
                 break;
             case Constants.SALE_RETURN_MATERAIL://销售 退料
-                tvSboTip.setText("销售退货单");
-                tvTitle.setText("销售退货-选单");
-                etSboInput.setHint("请输入销售退料单号或扫码查询");
+                tvSboTip.setText(R.string.sale_return_material_tip);
+                tvTitle.setText(R.string.sale_return_material_select_orderno);
+                etSboInput.setHint(R.string.please_input_sale_return_material_orderno_or_scan);
                 break;
         }
     }

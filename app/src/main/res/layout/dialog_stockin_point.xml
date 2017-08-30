@@ -16,7 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="80px"
             android:gravity="center_vertical"
-            android:text="@string/stockin_point_pro_num"
+            android:text="@string/material_code"
             android:textColor="#333"
             android:textSize="14sp"/>
 
@@ -25,7 +25,7 @@
             android:layout_width="match_parent"
             android:layout_height="80px"
             android:gravity="center_vertical"
-            android:text="@string/stockin_point_pro_name"
+            android:text="@string/material_name"
             android:textColor="#333"
             android:textSize="14sp"/>
 
@@ -34,7 +34,7 @@
             android:layout_width="match_parent"
             android:layout_height="80px"
             android:gravity="center_vertical"
-            android:text="@string/stockin_point_promodel"
+            android:text="@string/material_model"
             android:textColor="#333"
             android:textSize="14sp"/>
 
@@ -43,7 +43,7 @@
             android:layout_width="match_parent"
             android:layout_height="80px"
             android:gravity="center_vertical"
-            android:text="@string/stockin_point_buynum"
+            android:text="@string/buy_num"
             android:textColor="#333"
             android:textSize="14sp"/>
 
@@ -52,7 +52,7 @@
             android:layout_width="match_parent"
             android:layout_height="80px"
             android:gravity="center_vertical"
-            android:text="@string/stockin_point_receive_pro_num"
+            android:text="@string/arrive_good_num"
             android:textColor="#333"
             android:textSize="14sp"/>
 
@@ -67,7 +67,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
-                android:text="@string/tstockin_point_pro_point_num"
+                android:text="@string/point_num"
                 android:textColor="#333"
                 android:textSize="14sp"/>
 
@@ -96,7 +96,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
-                android:text="@string/stockin_point_sparenum"
+                android:text="@string/spare_num"
                 android:textColor="#333"
                 android:textSize="14sp"/>
 

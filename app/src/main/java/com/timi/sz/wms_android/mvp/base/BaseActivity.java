@@ -9,6 +9,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.Nullable;
+import android.support.annotation.StringRes;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
@@ -28,6 +29,7 @@ import com.timi.sz.wms_android.mvp.base.view.MvpView;
 import com.timi.sz.wms_android.mvp.base.view.iml.MvpBaseView;
 import com.timi.sz.wms_android.qrcode.CommonScanActivity;
 import com.timi.sz.wms_android.qrcode.utils.Constant;
+import com.timi.sz.wms_android.view.MyProgressDialog;
 import com.timi.sz.wms_android.view.SwipeBackLayout;
 import com.zhy.autolayout.AutoLayoutActivity;
 
@@ -51,13 +53,11 @@ public abstract class BaseActivity<V extends MvpView, P extends MvpPresenter<V>>
 
     public String TAG = "";
     //当前Activity的实例
-    static  private   Activity currentActivity;
+    static private BaseActivity currentActivity;
     //侧滑返回的布局
     private SwipeBackLayout swipeBackLayout;
     //侧滑返回的img
     private ImageView ivShadow;
-    //progress dialog
-    ProgressDialog dialog = null;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -112,17 +112,12 @@ public abstract class BaseActivity<V extends MvpView, P extends MvpPresenter<V>>
 
     @Override
     public void showProgressDialog() {
-        if (null == dialog) {
-            dialog = new ProgressDialog(this);
-        }
-        dialog.show();
+        MyProgressDialog.showProgressDialog(this);
     }
 
     @Override
     public void dismisProgressDialog() {
-        if (null != dialog && dialog.isShowing()) {
-            dialog.dismiss();
-        }
+        MyProgressDialog.hideProgressDialog();
     }
 
     /**
@@ -210,6 +205,7 @@ public abstract class BaseActivity<V extends MvpView, P extends MvpPresenter<V>>
             this.presenter.dettachView();
             this.presenter = null;
         }
+        dismisProgressDialog();
     }
 
     /********
@@ -325,9 +321,20 @@ public abstract class BaseActivity<V extends MvpView, P extends MvpPresenter<V>>
 
     /**
      * 获取当前Activity的实例
+     *
      * @return
      */
     public static Activity getCurrentActivty() {
         return currentActivity;
+    }
+
+    /**
+     *设置 文本
+     * @param tv
+     * @param fomat
+     * @param content
+     */
+    public void setTextViewText(TextView tv, @StringRes int fomat, String content) {
+        tv.setText(String.format(getString(fomat), content));
     }
 }

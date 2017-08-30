@@ -7,11 +7,8 @@ import com.timi.sz.wms_android.http.api.CommonResult;
 import com.timi.sz.wms_android.http.callback.ApiServiceMethodCallBack;
 import com.timi.sz.wms_android.mvp.base.model.impl.MvpBaseModel;
 
-import java.util.List;
-
 import io.reactivex.Observable;
 import io.reactivex.Observer;
-import okhttp3.ResponseBody;
 
 /**
  * Created by jzk on 2017/8/14.
@@ -27,7 +24,8 @@ public class LoginModel extends MvpBaseModel {
         HttpManager.getInstance().HttpManagerRequest(observer, new ApiServiceMethodCallBack<LoginBean>() {
             @Override
             public Observable<CommonResult<LoginBean>> createObservable(ApiService apiService) {
-                return apiService.login(tenancyName, usernameOrEmailAddress, password, 2, mac);
+                return apiService.login("Default", "admin", "123qwe", 2, "E8-2A-EA-D0-BB-D2");
+
             }
         });
     }

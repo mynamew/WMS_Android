@@ -21,6 +21,7 @@ import com.timi.sz.wms_android.mvp.UI.login.LoginActivity;
 import com.timi.sz.wms_android.mvp.base.BaseActivity;
 import com.timi.sz.wms_android.mvp.base.presenter.MvpPresenter;
 import com.timi.sz.wms_android.mvp.base.view.iml.MvpBaseView;
+import com.timi.sz.wms_android.view.MyProgressDialog;
 import com.timi.sz.wms_android.view.SwipeBackLayout;
 import com.zhy.autolayout.AutoLayoutActivity;
 
@@ -79,12 +80,12 @@ public abstract class BaseNoMvpActivity extends AutoLayoutActivity implements Mv
 
     @Override
     public void showProgressDialog() {
-
+        MyProgressDialog.showProgressDialog(this);
     }
 
     @Override
     public void dismisProgressDialog() {
-
+        MyProgressDialog.hideProgressDialog();
     }
 
     /**
@@ -217,5 +218,12 @@ public abstract class BaseNoMvpActivity extends AutoLayoutActivity implements Mv
         // 做跳转的操作
         Intent it = new Intent(currentActivity, LoginActivity.class);
         startActivity(it, BaseActivity.Interlude.POP_FROM_BOTTOM);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        //隐藏进度条，当界面被销毁的时候
+        dismisProgressDialog();
     }
 }

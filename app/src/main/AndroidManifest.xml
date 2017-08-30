@@ -189,7 +189,11 @@
         </activity>
         <activity android:name=".mvp.UI.stock_out.buy_return_material.BuyReturnMaterialActivity">
         </activity>
-        <activity android:name=".mvp.UI.stock_out.buy_return_material.scan_return_material.ScanReturnMaterialActivity">
+        <activity android:name=".mvp.UI.stock_out.buy_return_material.material.ScanReturnMaterialActivity">
+        </activity>
+        <activity android:name=".mvp.UI.stock_out.buy_return_material.orderno.BuyReturnMaterialOrderNoActivity">
+        </activity>
+        <activity android:name=".mvp.UI.stock_out.other.scan.OtherOutStockScanActivity">
         </activity>
     </application>
 

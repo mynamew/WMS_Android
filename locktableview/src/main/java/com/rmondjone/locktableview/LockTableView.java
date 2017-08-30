@@ -242,11 +242,7 @@ public class LockTableView {
                     textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, mTextViewSize);
                     textView.setText(rowDatas.get(j));
                     textView.setGravity(Gravity.CENTER);
-                    //设置布局
-                    LinearLayout.LayoutParams textViewParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
-                            LinearLayout.LayoutParams.WRAP_CONTENT);
-                    textViewParams.setMargins(10, 10, 10, 10);//android:layout_margin="15dp"
-                    textView.setLayoutParams(textViewParams);
+                    textView.setPadding(10, 10, 10, 10);
                     if (i == 0) {
                         mColumnMaxWidths.add(measureTextWidth(textView, rowDatas.get(j)));
                         buffer.append("[" + measureTextWidth(textView, rowDatas.get(j)) + "]");
@@ -272,11 +268,7 @@ public class LockTableView {
                 TextView textView = new TextView(mContext);
                 textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, mTextViewSize);
                 textView.setGravity(Gravity.CENTER);
-                //设置布局
-                LinearLayout.LayoutParams textViewParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
-                        LinearLayout.LayoutParams.WRAP_CONTENT);
-                textViewParams.setMargins(10, 10, 10, 10);//android:layout_margin="15dp"
-                textView.setLayoutParams(textViewParams);
+                textView.setPadding(10, 10, 10, 10);
                 int maxHeight = measureTextHeight(textView, rowDatas.get(0));
                 mRowMaxHeights.add(maxHeight);
                 for (int j = 0; j < rowDatas.size(); j++) {
@@ -371,11 +363,7 @@ public class LockTableView {
             mColumnTitleView.setTextColor(ContextCompat.getColor(mContext, mTableHeadTextColor));
             mColumnTitleView.setTextSize(TypedValue.COMPLEX_UNIT_SP, mTextViewSize);
             mColumnTitleView.setText(mColumnTitle);
-            LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) mColumnTitleView.getLayoutParams();
-            layoutParams.width = DisplayUtil.dip2px(mContext, mColumnMaxWidths.get(0));
-            layoutParams.height = DisplayUtil.dip2px(mContext, mRowMaxHeights.get(0));
-            layoutParams.setMargins(10, 10, 10, 10);
-            mColumnTitleView.setLayoutParams(layoutParams);
+            mColumnTitleView.setPadding(10, 10, 10, 10);
             //构造滚动视图
             createScollview(mLockScrollView, mTableFristData, true);
             mScrollViews.add(mLockScrollView);
@@ -425,11 +413,7 @@ public class LockTableView {
             textViewContainer.setLayoutParams(textLinearParams);
             //构造TextView
             TextView textView = new TextView(mContext);
-            //设置布局
-            LinearLayout.LayoutParams textViewParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT);
-            textViewParams.setMargins(10, 10, 10, 10);
-            textView.setLayoutParams(textViewParams);
+            textView.setPadding(10, 10, 10, 10);
             textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, mTextViewSize);
             textView.setText(mTableColumnDatas.get(i));
             textView.setGravity(Gravity.CENTER);
@@ -496,10 +480,10 @@ public class LockTableView {
                 textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, mTextViewSize);
                 textView.setGravity(Gravity.CENTER);
                 textView.setText(datas.get(j));
+                textView.setPadding(10, 10, 10, 10);
                 //设置布局
                 LinearLayout.LayoutParams textViewParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
                         LinearLayout.LayoutParams.WRAP_CONTENT);
-                textViewParams.setMargins(10, 10, 10, 10);
                 if (isLockFristRow) {
                     textViewParams.height = DisplayUtil.dip2px(mContext, mRowMaxHeights.get(i + 1));
                 } else {
@@ -591,7 +575,7 @@ public class LockTableView {
                 //设置布局
                 LinearLayout.LayoutParams textViewParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
                         LinearLayout.LayoutParams.WRAP_CONTENT);
-                textViewParams.setMargins(10, 10, 10, 10);
+                textView.setPadding(10, 10, 10, 10);
                 if (isLockFristRow) {
                     textViewParams.height = DisplayUtil.dip2px(mContext, mRowMaxHeights.get(i + 1));
                 } else {
@@ -778,7 +762,7 @@ public class LockTableView {
             //设置布局
             LinearLayout.LayoutParams textViewParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
                     LinearLayout.LayoutParams.WRAP_CONTENT);
-            textViewParams.setMargins(10, 10, 10, 10);
+            textView.setPadding(10, 10, 10, 10);
             textView.setLayoutParams(textViewParams);
             ViewGroup.LayoutParams textViewParamsCopy = textView.getLayoutParams();
             if (isLockFristColumn) {

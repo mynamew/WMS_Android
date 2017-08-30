@@ -2,7 +2,10 @@ package com.timi.sz.wms_android.mvp.UI.stock_out.buy_return_material;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -10,11 +13,14 @@ import android.widget.TextView;
 import com.timi.sz.wms_android.R;
 import com.timi.sz.wms_android.base.uils.Constants;
 import com.timi.sz.wms_android.base.uils.LogUitls;
-import com.timi.sz.wms_android.mvp.UI.stock_out.buy_return_material.scan_return_material.ScanReturnMaterialActivity;
+import com.timi.sz.wms_android.base.uils.ToastUtils;
+import com.timi.sz.wms_android.bean.buy_return.MaterialBean;
+import com.timi.sz.wms_android.bean.buy_return.OrderNoBean;
+import com.timi.sz.wms_android.mvp.UI.stock_out.buy_return_material.material.ScanReturnMaterialActivity;
+import com.timi.sz.wms_android.mvp.UI.stock_out.buy_return_material.orderno.BuyReturnMaterialOrderNoActivity;
 import com.timi.sz.wms_android.mvp.base.BaseActivity;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 import static com.timi.sz.wms_android.base.uils.Constants.REQUEST_SCAN_CODE_MATERIIAL;
@@ -56,7 +62,26 @@ public class BuyReturnMaterialActivity extends BaseActivity<BuyReturnMaterialVie
 
     @Override
     public void initView() {
-
+          etBuyReturnMaterialOrderno.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+              @Override
+              public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                  if(actionId== EditorInfo.IME_ACTION_SEARCH){
+                      /**
+                       * 输入的内容
+                       */
+                      String inputStr = etBuyReturnMaterialOrderno.getText().toString().trim();
+                      if(TextUtils.isEmpty(inputStr)){
+                          ToastUtils.showShort(getString(R.string.please_input_return_material_orderno_or_scan));
+                      }else {
+                          /**
+                           * 退料单号的 网络请求
+                           */
+                          getPresenter().returnMaterialScanNetWork(inputStr);
+                      }
+                  }
+                  return false;
+              }
+          });
     }
 
     @Override
@@ -78,18 +103,15 @@ public class BuyReturnMaterialActivity extends BaseActivity<BuyReturnMaterialVie
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tv_putaway_scan_material://扫物料码的点击事件
-                startActivity(new Intent(BuyReturnMaterialActivity.this, ScanReturnMaterialActivity.class));
-//                scan(Constants.REQUEST_SCAN_CODE_MATERIIAL);
+                scan(Constants.REQUEST_SCAN_CODE_MATERIIAL);
                 break;
-            case R.id.iv_putaway_scan_material:
-                startActivity(new Intent(BuyReturnMaterialActivity.this, ScanReturnMaterialActivity.class));
-//                scan(Constants.REQUEST_SCAN_CODE_MATERIIAL);
+            case R.id.iv_putaway_scan_material://扫物料码的点击事件
+                scan(Constants.REQUEST_SCAN_CODE_MATERIIAL);
                 break;
-            case R.id.et_buy_return_material_orderno://退了单号
+            case R.id.et_buy_return_material_orderno://退料单号
+                break;
+            case R.id.iv_buy_return_material_orderno://退料单号
                 scan(REQUEST_SCAN_CODE_RETURN_MATERIAL);
-                break;
-            case R.id.iv_buy_return_material_orderno:
-//                scan(REQUEST_SCAN_CODE_RETURN_MATERIAL);
                 break;
         }
     }
@@ -101,14 +123,15 @@ public class BuyReturnMaterialActivity extends BaseActivity<BuyReturnMaterialVie
                 if (resultCode == RESULT_OK) {
                     Bundle bundle = data.getExtras();
                     if (bundle != null) {
-                        LogUitls.d("物料码扫码--->", bundle.getString("result"));
+                        LogUitls.e("物料码扫码--->", bundle.getString("result"));
                         /**
                          * 设置扫描返回结果
                          */
                         tvPutawayScanMaterial.setText(bundle.getString("result"));
-                        // TODO: 2017/8/29 进行网络请求 扫描结果进行保存 对物料信息保存到上面的textview上
-                        startActivity(new Intent(BuyReturnMaterialActivity.this, ScanReturnMaterialActivity.class));
-
+                        /**
+                         * 扫物料码的网络请求
+                         */
+                         getPresenter().materialScanNetWork(bundle.getString("result"));
                     }
                 }
                 break;
@@ -116,15 +139,32 @@ public class BuyReturnMaterialActivity extends BaseActivity<BuyReturnMaterialVie
                 if (resultCode == RESULT_OK) {
                     Bundle bundle = data.getExtras();
                     if (bundle != null) {
-                        LogUitls.d("物料码扫码--->", bundle.getString("result"));
+                        LogUitls.e("物料码扫码--->", bundle.getString("result"));
                         /**
                          * 设置扫描返回结果
                          */
                         etBuyReturnMaterialOrderno.setText(bundle.getString("result"));
-                        // TODO: 2017/8/29 进行网络请求 扫描结果进行保存 对物料信息保存到上面的textview上
+                        /**
+                         * 退料单号的 网络请求
+                         */
+                        getPresenter().returnMaterialScanNetWork(bundle.getString("result"));
                     }
                 }
                 break;
         }
+    }
+
+    @Override
+    public void materialScanResult(MaterialBean bean) {
+        Intent intent=new Intent(this,ScanReturnMaterialActivity.class);
+        intent.putExtra("MaterialBean",bean);
+        startActivity(intent);
+    }
+
+    @Override
+    public void ReturnMaterialOrderNoScanResult(OrderNoBean bean) {
+        Intent intent=new Intent(this,BuyReturnMaterialOrderNoActivity.class);
+        intent.putExtra("OrderNoBean",bean);
+        startActivity(intent);
     }
 }

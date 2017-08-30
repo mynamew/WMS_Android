@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:padding="10dp"
-            android:text="@string/sip_order_num"
+            android:text="@string/order_no"
             android:textColor="#333"/>
         <TextView
             android:id="@+id/tv_sip_buyer"
@@ -26,7 +26,7 @@
             android:layout_weight="1"
             android:gravity="right"
             android:padding="10dp"
-            android:text="@string/sip_buyer"
+            android:text="@string/buyer"
             android:textColor="#333"/>
     </LinearLayout>
     <LinearLayout
@@ -40,7 +40,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="10dp"
-            android:text="@string/sip_buy_from"
+            android:text="@string/buy_from"
             android:textColor="#333"/>
 
         <TextView

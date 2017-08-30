@@ -2,6 +2,7 @@ package com.timi.sz.wms_android.mvp.UI.login;
 
 import android.content.Context;
 
+import com.timi.sz.wms_android.base.uils.ToastUtils;
 import com.timi.sz.wms_android.bean.LoginBean;
 import com.timi.sz.wms_android.http.callback.OnResultCallBack;
 import com.timi.sz.wms_android.http.subscriber.HttpSubscriber;
@@ -36,7 +37,7 @@ public class LoginPresenter extends MvpBasePresenter<LoginView> {
 
                 @Override
                 public void onError(String errorMsg) {
-
+                    ToastUtils.showShort(errorMsg);
                 }
             });
         }
