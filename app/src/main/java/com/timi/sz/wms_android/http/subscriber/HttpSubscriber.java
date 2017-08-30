@@ -1,14 +1,11 @@
 package com.timi.sz.wms_android.http.subscriber;
 
 import com.google.gson.stream.MalformedJsonException;
-import com.timi.sz.wms_android.base.uils.ToastUtils;
+import com.jakewharton.retrofit2.adapter.rxjava2.HttpException;
+import com.timi.sz.wms_android.R;
 import com.timi.sz.wms_android.http.callback.OnResultCallBack;
 import com.timi.sz.wms_android.mvp.base.BaseActivity;
-import com.timi.sz.wms_android.mvp.base.BaseApplication;
 import com.timi.sz.wms_android.view.MyProgressDialog;
-
-import org.reactivestreams.Subscriber;
-import org.reactivestreams.Subscription;
 
 import java.net.ConnectException;
 import java.net.SocketTimeoutException;
@@ -20,9 +17,10 @@ import io.reactivex.exceptions.CompositeException;
 
 
 public class HttpSubscriber<T> implements Observer<T> {
-    public static final String CONNECT_EXCEPTION = "网络连接异常，请检查您的网络状态";
-    public static final String SOCKET_TIMEOUT_EXCEPTION = "网络连接超时，请检查您的网络状态，稍后重试";
-    public static final String MALFORMED_JSON_EXCEPTION = "数据解析错误";
+    public static final String CONNECT_EXCEPTION = BaseActivity.getCurrentActivty().getString(R.string.exp_network_exception);
+    public static final String SOCKET_TIMEOUT_EXCEPTION = BaseActivity.getCurrentActivty().getString(R.string.exp_network_timeout);
+    public static final String MALFORMED_JSON_EXCEPTION = BaseActivity.getCurrentActivty().getString(R.string.exp_json_error);
+    public static final String SERVER_TIMEOUT_EXCEPTION = BaseActivity.getCurrentActivty().getString(R.string.exp_server_timeout);
 
     private OnResultCallBack mOnResultListener;
     private Disposable mDisposable;
@@ -69,12 +67,17 @@ public class HttpSubscriber<T> implements Observer<T> {
                     mOnResultListener.onError(MALFORMED_JSON_EXCEPTION);
                 }
             }
-        } else {//
+        } else if (e instanceof HttpException) {//服务器 错误 连接超时
+            mOnResultListener.onError(SERVER_TIMEOUT_EXCEPTION);
+        } else if(e instanceof UnknownHostException){// 测试到时再没网的情况下
+            mOnResultListener.onError(CONNECT_EXCEPTION);
+        }else {//
             /**
              * 弹出提示 所有的后台返回的提示
              */
+            mOnResultListener.onError(e.getMessage());
         }
-        mOnResultListener.onError(e.getMessage());
+
     }
 
     @Override

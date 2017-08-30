@@ -240,6 +240,10 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
         Toast.makeText(this, R.string.login_success, Toast.LENGTH_SHORT).show();
         //登录成功  存储 id
         SpUtils.getInstance().putUserid(bean.getUserId()+"");
+        /**
+         * 存储用户的所有信息 以字符串的形式
+         */
+        SpUtils.getInstance().putString(Constants.USER_INFO, bean.toString());
         //第一次登录以及设置别名
         jumpToMainActivity();
     }
@@ -260,6 +264,7 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
         }
         //设置 第一次登录为 false
         SpUtils.getInstance().putBoolean(Constants.IS_FIRST_LOG, true);
+
     }
 
     /*********************
@@ -459,7 +464,6 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
                                 ToastUtils.showShort(LoginActivity.this, "请输入服务地址");
                                 return;
                             }
-                            // TODO: 2017/8/23 判断url是否正确 可能需要更改
                             if (!text.contains("http")) {
                                 ToastUtils.showShort(LoginActivity.this, "请输入正确地址");
                                 //重置地址

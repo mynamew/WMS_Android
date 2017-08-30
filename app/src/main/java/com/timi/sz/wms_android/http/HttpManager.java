@@ -88,27 +88,30 @@ public class HttpManager {
      * @param s
      * @param <T>
      */
-    private <T> void toSubscribe(Observable<CommonResult<T>> o, Observer<T> s) throws Exception {
+    private <T> void toSubscribe(Observable<CommonResult<T>> o, Observer<T> s) {
         o.subscribeOn(Schedulers.io())
                 .map(new Function<CommonResult<T>, T>() {
                     @Override
                     public T apply(@NonNull CommonResult<T> t) throws Exception {
                         LogUitls.e("返回结果--->", t.toString());
-                        if (t.isUnAuthorizedRequest()) {
-                            if (t.isSuccess()) {//请求成功的返回
+//                            LogUitls.e("返回结果getTargetUrl--->", t.getTargetUrl());
+//                            LogUitls.e("返回结果getError--->", t.getError());
+//                            LogUitls.e("返回结果is__abp--->", t.is__abp());
+//                            LogUitls.e("返回结果isUnAuthorizedRequest--->", t.isUnAuthorizedRequest());
+//                            LogUitls.e("返回结果isSuccess--->", t.isSuccess());
+                        if (t.isSuccess()) {//请求成功的返回
+                            if (t.isUnAuthorizedRequest()) {
                                 return t.getResult();
                             } else {
-                                //发出异常，当返回的不成功的时候
-                                throw new ApiException(t.getError().getDetails());
+                                /**
+                                 * 如果返回的tocken 失效
+                                 */
+                                BaseActivity currentActivty = (BaseActivity) BaseActivity.getCurrentActivty();
+                                currentActivty.jumpToLoginActivity();
+                                return t.getResult();
                             }
                         } else {
-
-                            /**
-                             * 如果返回的tocken 失效
-                             */
-                            BaseActivity currentActivty = (BaseActivity) BaseActivity.getCurrentActivty();
-                            currentActivty.jumpToLoginActivity();
-                            return null;
+                            throw new ApiException(t.getError().getMessage());
                         }
                     }
                 })

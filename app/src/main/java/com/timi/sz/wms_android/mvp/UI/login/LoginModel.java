@@ -24,7 +24,7 @@ public class LoginModel extends MvpBaseModel {
         HttpManager.getInstance().HttpManagerRequest(observer, new ApiServiceMethodCallBack<LoginBean>() {
             @Override
             public Observable<CommonResult<LoginBean>> createObservable(ApiService apiService) {
-                return apiService.login("Default", "admin", "123qwe", 2, "E8-2A-EA-D0-BB-D2");
+                return apiService.login("Default", "admin", "123qwe", 8, "E8-2A-EA-D0-BB-D2");
 
             }
         });

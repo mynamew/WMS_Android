@@ -45,6 +45,10 @@ public class Constants {
     public static final String USER_ROOT = "USER_ROOT";
     //登录的id
     public static final String CUSER_ID = "USER_ID";
+    //租户信息
+    public static final String TENANCY_NAME = "TENANCY_NAME";
+    //用户所有的信息
+    public static final String USER_INFO = "USER_INFO";
     //是否是 debug的状态
     public static final boolean IS_DEBUG = isApkDebugable(BaseApplication.getMApplicationContext());
     /***********
@@ -67,10 +71,6 @@ public class Constants {
      * SharePerference存储用户选的baseurl
      *********************************************************************************************/
     public static final String SP_BASE_URL = "SP_BASE_URL";
-    /***********
-     * SharePerference 存储用户的租户
-     *********************************************************************************************/
-    public static final String TENANCY_NAME = "TENANCY_NAME";
     /***********
      * SharePerference 软件更新相关
      *********************************************************************************************/

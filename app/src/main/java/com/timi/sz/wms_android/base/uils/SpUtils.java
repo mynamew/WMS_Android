@@ -215,7 +215,7 @@ public class SpUtils {
      */
     public SpUtils puttenancyName(String value) {
         getSharedPreferences();
-        editor.putString(Constants.SP_BASE_URL, value).commit();
+        editor.putString(Constants.TENANCY_NAME, value).commit();
         return this;
     }
 
@@ -226,7 +226,7 @@ public class SpUtils {
      */
     public String gettenancyName() {
         getSharedPreferences();
-        return mPreference.getString(Constants.SP_BASE_URL, "");
+        return mPreference.getString(Constants.TENANCY_NAME, "");
     }
 
     /**

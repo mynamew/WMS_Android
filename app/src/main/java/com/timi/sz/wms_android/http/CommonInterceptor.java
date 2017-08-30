@@ -66,11 +66,11 @@ public class CommonInterceptor implements Interceptor {
             // 普通请求
             newRequest = oldRequest.newBuilder()
                     //类型
-//                    .addHeader("Content-Type", "application/json")
-//                    //请求的token
-//                    .addHeader(Constants.AUTHORIZATION, SpUtils.getInstance().getAuthorization())
-//                    //请求的语言
-//                    .addHeader(Constants.LOCALE_LAUGUAGE, SpUtils.getInstance().getLocaleLanguage())
+                    .addHeader("Content-Type", "application/json")
+                    //请求的token
+                    .addHeader(Constants.AUTHORIZATION, SpUtils.getInstance().getAuthorization())
+                    //请求的语言
+                    .addHeader(Constants.LOCALE_LAUGUAGE, SpUtils.getInstance().getLocaleLanguage())
                     .method(oldRequest.method(), oldRequest.body())
                     .url(parseUrl)
                     .build();
@@ -78,9 +78,9 @@ public class CommonInterceptor implements Interceptor {
             // 登录请求
             newRequest = oldRequest.newBuilder()
                     //类型
-//                    .addHeader("Content-Type", "application/json")
-//                    //请求的语言
-//                    .addHeader(Constants.LOCALE_LAUGUAGE, SpUtils.getInstance().getLocaleLanguage())
+                    .addHeader("Content-Type", "application/json")
+                    //请求的语言
+                    .addHeader(Constants.LOCALE_LAUGUAGE, SpUtils.getInstance().getLocaleLanguage())
                     .method(oldRequest.method(), oldRequest.body())
                     .url(parseUrl)
                     .build();

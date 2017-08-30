@@ -30,7 +30,7 @@ import com.timi.sz.wms_android.R;
 public class MyDialog extends Dialog {
     private Context ctx;
     private View rootView;
-    private SparseArray<View> views = new SparseArray<>();
+    private SparseArray<View> views;
     /**
      * 0 :  默认的弹出框优先级
      * 1 ： 系统公告
@@ -41,6 +41,9 @@ public class MyDialog extends Dialog {
 
     public MyDialog(Context context, int layoutId) {
         super(context, R.style.Dialog);
+        if(null==views){
+            views = new SparseArray<>();
+        }
         initView(context, layoutId);
     }
 
@@ -97,8 +100,6 @@ public class MyDialog extends Dialog {
         }
         Button bt = (Button) rootView.findViewById(resId);
         if (null != bt) {
-            //存储控件
-            views.put(resId, bt);
             //设置内容
             if (null != content && !TextUtils.isEmpty(content)) {
                 bt.setText(content);
@@ -111,6 +112,8 @@ public class MyDialog extends Dialog {
                     }
                 });
             }
+            //存储控件
+            views.put(resId, bt);
         }
         return this;
     }

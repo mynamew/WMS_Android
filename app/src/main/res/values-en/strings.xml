@@ -251,5 +251,9 @@
     /**====== 其他出库 出库扫描 ======**/
     <string name="other_out_stock_scan_title">其他出库—出库扫描</string>
     <string name="create_other_out_stock_orderno">生成其他出库单</string>
+    <string name="exp_network_exception">网络连接异常，请检查您的网络状态</string>
+    <string name="exp_network_timeout">网络连接超时，请检查您的网络状态，稍后重试</string>
+    <string name="exp_json_error">数据解析错误</string>
+    <string name="exp_server_timeout">服务器连接超时</string>
 
 </resources>
