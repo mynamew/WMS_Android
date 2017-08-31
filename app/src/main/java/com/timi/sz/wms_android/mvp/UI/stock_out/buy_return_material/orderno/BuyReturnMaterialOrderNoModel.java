@@ -1,7 +1,7 @@
 package com.timi.sz.wms_android.mvp.UI.stock_out.buy_return_material.orderno;
 
-import com.timi.sz.wms_android.bean.buy_return.MaterialBean;
-import com.timi.sz.wms_android.bean.buy_return.OrderNoAddMaterial;
+import com.timi.sz.wms_android.bean.outstock.MaterialBean;
+import com.timi.sz.wms_android.bean.outstock.OrderNoAddMaterial;
 import com.timi.sz.wms_android.http.HttpManager;
 import com.timi.sz.wms_android.http.api.ApiService;
 import com.timi.sz.wms_android.http.api.CommonResult;

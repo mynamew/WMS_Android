@@ -43,6 +43,18 @@ public abstract  class BaseFragment <V extends MvpView, P extends MvpPresenter<V
         View itemView = inflater.inflate(setLayoutId(), null);
         unbinder = ButterKnife.bind(this, itemView);
         AutoUtils.autoSize(itemView);
+        //绑定 presenter
+        if (this.presenter == null) {
+            this.presenter = createPresenter();
+        }
+        //view
+        if (this.view == null) {
+            this.view = createView();
+        }
+        //attach
+        if (this.presenter != null && this.view != null) {
+            this.presenter.attachView(view);
+        }
         return itemView;
     }
 

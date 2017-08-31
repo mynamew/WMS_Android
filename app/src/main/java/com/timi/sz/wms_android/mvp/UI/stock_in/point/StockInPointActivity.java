@@ -1,12 +1,16 @@
 package com.timi.sz.wms_android.mvp.UI.stock_in.point;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 
 import com.timi.sz.wms_android.R;
+import com.timi.sz.wms_android.base.uils.Constants;
 import com.timi.sz.wms_android.base.uils.ToastUtils;
+import com.timi.sz.wms_android.bean.instock.search.BuyOrdernoBean;
+import com.timi.sz.wms_android.bean.instock.search.SendOrdernoBean;
 import com.timi.sz.wms_android.mvp.base.BaseActivity;
 
 import butterknife.BindView;
@@ -22,6 +26,11 @@ public class StockInPointActivity extends BaseActivity<StockInPointView, StockIn
     private String[] titles;
     private Fragment mPointFragment;
     private Fragment mPointRecordFragment;
+    private int intentCode;
+    //采购单 实体
+    private BuyOrdernoBean mBuyBean;
+    //发货单实体
+    private SendOrdernoBean mSendBean;
     @Override
     public int setLayoutId() {
         return R.layout.activity_stock_in_point;
@@ -30,6 +39,11 @@ public class StockInPointActivity extends BaseActivity<StockInPointView, StockIn
     @Override
     public void initBundle(Bundle savedInstanceState) {
         setActivityTitle("收货-物品清点");
+        intentCode = getIntent().getIntExtra(Constants.CODE_STR, Constants.BUY_ORDE_NUM);
+        if (intentCode == Constants.BUY_ORDE_NUM)
+            mBuyBean=getIntent().getParcelableExtra(Constants.IN_STOCK_BUY_BEAN);
+        else
+            mSendBean=getIntent().getParcelableExtra(Constants.IN_STOCK_SEND_BEAN);
     }
 
     @Override
@@ -105,5 +119,13 @@ public class StockInPointActivity extends BaseActivity<StockInPointView, StockIn
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * 返回当前的Intent
+     * @return
+     */
+    public Intent getIntentCode(){
+        return getIntent();
     }
 }

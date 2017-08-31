@@ -1,4 +1,4 @@
-package com.timi.sz.wms_android.bean.buy_return;
+package com.timi.sz.wms_android.bean.outstock;
 
 /**
  * $dsc  退料单添加物料的bean

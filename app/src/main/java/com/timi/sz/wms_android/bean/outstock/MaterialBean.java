@@ -1,4 +1,4 @@
-package com.timi.sz.wms_android.bean.buy_return;
+package com.timi.sz.wms_android.bean.outstock;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -13,6 +13,7 @@ public class MaterialBean  implements Parcelable{
     public String MaterialName;
     public String MaterialCode;
     public String MaterialModel;
+    public String MaterialBuyNum;
 
     public MaterialBean(String materialName, String materialCode, String materialModel, String materialBuyNum) {
         MaterialName = materialName;
@@ -72,7 +73,6 @@ public class MaterialBean  implements Parcelable{
         MaterialBuyNum = materialBuyNum;
     }
 
-    public String MaterialBuyNum;
 
     @Override
     public int describeContents() {

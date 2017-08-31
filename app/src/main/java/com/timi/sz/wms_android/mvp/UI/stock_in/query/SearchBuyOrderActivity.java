@@ -18,8 +18,16 @@ import android.widget.TextView;
 import com.timi.sz.wms_android.R;
 import com.timi.sz.wms_android.base.uils.Constants;
 import com.timi.sz.wms_android.base.uils.InputMethodUtils;
-import com.timi.sz.wms_android.base.uils.LogUitls;
 import com.timi.sz.wms_android.base.uils.ToastUtils;
+import com.timi.sz.wms_android.bean.instock.search.BuyOrdernoBean;
+import com.timi.sz.wms_android.bean.instock.search.FinishGoodsCreateBillBean;
+import com.timi.sz.wms_android.bean.instock.search.FinishGoodsOrdernoBean;
+import com.timi.sz.wms_android.bean.instock.search.OtherAuditSelectOrdernoBean;
+import com.timi.sz.wms_android.bean.instock.search.OutReturnMaterialBean;
+import com.timi.sz.wms_android.bean.instock.search.ProductionReturnMaterialBean;
+import com.timi.sz.wms_android.bean.instock.search.ReceiveOrdernoBean;
+import com.timi.sz.wms_android.bean.instock.search.SaleGoodsReturnBean;
+import com.timi.sz.wms_android.bean.instock.search.SendOrdernoBean;
 import com.timi.sz.wms_android.mvp.UI.stock_in.point.StockInPointActivity;
 import com.timi.sz.wms_android.mvp.UI.stock_in.putaway.PutAwayActivity;
 import com.timi.sz.wms_android.mvp.base.BaseActivity;
@@ -27,11 +35,23 @@ import com.timi.sz.wms_android.qrcode.CommonScanActivity;
 import com.timi.sz.wms_android.qrcode.utils.Constant;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static com.timi.sz.wms_android.base.uils.Constants.IN_STOCK_BUY_BEAN;
+import static com.timi.sz.wms_android.base.uils.Constants.IN_STOCK_FINISH_BEAN;
+import static com.timi.sz.wms_android.base.uils.Constants.IN_STOCK_FINISH_CREATE_BEAN;
+import static com.timi.sz.wms_android.base.uils.Constants.IN_STOCK_FINISH_OTHER_BEAN;
+import static com.timi.sz.wms_android.base.uils.Constants.IN_STOCK_FINISH_OUT_BEAN;
+import static com.timi.sz.wms_android.base.uils.Constants.IN_STOCK_FINISH_PRODUCTION_BEAN;
+import static com.timi.sz.wms_android.base.uils.Constants.IN_STOCK_FINISH_SALE_BEAN;
+import static com.timi.sz.wms_android.base.uils.Constants.IN_STOCK_RECEIVE_BEAN;
+import static com.timi.sz.wms_android.base.uils.Constants.IN_STOCK_SEND_BEAN;
+import static com.timi.sz.wms_android.base.uils.Constants.ORDER_NO;
 import static com.timi.sz.wms_android.base.uils.Constants.REQUEST_CODE;
 
+/**
+ * 查找订单
+ */
 public class SearchBuyOrderActivity extends BaseActivity<SearchBuyOrderView, SearchBuyOrderPresenter> implements SearchBuyOrderView {
     @BindView(R.id.tv_sbo_tip)
     TextView tvSboTip;
@@ -73,7 +93,7 @@ public class SearchBuyOrderActivity extends BaseActivity<SearchBuyOrderView, Sea
                 etSboInput.setHint(R.string.please_input_receivce_orderno_or_scan);
                 break;
             case Constants.CREATE_PRO_CHECK_NUM://产成品 审核
-                tvSboTip.setText(String.format(getString(R.string.create_task_orderno),""));
+                tvSboTip.setText(String.format(getString(R.string.create_task_orderno), ""));
                 tvTitle.setText(R.string.produce_create_order);
                 etSboInput.setHint(R.string.please_input_create_product_orderno_or_scan);
                 break;
@@ -113,36 +133,19 @@ public class SearchBuyOrderActivity extends BaseActivity<SearchBuyOrderView, Sea
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
 
-                if (actionId == EditorInfo.IME_ACTION_SEARCH){
+                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                     InputMethodUtils.hide(SearchBuyOrderActivity.this);
                     String orderNum = etSboInput.getText().toString().trim();
                     if (TextUtils.isEmpty(orderNum)) {
                         ToastUtils.showShort("请输入单号");
+                    }
+                    if (orderNum.length() <= 4) {
+                        ToastUtils.showShort("输入查询单号位数必须是4位以上");
                     } else {
                         /**
-                         * 不同的intentcode  进行不同的跳转
+                         * 发起请求
                          */
-                        Intent it = new Intent();
-                        it.putExtra(Constants.CODE_STR, intentCode);
-                        switch (intentCode) {
-                            case Constants.BUY_ORDE_NUM://采购单
-                                it.setClass(SearchBuyOrderActivity.this, StockInPointActivity.class);
-                                break;
-                            case Constants.BUY_SEND_NUM://送货单
-                                it.setClass(SearchBuyOrderActivity.this, StockInPointActivity.class);
-                                break;
-                            case Constants.OTHER_IN_STOCK_SCAN:// 其他扫描 （扫码 不进行单据的查询）
-                            case Constants.COME_MATERAIL_NUM://来料单
-                            case Constants.CREATE_PRO_CHECK_NUM://产成品 审核
-                            case Constants.CREATE_PRO_CREATE_ORDER_NUM://产成品 生单
-                            case Constants.OTHER_IN_STOCK_SELECT_ORDERNO://其他 选单
-                            case Constants.OUT_RETURN_MATERAIL://委外退料
-                            case Constants.CREATE_RETURN_MATERAIL://生产退料
-                            case Constants.SALE_RETURN_MATERAIL://销售 退料
-                                it.setClass(SearchBuyOrderActivity.this, PutAwayActivity.class);
-                                break;
-                        }
-                        startActivity(it);
+                        requestManagerMethod(orderNum);
                     }
                 }
                 return false;
@@ -198,11 +201,167 @@ public class SearchBuyOrderActivity extends BaseActivity<SearchBuyOrderView, Sea
                     Bundle bundle = data.getExtras();
                     if (bundle != null) {
                         etSboInput.setText(bundle.getString("result"));
-                        // TODO: 2017/8/18 请求单号接口返回信息  
+                        requestManagerMethod(bundle.getString("result"));
                     }
                 }
                 break;
         }
     }
 
+    /**
+     * 采购单跳转
+     *
+     * @param bean
+     */
+    @Override
+    public void buyOrdernoQuery(BuyOrdernoBean bean) {
+        Intent it = new Intent(this, StockInPointActivity.class);
+        it.putExtra(Constants.CODE_STR, intentCode);
+        it.putExtra(IN_STOCK_BUY_BEAN, bean);
+        startActivity(it);
+    }
+
+    /**
+     * 收货单跳转
+     *
+     * @param bean
+     */
+    @Override
+    public void sendOrdernoQuery(SendOrdernoBean bean) {
+        Intent it = new Intent(this, StockInPointActivity.class);
+        it.putExtra(Constants.CODE_STR, intentCode);
+        it.putExtra(IN_STOCK_SEND_BEAN, bean);
+        startActivity(it);
+    }
+
+    /**
+     * 收货单跳转
+     *
+     * @param bean
+     */
+    @Override
+    public void searchReceiveGoodOrderno(ReceiveOrdernoBean bean) {
+        Intent it = new Intent(this, PutAwayActivity.class);
+        it.putExtra(Constants.CODE_STR, intentCode);
+        it.putExtra(IN_STOCK_RECEIVE_BEAN, bean);
+        startActivity(it);
+    }
+
+    /**
+     * 产成品- 审核
+     *
+     * @param bean
+     */
+    @Override
+    public void searchFinishGoodsOrderno(FinishGoodsOrdernoBean bean) {
+        Intent it = new Intent(this, PutAwayActivity.class);
+        it.putExtra(Constants.CODE_STR, intentCode);
+        it.putExtra(IN_STOCK_FINISH_BEAN, bean);
+        startActivity(it);
+    }
+
+    /**
+     * 产成品  生单
+     *
+     * @param bean
+     */
+    @Override
+    public void searchFinishGoodsCreateBillOrderno(FinishGoodsCreateBillBean bean) {
+        Intent it = new Intent(this, PutAwayActivity.class);
+        it.putExtra(Constants.CODE_STR, intentCode);
+        it.putExtra(IN_STOCK_FINISH_CREATE_BEAN, bean);
+        startActivity(it);
+    }
+
+    /**
+     * 其他 选单
+     *
+     * @param bean
+     */
+    @Override
+    public void searchOtherAuditSelectOrderno(OtherAuditSelectOrdernoBean bean) {
+        Intent it = new Intent(this, PutAwayActivity.class);
+        it.putExtra(Constants.CODE_STR, intentCode);
+        it.putExtra(IN_STOCK_FINISH_OTHER_BEAN, bean);
+        startActivity(it);
+    }
+
+    /**
+     * 委外
+     *
+     * @param bean
+     */
+    @Override
+    public void searchOutReturnMaterialOrderno(OutReturnMaterialBean bean) {
+        Intent it = new Intent(this, PutAwayActivity.class);
+        it.putExtra(Constants.CODE_STR, intentCode);
+        it.putExtra(IN_STOCK_FINISH_OUT_BEAN, bean);
+        startActivity(it);
+    }
+
+    /**
+     * 生产
+     *
+     * @param bean
+     */
+    @Override
+    public void searchProductionReturnMaterialOrderno(ProductionReturnMaterialBean bean) {
+        Intent it = new Intent(this, PutAwayActivity.class);
+        it.putExtra(Constants.CODE_STR, intentCode);
+        it.putExtra(IN_STOCK_FINISH_PRODUCTION_BEAN, bean);
+        startActivity(it);
+    }
+
+    /**
+     * 销售
+     *
+     * @param bean
+     */
+    @Override
+    public void searchSaleGoodsReturnOrderno(SaleGoodsReturnBean bean) {
+        Intent it = new Intent(this, PutAwayActivity.class);
+        it.putExtra(Constants.CODE_STR, intentCode);
+        it.putExtra(IN_STOCK_FINISH_SALE_BEAN, bean);
+        startActivity(it);
+    }
+
+    /**
+     * 根据 intentcode 发起不同的请求
+     *
+     * @param orderNum
+     */
+    public void requestManagerMethod(String orderNum) {
+        /**
+         * 不同的intentcode  请求不同
+         */
+        switch (intentCode) {
+            case Constants.BUY_ORDE_NUM://采购单
+                getPresenter().buyOrdernoQuery(orderNum);
+                break;
+            case Constants.BUY_SEND_NUM://送货单
+                getPresenter().sendOrdernoQuery(orderNum);
+                break;
+            case Constants.COME_MATERAIL_NUM://来料单
+                getPresenter().searchReceiveGoodOrderno(orderNum);
+                break;
+            case Constants.CREATE_PRO_CHECK_NUM://产成品 审核
+                getPresenter().searchFinishGoodsOrderno(orderNum);
+                break;
+            case Constants.CREATE_PRO_CREATE_ORDER_NUM://产成品 生单
+                getPresenter().searchFinishGoodsCreateBillOrderno(orderNum);
+                break;
+            case Constants.OTHER_IN_STOCK_SELECT_ORDERNO://其他 生单
+                getPresenter().searchOtherAuditSelectOrderno(orderNum);
+                break;
+            case Constants.OUT_RETURN_MATERAIL://委外退料
+                getPresenter().searchOutReturnMaterialOrderno(orderNum);
+                break;
+            case Constants.CREATE_RETURN_MATERAIL://生产退料
+                getPresenter().searchProductionReturnMaterialOrderno(orderNum);
+                break;
+            case Constants.SALE_RETURN_MATERAIL://销售 退料
+                getPresenter().searchSaleGoodsReturnOrderno(orderNum);
+                break;
+        }
+    }
 }

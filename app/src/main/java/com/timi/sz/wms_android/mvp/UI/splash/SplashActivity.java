@@ -25,16 +25,16 @@ public class SplashActivity extends AutoLayoutActivity {
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             //是否是第一次登录  跳转登录还是主页
-            if (!SpUtils.getInstance().getBoolean(Constants.IS_FIRST_LOG)) {
-                startActivity(new Intent(SplashActivity.this, LoginActivity.class));
-            } else {
-                startActivity(new Intent(SplashActivity.this, MainActivity.class));
-            }
-//            if (SpUtils.getInstance().getBoolean(Constants.IS_FIRST_LOG)) {
+//            if (!SpUtils.getInstance().getBoolean(Constants.IS_FIRST_LOG)) {
 //                startActivity(new Intent(SplashActivity.this, LoginActivity.class));
 //            } else {
 //                startActivity(new Intent(SplashActivity.this, MainActivity.class));
 //            }
+            if (SpUtils.getInstance().getBoolean(Constants.IS_FIRST_LOG)) {
+                startActivity(new Intent(SplashActivity.this, LoginActivity.class));
+            } else {
+                startActivity(new Intent(SplashActivity.this, MainActivity.class));
+            }
             onBackPressed();
         }
     };

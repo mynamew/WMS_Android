@@ -5,6 +5,7 @@ import com.jakewharton.retrofit2.adapter.rxjava2.HttpException;
 import com.timi.sz.wms_android.R;
 import com.timi.sz.wms_android.http.callback.OnResultCallBack;
 import com.timi.sz.wms_android.mvp.base.BaseActivity;
+import com.timi.sz.wms_android.mvp.base.BaseApplication;
 import com.timi.sz.wms_android.view.MyProgressDialog;
 
 import java.net.ConnectException;
@@ -17,10 +18,10 @@ import io.reactivex.exceptions.CompositeException;
 
 
 public class HttpSubscriber<T> implements Observer<T> {
-    public static final String CONNECT_EXCEPTION = BaseActivity.getCurrentActivty().getString(R.string.exp_network_exception);
-    public static final String SOCKET_TIMEOUT_EXCEPTION = BaseActivity.getCurrentActivty().getString(R.string.exp_network_timeout);
-    public static final String MALFORMED_JSON_EXCEPTION = BaseActivity.getCurrentActivty().getString(R.string.exp_json_error);
-    public static final String SERVER_TIMEOUT_EXCEPTION = BaseActivity.getCurrentActivty().getString(R.string.exp_server_timeout);
+    public static final String CONNECT_EXCEPTION = BaseApplication.getMApplicationContext().getString(R.string.exp_network_exception);
+    public static final String SOCKET_TIMEOUT_EXCEPTION = BaseApplication.getMApplicationContext().getString(R.string.exp_network_timeout);
+    public static final String MALFORMED_JSON_EXCEPTION = BaseApplication.getMApplicationContext().getString(R.string.exp_json_error);
+    public static final String SERVER_TIMEOUT_EXCEPTION = BaseApplication.getMApplicationContext().getString(R.string.exp_server_timeout);
 
     private OnResultCallBack mOnResultListener;
     private Disposable mDisposable;
@@ -88,6 +89,7 @@ public class HttpSubscriber<T> implements Observer<T> {
     public void unSubscribe() {
         if (mDisposable != null && !mDisposable.isDisposed()) {
             mDisposable.dispose();
+            MyProgressDialog.hideProgressDialog();
         }
     }
 }

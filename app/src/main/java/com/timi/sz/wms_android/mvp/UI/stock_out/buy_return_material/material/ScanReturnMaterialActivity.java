@@ -8,7 +8,7 @@ import android.widget.TextView;
 import com.timi.sz.wms_android.R;
 import com.timi.sz.wms_android.base.uils.Constants;
 import com.timi.sz.wms_android.base.uils.LogUitls;
-import com.timi.sz.wms_android.bean.buy_return.MaterialBean;
+import com.timi.sz.wms_android.bean.outstock.MaterialBean;
 import com.timi.sz.wms_android.mvp.base.BaseActivity;
 
 import butterknife.BindView;

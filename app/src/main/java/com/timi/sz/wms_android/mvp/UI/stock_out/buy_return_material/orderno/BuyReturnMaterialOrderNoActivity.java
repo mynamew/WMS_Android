@@ -3,19 +3,17 @@ package com.timi.sz.wms_android.mvp.UI.stock_out.buy_return_material.orderno;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.timi.sz.wms_android.R;
 import com.timi.sz.wms_android.base.uils.Constants;
 import com.timi.sz.wms_android.base.uils.LogUitls;
 import com.timi.sz.wms_android.base.uils.ToastUtils;
-import com.timi.sz.wms_android.bean.buy_return.MaterialBean;
-import com.timi.sz.wms_android.bean.buy_return.OrderNoBean;
+import com.timi.sz.wms_android.bean.outstock.MaterialBean;
+import com.timi.sz.wms_android.bean.outstock.OrderNoBean;
 import com.timi.sz.wms_android.mvp.base.BaseActivity;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 import static com.timi.sz.wms_android.base.uils.Constants.REQUEST_SCAN_CODE_MATERIIAL;

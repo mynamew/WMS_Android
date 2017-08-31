@@ -37,6 +37,7 @@
             android:imeOptions="actionSearch"
             android:paddingLeft="20px"
             android:paddingRight="80px"
+            android:inputType="textVisiblePassword"
             android:singleLine="true"
             android:text=""
             android:textSize="14sp"/>

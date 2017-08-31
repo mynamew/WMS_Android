@@ -1,4 +1,4 @@
-package com.timi.sz.wms_android.bean.buy_return;
+package com.timi.sz.wms_android.bean.outstock;
 
 import android.os.Parcel;
 import android.os.Parcelable;

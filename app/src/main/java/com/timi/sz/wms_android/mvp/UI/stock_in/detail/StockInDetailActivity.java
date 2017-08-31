@@ -6,6 +6,9 @@ import com.timi.sz.wms_android.R;
 import com.timi.sz.wms_android.base.uils.Constants;
 import com.timi.sz.wms_android.mvp.base.BaseActivity;
 
+/**
+ * 详情
+ */
 public class StockInDetailActivity extends BaseActivity<StockInDetailView, StockInPresenter> {
     private int intentCode= Constants.COME_MATERAIL_NUM;//来料单
     @Override

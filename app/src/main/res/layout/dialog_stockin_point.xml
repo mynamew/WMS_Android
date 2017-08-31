@@ -72,9 +72,11 @@
                 android:textSize="14sp"/>
 
             <EditText
+                android:layout_marginRight="20px"
                 android:id="@+id/et_stockin_point_pro_point_num"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:inputType="number"
                 android:layout_marginBottom="10px"
                 android:layout_marginTop="10px"
                 android:background="@drawable/bg_sbo_rectangle_et"
@@ -108,7 +110,9 @@
                 android:layout_marginTop="10px"
                 android:background="@drawable/bg_sbo_rectangle_et"
                 android:gravity="center_vertical"
+                android:inputType="number"
                 android:hint="@string/please_input_spare_num"
+                android:layout_marginRight="20px"
                 android:maxLines="1"
                 android:paddingLeft="20px"
                 android:textSize="14sp"/>

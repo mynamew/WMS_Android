@@ -91,6 +91,7 @@ public class Constants {
      * 入库跳转到查询界面的不同code码
      *********************************************************************************************/
     public static final String CODE_STR="stockin_code";//入库的code码的key
+    public static final String ORDER_NO="order_no";//单号
     public static final int BUY_ORDE_NUM = 5001;//采购单
     public static final int BUY_SEND_NUM = 5002;//送货单
     public static final int COME_MATERAIL_NUM = 5003;//来料单
@@ -101,5 +102,25 @@ public class Constants {
     public static final int OUT_RETURN_MATERAIL = 5008;//委外退料-选单
     public static final int CREATE_RETURN_MATERAIL = 5009;//生产退料-选单
     public static final int SALE_RETURN_MATERAIL = 5010;//销售退料-扫描
-
+    /***********
+     * 入库跳转到查询界面的不同实体的key
+     *********************************************************************************************/
+     //采购单
+    public static final String IN_STOCK_BUY_BEAN="in_stock_buy_orderno";
+    //送货单
+    public static final String IN_STOCK_SEND_BEAN="in_stock_send_orderno";
+    //收货单
+    public static final String IN_STOCK_RECEIVE_BEAN="in_stock_receive_orderno";
+    //产成品 审核
+    public static final String IN_STOCK_FINISH_BEAN="in_stock_finish_orderno";
+    //产成品 生单
+    public static final String IN_STOCK_FINISH_CREATE_BEAN="in_stock_craate_orderno";
+    //其他 选单
+    public static final String IN_STOCK_FINISH_OTHER_BEAN="in_stock_other_orderno";
+    //委外退料
+    public static final String IN_STOCK_FINISH_OUT_BEAN="in_stock_out_orderno";
+    //生产退料
+    public static final String IN_STOCK_FINISH_PRODUCTION_BEAN="in_stock_production_orderno";
+    //销售退料
+    public static final String IN_STOCK_FINISH_SALE_BEAN="in_stock_sale_orderno";
 }

@@ -195,6 +195,8 @@
         </activity>
         <activity android:name=".mvp.UI.stock_out.other.scan.OtherOutStockScanActivity">
         </activity>
+        <activity android:name=".mvp.UI.stock_in.other_scan.OtherScanActivity">
+        </activity>
     </application>
 
 </manifest>

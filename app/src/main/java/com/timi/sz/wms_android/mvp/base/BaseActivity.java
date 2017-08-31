@@ -199,6 +199,13 @@ public abstract class BaseActivity<V extends MvpView, P extends MvpPresenter<V>>
     public abstract V createView();
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        //current activity  为了解决progress  dialog 弹出 context改变的问题
+        currentActivity = this;
+    }
+
+    @Override
     protected void onDestroy() {
         super.onDestroy();
         if (this.presenter != null) {
@@ -336,5 +343,14 @@ public abstract class BaseActivity<V extends MvpView, P extends MvpPresenter<V>>
      */
     public void setTextViewText(TextView tv, @StringRes int fomat, String content) {
         tv.setText(String.format(getString(fomat), content));
+    }
+    /**
+     *设置 文本
+     * @param tv
+     * @param fomat
+     * @param content
+     */
+    public void setTextViewText(TextView tv, @StringRes int fomat, int content) {
+        tv.setText(String.format(getString(fomat), String.valueOf(content)));
     }
 }
