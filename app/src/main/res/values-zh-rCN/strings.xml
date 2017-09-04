@@ -202,7 +202,7 @@
     <string name="out_return_material_title">委外退料—入库上架</string>
     <string name="create_return_material_title">生产退料—入库上架</string>
     <string name="sale_return_material_title">销售退料—入库上架</string>
-    <string name="have_scan_num">已扫总数：%1$s</string>
+    <string name="have_scan_num">已扫总数：</string>
     <string name="create_instock_orderno">生成入库单</string>
     <string name="create_product_orderno">生成产成品入库单</string>
     <string name="confirm_commit">确认提交</string>

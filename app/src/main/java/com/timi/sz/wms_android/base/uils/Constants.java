@@ -56,8 +56,8 @@ public class Constants {
      *********************************************************************************************/
     public static final int REQUEST_CODE = 1001;//主页跳转到扫码
     public static final int REQUEST_SCAN_CODE_MATERIIAL = 1002;//物料条码 扫码
-    public static final int REQUEST_SCAN_CODE_LIB_LOATION= 1003;//库位码  扫码
-    public static final int REQUEST_SCAN_CODE_RETURN_MATERIAL= 1003;//退料单号  扫码
+    public static final int REQUEST_SCAN_CODE_LIB_LOATION = 1003;//库位码  扫码
+    public static final int REQUEST_SCAN_CODE_RETURN_MATERIAL = 1003;//退料单号  扫码
     /***********
      * SharePerference存储token   key /  value的前缀
      *********************************************************************************************/
@@ -90,8 +90,8 @@ public class Constants {
     /***********
      * 入库跳转到查询界面的不同code码
      *********************************************************************************************/
-    public static final String CODE_STR="stockin_code";//入库的code码的key
-    public static final String ORDER_NO="order_no";//单号
+    public static final String CODE_STR = "stockin_code";//入库的code码的key
+    public static final String ORDER_NO = "order_no";//单号
     public static final int BUY_ORDE_NUM = 5001;//采购单
     public static final int BUY_SEND_NUM = 5002;//送货单
     public static final int COME_MATERAIL_NUM = 5003;//来料单
@@ -105,22 +105,34 @@ public class Constants {
     /***********
      * 入库跳转到查询界面的不同实体的key
      *********************************************************************************************/
-     //采购单
-    public static final String IN_STOCK_BUY_BEAN="in_stock_buy_orderno";
+    //单号(传递到详情界面)
+    public static final String IN_STOCK_ORDERNO = "inStockOrderno";
+    //采购单
+    public static final String IN_STOCK_BUY_BEAN = "in_stock_buy_orderno";
     //送货单
-    public static final String IN_STOCK_SEND_BEAN="in_stock_send_orderno";
+    public static final String IN_STOCK_SEND_BEAN = "in_stock_send_orderno";
     //收货单
-    public static final String IN_STOCK_RECEIVE_BEAN="in_stock_receive_orderno";
+    public static final String IN_STOCK_RECEIVE_BEAN = "in_stock_receive_orderno";
     //产成品 审核
-    public static final String IN_STOCK_FINISH_BEAN="in_stock_finish_orderno";
+    public static final String IN_STOCK_FINISH_BEAN = "in_stock_finish_orderno";
     //产成品 生单
-    public static final String IN_STOCK_FINISH_CREATE_BEAN="in_stock_craate_orderno";
+    public static final String IN_STOCK_FINISH_CREATE_BEAN = "in_stock_craate_orderno";
     //其他 选单
-    public static final String IN_STOCK_FINISH_OTHER_BEAN="in_stock_other_orderno";
+    public static final String IN_STOCK_FINISH_OTHER_BEAN = "in_stock_other_orderno";
     //委外退料
-    public static final String IN_STOCK_FINISH_OUT_BEAN="in_stock_out_orderno";
+    public static final String IN_STOCK_FINISH_OUT_BEAN = "in_stock_out_orderno";
     //生产退料
-    public static final String IN_STOCK_FINISH_PRODUCTION_BEAN="in_stock_production_orderno";
+    public static final String IN_STOCK_FINISH_PRODUCTION_BEAN = "in_stock_production_orderno";
     //销售退料
-    public static final String IN_STOCK_FINISH_SALE_BEAN="in_stock_sale_orderno";
-}
+    public static final String IN_STOCK_FINISH_SALE_BEAN = "in_stock_sale_orderno";
+
+
+    /***********
+     * 出库跳转的key
+     *********************************************************************************************/
+
+    /**
+     * 采购退料 退料单的key
+     */
+    public static final String OUT_STOCK_BUY_RETURN_ORDERNO_BEAN = "out_stock_buy_return_orderno_bean";
+   }

@@ -141,7 +141,7 @@
     <string name="out_return_material_title">委外退料—入庫上架</string>
     <string name="create_return_material_title">生產退料—入庫上架</string>
     <string name="sale_return_material_title">銷售退料—入庫上架</string>
-    <string name="have_scan_num">已掃總數：%1$s</string>
+    <string name="have_scan_num">已掃總數：</string>
     <string name="create_instock_orderno">生成入庫單</string>
     <string name="create_product_orderno">生成產成品入庫單</string>
     <string name="confirm_commit">確認提交</string>

@@ -5,21 +5,23 @@
                 android:background="@color/set_bg"
     >
 
+
     <LinearLayout
         android:id="@+id/ll_stockin_point_record"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"/>
 
+
     <LinearLayout
-         android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="100px"
         android:layout_alignParentBottom="true"
-        android:orientation="horizontal"
         android:layout_marginBottom="20px"
+        android:orientation="horizontal"
         android:paddingLeft="30px"
-        android:paddingRight="30px">
+        android:paddingRight="30px"
+        android:visibility="gone">
 
         <Button
             android:id="@+id/btn_check"

@@ -128,7 +128,7 @@ public class FragmentPoint extends BaseFragment<FragmentPointView, FragmentPoint
         }
         LockTableView mLockTableView = new LockTableView(getActivity(), llPointContent, mTableDatas);
         Log.e("表格加载开始", "当前线程：" + Thread.currentThread());
-        mLockTableView.setLockFristColumn(false) //是否锁定第一列
+        mLockTableView.setLockFristColumn(true) //是否锁定第一列
                 .setLockFristRow(true) //是否锁定第一行
                 .setMaxColumnWidth(100) //列最大宽度
                 .setMinColumnWidth(10) //列最小宽度

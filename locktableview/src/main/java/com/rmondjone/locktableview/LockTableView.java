@@ -1,7 +1,6 @@
 package com.rmondjone.locktableview;
 
 import android.content.Context;
-import android.graphics.Canvas;
 import android.support.v4.content.ContextCompat;
 import android.text.Layout;
 import android.text.StaticLayout;
@@ -14,7 +13,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -92,6 +90,10 @@ public class LockTableView {
      * 表格监听事件
      */
     private OnTableViewListener mTableViewListener;
+    /**
+     * 表格竖直滑动 的监听事件
+     */
+    private MyCustomScrollView.OnScrollListener mScrollListener;
 
 
     //表格数据
@@ -149,7 +151,7 @@ public class LockTableView {
     /**
      * 表格主视图
      */
-    private ScrollView mTableScrollView;
+    private MyCustomScrollView mTableScrollView;
 
 
     /**
@@ -245,7 +247,8 @@ public class LockTableView {
                     //设置布局
                     LinearLayout.LayoutParams textViewParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
                             LinearLayout.LayoutParams.WRAP_CONTENT);
-                    textViewParams.setMargins(10, 10, 10, 10);//android:layout_margin="15dp"
+                    textView.setPadding(10,10,10,10);
+//                    textViewParams.setMargins(10, 10, 10, 10);//android:layout_margin="15dp"
                     textView.setLayoutParams(textViewParams);
                     if (i == 0) {
                         mColumnMaxWidths.add(measureTextWidth(textView, rowDatas.get(j)));
@@ -275,7 +278,8 @@ public class LockTableView {
                 //设置布局
                 LinearLayout.LayoutParams textViewParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
                         LinearLayout.LayoutParams.WRAP_CONTENT);
-                textViewParams.setMargins(10, 10, 10, 10);//android:layout_margin="15dp"
+                textView.setPadding(10,10,10,10);
+//                textViewParams.setMargins(10, 10, 10, 10);//android:layout_margin="15dp"
                 textView.setLayoutParams(textViewParams);
                 int maxHeight = measureTextHeight(textView, rowDatas.get(0));
                 mRowMaxHeights.add(maxHeight);
@@ -344,7 +348,8 @@ public class LockTableView {
         mUnLockHeadView = (LinearLayout) mTableView.findViewById(R.id.unLockHeadView);
         mLockScrollView = (CustomHorizontalScrollView) mTableView.findViewById(R.id.lockHeadView_ScrollView);
         mUnLockScrollView = (CustomHorizontalScrollView) mTableView.findViewById(R.id.unlockHeadView_ScrollView);
-        mTableScrollView = (ScrollView) mTableView.findViewById(R.id.table_scrollView);
+        mTableScrollView = (MyCustomScrollView) mTableView.findViewById(R.id.table_scrollView);
+        mTableScrollView.setOnScrollListener(mScrollListener);
         mLockHeadView.setBackgroundColor(ContextCompat.getColor(mContext, mFristRowBackGroudColor));
         mUnLockHeadView.setBackgroundColor(ContextCompat.getColor(mContext, mFristRowBackGroudColor));
         if (isLockFristRow) {
@@ -374,7 +379,8 @@ public class LockTableView {
             LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) mColumnTitleView.getLayoutParams();
             layoutParams.width = DisplayUtil.dip2px(mContext, mColumnMaxWidths.get(0));
             layoutParams.height = DisplayUtil.dip2px(mContext, mRowMaxHeights.get(0));
-            layoutParams.setMargins(10, 10, 10, 10);
+            mColumnTitleView.setPadding(10,10,10,10);
+//            layoutParams.setMargins(10, 10, 10, 10);
             mColumnTitleView.setLayoutParams(layoutParams);
             //构造滚动视图
             createScollview(mLockScrollView, mTableFristData, true);
@@ -428,7 +434,8 @@ public class LockTableView {
             //设置布局
             LinearLayout.LayoutParams textViewParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
                     LinearLayout.LayoutParams.WRAP_CONTENT);
-            textViewParams.setMargins(10, 10, 10, 10);
+            textView.setPadding(10,10,10,10);
+//            textViewParams.setMargins(10, 10, 10, 10);
             textView.setLayoutParams(textViewParams);
             textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, mTextViewSize);
             textView.setText(mTableColumnDatas.get(i));
@@ -499,7 +506,8 @@ public class LockTableView {
                 //设置布局
                 LinearLayout.LayoutParams textViewParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
                         LinearLayout.LayoutParams.WRAP_CONTENT);
-                textViewParams.setMargins(10, 10, 10, 10);
+                textView.setPadding(10,10,10,10);
+//                textViewParams.setMargins(10, 10, 10, 10);
                 if (isLockFristRow) {
                     textViewParams.height = DisplayUtil.dip2px(mContext, mRowMaxHeights.get(i + 1));
                 } else {
@@ -559,6 +567,12 @@ public class LockTableView {
                 ViewGroup.LayoutParams.WRAP_CONTENT);
         scollViewItemContentView.setLayoutParams(scollViewItemContentViewParams);
         scollViewItemContentView.setOrientation(LinearLayout.VERTICAL);
+        scollViewItemContentView.setOnScrollChangeListener(new View.OnScrollChangeListener() {
+            @Override
+            public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+                Log.e("这是滑动了------>","");
+            }
+        });
         for (int i = 0; i < mTableRowDatas.size(); i++) {
             ArrayList<String> datas = mTableRowDatas.get(i);
             //设置LinearLayout
@@ -588,10 +602,11 @@ public class LockTableView {
                 textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, mTextViewSize);
                 textView.setGravity(Gravity.CENTER);
                 textView.setText(datas.get(j));
-                //设置布局
+//                //设置布局
                 LinearLayout.LayoutParams textViewParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
                         LinearLayout.LayoutParams.WRAP_CONTENT);
-                textViewParams.setMargins(10, 10, 10, 10);
+                textView.setPadding(10,10,10,10);
+//                textViewParams.setMargins(10, 10, 10, 10);
                 if (isLockFristRow) {
                     textViewParams.height = DisplayUtil.dip2px(mContext, mRowMaxHeights.get(i + 1));
                 } else {
@@ -677,7 +692,7 @@ public class LockTableView {
         if (textView != null) {
             LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) textView.getLayoutParams();
             int width = DisplayUtil.px2dip(mContext, layoutParams.leftMargin) +
-                    DisplayUtil.px2dip(mContext, layoutParams.rightMargin) +
+                    DisplayUtil.px2dip(mContext, layoutParams.rightMargin) +textView.getPaddingLeft()+textView.getPaddingRight()+
                     getTextViewWidth(textView, text);
             if (width <= minColumnWidth) {
                 return minColumnWidth;
@@ -700,7 +715,7 @@ public class LockTableView {
     private int measureTextHeight(TextView textView, String text) {
         if (textView != null) {
             LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) textView.getLayoutParams();
-            int height = getTextViewHeight(textView, text);
+            int height = getTextViewHeight(textView, text)+textView.getPaddingTop()+textView.getPaddingBottom();
             if (height < minRowHeight) {
                 return minRowHeight;
             } else if (height > minRowHeight && height < maxRowHeight) {
@@ -775,7 +790,8 @@ public class LockTableView {
             //设置布局
             LinearLayout.LayoutParams textViewParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
                     LinearLayout.LayoutParams.WRAP_CONTENT);
-            textViewParams.setMargins(10, 10, 10, 10);
+            textView.setPadding(10,10,10,10);
+//            textViewParams.setMargins(10, 10, 10, 10);
             textView.setLayoutParams(textViewParams);
             ViewGroup.LayoutParams textViewParamsCopy = textView.getLayoutParams();
             if (isLockFristColumn) {
@@ -860,6 +876,16 @@ public class LockTableView {
 
     public LockTableView setTableViewListener(OnTableViewListener mTableViewListener) {
         this.mTableViewListener = mTableViewListener;
+        return this;
+    }
+
+    /**
+     * 设置滑动的监听器
+     * @param scrollListener
+     * @return
+     */
+    public LockTableView setTableViewOnScrollListener(MyCustomScrollView.OnScrollListener scrollListener) {
+        this.mScrollListener = scrollListener;
         return this;
     }
 

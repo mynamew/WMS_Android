@@ -74,7 +74,7 @@ public class FragmentPointPresenter extends MvpBasePresenter<FragmentPointView> 
                 public void onError(String errorMsg) {
                     //请求失败 加入假数据
                     List<SendOrdernoBean.MarterialBean> datas = new ArrayList<>();
-                    for (int i = 0; i < 20; i++) {
+                    for (int i = 0; i < 100; i++) {
                         datas.add(new SendOrdernoBean.MarterialBean(i + "", "M42324232" + i, "50", 50, 100, "10", "20","10", "20","20"));
                     }
                     SendOrdernoBean buyOrdernoBean = new SendOrdernoBean("B789678", "邢力丰", "深圳超然科技股份有限公司", "2017-8-29", datas);

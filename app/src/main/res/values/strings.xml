@@ -235,7 +235,7 @@
     /**====== 产成品入库—入库上架 ======**/
     <string name="create_task_orderno_title">产成品入库—入库上架</string>
     <string name="product_warehous_warrent_num_title">产成品入库—入库上架</string>
-    <string name="have_scan_num">已扫总数：%1$s</string>
+    <string name="have_scan_num">已扫总数：</string>
     <string name="in_stock_receivce_goods_orderno">入库-收货单</string>
     <string name="please_input_receivce_orderno_or_scan">请输入收货单号或扫码查询</string>
     /**====== 搜索单号 ======**/

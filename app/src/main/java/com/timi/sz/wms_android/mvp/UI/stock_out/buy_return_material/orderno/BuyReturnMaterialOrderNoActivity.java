@@ -16,8 +16,13 @@ import com.timi.sz.wms_android.mvp.base.BaseActivity;
 import butterknife.BindView;
 import butterknife.OnClick;
 
+import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_BUY_RETURN_ORDERNO_BEAN;
 import static com.timi.sz.wms_android.base.uils.Constants.REQUEST_SCAN_CODE_MATERIIAL;
-
+/** 
+  * 退料单
+  * author: timi    
+  * create at: 2017/9/1 15:40
+  */  
 public class BuyReturnMaterialOrderNoActivity extends BaseActivity<BuyReturnMaterialOrderNoView, BuyReturnMaterialOrderNoPresenter> implements BuyReturnMaterialOrderNoView {
 
     @BindView(R.id.tv_orderno)
@@ -59,7 +64,7 @@ public class BuyReturnMaterialOrderNoActivity extends BaseActivity<BuyReturnMate
 
     @Override
     public void initData() {
-        orderBoBean = getIntent().getParcelableExtra("OrderNoBean");
+        orderBoBean = getIntent().getParcelableExtra(OUT_STOCK_BUY_RETURN_ORDERNO_BEAN);
         if (null != orderBoBean) {
             tvOrderno.setText(String.format(getString(R.string.order_no), orderBoBean.getOrderno()));
             tvOrdernoDate.setText(String.format(getString(R.string.orderno_date), orderBoBean.getDate()));

@@ -1,5 +1,6 @@
 package com.timi.sz.wms_android.mvp.UI.stock_out.buy_return_material;
 
+import com.timi.sz.wms_android.bean.outstock.BuyReturnMaterialOrdernoBean;
 import com.timi.sz.wms_android.bean.outstock.MaterialBean;
 import com.timi.sz.wms_android.bean.outstock.OrderNoBean;
 import com.timi.sz.wms_android.http.HttpManager;
@@ -19,19 +20,19 @@ import io.reactivex.Observer;
 
 public class BuyReturnMaterialModel extends MvpBaseModel {
     /**
-     * 物料扫码的网络请求
-     * @param scanStr
+     * 物料扫码 获取采购退货单
+     * @param materialCode
      * @param observer
      */
-      public void materialScanNetWork(final String scanStr, final Observer<MaterialBean> observer){
-          HttpManager.getInstance().HttpManagerRequest(observer, new ApiServiceMethodCallBack<MaterialBean>() {
-              @Override
-              public Observable<CommonResult<MaterialBean>> createObservable(ApiService apiService) {
-                  return apiService.materialScan(scanStr);
-              }
-          });
-      }
+    public void materialScanGetBuyRetrurnOrderNo(final String materialCode, Observer<BuyReturnMaterialOrdernoBean> observer){
+        HttpManager.getInstance().HttpManagerRequest(observer, new ApiServiceMethodCallBack<BuyReturnMaterialOrdernoBean>() {
+            @Override
+            public Observable<CommonResult<BuyReturnMaterialOrdernoBean>> createObservable(ApiService apiService) {
+                return apiService.materialScanGetBuyRetrurnOrderNo(materialCode);
+            }
+        });
 
+    }
     /**
      * 退料单号的扫码请求
      * @param oderNo

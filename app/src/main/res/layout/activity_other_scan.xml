@@ -10,4 +10,173 @@
     tools:context="com.timi.sz.wms_android.mvp.UI.stock_in.other_scan.OtherScanActivity">
 
     <include layout="@layout/title_head"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="80px"
+            android:gravity="center_vertical"
+            android:paddingLeft="48px"
+            android:text="@string/have_scan_num"
+            android:textColor="#333"
+            android:textSize="14sp"
+            android:visibility="visible"/>
+
+        <TextView
+            android:id="@+id/tv_have_scan_num"
+            android:layout_width="match_parent"
+            android:layout_height="80px"
+            android:gravity="center_vertical"
+            android:text="0"
+            android:textColor="#333"
+            android:textSize="14sp"
+            android:visibility="visible"/>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="100px">
+
+        <TextView
+            android:id="@+id/tv_scan_location_tip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:paddingLeft="20px"
+            android:text="@string/lib_code"
+            android:textColor="#333"
+            />
+
+        <TextView
+            android:id="@+id/tv_scan_location"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="20px"
+            android:layout_toRightOf="@id/tv_scan_location_tip"
+            android:background="@drawable/bg_sbo_rectangle_et"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:hint="@string/please_scan_lib_location_code"
+            android:paddingLeft="20px"
+            android:paddingRight="80px"
+            android:singleLine="true"
+            android:text=""
+            android:textSize="14sp"/>
+
+        <ImageView
+            android:id="@+id/iv_can_location"
+            android:layout_width="100px"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="30px"
+            android:paddingLeft="60px"
+            android:src="@mipmap/ic_scan"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="100px">
+
+        <TextView
+            android:id="@+id/tv_can_material_tip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:paddingLeft="48px"
+            android:text="@string/scan_material"
+            android:textColor="#333"
+            />
+
+        <TextView
+            android:id="@+id/tv_scan_material"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="20px"
+            android:layout_toRightOf="@id/tv_can_material_tip"
+            android:background="@drawable/bg_sbo_rectangle_et"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:hint="@string/please_scan_material_code"
+            android:paddingLeft="20px"
+            android:paddingRight="80px"
+            android:singleLine="true"
+            android:text=""
+            android:textSize="14sp"/>
+
+        <ImageView
+            android:id="@+id/iv_putaway_scan_material"
+            android:layout_width="100px"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="30px"
+            android:paddingLeft="60px"
+            android:src="@mipmap/ic_scan"/>
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_material_code"
+        android:layout_width="match_parent"
+        android:layout_height="80px"
+        android:gravity="center_vertical"
+        android:paddingLeft="48px"
+        android:paddingTop="10px"
+        android:text="@string/material_code"
+        android:textColor="#333"
+        />
+
+    <TextView
+        android:id="@+id/tv_material_num"
+        android:layout_width="match_parent"
+        android:layout_height="80px"
+        android:gravity="center_vertical"
+        android:paddingLeft="48px"
+        android:paddingTop="10px"
+        android:text="@string/material_num"
+        android:textColor="#333"
+        />
+
+    <TextView
+        android:id="@+id/tv_material_name"
+        android:layout_width="match_parent"
+        android:layout_height="80px"
+        android:gravity="center_vertical"
+        android:paddingLeft="48px"
+        android:paddingTop="10px"
+        android:text="@string/material_name"
+        android:textColor="#333"
+        />
+
+    <TextView
+        android:id="@+id/tv_material_nmodel"
+        android:layout_width="match_parent"
+        android:layout_height="80px"
+        android:gravity="center_vertical"
+        android:paddingLeft="48px"
+        android:paddingTop="10px"
+        android:text="@string/material_model"
+        android:textColor="#333"
+        />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/btn_create_other_instock_bill"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="20px"
+            android:layout_marginLeft="50px"
+            android:layout_marginRight="50px"
+            android:background="@drawable/selector_btn_bg_login"
+            android:text="@string/create_other_out_stock_orderno"
+            android:textColor="#fff"
+            android:textSize="18sp"/>
+    </RelativeLayout>
 </LinearLayout>

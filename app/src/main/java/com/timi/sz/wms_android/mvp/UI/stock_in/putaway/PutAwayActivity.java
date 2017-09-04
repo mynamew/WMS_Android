@@ -13,17 +13,15 @@ import com.timi.sz.wms_android.R;
 import com.timi.sz.wms_android.base.uils.Constants;
 import com.timi.sz.wms_android.base.uils.LogUitls;
 import com.timi.sz.wms_android.base.uils.ToastUtils;
-import com.timi.sz.wms_android.bean.instock.search.BuyOrdernoBean;
+import com.timi.sz.wms_android.bean.instock.MaterialScanPutAwayBean;
+import com.timi.sz.wms_android.bean.instock.VertifyLocationCodeBean;
 import com.timi.sz.wms_android.bean.instock.search.FinishGoodsCreateBillBean;
 import com.timi.sz.wms_android.bean.instock.search.FinishGoodsOrdernoBean;
-import com.timi.sz.wms_android.bean.instock.MaterialScanPutAwayBean;
 import com.timi.sz.wms_android.bean.instock.search.OtherAuditSelectOrdernoBean;
 import com.timi.sz.wms_android.bean.instock.search.OutReturnMaterialBean;
 import com.timi.sz.wms_android.bean.instock.search.ProductionReturnMaterialBean;
 import com.timi.sz.wms_android.bean.instock.search.ReceiveOrdernoBean;
-import com.timi.sz.wms_android.bean.instock.VertifyLocationCodeBean;
 import com.timi.sz.wms_android.bean.instock.search.SaleGoodsReturnBean;
-import com.timi.sz.wms_android.bean.instock.search.SendOrdernoBean;
 import com.timi.sz.wms_android.mvp.UI.stock_in.detail.StockInDetailActivity;
 import com.timi.sz.wms_android.mvp.base.BaseActivity;
 
@@ -85,8 +83,6 @@ public class PutAwayActivity extends BaseActivity<PutAwayView, PutAwayPresenter>
     LinearLayout llPutawayDate;
     @BindView(R.id.ll_putaway_total_num)
     LinearLayout llPutawayTotalNum;
-    @BindView(R.id.tv_putaway_have_scan_num)
-    TextView tvPutawayHaveScanNum;
     @BindView(R.id.tv_putaway_scan_location)
     TextView tvPutawayScanLocation;
     @BindView(R.id.iv_putaway_scan_location)

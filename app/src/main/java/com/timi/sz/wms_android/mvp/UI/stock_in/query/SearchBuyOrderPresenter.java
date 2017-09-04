@@ -267,8 +267,8 @@ public class SearchBuyOrderPresenter extends MvpBasePresenter<SearchBuyOrderView
         super.dettachView();
         //采购
         if (null != mBuyHttpSubscriber) {
-            mSaleSubscriber.unSubscribe();
-            mSaleSubscriber = null;
+            mBuyHttpSubscriber.unSubscribe();
+            mBuyHttpSubscriber = null;
         }
         //送货
         if (null != mSendHttpSubscriber) {

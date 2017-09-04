@@ -91,6 +91,7 @@
             android:paddingRight="80px"
             android:singleLine="true"
             android:text=""
+            android:imeOptions="actionSearch"
             android:textSize="14sp"/>
 
         <ImageView

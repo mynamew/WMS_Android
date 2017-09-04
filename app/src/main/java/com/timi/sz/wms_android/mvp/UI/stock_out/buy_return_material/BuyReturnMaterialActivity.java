@@ -14,6 +14,7 @@ import com.timi.sz.wms_android.R;
 import com.timi.sz.wms_android.base.uils.Constants;
 import com.timi.sz.wms_android.base.uils.LogUitls;
 import com.timi.sz.wms_android.base.uils.ToastUtils;
+import com.timi.sz.wms_android.bean.outstock.BuyReturnMaterialOrdernoBean;
 import com.timi.sz.wms_android.bean.outstock.MaterialBean;
 import com.timi.sz.wms_android.bean.outstock.OrderNoBean;
 import com.timi.sz.wms_android.mvp.UI.stock_out.buy_return_material.material.ScanReturnMaterialActivity;
@@ -23,6 +24,7 @@ import com.timi.sz.wms_android.mvp.base.BaseActivity;
 import butterknife.BindView;
 import butterknife.OnClick;
 
+import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_BUY_RETURN_ORDERNO_BEAN;
 import static com.timi.sz.wms_android.base.uils.Constants.REQUEST_SCAN_CODE_MATERIIAL;
 import static com.timi.sz.wms_android.base.uils.Constants.REQUEST_SCAN_CODE_RETURN_MATERIAL;
 
@@ -153,18 +155,17 @@ public class BuyReturnMaterialActivity extends BaseActivity<BuyReturnMaterialVie
                 break;
         }
     }
-
     @Override
-    public void materialScanResult(MaterialBean bean) {
+    public void materialScanResult(BuyReturnMaterialOrdernoBean bean) {
         Intent intent=new Intent(this,ScanReturnMaterialActivity.class);
-        intent.putExtra("MaterialBean",bean);
+        intent.putExtra(OUT_STOCK_BUY_RETURN_ORDERNO_BEAN,bean);
         startActivity(intent);
     }
 
     @Override
     public void ReturnMaterialOrderNoScanResult(OrderNoBean bean) {
         Intent intent=new Intent(this,BuyReturnMaterialOrderNoActivity.class);
-        intent.putExtra("OrderNoBean",bean);
+        intent.putExtra(OUT_STOCK_BUY_RETURN_ORDERNO_BEAN,bean);
         startActivity(intent);
     }
 }

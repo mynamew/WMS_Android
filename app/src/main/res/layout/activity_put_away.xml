@@ -116,16 +116,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="2px"
                 android:background="@color/tab_txt_unselect"/>
-            <TextView
-                android:id="@+id/tv_putaway_have_scan_num"
-                android:layout_width="match_parent"
-                android:layout_height="80px"
-                android:textColor="#333"
-                android:textSize="16sp"
-                android:gravity="center_vertical"
-                android:paddingLeft="20px"
-                android:visibility="gone"
-                android:text="@string/have_scan_num"/>
 
 
             <RelativeLayout
