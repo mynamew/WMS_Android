@@ -1,13 +1,20 @@
 package com.timi.sz.wms_android.http.subscriber;
 
+import android.text.TextUtils;
+
+import com.google.gson.Gson;
 import com.google.gson.stream.MalformedJsonException;
 import com.jakewharton.retrofit2.adapter.rxjava2.HttpException;
 import com.timi.sz.wms_android.R;
+import com.timi.sz.wms_android.base.uils.LogUitls;
+import com.timi.sz.wms_android.base.uils.ToastUtils;
+import com.timi.sz.wms_android.bean.HttpResultBean;
 import com.timi.sz.wms_android.http.callback.OnResultCallBack;
 import com.timi.sz.wms_android.mvp.base.BaseActivity;
 import com.timi.sz.wms_android.mvp.base.BaseApplication;
 import com.timi.sz.wms_android.view.MyProgressDialog;
 
+import java.io.IOException;
 import java.net.ConnectException;
 import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
@@ -15,6 +22,7 @@ import java.net.UnknownHostException;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.exceptions.CompositeException;
+import okhttp3.ResponseBody;
 
 
 public class HttpSubscriber<T> implements Observer<T> {
@@ -69,7 +77,29 @@ public class HttpSubscriber<T> implements Observer<T> {
                 }
             }
         } else if (e instanceof HttpException) {//服务器 错误 连接超时
-            mOnResultListener.onError(SERVER_TIMEOUT_EXCEPTION);
+            String messageStr="";//提示信息
+            ResponseBody responseBody = ((HttpException) e).response().errorBody();
+            try {
+                assert responseBody != null;
+                HttpResultBean httpResultBean = new Gson().fromJson(responseBody.string(), HttpResultBean.class);
+                if(null==httpResultBean){//为空则返回
+                    mOnResultListener.onError(SERVER_TIMEOUT_EXCEPTION);
+                    return;
+                }
+                if(!TextUtils.isEmpty(httpResultBean.getError().getMessage())){
+                    messageStr=httpResultBean.getError().getMessage();
+                }
+                if(!TextUtils.isEmpty(httpResultBean.getError().getDetails())){
+                    messageStr=httpResultBean.getError().getDetails();
+                }
+                ToastUtils.showShort(messageStr);
+                mOnResultListener.onError(messageStr);
+                LogUitls.e("打印输出错误代码httpResultBean---->",httpResultBean.toString());
+                return;
+            } catch (Exception e1) {
+                mOnResultListener.onError(SERVER_TIMEOUT_EXCEPTION);
+            }
+
         } else if(e instanceof UnknownHostException){// 测试到时再没网的情况下
             mOnResultListener.onError(CONNECT_EXCEPTION);
         }else {//

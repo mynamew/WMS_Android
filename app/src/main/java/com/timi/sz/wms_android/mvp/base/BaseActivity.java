@@ -14,6 +14,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -22,6 +23,7 @@ import android.widget.TextView;
 import com.orhanobut.logger.Logger;
 import com.timi.sz.wms_android.R;
 import com.timi.sz.wms_android.base.uils.Constants;
+import com.timi.sz.wms_android.base.uils.InputMethodUtils;
 import com.timi.sz.wms_android.base.uils.statusutils.StatusBarUtil;
 import com.timi.sz.wms_android.mvp.UI.login.LoginActivity;
 import com.timi.sz.wms_android.mvp.base.presenter.MvpPresenter;
@@ -108,6 +110,12 @@ public abstract class BaseActivity<V extends MvpView, P extends MvpPresenter<V>>
         initBundle(savedInstanceState);
         initView();
         initData();
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        InputMethodUtils.hidSoftInput(event,this);
+        return super.onTouchEvent(event);
     }
 
     @Override

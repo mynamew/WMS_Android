@@ -92,7 +92,7 @@ public class HttpManager {
         o.subscribeOn(Schedulers.io())
                 .map(new Function<CommonResult<T>, T>() {
                     @Override
-                    public T apply(@NonNull CommonResult<T> t) throws Exception {
+                    public T apply(@NonNull CommonResult<T> t)   {
                         LogUitls.e("返回结果--->", t.toString());
 //                            LogUitls.e("返回结果getTargetUrl--->", t.getTargetUrl());
 //                            LogUitls.e("返回结果getError--->", t.getError());
