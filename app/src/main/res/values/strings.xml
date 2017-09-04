@@ -270,7 +270,26 @@
     <string name="exp_network_timeout">网络连接超时，请检查您的网络状态，稍后重试</string>
     <string name="exp_json_error">数据解析错误</string>
     <string name="exp_server_timeout">服务器连接超时</string>
+    /**====== 出库  搜索 ======**/
     <string name="stock_out_outsource_feed_tip">委外补料单号</string>
     <string name="stock_out_outsource_feed_title">委外补料—选单</string>
-    /**====== 出库  搜索 ======**/
+    <string name="stock_out_outsource_audit_title">委外发料—选单</string>
+    <string name="stock_out_outsource_audit_tip">委外发料单号</string>
+    <string name="stock_out_outsource_bill_tip">委外订单号</string>
+    <string name="stock_out_production_feed_title">生产补料—选单</string>
+    <string name="stock_out_production_feed_tip">生产补料单号</string>
+    <string name="stock_out_production_audit_title">生产领料—选单</string>
+    <string name="stock_out_production_audit_tip">生产领料单号</string>
+    <string name="stock_out_production_bill_tip">生产任务单号</string>
+    <string name="stock_out_pick">拣货—选单</string>
+    <string name="stock_out_pick_tip">调拨单</string>
+    <string name="stock_out_pick_send_orderno">发货通知单</string>
+    <string name="stock_out_pick_sell_outstock_orderno">销售出库单</string>
+    <string name="stock_out_sell_audit_title">销售出库—选单</string>
+    <string name="stock_out_sell_audit_tip">销售出库单</string>
+    <string name="stock_out_sell_bill_tip">销售订单</string>
+    <string name="stock_out_other_audit_title">其他出库—选单</string>
+    <string name="stock_out_other_audit_tip">其他出库单</string>
+    <string name="stock_out_other_bill_title">其他出库—出库扫描</string>
+
 </resources>

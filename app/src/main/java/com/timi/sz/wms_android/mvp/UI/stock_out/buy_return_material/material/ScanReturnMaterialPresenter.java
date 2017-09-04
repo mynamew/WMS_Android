@@ -2,8 +2,8 @@ package com.timi.sz.wms_android.mvp.UI.stock_out.buy_return_material.material;
 
 import android.content.Context;
 
-import com.timi.sz.wms_android.bean.outstock.CommitMaterialScanToOredernoBean;
-import com.timi.sz.wms_android.bean.outstock.MaterialBean;
+import com.timi.sz.wms_android.bean.outstock.buy.CommitMaterialScanToOredernoBean;
+import com.timi.sz.wms_android.bean.outstock.buy.MaterialBean;
 import com.timi.sz.wms_android.http.callback.OnResultCallBack;
 import com.timi.sz.wms_android.http.subscriber.HttpSubscriber;
 import com.timi.sz.wms_android.mvp.base.presenter.impl.MvpBasePresenter;

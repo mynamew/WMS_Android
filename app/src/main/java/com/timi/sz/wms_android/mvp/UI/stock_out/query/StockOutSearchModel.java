@@ -9,4 +9,5 @@ import com.timi.sz.wms_android.mvp.base.model.impl.MvpBaseModel;
  */
 
 public class StockOutSearchModel extends MvpBaseModel {
+
 }

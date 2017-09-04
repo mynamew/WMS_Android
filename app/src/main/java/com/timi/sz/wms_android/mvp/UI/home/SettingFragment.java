@@ -173,7 +173,7 @@ public class SettingFragment extends BaseFragment<SetFragmentView, SetFragmentPr
                         public void dialogClick(MyDialog dialog) {
                             // TODO: 2017/8/25 做登录的数据的清除工作
                             dialog.dismiss();
-                            ((MainActivity) getActivity()).jumpToLoginActivity();
+                            SpUtils.getInstance().putBoolean(Constants.IS_FIRST_LOG, false);                            ((MainActivity) getActivity()).jumpToLoginActivity();
                         }
                     }).setAnimation(R.style.popWindow_animation_push);
         }

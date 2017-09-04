@@ -17,11 +17,11 @@ import com.timi.sz.wms_android.bean.instock.search.ReceiveOrdernoBean;
 import com.timi.sz.wms_android.bean.instock.search.SaleGoodsReturnBean;
 import com.timi.sz.wms_android.bean.instock.search.SendOrdernoBean;
 import com.timi.sz.wms_android.bean.instock.VertifyLocationCodeBean;
-import com.timi.sz.wms_android.bean.outstock.BuyReturnMaterialOrdernoBean;
-import com.timi.sz.wms_android.bean.outstock.CommitMaterialScanToOredernoBean;
-import com.timi.sz.wms_android.bean.outstock.MaterialBean;
-import com.timi.sz.wms_android.bean.outstock.OrderNoAddMaterial;
-import com.timi.sz.wms_android.bean.outstock.OrderNoBean;
+import com.timi.sz.wms_android.bean.outstock.buy.BuyReturnMaterialOrdernoBean;
+import com.timi.sz.wms_android.bean.outstock.buy.CommitMaterialScanToOredernoBean;
+import com.timi.sz.wms_android.bean.outstock.buy.MaterialBean;
+import com.timi.sz.wms_android.bean.outstock.buy.OrderNoAddMaterial;
+import com.timi.sz.wms_android.bean.outstock.buy.OrderNoBean;
 
 import io.reactivex.Observable;
 import okhttp3.ResponseBody;
@@ -221,8 +221,79 @@ public interface ApiService {
 
 
     /********************出库 请求************************************************************/
+
     /**
-     * 退料单号扫码 请求
+     * 搜索相关的请求
+     */
+    /**
+     * 委外退料单号扫码 请求
+     */
+    @FormUrlEncoded
+    @POST("api/Account/ClientLogin")
+    Observable<CommonResult<OrderNoBean>> searchOutsourceFeed(@Field("orderno") String orderno);
+    /**
+     * 委外发货-审核单号扫码 请求
+     */
+    @FormUrlEncoded
+    @POST("api/Account/ClientLogin")
+    Observable<CommonResult<OrderNoBean>> searchOutsourceAudit(@Field("orderno") String orderno);
+    /**
+     * 委外发货-生单扫码 请求
+     */
+    @FormUrlEncoded
+    @POST("api/Account/ClientLogin")
+    Observable<CommonResult<OrderNoBean>> searchOutsourceBill(@Field("orderno") String orderno);
+    /**
+     * 生产退料单号扫码 请求
+     */
+    @FormUrlEncoded
+    @POST("api/Account/ClientLogin")
+    Observable<CommonResult<OrderNoBean>> searchProductionFeed(@Field("orderno") String orderno);
+    /**
+     * 生产领料-审核单号扫码 请求
+     */
+    @FormUrlEncoded
+    @POST("api/Account/ClientLogin")
+    Observable<CommonResult<OrderNoBean>> searchProductionAudit(@Field("orderno") String orderno);
+    /**
+     * 生产领料-生单 单号扫码 请求
+     */
+    @FormUrlEncoded
+    @POST("api/Account/ClientLogin")
+    Observable<CommonResult<OrderNoBean>> searchProductionBill(@Field("orderno") String orderno);
+    /**
+     * 调拨单号扫码 请求
+     */
+    @FormUrlEncoded
+    @POST("api/Account/ClientLogin")
+    Observable<CommonResult<OrderNoBean>> searchPick(@Field("ordernoPick") String ordernoPick,@Field("ordernoSend") String ordernoSend,@Field("ordernoSale") String ordernoSale);
+    /**
+     * 采购退料-审核 单号扫码 请求
+     */
+    @FormUrlEncoded
+    @POST("api/Account/ClientLogin")
+    Observable<CommonResult<OrderNoBean>> searchSaleAudit(@Field("orderno") String orderno);
+    /**
+     * 采购退料-生单 单号扫码 请求
+     */
+    @FormUrlEncoded
+    @POST("api/Account/ClientLogin")
+    Observable<CommonResult<OrderNoBean>> searchSaleBill(@Field("orderno") String orderno);
+    /**
+     * 其他出库-审核 单号扫码 请求
+     */
+    @FormUrlEncoded
+    @POST("api/Account/ClientLogin")
+    Observable<CommonResult<OrderNoBean>> searchOtherAudit(@Field("orderno") String orderno);
+    /**
+     * 其他出库-生单 单号扫码 请求
+     */
+    @FormUrlEncoded
+    @POST("api/Account/ClientLogin")
+    Observable<CommonResult<OrderNoBean>> searchOtherBill(@Field("orderno") String orderno);
+
+    /**
+     * 采购退料单号扫码 请求
      *
      * @param orderno
      * @return
@@ -232,7 +303,7 @@ public interface ApiService {
     Observable<CommonResult<OrderNoBean>> returnMaterialOrderNoScan(@Field("orderno") String orderno);
 
     /**
-     * 退料单 添加物料的方法
+     * 采购退料单 添加物料的方法
      *
      * @param materialCode
      * @return

@@ -258,7 +258,7 @@ public class MainActivity extends BaseActivity<MainView, MainPresenter> implemen
                     getPresenter().downLoadApk(bean.getObjectReturn().getUrl());
                 }
             }else{
-                ToastUtils.showShort("已是最新版本，无需更新");
+//                ToastUtils.showShort("已是最新版本，无需更新");
             }
         } catch (Exception e) {
             e.printStackTrace();

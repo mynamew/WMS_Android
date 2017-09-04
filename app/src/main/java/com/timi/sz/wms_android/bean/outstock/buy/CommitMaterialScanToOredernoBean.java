@@ -1,4 +1,4 @@
-package com.timi.sz.wms_android.bean.outstock;
+package com.timi.sz.wms_android.bean.outstock.buy;
 
 /**
  * $dsc 提交物料扫码 到采购退料单

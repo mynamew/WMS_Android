@@ -263,4 +263,9 @@
     <string name="location_code_no_user">库位码无效，请扫描正确的库位码</string>
     <string name="stock_out_outsource_feed_tip">委外补料单号</string>
     <string name="stock_out_outsource_feed_title">委外补料—选单</string>
+    <string name="stock_out_outsource_audit_title">委外发料—选单</string>
+    <string name="stock_out_outsource_audit_tip">委外发料单号</string>
+    <string name="stock_out_outsource_bill_tip">委外订单号</string>
+    <string name="stock_out_production_feed_title">生产补料—选单</string>
+    <string name="stock_out_production_feed_tip">生产补料单号</string>
 </resources>

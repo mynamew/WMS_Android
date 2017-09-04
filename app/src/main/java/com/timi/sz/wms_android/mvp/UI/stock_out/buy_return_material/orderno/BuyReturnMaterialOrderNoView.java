@@ -1,6 +1,6 @@
 package com.timi.sz.wms_android.mvp.UI.stock_out.buy_return_material.orderno;
 
-import com.timi.sz.wms_android.bean.outstock.MaterialBean;
+import com.timi.sz.wms_android.bean.outstock.buy.MaterialBean;
 import com.timi.sz.wms_android.mvp.base.view.iml.MvpBaseView;
 
 /**

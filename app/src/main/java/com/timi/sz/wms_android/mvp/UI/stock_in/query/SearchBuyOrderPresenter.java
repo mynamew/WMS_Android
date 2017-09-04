@@ -11,20 +11,12 @@ import com.timi.sz.wms_android.bean.instock.search.ProductionReturnMaterialBean;
 import com.timi.sz.wms_android.bean.instock.search.ReceiveOrdernoBean;
 import com.timi.sz.wms_android.bean.instock.search.SaleGoodsReturnBean;
 import com.timi.sz.wms_android.bean.instock.search.SendOrdernoBean;
-import com.timi.sz.wms_android.bean.outstock.MaterialBean;
-import com.timi.sz.wms_android.http.HttpManager;
-import com.timi.sz.wms_android.http.api.ApiService;
-import com.timi.sz.wms_android.http.api.CommonResult;
-import com.timi.sz.wms_android.http.callback.ApiServiceMethodCallBack;
 import com.timi.sz.wms_android.http.callback.OnResultCallBack;
 import com.timi.sz.wms_android.http.subscriber.HttpSubscriber;
 import com.timi.sz.wms_android.mvp.base.presenter.impl.MvpBasePresenter;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import io.reactivex.Observable;
-import io.reactivex.Observer;
 
 /**
  * 搜索采购单的presenter
