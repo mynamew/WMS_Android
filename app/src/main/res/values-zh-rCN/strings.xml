@@ -28,6 +28,7 @@
     <string name="login_language">语言：</string>
     <string name="login_set">配置</string>
     <string name="login_please_input_serverurl">请输入服务地址</string>
+    <string name="login_please_input_right_serverurl">请输入正确服务地址</string>
     <string name="login_confirm_set">确认设置</string>
     <string name="login_please_input_zuhu">请输入租户信息</string>
     <string name="language_simple">简体</string>
@@ -260,4 +261,6 @@
     <string name="exp_server_timeout">服务器连接超时</string>
     <string name="material_scan_putaway_success">物品扫码入库上架成功</string>
     <string name="location_code_no_user">库位码无效，请扫描正确的库位码</string>
+    <string name="stock_out_outsource_feed_tip">委外补料单号</string>
+    <string name="stock_out_outsource_feed_title">委外补料—选单</string>
 </resources>

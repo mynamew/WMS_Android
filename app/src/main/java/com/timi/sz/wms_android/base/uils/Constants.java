@@ -135,4 +135,26 @@ public class Constants {
      * 采购退料 退料单的key
      */
     public static final String OUT_STOCK_BUY_RETURN_ORDERNO_BEAN = "out_stock_buy_return_orderno_bean";
-   }
+    /**
+     * 搜索 跳转的intent code
+     */
+    public static final String STOCK_OUT_CODE_STR = "stockout_code";//出库的code码的key
+
+    public static final int STOCK_OUT_OUTSOURCE_FEED_SUPLLIEMENT = 5020;//委外补料
+    public static final int STOCK_OUT_OUTSOURCE_AUDIT = 5021;//委外发料-委外发料单
+    public static final int STOCK_OUT_OUTSOURCE_BILL= 5022;//委外发料-委外订单
+
+    public static final int STOCK_OUT_PRODUCTION_FEEDING = 5023;//生产补料
+    public static final int STOCK_OUT_PRODUCTION_AUDIT = 5024;//生产领料-审核
+    public static final int STOCK_OUT_PRODUCTION_BILL = 5025;//生产领料-生单
+
+    public static final int STOCK_OUT_PICK = 5026;//调拨
+    public static final int STOCK_OUT_SELL_OUT_AUDIT = 5027;//销售出库-审核
+    public static final int STOCK_OUT_SELL_OUT_BILL = 5028;//销售出库-生单
+
+    public static final int STOCK_OUT_PURCHASE_MATERIAL_RETURN = 5029;//采购退料
+    public static final int STOCK_OUT_OTHER_OUT_AUDIT = 5030;//其他出库-审核
+    public static final int STOCK_OUT_OTHER_OUT_BILL = 5031;//其他出库-生单
+
+
+}

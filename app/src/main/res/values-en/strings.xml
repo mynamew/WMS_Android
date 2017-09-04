@@ -27,7 +27,8 @@
     <string name="login_zuhu">Tenant：</string>
     <string name="login_language">Language：</string>
     <string name="login_set">ServerSet</string>
-    <string name="login_please_input_serverurl">login_please_input_serverurl</string>
+    <string name="login_please_input_serverurl">login please input serverurl</string>
+    <string name="login_please_input_right_serverurl">login please input right serverurl</string>
     <string name="login_confirm_set">confirm set</string>
     <string name="login_please_input_zuhu">please input zuhu</string>
     <string name="language_simple">Simple</string>
@@ -258,5 +259,7 @@
     <string name="exp_server_timeout">服务器连接超时</string>
     <string name="material_scan_putaway_success">物品扫码入库上架成功</string>
     <string name="location_code_no_user">库位码无效，请扫描正确的库位码</string>
+    <string name="stock_out_outsource_feed_tip">委外补料单号</string>
+    <string name="stock_out_outsource_feed_title">委外补料—选单</string>
 
 </resources>

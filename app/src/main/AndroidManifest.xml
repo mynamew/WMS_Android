@@ -197,6 +197,8 @@
         </activity>
         <activity android:name=".mvp.UI.stock_in.other_scan.OtherScanActivity">
         </activity>
+        <activity android:name=".mvp.UI.stock_out.query.StockOutSearchActivity">
+        </activity>
     </application>
 
 </manifest>

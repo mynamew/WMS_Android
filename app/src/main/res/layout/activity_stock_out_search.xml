@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/set_bg"
+    android:orientation="vertical"
+    tools:context="com.timi.sz.wms_android.mvp.UI.stock_out.query.StockOutSearchActivity">
+
+    <include layout="@layout/title_head"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="100px">
+
+        <TextView
+            android:id="@+id/tv_stockout_tip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="30px"
+            android:text="单号："
+            android:textColor="#333"
+            android:textSize="16sp"/>
+
+        <EditText
+            android:id="@+id/et_stockout_input"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="20px"
+            android:layout_toRightOf="@id/tv_stockout_tip"
+            android:background="@drawable/bg_sbo_rectangle_et"
+            android:ellipsize="end"
+            android:hint="请输入单号进行查询"
+            android:imeOptions="actionSearch"
+            android:inputType="textVisiblePassword"
+            android:paddingLeft="20px"
+            android:paddingRight="80px"
+            android:singleLine="true"
+            android:text=""
+            android:textSize="14sp"/>
+
+        <ImageView
+            android:id="@+id/iv_sotckout_scan"
+            android:layout_width="100px"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="30px"
+            android:paddingLeft="60px"
+            android:src="@mipmap/ic_scan"/>
+    </RelativeLayout>
+</LinearLayout>

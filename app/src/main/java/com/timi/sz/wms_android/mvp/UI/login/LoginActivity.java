@@ -126,10 +126,10 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
 
             @Override
             public void afterTextChanged(Editable s) {
-               String username=s.toString();
-                if(!TextUtils.isEmpty(username)){
+                String username = s.toString();
+                if (!TextUtils.isEmpty(username)) {
                     ivLoginClearUsername.setVisibility(View.VISIBLE);
-                }else{
+                } else {
                     ivLoginClearUsername.setVisibility(View.GONE);
                 }
             }
@@ -158,10 +158,10 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
         if (TextUtils.isEmpty(SpUtils.getInstance().getBaseUrl())
                 || TextUtils.isEmpty(SpUtils.getInstance().getLocaleLanguage())) {
             showServerSetDialogShow();
-        }else{
+        } else {
             //如果界面传过来的参数需要弹出服务配置的弹出框
-            boolean isNeedShowServerSet=getIntent().getBooleanExtra(Constants.IS_NEED_SHOW_SHOW_SERVER_SET,false);
-            if(isNeedShowServerSet){
+            boolean isNeedShowServerSet = getIntent().getBooleanExtra(Constants.IS_NEED_SHOW_SHOW_SERVER_SET, false);
+            if (isNeedShowServerSet) {
                 showServerSetDialogShow();
             }
         }
@@ -207,12 +207,10 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
         //获取租户地址
         String tenancyName = SpUtils.getInstance().gettenancyName();
         //获取mac地址
-        String mac = PackageUtils.getLocalMacAddressFromBusybox();
+//        String mac = PackageUtils.getLocalMacAddressFromBusybox();
+        String mac = PackageUtils.getMac();
 //        //登录请求
         getPresenter().getLoginResult(TextUtils.isEmpty(tenancyName) ? "" : tenancyName, username, password, TextUtils.isEmpty(mac) ? "" : mac);
-//        startActivity(new Intent(LoginActivity.this, MainActivity.class));
-//        onBackPressed();
-
     }
 
     /**
@@ -239,7 +237,7 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
         this.bean = bean;
         Toast.makeText(this, R.string.login_success, Toast.LENGTH_SHORT).show();
         //登录成功  存储 id
-        SpUtils.getInstance().putUserid(bean.getUserId()+"");
+        SpUtils.getInstance().putUserid(bean.getUserId() + "");
         /**
          * 存储用户的所有信息 以字符串的形式
          */
@@ -271,7 +269,7 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
      * 设置别名
      **************************************************************************************/
     private void setAlias() {
-        String alias = bean.getUserId()+"";
+        String alias = bean.getUserId() + "";
         LogUitls.d("alias--->" + alias);
         if (!ExampleUtil.isValidTagAndAlias(alias)) {
             ToastUtils.showShort(LoginActivity.this, "别名设置格式不正确");
@@ -336,10 +334,11 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
      * 清楚用户名
      */
     @OnClick(R.id.iv_login_clear_username)
-    public void clearUsername(){
+    public void clearUsername() {
         etLoginUsername.setText("");
         ivLoginClearUsername.setVisibility(View.GONE);
     }
+
     /**
      * 显示下拉框 选择语言
      *
@@ -451,21 +450,38 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
      */
     private void showServerSetDialogShow() {
         if (null == myDialog) {
+            String languageStr="";
+            switch ( SpUtils.getInstance().getLocaleLanguage()){
+                case "zh-CN":
+                    languageStr=getString(R.string.language_simple);
+                    break;
+                case "en":
+                    languageStr=getString(R.string.language_english);
+                    break;
+                case "zh-TW":
+                    languageStr=getString(R.string.language_tradtional);
+                    break;
+                default:
+                    languageStr=getString(R.string.language_simple);
+                    break;
+            }
             myDialog = new MyDialog(this, R.layout.dialog_login_server_set)
                     //设置url
-                    .setEdittextContent(R.id.et_login_server, SpUtils.getInstance().getBaseUrl())
+                    .setTextViewContent(R.id.et_login_server, SpUtils.getInstance().getBaseUrl())
+                    .setTextViewContent(R.id.et_login_zuhu, SpUtils.getInstance().gettenancyName())
+                    .setTextViewContent(R.id.tv_login_language,TextUtils.isEmpty(languageStr)?"":languageStr)
                     //设置按钮
-                    .setButtonListener(R.id.bt_login__confirm, "设置", new MyDialog.DialogClickListener() {
+                    .setButtonListener(R.id.bt_login__confirm, getString(R.string.home_set), new MyDialog.DialogClickListener() {
                         @Override
                         public void dialogClick(MyDialog dialog) {
                             EditText etLoginServer = dialog.getEdittext(R.id.et_login_server);
                             String text = etLoginServer.getText().toString();
                             if (TextUtils.isEmpty(text)) {
-                                ToastUtils.showShort(LoginActivity.this, "请输入服务地址");
+                                ToastUtils.showShort(LoginActivity.this, R.string.login_please_input_serverurl);
                                 return;
                             }
-                            if (!text.contains("http")) {
-                                ToastUtils.showShort(LoginActivity.this, "请输入正确地址");
+                            if (!text.contains("http")&&text.endsWith("/")){
+                                ToastUtils.showShort(LoginActivity.this, R.string.login_please_input_right_serverurl);
                                 //重置地址
                                 etLoginServer.setText("");
                                 return;
@@ -473,9 +489,8 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
                             //存储url
                             SpUtils.getInstance().putBaseUrl(text);
                             //存储租户信息
-                            EditText etLoginZuhu = dialog.getEdittext(R.id.et_login_zuhu);
-                            String zuhuStr = etLoginZuhu.getText().toString();
-                            if (TextUtils.isEmpty(zuhuStr)) {
+                            String zuhuStr = dialog.getEdittext(R.id.et_login_zuhu).getText().toString();
+                            if (!TextUtils.isEmpty(zuhuStr)) {
                                 //存储url
                                 SpUtils.getInstance().puttenancyName(zuhuStr);
                             }

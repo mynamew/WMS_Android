@@ -44,16 +44,16 @@ public class CommonInterceptor implements Interceptor {
             /**
              * 对url 进行处理 当本地sp 存储的是和Constants不同的url 的时候进行替换BaseUrl的操作
              */
-            if (!spBaseUrl.equals(oldUrl.toString())) {
-                try {
-                    //生成转换的url
-                    parseUrl = HttpUrl.parse(spBaseUrl + oldUrl.toString().replace(Constants.BASE_URL, ""));
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            } else {//相同的则直接转换
+//            if (!spBaseUrl.equals(oldUrl.toString())) {
+//                try {
+//                    //生成转换的url
+//                    parseUrl = HttpUrl.parse(spBaseUrl + oldUrl.toString().replace(Constants.BASE_URL, ""));
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
+//            } else {//相同的则直接转换
                 parseUrl = oldUrl;
-            }
+//            }
         }
         /**
          * Request 对象
@@ -85,8 +85,8 @@ public class CommonInterceptor implements Interceptor {
                     .url(parseUrl)
                     .build();
         }
-        LogUitls.e("处理后的头部-->" + newRequest.headers().toString());
-        LogUitls.e("参数列表-->" + newRequest.toString());
+//        LogUitls.e("处理后的头部-->" + newRequest.headers().toString());
+//        LogUitls.e("参数列表-->" + newRequest.toString());
         LogUitls.e("处理后的url-->" + newRequest.url().toString());
         return chain.proceed(newRequest);
     }

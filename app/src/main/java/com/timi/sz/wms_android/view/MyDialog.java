@@ -276,6 +276,20 @@ public class MyDialog extends Dialog {
         }
         return this;
     }
+    /**
+     * 设置Dialog的Edittext
+     *
+     * @param resId
+     * @return
+     */
+    public MyDialog setEdittextHint(int resId, String content) {
+        View viewById = rootView.findViewById(resId);
+        if (null != viewById && viewById instanceof EditText) {
+            views.put(resId, viewById);
+            ((EditText) viewById).setHint(content);
+        }
+        return this;
+    }
 
     /**
      * 返回Dialog的Edittext

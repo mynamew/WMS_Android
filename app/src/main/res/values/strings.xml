@@ -119,6 +119,7 @@
     <string name="login_language">语言：</string>
     <string name="login_set">配置</string>
     <string name="login_please_input_serverurl">请输入服务地址</string>
+    <string name="login_please_input_right_serverurl">请输入正确地址</string>
     <string name="login_confirm_set">确认设置</string>
     <string name="login_please_input_zuhu">请输入租户信息</string>
     /**====== 設置 ======**/
@@ -269,5 +270,7 @@
     <string name="exp_network_timeout">网络连接超时，请检查您的网络状态，稍后重试</string>
     <string name="exp_json_error">数据解析错误</string>
     <string name="exp_server_timeout">服务器连接超时</string>
-
+    <string name="stock_out_outsource_feed_tip">委外补料单号</string>
+    <string name="stock_out_outsource_feed_title">委外补料—选单</string>
+    /**====== 出库  搜索 ======**/
 </resources>
