@@ -1,8 +1,5 @@
 package com.timi.sz.wms_android.mvp.UI.home;
 
-import com.timi.sz.wms_android.base.uils.Constants;
-import com.timi.sz.wms_android.base.uils.SpUtils;
-import com.timi.sz.wms_android.bean.UserInfoBean;
 import com.timi.sz.wms_android.bean.VersionBean;
 import com.timi.sz.wms_android.http.HttpManager;
 import com.timi.sz.wms_android.http.api.ApiService;
@@ -16,28 +13,12 @@ import io.reactivex.Observable;
 import io.reactivex.Observer;
 
 /**
- * main  model
+ * $dsc
+ * author: timi
+ * create at: 2017-09-04 15:56
  */
 
-public class MainModel extends MvpBaseModel {
-
-    /**
-     * 获取用户信息
-     *
-     * @return
-     */
-    public UserInfoBean getSpUserInfo() {
-        UserInfoBean bean = new UserInfoBean();
-        //获取各个存储过的信息
-        bean.userName = SpUtils.getInstance().getString(Constants.USER_NAME);
-        bean.userSex = SpUtils.getInstance().getString(Constants.USER_SEX);
-        bean.userDepart = SpUtils.getInstance().getString(Constants.USER_DEPART);
-        bean.userFrom = SpUtils.getInstance().getString(Constants.USER_FROM);
-        bean.userRoot = SpUtils.getInstance().getString(Constants.USER_ROOT);
-        bean.userNum = SpUtils.getInstance().getString(Constants.USER_NUM);
-        return bean;
-    }
-
+public class SetFragmentMode extends MvpBaseModel {
     /**
      * 下载APK
      *

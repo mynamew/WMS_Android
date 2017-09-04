@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="#fff"
     android:orientation="vertical"
-    tools:context="com.timi.sz.wms_android.mvp.UI.login.LoginSuccessActivity">
+    tools:context="com.timi.sz.wms_android.mvp.UI.login_success.LoginSuccessActivity">
      <include layout="@layout/title_head"/>
     <LinearLayout
         android:layout_width="match_parent"
@@ -37,7 +37,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="40px"
         android:layout_marginTop="60px"
-        android:text="@string/login_success_name"
+        android:text="@string/name"
         android:textColor="#333"
         android:textSize="16sp"/>
 
@@ -47,7 +47,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="40px"
         android:layout_marginTop="30px"
-        android:text="@string/login_success_sex"
+        android:text="@string/sex"
         android:textColor="#333"
         android:textSize="16sp"/>
     <TextView
@@ -56,7 +56,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="40px"
         android:layout_marginTop="30px"
-        android:text="@string/login_success_num"
+        android:text="@string/work_num"
         android:textColor="#333"
         android:textSize="16sp"/>
 
@@ -67,7 +67,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="40px"
         android:layout_marginTop="30px"
-        android:text="@string/login_success_depart"
+        android:text="@string/depart"
         android:textColor="#333"
         android:textSize="16sp"/>
         <TextView
@@ -76,7 +76,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="40px"
         android:layout_marginTop="30px"
-        android:text="@string/login_success_tel"
+        android:text="@string/tel"
         android:textColor="#333"
         android:textSize="16sp"/>
     <Button

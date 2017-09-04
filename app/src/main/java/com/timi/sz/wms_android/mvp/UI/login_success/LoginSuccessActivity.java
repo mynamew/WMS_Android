@@ -1,7 +1,6 @@
-package com.timi.sz.wms_android.mvp.UI.login;
+package com.timi.sz.wms_android.mvp.UI.login_success;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -11,20 +10,20 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.timi.sz.wms_android.R;
 import com.timi.sz.wms_android.base.uils.Constants;
-import com.timi.sz.wms_android.base.uils.LogUitls;
+import com.timi.sz.wms_android.base.uils.PackageUtils;
 import com.timi.sz.wms_android.base.uils.SpUtils;
 import com.timi.sz.wms_android.base.uils.statusutils.StatusBarUtil;
 import com.timi.sz.wms_android.bean.LoginBean;
+import com.timi.sz.wms_android.bean.UserInfoBean;
 import com.timi.sz.wms_android.mvp.UI.home.MainActivity;
+import com.timi.sz.wms_android.mvp.base.BaseActivity;
 import com.zhy.autolayout.AutoLayoutActivity;
-
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class LoginSuccessActivity extends AutoLayoutActivity {
+public class LoginSuccessActivity extends BaseActivity<LoginSuccessView, LoginSuccessPresenter> implements LoginSuccessView {
 
     @BindView(R.id.tv_login_success_name)
     TextView tvLoginSuccessName;
@@ -48,21 +47,39 @@ public class LoginSuccessActivity extends AutoLayoutActivity {
     LinearLayout activityLoginSuccess;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login_success);
-        ButterKnife.bind(this);
-        StatusBarUtil.setColor(this,getResources().getColor(R.color.statuscolor));
+    public int setLayoutId() {
+        return R.layout.activity_login_success;
+    }
+
+    @Override
+    public void initBundle(Bundle savedInstanceState) {
         tvTitle.setText("首次登陆");
-        String userinfoStr = SpUtils.getInstance().getString(Constants.USER_INFO);
-        LoginBean loginBean = new Gson().fromJson(userinfoStr, LoginBean.class);
-        if (null != loginBean) {
-            tvLoginSuccessName.setText(String.format(getString(R.string.login_success_name), loginBean.getFullName()));
-            tvLoginSuccessSex.setText(String.format(getString(R.string.login_success_sex), "男"));
-            tvLoginSuccessTel.setText(String.format(getString(R.string.login_success_tel), "159958444889"));
-            tvLoginSuccessNum.setText(String.format(getString(R.string.login_success_name), "2345311"));
-            tvLoginSuccessDepart.setText(String.format(getString(R.string.login_success_depart), "假的数据的部门"));
-        }
+
+    }
+
+    @Override
+    public void initView() {
+
+    }
+
+    @Override
+    public void initData() {
+        /**
+         * 获取用户信息
+         */
+        String userId = SpUtils.getInstance().getUserId();
+        String mac =  PackageUtils.getMac();
+        getPresenter().getUserInfo(userId,mac);
+    }
+
+    @Override
+    public LoginSuccessPresenter createPresenter() {
+        return new LoginSuccessPresenter(this);
+    }
+
+    @Override
+    public LoginSuccessView createView() {
+        return this;
     }
 
     @Override
@@ -80,5 +97,16 @@ public class LoginSuccessActivity extends AutoLayoutActivity {
     public void back() {
         startActivity(new Intent(LoginSuccessActivity.this, MainActivity.class));
         onBackPressed();
+    }
+
+    @Override
+    public void getUserinfo(UserInfoBean bean) {
+        if (null != bean) {
+            tvLoginSuccessName.setText(String.format(getString(R.string.login_success_name), bean.userName));
+            tvLoginSuccessSex.setText(String.format(getString(R.string.login_success_sex), bean.userSex));
+            tvLoginSuccessTel.setText(String.format(getString(R.string.login_success_tel),bean.userTel));
+            tvLoginSuccessNum.setText(String.format(getString(R.string.login_success_num), bean.userNum));
+            tvLoginSuccessDepart.setText(String.format(getString(R.string.login_success_depart), bean.userDepart));
+        }
     }
 }

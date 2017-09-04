@@ -44,6 +44,11 @@ public class SplashActivity extends AutoLayoutActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         StatusBarUtil.setTranslucentBackground(this);
+        SpUtils.getInstance().putBaseUrl(Constants.BASE_URL);
+        SpUtils.getInstance().puttenancyName("Default");
+        SpUtils.getInstance().putLocaleLanguage("zh-CN");
+        SpUtils.getInstance().putUserName("admin");
+        SpUtils.getInstance().putPassword("123qwe");
         handler.sendEmptyMessageDelayed(0, 2000);
     }
 }

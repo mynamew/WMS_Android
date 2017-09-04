@@ -2,6 +2,8 @@ package com.timi.sz.wms_android.http.api;
 
 
 import com.timi.sz.wms_android.bean.LoginBean;
+import com.timi.sz.wms_android.bean.UserInfoBean;
+import com.timi.sz.wms_android.bean.VersionBean;
 import com.timi.sz.wms_android.bean.instock.search.BuyOrdernoBean;
 import com.timi.sz.wms_android.bean.instock.CreateInStockOrdernoBean;
 import com.timi.sz.wms_android.bean.instock.search.FinishGoodsCreateBillBean;
@@ -40,10 +42,24 @@ public interface ApiService {
     @POST("api/Account/ClientLogin")
     Observable<CommonResult<LoginBean>> login(@Field("tenancyName") String tenancyName, @Field("usernameOrEmailAddress") String usernameOrEmailAddress, @Field("password") String password, @Field("deviceType") int deviceType, @Field("mac") String mac);
 
+    /**
+     * 获取版本
+     */
+    @FormUrlEncoded
+    @POST("api/authority/GetAppVersion")
+    Observable<CommonResult<VersionBean>> getAppVersion(@Field("tenancyName") String tenancyName, @Field("usernameOrEmailAddress") String usernameOrEmailAddress, @Field("password") String password, @Field("deviceType") int deviceType, @Field("mac") String mac);
+
     //下载更新
     @Streaming
     @GET
     Observable<ResponseBody> downloadFile(@Url String fileUrl);
+
+    /**
+     * 获取用户信息
+     */
+    @FormUrlEncoded
+    @POST("api/authority/GetUserInfo")
+    Observable<CommonResult<UserInfoBean>> getUserInfo(@Field("userId") String userid, @Field("deviceType") int deviceType, @Field("mac") String mac);
 
     /********************入库 请求************************************************************/
 
@@ -214,6 +230,7 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("api/Account/ClientLogin")
     Observable<CommonResult<OrderNoBean>> returnMaterialOrderNoScan(@Field("orderno") String orderno);
+
     /**
      * 退料单 添加物料的方法
      *
@@ -226,12 +243,14 @@ public interface ApiService {
 
     /**
      * 通过物料码获取未关闭的采购单 即退料单
+     *
      * @param materialCode
      * @return
      */
     @FormUrlEncoded
     @POST("api/Account/ClientLogin")
     Observable<CommonResult<BuyReturnMaterialOrdernoBean>> materialScanGetBuyRetrurnOrderNo(@Field("materialCode") String materialCode);
+
     /**
      * 提交物料扫码 结果到采购退料单
      *

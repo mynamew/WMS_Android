@@ -94,11 +94,6 @@ public class HttpManager {
                     @Override
                     public T apply(@NonNull CommonResult<T> t)   {
                         LogUitls.e("返回结果--->", t.toString());
-//                            LogUitls.e("返回结果getTargetUrl--->", t.getTargetUrl());
-//                            LogUitls.e("返回结果getError--->", t.getError());
-//                            LogUitls.e("返回结果is__abp--->", t.is__abp());
-//                            LogUitls.e("返回结果isUnAuthorizedRequest--->", t.isUnAuthorizedRequest());
-//                            LogUitls.e("返回结果isSuccess--->", t.isSuccess());
                         if (t.isSuccess()) {//请求成功的返回
                             if (t.isUnAuthorizedRequest()) {
                                 return t.getResult();
@@ -106,8 +101,8 @@ public class HttpManager {
                                 /**
                                  * 如果返回的tocken 失效
                                  */
-                                BaseActivity currentActivty = (BaseActivity) BaseActivity.getCurrentActivty();
-                                currentActivty.jumpToLoginActivity();
+//                                BaseActivity currentActivty = (BaseActivity) BaseActivity.getCurrentActivty();
+//                                currentActivty.jumpToLoginActivity();
                                 return t.getResult();
                             }
                         } else {

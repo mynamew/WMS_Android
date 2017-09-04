@@ -1,36 +1,35 @@
 package com.timi.sz.wms_android.mvp.UI.home;
 
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.timi.sz.wms_android.R;
 import com.timi.sz.wms_android.base.uils.Constants;
 import com.timi.sz.wms_android.base.uils.LanguageUtils;
+import com.timi.sz.wms_android.base.uils.NetWorkUtils;
+import com.timi.sz.wms_android.base.uils.PackageUtils;
 import com.timi.sz.wms_android.base.uils.QRCodeUtil;
 import com.timi.sz.wms_android.base.uils.SDCardUtils;
 import com.timi.sz.wms_android.base.uils.SpUtils;
+import com.timi.sz.wms_android.base.uils.ToastUtils;
 import com.timi.sz.wms_android.bean.UserInfoBean;
+import com.timi.sz.wms_android.bean.VersionBean;
 import com.timi.sz.wms_android.http.message.BaseMessage;
 import com.timi.sz.wms_android.http.message.event.HomeEvent;
 import com.timi.sz.wms_android.mvp.UI.about.AboutActivity;
 import com.timi.sz.wms_android.mvp.UI.deviceinfo.DeviceInfoActivity;
-import com.timi.sz.wms_android.mvp.UI.login.LoginActivity;
 import com.timi.sz.wms_android.mvp.UI.update_password.UpdatePasswordActivity;
 import com.timi.sz.wms_android.mvp.UI.userinfo.UserInfoActivity;
+import com.timi.sz.wms_android.mvp.base.BaseFragment;
 import com.timi.sz.wms_android.view.MyDialog;
 
 import java.io.File;
@@ -45,7 +44,7 @@ import butterknife.Unbinder;
  * author: timi
  * create at: 2017-08-17 11:34
  */
-public class SettingFragment extends Fragment implements SetFragmentDataCallBack {
+public class SettingFragment extends BaseFragment<SetFragmentView, SetFragmentPresenter> implements SetFragmentDataCallBack, SetFragmentView {
     @BindView(R.id.iv_set_headicon)
     ImageView ivSetHeadicon;
     @BindView(R.id.tv_set_username)
@@ -76,27 +75,8 @@ public class SettingFragment extends Fragment implements SetFragmentDataCallBack
     TextView tvSetUpdateTeam;
     @BindView(R.id.tv_set_exit)
     TextView btnSetExit;
-    private Unbinder unbinder;
-
+    Unbinder unbinder;
     private UserInfoBean bean = null;
-
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_setting, null);
-        unbinder = ButterKnife.bind(this, view);
-        if (null != bean) {
-            tvSetUsername.setText(bean.userName);
-            tvSetUsercode.setText(bean.userDepart);
-        }
-        return view;
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        unbinder.unbind();
-    }
 
     /**
      * 点击事件
@@ -125,29 +105,26 @@ public class SettingFragment extends Fragment implements SetFragmentDataCallBack
                 startActivity(new Intent(getActivity(), AboutActivity.class));
                 break;
             case R.id.rl_set_update_version://更新版本
+                String userName = SpUtils.getInstance().getUserName();
+                String password = SpUtils.getInstance().getPassword();
+                String tenacyName = SpUtils.getInstance().gettenancyName();
+                String mac = PackageUtils.getMac();
                 /**
-                 * 判断是否已存在安装包并且是最新下载的安装包
-                 * ( 1. 要么检测到更新版本 删除原有的安装包
-                 *   2. 下载完成安装包则设置sp 标识，有更新标识更新，下载完再次设置
-                 * )
+                 * 显示进度条
                  */
-                File file = new File(SDCardUtils.getAPKPath(getActivity()), Constants.APK_NAME);
-                if(file.exists()&&(SpUtils.getInstance().getBoolean(Constants.IS_HAVE_DOWNLOAD_NEW))){
-                    Uri uri = Uri.fromFile(file);
-                    Intent intent = new Intent(Intent.ACTION_VIEW);
-                    intent.setDataAndType(uri, "application/vnd.android.package-archive");
-                    startActivity(intent);
-                    return;
-                }
-                //开始下载的操作
-                ((MainActivity) getActivity()).getPresenter().downLoadApk("http://7xk9dj.com1.z0.glb.clouddn.com/BGAUpdateDemo_v1.0.1_debug.apk");
+                showProgressDialog();
+                /**
+                 * 获取版本
+                 */
+                getPresenter().getVersion(tenacyName, userName, password, mac);
                 break;
             case R.id.btn_set_exit://退出登录
                 shwoLogoutDialog();
                 break;
             case R.id.tv_set_exit://退出登录
                 //退出登录 跳转到登录界面
-                shwoLogoutDialog();                break;
+                shwoLogoutDialog();
+                break;
             case R.id.tv_set_language://选择语言
                 showSelectLanguageDialog(view);
                 break;
@@ -202,6 +179,7 @@ public class SettingFragment extends Fragment implements SetFragmentDataCallBack
         }
         mLogoutDialog.show();
     }
+
     /**
      * 显示服务配置的Dialog
      */
@@ -213,8 +191,8 @@ public class SettingFragment extends Fragment implements SetFragmentDataCallBack
     public void shwoServerSetDialog() {
         if (null == mServerSetDialog) {
             mServerSetDialog = new MyDialog(getActivity(), R.layout.dialog_logout)
-                    .setTextViewContent(R.id.tv_title,getString(R.string.server_set))
-                    .setTextViewContent(R.id.tv_content,getString(R.string.reset_server_will_logout))
+                    .setTextViewContent(R.id.tv_title, getString(R.string.server_set))
+                    .setTextViewContent(R.id.tv_content, getString(R.string.reset_server_will_logout))
                     .setButtonListener(R.id.tv_logout_cancel, getString(R.string.cancel), new MyDialog.DialogClickListener() {
                         @Override
                         public void dialogClick(MyDialog dialog) {
@@ -233,6 +211,7 @@ public class SettingFragment extends Fragment implements SetFragmentDataCallBack
         }
         mServerSetDialog.show();
     }
+
     /**
      * 显示下拉框 选择语言
      *
@@ -309,5 +288,110 @@ public class SettingFragment extends Fragment implements SetFragmentDataCallBack
         this.bean = bean;
     }
 
+
+    @Override
+    public void installApk() {
+        // TODO: 2017/8/24  提示安装安装包
+        ToastUtils.showShort(getActivity(), "安装包下载完成请安装");
+        /**
+         * 下载完成 存储已下载更新的安装包的标识
+         */
+        SpUtils.getInstance().putBoolean(Constants.IS_HAVE_DOWNLOAD_NEW, true);
+        /**
+         * 调用系统方法进行安装
+         */
+        Uri uri = Uri.fromFile(new File(SDCardUtils.getAPKPath(getActivity()), Constants.APK_NAME));
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setDataAndType(uri, "application/vnd.android.package-archive");
+        startActivity(intent);
+    }
+
+    @Override
+    public void getVersion(final VersionBean bean) {
+        try {
+            String versionName = PackageUtils.getVersionName(getActivity());
+            if (!versionName.equals(bean.getObjectReturn().getVersion())) {
+                /**
+                 * 若已存在apk包
+                 */
+                File file = new File(SDCardUtils.getAPKPath(getActivity()), Constants.APK_NAME);
+                if (file.exists()) {
+                    /**
+                     * 获取存储的apk中的version code
+                     */
+                    PackageInfo packageArchiveInfo = getActivity().getPackageManager().getPackageArchiveInfo(SDCardUtils.getAPKPath(getActivity()), PackageManager.GET_ACTIVITIES);
+                    int versionCode = packageArchiveInfo.versionCode;
+                    /**
+                     * 如果已经下载的apk版本号和返回的版本号相同 则直接提示安装
+                     */
+                    if (versionCode == Integer.parseInt(bean.getObjectReturn().getVersion())) {
+                        /**
+                         * 调用系统方法进行安装
+                         */
+                        Uri uri = Uri.fromFile(new File(SDCardUtils.getAPKPath(getActivity()), Constants.APK_NAME));
+                        Intent intent = new Intent(Intent.ACTION_VIEW);
+                        intent.setDataAndType(uri, "application/vnd.android.package-archive");
+                        startActivity(intent);
+                        return;
+                    }
+                }
+                /**
+                 * 若版本不一致 设置需要版本更新
+                 */
+                SpUtils.getInstance().putBoolean(Constants.IS_HAVE_DOWNLOAD_NEW, false);
+                /**
+                 * 如果是wifi 下 自动下载apk  并提醒更新
+                 */
+                if (NetWorkUtils.checkedNetWorkType(getActivity()) == NetWorkUtils.WIFI) {
+                    ToastUtils.showShort("正在下载更新。。。请稍后");
+                    getPresenter().downLoadApk(bean.getObjectReturn().getUrl());
+                } else {
+                    new MyDialog(getActivity(), R.layout.dialog_logout)
+                            .setTextViewContent(R.id.tv_title, "下载安装包")
+                            .setTextViewContent(R.id.tv_content, "您当前处于非Wifi状态，是否进行下载？")
+                            .setTextViewListener(R.id.tv_logout_cancel, new MyDialog.DialogClickListener() {
+                                @Override
+                                public void dialogClick(MyDialog dialog) {
+                                    dialog.dismiss();
+                                }
+                            }).setTextViewListener(R.id.tv_logout_confirm, new MyDialog.DialogClickListener() {
+                        @Override
+                        public void dialogClick(MyDialog dialog) {
+                            dialog.dismiss();
+                            ToastUtils.showShort("正在下载更新。。。请稍后");
+                            getPresenter().downLoadApk(bean.getObjectReturn().getUrl());
+                        }
+                    }).show();
+                }
+            } else {
+                ToastUtils.showShort("已是最新版本，无需更新");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public int setLayoutId() {
+        return R.layout.fragment_setting;
+    }
+
+    @Override
+    public void initData() {
+        if (null != bean) {
+            tvSetUsername.setText(bean.userName);
+            tvSetUsercode.setText(bean.userDepart);
+        }
+    }
+
+    @Override
+    public SetFragmentPresenter createPresenter() {
+        return new SetFragmentPresenter(getActivity());
+    }
+
+    @Override
+    public SetFragmentView createView() {
+        return this;
+    }
 
 }

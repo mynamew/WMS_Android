@@ -40,7 +40,6 @@ public class HttpSubscriber<T> implements Observer<T> {
 
     @Override
     public void onSubscribe(Disposable d) {
-        MyProgressDialog.showProgressDialog(BaseActivity.getCurrentActivty());
         mDisposable = d;
     }
 
@@ -54,7 +53,6 @@ public class HttpSubscriber<T> implements Observer<T> {
 
     @Override
     public void onError(Throwable e) {
-        MyProgressDialog.hideProgressDialog();
         //请求失败的异常
         if (e instanceof CompositeException) {
             CompositeException compositeE = (CompositeException) e;
@@ -99,6 +97,8 @@ public class HttpSubscriber<T> implements Observer<T> {
                 ToastUtils.showShort(messageStr);
                 mOnResultListener.onError(messageStr);
                 LogUitls.e("打印输出错误代码httpResultBean---->", httpResultBean.toString());
+                //进度条消失
+                MyProgressDialog.hideProgressDialog();
                 return;
             } catch (Exception e1) {
                 mOnResultListener.onError(SERVER_TIMEOUT_EXCEPTION);
@@ -112,17 +112,20 @@ public class HttpSubscriber<T> implements Observer<T> {
              */
             mOnResultListener.onError(e.getMessage());
         }
-
+        //进度条消失
+        MyProgressDialog.hideProgressDialog();
     }
 
     @Override
     public void onComplete() {
+        //进度条消失
         MyProgressDialog.hideProgressDialog();
     }
 
     public void unSubscribe() {
         if (mDisposable != null && !mDisposable.isDisposed()) {
             mDisposable.dispose();
+            //进度条消失
             MyProgressDialog.hideProgressDialog();
         }
     }

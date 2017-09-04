@@ -1,19 +1,14 @@
 package com.timi.sz.wms_android.mvp.UI.login;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.os.Parcelable;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.Animation;
@@ -38,20 +33,12 @@ import com.timi.sz.wms_android.bean.LoginBean;
 import com.timi.sz.wms_android.http.message.BaseMessage;
 import com.timi.sz.wms_android.http.message.event.HomeEvent;
 import com.timi.sz.wms_android.mvp.UI.home.MainActivity;
+import com.timi.sz.wms_android.mvp.UI.login_success.LoginSuccessActivity;
 import com.timi.sz.wms_android.mvp.base.BaseActivity;
-import com.timi.sz.wms_android.receiver.ExampleUtil;
 import com.timi.sz.wms_android.view.MyDialog;
-import com.timi.sz.wms_android.view.MyProgressDialog;
-
-import java.util.ArrayList;
-import java.util.Set;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.OnTextChanged;
-import cn.jpush.android.api.JPushInterface;
-import cn.jpush.android.api.TagAliasCallback;
 
 /**
  * 登录界面
@@ -194,14 +181,14 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
         if (cbLoginRempsw.isChecked()) {
             //存储用户名和密码
             SpUtils.getInstance()
-                    .putString(Constants.USER_NAME, username)
-                    .putString(Constants.USER_PSW, password)
+                    .putUserName(username)
+                    .putPassword(password)
                     .putBoolean(Constants.REMENBER_PSW, true);
         } else {
             //清空用户名和密码
             SpUtils.getInstance()
-                    .putString(Constants.USER_NAME, "")
-                    .putString(Constants.USER_PSW, "")
+                    .putUserName("")
+                    .putPassword("")
                     .putBoolean(Constants.REMENBER_PSW, false);
         }
         //获取租户地址
@@ -242,7 +229,6 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
          * 存储用户的所有信息 以字符串的形式
          */
         SpUtils.getInstance().putString(Constants.USER_INFO, bean.toString());
-        //第一次登录以及设置别名
         jumpToMainActivity();
     }
 
@@ -252,77 +238,18 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
     private void jumpToMainActivity() {
         //是否第一次登录
         boolean isFirstLog = SpUtils.getInstance().getBoolean(Constants.IS_FIRST_LOG);
-        //判断跳转到不同界面
-        if (!isFirstLog) {
-            setAlias();
-        } else {
-            startActivity(new Intent(LoginActivity.this, MainActivity.class));
-            onBackPressed();
-
-        }
         //设置 第一次登录为 false
         SpUtils.getInstance().putBoolean(Constants.IS_FIRST_LOG, true);
+        //判断跳转到不同界面
+        if (!isFirstLog) {
+            startActivity(new Intent(LoginActivity.this, LoginSuccessActivity.class));
+        } else {
+            startActivity(new Intent(LoginActivity.this, MainActivity.class));
+        }
+        finish();
 
     }
 
-    /*********************
-     * 设置别名
-     **************************************************************************************/
-    private void setAlias() {
-        String alias = bean.getUserId() + "";
-        LogUitls.d("alias--->" + alias);
-        if (!ExampleUtil.isValidTagAndAlias(alias)) {
-            ToastUtils.showShort(LoginActivity.this, "别名设置格式不正确");
-            return;
-        }
-
-        // 调用 Handler 来异步设置别名
-        mHandler.sendMessage(mHandler.obtainMessage(MSG_SET_ALIAS, alias));
-    }
-
-    private final TagAliasCallback mAliasCallback = new TagAliasCallback() {
-        @Override
-        public void gotResult(int code, String alias, Set<String> tags) {
-            String logs;
-            switch (code) {
-                case 0://第一次登录 和设置别名一起操作 （设置别名也只设置一次）
-                    Intent intent = new Intent(LoginActivity.this, LoginSuccessActivity.class);
-                    startActivity(intent);
-                    onBackPressed();
-                    break;
-                case 6002:
-                    logs = "Failed to set alias and tags due to timeout. Try again after 60s.";
-//                    LogUitls.i(TAG + logs);
-                    // 延迟 60 秒来调用 Handler 设置别名
-                    mHandler.sendMessageDelayed(mHandler.obtainMessage(MSG_SET_ALIAS, alias), 1000 * 60);
-                    break;
-                default:
-                    logs = "Failed with errorCode = " + code;
-                    Log.e(TAG, logs);
-            }
-        }
-    };
-
-
-    private static final int MSG_SET_ALIAS = 1001;
-    private final Handler mHandler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            switch (msg.what) {
-                case MSG_SET_ALIAS:
-//                    LogUitls.d(TAG + "Set alias in handler.");
-                    // 调用 JPush 接口来设置别名。
-                    JPushInterface.setAliasAndTags(getApplicationContext(),
-                            (String) msg.obj,
-                            null,
-                            mAliasCallback);
-                    break;
-                default:
-//                    LogUitls.i(TAG + "Unhandled msg - " + msg.what);
-            }
-        }
-    };
     private MyDialog myDialog = null;
 
     @OnClick(R.id.btn_set)
@@ -450,26 +377,26 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
      */
     private void showServerSetDialogShow() {
         if (null == myDialog) {
-            String languageStr="";
-            switch ( SpUtils.getInstance().getLocaleLanguage()){
+            String languageStr = "";
+            switch (SpUtils.getInstance().getLocaleLanguage()) {
                 case "zh-CN":
-                    languageStr=getString(R.string.language_simple);
+                    languageStr = getString(R.string.language_simple);
                     break;
                 case "en":
-                    languageStr=getString(R.string.language_english);
+                    languageStr = getString(R.string.language_english);
                     break;
                 case "zh-TW":
-                    languageStr=getString(R.string.language_tradtional);
+                    languageStr = getString(R.string.language_tradtional);
                     break;
                 default:
-                    languageStr=getString(R.string.language_simple);
+                    languageStr = getString(R.string.language_simple);
                     break;
             }
             myDialog = new MyDialog(this, R.layout.dialog_login_server_set)
                     //设置url
                     .setTextViewContent(R.id.et_login_server, SpUtils.getInstance().getBaseUrl())
                     .setTextViewContent(R.id.et_login_zuhu, SpUtils.getInstance().gettenancyName())
-                    .setTextViewContent(R.id.tv_login_language,TextUtils.isEmpty(languageStr)?"":languageStr)
+                    .setTextViewContent(R.id.tv_login_language, TextUtils.isEmpty(languageStr) ? "" : languageStr)
                     //设置按钮
                     .setButtonListener(R.id.bt_login__confirm, getString(R.string.home_set), new MyDialog.DialogClickListener() {
                         @Override
@@ -480,7 +407,7 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
                                 ToastUtils.showShort(LoginActivity.this, R.string.login_please_input_serverurl);
                                 return;
                             }
-                            if (!text.contains("http")&&text.endsWith("/")){
+                            if (!text.contains("http") && text.endsWith("/")) {
                                 ToastUtils.showShort(LoginActivity.this, R.string.login_please_input_right_serverurl);
                                 //重置地址
                                 etLoginServer.setText("");

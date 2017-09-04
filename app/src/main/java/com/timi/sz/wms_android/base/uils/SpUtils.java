@@ -249,4 +249,44 @@ public class SpUtils {
         getSharedPreferences();
         return mPreference.getString(Constants.LOCALE_LAUGUAGE, "");
     }
+    /**
+     * 存入用户名
+     *
+     * @param value
+     */
+    public SpUtils putUserName(String value) {
+        getSharedPreferences();
+        editor.putString(Constants.USER_NAME, value).commit();
+        return this;
+    }
+
+    /**
+     * 获取用户名
+     *
+     * @return
+     */
+    public String getUserName() {
+        getSharedPreferences();
+        return mPreference.getString(Constants.USER_NAME, "");
+    }
+    /**
+     * 存入用户名
+     *
+     * @param value
+     */
+    public SpUtils putPassword(String value) {
+        getSharedPreferences();
+        editor.putString(Constants.USER_PSW, value).commit();
+        return this;
+    }
+
+    /**
+     * 获取用户名
+     *
+     * @return
+     */
+    public String getPassword() {
+        getSharedPreferences();
+        return mPreference.getString(Constants.USER_PSW, "");
+    }
 }

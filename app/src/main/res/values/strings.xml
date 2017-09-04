@@ -29,11 +29,11 @@
     <string name="login_select_language">请选择语言</string>
     /**====== 个人信息 ======**/
     <string name="login_success_tip">提示：首次登录需进行个人信息确认，如有问题，请到ERP中进行修改。</string>
-    <string name="name">姓名：</string>
-    <string name="sex">性别：</string>
-    <string name="work_num">工号：</string>
-    <string name="depart">部门：</string>
-    <string name="tel">手机：</string>
+    <string name="name">姓名：%1$s</string>
+    <string name="sex">性别：%1$s</string>
+    <string name="work_num">工号：%1$s</string>
+    <string name="depart">部门：%1$s</string>
+    <string name="tel">手机：%1$s</string>
     <string name="confirm">确定</string>
     /**====== 首页 ======**/
     <string name="home">首页</string>

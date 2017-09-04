@@ -71,7 +71,8 @@
             android:screenOrientation="portrait"/>
         <activity
             android:name=".qrcode.CommonScanActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:launchMode="singleTask"/>
 
         <meta-data
             android:name="JPUSH_APPKEY"
@@ -164,7 +165,7 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".mvp.UI.login.LoginSuccessActivity">
+        <activity android:name=".mvp.UI.login_success.LoginSuccessActivity">
         </activity>
         <activity android:name=".mvp.UI.stock_in.StockInActivity">
         </activity>
