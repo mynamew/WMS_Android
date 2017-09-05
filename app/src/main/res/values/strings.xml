@@ -291,5 +291,11 @@
     <string name="stock_out_other_audit_title">其他出库—选单</string>
     <string name="stock_out_other_audit_tip">其他出库单</string>
     <string name="stock_out_other_bill_title">其他出库—出库扫描</string>
-
+    /**====== 委外退料 ======**/
+    <string name="outsource_orderno">委外单号：%1$s</string>
+    <string name="lib_name">仓库名称：%1$s</string>
+    <string name="area_name">区域名称：%1$s</string>
+    <string name="send_material_num">发料数量：%1$s</string>
+    <string name="have_get_num">已领数量：%1$s</string>
+    <string name="can_get_num">可领数量：%1$s</string>
 </resources>

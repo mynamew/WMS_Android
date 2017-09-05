@@ -22,6 +22,7 @@ import com.timi.sz.wms_android.bean.outstock.buy.CommitMaterialScanToOredernoBea
 import com.timi.sz.wms_android.bean.outstock.buy.MaterialBean;
 import com.timi.sz.wms_android.bean.outstock.buy.OrderNoAddMaterial;
 import com.timi.sz.wms_android.bean.outstock.buy.OrderNoBean;
+import com.timi.sz.wms_android.bean.outstock.outsource.OutSourceFeedBean;
 
 import io.reactivex.Observable;
 import okhttp3.ResponseBody;
@@ -230,7 +231,7 @@ public interface ApiService {
      */
     @FormUrlEncoded
     @POST("api/Account/ClientLogin")
-    Observable<CommonResult<OrderNoBean>> searchOutsourceFeed(@Field("orderno") String orderno);
+    Observable<CommonResult<OutSourceFeedBean>> searchOutsourceFeed(@Field("orderno") String orderno);
     /**
      * 委外发货-审核单号扫码 请求
      */

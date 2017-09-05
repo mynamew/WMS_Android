@@ -22,6 +22,7 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.timi.sz.wms_android.R;
 import com.timi.sz.wms_android.base.uils.Constants;
 import com.timi.sz.wms_android.base.uils.LanguageUtils;
@@ -228,7 +229,8 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
         /**
          * 存储用户的所有信息 以字符串的形式
          */
-        SpUtils.getInstance().putString(Constants.USER_INFO, bean.toString());
+        SpUtils.getInstance().putString(Constants.USER_INFO,new Gson().toJson(bean));
+        LogUitls.e("用户信息---->",new Gson().toJson(bean));
         jumpToMainActivity();
     }
 
