@@ -67,7 +67,7 @@ public class LoginSuccessActivity extends BaseActivity<LoginSuccessView, LoginSu
         /**
          * 获取用户信息
          */
-        String userId = SpUtils.getInstance().getUserId();
+        int userId = SpUtils.getInstance().getUserId();
         String mac =  PackageUtils.getMac();
         getPresenter().getUserInfo(userId,mac);
     }

@@ -73,6 +73,16 @@ public class HttpResultBean {
     }
 
     public static class ErrorBean {
+        @Override
+        public String toString() {
+            return "ErrorBean{" +
+                    "code=" + code +
+                    ", message='" + message + '\'' +
+                    ", details='" + details + '\'' +
+                    ", validationErrors=" + validationErrors +
+                    '}';
+        }
+
         /**
          * code : 0
          * message : 登录失败

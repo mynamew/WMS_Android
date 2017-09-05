@@ -15,9 +15,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
 import com.timi.sz.wms_android.R;
 import com.timi.sz.wms_android.base.uils.Constants;
 import com.timi.sz.wms_android.base.uils.InputMethodUtils;
+import com.timi.sz.wms_android.base.uils.PackageUtils;
+import com.timi.sz.wms_android.base.uils.SpUtils;
 import com.timi.sz.wms_android.base.uils.ToastUtils;
 import com.timi.sz.wms_android.bean.instock.search.BuyOrdernoBean;
 import com.timi.sz.wms_android.bean.instock.search.FinishGoodsCreateBillBean;
@@ -139,7 +142,7 @@ public class SearchBuyOrderActivity extends BaseActivity<SearchBuyOrderView, Sea
                     if (TextUtils.isEmpty(orderNum)) {
                         ToastUtils.showShort("请输入单号");
                     }
-                    if (orderNum.length() <= 4) {
+                    if (orderNum.length() <4) {
                         ToastUtils.showShort("输入查询单号位数必须是4位以上");
                     } else {
                         /**
@@ -217,7 +220,7 @@ public class SearchBuyOrderActivity extends BaseActivity<SearchBuyOrderView, Sea
     public void buyOrdernoQuery(BuyOrdernoBean bean) {
         Intent it = new Intent(this, StockInPointActivity.class);
         it.putExtra(Constants.CODE_STR, intentCode);
-        it.putExtra(IN_STOCK_BUY_BEAN, bean);
+        it.putExtra(IN_STOCK_BUY_BEAN, new Gson().toJson(bean));
         startActivity(it);
     }
 
@@ -331,12 +334,15 @@ public class SearchBuyOrderActivity extends BaseActivity<SearchBuyOrderView, Sea
      * @param orderNum
      */
     public void requestManagerMethod(String orderNum) {
+        String mac= PackageUtils.getMac();
+        int userId= SpUtils.getInstance().getUserId();
+        int orgId=SpUtils.getInstance().getOrgId();
         /**
          * 不同的intentcode  请求不同
          */
         switch (intentCode) {
             case Constants.BUY_ORDE_NUM://采购单
-                getPresenter().buyOrdernoQuery(orderNum);
+                getPresenter().buyOrdernoQuery(orgId,userId,mac,orderNum);
                 break;
             case Constants.BUY_SEND_NUM://送货单
                 getPresenter().sendOrdernoQuery(orderNum);

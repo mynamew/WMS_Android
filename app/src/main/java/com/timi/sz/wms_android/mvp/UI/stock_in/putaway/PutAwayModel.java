@@ -62,7 +62,7 @@ public class PutAwayModel extends MvpBaseModel {
      * @param observer
      */
     public void materialScanPutAawy(final String locationCode, final String materialCode,
-                                    final String userId,
+                                    final int userId,
                                     final Observer<MaterialScanPutAwayBean> observer){
         HttpManager.getInstance().HttpManagerRequest(observer,
                 new ApiServiceMethodCallBack<MaterialScanPutAwayBean>() {

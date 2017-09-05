@@ -225,7 +225,9 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
         this.bean = bean;
         Toast.makeText(this, R.string.login_success, Toast.LENGTH_SHORT).show();
         //登录成功  存储 id
-        SpUtils.getInstance().putUserid(bean.getUserId() + "");
+        SpUtils.getInstance().putUserid(bean.getUserId());
+        SpUtils.getInstance().putOrgId(bean.getOrgUnits().get(0).getId());
+        SpUtils.getInstance().putAuthorization(bean.getToken());
         /**
          * 存储用户的所有信息 以字符串的形式
          */

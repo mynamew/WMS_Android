@@ -30,7 +30,7 @@ public class LoginSuccessPresenter extends MvpBasePresenter<LoginSuccessView> {
      * @param userId
      * @param mac
      */
-    public void getUserInfo( String userId,String mac) {
+    public void getUserInfo( int userId,String mac) {
         /**
          * 显示进度条
          */

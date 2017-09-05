@@ -8,6 +8,7 @@ import com.orhanobut.logger.Logger;
 import com.timi.sz.wms_android.mvp.base.BaseApplication;
 
 import static com.timi.sz.wms_android.base.uils.Constants.CUSER_ID;
+import static com.timi.sz.wms_android.base.uils.Constants.ORGANAZATION_ID;
 
 
 /**
@@ -147,9 +148,9 @@ public class SpUtils {
      * author: timi
      * create at: 2017/8/18 9:23
      */
-    public String getUserId() {
+    public int getUserId() {
         getSharedPreferences();
-        return mPreference.getString(CUSER_ID, "");
+        return mPreference.getInt(CUSER_ID, -1);
     }
 
     /**
@@ -157,9 +158,28 @@ public class SpUtils {
      * author: timi
      * create at: 2017/8/18 9:56
      */
-    public void putUserid(String userid) {
+    public void putUserid(int userid) {
         getSharedPreferences();
-        editor.putString(CUSER_ID, userid).commit();
+        editor.putInt(CUSER_ID, userid).commit();
+    }
+    /**
+     * 获取 组织id
+     * author: timi
+     * create at: 2017/8/18 9:23
+     */
+    public int getOrgId() {
+        getSharedPreferences();
+        return mPreference.getInt(ORGANAZATION_ID, -1);
+    }
+
+    /**
+     * 存入 组织id
+     * author: timi
+     * create at: 2017/8/18 9:56
+     */
+    public void putOrgId(int userid) {
+        getSharedPreferences();
+        editor.putInt(ORGANAZATION_ID, userid).commit();
     }
 
     /**

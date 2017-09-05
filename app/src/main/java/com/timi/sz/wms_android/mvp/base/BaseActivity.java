@@ -245,7 +245,7 @@ public abstract class BaseActivity<V extends MvpView, P extends MvpPresenter<V>>
         super.startActivity(intent);
 
         if (interlude == Interlude.DEFAULT) {
-            overridePendingTransition(R.transition.slide_in_right, R.anim.none);
+            overridePendingTransition(R.transition.slide_out_left, R.anim.none);
         } else if (interlude == Interlude.POP_FROM_BOTTOM) {
             //从下方弹出
             overridePendingTransition(R.transition.pop_in_bottom, R.anim.none);
@@ -257,7 +257,7 @@ public abstract class BaseActivity<V extends MvpView, P extends MvpPresenter<V>>
         super.finish();
         if (curInterlude == Interlude.DEFAULT) {
             //默认情况，什么都不做，已经在style文件中配置
-            overridePendingTransition( R.anim.none,R.transition.slide_out_left);
+            overridePendingTransition( R.anim.none,R.anim.none);
         } else if (curInterlude == Interlude.POP_FROM_BOTTOM) {
             //从下方弹出
             overridePendingTransition(R.anim.none, R.transition.pop_out_bottom);

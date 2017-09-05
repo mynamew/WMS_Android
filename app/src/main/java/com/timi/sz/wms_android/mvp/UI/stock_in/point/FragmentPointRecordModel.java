@@ -21,14 +21,12 @@ import io.reactivex.Observer;
 public class FragmentPointRecordModel extends MvpBaseModel {
     /**
      * 采购单查询的方法
-     * @param scanStr
-     * @param observer
      */
-    public void buyOrdernoQuery(final String scanStr , Observer<BuyOrdernoBean> observer){
+    public void buyOrdernoQuery(final int orgId, final int userId, final String mac, final String billNo , Observer<BuyOrdernoBean> observer){
         HttpManager.getInstance().HttpManagerRequest(observer, new ApiServiceMethodCallBack<BuyOrdernoBean>() {
             @Override
             public Observable<CommonResult<BuyOrdernoBean>> createObservable(ApiService apiService) {
-                return apiService.buyOrderNoQuery(scanStr);
+                return apiService.buyOrderNoQuery(orgId,userId,mac,billNo);
             }
         });
     }

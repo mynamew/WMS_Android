@@ -2,6 +2,7 @@ package com.timi.sz.wms_android.mvp.UI.stock_in.point;
 
 import android.content.Context;
 
+import com.timi.sz.wms_android.base.uils.ToastUtils;
 import com.timi.sz.wms_android.bean.instock.search.BuyOrdernoBean;
 import com.timi.sz.wms_android.bean.instock.PointMaterialBean;
 import com.timi.sz.wms_android.bean.instock.search.SendOrdernoBean;
@@ -32,9 +33,8 @@ public class FragmentPointRecordPresenter extends MvpBasePresenter<FragmentPoint
     /**
      * 采购单的搜索返回
      *
-     * @param scanStr
      */
-    public void buyOdernoQuery(String scanStr) {
+    public void buyOdernoQuery(final int orgId, final int userId, final String mac, final String billNo) {
         if (null == buyOrdernoBeanHttpSubscriber) {
             buyOrdernoBeanHttpSubscriber = new HttpSubscriber<>(new OnResultCallBack<BuyOrdernoBean>() {
                 @Override
@@ -44,17 +44,11 @@ public class FragmentPointRecordPresenter extends MvpBasePresenter<FragmentPoint
 
                 @Override
                 public void onError(String errorMsg) {
-                    //请求失败 加入假数据
-                    List<BuyOrdernoBean.MarterialBean> datas = new ArrayList<>();
-                    for (int i = 0; i < 20; i++) {
-                        datas.add(new BuyOrdernoBean.MarterialBean(i + "", "M42324232" + i, "50", "50", "100", "10", "20"));
-                    }
-                    BuyOrdernoBean buyOrdernoBean = new BuyOrdernoBean("B789678", "邢力丰", "深圳超然科技股份有限公司", "2017-8-29", datas);
-                    getView().buyOrdernoQuery(buyOrdernoBean);
+                    ToastUtils.showShort(errorMsg);
                 }
             });
         }
-        model.buyOrdernoQuery(scanStr, buyOrdernoBeanHttpSubscriber);
+        model.buyOrdernoQuery(orgId,userId,mac,billNo, buyOrdernoBeanHttpSubscriber);
     }
     /**
      * 保存物料清点的方法

@@ -14,5 +14,5 @@ import com.timi.sz.wms_android.mvp.base.view.iml.MvpBaseView;
 public interface FragmentPointView extends MvpBaseView {
      void buyOrdernoQuery(BuyOrdernoBean bean);
      void sendOrdernoQuery(SendOrdernoBean bean);
-     void savePointMaterial(PointMaterialBean bean);
+     void savePointMaterial(Integer result);
 }

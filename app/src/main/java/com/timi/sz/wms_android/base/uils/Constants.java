@@ -13,7 +13,8 @@ import static com.timi.sz.wms_android.base.uils.PackageUtils.isApkDebugable;
 
 public class Constants {
     //base url
-    public static final String BASE_URL = "http://szjuqent.imwork.net:83/";
+//    public static final String BASE_URL = "http://szjuqent.imwork.net:83/";
+    public static final String BASE_URL = "http://192.168.0.102:8066/";
     //超时时间   5s
     public static int DEFAULT_TIMEOUT = 5000;
     /**********
@@ -41,6 +42,8 @@ public class Constants {
     public static final String USER_TEL = "USER_TEL";
     //用户所属组织
     public static final String USER_FROM = "USER_FROM";
+    //组织id
+    public static final String ORGANAZATION_ID = "ORGANAZATION_ID";
     //用户权限组织
     public static final String USER_ROOT = "USER_ROOT";
     //登录的id

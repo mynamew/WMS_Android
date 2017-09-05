@@ -127,18 +127,18 @@ public class FragmentPointRecord extends BaseFragment<FragmentPointRecordView,Fr
                             int pointNum=Integer.parseInt(pointNumStr);
                             int spareNum=Integer.parseInt(spareNumStr);
                             int arriverNum=0;
-                            /**
-                             * 采购单 到货数
-                             */
-                            if(null!=mBuyOrderBean){
-                                arriverNum=mBuyOrderBean.data.get(position).arriveNum;
-                            }
-                            /**
-                             * 送货单 到货数
-                             */
-                            if(null!=mSendOrderBean){
-                                arriverNum=mBuyOrderBean.data.get(position).arriveNum;
-                            }
+//                            /**
+//                             * 采购单 到货数
+//                             */
+//                            if(null!=mBuyOrderBean){
+//                                arriverNum=mBuyOrderBean.data.get(position).arriveNum;
+//                            }
+//                            /**
+//                             * 送货单 到货数
+//                             */
+//                            if(null!=mSendOrderBean){
+//                                arriverNum=mBuyOrderBean.data.get(position).arriveNum;
+//                            }
                             /**
                              * 对清点数 输入做控制
                              */
@@ -163,62 +163,62 @@ public class FragmentPointRecord extends BaseFragment<FragmentPointRecordView,Fr
     private BuyOrdernoBean mBuyOrderBean=null;
     @Override
     public void buyOrdernoQuery(BuyOrdernoBean bean) {
-        llStockinPointRecord.removeAllViews();
-        /**
-         * 设置订单号 为了保存物料使用
-         */
-        orderNo=bean.num;
-        /**
-         * 采购单的实体
-         */
-        mBuyOrderBean=bean;
-        //构造假数据
-        ArrayList<ArrayList<String>> mTableDatas = new ArrayList<ArrayList<String>>();
-        ArrayList<String> mfristData = new ArrayList<String>();
-        mfristData.add("行号");
-        mfristData.add("物品编码");
-        mfristData.add("采购数");
-        mfristData.add("到货数");
-        mfristData.add("入库数");
-        mfristData.add("请点数");
-        mfristData.add("备品数");
-        mTableDatas.add(mfristData);
-        for (int i = 0; i < bean.data.size(); i++) {
-            ArrayList<String> mRowDatas = new ArrayList<String>();
-            BuyOrdernoBean.MarterialBean marterialBean = bean.data.get(i);
-            mRowDatas.add(marterialBean.materialCode);
-            mRowDatas.add(marterialBean.buyNum);
-            mRowDatas.add(marterialBean.arriveNum+"");
-            mRowDatas.add(marterialBean.inStockNum);
-            mRowDatas.add(marterialBean.pointNum);
-            mRowDatas.add(marterialBean.spareNum);
-            mTableDatas.add(mRowDatas);
-        }
-        LockTableView mLockTableView = new LockTableView(getActivity(), llStockinPointRecord, mTableDatas);
-        Log.e("表格加载开始", "当前线程：" + Thread.currentThread());
-        mLockTableView.setLockFristColumn(false) //是否锁定第一列
-                .setLockFristRow(true) //是否锁定第一行
-                .setMaxColumnWidth(100) //列最大宽度
-                .setMinColumnWidth(10) //列最小宽度
-                .setMinRowHeight(5)//行最小高度
-                .setMaxRowHeight(20)//行最大高度
-                .setTextViewSize(12) //单元格字体大小
-                .setFristRowBackGroudColor(R.color.table_head)//表头背景色
-                .setTableHeadTextColor(R.color.beijin)//表头字体颜色
-                .setTableContentTextColor(R.color.border_color)//单元格字体颜色
-                .setNullableString("N/A") //空值替换值
-                .setTableViewListener(new LockTableView.OnTableViewListener() {
-                    @Override
-                    public void onTableViewScrollChange(int x, int y) {
-                        Log.e("滚动值", "[" + x + "]" + "[" + y + "]");
-                    }
-
-                    @Override
-                    public void onTabViewClickListener(int position) {
-                        showGoodsPointRecordDialog(position);
-                    }
-                })//设置滚动回调监听
-                .show(); //显示表格,此方法必须调用
+//        llStockinPointRecord.removeAllViews();
+//        /**
+//         * 设置订单号 为了保存物料使用
+//         */
+//        orderNo=bean.num;
+//        /**
+//         * 采购单的实体
+//         */
+//        mBuyOrderBean=bean;
+//        //构造假数据
+//        ArrayList<ArrayList<String>> mTableDatas = new ArrayList<ArrayList<String>>();
+//        ArrayList<String> mfristData = new ArrayList<String>();
+//        mfristData.add("行号");
+//        mfristData.add("物品编码");
+//        mfristData.add("采购数");
+//        mfristData.add("到货数");
+//        mfristData.add("入库数");
+//        mfristData.add("请点数");
+//        mfristData.add("备品数");
+//        mTableDatas.add(mfristData);
+//        for (int i = 0; i < bean.data.size(); i++) {
+//            ArrayList<String> mRowDatas = new ArrayList<String>();
+//            BuyOrdernoBean.MarterialBean marterialBean = bean.data.get(i);
+//            mRowDatas.add(marterialBean.materialCode);
+//            mRowDatas.add(marterialBean.buyNum);
+//            mRowDatas.add(marterialBean.arriveNum+"");
+//            mRowDatas.add(marterialBean.inStockNum);
+//            mRowDatas.add(marterialBean.pointNum);
+//            mRowDatas.add(marterialBean.spareNum);
+//            mTableDatas.add(mRowDatas);
+//        }
+//        LockTableView mLockTableView = new LockTableView(getActivity(), llStockinPointRecord, mTableDatas);
+//        Log.e("表格加载开始", "当前线程：" + Thread.currentThread());
+//        mLockTableView.setLockFristColumn(false) //是否锁定第一列
+//                .setLockFristRow(true) //是否锁定第一行
+//                .setMaxColumnWidth(100) //列最大宽度
+//                .setMinColumnWidth(10) //列最小宽度
+//                .setMinRowHeight(5)//行最小高度
+//                .setMaxRowHeight(20)//行最大高度
+//                .setTextViewSize(12) //单元格字体大小
+//                .setFristRowBackGroudColor(R.color.table_head)//表头背景色
+//                .setTableHeadTextColor(R.color.beijin)//表头字体颜色
+//                .setTableContentTextColor(R.color.border_color)//单元格字体颜色
+//                .setNullableString("N/A") //空值替换值
+//                .setTableViewListener(new LockTableView.OnTableViewListener() {
+//                    @Override
+//                    public void onTableViewScrollChange(int x, int y) {
+//                        Log.e("滚动值", "[" + x + "]" + "[" + y + "]");
+//                    }
+//
+//                    @Override
+//                    public void onTabViewClickListener(int position) {
+//                        showGoodsPointRecordDialog(position);
+//                    }
+//                })//设置滚动回调监听
+//                .show(); //显示表格,此方法必须调用
     }
     private SendOrdernoBean mSendOrderBean=null;
 

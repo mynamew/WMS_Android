@@ -2,6 +2,7 @@ package com.timi.sz.wms_android.mvp.UI.stock_in.point;
 
 import android.content.Context;
 
+import com.timi.sz.wms_android.base.uils.ToastUtils;
 import com.timi.sz.wms_android.bean.instock.search.BuyOrdernoBean;
 import com.timi.sz.wms_android.bean.instock.PointMaterialBean;
 import com.timi.sz.wms_android.bean.instock.search.SendOrdernoBean;
@@ -11,6 +12,7 @@ import com.timi.sz.wms_android.mvp.base.presenter.impl.MvpBasePresenter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * $dsc
@@ -22,7 +24,7 @@ public class FragmentPointPresenter extends MvpBasePresenter<FragmentPointView> 
     FragmentPointModel model = null;
     private HttpSubscriber<BuyOrdernoBean> buyOrdernoBeanHttpSubscriber;
     private HttpSubscriber<SendOrdernoBean> sendOrdernoBeanHttpSubscriber;
-    private HttpSubscriber<PointMaterialBean> savePointMaterialHttpSubscriber;
+    private HttpSubscriber<Integer> savePointMaterialHttpSubscriber;
 
     public FragmentPointPresenter(Context context) {
         super(context);
@@ -32,9 +34,8 @@ public class FragmentPointPresenter extends MvpBasePresenter<FragmentPointView> 
     /**
      * 采购单的搜索返回
      *
-     * @param scanStr
      */
-    public void buyOdernoQuery(String scanStr) {
+    public void buyOdernoQuery(final int orgId, final int userId, final String mac, final String billNo) {
         if (null == buyOrdernoBeanHttpSubscriber) {
             buyOrdernoBeanHttpSubscriber = new HttpSubscriber<>(new OnResultCallBack<BuyOrdernoBean>() {
                 @Override
@@ -44,17 +45,11 @@ public class FragmentPointPresenter extends MvpBasePresenter<FragmentPointView> 
 
                 @Override
                 public void onError(String errorMsg) {
-                    //请求失败 加入假数据
-                    List<BuyOrdernoBean.MarterialBean> datas = new ArrayList<>();
-                    for (int i = 0; i < 20; i++) {
-                        datas.add(new BuyOrdernoBean.MarterialBean(i + "", "M42324232" + i, "50", "50", "100", "10", "20"));
-                    }
-                    BuyOrdernoBean buyOrdernoBean = new BuyOrdernoBean("B789678", "邢力丰", "深圳超然科技股份有限公司", "2017-8-29", datas);
-                    getView().buyOrdernoQuery(buyOrdernoBean);
+                    ToastUtils.showShort(errorMsg);
                 }
             });
         }
-        model.buyOrdernoQuery(scanStr, buyOrdernoBeanHttpSubscriber);
+        model.buyOrdernoQuery(orgId,userId,mac,billNo, buyOrdernoBeanHttpSubscriber);
     }
 
     /**
@@ -87,24 +82,22 @@ public class FragmentPointPresenter extends MvpBasePresenter<FragmentPointView> 
 
     /**
      * 保存物料清点的方法
-     * @param orderno
-     * @param pointNum
-     * @param spareNum
      */
-    public void savePointMaterial(final String orderno, final int pointNum, final int spareNum){
+    public void savePointMaterial(Map<String,Object> params){
+         getView().showProgressDialog();
         if (null == savePointMaterialHttpSubscriber) {
-            savePointMaterialHttpSubscriber = new HttpSubscriber<>(new OnResultCallBack<PointMaterialBean>() {
+            savePointMaterialHttpSubscriber = new HttpSubscriber<>(new OnResultCallBack<Integer>() {
                 @Override
-                public void onSuccess(PointMaterialBean pointMaterialBean) {
-                    getView().savePointMaterial(pointMaterialBean);
+                public void onSuccess(Integer result) {
+                    getView().savePointMaterial(result);
                 }
 
                 @Override
                 public void onError(String errorMsg) {
-                    getView().savePointMaterial(new PointMaterialBean(true));
+                    ToastUtils.showShort(errorMsg);
                 }
             });
         }
-        model.savePointMaterial(orderno, pointNum, spareNum, savePointMaterialHttpSubscriber);
+        model.savePointMaterial(params, savePointMaterialHttpSubscriber);
     }
 }

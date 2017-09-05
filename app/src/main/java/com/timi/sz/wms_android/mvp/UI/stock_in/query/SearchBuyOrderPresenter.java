@@ -2,6 +2,7 @@ package com.timi.sz.wms_android.mvp.UI.stock_in.query;
 
 import android.content.Context;
 
+import com.timi.sz.wms_android.base.uils.ToastUtils;
 import com.timi.sz.wms_android.bean.instock.search.BuyOrdernoBean;
 import com.timi.sz.wms_android.bean.instock.search.FinishGoodsCreateBillBean;
 import com.timi.sz.wms_android.bean.instock.search.FinishGoodsOrdernoBean;
@@ -14,6 +15,7 @@ import com.timi.sz.wms_android.bean.instock.search.SendOrdernoBean;
 import com.timi.sz.wms_android.http.callback.OnResultCallBack;
 import com.timi.sz.wms_android.http.subscriber.HttpSubscriber;
 import com.timi.sz.wms_android.mvp.base.presenter.impl.MvpBasePresenter;
+import com.timi.sz.wms_android.view.MyProgressDialog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,10 +45,9 @@ public class SearchBuyOrderPresenter extends MvpBasePresenter<SearchBuyOrderView
 
     /**
      * 采购单查询的方法
-     *
-     * @param scanStr
      */
-    public void buyOrdernoQuery(final String scanStr) {
+    public void buyOrdernoQuery(final int orgId, final int userId, final String mac, final String billNo) {
+        getView().showProgressDialog();
         if (null == mBuyHttpSubscriber) {
             mBuyHttpSubscriber = new HttpSubscriber<>(new OnResultCallBack<BuyOrdernoBean>() {
                 @Override
@@ -56,17 +57,11 @@ public class SearchBuyOrderPresenter extends MvpBasePresenter<SearchBuyOrderView
 
                 @Override
                 public void onError(String errorMsg) {
-                    //请求失败 加入假数据
-                    List<BuyOrdernoBean.MarterialBean> datas = new ArrayList<>();
-                    for (int i = 0; i < 20; i++) {
-                        datas.add(new BuyOrdernoBean.MarterialBean(i + "", "M42324232" + i, "50", "50", "100", "10", "20"));
-                    }
-                    BuyOrdernoBean buyOrdernoBean = new BuyOrdernoBean("B789678", "邢力丰", "深圳超然科技股份有限公司", "2017-8-29", datas);
-                    getView().buyOrdernoQuery(buyOrdernoBean);
+                    ToastUtils.showShort(errorMsg);
                 }
             });
         }
-        model.buyOrdernoQuery(scanStr, mBuyHttpSubscriber);
+        model.buyOrdernoQuery(orgId, userId, mac, billNo, mBuyHttpSubscriber);
     }
 
     /**

@@ -23,7 +23,7 @@ public class LoginSuccessModel extends MvpBaseModel {
      * @param mac
      * @param observer
      */
-    public void getUserInfo(final String userId, final String mac, final Observer<UserInfoBean> observer) {
+    public void getUserInfo(final int userId, final String mac, final Observer<UserInfoBean> observer) {
         HttpManager.getInstance().HttpManagerRequest(observer, new ApiServiceMethodCallBack<UserInfoBean>() {
             @Override
             public Observable<CommonResult<UserInfoBean>> createObservable(ApiService apiService) {

@@ -24,9 +24,12 @@ import com.timi.sz.wms_android.bean.outstock.buy.OrderNoAddMaterial;
 import com.timi.sz.wms_android.bean.outstock.buy.OrderNoBean;
 import com.timi.sz.wms_android.bean.outstock.outsource.OutSourceFeedBean;
 
+import java.util.Map;
+
 import io.reactivex.Observable;
 import okhttp3.ResponseBody;
 import retrofit2.http.Field;
+import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
@@ -60,19 +63,16 @@ public interface ApiService {
      */
     @FormUrlEncoded
     @POST("api/authority/GetUserInfo")
-    Observable<CommonResult<UserInfoBean>> getUserInfo(@Field("userId") String userid, @Field("deviceType") int deviceType, @Field("mac") String mac);
+    Observable<CommonResult<UserInfoBean>> getUserInfo(@Field("userId") int userid, @Field("deviceType") int deviceType, @Field("mac") String mac);
 
     /********************入库 请求************************************************************/
 
     /**
      * 采购单查询
-     *
-     * @param scamStr
-     * @return
      */
     @FormUrlEncoded
-    @POST("api/Account/ClientLogin")
-    Observable<CommonResult<BuyOrdernoBean>> buyOrderNoQuery(@Field("scamStr") String scamStr);
+    @POST("api/services/wpda/po/QueryPODataByInput")
+    Observable<CommonResult<BuyOrdernoBean>> buyOrderNoQuery(@Field("OrgId") int OrgId,@Field("UserId") int UserId,@Field("MAC") String mac,@Field("BillNo") String BillNo);
 
     /**
      * 采购单请点记录
@@ -83,7 +83,7 @@ public interface ApiService {
      */
     @FormUrlEncoded
     @POST("api/Account/ClientLogin")
-    Observable<CommonResult<BuyOrdernoBean>> buyOrderNoPointRecord(@Field("orderNo") String orderNo, @Field("userId") String userId);
+    Observable<CommonResult<BuyOrdernoBean>> buyOrderNoPointRecord(@Field("orderNo") String orderNo, @Field("userId") int userId);
 
     /**
      * 送货单查询
@@ -106,6 +106,13 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("api/Account/ClientLogin")
     Observable<CommonResult<PointMaterialBean>> saveMaterialPoint(@Field("orderNo") String orderNo, @Field("pointNum") int pointNum, @Field("spareNum") int spareNum);
+    /**
+     * 物品清点保存
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("api/services/wpda/po/POSaveReceive")
+    Observable<CommonResult<Integer>> saveMaterialPoint(@FieldMap Map<String,Object> params);
 
     /**
      * 物料扫码
@@ -198,7 +205,7 @@ public interface ApiService {
      */
     @FormUrlEncoded
     @POST("api/Account/ClientLogin")
-    Observable<CommonResult<MaterialScanPutAwayBean>> materialScanPutAawy(@Field("locationCode") String locationCode, @Field("materialCode") String materialCode, @Field("userId") String userId);
+    Observable<CommonResult<MaterialScanPutAwayBean>> materialScanPutAawy(@Field("locationCode") String locationCode, @Field("materialCode") String materialCode, @Field("userId") int userId);
 
     /**
      * 验证库位码是否有效
