@@ -37,6 +37,9 @@ import com.timi.sz.wms_android.mvp.base.BaseActivity;
 import com.timi.sz.wms_android.qrcode.CommonScanActivity;
 import com.timi.sz.wms_android.qrcode.utils.Constant;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import butterknife.BindView;
 import butterknife.OnClick;
 
@@ -142,7 +145,7 @@ public class SearchBuyOrderActivity extends BaseActivity<SearchBuyOrderView, Sea
                     if (TextUtils.isEmpty(orderNum)) {
                         ToastUtils.showShort("请输入单号");
                     }
-                    if (orderNum.length() <4) {
+                    if (orderNum.length() < 4) {
                         ToastUtils.showShort("输入查询单号位数必须是4位以上");
                     } else {
                         /**
@@ -233,7 +236,7 @@ public class SearchBuyOrderActivity extends BaseActivity<SearchBuyOrderView, Sea
     public void sendOrdernoQuery(SendOrdernoBean bean) {
         Intent it = new Intent(this, StockInPointActivity.class);
         it.putExtra(Constants.CODE_STR, intentCode);
-        it.putExtra(IN_STOCK_SEND_BEAN, bean);
+        it.putExtra(IN_STOCK_SEND_BEAN, new Gson().toJson(bean));
         startActivity(it);
     }
 
@@ -334,18 +337,20 @@ public class SearchBuyOrderActivity extends BaseActivity<SearchBuyOrderView, Sea
      * @param orderNum
      */
     public void requestManagerMethod(String orderNum) {
-        String mac= PackageUtils.getMac();
-        int userId= SpUtils.getInstance().getUserId();
-        int orgId=SpUtils.getInstance().getOrgId();
+        Map<String,Object> params=new HashMap<>();
+        params.put("UserId",SpUtils.getInstance().getUserId());
+        params.put("OrgId",SpUtils.getInstance().getOrgId());
+        params.put("MAC",PackageUtils.getMac());
+        params.put("BillNo",orderNum);
         /**
          * 不同的intentcode  请求不同
          */
         switch (intentCode) {
             case Constants.BUY_ORDE_NUM://采购单
-                getPresenter().buyOrdernoQuery(orgId,userId,mac,orderNum);
+                getPresenter().buyOrdernoQuery(params);
                 break;
             case Constants.BUY_SEND_NUM://送货单
-                getPresenter().sendOrdernoQuery(orderNum);
+                getPresenter().sendOrdernoQuery(params);
                 break;
             case Constants.COME_MATERAIL_NUM://来料单
                 getPresenter().searchReceiveGoodOrderno(orderNum);

@@ -97,7 +97,7 @@ public class StockOutActivity extends BaseNoMvpActivity {
                 intent.putExtra(STOCK_OUT_CODE_STR, STOCK_OUT_SELL_OUT_BILL);
                 break;
             case R.id.tv_stock_out_other_buy_return://采购退料
-                startActivity(new Intent(this, BuyReturnMaterialActivity.class));
+                intent.setClass(this, BuyReturnMaterialActivity.class);
                 intent.putExtra(STOCK_OUT_CODE_STR, STOCK_OUT_PURCHASE_MATERIAL_RETURN);
                 break;
             case R.id.tv_stock_out_other_check://其他审核

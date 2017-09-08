@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/set_bg"
+    tools:context="com.timi.sz.wms_android.mvp.UI.quity.nomal_quality.NormalQualityActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <include layout="@layout/title_head"/>
+
+        <TextView
+            android:id="@+id/tv_orderno"
+            android:layout_width="match_parent"
+            android:layout_height="80px"
+            android:gravity="center_vertical"
+            android:paddingLeft="48px"
+            android:paddingTop="10px"
+            android:text="收货单号"
+            android:textColor="#333"
+            />
+
+        <TextView
+            android:id="@+id/tv_date"
+            android:layout_width="match_parent"
+            android:layout_height="80px"
+            android:gravity="center_vertical"
+            android:paddingLeft="48px"
+            android:paddingTop="10px"
+            android:text="收料日期"
+            android:textColor="#333"
+            />
+
+        <TextView
+            android:id="@+id/tv_order_num"
+            android:layout_width="match_parent"
+            android:layout_height="80px"
+            android:gravity="center_vertical"
+            android:paddingLeft="48px"
+            android:paddingTop="10px"
+            android:text="订单号"
+            android:textColor="#333"
+            />
+
+        <TextView
+            android:id="@+id/tv_supplier"
+            android:layout_width="match_parent"
+            android:layout_height="80px"
+            android:gravity="center_vertical"
+            android:paddingLeft="48px"
+            android:paddingTop="10px"
+            android:text="供应商"
+            android:textColor="#333"
+            />
+
+        <TextView
+            android:id="@+id/tv_material_code"
+            android:layout_width="match_parent"
+            android:layout_height="80px"
+            android:gravity="center_vertical"
+            android:paddingLeft="48px"
+            android:paddingTop="10px"
+            android:text="@string/material_code"
+            android:textColor="#333"
+            />
+
+        <TextView
+            android:id="@+id/tv_material_name"
+            android:layout_width="match_parent"
+            android:layout_height="80px"
+            android:gravity="center_vertical"
+            android:paddingLeft="48px"
+            android:paddingTop="10px"
+            android:text="@string/material_name"
+            android:textColor="#333"
+            />
+
+        <TextView
+            android:id="@+id/tv_material_model"
+            android:layout_width="match_parent"
+            android:layout_height="80px"
+            android:gravity="center_vertical"
+            android:paddingLeft="48px"
+            android:paddingTop="10px"
+            android:text="@string/material_model"
+            android:textColor="#333"
+            />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2px"
+            android:background="@color/tab_txt_unselect"/>
+
+        <TextView
+            android:id="@+id/tv_receive_num"
+            android:layout_width="match_parent"
+            android:layout_height="80px"
+            android:gravity="center_vertical"
+            android:paddingLeft="48px"
+            android:paddingTop="10px"
+            android:text="实收数:30"
+            android:textColor="#333"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="80px"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="48px"
+                    android:paddingTop="10px"
+                    android:text="抽检数"
+                    android:textColor="#333"
+                    />
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="请输入抽检数"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

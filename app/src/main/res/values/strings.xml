@@ -140,6 +140,8 @@
     <string name="cancel">取消</string>
     <string name="save">保存</string>
     <string name="buy_num">采购数量：%1$s</string>
+    <string name="send_goods_num">送货数：%1$s</string>
+    <string name="have_receive_num">已收数：%1$s</string>
     <string name="arrive_good_num">到货数量：%1$s</string>
     <string name="point_num">清点数：</string>
     <string name="please_input_point_num">请输入请点数</string>
@@ -270,7 +272,7 @@
     <string name="exp_network_timeout">网络连接超时，请检查您的网络状态，稍后重试</string>
     <string name="exp_json_error">数据解析错误</string>
     <string name="exp_server_timeout">服务器连接超时</string>
-    /**====== 出库  搜索 ======**/
+    /**====== 出库 搜索 ======**/
     <string name="stock_out_outsource_feed_tip">委外补料单号</string>
     <string name="stock_out_outsource_feed_title">委外补料—选单</string>
     <string name="stock_out_outsource_audit_title">委外发料—选单</string>
@@ -291,11 +293,19 @@
     <string name="stock_out_other_audit_title">其他出库—选单</string>
     <string name="stock_out_other_audit_tip">其他出库单</string>
     <string name="stock_out_other_bill_title">其他出库—出库扫描</string>
-    /**====== 委外退料 ======**/
+    /**====== 委外补料 ======**/
     <string name="outsource_orderno">委外单号：%1$s</string>
     <string name="lib_name">仓库名称：%1$s</string>
     <string name="area_name">区域名称：%1$s</string>
     <string name="send_material_num">发料数量：%1$s</string>
     <string name="have_get_num">已领数量：%1$s</string>
     <string name="can_get_num">可领数量：%1$s</string>
+    /**====== 委外补料 物品清点 ======**/
+    <string name="outsource_feed_point_title">委外补料—物品清单</string>
+    <string name="close">关闭</string>
+    <string name="send_material_lib_name">发料仓库：%1$s</string>
+    <string name="other_add_attr">附加属性：%1$s</string>
+    /**====== 质量检验 ======**/
+    <string name="quality_check_title">来料—品质检验</string>
+
 </resources>

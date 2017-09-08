@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -151,7 +152,7 @@ public class LockTableView {
     /**
      * 表格主视图
      */
-    private MyCustomScrollView mTableScrollView;
+    private ScrollView mTableScrollView;
 
 
     /**
@@ -348,8 +349,8 @@ public class LockTableView {
         mUnLockHeadView = (LinearLayout) mTableView.findViewById(R.id.unLockHeadView);
         mLockScrollView = (CustomHorizontalScrollView) mTableView.findViewById(R.id.lockHeadView_ScrollView);
         mUnLockScrollView = (CustomHorizontalScrollView) mTableView.findViewById(R.id.unlockHeadView_ScrollView);
-        mTableScrollView = (MyCustomScrollView) mTableView.findViewById(R.id.table_scrollView);
-        mTableScrollView.setOnScrollListener(mScrollListener);
+        mTableScrollView = (ScrollView) mTableView.findViewById(R.id.table_scrollView);
+//        mTableScrollView.setOnScrollListener(mScrollListener);
         mLockHeadView.setBackgroundColor(ContextCompat.getColor(mContext, mFristRowBackGroudColor));
         mUnLockHeadView.setBackgroundColor(ContextCompat.getColor(mContext, mFristRowBackGroudColor));
         if (isLockFristRow) {

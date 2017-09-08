@@ -1,13 +1,14 @@
 package com.timi.sz.wms_android.mvp.UI.stock_in.point;
 
-import com.timi.sz.wms_android.bean.instock.search.BuyOrdernoBean;
-import com.timi.sz.wms_android.bean.instock.PointMaterialBean;
-import com.timi.sz.wms_android.bean.instock.search.SendOrdernoBean;
+import com.timi.sz.wms_android.bean.instock.search.StockinMaterialBean;
 import com.timi.sz.wms_android.http.HttpManager;
 import com.timi.sz.wms_android.http.api.ApiService;
 import com.timi.sz.wms_android.http.api.CommonResult;
 import com.timi.sz.wms_android.http.callback.ApiServiceMethodCallBack;
 import com.timi.sz.wms_android.mvp.base.model.impl.MvpBaseModel;
+
+import java.util.List;
+import java.util.Map;
 
 import io.reactivex.Observable;
 import io.reactivex.Observer;
@@ -20,43 +21,68 @@ import io.reactivex.Observer;
 
 public class FragmentPointRecordModel extends MvpBaseModel {
     /**
-     * 采购单查询的方法
+     * 获取 清点记录
+     * @param params
+     * @param observer
      */
-    public void buyOrdernoQuery(final int orgId, final int userId, final String mac, final String billNo , Observer<BuyOrdernoBean> observer){
-        HttpManager.getInstance().HttpManagerRequest(observer, new ApiServiceMethodCallBack<BuyOrdernoBean>() {
+      public void buyOrderNoPointRecord(final Map<String,Object> params, Observer< List<StockinMaterialBean>> observer){
+          HttpManager.getInstance().HttpManagerRequest(observer, new ApiServiceMethodCallBack<List<StockinMaterialBean>>() {
+              @Override
+              public Observable<CommonResult<List<StockinMaterialBean>>> createObservable(ApiService apiService) {
+                  return apiService.buyOrderNoPointRecord(params);
+              }
+          });
+      }
+    /**
+     * 修改 清点记录
+     * @param params
+     * @param observer
+     */
+    public void updateMaterialPoint(final Map<String,Object> params, Observer< Object> observer){
+        HttpManager.getInstance().HttpManagerRequest(observer, new ApiServiceMethodCallBack<Object>() {
             @Override
-            public Observable<CommonResult<BuyOrdernoBean>> createObservable(ApiService apiService) {
-                return apiService.buyOrderNoQuery(orgId,userId,mac,billNo);
+            public Observable<CommonResult<Object>> createObservable(ApiService apiService) {
+                return apiService.updateMaterialPoint(params);
             }
         });
     }
     /**
-     * 送货单查询的方法
-     * @param scanStr
+     * 删除清点记录
+     * @param params
      * @param observer
      */
-    public void sendOrdernoQuery(final String scanStr , Observer<SendOrdernoBean> observer){
-        HttpManager.getInstance().HttpManagerRequest(observer, new ApiServiceMethodCallBack<SendOrdernoBean>() {
+    public void deleteMaterialPoint(final Map<String,Object> params, Observer<Object> observer){
+        HttpManager.getInstance().HttpManagerRequest(observer, new ApiServiceMethodCallBack<Object>() {
             @Override
-            public Observable<CommonResult<SendOrdernoBean>> createObservable(ApiService apiService) {
-                return apiService.sendOrdernoQuery(scanStr);
+            public Observable<CommonResult<Object>> createObservable(ApiService apiService) {
+                return apiService.deleteMaterialPoint(params);
             }
         });
     }
     /**
-     * 保存物料清点的方法
-     * @param orderno
-     * @param pointNum
-     * @param spareNum
+     * 修改 清点记录
+     * @param params
      * @param observer
      */
-    public  void savePointMaterial(final String orderno , final int pointNum, final int spareNum, Observer<PointMaterialBean> observer){
-        HttpManager.getInstance().HttpManagerRequest(observer, new ApiServiceMethodCallBack<PointMaterialBean>() {
+    public void updateSendMaterialPoint(final Map<String,Object> params, Observer< Object> observer){
+        HttpManager.getInstance().HttpManagerRequest(observer, new ApiServiceMethodCallBack<Object>() {
             @Override
-            public Observable<CommonResult<PointMaterialBean>> createObservable(ApiService apiService) {
-                return apiService.saveMaterialPoint(orderno,pointNum,spareNum);
+            public Observable<CommonResult<Object>> createObservable(ApiService apiService) {
+                return apiService.updateSendMaterialPoint(params);
             }
         });
     }
-
+    /**
+     * 删除清点记录
+     * @param params
+     * @param observer
+     */
+    public void deleteSendMaterialPoint(final Map<String,Object> params, Observer<Object> observer){
+        HttpManager.getInstance().HttpManagerRequest(observer, new ApiServiceMethodCallBack<Object>() {
+            @Override
+            public Observable<CommonResult<Object>> createObservable(ApiService apiService) {
+                return apiService.deleteSendMaterialPoint(params);
+            }
+        });
+    }
 }

@@ -24,13 +24,15 @@ public class StockInPointActivity extends BaseActivity<StockInPointView, StockIn
     @BindView(R.id.tab_stockin_point)
     TabLayout tabStockinPoint;
     private String[] titles;
-    private Fragment mPointFragment;
-    private Fragment mPointRecordFragment;
+    private FragmentPoint mPointFragment;
+    private FragmentPointRecord mPointRecordFragment;
     private int intentCode;
     //采购单 实体
     private BuyOrdernoBean mBuyBean;
     //发货单实体
     private SendOrdernoBean mSendBean;
+    //receive Id
+    public int receiveId=0;
     @Override
     public int setLayoutId() {
         return R.layout.activity_stock_in_point;
@@ -60,7 +62,6 @@ public class StockInPointActivity extends BaseActivity<StockInPointView, StockIn
         tabStockinPoint.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                ToastUtils.showShort(StockInPointActivity.this, "点击了" + tab.getText());
                 if (tab.getText().equals(titles[0])) {//物品清点
                     changeFragment(0);
                 } else {//清点记录
@@ -107,6 +108,12 @@ public class StockInPointActivity extends BaseActivity<StockInPointView, StockIn
                 trans.show(mPointFragment);
             }
         }else{
+            /**
+             * 获取 清点界面的receive Ids
+             */
+            receiveId=mPointFragment.getReceiveId();
+
+
             if (mPointRecordFragment == null) {
                 mPointRecordFragment = new FragmentPointRecord();
                 trans.add(R.id.fl_stockin_point_content, mPointRecordFragment);
@@ -127,5 +134,12 @@ public class StockInPointActivity extends BaseActivity<StockInPointView, StockIn
      */
     public Intent getIntentCode(){
         return getIntent();
+    }
+    /**
+     * 返回接受的receiveId
+     * @return
+     */
+    public int getReceiveId(){
+        return receiveId;
     }
 }

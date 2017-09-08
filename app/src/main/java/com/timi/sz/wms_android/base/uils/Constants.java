@@ -145,7 +145,7 @@ public class Constants {
 
     public static final int STOCK_OUT_OUTSOURCE_FEED_SUPLLIEMENT = 5020;//委外补料
     public static final int STOCK_OUT_OUTSOURCE_AUDIT = 5021;//委外发料-委外发料单
-    public static final int STOCK_OUT_OUTSOURCE_BILL= 5022;//委外发料-委外订单
+    public static final int STOCK_OUT_OUTSOURCE_BILL = 5022;//委外发料-委外订单
 
     public static final int STOCK_OUT_PRODUCTION_FEEDING = 5023;//生产补料
     public static final int STOCK_OUT_PRODUCTION_AUDIT = 5024;//生产领料-审核
@@ -158,6 +158,22 @@ public class Constants {
     public static final int STOCK_OUT_PURCHASE_MATERIAL_RETURN = 5029;//采购退料
     public static final int STOCK_OUT_OTHER_OUT_AUDIT = 5030;//其他出库-审核
     public static final int STOCK_OUT_OTHER_OUT_BILL = 5031;//其他出库-生单
+    /**
+     * 搜索 跳转的传递对象的key
+     */
+    //委外补料传递实体的key
+    public static final String STOCK_OUT_OUTSOURCE_FEED_BEAN = "stock_out_outsource_feed_bean";//委外补料传递实体的key
+    public static final String STOCK_OUT_OUTSOURCE_AUDIT_BEAN = "stock_out_outsource_audit_bean";//委外发料单-审核传递实体的key
+    public static final String STOCK_OUT_OUTSOURCE_BILL_BEAN = "stock_out_outsource_bill_bean";//委外发料单-生单传递实体的key
+    public static final String STOCK_OUT_PRODUCT_FEED_BEAN = "stock_out_production_feed_bean";//生产补料单传递实体的key
+    public static final String STOCK_OUT_PRODUCT_AUDI_BEAN = "stock_out_production_audit_bean";//生产领料-审核传递实体的key
+    public static final String STOCK_OUT_PRODUCT_BILL_BEAN = "stock_out_production_bill_bean";//生产领料-生单传递实体的key
+    public static final String STOCK_OUT_PICK_BEAN = "stock_out_pick_bean";//调拨传递实体的key
+    public static final String STOCK_OUT_SELL_AUDRI_BEAN = "stock_out_sell_audit_bean";//销售出库-审核传递实体的key
+    public static final String STOCK_OUT_SELL_BILL_BEAN = "stock_out_sell_bill_bean";//销售出库-生单传递实体的key
+    public static final String STOCK_OUT_OTHER_AUDIT_BEAN = "stock_out_other_audit_bean";//其他-审核传递实体的key
+    public static final String STOCK_OUT_OTHER_BILL_BEAN = "stock_out_other_bill_bean";//其他-生单传递实体的key
+    public static final String STOCK_OUT_POINT_DETAIL_BEAN = "stock_out_point_detail_bean";//清点详情传递实体的key
 
 
 }

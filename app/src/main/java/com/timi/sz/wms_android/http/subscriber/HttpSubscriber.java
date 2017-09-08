@@ -10,6 +10,7 @@ import com.timi.sz.wms_android.base.uils.LogUitls;
 import com.timi.sz.wms_android.base.uils.ToastUtils;
 import com.timi.sz.wms_android.bean.HttpResultBean;
 import com.timi.sz.wms_android.http.callback.OnResultCallBack;
+import com.timi.sz.wms_android.http.exception.ApiException;
 import com.timi.sz.wms_android.mvp.base.BaseActivity;
 import com.timi.sz.wms_android.mvp.base.BaseApplication;
 import com.timi.sz.wms_android.view.MyProgressDialog;
@@ -23,6 +24,8 @@ import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.exceptions.CompositeException;
 import okhttp3.ResponseBody;
+
+import static com.timi.sz.wms_android.http.exception.ApiException.CODE_REQUEST_SUCCESS_EXCEPTION;
 
 
 public class HttpSubscriber<T> implements Observer<T> {
@@ -53,6 +56,7 @@ public class HttpSubscriber<T> implements Observer<T> {
 
     @Override
     public void onError(Throwable e) {
+        MyProgressDialog.hideProgressDialog();
         //请求失败的异常
         if (e instanceof CompositeException) {
             CompositeException compositeE = (CompositeException) e;
@@ -106,14 +110,20 @@ public class HttpSubscriber<T> implements Observer<T> {
 
         } else if (e instanceof UnknownHostException) {// 测试到时再没网的情况下
             mOnResultListener.onError(CONNECT_EXCEPTION);
-        } else {//
+        } else if (e instanceof ApiException) {
+            /**
+             * 为了解决当服务端返回的数据是空的情况，即map转换时返回值为null抛出异常
+             */
+            if (e.getMessage().equals(CODE_REQUEST_SUCCESS_EXCEPTION)) {
+                mOnResultListener.onSuccess(null);
+                return;
+            }
             /**
              * 弹出提示 所有的后台返回的提示
              */
             mOnResultListener.onError(e.getMessage());
         }
         //进度条消失
-        MyProgressDialog.hideProgressDialog();
     }
 
     @Override

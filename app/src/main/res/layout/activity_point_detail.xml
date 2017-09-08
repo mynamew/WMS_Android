@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/set_bg"
+    tools:context="com.timi.sz.wms_android.mvp.UI.stock_out.point_detail.PointDetailActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <include layout="@layout/title_head"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="80px"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_material_code"
+                style="@style/tv_header"
+                android:text="@string/material_code"
+                />
+
+            <TextView
+                android:id="@+id/tv_send_material_num"
+                style="@style/tv_header"
+                android:text="@string/send_material_num"
+                />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_material_name"
+            android:layout_width="match_parent"
+            android:layout_height="80px"
+            android:gravity="center_vertical"
+            android:paddingLeft="20px"
+            android:paddingTop="10px"
+            android:text="@string/material_name"
+            android:textColor="#333"
+            />
+
+        <TextView
+            android:id="@+id/tv_material_model"
+            android:layout_width="match_parent"
+            android:layout_height="80px"
+            android:gravity="center_vertical"
+            android:paddingLeft="20px"
+            android:paddingTop="10px"
+            android:text="@string/material_model"
+            android:textColor="#333"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="80px"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_send_material_lib_name"
+                style="@style/tv_header"
+                android:text="@string/send_material_lib_name"
+                />
+
+            <TextView
+                android:id="@+id/tv_other_add_attr"
+                style="@style/tv_header"
+                android:text="@string/other_add_attr"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="80px"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="80px"
+                android:gravity="center_vertical"
+                android:paddingLeft="20px"
+                android:text="管控方式："
+                android:textColor="#333"
+                />
+
+            <TextView
+                android:id="@+id/tv_controll_type"
+                android:layout_width="wrap_content"
+                android:layout_height="80px"
+                android:gravity="center_vertical"
+                android:text="先进先出 - 强制 (10)"
+                android:textColor="#ff0000"
+                />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2px"
+            android:background="@color/tab_txt_unselect"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="100px">
+
+            <TextView
+                android:id="@+id/tv_stockout_tip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="30px"
+                android:text="条码："
+                android:textColor="#333"
+                android:textSize="16sp"/>
+
+            <EditText
+                android:id="@+id/et_material_code_input"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="20px"
+                android:layout_toRightOf="@id/tv_stockout_tip"
+                android:background="@drawable/bg_sbo_rectangle_et"
+                android:ellipsize="end"
+                android:hint="请输入物料条码或扫码"
+                android:imeOptions="actionSearch"
+                android:inputType="textVisiblePassword"
+                android:paddingLeft="20px"
+                android:paddingRight="80px"
+                android:singleLine="true"
+                android:text=""
+                android:textSize="14sp"/>
+
+            <ImageView
+                android:id="@+id/iv_material_code_scan"
+                android:layout_width="100px"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="30px"
+                android:paddingLeft="60px"
+                android:src="@mipmap/ic_scan"/>
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_point_close"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="20px"
+        android:background="@drawable/selector_btn_bg_login"
+        android:text="@string/close"
+        android:textColor="#fff"
+        android:textSize="18sp"/>
+</RelativeLayout>

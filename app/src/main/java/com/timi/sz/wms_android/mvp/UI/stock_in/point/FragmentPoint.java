@@ -11,13 +11,19 @@ import com.google.gson.Gson;
 import com.rmondjone.locktableview.LockTableView;
 import com.timi.sz.wms_android.R;
 import com.timi.sz.wms_android.base.uils.Constants;
+import com.timi.sz.wms_android.base.uils.LogUitls;
 import com.timi.sz.wms_android.base.uils.PackageUtils;
 import com.timi.sz.wms_android.base.uils.SpUtils;
 import com.timi.sz.wms_android.base.uils.ToastUtils;
 import com.timi.sz.wms_android.bean.instock.search.BuyOrdernoBean;
 import com.timi.sz.wms_android.bean.instock.search.SendOrdernoBean;
+import com.timi.sz.wms_android.http.message.BaseMessage;
+import com.timi.sz.wms_android.http.message.event.StockInPointEvent;
 import com.timi.sz.wms_android.mvp.base.BaseFragment;
 import com.timi.sz.wms_android.view.MyDialog;
+
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,7 +31,10 @@ import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
-import retrofit2.http.POST;
+import butterknife.OnClick;
+import butterknife.Unbinder;
+
+import static com.timi.sz.wms_android.base.uils.Constants.BUY_ORDE_NUM;
 
 /**
  * $dsc  物料清点
@@ -70,13 +79,14 @@ public class FragmentPoint extends BaseFragment<FragmentPointView, FragmentPoint
 
     @Override
     public void initData() {
+        BaseMessage.register(this);
         mTableDatas = new ArrayList<ArrayList<String>>();
         Intent it = ((StockInPointActivity) getActivity()).getIntentCode();
         intentCode = it.getIntExtra(Constants.CODE_STR, Constants.COME_MATERAIL_NUM);
-        if (intentCode == Constants.BUY_ORDE_NUM) {
+        if (intentCode == BUY_ORDE_NUM) {
             mBuyBean = new Gson().fromJson(it.getStringExtra(Constants.IN_STOCK_BUY_BEAN), BuyOrdernoBean.class);
         } else {//送货单
-            mBuyBean = new Gson().fromJson(it.getStringExtra(Constants.IN_STOCK_SEND_BEAN), BuyOrdernoBean.class);
+            mSendBean = new Gson().fromJson(it.getStringExtra(Constants.IN_STOCK_SEND_BEAN), SendOrdernoBean.class);
 
         }
         /**
@@ -103,16 +113,8 @@ public class FragmentPoint extends BaseFragment<FragmentPointView, FragmentPoint
     public void showGoodsPointDialog(final int position) {
         //存储点击位置
         curretnPosition = position;
-        //获取数据 显示dialog
-        List<BuyOrdernoBean.DetailResultsBean> detailResults = mBuyBean.getDetailResults();
-        final BuyOrdernoBean.DetailResultsBean detailResultsBean = detailResults.get(position);
-        if (null == mPointDialog) {
+      if (null == mPointDialog) {
             mPointDialog = new MyDialog(getActivity(), R.layout.dialog_stockin_point)
-                    .setTextViewContent(R.id.tv_stockin_point_pronum, String.format(getString(R.string.material_code), detailResultsBean.getMaterialCode()))
-                    .setTextViewContent(R.id.tv_stockin_point_proname, String.format(getString(R.string.material_name), detailResultsBean.getMaterialName()))
-                    .setTextViewContent(R.id.tv_stockin_point_promodel, String.format(getString(R.string.material_model), detailResultsBean.getMaterialStandard()))
-                    .setTextViewContent(R.id.tv_stockin_point_buynum, String.format(getString(R.string.buy_num), detailResultsBean.getPoQty() + ""))
-                    .setTextViewContent(R.id.tv_stockin_point_receive_pro_num, String.format(getString(R.string.arrive_good_num), detailResultsBean.getArrivalQty() + ""))
                     .setButtonListener(R.id.btn_stockin_point_cancel, getString(R.string.cancel), new MyDialog.DialogClickListener() {
                         @Override
                         public void dialogClick(MyDialog dialog) {
@@ -133,42 +135,70 @@ public class FragmentPoint extends BaseFragment<FragmentPointView, FragmentPoint
                                 ToastUtils.showShort(getActivity(), "请点数和备品数不能同时为0");
                                 return;
                             }
-                            BuyOrdernoBean.SummaryResultsBean summaryResults = mBuyBean.getSummaryResults();
+
                             Map<String, Object> params = new HashMap<>();
                             params.put("UserId", SpUtils.getInstance().getUserId());
                             params.put("MAC", PackageUtils.getMac());
                             params.put("OrgId", SpUtils.getInstance().getOrgId());
-                            params.put("BizType", summaryResults.getBizType());
-                            params.put("BillId", summaryResults.getId());
-                            params.put("BillCode", summaryResults.getPoCode());
-                            params.put("DetailId", detailResultsBean.getId());
-                            params.put("ReceiveId", summaryResults.getReceiveId());
                             params.put("CountQty", pointNum);
                             params.put("GiveQty", spareNum);
-                            getPresenter().savePointMaterial(params);
+                            if (intentCode ==BUY_ORDE_NUM) {//采购单
+                                //获取数据 显示dialog
+                                BuyOrdernoBean.SummaryResultsBean summaryResults = mBuyBean.getSummaryResults();
+                                List<BuyOrdernoBean.DetailResultsBean> detailResults = mBuyBean.getDetailResults();
+                                final BuyOrdernoBean.DetailResultsBean detailResultsBean = detailResults.get(position);
+                                params.put("BizType", summaryResults.getBizType());
+                                params.put("BillId", summaryResults.getId());
+                                params.put("BillCode", summaryResults.getPoCode());
+                                params.put("DetailId", detailResultsBean.getId());
+                                params.put("ReceiveId", summaryResults.getReceiveId());
+                                getPresenter().savePointMaterial(params);
+                            }else{//送货单
+                                //获取数据 显示dialog
+                                List<SendOrdernoBean.DetailResultsBean> detailResults = mSendBean.getDetailResults();
+                                final SendOrdernoBean.DetailResultsBean detailResultsBean = detailResults.get(position);
+                                SendOrdernoBean.SummaryResultsBean summaryResults = mSendBean.getSummaryResults();
+                                params.put("BizType", summaryResults.getBizType());
+                                params.put("BillId", summaryResults.getId());
+                                params.put("BillCode", summaryResults.getAsnCode());
+                                params.put("DetailId", detailResultsBean.getId());
+                                params.put("ReceiveId", summaryResults.getReceiveId());
+                                getPresenter().saveSendMaterialPoint(params);
+                            }
                             dialog.dismiss();
                         }
                     }).setAnimation(R.style.popWindow_animation_push);
+            if (intentCode ==BUY_ORDE_NUM) {//采购单
+                //获取数据 显示dialog
+                List<BuyOrdernoBean.DetailResultsBean> detailResults = mBuyBean.getDetailResults();
+                final BuyOrdernoBean.DetailResultsBean detailResultsBean = detailResults.get(position);
+
+                mPointDialog.setTextViewContent(R.id.tv_stockin_point_pronum, String.format(getString(R.string.material_code), detailResultsBean.getMaterialCode()))
+                        .setTextViewContent(R.id.tv_stockin_point_proname, String.format(getString(R.string.material_name), detailResultsBean.getMaterialName()))
+                        .setTextViewContent(R.id.tv_stockin_point_promodel, String.format(getString(R.string.material_model), detailResultsBean.getMaterialStandard()))
+                        .setTextViewContent(R.id.tv_stockin_point_buynum, String.format(getString(R.string.buy_num), detailResultsBean.getPoQty() + ""))
+                        .setTextViewContent(R.id.tv_stockin_point_receive_pro_num, String.format(getString(R.string.arrive_good_num), detailResultsBean.getArrivalQty() + ""));
+
+            }else{//送货单
+                //获取数据 显示dialog
+                List<SendOrdernoBean.DetailResultsBean> detailResults = mSendBean.getDetailResults();
+                final SendOrdernoBean.DetailResultsBean detailResultsBean = detailResults.get(position);
+                mPointDialog.setTextViewContent(R.id.tv_stockin_point_pronum, String.format(getString(R.string.material_code), detailResultsBean.getMaterialCode()))
+                        .setTextViewContent(R.id.tv_stockin_point_proname, String.format(getString(R.string.material_name), detailResultsBean.getMaterialName()))
+                        .setTextViewContent(R.id.tv_stockin_point_promodel, String.format(getString(R.string.material_model), detailResultsBean.getMaterialStandard()))
+                        .setTextViewContent(R.id.tv_stockin_point_buynum, String.format(getString(R.string.send_goods_num), detailResultsBean.getPoQty() + ""))
+                        .setTextViewContent(R.id.tv_stockin_point_receive_pro_num, String.format(getString(R.string.have_receive_num), detailResultsBean.getArrivalQty() + ""));
+
+
+            }
         }
         mPointDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
             @Override
             public void onDismiss(DialogInterface dialog) {
-                mPointDialog=null;
+                mPointDialog = null;
             }
         });
         mPointDialog.show();
-    }
-
-
-    @Override
-    public void buyOrdernoQuery(BuyOrdernoBean bean) {
-        llPointContent.removeAllViews();
-    }
-
-
-    @Override
-    public void sendOrdernoQuery(SendOrdernoBean bean) {
-        llPointContent.removeAllViews();
     }
 
     /**
@@ -176,6 +206,13 @@ public class FragmentPoint extends BaseFragment<FragmentPointView, FragmentPoint
      */
     @Override
     public void savePointMaterial(Integer result) {
+        /**
+         * 更新清点记录 设置receive id
+         */
+        StockInPointEvent stockInPointEvent = new StockInPointEvent(StockInPointEvent.MATERIAL_POINT_RECORD_UPDATE);
+        stockInPointEvent.receiveId = result;
+        BaseMessage.post(stockInPointEvent);
+
         ToastUtils.showShort("物料请点保存成功");
         /**
          * 第一次设置接受id
@@ -199,6 +236,66 @@ public class FragmentPoint extends BaseFragment<FragmentPointView, FragmentPoint
         showExcelDialog();
     }
 
+    @Override
+    public void saveSendPointMaterial(Integer result) {
+        /**
+         * 更新清点记录 设置receive id
+         */
+        StockInPointEvent stockInPointEvent = new StockInPointEvent(StockInPointEvent.MATERIAL_POINT_RECORD_UPDATE);
+        stockInPointEvent.receiveId = result;
+        BaseMessage.post(stockInPointEvent);
+
+        ToastUtils.showShort("物料清点保存成功");
+        /**
+         * 第一次设置接受id
+         */
+        mSendBean.getSummaryResults().setReceiveId(result);
+        SendOrdernoBean.DetailResultsBean detailResultsBean = mSendBean.getDetailResults().get(curretnPosition);
+        /**
+         * 设置清点的数量
+         */
+        int lastCountNum = detailResultsBean.getCountQty();
+        if (pointNum > 0) {
+            detailResultsBean.setCountQty(lastCountNum + pointNum);
+        }
+        /**
+         * 设置备品的数量
+         */
+        int lastSpareNum = detailResultsBean.getGiveQty();
+        if (spareNum > 0) {
+            detailResultsBean.setGiveQty(lastSpareNum + spareNum);
+        }
+        showExcelDialog();
+    }
+
+    /**
+     * 提交清点
+     */
+    @Override
+    public void commitPointMaterial() {
+        ToastUtils.showShort("提交清点成功");
+        getActivity().finish();
+    }
+
+    /**
+     * 获取物料清点的表体
+     *
+     * @param bean
+     */
+    @Override
+    public void getPODetailsByCode(BuyOrdernoBean bean) {
+        LogUitls.e("更新了清点的表体");
+        mBuyBean.setDetailResults(bean.getDetailResults());
+        showExcelDialog();
+    }
+
+    @Override
+    public void getSendPODetailsByCode(SendOrdernoBean bean) {
+        LogUitls.e("更新了送货单清点的表体");
+        mSendBean.setDetailResults(bean.getDetailResults());
+        showExcelDialog();
+    }
+
     /**
      * 展示表体
      */
@@ -208,21 +305,34 @@ public class FragmentPoint extends BaseFragment<FragmentPointView, FragmentPoint
         ArrayList<String> mfristData = new ArrayList<String>();
         mfristData.add("行号");
         mfristData.add("物品编码");
-        mfristData.add("采购数");
-        mfristData.add("到货数");
-        mfristData.add("入库数");
-        mfristData.add("清点数");
-        mfristData.add("备品数");
+        if (intentCode == BUY_ORDE_NUM) {//如果是采购单
+            mfristData.add("采购数");
+            mfristData.add("到货数");
+            mfristData.add("入库数");
+            mfristData.add("清点数");
+            mfristData.add("备品数");
+        } else {
+            mfristData.add("送货数");
+            mfristData.add("已收数");
+            mfristData.add("清点数");
+            mfristData.add("备品数");
+            mfristData.add("来源单据");
+            mfristData.add("采购数");
+            mfristData.add("到货数");
+            mfristData.add("入库数");
+        }
         mTableDatas.add(mfristData);
-        if (intentCode == Constants.BUY_ORDE_NUM) {
+        if (intentCode == BUY_ORDE_NUM) {
             BuyOrdernoBean.SummaryResultsBean summaryResults = mBuyBean.getSummaryResults();
             /**
              * 设置初始数据
              */
-            setTextViewText(tvSipBuyNum, R.string.order_no, summaryResults.getPoCode());
-            setTextViewText(tvSipBuyDate, R.string.buy_date, summaryResults.getPoDate());
-            setTextViewText(tvSipBuyFrom, R.string.buy_from, summaryResults.getSupplierName());
-            setTextViewText(tvSipBuyer, R.string.buyer, ((null == summaryResults.getPurEmployeeName()) ? "" : summaryResults.getPurEmployeeName()));
+            if (null != summaryResults) {
+                setTextViewText(tvSipBuyNum, R.string.order_no, summaryResults.getPoCode());
+                setTextViewText(tvSipBuyDate, R.string.buy_date, summaryResults.getPoDate());
+                setTextViewText(tvSipBuyFrom, R.string.buy_from, summaryResults.getSupplierName());
+                setTextViewText(tvSipBuyer, R.string.buyer, ((null == summaryResults.getPurEmployeeName()) ? "" : summaryResults.getPurEmployeeName()));
+            }
             /**
              * 存储下方列表的数据
              */
@@ -242,22 +352,37 @@ public class FragmentPoint extends BaseFragment<FragmentPointView, FragmentPoint
             /**
              * 设置初始数据
              */
-            setTextViewText(tvSipBuyNum, R.string.order_no, mSendBean.num);
-            setTextViewText(tvSipBuyDate, R.string.buy_date, mSendBean.date);
-            setTextViewText(tvSipBuyFrom, R.string.buy_from, mSendBean.from);
-            setTextViewText(tvSipBuyer, R.string.buyer, mSendBean.buyer);
+            SendOrdernoBean.SummaryResultsBean summaryResults = mSendBean.getSummaryResults();
+            setTextViewText(tvSipBuyNum, R.string.order_no, summaryResults.getAsnCode());
+            setTextViewText(tvSipBuyDate, R.string.buy_date, summaryResults.getAsnDate());
+            setTextViewText(tvSipBuyFrom, R.string.buy_from, summaryResults.getSupplierName());
+            setTextViewText(tvSipBuyer, R.string.buyer, summaryResults.getCreaterName());
             /**
              * 存储下方列表的数据
              */
-            for (int i = 0; i < mSendBean.data.size(); i++) {
+            List<SendOrdernoBean.DetailResultsBean> detailResults = mSendBean.getDetailResults();
+            for (int i = 0; i < detailResults.size(); i++) {
                 ArrayList<String> mRowDatas = new ArrayList<String>();
-                SendOrdernoBean.MarterialBean marterialBean = mSendBean.data.get(i);
-                mRowDatas.add(marterialBean.materialCode);
-                mRowDatas.add(marterialBean.buyNum);
-                mRowDatas.add(marterialBean.arriveNum);
-                mRowDatas.add(marterialBean.inStockNum);
-                mRowDatas.add(marterialBean.pointNum);
-                mRowDatas.add(marterialBean.spareNum);
+                SendOrdernoBean.DetailResultsBean detailResultsBean = detailResults.get(i);
+                //行号
+                mRowDatas.add(detailResultsBean.getPoLine() + "");
+                //物料码
+                mRowDatas.add(detailResultsBean.getMaterialCode());
+                //送货数
+                mRowDatas.add(detailResultsBean.getDnQty() + "");
+                //已收数量
+                mRowDatas.add(detailResultsBean.getRecvQty() + "");
+                //清点数量
+                mRowDatas.add(detailResultsBean.getCountQty() + "");
+                //备品数
+                mRowDatas.add(detailResultsBean.getGiveQty() + "");
+                //采购数
+                mRowDatas.add(detailResultsBean.getPoQty() + "");
+                //到货数
+                mRowDatas.add(detailResultsBean.getArrivalQty() + "");
+                //入库数
+                mRowDatas.add(detailResultsBean.getInStockQty() + "");
+
                 mTableDatas.add(mRowDatas);
             }
         }
@@ -285,5 +410,66 @@ public class FragmentPoint extends BaseFragment<FragmentPointView, FragmentPoint
                     }
                 })//设置滚动回调监听
                 .show(); //显示表格,此方法必须调用
+    }
+
+    /**
+     * 返回receive id
+     *
+     * @return
+     */
+    public int getReceiveId() {
+        if(intentCode==BUY_ORDE_NUM){
+            return mBuyBean.getSummaryResults().getReceiveId();
+        }else {
+            return mSendBean.getSummaryResults().getReceiveId();
+        }
+    }
+
+    /**
+     * 当清点记录 做修改和 删除时 更新物料清点的v表体
+     *
+     * @param event
+     */
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void refreshPointMaterialPoDetails(StockInPointEvent event) {
+        if (event.getEvent().equals(StockInPointEvent.MATERIAL_POINT_UPDATE)) {
+            Map<String, Object> params = new HashMap<>();
+            params.put("UserId", SpUtils.getInstance().getUserId());
+            params.put("MAC", PackageUtils.getMac());
+            params.put("OrgId", SpUtils.getInstance().getOrgId());
+            if(intentCode==BUY_ORDE_NUM){
+                params.put("BillCode", mBuyBean.getSummaryResults().getPoCode());
+                params.put("BizType", mBuyBean.getSummaryResults().getBizType());
+                params.put("ScanId", mBuyBean.getSummaryResults().getReceiveId());
+                getPresenter().getPODetailsByCode(params);
+            }else {
+                params.put("BillCode", mSendBean.getSummaryResults().getAsnCode());
+                params.put("BizType", mSendBean.getSummaryResults().getBizType());
+                params.put("ScanId", mSendBean.getSummaryResults().getReceiveId());
+                getPresenter().getASNDetailsByCode(params);
+            }
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        BaseMessage.unregister(this);
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+    }
+
+    @OnClick(R.id.btn_point_commit)
+    public void onViewClicked() {
+        Map<String, Object> params = new HashMap<>();
+        params.put("UserId", SpUtils.getInstance().getUserId());
+        params.put("MAC", PackageUtils.getMac());
+        params.put("OrgId", SpUtils.getInstance().getOrgId());
+        params.put("ScanId", mBuyBean.getSummaryResults().getReceiveId());
+        params.put("SubmitType", 0);
+        getPresenter().commitMaterialPoint(params);
     }
 }

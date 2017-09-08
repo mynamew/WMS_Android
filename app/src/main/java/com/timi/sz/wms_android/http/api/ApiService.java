@@ -17,13 +17,16 @@ import com.timi.sz.wms_android.bean.instock.search.ReceiveOrdernoBean;
 import com.timi.sz.wms_android.bean.instock.search.SaleGoodsReturnBean;
 import com.timi.sz.wms_android.bean.instock.search.SendOrdernoBean;
 import com.timi.sz.wms_android.bean.instock.VertifyLocationCodeBean;
+import com.timi.sz.wms_android.bean.instock.search.StockinMaterialBean;
 import com.timi.sz.wms_android.bean.outstock.buy.BuyReturnMaterialOrdernoBean;
 import com.timi.sz.wms_android.bean.outstock.buy.CommitMaterialScanToOredernoBean;
 import com.timi.sz.wms_android.bean.outstock.buy.MaterialBean;
 import com.timi.sz.wms_android.bean.outstock.buy.OrderNoAddMaterial;
 import com.timi.sz.wms_android.bean.outstock.buy.OrderNoBean;
 import com.timi.sz.wms_android.bean.outstock.outsource.OutSourceFeedBean;
+import com.timi.sz.wms_android.bean.quality.QualityListBean;
 
+import java.util.List;
 import java.util.Map;
 
 import io.reactivex.Observable;
@@ -72,47 +75,95 @@ public interface ApiService {
      */
     @FormUrlEncoded
     @POST("api/services/wpda/po/QueryPODataByInput")
-    Observable<CommonResult<BuyOrdernoBean>> buyOrderNoQuery(@Field("OrgId") int OrgId,@Field("UserId") int UserId,@Field("MAC") String mac,@Field("BillNo") String BillNo);
+    Observable<CommonResult<BuyOrdernoBean>> buyOrderNoQuery(@FieldMap Map<String,Object> params);
 
     /**
      * 采购单请点记录
      *
-     * @param orderNo 单号
-     * @param userId  id
      * @return
      */
     @FormUrlEncoded
-    @POST("api/Account/ClientLogin")
-    Observable<CommonResult<BuyOrdernoBean>> buyOrderNoPointRecord(@Field("orderNo") String orderNo, @Field("userId") int userId);
+    @POST("api/services/wpda/po/POGetReceiveRecord")
+    Observable<CommonResult<List<StockinMaterialBean>>> buyOrderNoPointRecord(@FieldMap Map<String,Object> params);
 
     /**
      * 送货单查询
+     */
+    @FormUrlEncoded
+    @POST("api/services/wpda/po/QueryASNDataByBarcode")
+    Observable<CommonResult<SendOrdernoBean>> sendOrdernoQuery(@FieldMap Map<String,Object> params);
+    /**
+     * 送货单请点记录
      *
-     * @param scamStr
      * @return
      */
     @FormUrlEncoded
-    @POST("api/Account/ClientLogin")
-    Observable<CommonResult<SendOrdernoBean>> sendOrdernoQuery(@Field("scamStr") String scamStr);
+    @POST("api/services/wpda/po/ASNGetReceiveRecord")
+    Observable<CommonResult<List<StockinMaterialBean>>> sendOrderNoPointRecord(@FieldMap Map<String,Object> params);
 
     /**
-     * 物品清点保存
-     *
-     * @param orderNo  单号
-     * @param pointNum 请点数
-     * @param spareNum 备品数
-     * @return
+     * 采购单物品清点修改
      */
     @FormUrlEncoded
-    @POST("api/Account/ClientLogin")
-    Observable<CommonResult<PointMaterialBean>> saveMaterialPoint(@Field("orderNo") String orderNo, @Field("pointNum") int pointNum, @Field("spareNum") int spareNum);
+    @POST("api/services/wpda/po/POUpdateReceiveRecord")
+    Observable<CommonResult<Object>> updateMaterialPoint(@FieldMap Map<String,Object> params);
+     /**
+     * 采购单物品清点删除
+     */
+    @FormUrlEncoded
+    @POST("api/services/wpda/po/PODeleteReceiveRecord")
+    Observable<CommonResult<Object>> deleteMaterialPoint(@FieldMap Map<String,Object> params);
     /**
-     * 物品清点保存
+     * 采购单物品清点修改
+     */
+    @FormUrlEncoded
+    @POST("api/services/wpda/po/ASNUpdateReceiveRecord")
+    Observable<CommonResult<Object>> updateSendMaterialPoint(@FieldMap Map<String,Object> params);
+     /**
+     * 采购单物品清点删除
+     */
+    @FormUrlEncoded
+    @POST("api/services/wpda/po/ASNDeleteReceiveRecord")
+    Observable<CommonResult<Object>> deleteSendMaterialPoint(@FieldMap Map<String,Object> params);
+    /**
+     * 采购单物品清点保存
      * @return
      */
     @FormUrlEncoded
     @POST("api/services/wpda/po/POSaveReceive")
     Observable<CommonResult<Integer>> saveMaterialPoint(@FieldMap Map<String,Object> params);
+      /**
+     * 送货单物品清点保存
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("api/services/wpda/po/ASNSaveReceive")
+    Observable<CommonResult<Integer>> saveSendMaterialPoint(@FieldMap Map<String,Object> params);
+      /**
+     * 获取采购单物料清点的表体
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("api/services/wpda/po/GetPODetailsByCode")
+    Observable<CommonResult<BuyOrdernoBean>> getPODetailsByCode(@FieldMap Map<String,Object> params);
+       /**
+     * 获取送货单物料清点的表体
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("api/services/wpda/po/GetASNDetailsByCode")
+    Observable<CommonResult<SendOrdernoBean>> getASNDetailsByCode(@FieldMap Map<String,Object> params);
+      /**
+     * 物品清点提交
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("api/services/wpda/common/SubmitMakeOrAuditBill")
+    Observable<CommonResult<Object>> commitMaterialPoint(@FieldMap Map<String,Object> params);
+
+
+
+
 
     /**
      * 物料扫码
@@ -238,7 +289,7 @@ public interface ApiService {
      */
     @FormUrlEncoded
     @POST("api/Account/ClientLogin")
-    Observable<CommonResult<OutSourceFeedBean>> searchOutsourceFeed(@Field("orderno") String orderno);
+    Observable<CommonResult<OutSourceFeedBean>> searchOutsourceFeed(@FieldMap Map<String,Object> params);
     /**
      * 委外发货-审核单号扫码 请求
      */
@@ -339,5 +390,16 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("api/Account/ClientLogin")
     Observable<CommonResult<CommitMaterialScanToOredernoBean>> commitMaterialScanToOrederno(@Field("orderno") String orderno);
+
+
+    /**====== 质量检验 ======**/
+    /**
+     * 获取质量检验的列表
+     *
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("api/Account/ClientLogin")
+    Observable<CommonResult<QualityListBean>> getQualityList(@FieldMap Map<String,Object> params);
 
 }

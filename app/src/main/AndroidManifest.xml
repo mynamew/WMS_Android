@@ -71,8 +71,8 @@
             android:screenOrientation="portrait"/>
         <activity
             android:name=".qrcode.CommonScanActivity"
-            android:screenOrientation="portrait"
-            android:launchMode="singleTask"/>
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"/>
 
         <meta-data
             android:name="JPUSH_APPKEY"
@@ -199,6 +199,14 @@
         <activity android:name=".mvp.UI.stock_in.other_scan.OtherScanActivity">
         </activity>
         <activity android:name=".mvp.UI.stock_out.query.StockOutSearchActivity">
+        </activity>
+        <activity android:name=".mvp.UI.stock_out.point_list.PointListActivity">
+        </activity>
+        <activity android:name=".mvp.UI.stock_out.point_detail.PointDetailActivity">
+        </activity>
+        <activity android:name=".mvp.UI.quity.quality.QualityCheckActivity">
+        </activity>
+        <activity android:name=".mvp.UI.quity.nomal_quality.NormalQualityActivity">
         </activity>
     </application>
 

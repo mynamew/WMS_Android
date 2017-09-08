@@ -3,7 +3,10 @@ package com.timi.sz.wms_android.mvp.UI.stock_in.point;
 import com.timi.sz.wms_android.bean.instock.search.BuyOrdernoBean;
 import com.timi.sz.wms_android.bean.instock.PointMaterialBean;
 import com.timi.sz.wms_android.bean.instock.search.SendOrdernoBean;
+import com.timi.sz.wms_android.bean.instock.search.StockinMaterialBean;
 import com.timi.sz.wms_android.mvp.base.view.iml.MvpBaseView;
+
+import java.util.List;
 
 /**
  * $dsc
@@ -12,7 +15,17 @@ import com.timi.sz.wms_android.mvp.base.view.iml.MvpBaseView;
  */
 
 public interface FragmentPointRecordView extends MvpBaseView {
-    void buyOrdernoQuery(BuyOrdernoBean bean);
-    void sendOrdernoQuery(SendOrdernoBean bean);
-    void savePointMaterial(PointMaterialBean bean);
+    /**
+     * 获取采购单清点记录
+     * @param datas
+     */
+    void getPointRecord(List<StockinMaterialBean> datas);
+    /**
+     * 修改采购单清点记录
+     */
+    void updatePointRecord();
+    /**
+     * 删除采购单清点记录
+     */
+    void deletePointRecord();
 }

@@ -6,6 +6,7 @@ import com.timi.sz.wms_android.base.uils.ToastUtils;
 import com.timi.sz.wms_android.bean.instock.search.BuyOrdernoBean;
 import com.timi.sz.wms_android.bean.instock.PointMaterialBean;
 import com.timi.sz.wms_android.bean.instock.search.SendOrdernoBean;
+import com.timi.sz.wms_android.bean.instock.search.StockinMaterialBean;
 import com.timi.sz.wms_android.http.callback.OnResultCallBack;
 import com.timi.sz.wms_android.http.subscriber.HttpSubscriber;
 import com.timi.sz.wms_android.mvp.base.presenter.impl.MvpBasePresenter;
@@ -22,9 +23,11 @@ import java.util.Map;
 
 public class FragmentPointPresenter extends MvpBasePresenter<FragmentPointView> {
     FragmentPointModel model = null;
-    private HttpSubscriber<BuyOrdernoBean> buyOrdernoBeanHttpSubscriber;
-    private HttpSubscriber<SendOrdernoBean> sendOrdernoBeanHttpSubscriber;
     private HttpSubscriber<Integer> savePointMaterialHttpSubscriber;
+    private HttpSubscriber<Integer> saveSendMaterialPointHttpSubscriber;
+    private HttpSubscriber<Object> commitPointMaterialHttpSubscriber;
+    private HttpSubscriber<BuyOrdernoBean> getPointMaterialHttpSubscriber;
+    private HttpSubscriber<SendOrdernoBean> getASNDetailsByCodeHttpSubscriber;
 
     public FragmentPointPresenter(Context context) {
         super(context);
@@ -32,59 +35,10 @@ public class FragmentPointPresenter extends MvpBasePresenter<FragmentPointView> 
     }
 
     /**
-     * 采购单的搜索返回
-     *
+     * 保存采购单物料清点的方法
      */
-    public void buyOdernoQuery(final int orgId, final int userId, final String mac, final String billNo) {
-        if (null == buyOrdernoBeanHttpSubscriber) {
-            buyOrdernoBeanHttpSubscriber = new HttpSubscriber<>(new OnResultCallBack<BuyOrdernoBean>() {
-                @Override
-                public void onSuccess(BuyOrdernoBean buyOrdernoBean) {
-
-                }
-
-                @Override
-                public void onError(String errorMsg) {
-                    ToastUtils.showShort(errorMsg);
-                }
-            });
-        }
-        model.buyOrdernoQuery(orgId,userId,mac,billNo, buyOrdernoBeanHttpSubscriber);
-    }
-
-    /**
-     * 送货单的搜索返回
-     *
-     * @param scanStr
-     */
-    public void sendOdernoQuery(String scanStr) {
-        if (null == sendOrdernoBeanHttpSubscriber) {
-            sendOrdernoBeanHttpSubscriber = new HttpSubscriber<>(new OnResultCallBack<SendOrdernoBean>() {
-                @Override
-                public void onSuccess(SendOrdernoBean sendBean) {
-
-                }
-
-                @Override
-                public void onError(String errorMsg) {
-                    //请求失败 加入假数据
-                    List<SendOrdernoBean.MarterialBean> datas = new ArrayList<>();
-                    for (int i = 0; i < 100; i++) {
-                        datas.add(new SendOrdernoBean.MarterialBean(i + "", "M42324232" + i, "50", 50, 100, "10", "20","10", "20","20"));
-                    }
-                    SendOrdernoBean buyOrdernoBean = new SendOrdernoBean("B789678", "邢力丰", "深圳超然科技股份有限公司", "2017-8-29", datas);
-                    getView().sendOrdernoQuery(buyOrdernoBean);
-                }
-            });
-        }
-        model.sendOrdernoQuery(scanStr, sendOrdernoBeanHttpSubscriber);
-    }
-
-    /**
-     * 保存物料清点的方法
-     */
-    public void savePointMaterial(Map<String,Object> params){
-         getView().showProgressDialog();
+    public void savePointMaterial(Map<String, Object> params) {
+        getView().showProgressDialog();
         if (null == savePointMaterialHttpSubscriber) {
             savePointMaterialHttpSubscriber = new HttpSubscriber<>(new OnResultCallBack<Integer>() {
                 @Override
@@ -99,5 +53,110 @@ public class FragmentPointPresenter extends MvpBasePresenter<FragmentPointView> 
             });
         }
         model.savePointMaterial(params, savePointMaterialHttpSubscriber);
+    }
+
+    /**
+     * 保存送货单物料清点的方法
+     */
+    public void saveSendMaterialPoint(Map<String, Object> params) {
+        getView().showProgressDialog();
+        if (null == savePointMaterialHttpSubscriber) {
+            saveSendMaterialPointHttpSubscriber = new HttpSubscriber<>(new OnResultCallBack<Integer>() {
+                @Override
+                public void onSuccess(Integer result) {
+                    getView().saveSendPointMaterial(result);
+                }
+
+                @Override
+                public void onError(String errorMsg) {
+                    ToastUtils.showShort(errorMsg);
+                }
+            });
+        }
+        model.saveSendMaterialPoint(params, saveSendMaterialPointHttpSubscriber);
+    }
+
+    /**
+     * 提交采购单物料清点的方法
+     */
+    public void commitMaterialPoint(Map<String, Object> params) {
+        getView().showProgressDialog();
+        if (null == commitPointMaterialHttpSubscriber) {
+            commitPointMaterialHttpSubscriber = new HttpSubscriber<>(new OnResultCallBack<Object>() {
+                @Override
+                public void onSuccess(Object result) {
+                    getView().commitPointMaterial();
+                }
+
+                @Override
+                public void onError(String errorMsg) {
+                    ToastUtils.showShort(errorMsg);
+                }
+            });
+        }
+        model.commitMaterialPoint(params, commitPointMaterialHttpSubscriber);
+    }
+
+    /**
+     * 获取采购单物料清点的表体
+     */
+    public void getPODetailsByCode(Map<String, Object> params) {
+        getView().showProgressDialog();
+        if (null == getPointMaterialHttpSubscriber) {
+            getPointMaterialHttpSubscriber = new HttpSubscriber<>(new OnResultCallBack<BuyOrdernoBean>() {
+                @Override
+                public void onSuccess(BuyOrdernoBean result) {
+                    getView().getPODetailsByCode(result);
+                }
+
+                @Override
+                public void onError(String errorMsg) {
+                    ToastUtils.showShort(errorMsg);
+                }
+            });
+        }
+        model.getPODetailsByCode(params, getPointMaterialHttpSubscriber);
+    }
+
+    /**
+     * 获取送货单物料清点的表体
+     */
+    public void getASNDetailsByCode(Map<String, Object> params) {
+        getView().showProgressDialog();
+        if (null == getPointMaterialHttpSubscriber) {
+            getASNDetailsByCodeHttpSubscriber = new HttpSubscriber<>(new OnResultCallBack<SendOrdernoBean>() {
+                @Override
+                public void onSuccess(SendOrdernoBean result) {
+                    getView().getSendPODetailsByCode(result);
+                }
+
+                @Override
+                public void onError(String errorMsg) {
+                    ToastUtils.showShort(errorMsg);
+                }
+            });
+        }
+        model.getASNDetailsByCode(params, getASNDetailsByCodeHttpSubscriber);
+    }
+
+    @Override
+    public void dettachView() {
+        super.dettachView();
+        if (null != savePointMaterialHttpSubscriber) {
+            savePointMaterialHttpSubscriber.unSubscribe();
+            savePointMaterialHttpSubscriber = null;
+        }
+        if (null != saveSendMaterialPointHttpSubscriber) {
+            saveSendMaterialPointHttpSubscriber.unSubscribe();
+            saveSendMaterialPointHttpSubscriber = null;
+        }
+        if (null != commitPointMaterialHttpSubscriber) {
+            commitPointMaterialHttpSubscriber.unSubscribe();
+            commitPointMaterialHttpSubscriber = null;
+        }
+        if (null != getASNDetailsByCodeHttpSubscriber) {
+            getASNDetailsByCodeHttpSubscriber.unSubscribe();
+            getASNDetailsByCodeHttpSubscriber = null;
+        }
     }
 }

@@ -2,10 +2,15 @@ package com.timi.sz.wms_android.mvp.UI.stock_out.query;
 
 import android.content.Context;
 
+import com.timi.sz.wms_android.base.uils.ToastUtils;
 import com.timi.sz.wms_android.bean.outstock.outsource.OutSourceFeedBean;
 import com.timi.sz.wms_android.http.callback.OnResultCallBack;
 import com.timi.sz.wms_android.http.subscriber.HttpSubscriber;
 import com.timi.sz.wms_android.mvp.base.presenter.impl.MvpBasePresenter;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 /**
  * $dsc
@@ -24,25 +29,30 @@ public class StockOutSearchPresenter extends MvpBasePresenter<StockOutSearchView
 
     /**
      * 委外退料搜索
-     *
-     * @param orderno
      */
-    public void searchOutsourceFeed(String orderno) {
+    public void searchOutsourceFeed(Map<String, Object> params) {
 
         if (null == outSourceFeedBeanHttpSubscriber) {
             outSourceFeedBeanHttpSubscriber = new HttpSubscriber<>(new OnResultCallBack<OutSourceFeedBean>() {
                 @Override
                 public void onSuccess(OutSourceFeedBean o) {
-
+                    getView().searchOutsourceFeed(o);
                 }
 
                 @Override
                 public void onError(String errorMsg) {
+                    ToastUtils.showShort(errorMsg);
 
+                    List<OutSourceFeedBean.MaterialBean> datas = new ArrayList<>();
+                    for (int i = 0; i < 20; i++) {
+                        datas.add(new OutSourceFeedBean.MaterialBean("a23das", "qwdwqdd", 100, 100, 100));
+                    }
+                    OutSourceFeedBean o = new OutSourceFeedBean("A1231321", "2017-8-25", "电子料仓", "IC检选区", 30, 30, 30, 0, 0, datas);
+                    getView().searchOutsourceFeed(o);
                 }
             });
         }
-        model.searchOutsourceFeed(orderno, outSourceFeedBeanHttpSubscriber);
+        model.searchOutsourceFeed(params, outSourceFeedBeanHttpSubscriber);
     }
 
     @Override

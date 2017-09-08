@@ -120,7 +120,7 @@ public abstract class BaseActivity<V extends MvpView, P extends MvpPresenter<V>>
 
     @Override
     public void showProgressDialog() {
-        MyProgressDialog.showProgressDialog(this);
+        MyProgressDialog.showProgressDialog(currentActivity);
     }
 
     @Override
@@ -245,7 +245,7 @@ public abstract class BaseActivity<V extends MvpView, P extends MvpPresenter<V>>
         super.startActivity(intent);
 
         if (interlude == Interlude.DEFAULT) {
-            overridePendingTransition(R.transition.slide_out_left, R.anim.none);
+            overridePendingTransition(R.transition.slide_in_right, R.anim.none);
         } else if (interlude == Interlude.POP_FROM_BOTTOM) {
             //从下方弹出
             overridePendingTransition(R.transition.pop_in_bottom, R.anim.none);

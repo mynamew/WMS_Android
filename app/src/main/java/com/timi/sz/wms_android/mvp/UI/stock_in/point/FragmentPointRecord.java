@@ -1,19 +1,32 @@
 package com.timi.sz.wms_android.mvp.UI.stock_in.point;
 
+import android.content.DialogInterface;
 import android.text.TextUtils;
 import android.util.Log;
 import android.widget.LinearLayout;
 
 import com.rmondjone.locktableview.LockTableView;
 import com.timi.sz.wms_android.R;
+import com.timi.sz.wms_android.base.uils.Constants;
+import com.timi.sz.wms_android.base.uils.PackageUtils;
+import com.timi.sz.wms_android.base.uils.SpUtils;
 import com.timi.sz.wms_android.base.uils.ToastUtils;
 import com.timi.sz.wms_android.bean.instock.search.BuyOrdernoBean;
 import com.timi.sz.wms_android.bean.instock.PointMaterialBean;
 import com.timi.sz.wms_android.bean.instock.search.SendOrdernoBean;
+import com.timi.sz.wms_android.bean.instock.search.StockinMaterialBean;
+import com.timi.sz.wms_android.http.message.BaseMessage;
+import com.timi.sz.wms_android.http.message.event.StockInPointEvent;
 import com.timi.sz.wms_android.mvp.base.BaseFragment;
 import com.timi.sz.wms_android.view.MyDialog;
 
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 
@@ -23,9 +36,26 @@ import butterknife.BindView;
  * create at: 2017-08-25 15:50
  */
 
-public class FragmentPointRecord extends BaseFragment<FragmentPointRecordView,FragmentPointRecordPresenter> implements FragmentPointRecordView{
+public class FragmentPointRecord extends BaseFragment<FragmentPointRecordView, FragmentPointRecordPresenter> implements FragmentPointRecordView {
     @BindView(R.id.ll_stockin_point_record)
     LinearLayout llStockinPointRecord;
+    /**
+     * 当前的位置
+     */
+    private int currentPostion;
+    /**
+     * 跳转的code值
+     */
+    private int intentCode;
+
+    /**
+     * 修改的清点数量
+     */
+    private int pointNum;
+    /**
+     * 备品的请点数量
+     */
+    private int spareNum;
 
     @Override
     public FragmentPointRecordPresenter createPresenter() {
@@ -39,49 +69,20 @@ public class FragmentPointRecord extends BaseFragment<FragmentPointRecordView,Fr
 
     @Override
     public void initData() {
-        //构造假数据
-        ArrayList<ArrayList<String>> mTableDatas = new ArrayList<ArrayList<String>>();
-        ArrayList<String> mfristData = new ArrayList<String>();
-        mfristData.add("序号");
-        mfristData.add("物品编码");
-        mfristData.add("物品名称");
-        mfristData.add("请点数");
-        mfristData.add("备品数");
-        mfristData.add("清点日期");
-        mTableDatas.add(mfristData);
-        for (int i = 0; i < 20; i++) {
-            ArrayList<String> mRowDatas = new ArrayList<String>();
-            mRowDatas.add("" + i);
-            for (int j = 0; j < 5; j++) {
-                mRowDatas.add("数据" + j);
-            }
-            mTableDatas.add(mRowDatas);
-        }
-        LockTableView mLockTableView = new LockTableView(getActivity(), llStockinPointRecord, mTableDatas);
-        Log.e("表格加载开始", "当前线程：" + Thread.currentThread());
-        mLockTableView.setLockFristColumn(false) //是否锁定第一列
-                .setLockFristRow(true) //是否锁定第一行
-                .setMaxColumnWidth(100) //列最大宽度
-                .setMinColumnWidth(10) //列最小宽度
-                .setMinRowHeight(5)//行最小高度
-                .setMaxRowHeight(20)//行最大高度
-                .setTextViewSize(12) //单元格字体大小
-                .setFristRowBackGroudColor(R.color.table_head)//表头背景色
-                .setTableHeadTextColor(R.color.beijin)//表头字体颜色
-                .setTableContentTextColor(R.color.border_color)//单元格字体颜色
-                .setNullableString("N/A") //空值替换值
-                .setTableViewListener(new LockTableView.OnTableViewListener() {
-                    @Override
-                    public void onTableViewScrollChange(int x, int y) {
-                        Log.e("滚动值", "[" + x + "]" + "[" + y + "]");
-                    }
+        BaseMessage.register(this);
+        int receiveId = ((StockInPointActivity) getActivity()).getReceiveId();
+        intentCode = ((StockInPointActivity) getActivity()).getIntentCode().getIntExtra(Constants.CODE_STR, Constants.COME_MATERAIL_NUM);
+        Map<String, Object> params = new HashMap<>();
+        params.put("UserId", SpUtils.getInstance().getUserId());
+        params.put("OrgId", SpUtils.getInstance().getOrgId());
+        params.put("ReceiveId", receiveId);
+        params.put("MAC", PackageUtils.getMac());
+        getPresenter().getPointRecord(params);
+    }
 
-                    @Override
-                    public void onTabViewClickListener(int position) {
-                        showGoodsPointRecordDialog(position);
-                    }
-                })//设置滚动回调监听
-                .show(); //显示表格,此方法必须调用
+    @Override
+    public void onResume() {
+        super.onResume();
     }
 
     @Override
@@ -95,168 +96,122 @@ public class FragmentPointRecord extends BaseFragment<FragmentPointRecordView,Fr
     private MyDialog mPointRecordDialog = null;
 
     public void showGoodsPointRecordDialog(final int position) {
+        currentPostion = position;
         if (null == mPointRecordDialog) {
+            final StockinMaterialBean stockinMaterialBean = mDatas.get(position);
             mPointRecordDialog = new MyDialog(getActivity(), R.layout.dialog_stockin_record)
-                    .setTextViewContent(R.id.tv_stockin_point_record_pronum, String.format(getString(R.string.material_code), "9.05.0022"))
-                    .setTextViewContent(R.id.tv_stockin_point_record_proname, String.format(getString(R.string.material_name), "滑轨双孔梁496-蓝色"))
-                    .setTextViewContent(R.id.tv_stockin_point_record_promodel, String.format(getString(R.string.material_model), "Slide Beam0824-496铝挤压加工"))
+                    .setTextViewContent(R.id.tv_stockin_point_record_pronum, String.format(getString(R.string.material_code), stockinMaterialBean.getMaterialCode()))
+                    .setTextViewContent(R.id.tv_stockin_point_record_proname, String.format(getString(R.string.material_name), stockinMaterialBean.getMaterialName()))
+                    .setTextViewContent(R.id.tv_stockin_point_record_promodel, String.format(getString(R.string.material_model), stockinMaterialBean.getMaterialStandard()))
                     .setButtonListener(R.id.btn_stockin_point_record_delete, getString(R.string.delete), new MyDialog.DialogClickListener() {
                         @Override
                         public void dialogClick(MyDialog dialog) {
                             dialog.dismiss();
+                            Map<String, Object> params = new HashMap<>();
+                            params.put("UserId", SpUtils.getInstance().getUserId());
+                            params.put("MAC", PackageUtils.getMac());
+                            params.put("OrgId", SpUtils.getInstance().getOrgId());
+                            params.put("ReceiveRecordId", stockinMaterialBean.getId());
+                            getPresenter().deleteMaterialPoint(params, intentCode == Constants.BUY_ORDE_NUM);
                         }
                     })
                     .setButtonListener(R.id.btn_stockin_point_record_update, getString(R.string.update), new MyDialog.DialogClickListener() {
                         @Override
                         public void dialogClick(MyDialog dialog) {
+                            dialog.dismiss();
                             String pointNumStr = dialog.getEdittext(R.id.et_stockin_point_record_pro_point_num).getText().toString();
                             String spareNumStr = dialog.getEdittext(R.id.et_stockin_poin_recordt_sparenum).getText().toString();
-                            //判断是否输入了清点的数量
-                            if (TextUtils.isEmpty(pointNumStr)) {
-                                ToastUtils.showShort(getActivity(), getString(R.string.please_input_point_num));
-                                return;
-                            }
-                            //判断是否输入了备品的数量
-                            if (TextUtils.isEmpty(spareNumStr)) {
-                                ToastUtils.showShort(getActivity(), getString(R.string.please_input_spare_num));
-                                return;
-                            }
-                            /**
-                             * 清点的数量 不能大于到货数
-                             */
-                            int pointNum=Integer.parseInt(pointNumStr);
-                            int spareNum=Integer.parseInt(spareNumStr);
-                            int arriverNum=0;
-//                            /**
-//                             * 采购单 到货数
-//                             */
-//                            if(null!=mBuyOrderBean){
-//                                arriverNum=mBuyOrderBean.data.get(position).arriveNum;
-//                            }
-//                            /**
-//                             * 送货单 到货数
-//                             */
-//                            if(null!=mSendOrderBean){
-//                                arriverNum=mBuyOrderBean.data.get(position).arriveNum;
-//                            }
-                            /**
-                             * 对清点数 输入做控制
-                             */
-                            // TODO: 2017/8/31 对请点数做多重控制
-                            if(pointNum>arriverNum){
-                                ToastUtils.showShort("请输入正确的请点数");
-                                return;
-                            }
-                            // TODO: 2017/8/24 网络请求 保存清点信息
-                            getPresenter().savePointMaterial(orderNo,pointNum,spareNum);
-                            dialog.dismiss();
+                            pointNum = TextUtils.isEmpty(pointNumStr) ? stockinMaterialBean.getCountQty() : Integer.parseInt(pointNumStr);
+                            spareNum = TextUtils.isEmpty(spareNumStr) ? stockinMaterialBean.getGiveQty() : Integer.parseInt(spareNumStr);
+                            Map<String, Object> params = new HashMap<>();
+                            params.put("UserId", SpUtils.getInstance().getUserId());
+                            params.put("MAC", PackageUtils.getMac());
+                            params.put("OrgId", SpUtils.getInstance().getOrgId());
+                            params.put("ReceiveRecordId", stockinMaterialBean.getId());
+                            params.put("CountQty", pointNum);
+                            params.put("GiveQty", spareNum);
+                            getPresenter().updateMaterialPoint(params, intentCode == Constants.BUY_ORDE_NUM);
+
+
                         }
                     }).setAnimation(R.style.popWindow_animation_push);
         }
+        mPointRecordDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog) {
+                mPointRecordDialog = null;
+            }
+        });
         mPointRecordDialog.show();
     }
-    /**
-     * 订单号
-     */
-    private String orderNo="";
 
-    private BuyOrdernoBean mBuyOrderBean=null;
+    private List<StockinMaterialBean> mDatas = new ArrayList<>();
+    ArrayList<ArrayList<String>> mTableDatas = new ArrayList<ArrayList<String>>();
+
     @Override
-    public void buyOrdernoQuery(BuyOrdernoBean bean) {
-//        llStockinPointRecord.removeAllViews();
-//        /**
-//         * 设置订单号 为了保存物料使用
-//         */
-//        orderNo=bean.num;
-//        /**
-//         * 采购单的实体
-//         */
-//        mBuyOrderBean=bean;
-//        //构造假数据
-//        ArrayList<ArrayList<String>> mTableDatas = new ArrayList<ArrayList<String>>();
-//        ArrayList<String> mfristData = new ArrayList<String>();
-//        mfristData.add("行号");
-//        mfristData.add("物品编码");
-//        mfristData.add("采购数");
-//        mfristData.add("到货数");
-//        mfristData.add("入库数");
-//        mfristData.add("请点数");
-//        mfristData.add("备品数");
-//        mTableDatas.add(mfristData);
-//        for (int i = 0; i < bean.data.size(); i++) {
-//            ArrayList<String> mRowDatas = new ArrayList<String>();
-//            BuyOrdernoBean.MarterialBean marterialBean = bean.data.get(i);
-//            mRowDatas.add(marterialBean.materialCode);
-//            mRowDatas.add(marterialBean.buyNum);
-//            mRowDatas.add(marterialBean.arriveNum+"");
-//            mRowDatas.add(marterialBean.inStockNum);
-//            mRowDatas.add(marterialBean.pointNum);
-//            mRowDatas.add(marterialBean.spareNum);
-//            mTableDatas.add(mRowDatas);
-//        }
-//        LockTableView mLockTableView = new LockTableView(getActivity(), llStockinPointRecord, mTableDatas);
-//        Log.e("表格加载开始", "当前线程：" + Thread.currentThread());
-//        mLockTableView.setLockFristColumn(false) //是否锁定第一列
-//                .setLockFristRow(true) //是否锁定第一行
-//                .setMaxColumnWidth(100) //列最大宽度
-//                .setMinColumnWidth(10) //列最小宽度
-//                .setMinRowHeight(5)//行最小高度
-//                .setMaxRowHeight(20)//行最大高度
-//                .setTextViewSize(12) //单元格字体大小
-//                .setFristRowBackGroudColor(R.color.table_head)//表头背景色
-//                .setTableHeadTextColor(R.color.beijin)//表头字体颜色
-//                .setTableContentTextColor(R.color.border_color)//单元格字体颜色
-//                .setNullableString("N/A") //空值替换值
-//                .setTableViewListener(new LockTableView.OnTableViewListener() {
-//                    @Override
-//                    public void onTableViewScrollChange(int x, int y) {
-//                        Log.e("滚动值", "[" + x + "]" + "[" + y + "]");
-//                    }
-//
-//                    @Override
-//                    public void onTabViewClickListener(int position) {
-//                        showGoodsPointRecordDialog(position);
-//                    }
-//                })//设置滚动回调监听
-//                .show(); //显示表格,此方法必须调用
+    public void getPointRecord(List<StockinMaterialBean> datas) {
+        mDatas.clear();
+        mDatas.addAll(datas);
+        showExcelDialog();
     }
-    private SendOrdernoBean mSendOrderBean=null;
 
     @Override
-    public void sendOrdernoQuery(SendOrdernoBean bean) {
+    public void updatePointRecord() {
+        /**
+         * 更新清点界面的表体
+         */
+        BaseMessage.post(new StockInPointEvent(StockInPointEvent.MATERIAL_POINT_UPDATE));
+        /**
+         * 更新数据
+         */
+        ToastUtils.showShort("清点记录修改成功");
+        StockinMaterialBean stockinMaterialBean = mDatas.get(currentPostion);
+        stockinMaterialBean.setCountQty(pointNum);
+        stockinMaterialBean.setGiveQty(spareNum);
+        showExcelDialog();
+    }
+
+    @Override
+    public void deletePointRecord() {
+        /**
+         * 更新清点界面的表体
+         */
+        BaseMessage.post(new StockInPointEvent(StockInPointEvent.MATERIAL_POINT_UPDATE));
+        /**
+         * 更新数据
+         */
+        ToastUtils.showShort("清点记录删除成功");
+        mDatas.remove(currentPostion);
+        showExcelDialog();
+    }
+
+    /**
+     * 展示表体
+     */
+    public void showExcelDialog() {
         llStockinPointRecord.removeAllViews();
-        /**
-         * 设置订单号 为了保存物料使用
-         */
-        orderNo=bean.num;
-        /**
-         * 保存的发货单的实体
-         */
-        mSendOrderBean=bean;
-        //构造假数据
-        ArrayList<ArrayList<String>> mTableDatas = new ArrayList<ArrayList<String>>();
+        mTableDatas.clear();
         ArrayList<String> mfristData = new ArrayList<String>();
         mfristData.add("行号");
         mfristData.add("物品编码");
-        mfristData.add("采购数");
-        mfristData.add("到货数");
-        mfristData.add("入库数");
+        mfristData.add("物品名称");
         mfristData.add("请点数");
         mfristData.add("备品数");
+        mfristData.add("清点日期");
         mTableDatas.add(mfristData);
-        for (int i = 0; i < bean.data.size(); i++) {
+
+        for (int i = 0; i < mDatas.size(); i++) {
             ArrayList<String> mRowDatas = new ArrayList<String>();
-            SendOrdernoBean.MarterialBean marterialBean = bean.data.get(i);
-            mRowDatas.add(marterialBean.materialCode);
-            mRowDatas.add(marterialBean.buyNum);
-            mRowDatas.add(marterialBean.arriveNum);
-            mRowDatas.add(marterialBean.inStockNum);
-            mRowDatas.add(marterialBean.pointNum);
-            mRowDatas.add(marterialBean.spareNum);
+            StockinMaterialBean stockinMaterialBean = mDatas.get(i);
+            mRowDatas.add("" + stockinMaterialBean.getId());
+            mRowDatas.add(stockinMaterialBean.getMaterialCode());
+            mRowDatas.add(stockinMaterialBean.getMaterialName());
+            mRowDatas.add(stockinMaterialBean.getCountQty() + "");
+            mRowDatas.add(stockinMaterialBean.getGiveQty() + "");
+            mRowDatas.add(stockinMaterialBean.getCreateDateTime());
             mTableDatas.add(mRowDatas);
         }
         LockTableView mLockTableView = new LockTableView(getActivity(), llStockinPointRecord, mTableDatas);
-        Log.e("表格加载开始", "当前线程：" + Thread.currentThread());
         mLockTableView.setLockFristColumn(false) //是否锁定第一列
                 .setLockFristRow(true) //是否锁定第一行
                 .setMaxColumnWidth(100) //列最大宽度
@@ -267,11 +222,10 @@ public class FragmentPointRecord extends BaseFragment<FragmentPointRecordView,Fr
                 .setFristRowBackGroudColor(R.color.table_head)//表头背景色
                 .setTableHeadTextColor(R.color.beijin)//表头字体颜色
                 .setTableContentTextColor(R.color.border_color)//单元格字体颜色
-                .setNullableString("N/A") //空值替换值
+                .setNullableString("0") //空值替换值
                 .setTableViewListener(new LockTableView.OnTableViewListener() {
                     @Override
                     public void onTableViewScrollChange(int x, int y) {
-                        Log.e("滚动值", "[" + x + "]" + "[" + y + "]");
                     }
 
                     @Override
@@ -282,10 +236,26 @@ public class FragmentPointRecord extends BaseFragment<FragmentPointRecordView,Fr
                 .show(); //显示表格,此方法必须调用
     }
 
-    @Override
-    public void savePointMaterial(PointMaterialBean bean) {
-        if(bean.isSuccess){
-            ToastUtils.showShort("物料请点修改成功");
+    /**
+     * 当清点记录 做修改和 删除时 更新物料清点的v表体
+     *
+     * @param event
+     */
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void refreshPointMaterialPoDetails(StockInPointEvent event) {
+        if (event.getEvent().equals(StockInPointEvent.MATERIAL_POINT_RECORD_UPDATE)) {
+            Map<String, Object> params = new HashMap<>();
+            params.put("UserId", SpUtils.getInstance().getUserId());
+            params.put("OrgId", SpUtils.getInstance().getOrgId());
+            params.put("ReceiveId", event.receiveId);
+            params.put("MAC", PackageUtils.getMac());
+            getPresenter().getPointRecord(params);
         }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        BaseMessage.unregister(this);
     }
 }

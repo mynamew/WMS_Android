@@ -1,9 +1,11 @@
 package com.timi.sz.wms_android.mvp.UI.quity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
 import com.timi.sz.wms_android.R;
+import com.timi.sz.wms_android.mvp.UI.quity.quality.QualityCheckActivity;
 import com.timi.sz.wms_android.mvp.base.view.BaseNoMvpActivity;
 
 import butterknife.ButterKnife;
@@ -43,6 +45,7 @@ public class QulityActivity extends BaseNoMvpActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tv_qulity_inspection://品质检验
+                startActivity(new Intent(this,QualityCheckActivity.class));
                 break;
             case R.id.tv_qulity_mrp_inspection://mrp 评审
                 break;

@@ -14,6 +14,7 @@ import com.timi.sz.wms_android.R;
 import com.timi.sz.wms_android.mvp.base.presenter.MvpPresenter;
 import com.timi.sz.wms_android.mvp.base.view.MvpView;
 import com.timi.sz.wms_android.mvp.base.view.iml.MvpBaseView;
+import com.timi.sz.wms_android.view.MyProgressDialog;
 import com.zhy.autolayout.utils.AutoUtils;
 
 import butterknife.ButterKnife;
@@ -66,12 +67,12 @@ public abstract  class BaseFragment <V extends MvpView, P extends MvpPresenter<V
 
     @Override
     public void showProgressDialog() {
-
+        MyProgressDialog.showProgressDialog(getActivity());
     }
 
     @Override
     public void dismisProgressDialog() {
-
+        MyProgressDialog.hideProgressDialog();
     }
     /**
      * 绑定P层

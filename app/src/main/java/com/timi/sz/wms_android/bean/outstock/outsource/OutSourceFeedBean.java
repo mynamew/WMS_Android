@@ -18,17 +18,37 @@ public class OutSourceFeedBean {
     public int sendNum;
     public int receiveNum;
     public int canReceiveNum;
+
+    public OutSourceFeedBean(String orderno, String date, String libName, String area, int sendNum, int receiveNum, int canReceiveNum, int waitPointNum, int havePointNum, List<MaterialBean> datas) {
+        Orderno = orderno;
+        this.date = date;
+        this.libName = libName;
+        this.area = area;
+        this.sendNum = sendNum;
+        this.receiveNum = receiveNum;
+        this.canReceiveNum = canReceiveNum;
+        this.waitPointNum = waitPointNum;
+        this.havePointNum = havePointNum;
+        this.datas = datas;
+    }
+
     public int waitPointNum;
     public int havePointNum;
     public List<MaterialBean> datas;
 
-    class MaterialBean {
+    public static class MaterialBean {
         public String materialCode;
         public String materialName;
         public int sendNum;
         public int haveReceiveNum;
         public int pointNum;
 
-
+        public MaterialBean(String materialCode, String materialName, int sendNum, int haveReceiveNum, int pointNum) {
+            this.materialCode = materialCode;
+            this.materialName = materialName;
+            this.sendNum = sendNum;
+            this.haveReceiveNum = haveReceiveNum;
+            this.pointNum = pointNum;
+        }
     }
 }

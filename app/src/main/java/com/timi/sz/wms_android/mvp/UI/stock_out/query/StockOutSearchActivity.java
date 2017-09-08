@@ -13,19 +13,22 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
 import com.timi.sz.wms_android.R;
 import com.timi.sz.wms_android.base.uils.Constants;
 import com.timi.sz.wms_android.base.uils.InputMethodUtils;
+import com.timi.sz.wms_android.base.uils.PackageUtils;
 import com.timi.sz.wms_android.base.uils.ToastUtils;
 import com.timi.sz.wms_android.bean.outstock.outsource.OutSourceFeedBean;
-import com.timi.sz.wms_android.mvp.UI.stock_in.point.StockInPointActivity;
-import com.timi.sz.wms_android.mvp.UI.stock_in.query.SearchBuyOrderActivity;
+import com.timi.sz.wms_android.mvp.UI.stock_out.point_list.PointListActivity;
 import com.timi.sz.wms_android.mvp.base.BaseActivity;
 import com.timi.sz.wms_android.qrcode.CommonScanActivity;
 import com.timi.sz.wms_android.qrcode.utils.Constant;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 import static com.timi.sz.wms_android.base.uils.Constants.REQUEST_CODE;
@@ -33,6 +36,7 @@ import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_CODE_STR;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_OTHER_OUT_AUDIT;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_OUTSOURCE_AUDIT;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_OUTSOURCE_BILL;
+import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_OUTSOURCE_FEED_BEAN;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_OUTSOURCE_FEED_SUPLLIEMENT;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_PRODUCTION_AUDIT;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_PRODUCTION_BILL;
@@ -192,12 +196,18 @@ public class StockOutSearchActivity extends BaseActivity<StockOutSearchView, Sto
      * @param orderNum
      */
     public void requestManagerMethod(String orderNum) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("tenancyName", "Default");
+        params.put("usernameOrEmailAddress", "admin1");
+        params.put("password", "123qwe");
+        params.put("deviceType", "8");
+        params.put("mac", PackageUtils.getMac());
         /**
          * 不同的intentcode  请求不同
          */
         switch (intentCode) {
             case Constants.STOCK_OUT_OUTSOURCE_FEED_SUPLLIEMENT://委外退料
-                getPresenter().searchOutsourceFeed(orderNum);
+                getPresenter().searchOutsourceFeed(params);
                 break;
             case Constants.STOCK_OUT_OUTSOURCE_AUDIT://委外发货-审核
                 break;
@@ -222,10 +232,14 @@ public class StockOutSearchActivity extends BaseActivity<StockOutSearchView, Sto
 
     /**
      * 委外补料的请求 回调
+     *  跳转到清点的界面
+     *
      * @param bean
      */
     @Override
     public void searchOutsourceFeed(OutSourceFeedBean bean) {
-
+        Intent intent = new Intent(this, PointListActivity.class);
+        intent.putExtra(STOCK_OUT_OUTSOURCE_FEED_BEAN, new Gson().toJson(bean));
+        startActivity(intent);
     }
 }

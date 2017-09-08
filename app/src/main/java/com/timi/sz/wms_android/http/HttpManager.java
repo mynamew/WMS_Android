@@ -24,6 +24,8 @@ import okhttp3.ResponseBody;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import static com.timi.sz.wms_android.http.exception.ApiException.CODE_REQUEST_SUCCESS_EXCEPTION;
+
 /**
  * 用于网络请求的管理类$
  * author: timi
@@ -95,16 +97,20 @@ public class HttpManager {
                     public T apply(@NonNull CommonResult<T> t)   {
                         LogUitls.e("返回结果--->", t.toString());
                         if (t.isSuccess()) {//请求成功的返回
-                            if (t.isUnAuthorizedRequest()) {
+//                            if (t.isUnAuthorizedRequest()) {
+
+                                if(null== t.getResult()){
+                                    throw new ApiException(CODE_REQUEST_SUCCESS_EXCEPTION);
+                                }
                                 return t.getResult();
-                            } else {
-                                /**
-                                 * 如果返回的tocken 失效
-                                 */
-//                                BaseActivity currentActivty = (BaseActivity) BaseActivity.getCurrentActivty();
-//                                currentActivty.jumpToLoginActivity();
-                                return t.getResult();
-                            }
+//                            } else {
+//                                /**
+//                                 * 如果返回的tocken 失效
+//                                 */
+////                                BaseActivity currentActivty = (BaseActivity) BaseActivity.getCurrentActivty();
+////                                currentActivty.jumpToLoginActivity();
+//                                return t.getResult();
+//                            }
                         } else {
                             throw new ApiException(t.getError().getMessage());
                         }

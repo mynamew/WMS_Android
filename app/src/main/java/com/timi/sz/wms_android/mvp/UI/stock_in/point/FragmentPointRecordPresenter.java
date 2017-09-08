@@ -6,12 +6,14 @@ import com.timi.sz.wms_android.base.uils.ToastUtils;
 import com.timi.sz.wms_android.bean.instock.search.BuyOrdernoBean;
 import com.timi.sz.wms_android.bean.instock.PointMaterialBean;
 import com.timi.sz.wms_android.bean.instock.search.SendOrdernoBean;
+import com.timi.sz.wms_android.bean.instock.search.StockinMaterialBean;
 import com.timi.sz.wms_android.http.callback.OnResultCallBack;
 import com.timi.sz.wms_android.http.subscriber.HttpSubscriber;
 import com.timi.sz.wms_android.mvp.base.presenter.impl.MvpBasePresenter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * $dsc
@@ -21,9 +23,9 @@ import java.util.List;
 
 public class FragmentPointRecordPresenter extends MvpBasePresenter<FragmentPointRecordView> {
     FragmentPointRecordModel model = null;
-    private HttpSubscriber<BuyOrdernoBean> buyOrdernoBeanHttpSubscriber;
-    private HttpSubscriber<SendOrdernoBean> sendOrdernoBeanHttpSubscriber;
-    private HttpSubscriber<PointMaterialBean> savePointMaterialHttpSubscriber;
+    private HttpSubscriber<List<StockinMaterialBean>> materialBeanHttpSubscriber;
+    private HttpSubscriber<Object> updateHttpSubscriber;
+    private HttpSubscriber<Object> deleteHttpSubscriber;
 
     public FragmentPointRecordPresenter(Context context) {
         super(context);
@@ -31,15 +33,17 @@ public class FragmentPointRecordPresenter extends MvpBasePresenter<FragmentPoint
     }
 
     /**
-     * 采购单的搜索返回
+     * 获取 清点记录
      *
+     * @param params
      */
-    public void buyOdernoQuery(final int orgId, final int userId, final String mac, final String billNo) {
-        if (null == buyOrdernoBeanHttpSubscriber) {
-            buyOrdernoBeanHttpSubscriber = new HttpSubscriber<>(new OnResultCallBack<BuyOrdernoBean>() {
+    public void getPointRecord(Map<String, Object> params) {
+        getView().showProgressDialog();
+        if (null == materialBeanHttpSubscriber) {
+            materialBeanHttpSubscriber = new HttpSubscriber<>(new OnResultCallBack<List<StockinMaterialBean>>() {
                 @Override
-                public void onSuccess(BuyOrdernoBean buyOrdernoBean) {
-
+                public void onSuccess(List<StockinMaterialBean> datas) {
+                    getView().getPointRecord(datas);
                 }
 
                 @Override
@@ -48,55 +52,78 @@ public class FragmentPointRecordPresenter extends MvpBasePresenter<FragmentPoint
                 }
             });
         }
-        model.buyOrdernoQuery(orgId,userId,mac,billNo, buyOrdernoBeanHttpSubscriber);
-    }
-    /**
-     * 保存物料清点的方法
-     * @param orderno
-     * @param pointNum
-     * @param spareNum
-     */
-    public void savePointMaterial(final String orderno, final int pointNum, final int spareNum){
-        if (null == savePointMaterialHttpSubscriber) {
-            savePointMaterialHttpSubscriber = new HttpSubscriber<>(new OnResultCallBack<PointMaterialBean>() {
-                @Override
-                public void onSuccess(PointMaterialBean pointMaterialBean) {
-                    getView().savePointMaterial(pointMaterialBean);
-                }
+        model.buyOrderNoPointRecord(params, materialBeanHttpSubscriber);
 
-                @Override
-                public void onError(String errorMsg) {
-                    getView().savePointMaterial(new PointMaterialBean(true));
-                }
-            });
-        }
-        model.savePointMaterial(orderno, pointNum, spareNum, savePointMaterialHttpSubscriber);
     }
+
     /**
-     * 送货单的搜索返回
+     * 修改清点记录
      *
-     * @param scanStr
+     * @param params
      */
-    public void sendOdernoQuery(String scanStr) {
-        if (null == sendOrdernoBeanHttpSubscriber) {
-            sendOrdernoBeanHttpSubscriber = new HttpSubscriber<>(new OnResultCallBack<SendOrdernoBean>() {
+    public void updateMaterialPoint(Map<String, Object> params,boolean isBuyOrder) {
+        getView().showProgressDialog();
+        if (null == updateHttpSubscriber) {
+            updateHttpSubscriber = new HttpSubscriber<>(new OnResultCallBack<Object>() {
                 @Override
-                public void onSuccess(SendOrdernoBean sendBean) {
-
+                public void onSuccess(Object datas) {
+                    getView().updatePointRecord();
                 }
 
                 @Override
                 public void onError(String errorMsg) {
-                    //请求失败 加入假数据
-                    List<SendOrdernoBean.MarterialBean> datas = new ArrayList<>();
-                    for (int i = 0; i < 100; i++) {
-                        datas.add(new SendOrdernoBean.MarterialBean(i + "", "M42324232" + i, "50", 50, 100, "10", "20", "100", "10", "20"));
-                    }
-                    SendOrdernoBean buyOrdernoBean = new SendOrdernoBean("B789678", "邢力丰", "深圳超然科技股份有限公司", "2017-8-29", datas);
-                    getView().sendOrdernoQuery(buyOrdernoBean);
+                    ToastUtils.showShort(errorMsg);
                 }
             });
         }
-        model.sendOrdernoQuery(scanStr, sendOrdernoBeanHttpSubscriber);
+        if(isBuyOrder) {
+            model.updateMaterialPoint(params, updateHttpSubscriber);
+        }else {
+            model.updateSendMaterialPoint(params, updateHttpSubscriber);
+        }
+    }
+
+    /**
+     * 删除清点记录
+     *
+     * @param params
+     */
+    public void deleteMaterialPoint(Map<String, Object> params,boolean isBuyOrder) {
+        getView().showProgressDialog();
+        if (null == deleteHttpSubscriber) {
+            deleteHttpSubscriber = new HttpSubscriber<>(new OnResultCallBack<Object>() {
+                @Override
+                public void onSuccess(Object datas) {
+                    getView().deletePointRecord();
+                }
+
+                @Override
+                public void onError(String errorMsg) {
+                    ToastUtils.showShort(errorMsg);
+                }
+            });
+        }
+        if(isBuyOrder) {
+            model.deleteMaterialPoint(params, deleteHttpSubscriber);
+        }else {
+            model.deleteSendMaterialPoint(params, deleteHttpSubscriber);
+        }
+    }
+
+    @Override
+    public void dettachView() {
+        super.dettachView();
+        if (null != materialBeanHttpSubscriber) {
+            materialBeanHttpSubscriber.unSubscribe();
+            materialBeanHttpSubscriber = null;
+        }
+        if (null != updateHttpSubscriber) {
+            updateHttpSubscriber.unSubscribe();
+            updateHttpSubscriber = null;
+        }
+        if (null != deleteHttpSubscriber) {
+            deleteHttpSubscriber.unSubscribe();
+            deleteHttpSubscriber = null;
+        }
     }
 }

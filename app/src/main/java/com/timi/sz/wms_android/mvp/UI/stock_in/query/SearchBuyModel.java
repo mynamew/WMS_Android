@@ -15,6 +15,8 @@ import com.timi.sz.wms_android.http.api.CommonResult;
 import com.timi.sz.wms_android.http.callback.ApiServiceMethodCallBack;
 import com.timi.sz.wms_android.mvp.base.model.impl.MvpBaseModel;
 
+import java.util.Map;
+
 import io.reactivex.Observable;
 import io.reactivex.Observer;
 
@@ -28,26 +30,23 @@ public class SearchBuyModel extends MvpBaseModel {
     /**
      * 采购单查询的方法
      */
-    public void buyOrdernoQuery(final int orgId, final int userId, final String mac, final String billNo, Observer<BuyOrdernoBean> observer) {
+    public void buyOrdernoQuery(final Map<String,Object> params, Observer<BuyOrdernoBean> observer) {
         HttpManager.getInstance().HttpManagerRequest(observer, new ApiServiceMethodCallBack<BuyOrdernoBean>() {
             @Override
             public Observable<CommonResult<BuyOrdernoBean>> createObservable(ApiService apiService) {
-                return apiService.buyOrderNoQuery(orgId,userId,mac,billNo);
+                return apiService.buyOrderNoQuery(params);
             }
         });
     }
 
     /**
      * 送货单查询的方法
-     *
-     * @param scanStr
-     * @param observer
      */
-    public void sendOrdernoQuery(final String scanStr, Observer<SendOrdernoBean> observer) {
+    public void sendOrdernoQuery(final Map<String,Object> params, Observer<SendOrdernoBean> observer) {
         HttpManager.getInstance().HttpManagerRequest(observer, new ApiServiceMethodCallBack<SendOrdernoBean>() {
             @Override
             public Observable<CommonResult<SendOrdernoBean>> createObservable(ApiService apiService) {
-                return apiService.sendOrdernoQuery(scanStr);
+                return apiService.sendOrdernoQuery(params);
             }
         });
     }

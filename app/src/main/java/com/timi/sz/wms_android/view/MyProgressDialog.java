@@ -37,6 +37,13 @@ public class MyProgressDialog  extends MyDialog {
         if (null == instance) {
             getInstance(context);
         }
+        /**
+         * 解决切换 activity dialog 崩溃
+         */
+        if(!instance.getContext().equals(context)){
+            instance=null;
+            getInstance(context);
+        }
         if(!instance.isShowing()){
             instance.show();
         }

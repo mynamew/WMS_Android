@@ -19,6 +19,7 @@ import com.timi.sz.wms_android.view.MyProgressDialog;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 搜索采购单的presenter
@@ -46,7 +47,7 @@ public class SearchBuyOrderPresenter extends MvpBasePresenter<SearchBuyOrderView
     /**
      * 采购单查询的方法
      */
-    public void buyOrdernoQuery(final int orgId, final int userId, final String mac, final String billNo) {
+    public void buyOrdernoQuery(Map<String,Object> params) {
         getView().showProgressDialog();
         if (null == mBuyHttpSubscriber) {
             mBuyHttpSubscriber = new HttpSubscriber<>(new OnResultCallBack<BuyOrdernoBean>() {
@@ -61,35 +62,28 @@ public class SearchBuyOrderPresenter extends MvpBasePresenter<SearchBuyOrderView
                 }
             });
         }
-        model.buyOrdernoQuery(orgId, userId, mac, billNo, mBuyHttpSubscriber);
+        model.buyOrdernoQuery(params, mBuyHttpSubscriber);
     }
 
     /**
      * 送货单查询的方法
-     *
-     * @param scanStr
      */
-    public void sendOrdernoQuery(final String scanStr) {
+    public void sendOrdernoQuery(final Map<String, Object> params) {
+        getView().showProgressDialog();
         if (null == mSendHttpSubscriber) {
             mSendHttpSubscriber = new HttpSubscriber<>(new OnResultCallBack<SendOrdernoBean>() {
                 @Override
                 public void onSuccess(SendOrdernoBean sendOrdernoBean) {
-
+                    getView().sendOrdernoQuery(sendOrdernoBean);
                 }
 
                 @Override
                 public void onError(String errorMsg) {
-                    //请求失败 加入假数据
-                    List<SendOrdernoBean.MarterialBean> datas = new ArrayList<>();
-                    for (int i = 0; i < 20; i++) {
-                        datas.add(new SendOrdernoBean.MarterialBean(i + "", "M42324232" + i, "200", 200, 50, "50", "100", "10", "20", "20"));
-                    }
-                    SendOrdernoBean sendOrdernoBean = new SendOrdernoBean("B789678", "邢力丰", "深圳超然科技股份有限公司", "2017-8-29", datas);
-                    getView().sendOrdernoQuery(sendOrdernoBean);
+                    ToastUtils.showShort(errorMsg);
                 }
             });
         }
-        model.sendOrdernoQuery(scanStr, mSendHttpSubscriber);
+        model.sendOrdernoQuery(params, mSendHttpSubscriber);
     }
 
     /**
