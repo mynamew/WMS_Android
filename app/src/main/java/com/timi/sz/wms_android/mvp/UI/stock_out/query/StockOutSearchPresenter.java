@@ -31,7 +31,7 @@ public class StockOutSearchPresenter extends MvpBasePresenter<StockOutSearchView
      * 委外退料搜索
      */
     public void searchOutsourceFeed(Map<String, Object> params) {
-
+        getView().showProgressDialog();
         if (null == outSourceFeedBeanHttpSubscriber) {
             outSourceFeedBeanHttpSubscriber = new HttpSubscriber<>(new OnResultCallBack<OutSourceFeedBean>() {
                 @Override
@@ -47,7 +47,7 @@ public class StockOutSearchPresenter extends MvpBasePresenter<StockOutSearchView
                     for (int i = 0; i < 20; i++) {
                         datas.add(new OutSourceFeedBean.MaterialBean("a23das", "qwdwqdd", 100, 100, 100));
                     }
-                    OutSourceFeedBean o = new OutSourceFeedBean("A1231321", "2017-8-25", "电子料仓", "IC检选区", 30, 30, 30, 0, 0, datas);
+                    OutSourceFeedBean o = new OutSourceFeedBean("A1231321", "2017-8-25", "电子料仓", "IC检选区", 30, 30,30, 30, 0, 0, datas);
                     getView().searchOutsourceFeed(o);
                 }
             });

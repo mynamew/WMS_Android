@@ -18,8 +18,9 @@ public class OutSourceFeedBean {
     public int sendNum;
     public int receiveNum;
     public int canReceiveNum;
+    public int haveGetNum;
 
-    public OutSourceFeedBean(String orderno, String date, String libName, String area, int sendNum, int receiveNum, int canReceiveNum, int waitPointNum, int havePointNum, List<MaterialBean> datas) {
+    public OutSourceFeedBean(String orderno, String date, String libName, String area, int sendNum, int receiveNum, int canReceiveNum, int haveGetNum, int waitPointNum, int havePointNum, List<MaterialBean> datas) {
         Orderno = orderno;
         this.date = date;
         this.libName = libName;
@@ -27,6 +28,7 @@ public class OutSourceFeedBean {
         this.sendNum = sendNum;
         this.receiveNum = receiveNum;
         this.canReceiveNum = canReceiveNum;
+        this.haveGetNum = haveGetNum;
         this.waitPointNum = waitPointNum;
         this.havePointNum = havePointNum;
         this.datas = datas;

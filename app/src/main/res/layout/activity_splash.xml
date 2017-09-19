@@ -10,13 +10,15 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
-        android:src="@mipmap/login_bg" />
+        android:visibility="visible"
+        android:src="@mipmap/splash_bg" />
     <ImageView
         android:id="@+id/iv_login_logo"
         android:layout_width="150px"
         android:layout_height="150px"
         android:layout_marginLeft="20px"
         android:layout_marginTop="20px"
+        android:visibility="gone"
         android:src="@mipmap/logo2" />
 
     <TextView
@@ -25,6 +27,7 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:layout_centerHorizontal="true"
+        android:visibility="gone"
         android:layout_marginBottom="20px"
         android:layout_marginTop="20px"
         android:text="@string/login_app_name"
@@ -35,6 +38,7 @@
         android:id="@+id/tv_login_version"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         android:layout_below="@id/tv_login_name"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="20px"
@@ -49,6 +53,7 @@
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="20px"
         android:gravity="center_horizontal"
+        android:visibility="gone"
         android:text="版权所有：玖坤信息"
         android:textColor="#999" />
 </RelativeLayout>

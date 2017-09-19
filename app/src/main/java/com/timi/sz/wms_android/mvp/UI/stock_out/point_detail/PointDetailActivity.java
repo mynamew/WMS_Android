@@ -1,8 +1,15 @@
 package com.timi.sz.wms_android.mvp.UI.stock_out.point_detail;
 
+import android.Manifest;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -11,13 +18,20 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.timi.sz.wms_android.R;
+import com.timi.sz.wms_android.base.uils.InputMethodUtils;
+import com.timi.sz.wms_android.base.uils.ToastUtils;
 import com.timi.sz.wms_android.bean.outstock.outsource.OutSourceFeedBean;
+import com.timi.sz.wms_android.mvp.UI.stock_out.divide_print.SplitPrintActivity;
+import com.timi.sz.wms_android.mvp.UI.stock_out.query.StockOutSearchActivity;
 import com.timi.sz.wms_android.mvp.base.BaseActivity;
+import com.timi.sz.wms_android.qrcode.CommonScanActivity;
+import com.timi.sz.wms_android.qrcode.utils.Constant;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static com.timi.sz.wms_android.base.uils.Constants.REQUEST_CODE;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_POINT_DETAIL_BEAN;
 
 public class PointDetailActivity extends BaseActivity<PointDetailView, PointDetailPresenter> implements PointDetailView {
@@ -47,6 +61,7 @@ public class PointDetailActivity extends BaseActivity<PointDetailView, PointDeta
     LinearLayout llContent;
     @BindView(R.id.btn_point_close)
     Button btnPointClose;
+
     @Override
     public int setLayoutId() {
         return R.layout.activity_point_detail;
@@ -69,6 +84,27 @@ public class PointDetailActivity extends BaseActivity<PointDetailView, PointDeta
     @Override
     public void initView() {
 
+        /**
+         *  输入框
+         */
+        etMaterialCodeInput.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+
+                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                    InputMethodUtils.hide(PointDetailActivity.this);
+                    String orderNum = etMaterialCodeInput.getText().toString().trim();
+                    if (TextUtils.isEmpty(orderNum)) {
+                        ToastUtils.showShort("请输入单号");
+                    }
+                    /**
+                     * 发起请求
+                     */
+                    startActivity(new Intent(PointDetailActivity.this, SplitPrintActivity.class));
+                }
+                return false;
+            }
+        });
     }
 
     @Override
@@ -90,10 +126,42 @@ public class PointDetailActivity extends BaseActivity<PointDetailView, PointDeta
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_material_code_scan:
+                if (ContextCompat.checkSelfPermission(this,
+                        Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                    //权限还没有授予，需要在这里写申请权限的代码
+                    ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, 60);
+                } else {
+                    //权限已经被授予，在这里直接写要执行的相应方法即可
+                    Intent intent = new Intent(this, CommonScanActivity.class);
+
+                    String pointMsg = getResources().getString(R.string.scan_point_title);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("pointMsg", pointMsg);
+                    intent.putExtras(bundle);
+
+                    intent.putExtra(Constant.REQUEST_SCAN_MODE, Constant.REQUEST_SCAN_MODE_ALL_MODE);
+                    startActivityForResult(intent, REQUEST_CODE);
+                }
                 break;
             case R.id.btn_point_close:
+                onBackPressed();
                 break;
         }
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case REQUEST_CODE:
+                if (resultCode == RESULT_OK) {
+                    Bundle bundle = data.getExtras();
+                    if (bundle != null) {
+                        etMaterialCodeInput.setText(bundle.getString("result"));
+                        // TODO: 2017/9/18 发送请求
+                    }
+                }
+                break;
+        }
+    }
 }

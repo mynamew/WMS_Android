@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">智能仓库管理系统</string>
+    <string name="app_name">智能仓储</string>
     <string name="title_activity_login">Sign in</string>
 
     <!-- Strings related to login -->
@@ -15,7 +15,7 @@
         completions."
     </string>
     /**====== 登录 ======**/
-    <string name="login_login">登录</string>
+    <string name="login_login">立即登录</string>
     <string name="login_inpiut_psw">请输入密码</string>
     <string name="login_input_username">请输入用户名</string>
     <string name="login_choose_servers">请选择服务器</string>
@@ -117,7 +117,7 @@
     <string name="login_url_tip">地址：</string>
     <string name="login_zuhu">租户：</string>
     <string name="login_language">语言：</string>
-    <string name="login_set">配置</string>
+    <string name="login_set">配置服务</string>
     <string name="login_please_input_serverurl">请输入服务地址</string>
     <string name="login_please_input_right_serverurl">请输入正确地址</string>
     <string name="login_confirm_set">确认设置</string>

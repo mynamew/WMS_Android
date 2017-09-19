@@ -6,6 +6,7 @@ import android.view.View;
 
 import com.timi.sz.wms_android.R;
 import com.timi.sz.wms_android.mvp.UI.stock_out.buy_return_material.BuyReturnMaterialActivity;
+import com.timi.sz.wms_android.mvp.UI.stock_out.pick.PickActivity;
 import com.timi.sz.wms_android.mvp.UI.stock_out.query.StockOutSearchActivity;
 import com.timi.sz.wms_android.mvp.base.view.BaseNoMvpActivity;
 
@@ -87,6 +88,7 @@ public class StockOutActivity extends BaseNoMvpActivity {
                 break;
             case R.id.tv_stock_out_sale_trans://调拨
                 intent.putExtra(STOCK_OUT_CODE_STR, STOCK_OUT_PICK);
+                intent.setClass(StockOutActivity.this, PickActivity.class);
                 break;
             case R.id.tv_stock_out_sale_check://销售审核
                 intent.setClass(StockOutActivity.this, StockOutSearchActivity.class);

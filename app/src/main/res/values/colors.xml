@@ -3,7 +3,7 @@
     <color name="colorPrimary">#1983d1</color>
     <color name="colorPrimaryDark">#12619a</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="statuscolor">#1983d1</color>
+    <color name="statuscolor">#ffb700</color>
     <color name="app_background">#FDF8F4</color>
     <color name="theme_black_7f">#8f000000</color>
     <color name="home_in_lib">#67c4fc</color>
@@ -14,7 +14,9 @@
     <color name="tab_txt_select">#27a1f6</color>
     <color name="tab_txt_unselect">#b0b0b0</color>
     <color name="set_userinfo">#27a1f6</color>
-    <color name="set_bg">#fdf8f4</color>
+    <color name="set_bg">#eeeeee</color>
     <color name="scan_bg">#7f000000</color>
+    <color name="login_txt_color">#ffb700</color>
+    <color name="login_txt_color_gray">#bf8a02</color>
 
 </resources>

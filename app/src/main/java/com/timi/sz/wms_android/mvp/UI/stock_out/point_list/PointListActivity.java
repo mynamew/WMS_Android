@@ -77,8 +77,10 @@ public class PointListActivity extends BaseActivity<PointListView, PointListPres
             setTextViewText(tvLibName, R.string.lib_name, bean.libName);
             setTextViewText(tvAreaName, R.string.area_name, bean.area);
             setTextViewText(tvSendMaterialNum, R.string.send_material_num, bean.sendNum);
-            setTextViewText(tvOrderno, R.string.outsource_orderno, bean.Orderno);
-            setTextViewText(tvOrderno, R.string.outsource_orderno, bean.Orderno);
+            setTextViewText(tvHavePointNum, R.string.have_count_num, bean.havePointNum);
+            setTextViewText(tvCanGetNum, R.string.can_get_num, bean.canReceiveNum);
+            setTextViewText(tvHaveGetNum, R.string.have_get_num, bean.haveGetNum);
+            setTextViewText(tvWaitPointNum, R.string.wait_count_num, bean.waitPointNum);
         }
     }
 

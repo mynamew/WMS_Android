@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/set_bg"
+    tools:context="com.timi.sz.wms_android.mvp.UI.stock_out.pick.PickActivity">
+
+    <include
+        android:id="@+id/title"
+        layout="@layout/title_head"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+    <TextView
+        android:id="@+id/tv_send_order_tip"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="110dp"
+        android:gravity="center_vertical"
+        android:text="发货通知单："
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="parent"
+        />
+
+    <EditText
+        android:id="@+id/et_send_order"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="10dp"
+        android:background="@drawable/bg_set_userinfo"
+        android:gravity="center_vertical"
+        android:hint="请输入单号进行查询"
+        android:paddingLeft="10dp"
+        android:textSize="14sp"
+        app:layout_constraintBaseline_toBaselineOf="@id/tv_send_order_tip"
+        app:layout_constraintLeft_toRightOf="@+id/tv_send_order_tip"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+    <TextView
+        android:id="@+id/tv_sell_order_tip"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center_vertical"
+        android:text="送货通知单："
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_send_order_tip"
+        />
+
+    <EditText
+        android:id="@+id/et_sell_order"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/bg_set_userinfo"
+        android:gravity="center_vertical"
+        android:hint="请输入单号进行查询"
+        android:paddingLeft="10dp"
+        android:textSize="14sp"
+        app:layout_constraintLeft_toRightOf="@+id/tv_send_order_tip"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_send_order"/>
+    <TextView
+        android:id="@+id/tv_allot_roder_tip"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:text="调拨单："
+        app:layout_constraintTop_toBottomOf="@id/title"
+        android:layout_marginTop="10dp"
+        android:gravity="center_vertical"
+        app:layout_constraintRight_toRightOf="@+id/tv_send_order_tip"
+       />
+    <EditText
+        android:id="@+id/et_allot_roder"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:hint="请输入单号进行查询"
+        android:textSize="14sp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:paddingLeft="10dp"
+        app:layout_constraintLeft_toRightOf="@+id/tv_send_order_tip"
+        android:background="@drawable/bg_set_userinfo"
+        android:gravity="center_vertical"
+        app:layout_constraintTop_toBottomOf="@+id/title"
+        android:layout_marginStart="10dp"
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+</android.support.constraint.ConstraintLayout>

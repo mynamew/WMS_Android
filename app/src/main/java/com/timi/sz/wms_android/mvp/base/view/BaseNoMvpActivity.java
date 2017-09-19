@@ -205,6 +205,7 @@ public abstract class BaseNoMvpActivity extends AutoLayoutActivity implements Mv
         super.finish();
         if (curInterlude == BaseActivity.Interlude.DEFAULT) {
             //默认情况，什么都不做，已经在style文件中配置
+            overridePendingTransition( R.anim.none,R.transition.slide_out_right);
         } else if (curInterlude == BaseActivity.Interlude.POP_FROM_BOTTOM) {
             //从下方弹出
             overridePendingTransition(R.anim.none, R.transition.pop_out_bottom);

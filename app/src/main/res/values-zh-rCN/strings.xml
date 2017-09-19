@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">智能仓库管理系统</string>
+    <string name="app_name">智能仓储</string>
     <string name="title_activity_login">Sign in</string>
 
     <!-- Strings related to login -->

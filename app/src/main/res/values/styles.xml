@@ -13,12 +13,14 @@
         <item name="android:windowAnimationStyle">@style/MyInterludeStyle</item>
 
     </style>
+
     <style name="MyInterludeStyle">
         <item name="android:activityOpenEnterAnimation">@transition/slide_in_right</item>
         <item name="android:activityOpenExitAnimation">@transition/slide_out_left</item>
         <item name="android:activityCloseEnterAnimation">@transition/slide_in_left</item>
         <item name="android:activityCloseExitAnimation">@transition/slide_out_right</item>
     </style>
+
     <style name="tab_menu_item">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_weight">1</item>
@@ -111,6 +113,7 @@
         <item name="android:windowEnterAnimation">@anim/popwindow_animation_top_in</item>
         <item name="android:windowExitAnimation">@anim/popwindow_animation_top_out</item>
     </style>
+
     <style name="popWindow_animation_push">
         <item name="android:windowEnterAnimation">@anim/popupwindow_enter</item>
         <item name="android:windowExitAnimation">@anim/popupwindow_exit</item>
@@ -137,4 +140,29 @@
         <item name="android:paddingLeft">20px</item>
         <item name="android:paddingRight">20px</item>
     </style>
+    <!--分割线的style-->
+    <style name="divide_line">
+        <item name="android:layout_width">304dp</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:layout_marginLeft">20px</item>
+        <item name="android:layout_marginRight">20px</item>
+        <item name="android:background">#e5e5e5</item>
+    </style>
+    <style name="MyCheckBox" parent="Theme.AppCompat.Light">
+        <item name="colorControlNormal">@color/login_txt_color</item>
+        <item name="colorControlActivated">@color/login_txt_color</item>
+    </style>
+    <!--自定义表格的属性-->
+    <declare-styleable name="MyExcelView">
+        <attr name="firshTabColor" format="integer"/>
+        <attr name="firshTabBackground" format="integer"/>
+        <attr name="contentBackground" format="integer"/>
+        <attr name="contentColor" format="integer"/>
+        <attr name="maxHeight" format="dimension"/>
+        <attr name="maxWidth" format="dimension"/>
+        <attr name="minWidth" format="dimension"/>
+        <attr name="minHeight" format="dimension"/>
+        <attr name="textSize" format="integer"/>
+        <attr name="isLockFristRow" format="boolean"/>
+    </declare-styleable>
 </resources>

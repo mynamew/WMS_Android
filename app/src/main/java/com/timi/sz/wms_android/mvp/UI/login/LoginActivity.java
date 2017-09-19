@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.support.v7.widget.AppCompatCheckBox;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -49,20 +50,16 @@ import butterknife.OnClick;
 public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> implements LoginView {
     @BindView(R.id.iv_login_eye)
     ImageView ivLoginEye;
-    @BindView(R.id.tv_login_name)
-    TextView tvLoginName;
-    @BindView(R.id.tv_login_version)
-    TextView tvLoginVersion;
     @BindView(R.id.et_login_username)
     EditText etLoginUsername;
     @BindView(R.id.et_login_password)
     EditText etLoginPassword;
     @BindView(R.id.cb_login_rempsw)
-    CheckBox cbLoginRempsw;
+    AppCompatCheckBox cbLoginRempsw;
     @BindView(R.id.btn_login)
-    Button btnLogin;
+    TextView btnLogin;
     @BindView(R.id.btn_set)
-    Button btnSet;
+    TextView btnSet;
     @BindView(R.id.iv_login_clear_username)
     ImageView ivLoginClearUsername;
 
@@ -126,7 +123,6 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
 
     @Override
     public void initData() {
-        tvLoginVersion.setText(String.format(getString(R.string.login_version), PackageUtils.getAppVersionName(this)));
     }
 
     @Override
@@ -355,7 +351,6 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
         //切换界面的语言
         btnLogin.setText(getResources().getString(R.string.login_login));
         btnSet.setText(getResources().getString(R.string.login_set));
-        tvLoginName.setText(getResources().getString(R.string.app_name));
         cbLoginRempsw.setText(getResources().getString(R.string.login_remember_psw));
         //Dialog 内部
         tvLoginServerSet.setText(getResources().getString(R.string.server_set));

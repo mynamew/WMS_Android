@@ -6,11 +6,15 @@ import android.util.Log;
 import android.widget.LinearLayout;
 
 import com.rmondjone.locktableview.LockTableView;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.timi.sz.wms_android.R;
 import com.timi.sz.wms_android.base.uils.PackageUtils;
 import com.timi.sz.wms_android.bean.quality.QualityListBean;
 import com.timi.sz.wms_android.mvp.UI.quity.nomal_quality.NormalQualityActivity;
 import com.timi.sz.wms_android.mvp.base.BaseActivity;
+import com.timi.sz.wms_android.view.excel.MyExcelView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -18,12 +22,17 @@ import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 
+/**
+ * 品质检测
+ * author: timi
+ * create at: 2017/9/18 20:05
+ */
 public class QualityCheckActivity extends BaseActivity<QualityCheckView, QualityCheckPresneter> implements QualityCheckView {
 
-
-    @BindView(R.id.ll_content)
-    LinearLayout llContent;
+    @BindView(R.id.excel_quality)
+    MyExcelView excelQuality;
 
     @Override
     public int setLayoutId() {
@@ -37,8 +46,25 @@ public class QualityCheckActivity extends BaseActivity<QualityCheckView, Quality
 
     @Override
     public void initView() {
-        llContent.removeAllViews();
+      excelQuality.showRefresh();
+        excelQuality.setTableViewListener(new MyExcelView.OnTableViewListener() {
+            @Override
+            public void onTabViewClickListener(int position) {
 
+            }
+        });
+        excelQuality.setRefreshLayoutLoadmoreListener(new OnLoadmoreListener() {
+            @Override
+            public void onLoadmore(RefreshLayout refreshlayout) {
+
+            }
+        });
+        excelQuality.setRefreshLayoutRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(RefreshLayout refreshlayout) {
+
+            }
+        });
     }
 
     @Override
@@ -69,6 +95,7 @@ public class QualityCheckActivity extends BaseActivity<QualityCheckView, Quality
      */
     @Override
     public void getQualityList(List<QualityListBean> datas) {
+        excelQuality.showRefresh();
         showExcelDialog(datas);
     }
 
@@ -78,7 +105,6 @@ public class QualityCheckActivity extends BaseActivity<QualityCheckView, Quality
      * 展示表体
      */
     public void showExcelDialog(List<QualityListBean> datas) {
-        llContent.removeAllViews();
         mTableDatas.clear();
         ArrayList<String> mfristData = new ArrayList<String>();
         mfristData.add("质检");
@@ -111,30 +137,13 @@ public class QualityCheckActivity extends BaseActivity<QualityCheckView, Quality
             mRowDatas.add(detailResultsBean.getQualityResult());
             mTableDatas.add(mRowDatas);
         }
-        LockTableView mLockTableView = new LockTableView(this, llContent, mTableDatas);
-        Log.e("表格加载开始", "当前线程：" + Thread.currentThread());
-        mLockTableView.setLockFristColumn(false) //是否锁定第一列
-                .setLockFristRow(true) //是否锁定第一行
-                .setMaxColumnWidth(100) //列最大宽度
-                .setMinColumnWidth(10) //列最小宽度
-                .setMinRowHeight(5)//行最小高度
-                .setMaxRowHeight(20)//行最大高度
-                .setTextViewSize(12) //单元格字体大小
-                .setFristRowBackGroudColor(R.color.table_head)//表头背景色
-                .setTableHeadTextColor(R.color.beijin)//表头字体颜色
-                .setTableContentTextColor(R.color.border_color)//单元格字体颜色
-                .setNullableString("0") //空值替换值
-                .setTableViewListener(new LockTableView.OnTableViewListener() {
-                    @Override
-                    public void onTableViewScrollChange(int x, int y) {
-                    }
+        excelQuality.setExcelFirstData(mTableDatas);
+    }
 
-                    @Override
-                    public void onTabViewClickListener(int position) {
-                        Intent it = new Intent(QualityCheckActivity.this, NormalQualityActivity.class);
-                        startActivity(it);
-                    }
-                })//设置滚动回调监听
-                .show(); //显示表格,此方法必须调用
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
     }
 }
