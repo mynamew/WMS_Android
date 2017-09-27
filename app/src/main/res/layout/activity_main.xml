@@ -5,39 +5,64 @@
                 android:background="@color/set_bg"
                 android:orientation="vertical">
 
-    <RadioGroup
+    <LinearLayout
         android:id="@+id/rl_home_botom"
         android:layout_width="match_parent"
-        android:layout_height="120px"
+        android:layout_height="50dp"
         android:layout_alignParentBottom="true"
         android:background="#fff"
-        android:gravity="center"
-        android:orientation="horizontal"
-        android:paddingTop="10px">
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        >
 
-        <RadioButton
-            android:id="@+id/rd_home_home"
-            style="@style/tab_menu_item"
-            android:drawableTop="@drawable/selector_home"
-            android:gravity="center"
-            android:text="@string/home"
-            />
+        <RelativeLayout
+            android:id="@+id/rl_home"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
 
-        <RadioButton
-            android:id="@+id/rd_home_set"
-            style="@style/tab_menu_item"
-            android:drawableTop="@drawable/selector_home_set"
-            android:gravity="center"
-            android:text="@string/home_set"
-            />
+            <ImageView
+                android:id="@+id/iv_home_img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="5dp"
+                android:src="@drawable/selector_home"/>
 
-    </RadioGroup>
+            <ImageView
+                android:id="@+id/iv_home_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/iv_home_img"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="5dp"
+                android:src="@drawable/selector_home_txt"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_mine"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/tv_home_set"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="5dp"
+                android:drawablePadding="5dp"
+                android:drawableTop="@drawable/selector_home_set"
+                android:text="@string/home_mine"
+                android:textColor="@drawable/tab_menu_text"/>
+        </RelativeLayout>
+    </LinearLayout>
 
     <FrameLayout
         android:id="@+id/fl_home_content"
         android:layout_width="match_parent"
-        android:layout_marginBottom="2px"
         android:layout_height="match_parent"
         android:layout_above="@id/rl_home_botom"
+        android:layout_marginBottom="2px"
         />
 </RelativeLayout>

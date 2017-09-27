@@ -20,7 +20,7 @@ import butterknife.OnClick;
 import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_BUY_RETURN_ORDERNO_BEAN;
 import static com.timi.sz.wms_android.base.uils.Constants.REQUEST_SCAN_CODE_MATERIIAL;
 
-public class ScanReturnMaterialActivity extends BaseActivity<ScanReturnMaterialView, ScanReturnMaterialPresenter> implements ScanReturnMaterialView {
+public class ScanReturnMaterialActivity extends BaseActivity<ScanReturnMaterialView, ScanReturnMaterialPresenter> implements ScanReturnMaterialView,BaseActivity.ScanQRCodeResultListener {
     @BindView(R.id.tv_orderno)
     TextView tvOrderno;
     @BindView(R.id.tv_orderno_date)
@@ -96,34 +96,16 @@ public class ScanReturnMaterialActivity extends BaseActivity<ScanReturnMaterialV
         return this;
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        switch (requestCode) {
-            case REQUEST_SCAN_CODE_MATERIIAL:
-                if (resultCode == RESULT_OK) {
-                    Bundle bundle = data.getExtras();
-                    if (bundle != null) {
-                        LogUitls.d("物料码扫码--->", bundle.getString("result"));
-                        /**
-                         * 设置扫描返回结果
-                         */
-                        materialCode=bundle.getString("result");
-                        tvMaterialScan.setText(materialCode);
-                        getPresenter().materialScan(materialCode);
-                    }
-                }
-                break;
-        }
-    }
+
 
     @OnClick({R.id.tv_material_scan, R.id.iv_material_scan, R.id.btn_commit})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tv_material_scan:
-                scan(Constants.REQUEST_SCAN_CODE_MATERIIAL);
+                scan(Constants.REQUEST_SCAN_CODE_MATERIIAL,this);
                 break;
             case R.id.iv_material_scan:
-                scan(Constants.REQUEST_SCAN_CODE_MATERIIAL);
+                scan(Constants.REQUEST_SCAN_CODE_MATERIIAL,this);
                 break;
             case R.id.btn_commit://退料出库扫描 将扫描结果提交到服务器
                 getPresenter().commitMaterialScanToOrederno(materialCode);
@@ -150,5 +132,16 @@ public class ScanReturnMaterialActivity extends BaseActivity<ScanReturnMaterialV
     public void commitMaterialScanToOrederno(CommitMaterialScanToOredernoBean bean) {
         ToastUtils.showShort("提交成功");
         onBackPressed();
+    }
+
+    @Override
+    public void scanSuccess(int requestCode, String result) {
+        LogUitls.d("物料码扫码--->", result);
+        /**
+         * 设置扫描返回结果
+         */
+        materialCode=result;
+        tvMaterialScan.setText(materialCode);
+        getPresenter().materialScan(materialCode);
     }
 }

@@ -22,7 +22,7 @@ import butterknife.OnClick;
 import static com.timi.sz.wms_android.base.uils.Constants.REQUEST_SCAN_CODE_LIB_LOATION;
 import static com.timi.sz.wms_android.base.uils.Constants.REQUEST_SCAN_CODE_MATERIIAL;
 
-public class OtherScanActivity extends BaseActivity<OtherScanView, OtherScanPresenter> implements OtherScanView {
+public class OtherScanActivity extends BaseActivity<OtherScanView, OtherScanPresenter> implements OtherScanView, BaseActivity.ScanQRCodeResultListener {
     @BindView(R.id.tv_have_scan_num)
     TextView tvHaveScanNum;
     @BindView(R.id.tv_scan_location_tip)
@@ -52,7 +52,8 @@ public class OtherScanActivity extends BaseActivity<OtherScanView, OtherScanPres
     /**
      * 入库单 单号
      */
-    private String inStockOrderno="";
+    private String inStockOrderno = "";
+
     @Override
     public int setLayoutId() {
         return R.layout.activity_other_scan;
@@ -85,7 +86,7 @@ public class OtherScanActivity extends BaseActivity<OtherScanView, OtherScanPres
     public void initData() {
         setTextViewText(tvMaterialCode, R.string.material_code, "");
         setTextViewText(tvMaterialName, R.string.material_name, "");
-        setTextViewText(tvMaterialNmodel, R.string.material_model,"");
+        setTextViewText(tvMaterialNmodel, R.string.material_model, "");
         setTextViewText(tvMaterialNum, R.string.material_num, "");
     }
 
@@ -105,7 +106,7 @@ public class OtherScanActivity extends BaseActivity<OtherScanView, OtherScanPres
         switch (view.getId()) {
             case R.id.tv_scan_location:
             case R.id.iv_can_location:
-                scan(Constants.REQUEST_SCAN_CODE_LIB_LOATION);
+                scan(Constants.REQUEST_SCAN_CODE_LIB_LOATION, this);
                 break;
             case R.id.tv_scan_material:
             case R.id.iv_putaway_scan_material:
@@ -113,7 +114,7 @@ public class OtherScanActivity extends BaseActivity<OtherScanView, OtherScanPres
                     ToastUtils.showShort(getString(R.string.please_scan_lib_location_code));
                     return;
                 }
-                scan(Constants.REQUEST_SCAN_CODE_MATERIIAL);
+                scan(Constants.REQUEST_SCAN_CODE_MATERIIAL, this);
                 break;
             case R.id.btn_create_other_instock_bill://生成入库单
                 if (TextUtils.isEmpty(locationCode)) {
@@ -132,38 +133,6 @@ public class OtherScanActivity extends BaseActivity<OtherScanView, OtherScanPres
                 break;
         }
     }
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        switch (requestCode) {
-            case REQUEST_SCAN_CODE_MATERIIAL:
-                if (resultCode == RESULT_OK) {
-                    Bundle bundle = data.getExtras();
-                    if (bundle != null) {
-                        LogUitls.d("物料码扫码--->", bundle.getString("result"));
-                        tvScanMaterial.setText(bundle.getString("result"));
-                        /**
-                         * 物料扫码并上架的网络请求
-                         */
-                        getPresenter().materialScanNetWork(locationCode, bundle.getString("result"));
-                    }
-                }
-                break;
-            case REQUEST_SCAN_CODE_LIB_LOATION:
-                if (resultCode == RESULT_OK) {
-                    Bundle bundle = data.getExtras();
-                    if (bundle != null) {
-                        LogUitls.d("库位码扫码--->", bundle.getString("result"));
-                        //保存库位码
-                        locationCode = bundle.getString("result");
-                        //设置库位码
-                        tvScanLocation.setText(locationCode);
-                        //判断库位码是否有效
-                        getPresenter().vertifyLocationCode(locationCode);
-                    }
-                }
-                break;
-        }
-    }
 
     @Override
     public void materialScanResult(MaterialScanPutAwayBean bean) {
@@ -178,8 +147,8 @@ public class OtherScanActivity extends BaseActivity<OtherScanView, OtherScanPres
         /**
          * 已扫的总数
          */
-        int haveScanNum = Integer.parseInt(tvHaveScanNum.getText().toString())+1;
-        tvHaveScanNum.setText(haveScanNum+"");
+        int haveScanNum = Integer.parseInt(tvHaveScanNum.getText().toString()) + 1;
+        tvHaveScanNum.setText(haveScanNum + "");
     }
 
     @Override
@@ -201,11 +170,39 @@ public class OtherScanActivity extends BaseActivity<OtherScanView, OtherScanPres
         if (isCreateSuccess) {
             ToastUtils.showShort("生成入库单成功");
             //如果成功  入库单号存储起来
-            inStockOrderno="q1231221";
+            inStockOrderno = "q1231221";
             onBackPressed();
         } else {
             ToastUtils.showShort("生成入库单失败");
             onBackPressed();
+        }
+    }
+
+    /**
+     * 扫码返回 请求
+      * @param requestCode
+     * @param result
+     */
+    @Override
+    public void scanSuccess(int requestCode, String result) {
+        switch (requestCode) {
+            case REQUEST_SCAN_CODE_MATERIIAL:
+                LogUitls.d("物料码扫码--->", result);
+                tvScanMaterial.setText(result);
+                /**
+                 * 物料扫码并上架的网络请求
+                 */
+                getPresenter().materialScanNetWork(locationCode, result);
+                break;
+            case REQUEST_SCAN_CODE_LIB_LOATION:
+                LogUitls.d("库位码扫码--->", result);
+                //保存库位码
+                locationCode = result;
+                //设置库位码
+                tvScanLocation.setText(locationCode);
+                //判断库位码是否有效
+                getPresenter().vertifyLocationCode(locationCode);
+                break;
         }
     }
 }

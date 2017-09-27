@@ -23,7 +23,7 @@ import static com.timi.sz.wms_android.base.uils.Constants.REQUEST_SCAN_CODE_MATE
   * author: timi    
   * create at: 2017/9/1 15:40
   */  
-public class BuyReturnMaterialOrderNoActivity extends BaseActivity<BuyReturnMaterialOrderNoView, BuyReturnMaterialOrderNoPresenter> implements BuyReturnMaterialOrderNoView {
+public class BuyReturnMaterialOrderNoActivity extends BaseActivity<BuyReturnMaterialOrderNoView, BuyReturnMaterialOrderNoPresenter> implements BuyReturnMaterialOrderNoView,BaseActivity.ScanQRCodeResultListener {
 
     @BindView(R.id.tv_orderno)
     TextView tvOrderno;
@@ -117,13 +117,13 @@ public class BuyReturnMaterialOrderNoActivity extends BaseActivity<BuyReturnMate
                 /**
                  * 扫码
                  */
-                scan(Constants.REQUEST_SCAN_CODE_MATERIIAL);
+                scan(Constants.REQUEST_SCAN_CODE_MATERIIAL,this);
                 break;
             case R.id.iv_material_scan:
                 /**
                  * 扫码
                  */
-                scan(Constants.REQUEST_SCAN_CODE_MATERIIAL);
+                scan(Constants.REQUEST_SCAN_CODE_MATERIIAL,this);
                 break;
             case R.id.btn_commit_check:
                 if (Integer.parseInt(orderBoBean.getReturnHaveScanNum()) == Integer.parseInt(orderBoBean.getReturnTotalNum())) {
@@ -139,27 +139,21 @@ public class BuyReturnMaterialOrderNoActivity extends BaseActivity<BuyReturnMate
         }
     }
 
+    /**
+     * 扫描的返回
+     * @param requestCode
+     * @param result
+     */
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        switch (requestCode) {
-            case REQUEST_SCAN_CODE_MATERIIAL:
-                if (resultCode == RESULT_OK) {
-                    Bundle bundle = data.getExtras();
-                    if (bundle != null) {
-                        LogUitls.e("物料码扫码--->", bundle.getString("result"));
-                        /**
-                         * 设置扫描返回结果
-                         */
-                        tvReturnMaterialMaterialScan.setText(bundle.getString("result"));
-                        /**
-                         * 扫物料码的网络请求
-                         */
-                        getPresenter().materialScanNetWork(bundle.getString("result"));
-                    }
-                }
-                break;
-        }
+    public void scanSuccess(int requestCode, String result) {
+        LogUitls.e("物料码扫码--->", result);
+        /**
+         * 设置扫描返回结果
+         */
+        tvReturnMaterialMaterialScan.setText(result);
+        /**
+         * 扫物料码的网络请求
+         */
+        getPresenter().materialScanNetWork(result);
     }
-
-
 }

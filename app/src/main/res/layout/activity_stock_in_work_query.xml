@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/set_bg"
+    tools:context="com.timi.sz.wms_android.mvp.UI.stock_in_work.query.StockInWorkQueryActivity">
+
+    <include
+        android:id="@+id/head"
+        layout="@layout/title_head"/>
+
+    <TextView
+        android:id="@+id/tv_query_tip"
+        android:layout_width="wrap_content"
+        android:layout_height="44dp"
+        android:gravity="center_vertical"
+        android:text="调拨单："
+        android:layout_marginTop="10dp"
+        app:layout_editor_absoluteX="10dp"
+        app:layout_constraintTop_toBottomOf="@id/head"/>
+
+    <EditText
+        android:id="@+id/et_query_input"
+        android:layout_width="0dp"
+        android:layout_height="44dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:hint="请输入单号进行查询"
+        android:paddingLeft="10dp"
+        android:textSize="14sp"
+        android:background="@drawable/bg_set_userinfo"
+        app:layout_constraintLeft_toRightOf="@id/tv_query_tip"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/head"/>
+</android.support.constraint.ConstraintLayout>

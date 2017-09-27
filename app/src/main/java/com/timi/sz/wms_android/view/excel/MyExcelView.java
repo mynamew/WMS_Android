@@ -255,6 +255,7 @@ public class MyExcelView extends LinearLayout {
         View lockTableViewContent = LayoutInflater.from(mContext).inflate(R.layout.locktablecontentview, null);
         LinearLayout lockViewParent = (LinearLayout) lockTableViewContent.findViewById(R.id.lockView_parent);
         CustomHorizontalScrollView lockScrollViewParent = (CustomHorizontalScrollView) lockTableViewContent.findViewById(R.id.lockScrollView_parent);
+        lockScrollViewParent.setHorizontalScrollBarEnabled(false);
         //构造滚动视图
         LinearLayout scollViewItemContentView = new LinearLayout(mContext);
         LinearLayout.LayoutParams scollViewItemContentViewParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
@@ -578,16 +579,31 @@ public class MyExcelView extends LinearLayout {
     /**
      * 显示刷新
      */
-    public void showRefresh(){
+    public void showRefresh() {
         mRefreshLayout.autoRefresh();
+    }
+
+    /**
+     * 显示上拉刷新
+     */
+    public void autoLoadmore() {
+        mRefreshLayout.autoLoadmore();
     }
 
     /**
      * 关闭刷新
      */
-    public  void refreshComplete(){
+    public void finishRefresh() {
         mRefreshLayout.finishRefresh();
     }
+
+    /**
+     * 关闭加载更多
+     */
+    public void finishLoadmore() {
+        mRefreshLayout.finishLoadmore();
+    }
+
     //回调监听
     public interface OnTableViewListener {
         /**

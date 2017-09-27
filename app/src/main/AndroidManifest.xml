@@ -214,6 +214,10 @@
         </activity>
         <activity android:name=".mvp.UI.stock_out.detail.DetailActivity">
         </activity>
+        <activity android:name=".mvp.UI.stock_in_work.lib_adjust.LibraryAdjustActivity">
+        </activity>
+        <activity android:name=".mvp.UI.stock_in_work.query.StockInWorkQueryActivity">
+        </activity>
     </application>
 
 </manifest>

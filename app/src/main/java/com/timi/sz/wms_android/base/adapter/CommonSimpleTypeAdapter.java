@@ -5,6 +5,7 @@ import android.util.SparseArray;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /** 
@@ -16,6 +17,8 @@ public abstract class CommonSimpleTypeAdapter<T> extends RecyclerView.Adapter<Co
     //存储监听回调
     private SparseArray<ItemClickListener> onClickListeners;
     private List<T> dataList;
+
+
 
     public interface ItemClickListener {
         void onItemClicked(View view, int position);

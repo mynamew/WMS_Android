@@ -1,9 +1,11 @@
 package com.timi.sz.wms_android.mvp.UI.stock_in_work;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
 import com.timi.sz.wms_android.R;
+import com.timi.sz.wms_android.mvp.UI.stock_in_work.lib_adjust.LibraryAdjustActivity;
 import com.timi.sz.wms_android.mvp.base.view.BaseNoMvpActivity;
 
 import butterknife.ButterKnife;
@@ -37,32 +39,32 @@ public class StockInWorkActivity extends BaseNoMvpActivity {
 
     }
 
-    /**
-     * 点击事件
-     * author: timi
-     * create at: 2017/8/18 16:50
-     */
-    @OnClick({R.id.tv_siw_storage_location_change, R.id.tv_siw_scan_in, R.id.tv_siw_one_step_in, R.id.tv_siw_group_change, R.id.tv_siw_form_change_stock_out, R.id.tv_siw_form_change_stock_in, R.id.tv_siw_query_repertory, R.id.tv_siw_check, R.id.tv_stock_in_create_order})
+    @OnClick({R.id.tv_stockin_work_storage_location_change, R.id.tv_stockin_work_scan_in, R.id.tv_stockin_work_one_step_in, R.id.tv_stockin_work_group_change, R.id.tv_stockin_work_out_stock, R.id.tv_stockin_work_in_stock, R.id.tv_stockin_work_query_repertory, R.id.tv_stockin_work_count, R.id.tv_stock_in_sale_return})
     public void onViewClicked(View view) {
+        Intent intent = new Intent();
+
         switch (view.getId()) {
-            case R.id.tv_siw_storage_location_change:
+            case R.id.tv_stockin_work_storage_location_change:
+                intent.setClass(StockInWorkActivity.this, LibraryAdjustActivity.class);
+
                 break;
-            case R.id.tv_siw_scan_in:
+            case R.id.tv_stockin_work_scan_in:
                 break;
-            case R.id.tv_siw_one_step_in:
+            case R.id.tv_stockin_work_one_step_in:
                 break;
-            case R.id.tv_siw_group_change:
+            case R.id.tv_stockin_work_group_change:
                 break;
-            case R.id.tv_siw_form_change_stock_out:
+            case R.id.tv_stockin_work_out_stock:
                 break;
-            case R.id.tv_siw_form_change_stock_in:
+            case R.id.tv_stockin_work_in_stock:
                 break;
-            case R.id.tv_siw_query_repertory:
+            case R.id.tv_stockin_work_query_repertory:
                 break;
-            case R.id.tv_siw_check:
+            case R.id.tv_stockin_work_count:
                 break;
-            case R.id.tv_stock_in_create_order:
+            case R.id.tv_stock_in_sale_return:
                 break;
         }
+        startActivity(intent);
     }
 }

@@ -20,7 +20,7 @@
         android:paddingRight="30px"
         android:text="显示全部"
         android:textColor="#666"
-        app:buttonTintMode="src_atop"/>
+        />
 
     <LinearLayout
         android:id="@+id/ll_content"

@@ -1,11 +1,7 @@
 package com.timi.sz.wms_android.mvp.UI.stock_in.query;
 
-import android.Manifest;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
@@ -34,7 +30,6 @@ import com.timi.sz.wms_android.bean.instock.search.SendOrdernoBean;
 import com.timi.sz.wms_android.mvp.UI.stock_in.point.StockInPointActivity;
 import com.timi.sz.wms_android.mvp.UI.stock_in.putaway.PutAwayActivity;
 import com.timi.sz.wms_android.mvp.base.BaseActivity;
-import com.timi.sz.wms_android.qrcode.CommonScanActivity;
 import com.timi.sz.wms_android.qrcode.utils.Constant;
 
 import java.util.HashMap;
@@ -52,8 +47,6 @@ import static com.timi.sz.wms_android.base.uils.Constants.IN_STOCK_FINISH_PRODUC
 import static com.timi.sz.wms_android.base.uils.Constants.IN_STOCK_FINISH_SALE_BEAN;
 import static com.timi.sz.wms_android.base.uils.Constants.IN_STOCK_RECEIVE_BEAN;
 import static com.timi.sz.wms_android.base.uils.Constants.IN_STOCK_SEND_BEAN;
-import static com.timi.sz.wms_android.base.uils.Constants.ORDER_NO;
-import static com.timi.sz.wms_android.base.uils.Constants.REQUEST_CODE;
 
 /**
  * 查找订单
@@ -178,41 +171,19 @@ public class SearchBuyOrderActivity extends BaseActivity<SearchBuyOrderView, Sea
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_sbo_scan://扫码
-                if (ContextCompat.checkSelfPermission(this,
-                        Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-                    //权限还没有授予，需要在这里写申请权限的代码
-                    ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, 60);
-                } else {
-                    //权限已经被授予，在这里直接写要执行的相应方法即可
-                    Intent intent = new Intent(this, CommonScanActivity.class);
+                scan(Constant.REQUEST_SCAN_MODE_ALL_MODE, new ScanQRCodeResultListener() {
 
-                    String pointMsg = getResources().getString(R.string.scan_point_title);
-                    Bundle bundle = new Bundle();
-                    bundle.putString("pointMsg", pointMsg);
-                    intent.putExtras(bundle);
-
-                    intent.putExtra(Constant.REQUEST_SCAN_MODE, Constant.REQUEST_SCAN_MODE_ALL_MODE);
-                    startActivityForResult(intent, REQUEST_CODE);
-                }
-                break;
-        }
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        switch (requestCode) {
-            case REQUEST_CODE:
-                if (resultCode == RESULT_OK) {
-                    Bundle bundle = data.getExtras();
-                    if (bundle != null) {
-                        etSboInput.setText(bundle.getString("result"));
-                        requestManagerMethod(bundle.getString("result"));
+                    @Override
+                    public void scanSuccess(int RequestCode, String result) {
+                        etSboInput.setText(result);
+                        requestManagerMethod(result);
                     }
-                }
+                });
                 break;
         }
     }
+
+
 
     /**
      * 采购单跳转

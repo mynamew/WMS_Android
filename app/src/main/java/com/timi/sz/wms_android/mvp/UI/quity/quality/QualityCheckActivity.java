@@ -1,20 +1,20 @@
 package com.timi.sz.wms_android.mvp.UI.quity.quality;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
-import com.rmondjone.locktableview.LockTableView;
-import com.scwang.smartrefresh.layout.api.RefreshLayout;
-import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
-import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.timi.sz.wms_android.R;
+import com.timi.sz.wms_android.base.adapter.CommonSimpleTypeAdapter;
+import com.timi.sz.wms_android.base.adapter.CommonViewHolder;
 import com.timi.sz.wms_android.base.uils.PackageUtils;
 import com.timi.sz.wms_android.bean.quality.QualityListBean;
-import com.timi.sz.wms_android.mvp.UI.quity.nomal_quality.NormalQualityActivity;
 import com.timi.sz.wms_android.mvp.base.BaseActivity;
-import com.timi.sz.wms_android.view.excel.MyExcelView;
+import com.timi.sz.wms_android.view.excelview.DisplayUtil;
+import com.timi.sz.wms_android.view.excelview.MeasureExcelViewUtils;
+import com.timi.sz.wms_android.view.excelview.MyExcelView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -22,7 +22,6 @@ import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * 品质检测
@@ -31,8 +30,18 @@ import butterknife.ButterKnife;
  */
 public class QualityCheckActivity extends BaseActivity<QualityCheckView, QualityCheckPresneter> implements QualityCheckView {
 
-    @BindView(R.id.excel_quality)
-    MyExcelView excelQuality;
+    @BindView(R.id.myexcel_quality)
+    MyExcelView myexcelQuality;
+    /**
+     * 第一行
+     */
+    ArrayList<String> mfristData = new ArrayList<String>();
+    ArrayList<ArrayList<String>> mTableDatas = new ArrayList<>();
+    ArrayList<ArrayList<String>> mTabNewDatas = new ArrayList<>();
+    /**
+     * 每一行宽度的集合
+     */
+    ArrayList<Integer> allRowWidth;
 
     @Override
     public int setLayoutId() {
@@ -42,34 +51,47 @@ public class QualityCheckActivity extends BaseActivity<QualityCheckView, Quality
     @Override
     public void initBundle(Bundle savedInstanceState) {
         setActivityTitle(getString(R.string.quality_check_title));
+        /**
+         * 设置表头
+         */
+        mfristData.add("质检");
+        mfristData.add("物品编码");
+        mfristData.add("供应商");
+        mfristData.add("实收数");
+        mfristData.add("送检数");
+        mfristData.add("合格数");
+        mfristData.add("质检结果");
     }
 
     @Override
     public void initView() {
-      excelQuality.showRefresh();
-        excelQuality.setTableViewListener(new MyExcelView.OnTableViewListener() {
+        myexcelQuality.setRefreshing();
+        myexcelQuality.setRefreshListener(new MyExcelView.OnRefreshListener() {
             @Override
-            public void onTabViewClickListener(int position) {
-
+            public void onRefresh() {
+                Map<String, Object> params = new HashMap<>();
+                params.put("tenancyName", "Default");
+                params.put("usernameOrEmailAddress", "asdas");
+                params.put("password", "123qwe");
+                params.put("mac", PackageUtils.getMac());
+                getPresenter().getQualityList(params);
             }
-        });
-        excelQuality.setRefreshLayoutLoadmoreListener(new OnLoadmoreListener() {
-            @Override
-            public void onLoadmore(RefreshLayout refreshlayout) {
 
-            }
-        });
-        excelQuality.setRefreshLayoutRefreshListener(new OnRefreshListener() {
             @Override
-            public void onRefresh(RefreshLayout refreshlayout) {
-
+            public void onLoadMore() {
+                Map<String, Object> params = new HashMap<>();
+                params.put("tenancyName", "Default");
+                params.put("usernameOrEmailAddress", "asdas");
+                params.put("password", "123qwe");
+                params.put("mac", PackageUtils.getMac());
+                getPresenter().getQualityList(params);
             }
         });
     }
 
     @Override
     public void initData() {
-        mTableDatas = new ArrayList<ArrayList<String>>();
+        showProgressDialog();
         Map<String, Object> params = new HashMap<>();
         params.put("tenancyName", "Default");
         params.put("usernameOrEmailAddress", "asdas");
@@ -94,30 +116,12 @@ public class QualityCheckActivity extends BaseActivity<QualityCheckView, Quality
      * @param datas
      */
     @Override
-    public void getQualityList(List<QualityListBean> datas) {
-        excelQuality.showRefresh();
-        showExcelDialog(datas);
-    }
-
-    ArrayList<ArrayList<String>> mTableDatas;
-
-    /**
-     * 展示表体
-     */
-    public void showExcelDialog(List<QualityListBean> datas) {
-        mTableDatas.clear();
-        ArrayList<String> mfristData = new ArrayList<String>();
-        mfristData.add("质检");
-        mfristData.add("物品编码");
-        mfristData.add("供应商");
-        mfristData.add("实收数");
-        mfristData.add("送检数");
-        mfristData.add("合格数");
-        mfristData.add("质检结果");
-        mTableDatas.add(mfristData);
+    public void getQualityList(final List<QualityListBean> datas) {
         /**
          * 存储下方列表的数据
          */
+        mTabNewDatas.clear();
+
         for (int i = 0; i < datas.size(); i++) {
             ArrayList<String> mRowDatas = new ArrayList<String>();
             QualityListBean detailResultsBean = datas.get(i);
@@ -126,7 +130,11 @@ public class QualityCheckActivity extends BaseActivity<QualityCheckView, Quality
             //物料码
             mRowDatas.add(detailResultsBean.getMaterialCode());
             //供应商
-            mRowDatas.add(detailResultsBean.getSupplier());
+            String  str="大大大大叔";
+            for (int j = 0; j < mTableDatas.size()/10; j++) {
+                str=str+"笑笑笑";
+            }
+            mRowDatas.add(detailResultsBean.getSupplier()+str);
             //实收数
             mRowDatas.add(detailResultsBean.getHaveReceveNum() + "");
             //送检数
@@ -135,15 +143,57 @@ public class QualityCheckActivity extends BaseActivity<QualityCheckView, Quality
             mRowDatas.add(detailResultsBean.getQualitiedNum() + "");
             //质检结果
             mRowDatas.add(detailResultsBean.getQualityResult());
-            mTableDatas.add(mRowDatas);
+            mTabNewDatas.add(mRowDatas);
         }
-        excelQuality.setExcelFirstData(mTableDatas);
+        final ArrayList<Integer> allRowWidth = myexcelQuality.getAllRowWidth(mTableDatas, mTabNewDatas, mfristData);
+        myexcelQuality.loadData(mTableDatas, mTabNewDatas, mfristData, new CommonSimpleTypeAdapter<ArrayList<String>>(mTableDatas) {
+            @Override
+            public int getLayoutId(int viewType) {
+                return R.layout.item_quality;
+            }
+
+            @Override
+            public void convert(CommonViewHolder holder, ArrayList<String> strings, int position) {
+                /**
+                 * 设置第一行的颜色
+                 */
+                LinearLayout llcontent= (LinearLayout) holder.getView(R.id.ll_content);
+                ViewGroup.LayoutParams layoutParams1 = llcontent.getLayoutParams();
+                int width=0;
+                for (int i = 0; i <allRowWidth.size() ; i++) {
+                    width=width+allRowWidth.get(i);
+                }
+                layoutParams1.width= DisplayUtil.dip2px(QualityCheckActivity.this,width+ allRowWidth.size()+1);
+                llcontent.setLayoutParams(layoutParams1);
+                if (position == 0) {
+                    llcontent.setBackgroundColor(getResources().getColor(R.color.statuscolor));
+                } else {
+                    llcontent.setBackgroundColor(getResources().getColor(R.color.white));
+                }
+                int[] ids = new int[]{R.id.tv_quality, R.id.tv_material_code, R.id.tv_supplier, R.id.tv_receive_num, R.id.tv_send_quality_num, R.id.tv_quality_num, R.id.tv_quality_result};
+                for (int i = 0; i < ids.length; i++) {
+                    TextView textView = holder.getTextView(ids[i]);
+                    ViewGroup.LayoutParams layoutParams = textView.getLayoutParams();
+                    layoutParams.width = DisplayUtil.dip2px(QualityCheckActivity.this, allRowWidth.get(i));
+                    textView.setLayoutParams(layoutParams);
+                    textView.setPadding(20, 20, 20, 20);
+                    textView.setText(strings.get(i));
+                }
+                /**
+                 * 设置底边分割线
+                 */
+                if (position == 0) {
+                    holder.getView(R.id.divide_bottom).setVisibility(View.VISIBLE);
+                } else {
+                    holder.getView(R.id.divide_bottom).setVisibility(View.GONE);
+
+                }
+            }
+        });
+        /**
+         * 数据都加载完成调用 finishRefresh()方法
+         */
+        myexcelQuality.finishRefresh();
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
-    }
 }

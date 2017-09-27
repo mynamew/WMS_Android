@@ -27,7 +27,7 @@ import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_BUY_RETURN_O
 import static com.timi.sz.wms_android.base.uils.Constants.REQUEST_SCAN_CODE_MATERIIAL;
 import static com.timi.sz.wms_android.base.uils.Constants.REQUEST_SCAN_CODE_RETURN_MATERIAL;
 
-public class BuyReturnMaterialActivity extends BaseActivity<BuyReturnMaterialView, BuyReturnMaterialPresenter> implements BuyReturnMaterialView {
+public class BuyReturnMaterialActivity extends BaseActivity<BuyReturnMaterialView, BuyReturnMaterialPresenter> implements BuyReturnMaterialView, BaseActivity.ScanQRCodeResultListener {
     @BindView(R.id.iv_title_back)
     ImageView ivTitleBack;
     @BindView(R.id.tv_title)
@@ -63,26 +63,26 @@ public class BuyReturnMaterialActivity extends BaseActivity<BuyReturnMaterialVie
 
     @Override
     public void initView() {
-          etBuyReturnMaterialOrderno.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-              @Override
-              public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                  if(actionId== EditorInfo.IME_ACTION_SEARCH){
-                      /**
-                       * 输入的内容
-                       */
-                      String inputStr = etBuyReturnMaterialOrderno.getText().toString().trim();
-                      if(TextUtils.isEmpty(inputStr)){
-                          ToastUtils.showShort(getString(R.string.please_input_return_material_orderno_or_scan));
-                      }else {
-                          /**
-                           * 退料单号的 网络请求
-                           */
-                          getPresenter().returnMaterialScanNetWork(inputStr);
-                      }
-                  }
-                  return false;
-              }
-          });
+        etBuyReturnMaterialOrderno.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                    /**
+                     * 输入的内容
+                     */
+                    String inputStr = etBuyReturnMaterialOrderno.getText().toString().trim();
+                    if (TextUtils.isEmpty(inputStr)) {
+                        ToastUtils.showShort(getString(R.string.please_input_return_material_orderno_or_scan));
+                    } else {
+                        /**
+                         * 退料单号的 网络请求
+                         */
+                        getPresenter().returnMaterialScanNetWork(inputStr);
+                    }
+                }
+                return false;
+            }
+        });
     }
 
     @Override
@@ -104,67 +104,58 @@ public class BuyReturnMaterialActivity extends BaseActivity<BuyReturnMaterialVie
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tv_putaway_scan_material://扫物料码的点击事件
-                scan(Constants.REQUEST_SCAN_CODE_MATERIIAL);
+                scan(Constants.REQUEST_SCAN_CODE_MATERIIAL, this);
                 break;
             case R.id.iv_putaway_scan_material://扫物料码的点击事件
-                scan(Constants.REQUEST_SCAN_CODE_MATERIIAL);
+                scan(Constants.REQUEST_SCAN_CODE_MATERIIAL, this);
                 break;
             case R.id.et_buy_return_material_orderno://退料单号
                 break;
             case R.id.iv_buy_return_material_orderno://退料单号
-                scan(REQUEST_SCAN_CODE_RETURN_MATERIAL);
+                scan(REQUEST_SCAN_CODE_RETURN_MATERIAL, this);
                 break;
         }
     }
 
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        switch (requestCode) {
-            case REQUEST_SCAN_CODE_MATERIIAL:
-                if (resultCode == RESULT_OK) {
-                    Bundle bundle = data.getExtras();
-                    if (bundle != null) {
-                        LogUitls.e("物料码扫码--->", bundle.getString("result"));
-                        /**
-                         * 设置扫描返回结果
-                         */
-                        tvPutawayScanMaterial.setText(bundle.getString("result"));
-                        /**
-                         * 扫物料码的网络请求
-                         */
-                         getPresenter().materialScanNetWork(bundle.getString("result"));
-                    }
-                }
-                break;
-            case REQUEST_SCAN_CODE_RETURN_MATERIAL:
-                if (resultCode == RESULT_OK) {
-                    Bundle bundle = data.getExtras();
-                    if (bundle != null) {
-                        LogUitls.e("物料码扫码--->", bundle.getString("result"));
-                        /**
-                         * 设置扫描返回结果
-                         */
-                        etBuyReturnMaterialOrderno.setText(bundle.getString("result"));
-                        /**
-                         * 退料单号的 网络请求
-                         */
-                        getPresenter().returnMaterialScanNetWork(bundle.getString("result"));
-                    }
-                }
-                break;
-        }
-    }
-    @Override
     public void materialScanResult(BuyReturnMaterialOrdernoBean bean) {
-        Intent intent=new Intent(this,ScanReturnMaterialActivity.class);
-        intent.putExtra(OUT_STOCK_BUY_RETURN_ORDERNO_BEAN,bean);
+        Intent intent = new Intent(this, ScanReturnMaterialActivity.class);
+        intent.putExtra(OUT_STOCK_BUY_RETURN_ORDERNO_BEAN, bean);
         startActivity(intent);
     }
 
     @Override
     public void ReturnMaterialOrderNoScanResult(OrderNoBean bean) {
-        Intent intent=new Intent(this,BuyReturnMaterialOrderNoActivity.class);
-        intent.putExtra(OUT_STOCK_BUY_RETURN_ORDERNO_BEAN,bean);
+        Intent intent = new Intent(this, BuyReturnMaterialOrderNoActivity.class);
+        intent.putExtra(OUT_STOCK_BUY_RETURN_ORDERNO_BEAN, bean);
         startActivity(intent);
+    }
+
+    @Override
+    public void scanSuccess(int requestCode, String result) {
+        switch (requestCode) {
+            case REQUEST_SCAN_CODE_MATERIIAL://物料扫码
+                LogUitls.e("物料码扫码--->", result);
+                /**
+                 * 设置扫描返回结果
+                 */
+                tvPutawayScanMaterial.setText(result);
+                /**
+                 * 扫物料码的网络请求
+                 */
+                getPresenter().materialScanNetWork(result);
+                break;
+            case REQUEST_SCAN_CODE_RETURN_MATERIAL://退料单号
+                LogUitls.e("退了单号--->", result);
+                /**
+                 * 设置扫描返回结果
+                 */
+                etBuyReturnMaterialOrderno.setText(result);
+                /**
+                 * 退料单号的 网络请求
+                 */
+                getPresenter().returnMaterialScanNetWork(result);
+                break;
+        }
     }
 }

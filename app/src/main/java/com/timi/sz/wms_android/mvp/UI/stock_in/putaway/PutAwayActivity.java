@@ -40,7 +40,7 @@ import static com.timi.sz.wms_android.base.uils.Constants.REQUEST_SCAN_CODE_MATE
  * author: timi
  * create at: 2017/8/31 9:14
  */
-public class PutAwayActivity extends BaseActivity<PutAwayView, PutAwayPresenter> implements PutAwayView {
+public class PutAwayActivity extends BaseActivity<PutAwayView, PutAwayPresenter> implements PutAwayView, BaseActivity.ScanQRCodeResultListener {
     @BindView(R.id.tv_title)
     TextView tvTitle;
     @BindView(R.id.tv_receive_pro_num)
@@ -433,24 +433,24 @@ public class PutAwayActivity extends BaseActivity<PutAwayView, PutAwayPresenter>
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tv_putaway_scan_location://目的库位码
-                scan(Constants.REQUEST_SCAN_CODE_LIB_LOATION);
+                scan(Constants.REQUEST_SCAN_CODE_LIB_LOATION, this);
                 break;
             case R.id.iv_putaway_scan_location://目的库位码
-                scan(Constants.REQUEST_SCAN_CODE_LIB_LOATION);
+                scan(Constants.REQUEST_SCAN_CODE_LIB_LOATION, this);
                 break;
             case R.id.tv_putaway_scan_material://物料码
                 if (TextUtils.isEmpty(locationCode)) {
                     ToastUtils.showShort(getString(R.string.please_scan_lib_location_code));
                     return;
                 }
-                scan(Constants.REQUEST_SCAN_CODE_MATERIIAL);
+                scan(Constants.REQUEST_SCAN_CODE_MATERIIAL, this);
                 break;
             case R.id.iv_putaway_scan_material://物料码
                 if (TextUtils.isEmpty(locationCode)) {
                     ToastUtils.showShort(getString(R.string.please_scan_lib_location_code));
                     return;
                 }
-                scan(Constants.REQUEST_SCAN_CODE_MATERIIAL);
+                scan(Constants.REQUEST_SCAN_CODE_MATERIIAL, this);
                 break;
             case R.id.btn_login://确认提交
                 /**
@@ -499,40 +499,6 @@ public class PutAwayActivity extends BaseActivity<PutAwayView, PutAwayPresenter>
      * 库位码
      */
     private String locationCode = "";
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        switch (requestCode) {
-            case REQUEST_SCAN_CODE_MATERIIAL:
-                if (resultCode == RESULT_OK) {
-                    Bundle bundle = data.getExtras();
-                    if (bundle != null) {
-                        LogUitls.d("物料码扫码--->", bundle.getString("result"));
-                        tvPutawayScanMaterial.setText(bundle.getString("result"));
-                        /**
-                         * 物料扫码并上架的网络请求
-                         */
-                        getPresenter().materialScanNetWork(locationCode, bundle.getString("result"));
-                    }
-                }
-                break;
-            case REQUEST_SCAN_CODE_LIB_LOATION:
-                if (resultCode == RESULT_OK) {
-                    Bundle bundle = data.getExtras();
-                    if (bundle != null) {
-                        LogUitls.d("库位码扫码--->", bundle.getString("result"));
-                        //保存库位码
-                        locationCode = bundle.getString("result");
-                        //设置库位码
-                        tvPutawayScanLocation.setText(locationCode);
-                        //判断库位码是否有效
-                        getPresenter().vertifyLocationCode(locationCode);
-                    }
-                }
-                break;
-        }
-    }
-
 
     @Override
     public void searchReceiveGoodOrderno(ReceiveOrdernoBean bean) {
@@ -631,4 +597,39 @@ public class PutAwayActivity extends BaseActivity<PutAwayView, PutAwayPresenter>
             onBackPressed();
         }
     }
+
+    /**
+     * 扫码的返回方法
+     *
+     * @param requestCode
+     * @param result
+     */
+    @Override
+    public void scanSuccess(int requestCode, String result) {
+        switch (requestCode) {
+            case REQUEST_SCAN_CODE_MATERIIAL:
+                if (requestCode == RESULT_OK) {
+                    LogUitls.d("物料码扫码--->", result);
+                    tvPutawayScanMaterial.setText(result);
+                    /**
+                     * 物料扫码并上架的网络请求
+                     */
+                    getPresenter().materialScanNetWork(locationCode, result);
+                }
+                break;
+            case REQUEST_SCAN_CODE_LIB_LOATION:
+                LogUitls.d("库位码扫码--->", result);
+                //保存库位码
+                locationCode = result;
+                //设置库位码
+                tvPutawayScanLocation.setText(locationCode);
+                /**
+                 * 判断库位码是否有效
+                 */
+                getPresenter().vertifyLocationCode(locationCode);
+                break;
+        }
+
+    }
+
 }

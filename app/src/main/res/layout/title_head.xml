@@ -1,38 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.zhy.autolayout.AutoRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="50dp"
-    android:background="@color/statuscolor">
+                                       android:layout_width="match_parent"
+                                       android:layout_height="50dp"
+                                       android:background="@color/statuscolor">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@mipmap/home_banner_head"/>
 
     <ImageView
         android:id="@+id/iv_title_back"
         android:layout_width="wrap_content"
-        android:padding="15dp"
         android:layout_height="match_parent"
-        android:src="@mipmap/back" />
+        android:padding="15dp"
+        android:src="@mipmap/back"/>
 
     <TextView
         android:id="@+id/tv_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="18sp"
+        android:layout_centerInParent="true"
         android:textColor="#fff"
-        android:layout_centerInParent="true" />
+        android:textSize="18sp"/>
 
     <ImageView
         android:id="@+id/iv_title_right"
         android:layout_width="60px"
         android:layout_height="80px"
         android:layout_alignParentRight="true"
-        android:src="@mipmap/stockin_detail"
-        android:paddingRight="20px"
         android:layout_centerVertical="true"
-        android:visibility="gone" />
+        android:paddingRight="20px"
+        android:src="@mipmap/stockin_detail"
+        android:visibility="gone"/>
 
     <TextView
         android:id="@+id/tv_title_right"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:visibility="gone" />
+        android:visibility="gone"/>
 </com.zhy.autolayout.AutoRelativeLayout>

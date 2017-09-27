@@ -31,7 +31,6 @@ public class QualityCheckPresneter extends MvpBasePresenter<QualityCheckView> {
      * 获取质量检验的列表
      */
     public void getQualityList(Map<String, Object> params) {
-        getView().showProgressDialog();
         if (null == qualityListBeanHttpSubscriber) {
             qualityListBeanHttpSubscriber = new HttpSubscriber<>(new OnResultCallBack<List<QualityListBean>>() {
                 @Override
@@ -43,7 +42,7 @@ public class QualityCheckPresneter extends MvpBasePresenter<QualityCheckView> {
                 public void onError(String errorMsg) {
                     ToastUtils.showShort(errorMsg);
                     List<QualityListBean> datas=new ArrayList<>();
-                    for (int i = 0; i <100 ; i++) {
+                    for (int i = 0; i <20 ; i++) {
                         datas.add(new QualityListBean(i%2==0,"P2323","超然",i*10,i*5,i*5,"合格"));
                     }
                     getView().getQualityList(datas);

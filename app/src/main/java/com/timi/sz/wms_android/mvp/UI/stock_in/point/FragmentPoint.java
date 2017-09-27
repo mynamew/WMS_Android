@@ -8,7 +8,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
-import com.rmondjone.locktableview.LockTableView;
 import com.timi.sz.wms_android.R;
 import com.timi.sz.wms_android.base.uils.Constants;
 import com.timi.sz.wms_android.base.uils.LogUitls;
@@ -386,30 +385,6 @@ public class FragmentPoint extends BaseFragment<FragmentPointView, FragmentPoint
                 mTableDatas.add(mRowDatas);
             }
         }
-        LockTableView mLockTableView = new LockTableView(getActivity(), llPointContent, mTableDatas);
-        Log.e("表格加载开始", "当前线程：" + Thread.currentThread());
-        mLockTableView.setLockFristColumn(false) //是否锁定第一列
-                .setLockFristRow(true) //是否锁定第一行
-                .setMaxColumnWidth(100) //列最大宽度
-                .setMinColumnWidth(10) //列最小宽度
-                .setMinRowHeight(5)//行最小高度
-                .setMaxRowHeight(20)//行最大高度
-                .setTextViewSize(12) //单元格字体大小
-                .setFristRowBackGroudColor(R.color.table_head)//表头背景色
-                .setTableHeadTextColor(R.color.beijin)//表头字体颜色
-                .setTableContentTextColor(R.color.border_color)//单元格字体颜色
-                .setNullableString("0") //空值替换值
-                .setTableViewListener(new LockTableView.OnTableViewListener() {
-                    @Override
-                    public void onTableViewScrollChange(int x, int y) {
-                    }
-
-                    @Override
-                    public void onTabViewClickListener(int position) {
-                        showGoodsPointDialog(position);
-                    }
-                })//设置滚动回调监听
-                .show(); //显示表格,此方法必须调用
     }
 
     /**

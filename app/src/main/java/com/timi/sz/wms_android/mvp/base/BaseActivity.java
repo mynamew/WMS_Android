@@ -37,6 +37,8 @@ import com.zhy.autolayout.AutoLayoutActivity;
 
 import butterknife.ButterKnife;
 
+import static com.timi.sz.wms_android.base.uils.Constants.REQUEST_CODE;
+
 /**
  * 所有Acitity的基类  封装基类的方法
  */
@@ -105,7 +107,7 @@ public abstract class BaseActivity<V extends MvpView, P extends MvpPresenter<V>>
             });
         }
         //设置状态栏颜色 默认
-        StatusBarUtil.setColor(this, getResources().getColor(R.color.statuscolor),80);
+        StatusBarUtil.setColor(this, getResources().getColor(R.color.statuscolor), 80);
         //初始化各种数据
         initBundle(savedInstanceState);
         initView();
@@ -114,7 +116,7 @@ public abstract class BaseActivity<V extends MvpView, P extends MvpPresenter<V>>
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        InputMethodUtils.hidSoftInput(event,this);
+        InputMethodUtils.hidSoftInput(event, this);
         return super.onTouchEvent(event);
     }
 
@@ -257,7 +259,7 @@ public abstract class BaseActivity<V extends MvpView, P extends MvpPresenter<V>>
         super.finish();
         if (curInterlude == Interlude.DEFAULT) {
             //默认情况，什么都不做，已经在style文件中配置
-            overridePendingTransition( R.anim.none,R.transition.slide_out_right);
+            overridePendingTransition(R.anim.none, R.transition.slide_out_right);
         } else if (curInterlude == Interlude.POP_FROM_BOTTOM) {
             //从下方弹出
             overridePendingTransition(R.anim.none, R.transition.pop_out_bottom);
@@ -313,11 +315,18 @@ public abstract class BaseActivity<V extends MvpView, P extends MvpPresenter<V>>
     }
 
     /**
+     * 扫码的返回 监听器
+      */
+    private ScanQRCodeResultListener mListener = null;
+    /**
      * 调用相机扫描二维码的方法
      *
      * @param requestCode
      */
-    public void scan(int requestCode) {
+    public void scan(int requestCode, ScanQRCodeResultListener listener) {
+        if (null != listener) {
+            mListener = listener;
+        }
         if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
             //权限还没有授予，需要在这里写申请权限的代码
@@ -336,6 +345,23 @@ public abstract class BaseActivity<V extends MvpView, P extends MvpPresenter<V>>
         }
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case REQUEST_CODE:
+                if (resultCode == RESULT_OK) {
+                    Bundle bundle = data.getExtras();
+                    if (bundle != null) {
+                        if(null!=mListener){
+                            mListener.scanSuccess(REQUEST_CODE,bundle.getString("result"));
+                        }
+                    }
+                }
+                break;
+        }
+    }
+
     /**
      * 获取当前Activity的实例
      *
@@ -346,7 +372,8 @@ public abstract class BaseActivity<V extends MvpView, P extends MvpPresenter<V>>
     }
 
     /**
-     *设置 文本
+     * 设置 文本
+     *
      * @param tv
      * @param fomat
      * @param content
@@ -354,13 +381,22 @@ public abstract class BaseActivity<V extends MvpView, P extends MvpPresenter<V>>
     public void setTextViewText(TextView tv, @StringRes int fomat, String content) {
         tv.setText(String.format(getString(fomat), content));
     }
+
     /**
-     *设置 文本
+     * 设置 文本
+     *
      * @param tv
      * @param fomat
      * @param content
      */
     public void setTextViewText(TextView tv, @StringRes int fomat, int content) {
         tv.setText(String.format(getString(fomat), String.valueOf(content)));
+    }
+
+    /**
+     * zxing 扫码的回调接口
+     */
+    public interface ScanQRCodeResultListener {
+        void scanSuccess(int requestCode,String result);
     }
 }

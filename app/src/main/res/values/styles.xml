@@ -47,15 +47,13 @@
     </style>
     <!--入库的标题的style-->
     <style name="stock_in_title">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">50dp</item>
-        <item name="android:paddingLeft">15dp</item>
+        <item name="android:layout_width">96px</item>
+        <item name="android:layout_height">40px</item>
+        <item name="android:layout_marginLeft">12px</item>
         <item name="android:gravity">center</item>
-        <item name="android:drawablePadding">10dp</item>
+        <item name="android:textColor">#333</item>
         <item name="android:layout_centerInParent">true</item>
-        <item name="android:drawableRight">@mipmap/tab_line_right</item>
-        <item name="android:drawableLeft">@mipmap/tab_line_left</item>
-        <item name="android:textColor">@color/home_in_lib</item>
+        <item name="android:background">@drawable/inlib_tip_bg</item>
     </style>
     <!--入库的快捷入口的style-->
     <style name="stock_in_tab">

@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/PullToRefresh/PullToRefresh.iml" filepath="$PROJECT_DIR$/PullToRefresh/PullToRefresh.iml" />
       <module fileurl="file://$PROJECT_DIR$/WMS_Android.iml" filepath="$PROJECT_DIR$/WMS_Android.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/locktableview/locktableview.iml" filepath="$PROJECT_DIR$/locktableview/locktableview.iml" />
     </modules>
   </component>
 </project>

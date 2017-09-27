@@ -9,8 +9,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.widget.FrameLayout;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.timi.sz.wms_android.R;
 import com.timi.sz.wms_android.base.uils.Constants;
@@ -32,21 +32,20 @@ import org.greenrobot.eventbus.ThreadMode;
 import java.io.File;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 
 public class MainActivity extends BaseActivity<MainView, MainPresenter> implements MainView {
     private static final String TAG = MainActivity.class.getSimpleName();
-    //是否处于后台
-    public static boolean isForeground = false;
-    @BindView(R.id.rd_home_home)
-    RadioButton rdHomeHome;
-    @BindView(R.id.rd_home_set)
-    RadioButton rdHomeSet;
-    @BindView(R.id.rl_home_botom)
-    RadioGroup rlHomeBotom;
     @BindView(R.id.fl_home_content)
     FrameLayout flHomeContent;
+    @BindView(R.id.iv_home_img)
+    ImageView ivHomeImg;
+    @BindView(R.id.iv_home_txt)
+    ImageView ivHomeTxt;
+    @BindView(R.id.tv_home_set)
+    TextView tvHomeSet;
     //data
     private Fragment homeFM;
     private Fragment setFM;
@@ -63,8 +62,7 @@ public class MainActivity extends BaseActivity<MainView, MainPresenter> implemen
 
     @Override
     public void initView() {
-        //设置选中
-        rdHomeHome.setChecked(true);
+
     }
 
     @Override
@@ -101,31 +99,13 @@ public class MainActivity extends BaseActivity<MainView, MainPresenter> implemen
 
     @Override
     protected void onResume() {
-        isForeground = true;
         super.onResume();
     }
 
 
     @Override
     protected void onPause() {
-        isForeground = false;
         super.onPause();
-    }
-
-    /**
-     * @param view
-     */
-    @OnClick({R.id.rd_home_home, R.id.rd_home_set})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.rd_home_home://主页
-                intentIndex(0);
-                break;
-            case R.id.rd_home_set://设置
-                intentIndex(1);
-                break;
-
-        }
     }
 
     /**
@@ -137,8 +117,7 @@ public class MainActivity extends BaseActivity<MainView, MainPresenter> implemen
         FragmentTransaction trans = super.getSupportFragmentManager().beginTransaction();
         hideFragment(trans);
         //设置按钮状态
-        rdHomeHome.setChecked(index == 0);
-        rdHomeSet.setChecked(index == 1);
+        setHomeTabCheckStatus(index == 0);
         //首页上方的文字
         switch (index) {
             case 0://主页
@@ -190,8 +169,17 @@ public class MainActivity extends BaseActivity<MainView, MainPresenter> implemen
      */
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void getMessageLanguageUpdata(HomeEvent event) {
-        rdHomeHome.setText(getResources().getString(R.string.home));
-        rdHomeSet.setText(getResources().getString(R.string.home_set));
+        tvHomeSet.setText(getResources().getString(R.string.home_set));
+    }
+
+    /**
+     * 设置主页下方tab 的选中状态
+     * @param isHome
+     */
+    public void setHomeTabCheckStatus(boolean isHome) {
+        ivHomeImg.setSelected(isHome);
+        ivHomeTxt.setSelected(isHome);
+        tvHomeSet.setSelected(!isHome);
     }
 
     @Override
@@ -257,7 +245,7 @@ public class MainActivity extends BaseActivity<MainView, MainPresenter> implemen
                 if (NetWorkUtils.checkedNetWorkType(this) == NetWorkUtils.WIFI) {
                     getPresenter().downLoadApk(bean.getObjectReturn().getUrl());
                 }
-            }else{
+            } else {
 //                ToastUtils.showShort("已是最新版本，无需更新");
             }
         } catch (Exception e) {
@@ -265,5 +253,23 @@ public class MainActivity extends BaseActivity<MainView, MainPresenter> implemen
         }
     }
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
+    }
+
+    @OnClick({R.id.rl_home, R.id.rl_mine})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.rl_home:
+                intentIndex(0);
+                break;
+            case R.id.rl_mine:
+                intentIndex(1);
+                break;
+        }
+    }
 }
 

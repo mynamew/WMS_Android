@@ -1,0 +1,9 @@
+/build
+build/
+build/*
+build/*.jar
+build/*.aar
+build/*.xml
+*.class
+*.txt
+*.json

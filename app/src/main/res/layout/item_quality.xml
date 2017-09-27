@@ -2,87 +2,129 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
-              android:background="#666"
-              android:orientation="horizontal"
-              android:paddingBottom="2px"
-              android:paddingTop="2px">
+              android:orientation="vertical"
+    >
 
-    <TextView
-        android:id="@+id/tv_quality"
+    <View
+        android:id="@+id/divide_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#999"/>
+
+
+    <LinearLayout
+        android:id="@+id/ll_content"
         android:layout_width="wrap_content"
-        android:layout_height="60px"
-        android:layout_marginLeft="2px"
-        android:background="@color/set_bg"
-        android:gravity="center_vertical"
-        android:paddingLeft="20px"
-        android:paddingRight="20px"
-        android:text="质检"/>
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/tv_material_code"
-        android:layout_width="wrap_content"
-        android:layout_height="60px"
-        android:layout_marginLeft="2px"
-        android:background="@color/set_bg"
-        android:gravity="center_vertical"
-        android:paddingLeft="20px"
-        android:paddingRight="20px"
-        android:text="物料编码"/>
+        <View
+            android:layout_width="1dp"
+            android:layout_height="40dp"
+            android:background="#999"/>
 
-    <TextView
-        android:id="@+id/tv_supplier"
-        android:layout_width="wrap_content"
-        android:layout_height="60px"
-        android:layout_marginLeft="2px"
-        android:background="@color/set_bg"
-        android:gravity="center_vertical"
-        android:paddingLeft="20px"
-        android:paddingRight="20px"
-        android:text="供应商"/>
+        <TextView
+            android:id="@+id/tv_quality"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:paddingLeft="20px"
+            android:paddingRight="20px"
+            android:text="质检"/>
 
-    <TextView
-        android:id="@+id/tv_receive_num"
-        android:layout_width="wrap_content"
-        android:layout_height="60px"
-        android:layout_marginLeft="2px"
-        android:background="@color/set_bg"
-        android:gravity="center_vertical"
-        android:paddingLeft="20px"
-        android:paddingRight="20px"
-        android:text="实收数"/>
+        <View
+            android:layout_width="1dp"
+            android:layout_height="40dp"
+            android:background="#999"/>
 
-    <TextView
-        android:id="@+id/tv_send_quality_num"
-        android:layout_width="wrap_content"
-        android:layout_height="60px"
-        android:layout_marginLeft="2px"
-        android:background="@color/set_bg"
-        android:gravity="center_vertical"
-        android:paddingLeft="20px"
-        android:paddingRight="20px"
-        android:text="送检数"/>
+        <TextView
+            android:id="@+id/tv_material_code"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:paddingLeft="20px"
+            android:paddingRight="20px"
+            android:text="物料编码"/>
 
-    <TextView
-        android:id="@+id/tv_quality_num"
-        android:layout_width="wrap_content"
-        android:layout_height="60px"
-        android:layout_marginLeft="2px"
-        android:background="@color/set_bg"
-        android:gravity="center_vertical"
-        android:paddingLeft="20px"
-        android:paddingRight="20px"
-        android:text="合格数"/>
+        <View
+            android:layout_width="1dp"
+            android:layout_height="40dp"
+            android:background="#999"/>
 
-    <TextView
-        android:id="@+id/tv_quality_result"
-        android:layout_width="wrap_content"
-        android:layout_height="60px"
-        android:layout_marginLeft="2px"
-        android:background="@color/set_bg"
-        android:gravity="center_vertical"
-        android:paddingLeft="20px"
-        android:paddingRight="20px"
-        android:text="质检结果"/>
+        <TextView
+            android:id="@+id/tv_supplier"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:paddingLeft="20px"
+            android:paddingRight="20px"
+            android:text="供应商"/>
 
+        <View
+            android:layout_width="1dp"
+            android:layout_height="40dp"
+            android:background="#999"/>
 
+        <TextView
+            android:id="@+id/tv_receive_num"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:paddingLeft="20px"
+            android:paddingRight="20px"
+            android:text="实收数"/>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="40dp"
+            android:background="#999"/>
+
+        <TextView
+            android:id="@+id/tv_send_quality_num"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:paddingLeft="20px"
+            android:paddingRight="20px"
+            android:text="送检数"/>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="40dp"
+            android:background="#999"/>
+
+        <TextView
+            android:id="@+id/tv_quality_num"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:paddingLeft="20px"
+            android:paddingRight="20px"
+            android:text="合格数"/>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="40dp"
+            android:background="#999"/>
+
+        <TextView
+            android:id="@+id/tv_quality_result"
+            android:layout_width="wrap_content"
+            android:layout_height="60px"
+            android:gravity="center"
+            android:paddingLeft="20px"
+            android:paddingRight="20px"
+            android:text="质检结果"/>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="40dp"
+            android:background="#999"/>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#999"/>
 </LinearLayout>

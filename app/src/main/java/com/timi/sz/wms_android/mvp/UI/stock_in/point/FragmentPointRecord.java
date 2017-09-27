@@ -2,18 +2,13 @@ package com.timi.sz.wms_android.mvp.UI.stock_in.point;
 
 import android.content.DialogInterface;
 import android.text.TextUtils;
-import android.util.Log;
 import android.widget.LinearLayout;
 
-import com.rmondjone.locktableview.LockTableView;
 import com.timi.sz.wms_android.R;
 import com.timi.sz.wms_android.base.uils.Constants;
 import com.timi.sz.wms_android.base.uils.PackageUtils;
 import com.timi.sz.wms_android.base.uils.SpUtils;
 import com.timi.sz.wms_android.base.uils.ToastUtils;
-import com.timi.sz.wms_android.bean.instock.search.BuyOrdernoBean;
-import com.timi.sz.wms_android.bean.instock.PointMaterialBean;
-import com.timi.sz.wms_android.bean.instock.search.SendOrdernoBean;
 import com.timi.sz.wms_android.bean.instock.search.StockinMaterialBean;
 import com.timi.sz.wms_android.http.message.BaseMessage;
 import com.timi.sz.wms_android.http.message.event.StockInPointEvent;
@@ -211,29 +206,7 @@ public class FragmentPointRecord extends BaseFragment<FragmentPointRecordView, F
             mRowDatas.add(stockinMaterialBean.getCreateDateTime());
             mTableDatas.add(mRowDatas);
         }
-        LockTableView mLockTableView = new LockTableView(getActivity(), llStockinPointRecord, mTableDatas);
-        mLockTableView.setLockFristColumn(false) //是否锁定第一列
-                .setLockFristRow(true) //是否锁定第一行
-                .setMaxColumnWidth(100) //列最大宽度
-                .setMinColumnWidth(10) //列最小宽度
-                .setMinRowHeight(5)//行最小高度
-                .setMaxRowHeight(20)//行最大高度
-                .setTextViewSize(12) //单元格字体大小
-                .setFristRowBackGroudColor(R.color.table_head)//表头背景色
-                .setTableHeadTextColor(R.color.beijin)//表头字体颜色
-                .setTableContentTextColor(R.color.border_color)//单元格字体颜色
-                .setNullableString("0") //空值替换值
-                .setTableViewListener(new LockTableView.OnTableViewListener() {
-                    @Override
-                    public void onTableViewScrollChange(int x, int y) {
-                    }
 
-                    @Override
-                    public void onTabViewClickListener(int position) {
-                        showGoodsPointRecordDialog(position);
-                    }
-                })//设置滚动回调监听
-                .show(); //显示表格,此方法必须调用
     }
 
     /**

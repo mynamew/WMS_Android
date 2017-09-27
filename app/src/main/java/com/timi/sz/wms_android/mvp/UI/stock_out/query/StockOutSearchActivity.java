@@ -156,38 +156,13 @@ public class StockOutSearchActivity extends BaseActivity<StockOutSearchView, Sto
 
     @OnClick(R.id.iv_sotckout_scan)
     public void onViewClicked() {
-        if (ContextCompat.checkSelfPermission(this,
-                Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-            //权限还没有授予，需要在这里写申请权限的代码
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, 60);
-        } else {
-            //权限已经被授予，在这里直接写要执行的相应方法即可
-            Intent intent = new Intent(this, CommonScanActivity.class);
-
-            String pointMsg = getResources().getString(R.string.scan_point_title);
-            Bundle bundle = new Bundle();
-            bundle.putString("pointMsg", pointMsg);
-            intent.putExtras(bundle);
-
-            intent.putExtra(Constant.REQUEST_SCAN_MODE, Constant.REQUEST_SCAN_MODE_ALL_MODE);
-            startActivityForResult(intent, REQUEST_CODE);
-        }
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        switch (requestCode) {
-            case REQUEST_CODE:
-                if (resultCode == RESULT_OK) {
-                    Bundle bundle = data.getExtras();
-                    if (bundle != null) {
-                        etStockoutInput.setText(bundle.getString("result"));
-                        requestManagerMethod(bundle.getString("result"));
-                    }
-                }
-                break;
-        }
+        scan(Constant.REQUEST_SCAN_MODE_ALL_MODE, new ScanQRCodeResultListener() {
+            @Override
+            public void scanSuccess(int requestCode, String result) {
+                etStockoutInput.setText(result);
+                requestManagerMethod(result);
+            }
+        });
     }
 
     /**

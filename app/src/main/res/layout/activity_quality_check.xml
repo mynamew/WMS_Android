@@ -2,6 +2,7 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:ptr="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -11,8 +12,10 @@
 
     <include layout="@layout/title_head"/>
 
-    <com.timi.sz.wms_android.view.excel.MyExcelView
-        android:id="@+id/excel_quality"
+    <com.timi.sz.wms_android.view.excelview.MyExcelView
+        android:id="@+id/myexcel_quality"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:visibility="visible"
+        ptr:ptrMode="both"/>
 </LinearLayout>
