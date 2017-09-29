@@ -28,7 +28,7 @@ public class CommonInterceptor implements Interceptor {
          * 请求中的Url
          */
         HttpUrl oldUrl = oldRequest.url();
-        LogUitls.e("oldUrl--->" + oldUrl.toString());
+//        LogUitls.e("oldUrl--->" + oldUrl.toString());
         /**
          * 应用配置的服务器Url
          */

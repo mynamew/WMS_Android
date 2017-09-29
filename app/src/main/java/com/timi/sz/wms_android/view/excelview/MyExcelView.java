@@ -3,11 +3,18 @@ package com.timi.sz.wms_android.view.excelview;
 import android.content.Context;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextPaint;
+import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.util.TypedValue;
+import android.view.Gravity;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshRecyclerView;
-import com.timi.sz.wms_android.base.adapter.CommonSimpleTypeAdapter;
+import com.timi.sz.wms_android.base.adapter.CommonSimpleHeaderAndFooterTypeAdapter;
+import com.timi.sz.wms_android.base.uils.LogUitls;
 
 import java.util.ArrayList;
 
@@ -22,15 +29,13 @@ public class MyExcelView extends PullToRefreshRecyclerView {
     private PullToRefreshRecyclerView refreshExcel;
     private RecyclerView rlvExcel;
 
-    private CommonSimpleTypeAdapter<ArrayList<String>> adapter;
+    private CommonSimpleHeaderAndFooterTypeAdapter<ArrayList<String>> adapter;
     private boolean isLoadMore, isRefresh;//刷新，加载更多的标识
 
     private final int NORMAL = 0;//普通加载
     private final int REFRESH = 1;//刷新
     private final int LOADMORE = 2;//加载更多
 
-    ArrayList<ArrayList<String>> tabDatas = new ArrayList<>();
-    ArrayList<Integer> mAllWidth = new ArrayList<>();
 
     public MyExcelView(Context context) {
         super(context);
@@ -45,6 +50,7 @@ public class MyExcelView extends PullToRefreshRecyclerView {
     private void initView(Context context) {
         mContext = context;
         rlvExcel = this.getRefreshableView();
+        rlvExcel.setOverScrollMode(OVER_SCROLL_NEVER);
     }
 
     /**
@@ -98,36 +104,27 @@ public class MyExcelView extends PullToRefreshRecyclerView {
 
         void onLoadMore();
     }
+
     /**
      * 加载数据的方法
      *
-     * @param mTabDatas
-     * @param mTabNewDatas
-     * @param mFirstTabDatas
      * @param adapter
      */
-    public void loadData(ArrayList<ArrayList<String>> mTabDatas, ArrayList<ArrayList<String>> mTabNewDatas, ArrayList<String> mFirstTabDatas, CommonSimpleTypeAdapter<ArrayList<String>> adapter) {
+    public void loadData(CommonSimpleHeaderAndFooterTypeAdapter<ArrayList<String>> adapter) {
         switch (getCurrentStatus()) {
             case REFRESH:
-                mTabDatas.clear();
-                mTabDatas.add(mFirstTabDatas);
-                mTabDatas.addAll(mTabNewDatas);
                 this.adapter.notifyDataSetChanged();
-                isRefresh = false;
                 break;
             case LOADMORE:
-                mTabDatas.addAll(mTabNewDatas);
                 this.adapter.notifyDataSetChanged();
-                isLoadMore = false;
                 break;
             case NORMAL:
-                this.adapter = adapter;
-                rlvExcel.setAdapter(adapter);
-                rlvExcel.setLayoutManager(new FixedGridLayoutManager());
-                //
-                mTabDatas.add(mFirstTabDatas);
-                mTabDatas.addAll(mTabNewDatas);
-               this.adapter.notifyDataSetChanged();
+                if (null == this.adapter) {
+                    this.adapter = adapter;
+                    rlvExcel.setAdapter(adapter);
+                    rlvExcel.setLayoutManager(new FixedGridLayoutManager());
+                }
+                this.adapter.notifyDataSetChanged();
                 break;
             default:
                 break;
@@ -138,23 +135,92 @@ public class MyExcelView extends PullToRefreshRecyclerView {
      * 获取 tab 宽度的方法
      *
      * @param mTabDatas
-     * @param mTabNewDatas
      * @param mFirstTabDatas
      * @return
      */
-    public ArrayList<Integer> getAllRowWidth(ArrayList<ArrayList<String>> mTabDatas, ArrayList<ArrayList<String>> mTabNewDatas, ArrayList<String> mFirstTabDatas) {
-        tabDatas.addAll(mTabDatas);
+    public ArrayList<Integer> getAllRowWidth(ArrayList<ArrayList<String>> mTabDatas, ArrayList<String> mFirstTabDatas) {
         /**
-         * 如果 mTabDatas是空
-         * 则证明是第一次进入加载数据，
-         * 则需要将mFirstDatas加入到mTabDatas中去
-         * */
-        if (mTabDatas.isEmpty()) {
-            tabDatas.add(mFirstTabDatas);
+         * 对 数据进行处理 拿出来每列的文本的最大值
+         */
+        /**
+         * 最大的宽度的集合
+         */
+        ArrayList<Integer> allRowWidth = new ArrayList<>();
+        /**
+         * 所有的数据
+         */
+        ArrayList<ArrayList<String>> measureTabDatas = new ArrayList<>();
+        /**
+         * 将数据重新整理，每列作为一个 arraylist，
+         */
+        for (int i = 0; i < mFirstTabDatas.size(); i++) {
+            ArrayList<String> tab = new ArrayList<>();
+            tab.add(mFirstTabDatas.get(i));
+            /**
+             * 获取每行的第i列的数据
+             */
+            for (int j = 0; j < mTabDatas.size(); j++) {
+                ArrayList<String> strings = mTabDatas.get(j);
+                LogUitls.e("每行的数据-->", strings);
+                tab.add(null == strings.get(i) ? "" : strings.get(i));
+            }
+            /**
+             * 添加 每列的数据
+             */
+            measureTabDatas.add(tab);
         }
-        tabDatas.addAll(mTabNewDatas);
-        mAllWidth = new MeasureExcelViewUtils(mContext).getExcelViewWidth(tabDatas).getAllRowWidth();
-        return mAllWidth;
+        /**
+         * 获取每列的文本的最大宽度
+         */
+        for (int i = 0; i < mFirstTabDatas.size(); i++) {
+            int maxWidth = 0;
+            for (int j = 0; j < measureTabDatas.get(i).size(); j++) {
+
+                /**
+                 * 设置文本 获取文本框的宽度
+                 */
+                TextView textView = new TextView(mContext);
+                textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+                //每一个文本
+                String text = measureTabDatas.get(i).get(j);
+                textView.setText(text);
+                textView.setGravity(Gravity.CENTER);
+                //设置布局
+                LinearLayout.LayoutParams textViewParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT);
+                textView.setPadding(10, 10, 10, 10);
+                textView.setLayoutParams(textViewParams);
+                LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) textView.getLayoutParams();
+                int width = DisplayUtil.px2dip(mContext, layoutParams.leftMargin) +
+                        DisplayUtil.px2dip(mContext, layoutParams.rightMargin) + textView.getPaddingLeft() + textView.getPaddingRight() +
+                        getTextViewWidth(textView, text);
+                /**
+                 * 存储 文本框的宽度
+                 */
+                if (width > maxWidth) {
+                    maxWidth = width;
+                }
+
+            }
+            allRowWidth.add(maxWidth);
+        }
+        LogUitls.e("文本的宽度---->", allRowWidth);
+        return allRowWidth;
+    }
+
+    /**
+     * 根据文字计算textview的高度
+     *
+     * @param view
+     * @param text
+     * @return
+     */
+    private int getTextViewWidth(TextView view, String text) {
+        if (view != null) {
+            TextPaint paint = view.getPaint();
+            return DisplayUtil.px2dip(mContext, (int) paint.measureText(text));
+        }
+        return 0;
     }
 
     /**

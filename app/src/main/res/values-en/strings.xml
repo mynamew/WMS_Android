@@ -292,5 +292,12 @@
     <string name="stockin_work_count">盘点</string>
     <string name="stock_out_out_resource">委外</string>
     <string name="stock_out_pick_tab">拣货</string>
+    <string name="stock_out_all">综合</string>
+    <string name="quality_material_quality">物料质检</string>
+    <string name="query_library_transfer">库台转账</string>
+    <string name="query_repertory_tip">库存查询</string>
+    <string name="query_retrospective">追溯查询</string>
+    <string name="query_record_tip">记录查询</string>
+    <string name="query_statistical_tip">统计查询</string>
 
 </resources>

@@ -35,30 +35,33 @@ public class QueryActivity extends BaseNoMvpActivity {
 
     }
 
-    /**
-     * 点击事件
-     * @param view
-     */
-    @OnClick({R.id.tv_query_repertory, R.id.tv_query_todayin, R.id.tv_query_todayout, R.id.tv_query_in_record, R.id.tv_query_materail_sn_from, R.id.tv_query_pro_sn_from, R.id.tv_query_out_record, R.id.tv_query_in_total, R.id.tv_query_out_total, R.id.activity_query})
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
+    }
+
+    @OnClick({R.id.tv_query_library_transfer, R.id.tv_query_today_out, R.id.tv_query_today_in, R.id.tv_query_materail_sn_from, R.id.tv_query_pro_sn_from, R.id.tv_query_in_record, R.id.tv_query_out_record, R.id.tv_query_in_total, R.id.tv_query_out_total})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.tv_query_repertory://库存查询
+            case R.id.tv_query_library_transfer:
                 break;
-            case R.id.tv_query_todayin://今日入库
+            case R.id.tv_query_today_out:
                 break;
-            case R.id.tv_query_todayout://今日出库
+            case R.id.tv_query_today_in:
                 break;
-            case R.id.tv_query_in_record://入库记录
+            case R.id.tv_query_materail_sn_from:
                 break;
-            case R.id.tv_query_materail_sn_from://原材料 sn追溯
+            case R.id.tv_query_pro_sn_from:
                 break;
-            case R.id.tv_query_pro_sn_from://成品sn追溯
+            case R.id.tv_query_in_record:
                 break;
-            case R.id.tv_query_out_record://出库记录
+            case R.id.tv_query_out_record:
                 break;
-            case R.id.tv_query_in_total://入库统计
+            case R.id.tv_query_in_total:
                 break;
-            case R.id.tv_query_out_total://出库统计
+            case R.id.tv_query_out_total:
                 break;
         }
     }

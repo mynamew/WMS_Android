@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_quity"
     android:layout_width="match_parent"
@@ -9,44 +10,68 @@
     android:orientation="vertical"
     tools:context="com.timi.sz.wms_android.mvp.UI.quity.QulityActivity">
 
-    <include layout="@layout/title_head"/>
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="400px"
-        android:scaleType="centerCrop"
-        android:src="@mipmap/query_bg"/>
-
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="160px"
-        android:background="#fff"
-        android:gravity="center_vertical"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/tv_qulity_inspection"
-            style="@style/stock_in_tab"
-            android:drawableTop="@mipmap/stock_in_other_check"
-            android:text="@string/qulity_inspection"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="400px"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/quality_bg"/>
 
-        <View
-           style="@style/LineDirection"/>
+        <include layout="@layout/title_head"/>
+    </RelativeLayout>
+    <!--收货-->
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="218px"
+        android:layout_marginLeft="20px"
+        android:layout_marginRight="20px"
+        android:layout_marginTop="20px"
+        app:cardBackgroundColor="@color/statuscolor"
+        app:cardCornerRadius="10px">
 
-        <TextView
-            android:id="@+id/tv_qulity_mrp_inspection"
-            style="@style/stock_in_tab"
-            android:drawableTop="@mipmap/stock_in_other_create_order"
-            android:text="@string/qulity_mrp_inspection"/>
-        <View
-            style="@style/LineDirection"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="4px"
+            android:background="@drawable/inlib_menu_bg"
+            android:orientation="vertical"
+            android:paddingBottom="4px"
+            android:paddingLeft="4px"
+            android:paddingRight="4px">
 
-        <TextView
-            android:id="@+id/tv_qulity_update_qr"
-            style="@style/stock_in_tab"
-            android:drawableTop="@mipmap/stock_in_buy_order"
-            android:paddingBottom="10dp"
-            android:paddingTop="10dp"
-            android:text="@string/qulity_update_qr"/>
-    </LinearLayout>
+            <TextView
+                style="@style/stock_in_title"
+                android:layout_width="148px"
+                android:text="@string/quality_material_quality"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="160px"
+                android:layout_marginTop="2px"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_qulity_inspection"
+                    style="@style/stock_in_tab"
+                    android:drawableTop="@mipmap/qulity_inspection"
+                    android:text="@string/qulity_inspection"/>
+
+                <TextView
+                    android:id="@+id/tv_qulity_mrp_inspection"
+                    style="@style/stock_in_tab"
+                    android:drawableTop="@mipmap/qulity_mrp_inspection"
+                    android:text="@string/qulity_mrp_inspection"/>
+
+                <TextView
+                    android:id="@+id/tv_qulity_update_qr"
+                    style="@style/stock_in_tab"
+                    android:drawableTop="@mipmap/qulity_update_qr"
+                    android:text="@string/qulity_update_qr"/>
+            </LinearLayout>
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
 </LinearLayout>

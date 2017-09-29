@@ -4,6 +4,7 @@
               android:layout_height="wrap_content"
               android:orientation="vertical"
     >
+
     <View
         android:id="@+id/divide_bottom"
         android:layout_width="match_parent"
@@ -15,6 +16,7 @@
         android:id="@+id/ll_content"
         android:layout_width="match_parent"
         android:layout_height="40dp"
+        android:background="@color/beijin"
         android:orientation="horizontal">
 
         <View
@@ -29,7 +31,8 @@
             android:gravity="center"
             android:paddingLeft="20px"
             android:paddingRight="20px"
-            android:text="质检"/>
+            android:text="质检"
+            android:textColor="#fff"/>
 
         <View
             android:layout_width="1dp"
@@ -42,8 +45,10 @@
             android:layout_height="40dp"
             android:gravity="center"
             android:paddingLeft="20px"
+
             android:paddingRight="20px"
-            android:text="物料编码"/>
+            android:text="物料编码"
+            android:textColor="#fff"/>
 
         <View
             android:layout_width="1dp"
@@ -56,8 +61,10 @@
             android:layout_height="40dp"
             android:gravity="center"
             android:paddingLeft="20px"
+
             android:paddingRight="20px"
-            android:text="供应商"/>
+            android:text="供应商"
+            android:textColor="#fff"/>
 
         <View
             android:layout_width="1dp"
@@ -71,7 +78,9 @@
             android:gravity="center"
             android:paddingLeft="20px"
             android:paddingRight="20px"
-            android:text="实收数"/>
+
+            android:text="实收数"
+            android:textColor="#fff"/>
 
         <View
             android:layout_width="1dp"
@@ -85,7 +94,9 @@
             android:gravity="center"
             android:paddingLeft="20px"
             android:paddingRight="20px"
-            android:text="送检数"/>
+            android:text="送检数"
+
+            android:textColor="#fff"/>
 
         <View
             android:layout_width="1dp"
@@ -99,7 +110,9 @@
             android:gravity="center"
             android:paddingLeft="20px"
             android:paddingRight="20px"
-            android:text="合格数"/>
+            android:text="合格数"
+
+            android:textColor="#fff"/>
 
         <View
             android:layout_width="1dp"
@@ -111,9 +124,11 @@
             android:layout_width="wrap_content"
             android:layout_height="60px"
             android:gravity="center"
+
             android:paddingLeft="20px"
             android:paddingRight="20px"
-            android:text="质检结果"/>
+            android:text="质检结果"
+            android:textColor="#fff"/>
 
         <View
             android:layout_width="1dp"

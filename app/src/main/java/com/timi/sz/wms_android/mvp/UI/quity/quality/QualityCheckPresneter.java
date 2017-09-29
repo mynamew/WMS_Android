@@ -43,7 +43,7 @@ public class QualityCheckPresneter extends MvpBasePresenter<QualityCheckView> {
                     ToastUtils.showShort(errorMsg);
                     List<QualityListBean> datas=new ArrayList<>();
                     for (int i = 0; i <20 ; i++) {
-                        datas.add(new QualityListBean(i%2==0,"P2323","超然",i*10,i*5,i*5,"合格"));
+                        datas.add(new QualityListBean(i%2==0,"P2323","超然",i,i,i,"合格"));
                     }
                     getView().getQualityList(datas);
                 }
