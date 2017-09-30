@@ -43,7 +43,6 @@
         <item name="android:drawableRight">@mipmap/set_next_page</item>
         <item name="android:paddingRight">15dp</item>
         <item name="android:layout_marginBottom">1dp</item>
-        <item name="android:drawableLeft">@mipmap/set_userinfo_icon</item>
     </style>
     <!--入库的标题的style-->
     <style name="stock_in_title">

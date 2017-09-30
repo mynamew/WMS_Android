@@ -3,8 +3,14 @@
                                        android:layout_width="match_parent"
                                        android:layout_height="50dp"
     >
-
     <ImageView
+        android:id="@+id/iv_title_bg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/login_txt_color"
+        android:visibility="gone"/>
+    <ImageView
+        android:id="@+id/iv_banner_bg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@mipmap/home_banner_head"/>

@@ -174,6 +174,7 @@ public class MainActivity extends BaseActivity<MainView, MainPresenter> implemen
 
     /**
      * 设置主页下方tab 的选中状态
+     *
      * @param isHome
      */
     public void setHomeTabCheckStatus(boolean isHome) {
@@ -243,7 +244,16 @@ public class MainActivity extends BaseActivity<MainView, MainPresenter> implemen
                  * 如果是wifi 下 自动下载apk  并提醒更新
                  */
                 if (NetWorkUtils.checkedNetWorkType(this) == NetWorkUtils.WIFI) {
+                    /**
+                     * 设置红点
+                     */
+                    ((SettingFragment) setFM).needUpdateVersionTip(true);
                     getPresenter().downLoadApk(bean.getObjectReturn().getUrl());
+                } else {
+                    /**
+                     * 设置红点
+                     */
+                    ((SettingFragment) setFM).needUpdateVersionTip(false);
                 }
             } else {
 //                ToastUtils.showShort("已是最新版本，无需更新");
@@ -251,13 +261,6 @@ public class MainActivity extends BaseActivity<MainView, MainPresenter> implemen
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
     }
 
     @OnClick({R.id.rl_home, R.id.rl_mine})

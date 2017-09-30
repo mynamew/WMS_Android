@@ -2,7 +2,9 @@ package com.timi.sz.wms_android.mvp.UI.stock_in;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.widget.NestedScrollView;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.timi.sz.wms_android.R;
 import com.timi.sz.wms_android.base.uils.Constants;
@@ -10,6 +12,7 @@ import com.timi.sz.wms_android.mvp.UI.stock_in.other_scan.OtherScanActivity;
 import com.timi.sz.wms_android.mvp.UI.stock_in.query.SearchBuyOrderActivity;
 import com.timi.sz.wms_android.mvp.base.view.BaseNoMvpActivity;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
@@ -23,6 +26,13 @@ import static com.timi.sz.wms_android.base.uils.Constants.CODE_STR;
 public class StockInActivity extends BaseNoMvpActivity {
 
 
+    @BindView(R.id.iv_title_bg)
+    ImageView ivTitleBg;
+    @BindView(R.id.iv_banner_bg)
+    ImageView ivBannerBg;
+    @BindView(R.id.nescroll_stock_in)
+    NestedScrollView nescrollStockIn;
+
     @Override
     public int setLayoutId() {
         return R.layout.activity_stock_in;
@@ -35,7 +45,17 @@ public class StockInActivity extends BaseNoMvpActivity {
 
     @Override
     public void initView() {
-
+        nescrollStockIn.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
+            @Override
+            public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+                /**
+                 * 设置可见 及透明度的变化
+                 */
+                ivTitleBg.setVisibility(View.VISIBLE);
+                ivTitleBg.setAlpha(scrollY);
+                ivBannerBg.setAlpha(255 - scrollY > 1 ? 255 - scrollY : 1);
+            }
+        });
     }
 
     @Override
@@ -80,5 +100,12 @@ public class StockInActivity extends BaseNoMvpActivity {
                 break;
         }
         startActivity(it);
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
     }
 }

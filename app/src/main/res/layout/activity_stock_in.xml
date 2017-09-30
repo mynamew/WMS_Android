@@ -23,7 +23,8 @@
 
     </RelativeLayout>
 
-    <ScrollView
+    <android.support.v4.widget.NestedScrollView
+        android:id="@+id/nescroll_stock_in"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbars="none">
@@ -42,7 +43,7 @@
                 android:layout_marginLeft="20px"
                 android:layout_marginRight="20px"
                 android:layout_marginTop="20px"
-                app:cardBackgroundColor="@color/statuscolor"
+                app:cardBackgroundColor="@color/login_txt_color"
                 app:cardCornerRadius="10px">
 
                 <LinearLayout
@@ -90,7 +91,7 @@
                 android:layout_marginLeft="20px"
                 android:layout_marginRight="20px"
                 android:layout_marginTop="20px"
-                app:cardBackgroundColor="@color/statuscolor"
+                app:cardBackgroundColor="@color/login_txt_color"
                 app:cardCornerRadius="10px">
 
                 <LinearLayout
@@ -167,7 +168,7 @@
                 android:layout_marginLeft="20px"
                 android:layout_marginRight="20px"
                 android:layout_marginTop="20px"
-                app:cardBackgroundColor="@color/statuscolor"
+                app:cardBackgroundColor="@color/login_txt_color"
                 app:cardCornerRadius="10px">
 
                 <LinearLayout
@@ -212,5 +213,5 @@
                 </LinearLayout>
             </android.support.v7.widget.CardView>
         </LinearLayout>
-    </ScrollView>
+    </android.support.v4.widget.NestedScrollView>
 </LinearLayout>

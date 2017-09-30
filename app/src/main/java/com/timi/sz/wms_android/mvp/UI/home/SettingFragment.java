@@ -4,10 +4,8 @@ import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
-import android.os.Bundle;
-import android.view.LayoutInflater;
+import android.support.v4.widget.NestedScrollView;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -15,6 +13,7 @@ import android.widget.TextView;
 import com.timi.sz.wms_android.R;
 import com.timi.sz.wms_android.base.uils.Constants;
 import com.timi.sz.wms_android.base.uils.LanguageUtils;
+import com.timi.sz.wms_android.base.uils.LogUitls;
 import com.timi.sz.wms_android.base.uils.NetWorkUtils;
 import com.timi.sz.wms_android.base.uils.PackageUtils;
 import com.timi.sz.wms_android.base.uils.QRCodeUtil;
@@ -35,9 +34,7 @@ import com.timi.sz.wms_android.view.MyDialog;
 import java.io.File;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.Unbinder;
 
 /**
  * 个人设置的碎片
@@ -45,20 +42,12 @@ import butterknife.Unbinder;
  * create at: 2017-08-17 11:34
  */
 public class SettingFragment extends BaseFragment<SetFragmentView, SetFragmentPresenter> implements SetFragmentDataCallBack, SetFragmentView {
-    @BindView(R.id.iv_set_headicon)
-    ImageView ivSetHeadicon;
-    @BindView(R.id.tv_set_username)
-    TextView tvSetUsername;
-    @BindView(R.id.tv_set_usercode)
-    TextView tvSetUsercode;
-    @BindView(R.id.iv_set_qr)
-    ImageView ivSetQr;
-    @BindView(R.id.rl_set_qr)
-    RelativeLayout rlSetQr;
-    @BindView(R.id.tv_set_new_version)
-    TextView tvSetNewVersion;
+    @BindView(R.id.iv_set_need_update)
+    ImageView ivSetNewVersion;
     @BindView(R.id.tv_set_userinfo)
     TextView tvSetUserinfo;
+    @BindView(R.id.tv_set_username)
+    TextView tvSetUserName;
     @BindView(R.id.tv_set_deviceinfo)
     TextView tvSetDeviceinfo;
     @BindView(R.id.tv_set_update_psw)
@@ -75,7 +64,14 @@ public class SettingFragment extends BaseFragment<SetFragmentView, SetFragmentPr
     TextView tvSetUpdateTeam;
     @BindView(R.id.tv_set_exit)
     TextView btnSetExit;
-    Unbinder unbinder;
+    @BindView(R.id.rl_set_update_version)
+    RelativeLayout rlSetUpdateVersion;
+    @BindView(R.id.scroll_set)
+    NestedScrollView scrollSet;
+    @BindView(R.id.iv_set_title_bg)
+    ImageView ivSetTitleBg;
+    @BindView(R.id.iv_set_banner_bg)
+    ImageView ivSetBannerBg;
     private UserInfoBean bean = null;
 
     /**
@@ -83,15 +79,9 @@ public class SettingFragment extends BaseFragment<SetFragmentView, SetFragmentPr
      *
      * @param view
      */
-    @OnClick({R.id.tv_set_update_team, R.id.tv_set_language, R.id.tv_set_exit, R.id.tv_set_server, R.id.btn_set_exit, R.id.rl_set_update_version, R.id.iv_set_qr, R.id.rl_set_qr, R.id.tv_set_userinfo, R.id.tv_set_deviceinfo, R.id.tv_set_update_psw, R.id.tv_set_about})
+    @OnClick({R.id.tv_set_update_team, R.id.tv_set_language, R.id.tv_set_exit, R.id.tv_set_server, R.id.btn_set_exit, R.id.rl_set_update_version, R.id.tv_set_userinfo, R.id.tv_set_deviceinfo, R.id.tv_set_update_psw, R.id.tv_set_about})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.iv_set_qr://二维码 弹窗 生成二维码
-                showQRDialog("杨政a12345678");
-                break;
-            case R.id.rl_set_qr://弹窗 二维码
-                showQRDialog("杨政a12345678");
-                break;
             case R.id.tv_set_userinfo://跳转到用户信息
                 startActivity(new Intent(getActivity(), UserInfoActivity.class));
                 break;
@@ -173,7 +163,8 @@ public class SettingFragment extends BaseFragment<SetFragmentView, SetFragmentPr
                         public void dialogClick(MyDialog dialog) {
                             // TODO: 2017/8/25 做登录的数据的清除工作
                             dialog.dismiss();
-                            SpUtils.getInstance().putBoolean(Constants.IS_FIRST_LOG, false);                            ((MainActivity) getActivity()).jumpToLoginActivity();
+                            SpUtils.getInstance().putBoolean(Constants.IS_FIRST_LOG, false);
+                            ((MainActivity) getActivity()).jumpToLoginActivity();
                         }
                     }).setAnimation(R.style.popWindow_animation_push);
         }
@@ -379,9 +370,23 @@ public class SettingFragment extends BaseFragment<SetFragmentView, SetFragmentPr
     @Override
     public void initData() {
         if (null != bean) {
-            tvSetUsername.setText(bean.userName);
-            tvSetUsercode.setText(bean.userDepart);
+            tvSetUserName.setText(bean.userName);
         }
+        /**
+         * 滑动监听
+         */
+        scrollSet.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
+            @Override
+            public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+                LogUitls.e("滑动--->", "scrollX-->" + scrollX + "---scrollY-->" + scrollY + "---oldScrollX--->" + oldScrollX + "---oldScrollY--->" + oldScrollY + "---总长度---->" + scrollSet.getHeight());
+                /**
+                 * 设置可见 及透明度的变化
+                 */
+                ivSetTitleBg.setVisibility(View.VISIBLE);
+                ivSetTitleBg.setAlpha(scrollY);
+                ivSetBannerBg.setAlpha(255-scrollY>1?255-scrollY:1);
+            }
+        });
     }
 
     @Override
@@ -389,9 +394,17 @@ public class SettingFragment extends BaseFragment<SetFragmentView, SetFragmentPr
         return new SetFragmentPresenter(getActivity());
     }
 
+    /**
+     * 设置是否需要更新
+     *
+     * @param isNeedUpdate
+     */
+    public void needUpdateVersionTip(boolean isNeedUpdate) {
+        ivSetNewVersion.setVisibility(isNeedUpdate ? View.VISIBLE : View.GONE);
+    }
+
     @Override
     public SetFragmentView createView() {
         return this;
     }
-
 }

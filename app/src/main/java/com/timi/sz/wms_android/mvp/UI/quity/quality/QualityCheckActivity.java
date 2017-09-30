@@ -87,6 +87,12 @@ public class QualityCheckActivity extends BaseActivity<QualityCheckView, Quality
                 getPresenter().getQualityList(params);
             }
         });
+        setRightImg(R.mipmap.ic_scan, new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // TODO: 2017/9/30 点击筛选按钮
+            }
+        });
     }
 
     @Override

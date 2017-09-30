@@ -30,7 +30,7 @@
         android:layout_marginLeft="20px"
         android:layout_marginRight="20px"
         android:layout_marginTop="20px"
-        app:cardBackgroundColor="@color/statuscolor"
+        app:cardBackgroundColor="@color/login_txt_color"
         app:cardCornerRadius="10px">
 
         <LinearLayout

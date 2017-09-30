@@ -1,63 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:background="@color/set_bg"
-              android:orientation="vertical">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/set_bg"
+                android:orientation="vertical">
 
-    <RelativeLayout
-        android:id="@+id/rl_set_qr"
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:background="@color/set_userinfo">
-
-        <ImageView
-            android:id="@+id/iv_set_headicon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="15dp"
-            android:src="@mipmap/set_user_org"/>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_toRightOf="@id/iv_set_headicon"
-            android:orientation="vertical"
-            android:padding="10dp">
-
-            <TextView
-                android:id="@+id/tv_set_username"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:text="用户名"
-                android:textColor="#fff"
-                android:textSize="14sp"/>
-
-            <TextView
-                android:id="@+id/tv_set_usercode"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="1234567898876543"
-                android:textColor="#fff"
-                android:textSize="14sp"/>
-        </LinearLayout>
-
-        <ImageView
-            android:id="@+id/iv_set_qr"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="15dp"
-            android:src="@mipmap/set_user_qr"/>
-    </RelativeLayout>
-
-    <ScrollView
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:id="@+id/scroll_set"
         android:scrollbars="none">
 
         <LinearLayout
@@ -65,9 +16,31 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="336px">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/mine_banner_bg"/>
+
+                <TextView
+                    android:id="@+id/tv_set_username"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="30px"
+                    android:text="王工"
+                    android:textColor="#fff"
+                    android:textSize="14sp"/>
+            </RelativeLayout>
+
             <TextView
                 android:id="@+id/tv_set_userinfo"
                 style="@style/set_tab_item"
+                android:layout_marginTop="2dp"
                 android:drawableLeft="@mipmap/set_userinfo"
                 android:text="@string/set_userinfo"/>
 
@@ -113,41 +86,23 @@
                 android:id="@+id/rl_set_update_version"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:background="@drawable/bg_set_tab_check"
-                android:paddingLeft="15dp"
-                >
+                android:background="@drawable/bg_set_tab_check">
 
                 <TextView
                     android:id="@+id/tv_set_update_version"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    style="@style/set_tab_item"
                     android:drawableLeft="@mipmap/set_update"
-                    android:drawablePadding="10dp"
-                    android:gravity="center_vertical"
                     android:text="@string/set_update_version"/>
 
-                <TextView
-                    android:id="@+id/tv_set_new_version"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="10dp"
-                    android:layout_toRightOf="@id/tv_set_update_version"
-                    android:background="@drawable/bg_set_new_version"
-                    android:paddingLeft="5dp"
-                    android:paddingRight="5dp"
-                    android:text="new"
-                    android:textColor="#fff"/>
-
-                <TextView
-                    android:id="@+id/tv_set_now_version"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                <ImageView
+                    android:id="@+id/iv_set_need_update"
+                    android:layout_width="30px"
+                    android:layout_height="30px"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:layout_marginRight="15dp"
-                    android:text="v 1.0"
-                    android:textColor="#333"/>
+                    android:layout_marginRight="70px"
+                    android:src="@mipmap/set_need_update"
+                    android:visibility="gone"/>
             </RelativeLayout>
 
             <TextView
@@ -162,7 +117,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"/>
         </LinearLayout>
-    </ScrollView>
+    </android.support.v4.widget.NestedScrollView>
 
     <Button
         android:id="@+id/btn_set_exit"
@@ -175,4 +130,31 @@
         android:text="@string/set_exit"
         android:textColor="#ffff"
         android:visibility="gone"/>
-</LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="88px">
+
+        <ImageView
+            android:id="@+id/iv_set_title_bg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/login_txt_color"
+            android:visibility="gone"/>
+
+        <ImageView
+            android:id="@+id/iv_set_banner_bg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/home_banner_head"/>
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/home_mine"
+            android:textColor="#fff"
+            android:textSize="18sp"/>
+    </RelativeLayout>
+</RelativeLayout>
