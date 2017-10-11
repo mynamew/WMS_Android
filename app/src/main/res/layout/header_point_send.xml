@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="vertical"
+    >
+    <!--送货单的item-->
+    <View
+        android:id="@+id/divide_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#999"/>
+
+
+    <LinearLayout
+        android:id="@+id/ll_content"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@color/beijin"
+        android:orientation="horizontal">
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="40dp"
+            android:background="#999"/>
+
+        <TextView
+            android:id="@+id/tv_line_name"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:paddingLeft="20px"
+            android:paddingRight="20px"
+            android:text="@string/line_name"
+            android:textColor="#fff"/>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="40dp"
+            android:background="#999"/>
+
+        <TextView
+            android:id="@+id/tv_goods_code"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:paddingLeft="20px"
+            android:paddingRight="20px"
+
+            android:text="@string/goods_code"
+            android:textColor="#fff"/>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="40dp"
+            android:background="#999"/>
+
+        <TextView
+            android:id="@+id/tv_send_num"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:paddingLeft="20px"
+            android:paddingRight="20px"
+
+            android:text="@string/item_send_num"
+            android:textColor="#fff"/>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="40dp"
+            android:background="#999"/>
+
+        <TextView
+            android:id="@+id/tv_have_receive_num"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:paddingLeft="20px"
+
+            android:paddingRight="20px"
+            android:text="@string/item_have_receive_num"
+            android:textColor="#fff"/>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="40dp"
+            android:background="#999"/>
+
+        <TextView
+            android:id="@+id/tv_point_num"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:paddingLeft="20px"
+            android:paddingRight="20px"
+
+            android:text="@string/item_point_num"
+            android:textColor="#fff"/>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="40dp"
+            android:background="#999"/>
+
+        <TextView
+            android:id="@+id/tv_spare_num"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:paddingLeft="20px"
+            android:paddingRight="20px"
+
+            android:text="@string/spare_num"
+            android:textColor="#fff"/>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="40dp"
+            android:background="#999"/>
+
+        <TextView
+            android:id="@+id/tv_form_orderno"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:paddingLeft="20px"
+            android:paddingRight="20px"
+
+            android:text="@string/item_form_orderno"
+            android:textColor="#fff"/>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="40dp"
+            android:background="#999"/>
+
+        <TextView
+            android:id="@+id/tv_buy_num"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:paddingLeft="20px"
+
+            android:paddingRight="20px"
+            android:text="@string/item_buy_num"
+            android:textColor="#fff"/>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="40dp"
+            android:background="#999"/>
+
+        <TextView
+            android:id="@+id/tv_arrive_goods_num"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:paddingLeft="20px"
+            android:paddingRight="20px"
+            android:text="@string/item_arrive_goods_num"
+
+            android:textColor="#fff"/>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="40dp"
+            android:background="#999"/>
+
+        <TextView
+            android:id="@+id/tv_in_stock_num"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:paddingLeft="20px"
+            android:paddingRight="20px"
+
+            android:text="@string/item_in_stock_num"
+            android:textColor="#fff"/>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="40dp"
+            android:background="#999"/>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#999"/>
+</LinearLayout>

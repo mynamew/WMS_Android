@@ -50,10 +50,10 @@
         <!-- 适配 -->
         <meta-data
             android:name="design_width"
-            android:value="768"/>
+            android:value="750"/>
         <meta-data
             android:name="design_height"
-            android:value="1280"/>
+            android:value="1330"/>
 
         <activity
             android:name=".mvp.UI.home.MainActivity"
@@ -217,6 +217,10 @@
         <activity android:name=".mvp.UI.stock_in_work.lib_adjust.LibraryAdjustActivity">
         </activity>
         <activity android:name=".mvp.UI.stock_in_work.query.StockInWorkQueryActivity">
+        </activity>
+        <activity android:name=".mvp.UI.stock_in_work.pack_adjust.PackAdjustActivity">
+        </activity>
+        <activity android:name=".mvp.UI.stock_in_work.stock_query.StockQueryActivity">
         </activity>
     </application>
 

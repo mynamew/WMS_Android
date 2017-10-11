@@ -151,6 +151,11 @@
     <string name="please_input_spare_num">请输入备品数</string>
     <string name="point_record">清点记录</string>
     <string name="goods_point">物品清点</string>
+    <string name="point_date">清点日期</string>
+    <string name="line_name">行号</string>
+    <string name="item_buy_num">采购数</string>
+    <string name="item_arrive_goods_num">到货数</string>
+    <string name="item_in_stock_num">入库数</string>
     /**====== 设备信息 ======**/
     <string name="deviceinfo">设备信息</string>
     <string name="set_deviceinfo_num">设备编号：</string>
@@ -334,11 +339,27 @@
     <string name="goods_num_tip">物品数量：</string>
     <string name="goods_name">物品名称：</string>
     <string name="goods_model">规格型号：</string>
+    /**====== 容器调整 ======**/
+
     /**====== 综合查询 ======**/
     <string name="query_library_transfer">库台转账</string>
     <string name="query_repertory_tip">库存查询</string>
     <string name="query_retrospective">追溯查询</string>
     <string name="query_record_tip">记录查询</string>
     <string name="query_statistical_tip">统计查询</string>
+    <string name="item_send_num">送货数</string>
+    <string name="item_have_receive_num">已收数</string>
+    <string name="item_point_num">请点数</string>
+    <string name="item_form_orderno">来源单据</string>
+    <string name="item_goods_code">物品编码</string>
+    <string name="pack_adjust">容器调整</string>
+    <string name="query_allot_scan_title">调拨—选单</string>
+    <string name="query_allot_scan_tip">调拨单：</string>
+    <string name="query_allot_scan_hint">请输入单号进行查询</string>
+    <string name="query_form_change_title">形态转换—选单：</string>
+    <string name="query_form_change_tip">形态转换单：</string>
+    <string name="query_point_title">盘点—选单</string>
+    <string name="query_point_tip">盘点单</string>
+
 
 </resources>

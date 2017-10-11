@@ -28,7 +28,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="@string/lib_location_change"
+            android:text="@string/pack_adjust"
             android:textColor="#fff"
             android:textSize="18sp"/>
 

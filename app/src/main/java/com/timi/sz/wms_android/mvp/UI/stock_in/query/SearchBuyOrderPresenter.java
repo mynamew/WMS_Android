@@ -59,6 +59,34 @@ public class SearchBuyOrderPresenter extends MvpBasePresenter<SearchBuyOrderView
                 @Override
                 public void onError(String errorMsg) {
                     ToastUtils.showShort(errorMsg);
+                    BuyOrdernoBean sendOrdernoBean = new BuyOrdernoBean();
+                    List<BuyOrdernoBean.DetailResultsBean> datas=new ArrayList<>();
+                    for (int i = 0; i <10 ; i++) {
+                        BuyOrdernoBean.DetailResultsBean bean=new BuyOrdernoBean.DetailResultsBean();
+                        bean.setId(i);
+                        bean.setPoLine(i);
+                        bean.setArrivalQty(100);
+                        bean.setCountQty(20);
+                        bean.setGiveQty(40);
+                        bean.setInStockQty(50);
+                        bean.setMaterialId(i);
+                        bean.setMaterialName("和呵呵无聊");
+                        bean.setMaterialStandard("实打实");
+                        bean.setPoQty(30);
+                        bean.setMaterialCode("P2345433");
+                        datas.add(bean);
+                    }
+                    sendOrdernoBean.setDetailResults(datas);
+                    BuyOrdernoBean.SummaryResultsBean summaryResultsBean = new BuyOrdernoBean.SummaryResultsBean();
+                    summaryResultsBean.setId(1);
+                    summaryResultsBean.setReceiveId(1);
+                    summaryResultsBean.setBizType(1);
+                    summaryResultsBean.setPoCode("P2343232");
+                    summaryResultsBean.setPoDate("2017-9-12");
+                    summaryResultsBean.setPurEmployeeName("实打实");
+                    summaryResultsBean.setSupplierName("雷");
+                    sendOrdernoBean.setSummaryResults(summaryResultsBean);
+                    getView().buyOrdernoQuery(sendOrdernoBean);
                 }
             });
         }
@@ -80,6 +108,35 @@ public class SearchBuyOrderPresenter extends MvpBasePresenter<SearchBuyOrderView
                 @Override
                 public void onError(String errorMsg) {
                     ToastUtils.showShort(errorMsg);
+                    SendOrdernoBean sendOrdernoBean = new SendOrdernoBean();
+                    List<SendOrdernoBean.DetailResultsBean> datas=new ArrayList<>();
+                    for (int i = 0; i <10 ; i++) {
+                        SendOrdernoBean.DetailResultsBean bean=new SendOrdernoBean.DetailResultsBean();
+                        bean.setId(i);
+                        bean.setPoLine(i);
+                        bean.setArrivalQty(100);
+                        bean.setCountQty(20);
+                        bean.setDnQty(30);
+                        bean.setGiveQty(40);
+                        bean.setInStockQty(50);
+                        bean.setMaterialId(i);
+                        bean.setMaterialName("和呵呵无聊");
+                        bean.setMaterialStandard("实打实");
+                        bean.setRecvQty(20);
+                        bean.setPoQty(30);
+                        bean.setMaterialCode("P2345433");
+                        datas.add(bean);
+                    }
+                    sendOrdernoBean.setDetailResults(datas);
+                    SendOrdernoBean.SummaryResultsBean summaryResultsBean = new SendOrdernoBean.SummaryResultsBean();
+                    summaryResultsBean.setAsnCode(1+"");
+                    summaryResultsBean.setAsnDate(1+"");
+                    summaryResultsBean.setBizType(1);
+                    summaryResultsBean.setCreaterName("2017-9-12");
+                    summaryResultsBean.setId(1);
+                    summaryResultsBean.setReceiveId(1);
+                    sendOrdernoBean.setSummaryResults(summaryResultsBean);
+                    getView().sendOrdernoQuery(sendOrdernoBean);
                 }
             });
         }

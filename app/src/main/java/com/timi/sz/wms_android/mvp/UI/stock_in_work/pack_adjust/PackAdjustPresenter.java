@@ -1,4 +1,4 @@
-package com.timi.sz.wms_android.mvp.UI.stock_in_work.lib_adjust;
+package com.timi.sz.wms_android.mvp.UI.stock_in_work.pack_adjust;
 
 import android.content.Context;
 
@@ -7,25 +7,27 @@ import com.timi.sz.wms_android.bean.stockin_work.ScanLocationResult;
 import com.timi.sz.wms_android.bean.stockin_work.ScanMaterialResult;
 import com.timi.sz.wms_android.http.callback.OnResultCallBack;
 import com.timi.sz.wms_android.http.subscriber.HttpSubscriber;
+import com.timi.sz.wms_android.mvp.UI.stock_in_work.lib_adjust.LibraryAdjustModel;
+import com.timi.sz.wms_android.mvp.UI.stock_in_work.lib_adjust.LibraryAdjustView;
 import com.timi.sz.wms_android.mvp.base.presenter.impl.MvpBasePresenter;
 
 import java.util.Map;
 
 /**
- * $dsc
+ * $dsc 容器调整的presenter
  * author: timi
  * create at: 2017-09-22 10:23
  */
 
-public class LibraryAdjustPresenter extends MvpBasePresenter<LibraryAdjustView> {
-    private LibraryAdjustModel model;
+public class PackAdjustPresenter extends MvpBasePresenter<PackAdjustView> {
+    private PackAdjustModel model;
     private HttpSubscriber<ScanLocationResult> scanLocationResultHttpSubscriber = null;
     private HttpSubscriber<ScanMaterialResult> scanMaterialResultHttpSubscriber = null;
     private HttpSubscriber<LibraryAdjustResult> libraryAdjustResultHttpSubscriber = null;
 
-    public LibraryAdjustPresenter(Context context) {
+    public PackAdjustPresenter(Context context) {
         super(context);
-        model = new LibraryAdjustModel();
+        model = new PackAdjustModel();
     }
 
     /**

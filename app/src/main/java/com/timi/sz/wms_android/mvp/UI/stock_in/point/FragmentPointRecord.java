@@ -2,9 +2,13 @@ package com.timi.sz.wms_android.mvp.UI.stock_in.point;
 
 import android.content.DialogInterface;
 import android.text.TextUtils;
-import android.widget.LinearLayout;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.timi.sz.wms_android.R;
+import com.timi.sz.wms_android.base.adapter.CommonSimpleHeaderAndFooterTypeAdapter;
+import com.timi.sz.wms_android.base.adapter.CommonViewHolder;
 import com.timi.sz.wms_android.base.uils.Constants;
 import com.timi.sz.wms_android.base.uils.PackageUtils;
 import com.timi.sz.wms_android.base.uils.SpUtils;
@@ -14,6 +18,8 @@ import com.timi.sz.wms_android.http.message.BaseMessage;
 import com.timi.sz.wms_android.http.message.event.StockInPointEvent;
 import com.timi.sz.wms_android.mvp.base.BaseFragment;
 import com.timi.sz.wms_android.view.MyDialog;
+import com.timi.sz.wms_android.view.excelview.DisplayUtil;
+import com.timi.sz.wms_android.view.excelview.MyExcelView;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -25,6 +31,8 @@ import java.util.Map;
 
 import butterknife.BindView;
 
+import static com.timi.sz.wms_android.base.uils.Constants.BUY_ORDE_NUM;
+
 /**
  * $dsc  清点记录
  * author: timi
@@ -32,8 +40,8 @@ import butterknife.BindView;
  */
 
 public class FragmentPointRecord extends BaseFragment<FragmentPointRecordView, FragmentPointRecordPresenter> implements FragmentPointRecordView {
-    @BindView(R.id.ll_stockin_point_record)
-    LinearLayout llStockinPointRecord;
+    @BindView(R.id.myexcel_point_record)
+    MyExcelView myexcelPointRecord;
     /**
      * 当前的位置
      */
@@ -51,7 +59,14 @@ public class FragmentPointRecord extends BaseFragment<FragmentPointRecordView, F
      * 备品的请点数量
      */
     private int spareNum;
-
+    //tabs
+    /**
+     * adapter
+     */
+    CommonSimpleHeaderAndFooterTypeAdapter<ArrayList<String>> commonSimpleHeaderTypeAdapter;    //code 码
+    private List<StockinMaterialBean> mDatas = new ArrayList<>();
+    ArrayList<ArrayList<String>> mTableDatas = new ArrayList<>();
+    ArrayList<String> mfristData = new ArrayList<>();
     @Override
     public FragmentPointRecordPresenter createPresenter() {
         return new FragmentPointRecordPresenter(getActivity());
@@ -139,10 +154,6 @@ public class FragmentPointRecord extends BaseFragment<FragmentPointRecordView, F
         });
         mPointRecordDialog.show();
     }
-
-    private List<StockinMaterialBean> mDatas = new ArrayList<>();
-    ArrayList<ArrayList<String>> mTableDatas = new ArrayList<ArrayList<String>>();
-
     @Override
     public void getPointRecord(List<StockinMaterialBean> datas) {
         mDatas.clear();
@@ -184,9 +195,6 @@ public class FragmentPointRecord extends BaseFragment<FragmentPointRecordView, F
      * 展示表体
      */
     public void showExcelDialog() {
-        llStockinPointRecord.removeAllViews();
-        mTableDatas.clear();
-        ArrayList<String> mfristData = new ArrayList<String>();
         mfristData.add("行号");
         mfristData.add("物品编码");
         mfristData.add("物品名称");
@@ -206,7 +214,94 @@ public class FragmentPointRecord extends BaseFragment<FragmentPointRecordView, F
             mRowDatas.add(stockinMaterialBean.getCreateDateTime());
             mTableDatas.add(mRowDatas);
         }
+        final ArrayList<Integer> allRowWidth = myexcelPointRecord.getAllRowWidth(mTableDatas, mfristData);
+        /**
+         * adapter  为空 则初始化
+         */
+        if (null == commonSimpleHeaderTypeAdapter) {
+            commonSimpleHeaderTypeAdapter = new CommonSimpleHeaderAndFooterTypeAdapter<ArrayList<String>>(mTableDatas) {
+                @Override
+                public int getLayoutId(int viewType) {
 
+                    return R.layout.item_point_record;
+                }
+
+                @Override
+                public void convert(CommonViewHolder holder, ArrayList<String> strings, int position) {
+                    /**
+                     * 初始化不同的布局 id
+                     */
+                    int[] ids = new int[]{R.id.tv_line_name, R.id.tv_goods_code, R.id.tv_buy_num, R.id.tv_arrive_good_num, R.id.tv_in_stock_num, R.id.tv_point_num, R.id.tv_spare_num};
+                    for (int i = 0; i < ids.length; i++) {
+                        TextView textView = holder.getTextView(ids[i]);
+                        ViewGroup.LayoutParams layoutParams = textView.getLayoutParams();
+                        layoutParams.width = DisplayUtil.dip2px(getActivity(), allRowWidth.get(i));
+                        textView.setLayoutParams(layoutParams);
+                        textView.setPadding(20, 20, 20, 20);
+                        textView.setText(strings.get(i));
+                    }
+                    /**
+                     * 设置底边分割线
+                     */
+                    if (position == 0) {
+                        holder.getView(R.id.divide_bottom).setVisibility(View.VISIBLE);
+                    } else {
+                        holder.getView(R.id.divide_bottom).setVisibility(View.GONE);
+
+                    }
+                }
+
+                @Override
+                protected int getHeaderLayoutId() {
+                        return R.layout.header_point_record;
+                }
+
+                @Override
+                protected void bindHeader(CommonViewHolder holder, int position) {
+                    /**
+                     * 初始化不同的布局 id
+                     */
+                    int[] ids = new int[]{R.id.tv_line_name, R.id.tv_goods_code, R.id.tv_buy_num, R.id.tv_arrive_good_num, R.id.tv_in_stock_num, R.id.tv_point_num, R.id.tv_spare_num};
+                    /**
+                     * 设置布局
+                     */
+                    for (int i = 0; i < ids.length; i++) {
+                        TextView textView = holder.getTextView(ids[i]);
+                        ViewGroup.LayoutParams layoutParams = textView.getLayoutParams();
+                        layoutParams.width = DisplayUtil.dip2px(getActivity(), allRowWidth.get(i));
+                        textView.setLayoutParams(layoutParams);
+                        textView.setPadding(20, 20, 20, 20);
+                        textView.setText(mfristData.get(i));
+                    }
+                    /**
+                     * 设置底边分割线
+                     */
+                    if (position == 0) {
+                        holder.getView(R.id.divide_bottom).setVisibility(View.VISIBLE);
+                    } else {
+                        holder.getView(R.id.divide_bottom).setVisibility(View.GONE);
+
+                    }
+                    holder.getView(R.id.ll_content).setBackgroundColor(getResources().getColor(R.color.beijin));
+                }
+
+            };
+        }
+        myexcelPointRecord.loadData(commonSimpleHeaderTypeAdapter);
+        commonSimpleHeaderTypeAdapter.notifyDataSetChanged();
+        /**
+         * 数据都加载完成调用 finishRefresh()方法
+         */
+        commonSimpleHeaderTypeAdapter.setOnItemClickListener(R.id.ll_content, new CommonSimpleHeaderAndFooterTypeAdapter.ItemClickListener() {
+            @Override
+            public void onItemClicked(View view, int position) {
+                /**
+                 * 弹出修改清点的弹出框
+                 */
+                showGoodsPointRecordDialog(position);
+            }
+        });
+        myexcelPointRecord.finishRefresh();
     }
 
     /**

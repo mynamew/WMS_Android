@@ -1,4 +1,4 @@
-package com.timi.sz.wms_android.mvp.UI.stock_in_work.lib_adjust;
+package com.timi.sz.wms_android.mvp.UI.stock_in_work.pack_adjust;
 
 import com.timi.sz.wms_android.bean.stockin_work.LibraryAdjustResult;
 import com.timi.sz.wms_android.bean.stockin_work.ScanLocationResult;
@@ -20,7 +20,7 @@ import io.reactivex.Observer;
  * create at: 2017-09-22 10:23
  */
 
-public class LibraryAdjustModel extends MvpBaseModel {
+public class PackAdjustModel extends MvpBaseModel {
     /**
      * 扫描库位码
      *

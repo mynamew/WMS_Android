@@ -2,18 +2,11 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:background="@color/set_bg"
     >
-
-
     <LinearLayout
-        android:id="@+id/ll_stockin_point_record"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"/>
-
-
-    <LinearLayout
+        android:id="@+id/ll_bottom_menu"
         android:layout_width="match_parent"
         android:layout_height="100px"
         android:layout_alignParentBottom="true"
@@ -21,7 +14,7 @@
         android:orientation="horizontal"
         android:paddingLeft="30px"
         android:paddingRight="30px"
-        android:visibility="gone">
+        android:visibility="visible">
 
         <Button
             android:id="@+id/btn_check"
@@ -45,6 +38,11 @@
             android:textColor="#fff"
             android:textSize="18sp"/>
     </LinearLayout>
-
-
+    <com.timi.sz.wms_android.view.excelview.MyExcelView
+        android:id="@+id/myexcel_point_record"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/ll_bottom_menu"
+        android:visibility="visible"
+        app:ptrMode="both"/>
 </RelativeLayout>

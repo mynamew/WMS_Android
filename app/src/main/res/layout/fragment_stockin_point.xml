@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             android:orientation="vertical"
-              android:background="@color/set_bg"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/set_bg"
+                android:orientation="vertical">
 
     <LinearLayout
         android:id="@+id/ll_top"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -24,6 +26,7 @@
                 android:padding="10dp"
                 android:text="@string/order_no"
                 android:textColor="#333"/>
+
             <TextView
                 android:id="@+id/tv_sip_buyer"
                 android:layout_width="0dp"
@@ -34,10 +37,11 @@
                 android:text="@string/buyer"
                 android:textColor="#333"/>
         </LinearLayout>
+
         <LinearLayout
-            android:background="#fff"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="#fff"
             android:orientation="vertical">
 
             <TextView
@@ -52,29 +56,33 @@
                 android:id="@+id/tv_sip_buy_date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="10dp"
                 android:gravity="right"
+                android:padding="10dp"
                 android:text="2017-08-17"
-                android:textSize="12sp"
-                android:textColor="#999"/>
+                android:textColor="#999"
+                android:textSize="12sp"/>
         </LinearLayout>
     </LinearLayout>
-    <LinearLayout
-        android:layout_marginBottom="100px"
-        android:layout_below="@id/ll_top"
-        android:id="@+id/ll_point_content"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"/>
+
     <Button
         android:id="@+id/btn_point_commit"
-        android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="20px"
         android:background="@drawable/selector_btn_bg_login"
         android:text="@string/confirm_commit"
         android:textColor="#fff"
-        android:layout_margin="20px"
         android:textSize="18sp"/>
+
+    <com.timi.sz.wms_android.view.excelview.MyExcelView
+        android:id="@+id/myexcel_point"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/btn_point_commit"
+        android:layout_below="@id/ll_top"
+        android:visibility="visible"
+        app:ptrMode="both"/>
+
 
 </RelativeLayout>

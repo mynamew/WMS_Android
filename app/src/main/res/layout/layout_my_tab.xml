@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                     android:layout_width="match_parent"
+                                     android:layout_height="88px"
+                                     android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/tab1"
+        android:layout_width="0dp"
+        android:layout_margin="10px"
+        android:text="容器存储"
+        android:gravity="center"
+        android:textColor="#fff"
+        android:background="@drawable/bg_mytab_selected"
+        android:layout_height="match_parent"
+        android:layout_weight="1"/>
+
+    <TextView
+        android:id="@+id/tab2"
+        android:layout_width="0dp"
+        android:layout_marginTop="10px"
+        android:layout_marginBottom="10px"
+        android:layout_marginRight="10px"
+        android:text="物品库存"
+        android:gravity="center"
+        android:textColor="@color/login_txt_color"
+        android:background="@drawable/bg_mytab_unselected"
+        android:layout_height="match_parent"
+        android:layout_weight="1"/>
+</com.zhy.autolayout.AutoLinearLayout>

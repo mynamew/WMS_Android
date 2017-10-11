@@ -1,4 +1,4 @@
-package com.timi.sz.wms_android.mvp.UI.stock_in_work.lib_adjust;
+package com.timi.sz.wms_android.mvp.UI.stock_in_work.pack_adjust;
 
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -22,11 +22,9 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 /**
- * 库位调整模块
- * author: timi
- * create at: 2017/9/22 10:25
+ *   容器转换
  */
-public class LibraryAdjustActivity extends BaseActivity<LibraryAdjustView, LibraryAdjustPresenter> implements LibraryAdjustView {
+public class PackAdjustActivity extends BaseActivity<PackAdjustView,PackAdjustPresenter> implements PackAdjustView {
     @BindView(R.id.tv_scan_location)
     TextView tvScanLocation;
     @BindView(R.id.tv_material_code)
@@ -41,10 +39,9 @@ public class LibraryAdjustActivity extends BaseActivity<LibraryAdjustView, Libra
     TextView tvGoodsName;
     @BindView(R.id.tv_goods_model)
     TextView tvGoodsModel;
-
     @Override
     public int setLayoutId() {
-        return R.layout.activity_library_adjust;
+        return R.layout.activity_pack_adjust;
     }
 
     @Override
@@ -63,15 +60,29 @@ public class LibraryAdjustActivity extends BaseActivity<LibraryAdjustView, Libra
     }
 
     @Override
-    public LibraryAdjustPresenter createPresenter() {
-        return new LibraryAdjustPresenter(this);
+    public PackAdjustPresenter createPresenter() {
+        return new PackAdjustPresenter(this);
     }
 
     @Override
-    public LibraryAdjustView createView() {
+    public PackAdjustView createView() {
         return this;
     }
 
+    @Override
+    public void scanLibLocatonCode(ScanLocationResult result) {
+
+    }
+
+    @Override
+    public void scanMaterialCode(ScanMaterialResult result) {
+
+    }
+
+    @Override
+    public void libraryAdjust(LibraryAdjustResult result) {
+
+    }
     @OnClick({R.id.iv_title_detail, R.id.iv_can_location,R.id.tv_scan_location,R.id.tv_material_code, R.id.iv_can_material_code, R.id.btn_confirm_commit})
     public void onViewClicked(View view) {
         switch (view.getId()) {
@@ -148,18 +159,4 @@ public class LibraryAdjustActivity extends BaseActivity<LibraryAdjustView, Libra
         }
     }
 
-    @Override
-    public void scanLibLocatonCode(ScanLocationResult result) {
-
-    }
-
-    @Override
-    public void scanMaterialCode(ScanMaterialResult result) {
-
-    }
-
-    @Override
-    public void libraryAdjust(LibraryAdjustResult result) {
-
-    }
 }

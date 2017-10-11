@@ -175,5 +175,23 @@ public class Constants {
     public static final String STOCK_OUT_OTHER_BILL_BEAN = "stock_out_other_bill_bean";//其他-生单传递实体的key
     public static final String STOCK_OUT_POINT_DETAIL_BEAN = "stock_out_point_detail_bean";//清点详情传递实体的key
 
+    /***********
+     * 库内作业跳转的key
+     *********************************************************************************************/
+    /**
+     * 搜索 跳转的intent code
+     */
+    public static final String STOCK_IN_WORK_CODE_STR = "stockin_work_code";//库内作业的code码的key
 
+    public static final int STOCK_IN_WORK_LIBRARY_ADJUST = 5201;//库位调整
+    public static final int STOCK_IN_WORK_ALLOT_SCAN = 5202;//扫描调入
+    public static final int STOCK_IN_WORK_ALLOT_ONE_STEP= 5203;//一步调入
+    public static final int STOCK_IN_WORK_PACK_ADJUST = 5204;//容器调整
+
+
+    public static final int STOCK_IN_WORK_FORM_CHANGE_OUT= 5205;//形态转换-出库
+    public static final int STOCK_IN_WORK_FORM_CHANGE_IN = 5206;//形态转换-入库
+
+    public static final int STOCK_IN_WORK_STOCK_QUERY = 5207;//库存呢查询
+    public static final int STOCK_IN_WORK_POINT = 5208;//盘点
 }

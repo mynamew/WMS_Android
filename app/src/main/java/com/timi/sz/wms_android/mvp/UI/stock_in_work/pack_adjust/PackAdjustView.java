@@ -1,4 +1,4 @@
-package com.timi.sz.wms_android.mvp.UI.stock_in_work.lib_adjust;
+package com.timi.sz.wms_android.mvp.UI.stock_in_work.pack_adjust;
 
 import com.timi.sz.wms_android.bean.stockin_work.LibraryAdjustResult;
 import com.timi.sz.wms_android.bean.stockin_work.ScanLocationResult;
@@ -11,7 +11,7 @@ import com.timi.sz.wms_android.mvp.base.view.iml.MvpBaseView;
  * create at: 2017-09-22 10:22
  */
 
-public interface LibraryAdjustView extends MvpBaseView {
+public interface PackAdjustView extends MvpBaseView {
     /**
      * 扫 库位码
      * @param result

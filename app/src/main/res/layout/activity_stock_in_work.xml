@@ -180,6 +180,7 @@
                     >
 
                     <TextView
+                        android:layout_width="148px"
                         style="@style/stock_in_title"
                         android:text="@string/stockin_work_query_and_count"/>
 

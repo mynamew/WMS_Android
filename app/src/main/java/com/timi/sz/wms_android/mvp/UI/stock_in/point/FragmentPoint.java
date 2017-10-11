@@ -4,11 +4,15 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.timi.sz.wms_android.R;
+import com.timi.sz.wms_android.base.adapter.CommonSimpleHeaderAndFooterTypeAdapter;
+import com.timi.sz.wms_android.base.adapter.CommonViewHolder;
 import com.timi.sz.wms_android.base.uils.Constants;
 import com.timi.sz.wms_android.base.uils.LogUitls;
 import com.timi.sz.wms_android.base.uils.PackageUtils;
@@ -18,8 +22,11 @@ import com.timi.sz.wms_android.bean.instock.search.BuyOrdernoBean;
 import com.timi.sz.wms_android.bean.instock.search.SendOrdernoBean;
 import com.timi.sz.wms_android.http.message.BaseMessage;
 import com.timi.sz.wms_android.http.message.event.StockInPointEvent;
+import com.timi.sz.wms_android.mvp.UI.quity.quality.QualityCheckActivity;
 import com.timi.sz.wms_android.mvp.base.BaseFragment;
 import com.timi.sz.wms_android.view.MyDialog;
+import com.timi.sz.wms_android.view.excelview.DisplayUtil;
+import com.timi.sz.wms_android.view.excelview.MyExcelView;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -50,8 +57,8 @@ public class FragmentPoint extends BaseFragment<FragmentPointView, FragmentPoint
     TextView tvSipBuyFrom;
     @BindView(R.id.tv_sip_buy_date)
     TextView tvSipBuyDate;
-    @BindView(R.id.ll_point_content)
-    LinearLayout llPointContent;
+    @BindView(R.id.myexcel_point)
+    MyExcelView myExcelViewPoint;
 
     private BuyOrdernoBean mBuyBean;
     private SendOrdernoBean mSendBean;
@@ -62,8 +69,15 @@ public class FragmentPoint extends BaseFragment<FragmentPointView, FragmentPoint
     //点击的item position
     private int curretnPosition;
     //tabs
-    ArrayList<ArrayList<String>> mTableDatas;
-    //code 码
+    /**
+     * 第一行
+     */
+    ArrayList<String> mfristData = null;
+    ArrayList<ArrayList<String>> mTableDatas = null;
+    /**
+     * adapter
+     */
+    CommonSimpleHeaderAndFooterTypeAdapter<ArrayList<String>> commonSimpleHeaderTypeAdapter;    //code 码
     private int intentCode;
 
     @Override
@@ -79,7 +93,12 @@ public class FragmentPoint extends BaseFragment<FragmentPointView, FragmentPoint
     @Override
     public void initData() {
         BaseMessage.register(this);
-        mTableDatas = new ArrayList<ArrayList<String>>();
+        //初始化链表
+        mTableDatas = new ArrayList<>();
+        mfristData = new ArrayList<>();
+        //显示加载中
+        myExcelViewPoint.showRefreshing();
+        //判断code  是送货单还是采购单
         Intent it = ((StockInPointActivity) getActivity()).getIntentCode();
         intentCode = it.getIntExtra(Constants.CODE_STR, Constants.COME_MATERAIL_NUM);
         if (intentCode == BUY_ORDE_NUM) {
@@ -112,7 +131,7 @@ public class FragmentPoint extends BaseFragment<FragmentPointView, FragmentPoint
     public void showGoodsPointDialog(final int position) {
         //存储点击位置
         curretnPosition = position;
-      if (null == mPointDialog) {
+        if (null == mPointDialog) {
             mPointDialog = new MyDialog(getActivity(), R.layout.dialog_stockin_point)
                     .setButtonListener(R.id.btn_stockin_point_cancel, getString(R.string.cancel), new MyDialog.DialogClickListener() {
                         @Override
@@ -141,7 +160,7 @@ public class FragmentPoint extends BaseFragment<FragmentPointView, FragmentPoint
                             params.put("OrgId", SpUtils.getInstance().getOrgId());
                             params.put("CountQty", pointNum);
                             params.put("GiveQty", spareNum);
-                            if (intentCode ==BUY_ORDE_NUM) {//采购单
+                            if (intentCode == BUY_ORDE_NUM) {//采购单
                                 //获取数据 显示dialog
                                 BuyOrdernoBean.SummaryResultsBean summaryResults = mBuyBean.getSummaryResults();
                                 List<BuyOrdernoBean.DetailResultsBean> detailResults = mBuyBean.getDetailResults();
@@ -152,7 +171,7 @@ public class FragmentPoint extends BaseFragment<FragmentPointView, FragmentPoint
                                 params.put("DetailId", detailResultsBean.getId());
                                 params.put("ReceiveId", summaryResults.getReceiveId());
                                 getPresenter().savePointMaterial(params);
-                            }else{//送货单
+                            } else {//送货单
                                 //获取数据 显示dialog
                                 List<SendOrdernoBean.DetailResultsBean> detailResults = mSendBean.getDetailResults();
                                 final SendOrdernoBean.DetailResultsBean detailResultsBean = detailResults.get(position);
@@ -167,7 +186,7 @@ public class FragmentPoint extends BaseFragment<FragmentPointView, FragmentPoint
                             dialog.dismiss();
                         }
                     }).setAnimation(R.style.popWindow_animation_push);
-            if (intentCode ==BUY_ORDE_NUM) {//采购单
+            if (intentCode == BUY_ORDE_NUM) {//采购单
                 //获取数据 显示dialog
                 List<BuyOrdernoBean.DetailResultsBean> detailResults = mBuyBean.getDetailResults();
                 final BuyOrdernoBean.DetailResultsBean detailResultsBean = detailResults.get(position);
@@ -178,7 +197,7 @@ public class FragmentPoint extends BaseFragment<FragmentPointView, FragmentPoint
                         .setTextViewContent(R.id.tv_stockin_point_buynum, String.format(getString(R.string.buy_num), detailResultsBean.getPoQty() + ""))
                         .setTextViewContent(R.id.tv_stockin_point_receive_pro_num, String.format(getString(R.string.arrive_good_num), detailResultsBean.getArrivalQty() + ""));
 
-            }else{//送货单
+            } else {//送货单
                 //获取数据 显示dialog
                 List<SendOrdernoBean.DetailResultsBean> detailResults = mSendBean.getDetailResults();
                 final SendOrdernoBean.DetailResultsBean detailResultsBean = detailResults.get(position);
@@ -299,9 +318,9 @@ public class FragmentPoint extends BaseFragment<FragmentPointView, FragmentPoint
      * 展示表体
      */
     public void showExcelDialog() {
-        llPointContent.removeAllViews();
-        mTableDatas.clear();
-        ArrayList<String> mfristData = new ArrayList<String>();
+        /**
+         * 表头的数据
+         */
         mfristData.add("行号");
         mfristData.add("物品编码");
         if (intentCode == BUY_ORDE_NUM) {//如果是采购单
@@ -320,7 +339,9 @@ public class FragmentPoint extends BaseFragment<FragmentPointView, FragmentPoint
             mfristData.add("到货数");
             mfristData.add("入库数");
         }
-        mTableDatas.add(mfristData);
+        /**
+         * 标题的数据
+         */
         if (intentCode == BUY_ORDE_NUM) {
             BuyOrdernoBean.SummaryResultsBean summaryResults = mBuyBean.getSummaryResults();
             /**
@@ -338,7 +359,7 @@ public class FragmentPoint extends BaseFragment<FragmentPointView, FragmentPoint
             for (int i = 0; i < mBuyBean.getDetailResults().size(); i++) {
                 ArrayList<String> mRowDatas = new ArrayList<String>();
                 BuyOrdernoBean.DetailResultsBean detailResultsBean = mBuyBean.getDetailResults().get(i);
-                mRowDatas.add(i + 1 + "");
+                mRowDatas.add(detailResultsBean.getPoLine() + "");
                 mRowDatas.add(detailResultsBean.getMaterialCode());
                 mRowDatas.add(detailResultsBean.getPoQty() + "");
                 mRowDatas.add(detailResultsBean.getArrivalQty() + "");
@@ -385,6 +406,120 @@ public class FragmentPoint extends BaseFragment<FragmentPointView, FragmentPoint
                 mTableDatas.add(mRowDatas);
             }
         }
+        final ArrayList<Integer> allRowWidth = myExcelViewPoint.getAllRowWidth(mTableDatas, mfristData);
+        /**
+         * adapter  为空 则初始化
+         */
+        if (null == commonSimpleHeaderTypeAdapter) {
+            commonSimpleHeaderTypeAdapter = new CommonSimpleHeaderAndFooterTypeAdapter<ArrayList<String>>(mTableDatas) {
+                @Override
+                public int getLayoutId(int viewType) {
+                    /**
+                     *根据code 返回不同的item 布局
+                     */
+                    if (intentCode == BUY_ORDE_NUM)
+                        return R.layout.item_point;
+                    else
+                        return R.layout.item_point_send;
+                }
+
+                @Override
+                public void convert(CommonViewHolder holder, ArrayList<String> strings, int position) {
+                    /**
+                     * 初始化不同的布局 id
+                     */
+                    int[] ids = null;
+                    if (intentCode == BUY_ORDE_NUM) {
+                        ids = new int[]{R.id.tv_line_name, R.id.tv_goods_code, R.id.tv_buy_num, R.id.tv_arrive_good_num, R.id.tv_in_stock_num, R.id.tv_point_num, R.id.tv_spare_num};
+                    } else {
+                        ids = new int[]{R.id.tv_line_name, R.id.tv_goods_code, R.id.tv_send_num, R.id.tv_have_receive_num, R.id.tv_point_num, R.id.tv_spare_num, R.id.tv_form_orderno, R.id.tv_buy_num, R.id.tv_arrive_goods_num, R.id.tv_in_stock_num};
+
+                    }
+                    for (int i = 0; i < ids.length; i++) {
+                        TextView textView = holder.getTextView(ids[i]);
+                        ViewGroup.LayoutParams layoutParams = textView.getLayoutParams();
+                        layoutParams.width = DisplayUtil.dip2px(getActivity(), allRowWidth.get(i));
+                        textView.setLayoutParams(layoutParams);
+                        textView.setPadding(20, 20, 20, 20);
+                        textView.setText(strings.get(i));
+                    }
+                    /**
+                     * 设置底边分割线
+                     */
+                    if (position == 0) {
+                        holder.getView(R.id.divide_bottom).setVisibility(View.VISIBLE);
+                    } else {
+                        holder.getView(R.id.divide_bottom).setVisibility(View.GONE);
+
+                    }
+                }
+
+                @Override
+                protected int getHeaderLayoutId() {
+                    /**
+                     *根据code 返回不同的item 布局
+                     */
+                    if (intentCode == BUY_ORDE_NUM)
+                        return R.layout.header_point;
+                    else
+                        return R.layout.header_point_send;
+                }
+
+                @Override
+                protected void bindHeader(CommonViewHolder holder, int position) {
+                    /**
+                     * 设置第一行的颜色
+                     */
+                    /**
+                     * 初始化不同的布局 id
+                     */
+                    int[] ids = null;
+                    if (intentCode == BUY_ORDE_NUM) {
+                        ids = new int[]{R.id.tv_line_name, R.id.tv_goods_code, R.id.tv_buy_num, R.id.tv_arrive_good_num, R.id.tv_in_stock_num, R.id.tv_point_num, R.id.tv_spare_num};
+                    } else {
+                        ids = new int[]{R.id.tv_line_name, R.id.tv_goods_code, R.id.tv_send_num, R.id.tv_have_receive_num, R.id.tv_point_num, R.id.tv_spare_num, R.id.tv_form_orderno, R.id.tv_buy_num, R.id.tv_arrive_goods_num, R.id.tv_in_stock_num};
+
+                    }
+                    /**
+                     * 设置布局
+                     */
+                    for (int i = 0; i < ids.length; i++) {
+                        TextView textView = holder.getTextView(ids[i]);
+                        ViewGroup.LayoutParams layoutParams = textView.getLayoutParams();
+                        layoutParams.width = DisplayUtil.dip2px(getActivity(), allRowWidth.get(i));
+                        textView.setLayoutParams(layoutParams);
+                        textView.setPadding(20, 20, 20, 20);
+                        textView.setText(mfristData.get(i));
+                    }
+                    /**
+                     * 设置底边分割线
+                     */
+                    if (position == 0) {
+                        holder.getView(R.id.divide_bottom).setVisibility(View.VISIBLE);
+                    } else {
+                        holder.getView(R.id.divide_bottom).setVisibility(View.GONE);
+
+                    }
+                    holder.getView(R.id.ll_content).setBackgroundColor(getResources().getColor(R.color.beijin));
+                }
+
+            };
+        }
+        myExcelViewPoint.loadData(commonSimpleHeaderTypeAdapter);
+        commonSimpleHeaderTypeAdapter.notifyDataSetChanged();
+        /**
+         * 数据都加载完成调用 finishRefresh()方法
+         */
+        commonSimpleHeaderTypeAdapter.setOnItemClickListener(R.id.ll_content, new CommonSimpleHeaderAndFooterTypeAdapter.ItemClickListener() {
+            @Override
+            public void onItemClicked(View view, int position) {
+                /**
+                 * 弹出保存清点的弹出框
+                 */
+                showGoodsPointDialog(position);
+            }
+        });
+        myExcelViewPoint.finishRefresh();
     }
 
     /**
@@ -393,9 +528,9 @@ public class FragmentPoint extends BaseFragment<FragmentPointView, FragmentPoint
      * @return
      */
     public int getReceiveId() {
-        if(intentCode==BUY_ORDE_NUM){
+        if (intentCode == BUY_ORDE_NUM) {
             return mBuyBean.getSummaryResults().getReceiveId();
-        }else {
+        } else {
             return mSendBean.getSummaryResults().getReceiveId();
         }
     }
@@ -412,12 +547,12 @@ public class FragmentPoint extends BaseFragment<FragmentPointView, FragmentPoint
             params.put("UserId", SpUtils.getInstance().getUserId());
             params.put("MAC", PackageUtils.getMac());
             params.put("OrgId", SpUtils.getInstance().getOrgId());
-            if(intentCode==BUY_ORDE_NUM){
+            if (intentCode == BUY_ORDE_NUM) {
                 params.put("BillCode", mBuyBean.getSummaryResults().getPoCode());
                 params.put("BizType", mBuyBean.getSummaryResults().getBizType());
                 params.put("ScanId", mBuyBean.getSummaryResults().getReceiveId());
                 getPresenter().getPODetailsByCode(params);
-            }else {
+            } else {
                 params.put("BillCode", mSendBean.getSummaryResults().getAsnCode());
                 params.put("BizType", mSendBean.getSummaryResults().getBizType());
                 params.put("ScanId", mSendBean.getSummaryResults().getReceiveId());
