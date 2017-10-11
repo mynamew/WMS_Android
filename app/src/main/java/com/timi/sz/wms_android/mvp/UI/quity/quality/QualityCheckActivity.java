@@ -214,7 +214,7 @@ public class QualityCheckActivity extends BaseActivity<QualityCheckView, Quality
 
             };
         }
-        myexcelQuality.loadData(commonSimpleHeaderTypeAdapter);
+        myexcelQuality.loadData(commonSimpleHeaderTypeAdapter,mTableDatas);
         commonSimpleHeaderTypeAdapter.notifyDataSetChanged();
         /**
          * 数据都加载完成调用 finishRefresh()方法

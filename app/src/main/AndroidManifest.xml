@@ -222,6 +222,8 @@
         </activity>
         <activity android:name=".mvp.UI.stock_in_work.stock_query.StockQueryActivity">
         </activity>
+        <activity android:name=".mvp.UI.quity.MRPReviewActivity">
+        </activity>
     </application>
 
 </manifest>

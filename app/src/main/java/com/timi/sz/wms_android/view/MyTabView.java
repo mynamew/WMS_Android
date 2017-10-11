@@ -41,15 +41,55 @@ public class MyTabView extends LinearLayout {
         View inflate = LayoutInflater.from(context).inflate(R.layout.layout_my_tab, null);
         tab1 = inflate.findViewById(R.id.tab1);
         tab2 = inflate.findViewById(R.id.tab2);
-        addView(inflate);
+        this.addView(inflate);
     }
-   public void setTabOnclickListener(final OnClickListener listener1, OnClickListener listener2){
-       tab1.setOnClickListener(new OnClickListener() {
-           @Override
-           public void onClick(View view) {
-               listener1.onClick(view);
-           }
-       });
-   }
+    /**
+     * 设置监听器
+     *
+     * @param clickListener
+     */
+    public MyTabView setTabOnclickListener(final TabClickListener clickListener) {
+        tab1.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                tab1.setBackgroundResource(R.drawable.bg_mytab_selected);
+                tab2.setBackgroundResource(R.drawable.bg_mytab_unselected);
+                tab1.setTextColor(getResources().getColor(R.color.white));
+                tab2.setTextColor(getResources().getColor(R.color.login_txt_color));
+                clickListener.tab1Click(view);
+            }
+        });
+        tab2.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                tab1.setBackgroundResource(R.drawable.bg_mytab_unselected);
+                tab2.setBackgroundResource(R.drawable.bg_mytab_selected);
+                tab1.setTextColor(getResources().getColor(R.color.login_txt_color));
+                tab2.setTextColor(getResources().getColor(R.color.white));
+                clickListener.tab2Click(view);
+            }
+        });
+        return this;
+    }
 
+    /**
+     * 设置tab 的内容
+      * @param tab1Content
+     * @param tab2Content
+     * @return
+     */
+    public MyTabView setTabContent(String tab1Content, String tab2Content) {
+        tab1.setText(tab1Content);
+        tab2.setText(tab2Content);
+        return this;
+    }
+
+    /**
+     * 点击事件
+     */
+    public interface TabClickListener {
+        void tab1Click(View view);
+
+        void tab2Click(View view);
+    }
 }

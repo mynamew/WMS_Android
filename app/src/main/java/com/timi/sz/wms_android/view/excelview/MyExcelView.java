@@ -2,6 +2,7 @@ package com.timi.sz.wms_android.view.excelview;
 
 import android.content.Context;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextPaint;
 import android.text.TextUtils;
@@ -110,7 +111,7 @@ public class MyExcelView extends PullToRefreshRecyclerView {
      *
      * @param adapter
      */
-    public void loadData(CommonSimpleHeaderAndFooterTypeAdapter<ArrayList<String>> adapter) {
+    public void loadData(CommonSimpleHeaderAndFooterTypeAdapter<ArrayList<String>> adapter,ArrayList<ArrayList<String>> mTableDatas) {
         switch (getCurrentStatus()) {
             case REFRESH:
                 this.adapter.notifyDataSetChanged();
@@ -122,7 +123,14 @@ public class MyExcelView extends PullToRefreshRecyclerView {
                 if (null == this.adapter) {
                     this.adapter = adapter;
                     rlvExcel.setAdapter(adapter);
-                    rlvExcel.setLayoutManager(new FixedGridLayoutManager());
+                    /**
+                     * 对没有数据的情况做处理，只显示表头
+                     */
+                    if(mTableDatas.isEmpty()){
+                        rlvExcel.setLayoutManager(new LinearLayoutManager(mContext,LinearLayoutManager.HORIZONTAL,true));
+                    }else{
+                        rlvExcel.setLayoutManager(new FixedGridLayoutManager());
+                    }
                 }
                 this.adapter.notifyDataSetChanged();
                 break;

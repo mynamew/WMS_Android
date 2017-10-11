@@ -151,7 +151,7 @@
         <item name="colorControlActivated">@color/login_txt_color</item>
     </style>
     <!--自定义表格的属性-->
-    <declare-styleable name="MyExcelView">
+    <declare-styleable name="MyExcelFromScrollView">
         <attr name="firshTabColor" format="integer"/>
         <attr name="firshTabBackground" format="integer"/>
         <attr name="contentBackground" format="integer"/>

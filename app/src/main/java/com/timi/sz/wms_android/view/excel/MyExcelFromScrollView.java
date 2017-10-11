@@ -32,7 +32,7 @@ import java.util.ArrayList;
  * create at: 2017-09-13 10:43
  */
 
-public class MyExcelView extends LinearLayout {
+public class MyExcelFromScrollView extends LinearLayout {
     /**
      * 上下文
      */
@@ -109,31 +109,31 @@ public class MyExcelView extends LinearLayout {
      */
     private SmartRefreshLayout mRefreshLayout;
 
-    public MyExcelView(Context context) {
+    public MyExcelFromScrollView(Context context) {
         super(context, null);
     }
 
-    public MyExcelView(Context context, @Nullable AttributeSet attrs) {
+    public MyExcelFromScrollView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         mContext = context;
         /**
          * 初始化表格的属性
          */
-        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.MyExcelView);
-        maxColumnWidth = (int) typedArray.getDimension(R.styleable.MyExcelView_maxWidth, 1000);
-        minColumnWidth = (int) typedArray.getDimension(R.styleable.MyExcelView_minWidth, 50);
-        maxRowHeight = (int) typedArray.getDimension(R.styleable.MyExcelView_maxHeight, 100);
-        minRowHeight = (int) typedArray.getDimension(R.styleable.MyExcelView_minHeight, 10);
-        mTableHeadTextColor = typedArray.getInt(R.styleable.MyExcelView_firshTabColor, R.color.white);
-        mTableContentTextColor = typedArray.getInt(R.styleable.MyExcelView_contentColor, R.color.black);
-        mFristRowBackGroudColor = typedArray.getInt(R.styleable.MyExcelView_firshTabBackground, R.color.beijin);
-        mTextViewSize = typedArray.getInteger(R.styleable.MyExcelView_textSize, 16);
-        isLockFristRow = typedArray.getBoolean(R.styleable.MyExcelView_isLockFristRow, false);
+        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.MyExcelFromScrollView);
+        maxColumnWidth = (int) typedArray.getDimension(R.styleable.MyExcelFromScrollView_maxWidth, 1000);
+        minColumnWidth = (int) typedArray.getDimension(R.styleable.MyExcelFromScrollView_minWidth, 50);
+        maxRowHeight = (int) typedArray.getDimension(R.styleable.MyExcelFromScrollView_maxHeight, 100);
+        minRowHeight = (int) typedArray.getDimension(R.styleable.MyExcelFromScrollView_minHeight, 10);
+        mTableHeadTextColor = typedArray.getInt(R.styleable.MyExcelFromScrollView_firshTabColor, R.color.white);
+        mTableContentTextColor = typedArray.getInt(R.styleable.MyExcelFromScrollView_contentColor, R.color.black);
+        mFristRowBackGroudColor = typedArray.getInt(R.styleable.MyExcelFromScrollView_firshTabBackground, R.color.beijin);
+        mTextViewSize = typedArray.getInteger(R.styleable.MyExcelFromScrollView_textSize, 16);
+        isLockFristRow = typedArray.getBoolean(R.styleable.MyExcelFromScrollView_isLockFristRow, false);
         typedArray.recycle();
         initView(context);
     }
 
-    public MyExcelView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public MyExcelFromScrollView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 
@@ -557,7 +557,7 @@ public class MyExcelView extends LinearLayout {
         return 0;
     }
 
-    public MyExcelView setTableViewListener(OnTableViewListener mTableViewListener) {
+    public MyExcelFromScrollView setTableViewListener(OnTableViewListener mTableViewListener) {
         this.mTableViewListener = mTableViewListener;
         return this;
     }

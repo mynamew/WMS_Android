@@ -287,7 +287,7 @@ public class FragmentPointRecord extends BaseFragment<FragmentPointRecordView, F
 
             };
         }
-        myexcelPointRecord.loadData(commonSimpleHeaderTypeAdapter);
+        myexcelPointRecord.loadData(commonSimpleHeaderTypeAdapter,mTableDatas);
         commonSimpleHeaderTypeAdapter.notifyDataSetChanged();
         /**
          * 数据都加载完成调用 finishRefresh()方法

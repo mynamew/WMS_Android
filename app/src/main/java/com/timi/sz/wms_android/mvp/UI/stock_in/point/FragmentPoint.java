@@ -505,7 +505,7 @@ public class FragmentPoint extends BaseFragment<FragmentPointView, FragmentPoint
 
             };
         }
-        myExcelViewPoint.loadData(commonSimpleHeaderTypeAdapter);
+        myExcelViewPoint.loadData(commonSimpleHeaderTypeAdapter,mTableDatas);
         commonSimpleHeaderTypeAdapter.notifyDataSetChanged();
         /**
          * 数据都加载完成调用 finishRefresh()方法
