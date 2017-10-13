@@ -337,6 +337,34 @@
     /**====== 质量检验 ======**/
     <string name="quality_check_title">来料—品质检验</string>
     <string name="quality_material_quality">物料质检</string>
+    <string name="start_time_tip">开始日期：</string>
+    /**====== 普通质检 ======**/
+    <string name="receive_material_date">收料日期：%1$s</string>
+    <string name="instock_total_num_tip">入库总数：</string>
+    <string name="receive_num">\t实收数：%1$s</string>
+    <string name="please_input_spot_check_num">请输入抽检数</string>
+    <string name="refuse_receive_num">拒收数：</string>
+    <string name="spot_check_num">抽检数：</string>
+    <string name="badness_total_num">不良总数：</string>
+    <string name="badness_percent">不良率：</string>
+    <string name="next_page">下一步</string>
+    <string name="normal_quality_title">来料—质检详情（普检）</string>
+    /**====== 普通质检 ======**/
+    <string name="standard_level">标准水平：%1$s</string>
+    <string name="sample_half_yard">试样半码：%1$s</string>
+    <string name="check_method">检验方法：%1$s</string>
+    <string name="aql_tip">AQL：</string>
+    <string name="stringency_tip">严格度：</string>
+    <string name="sample_num">样品数：</string>
+    <string name="serious_unqualitfied_tip">严重不合格原因：</string>
+    <string name="badness_total_num_tip">不良样品总数：</string>
+    <string name="main_unqualitfied_tip">主要不合格原因：</string>
+    <string name="tv_monor_unqualitfied_tip">催要不合格原因：</string>
+    <string name="quality_complete">质检完成</string>
+    <string name="please_scan_assign_material_code">请扫描指定退料条码</string>
+    <string name="rd_qualified_tip">合格</string>
+    <string name="rd_unqualified">不合格</string>
+    <string name="rd_wait_deal">待定</string>
     /******************************************************************************************************************************************************/
     /******************************************************************************************************************************************************/
     /**====== 库内作业 ======**/
@@ -382,6 +410,10 @@
     <string name="item_goods_model">规格型号</string>
     <string name="item_goods_num">物品数量</string>
     <string name="item_goods_current_status">当前状态</string>
+    <string name="allot_orderno_tip">调拨单：</string>
+    <string name="wait_point_num_tip">待点总数：</string>
+    <string name="create_date_tip">制单日期：</string>
+    <string name="have_point_num_tip">已点总数：</string>
     /******************************************************************************************************************************************************/
     /******************************************************************************************************************************************************/
     /**====== 综合查询 ======**/
@@ -389,6 +421,11 @@
     <string name="query_retrospective">追溯查询</string>
     <string name="query_record_tip">记录查询</string>
     <string name="query_statistical_tip">统计查询</string>
+    <string name="end_time_tip">结束日期：</string>
+    <string name="receive_material_orderno_tip">收料通知单：</string>
+    <string name="goods_code_tip">物品代码：</string>
+    <string name="supplier_name_tip">供应商名称：</string>
+    <string name="tv_pack_name_tip">包装条码：</string>
 
 
 </resources>

@@ -32,11 +32,12 @@
 
     <ImageView
         android:id="@+id/iv_title_right"
-        android:layout_width="60px"
-        android:layout_height="80px"
+        android:layout_width="80px"
+        android:layout_height="60px"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:paddingRight="20px"
+        android:paddingLeft="20px"
         android:src="@mipmap/stockin_detail"
         android:visibility="gone"/>
 

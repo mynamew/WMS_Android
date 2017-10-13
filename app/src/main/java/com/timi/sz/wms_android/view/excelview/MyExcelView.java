@@ -111,7 +111,7 @@ public class MyExcelView extends PullToRefreshRecyclerView {
      *
      * @param adapter
      */
-    public void loadData(CommonSimpleHeaderAndFooterTypeAdapter<ArrayList<String>> adapter,ArrayList<ArrayList<String>> mTableDatas) {
+    public void loadData(CommonSimpleHeaderAndFooterTypeAdapter<ArrayList<String>> adapter, ArrayList<ArrayList<String>> mTableDatas) {
         switch (getCurrentStatus()) {
             case REFRESH:
                 this.adapter.notifyDataSetChanged();
@@ -120,18 +120,20 @@ public class MyExcelView extends PullToRefreshRecyclerView {
                 this.adapter.notifyDataSetChanged();
                 break;
             case NORMAL:
-                if (null == this.adapter) {
-                    this.adapter = adapter;
-                    rlvExcel.setAdapter(adapter);
-                    /**
-                     * 对没有数据的情况做处理，只显示表头
-                     */
-                    if(mTableDatas.isEmpty()){
-                        rlvExcel.setLayoutManager(new LinearLayoutManager(mContext,LinearLayoutManager.HORIZONTAL,true));
-                    }else{
-                        rlvExcel.setLayoutManager(new FixedGridLayoutManager());
-                    }
+                this.adapter = null;
+                this.adapter = adapter;
+                rlvExcel.setAdapter(adapter);
+                /**
+                 * 对没有数据的情况做处理，只显示表头
+                 */
+                if (mTableDatas.isEmpty()) {
+                    rlvExcel.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, true));
+                } else {
+                    rlvExcel.setLayoutManager(new FixedGridLayoutManager());
                 }
+                /**
+                 * 更新
+                 */
                 this.adapter.notifyDataSetChanged();
                 break;
             default:

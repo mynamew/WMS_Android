@@ -82,6 +82,8 @@ public class StockQueryActivity extends BaseActivity<StockQueryView, StockQueryP
                 tvGoodsType.setVisibility(View.GONE);
                 setTextViewText(tvGoodsType, R.string.goods_type, "0");
                 setTextViewText(tvGoodsTotalNum, R.string.goods_total_num, "0");
+                mTableDatas.add(mfristData);
+                adapterInit();
             }
         });
     }
@@ -97,7 +99,6 @@ public class StockQueryActivity extends BaseActivity<StockQueryView, StockQueryP
         mfristData.add(getString(R.string.item_goods_model));
         mfristData.add(getString(R.string.item_goods_num));
         mfristData.add(getString(R.string.item_goods_current_status));
-//        mTableDatas.add(mfristData);
         adapterInit();
     }
 

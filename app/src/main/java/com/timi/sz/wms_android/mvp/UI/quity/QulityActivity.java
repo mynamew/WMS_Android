@@ -5,7 +5,9 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.timi.sz.wms_android.R;
+import com.timi.sz.wms_android.mvp.UI.quity.advance_quality.AdvanceQualityActivity;
 import com.timi.sz.wms_android.mvp.UI.quity.quality.QualityCheckActivity;
+import com.timi.sz.wms_android.mvp.UI.quity.reject.QualityRejectActivity;
 import com.timi.sz.wms_android.mvp.base.view.BaseNoMvpActivity;
 
 import butterknife.ButterKnife;
@@ -35,22 +37,25 @@ public class QulityActivity extends BaseNoMvpActivity {
     @Override
     public void initData() {
 
+
     }
 
     /**
      * 点击事件
+     *
      * @param view
      */
     @OnClick({R.id.tv_qulity_inspection, R.id.tv_qulity_mrp_inspection, R.id.tv_qulity_update_qr})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tv_qulity_inspection://品质检验
-                startActivity(new Intent(this,QualityCheckActivity.class));
+                startActivity(new Intent(this, QualityCheckActivity.class));
                 break;
             case R.id.tv_qulity_mrp_inspection://mrp 评审
-                startActivity(new Intent(this,MRPReviewActivity.class));
+                startActivity(new Intent(this, AdvanceQualityActivity.class));
                 break;
             case R.id.tv_qulity_update_qr://条码修改
+                startActivity(new Intent(this, QualityRejectActivity.class));
                 break;
         }
     }

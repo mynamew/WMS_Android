@@ -1,5 +1,6 @@
 package com.timi.sz.wms_android.mvp.UI.quity.quality;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +12,10 @@ import com.timi.sz.wms_android.base.adapter.CommonViewHolder;
 import com.timi.sz.wms_android.base.uils.LogUitls;
 import com.timi.sz.wms_android.base.uils.PackageUtils;
 import com.timi.sz.wms_android.bean.quality.QualityListBean;
+import com.timi.sz.wms_android.mvp.UI.quity.advance_quality.AdvanceQualityActivity;
+import com.timi.sz.wms_android.mvp.UI.quity.nomal_quality.NormalQualityActivity;
 import com.timi.sz.wms_android.mvp.base.BaseActivity;
+import com.timi.sz.wms_android.view.MyDialog;
 import com.timi.sz.wms_android.view.excelview.DisplayUtil;
 import com.timi.sz.wms_android.view.excelview.MyExcelView;
 
@@ -31,6 +35,8 @@ public class QualityCheckActivity extends BaseActivity<QualityCheckView, Quality
 
     @BindView(R.id.myexcel_quality)
     MyExcelView myexcelQuality;
+
+    private MyDialog myDialog;
     /**
      * 第一行
      */
@@ -87,10 +93,17 @@ public class QualityCheckActivity extends BaseActivity<QualityCheckView, Quality
                 getPresenter().getQualityList(params);
             }
         });
-        setRightImg(R.mipmap.ic_scan, new View.OnClickListener() {
+        setRightImg(R.mipmap.quatily_fliter, new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO: 2017/9/30 点击筛选按钮
+                if (null == myDialog) {
+                    myDialog = new MyDialog(QualityCheckActivity.this, R.layout.dialog_quality_query);
+                    
+                }else{
+                    // TODO: 2017/10/13 设置上次填写的数据
+
+                }
+                myDialog.show();
             }
         });
     }
@@ -126,24 +139,24 @@ public class QualityCheckActivity extends BaseActivity<QualityCheckView, Quality
         /**
          * 存储下方列表的数据
          */
-        LogUitls.e("数据1--->",mTableDatas);
+        LogUitls.e("数据1--->", mTableDatas);
         for (int i = 0; i < datas.size(); i++) {
             ArrayList<String> mRowDatas = new ArrayList<>();
             QualityListBean detailResultsBean = datas.get(i);
             //质检
-            mRowDatas.add(detailResultsBean.isFinsishQuality ? "十大" : "请问");
+            mRowDatas.add(detailResultsBean.isFinsishQuality ? "√" : "");
             //物料码
-            mRowDatas.add(detailResultsBean.getMaterialCode() + (System.currentTimeMillis() % 2 == 0 ? "奇数" : "偶数"));
+            mRowDatas.add(detailResultsBean.getMaterialCode() + (System.currentTimeMillis() % 2 == 0 ? "9.05.0022" : "9.05.0022111"));
             //供应商
-            mRowDatas.add(detailResultsBean.getSupplier() + "算得上是");
+            mRowDatas.add(detailResultsBean.getSupplier() + "超然");
             //实收数
-            mRowDatas.add(detailResultsBean.getHaveReceveNum() + "是多少啊");
+            mRowDatas.add(detailResultsBean.getHaveReceveNum() + "30");
             //送检数
-            mRowDatas.add(detailResultsBean.getSendQuaskityNum() + "啊实打实");
+            mRowDatas.add(detailResultsBean.getSendQuaskityNum() + "0");
             //合格数
-            mRowDatas.add(detailResultsBean.getQualitiedNum() + "啊实打实");
+            mRowDatas.add(detailResultsBean.getQualitiedNum() + "0");
             //质检结果
-            mRowDatas.add(detailResultsBean.getQualityResult() + "撒旦撒旦");
+            mRowDatas.add(detailResultsBean.getQualityResult() + "合格");
             mTableDatas.add(mRowDatas);
         }
         final ArrayList<Integer> allRowWidth = myexcelQuality.getAllRowWidth(mTableDatas, mfristData);
@@ -186,6 +199,7 @@ public class QualityCheckActivity extends BaseActivity<QualityCheckView, Quality
                 protected int getHeaderLayoutId() {
                     return R.layout.header_quality;
                 }
+
                 @Override
                 protected void bindHeader(CommonViewHolder holder, int position) {
                     /**
@@ -214,8 +228,15 @@ public class QualityCheckActivity extends BaseActivity<QualityCheckView, Quality
 
             };
         }
-        myexcelQuality.loadData(commonSimpleHeaderTypeAdapter,mTableDatas);
+        myexcelQuality.loadData(commonSimpleHeaderTypeAdapter, mTableDatas);
         commonSimpleHeaderTypeAdapter.notifyDataSetChanged();
+        commonSimpleHeaderTypeAdapter.setOnItemClickListener(R.id.ll_content, new CommonSimpleHeaderAndFooterTypeAdapter.ItemClickListener() {
+            @Override
+            public void onItemClicked(View view, int position) {
+                startActivity(new Intent(QualityCheckActivity.this, NormalQualityActivity.class));
+//                startActivity(new Intent(QualityCheckActivity.this, AdvanceQualityActivity.class));
+            }
+        });
         /**
          * 数据都加载完成调用 finishRefresh()方法
          */

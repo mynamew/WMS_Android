@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/set_bg"
     android:orientation="vertical"
     tools:context="com.timi.sz.wms_android.mvp.UI.stock_in_work.stock_query.StockQueryActivity">
@@ -71,6 +72,7 @@
         <com.timi.sz.wms_android.view.excelview.MyExcelView
             android:id="@+id/myexcel_stock_query"
             android:layout_width="match_parent"
+            app:ptrMode="both"
             android:layout_height="match_parent"/>
     </LinearLayout>
 

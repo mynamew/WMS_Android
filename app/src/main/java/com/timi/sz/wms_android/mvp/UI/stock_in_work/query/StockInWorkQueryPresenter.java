@@ -41,7 +41,7 @@ public class StockInWorkQueryPresenter extends MvpBasePresenter<StockInWorkQuery
      * @param params
      */
     public void queryAllotScan(Map<String, Object> params) {
-
+         getView().showProgressDialog();
         if (null == allotScanResultHttpSubscriber) {
             allotScanResultHttpSubscriber = new HttpSubscriber<>(new OnResultCallBack<AllotScanResult>() {
                 @Override
@@ -52,6 +52,7 @@ public class StockInWorkQueryPresenter extends MvpBasePresenter<StockInWorkQuery
                 @Override
                 public void onError(String errorMsg) {
                     ToastUtils.showShort(errorMsg);
+                    getView().queryAllotScan(new AllotScanResult());
                 }
             });
         }

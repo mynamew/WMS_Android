@@ -224,6 +224,14 @@
         </activity>
         <activity android:name=".mvp.UI.quity.MRPReviewActivity">
         </activity>
+        <activity android:name=".mvp.UI.stock_in_work.allot_scan.AllotScanActivity">
+        </activity>
+        <activity android:name=".mvp.UI.quity.advance_quality.AdvanceQualityActivity">
+        </activity>
+        <activity android:name=".mvp.UI.quity.reject.QualityRejectActivity">
+        </activity>
+        <activity android:name=".mvp.UI.quity.advance1_quality.Advance1QualityActivity">
+        </activity>
     </application>
 
 </manifest>

@@ -153,18 +153,19 @@
                         android:layout_height="wrap_content"
                         android:paddingLeft="47px"
                         android:paddingTop="10px"
-                        android:text="@string/spot_check_num"
+                        android:text="@string/sample_num"
                         android:textColor="#333"
                         />
 
-                    <EditText
+                    <TextView
                         android:id="@+id/et_spot_check_num"
                         android:layout_width="match_parent"
                         android:layout_height="60px"
+                        android:gravity="center_vertical"
                         android:background="@drawable/bg_sbo_rectangle_et"
                         android:focusable="false"
                         android:focusableInTouchMode="false"
-                        android:hint="@string/please_input_spot_check_num"
+                        android:text="0"
                         android:paddingLeft="20px"
                         android:textSize="14sp"/>
                 </LinearLayout>
@@ -356,14 +357,20 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="合格"/>
+                            android:text="@string/rd_qualified_tip"/>
 
                         <RadioButton
                             android:id="@+id/rd_unqualified"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="不合格"/>
+                            android:text="@string/rd_unqualified"/>
+                        <RadioButton
+                            android:id="@+id/rd_wait_deal"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/rd_wait_deal"/>
                     </RadioGroup>
                 </LinearLayout>
             </LinearLayout>

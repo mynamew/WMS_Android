@@ -1,5 +1,6 @@
 package com.timi.sz.wms_android.mvp.UI.stock_in_work.query;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.KeyEvent;
@@ -20,6 +21,7 @@ import com.timi.sz.wms_android.bean.stockin_work.query.FormChangeInResult;
 import com.timi.sz.wms_android.bean.stockin_work.query.FormChangeOutResult;
 import com.timi.sz.wms_android.bean.stockin_work.query.PointResult;
 import com.timi.sz.wms_android.bean.stockin_work.query.StockQueryResult;
+import com.timi.sz.wms_android.mvp.UI.stock_in_work.allot_scan.AllotScanActivity;
 import com.timi.sz.wms_android.mvp.base.BaseActivity;
 import com.timi.sz.wms_android.qrcode.utils.Constant;
 
@@ -110,7 +112,7 @@ public class StockInWorkQueryActivity extends BaseActivity<StockInWorkQueryView,
 
     @Override
     public void queryAllotScan(AllotScanResult result) {
-
+        startActivity(new Intent(this, AllotScanActivity.class));
     }
 
     @Override
@@ -127,6 +129,7 @@ public class StockInWorkQueryActivity extends BaseActivity<StockInWorkQueryView,
     public void queryFormChangeIn(FormChangeInResult result) {
 
     }
+
     @Override
     public void queryPoint(PointResult result) {
 
@@ -147,16 +150,18 @@ public class StockInWorkQueryActivity extends BaseActivity<StockInWorkQueryView,
                 break;
         }
     }
+
     /**
      * 发起请求的方法
+     *
      * @param orderNum
      */
     private void requestManagerMethod(String orderNum) {
-        Map<String,Object> params=new HashMap<>();
+        Map<String, Object> params = new HashMap<>();
         params.put("UserId", SpUtils.getInstance().getUserId());
-        params.put("OrgId",SpUtils.getInstance().getOrgId());
+        params.put("OrgId", SpUtils.getInstance().getOrgId());
         params.put("MAC", PackageUtils.getMac());
-        params.put("BillNo",orderNum);
+        params.put("BillNo", orderNum);
         /**
          * 不同的intentcode  请求不同
          */
@@ -177,8 +182,6 @@ public class StockInWorkQueryActivity extends BaseActivity<StockInWorkQueryView,
                 getPresenter().queryPoint(params);
                 break;
         }
-
-
 
 
     }
