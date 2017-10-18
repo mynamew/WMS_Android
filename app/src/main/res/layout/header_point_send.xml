@@ -114,21 +114,21 @@
             android:text="@string/spare_num"
             android:textColor="#fff"/>
 
-        <View
-            android:layout_width="1dp"
-            android:layout_height="40dp"
-            android:background="#999"/>
+        <!--<View-->
+            <!--android:layout_width="1dp"-->
+            <!--android:layout_height="40dp"-->
+            <!--android:background="#999"/>-->
 
-        <TextView
-            android:id="@+id/tv_form_orderno"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:gravity="center"
-            android:paddingLeft="20px"
-            android:paddingRight="20px"
+        <!--<TextView-->
+            <!--android:id="@+id/tv_form_orderno"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="40dp"-->
+            <!--android:gravity="center"-->
+            <!--android:paddingLeft="20px"-->
+            <!--android:paddingRight="20px"-->
 
-            android:text="@string/item_form_orderno"
-            android:textColor="#fff"/>
+            <!--android:text="@string/item_form_orderno"-->
+            <!--android:textColor="#fff"/>-->
 
         <View
             android:layout_width="1dp"

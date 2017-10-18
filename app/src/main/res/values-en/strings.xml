@@ -406,5 +406,11 @@
     <string name="please_input_pick_num">请输入挑选数量（或特采）</string>
     <string name="please_input_mark_info">请输入备注信息</string>
     <string name="mrp_normal_mark_tip">备注：</string>
+    <string name="mr_advance_sample_num">样品数：%1$s</string>
+    <string name="mrp_advance_main_num">主要不良原因：%1$s</string>
+    <string name="mrp_advance_second_num">次要不良原因：%1$s</string>
+    <string name="mrp_aql_tip">AQL：%1$s</string>
+    <string name="header_spare_num">备品数</string>
+    <string name="header_point_num">请点数</string>
 
 </resources>

@@ -79,6 +79,14 @@ public class FragmentPointRecord extends BaseFragment<FragmentPointRecordView, F
 
     @Override
     public void initData() {
+
+        mfristData.add(getString(R.string.line_name));
+        mfristData.add(getString(R.string.item_goods_name));
+        mfristData.add(getString(R.string.item_material_name));
+        mfristData.add(getString(R.string.header_point_num));
+        mfristData.add(getString(R.string.header_spare_num));
+        mfristData.add(getString(R.string.point_date));
+
         BaseMessage.register(this);
         int receiveId = ((StockInPointActivity) getActivity()).getReceiveId();
         intentCode = ((StockInPointActivity) getActivity()).getIntentCode().getIntExtra(Constants.CODE_STR, Constants.COME_MATERAIL_NUM);
@@ -195,14 +203,7 @@ public class FragmentPointRecord extends BaseFragment<FragmentPointRecordView, F
      * 展示表体
      */
     public void showExcelDialog() {
-        mfristData.add("行号");
-        mfristData.add("物品编码");
-        mfristData.add("物品名称");
-        mfristData.add("请点数");
-        mfristData.add("备品数");
-        mfristData.add("清点日期");
-        mTableDatas.add(mfristData);
-
+        mTableDatas.clear();
         for (int i = 0; i < mDatas.size(); i++) {
             ArrayList<String> mRowDatas = new ArrayList<String>();
             StockinMaterialBean stockinMaterialBean = mDatas.get(i);
@@ -231,7 +232,7 @@ public class FragmentPointRecord extends BaseFragment<FragmentPointRecordView, F
                     /**
                      * 初始化不同的布局 id
                      */
-                    int[] ids = new int[]{R.id.tv_line_name, R.id.tv_goods_code, R.id.tv_buy_num, R.id.tv_arrive_good_num, R.id.tv_in_stock_num, R.id.tv_point_num, R.id.tv_spare_num};
+                    int[] ids = new int[]{R.id.tv_line_name, R.id.tv_goods_code, R.id.tv_goods_name, R.id.tv_point_num, R.id.tv_spare_num, R.id.tv_point_date};
                     for (int i = 0; i < ids.length; i++) {
                         TextView textView = holder.getTextView(ids[i]);
                         ViewGroup.LayoutParams layoutParams = textView.getLayoutParams();
@@ -261,16 +262,21 @@ public class FragmentPointRecord extends BaseFragment<FragmentPointRecordView, F
                     /**
                      * 初始化不同的布局 id
                      */
-                    int[] ids = new int[]{R.id.tv_line_name, R.id.tv_goods_code, R.id.tv_buy_num, R.id.tv_arrive_good_num, R.id.tv_in_stock_num, R.id.tv_point_num, R.id.tv_spare_num};
+                    int[] ids = new int[]{R.id.tv_line_name, R.id.tv_goods_code, R.id.tv_goods_name, R.id.tv_point_num, R.id.tv_spare_num, R.id.tv_point_date};
                     /**
                      * 设置布局
                      */
                     for (int i = 0; i < ids.length; i++) {
                         TextView textView = holder.getTextView(ids[i]);
-                        ViewGroup.LayoutParams layoutParams = textView.getLayoutParams();
-                        layoutParams.width = DisplayUtil.dip2px(getActivity(), allRowWidth.get(i));
-                        textView.setLayoutParams(layoutParams);
-                        textView.setPadding(20, 20, 20, 20);
+                        /**
+                         * 不为空的时候设置其大小
+                         */
+                        if(!allRowWidth.isEmpty()){
+                            ViewGroup.LayoutParams layoutParams = textView.getLayoutParams();
+                            layoutParams.width = DisplayUtil.dip2px(getActivity(), allRowWidth.get(i));
+                            textView.setLayoutParams(layoutParams);
+                            textView.setPadding(20, 20, 20, 20);
+                        }
                         textView.setText(mfristData.get(i));
                     }
                     /**

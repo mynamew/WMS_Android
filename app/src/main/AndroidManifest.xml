@@ -60,7 +60,11 @@
             android:launchMode="singleTask"
             android:screenOrientation="portrait"/>
         <activity android:name=".mvp.UI.splash.SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
 
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
         </activity>
         <activity
             android:name=".mvp.UI.login.LoginActivity"
@@ -236,11 +240,8 @@
             android:windowSoftInputMode="stateVisible|adjustResize|stateHidden|stateAlwaysHidden">
         </activity>
         <activity android:name=".mvp.UI.quity.normal_review.MRPNormalReviewActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
+        </activity>
+        <activity android:name=".mvp.UI.quity.advance_review.MRPAdvanceReviewActivity">
         </activity>
     </application>
 

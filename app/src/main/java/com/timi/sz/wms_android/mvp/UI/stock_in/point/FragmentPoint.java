@@ -105,7 +105,26 @@ public class FragmentPoint extends BaseFragment<FragmentPointView, FragmentPoint
             mBuyBean = new Gson().fromJson(it.getStringExtra(Constants.IN_STOCK_BUY_BEAN), BuyOrdernoBean.class);
         } else {//送货单
             mSendBean = new Gson().fromJson(it.getStringExtra(Constants.IN_STOCK_SEND_BEAN), SendOrdernoBean.class);
-
+        }
+        /**
+         * 设置表头的数据
+         */
+        mfristData.add("行号");
+        mfristData.add("物品编码");
+        if (intentCode == BUY_ORDE_NUM) {//如果是采购单
+            mfristData.add("采购数");
+            mfristData.add("到货数");
+            mfristData.add("入库数");
+            mfristData.add("清点数");
+            mfristData.add("备品数");
+        } else {
+            mfristData.add("送货数");
+            mfristData.add("已收数");
+            mfristData.add("清点数");
+            mfristData.add("备品数");
+            mfristData.add("采购数");
+            mfristData.add("到货数");
+            mfristData.add("入库数");
         }
         /**
          * 显示表体
@@ -318,27 +337,7 @@ public class FragmentPoint extends BaseFragment<FragmentPointView, FragmentPoint
      * 展示表体
      */
     public void showExcelDialog() {
-        /**
-         * 表头的数据
-         */
-        mfristData.add("行号");
-        mfristData.add("物品编码");
-        if (intentCode == BUY_ORDE_NUM) {//如果是采购单
-            mfristData.add("采购数");
-            mfristData.add("到货数");
-            mfristData.add("入库数");
-            mfristData.add("清点数");
-            mfristData.add("备品数");
-        } else {
-            mfristData.add("送货数");
-            mfristData.add("已收数");
-            mfristData.add("清点数");
-            mfristData.add("备品数");
-            mfristData.add("来源单据");
-            mfristData.add("采购数");
-            mfristData.add("到货数");
-            mfristData.add("入库数");
-        }
+        mTableDatas.clear();
         /**
          * 标题的数据
          */
@@ -366,7 +365,6 @@ public class FragmentPoint extends BaseFragment<FragmentPointView, FragmentPoint
                 mRowDatas.add(detailResultsBean.getInStockQty() + "");
                 mRowDatas.add(detailResultsBean.getCountQty() + "");
                 mRowDatas.add(detailResultsBean.getGiveQty() + "");
-                mTableDatas.add(mRowDatas);
             }
         } else {//送货单
             /**
@@ -432,7 +430,7 @@ public class FragmentPoint extends BaseFragment<FragmentPointView, FragmentPoint
                     if (intentCode == BUY_ORDE_NUM) {
                         ids = new int[]{R.id.tv_line_name, R.id.tv_goods_code, R.id.tv_buy_num, R.id.tv_arrive_good_num, R.id.tv_in_stock_num, R.id.tv_point_num, R.id.tv_spare_num};
                     } else {
-                        ids = new int[]{R.id.tv_line_name, R.id.tv_goods_code, R.id.tv_send_num, R.id.tv_have_receive_num, R.id.tv_point_num, R.id.tv_spare_num, R.id.tv_form_orderno, R.id.tv_buy_num, R.id.tv_arrive_goods_num, R.id.tv_in_stock_num};
+                        ids = new int[]{R.id.tv_line_name, R.id.tv_goods_code, R.id.tv_send_num, R.id.tv_have_receive_num, R.id.tv_point_num, R.id.tv_spare_num, R.id.tv_buy_num, R.id.tv_arrive_goods_num, R.id.tv_in_stock_num};
 
                     }
                     for (int i = 0; i < ids.length; i++) {
@@ -477,7 +475,8 @@ public class FragmentPoint extends BaseFragment<FragmentPointView, FragmentPoint
                     if (intentCode == BUY_ORDE_NUM) {
                         ids = new int[]{R.id.tv_line_name, R.id.tv_goods_code, R.id.tv_buy_num, R.id.tv_arrive_good_num, R.id.tv_in_stock_num, R.id.tv_point_num, R.id.tv_spare_num};
                     } else {
-                        ids = new int[]{R.id.tv_line_name, R.id.tv_goods_code, R.id.tv_send_num, R.id.tv_have_receive_num, R.id.tv_point_num, R.id.tv_spare_num, R.id.tv_form_orderno, R.id.tv_buy_num, R.id.tv_arrive_goods_num, R.id.tv_in_stock_num};
+//                        ids = new int[]{R.id.tv_line_name, R.id.tv_goods_code, R.id.tv_send_num, R.id.tv_have_receive_num, R.id.tv_point_num, R.id.tv_spare_num, R.id.tv_form_orderno, R.id.tv_buy_num, R.id.tv_arrive_goods_num, R.id.tv_in_stock_num};
+                        ids = new int[]{R.id.tv_line_name, R.id.tv_goods_code, R.id.tv_send_num, R.id.tv_have_receive_num, R.id.tv_point_num, R.id.tv_spare_num, R.id.tv_buy_num, R.id.tv_arrive_goods_num, R.id.tv_in_stock_num};
 
                     }
                     /**
@@ -505,7 +504,7 @@ public class FragmentPoint extends BaseFragment<FragmentPointView, FragmentPoint
 
             };
         }
-        myExcelViewPoint.loadData(commonSimpleHeaderTypeAdapter,mTableDatas);
+        myExcelViewPoint.loadData(commonSimpleHeaderTypeAdapter, mTableDatas);
         commonSimpleHeaderTypeAdapter.notifyDataSetChanged();
         /**
          * 数据都加载完成调用 finishRefresh()方法
@@ -578,7 +577,11 @@ public class FragmentPoint extends BaseFragment<FragmentPointView, FragmentPoint
         params.put("UserId", SpUtils.getInstance().getUserId());
         params.put("MAC", PackageUtils.getMac());
         params.put("OrgId", SpUtils.getInstance().getOrgId());
-        params.put("ScanId", mBuyBean.getSummaryResults().getReceiveId());
+        if (intentCode == BUY_ORDE_NUM) {
+            params.put("ScanId", mBuyBean.getSummaryResults().getReceiveId());
+        } else {
+            params.put("ScanId", mSendBean.getSummaryResults().getReceiveId());
+        }
         params.put("SubmitType", 0);
         getPresenter().commitMaterialPoint(params);
     }

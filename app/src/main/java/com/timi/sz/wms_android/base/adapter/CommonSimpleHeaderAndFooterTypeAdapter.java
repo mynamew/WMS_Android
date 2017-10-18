@@ -99,7 +99,7 @@ public abstract class CommonSimpleHeaderAndFooterTypeAdapter<T> extends Recycler
                     @Override
                     public void onClick(View v) {
                         if (listener != null) {
-                            listener.onItemClicked(v, position);
+                            listener.onItemClicked(v, position-1);
                         }
                     }
                 });
