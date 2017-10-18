@@ -60,11 +60,7 @@
             android:launchMode="singleTask"
             android:screenOrientation="portrait"/>
         <activity android:name=".mvp.UI.splash.SplashActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
         </activity>
         <activity
             android:name=".mvp.UI.login.LoginActivity"
@@ -206,7 +202,10 @@
         </activity>
         <activity android:name=".mvp.UI.quity.quality.QualityCheckActivity">
         </activity>
-        <activity android:name=".mvp.UI.quity.nomal_quality.NormalQualityActivity">
+        <activity
+            android:name=".mvp.UI.quity.nomal_quality.NormalQualityActivity"
+            android:windowSoftInputMode="stateVisible|adjustResize|stateHidden|stateAlwaysHidden">
+            >
         </activity>
         <activity android:name=".mvp.UI.stock_out.divide_print.SplitPrintActivity">
         </activity>
@@ -222,15 +221,26 @@
         </activity>
         <activity android:name=".mvp.UI.stock_in_work.stock_query.StockQueryActivity">
         </activity>
-        <activity android:name=".mvp.UI.quity.MRPReviewActivity">
+        <activity android:name=".mvp.UI.quity.mrp.MRPReviewActivity">
         </activity>
         <activity android:name=".mvp.UI.stock_in_work.allot_scan.AllotScanActivity">
         </activity>
-        <activity android:name=".mvp.UI.quity.advance_quality.AdvanceQualityActivity">
+        <activity
+            android:name=".mvp.UI.quity.advance_quality.AdvanceQualityActivity"
+            android:windowSoftInputMode="stateVisible|adjustResize|stateHidden|stateAlwaysHidden">
         </activity>
         <activity android:name=".mvp.UI.quity.reject.QualityRejectActivity">
         </activity>
-        <activity android:name=".mvp.UI.quity.advance1_quality.Advance1QualityActivity">
+        <activity
+            android:name=".mvp.UI.quity.advance1_quality.Advance1QualityActivity"
+            android:windowSoftInputMode="stateVisible|adjustResize|stateHidden|stateAlwaysHidden">
+        </activity>
+        <activity android:name=".mvp.UI.quity.normal_review.MRPNormalReviewActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
         </activity>
     </application>
 

@@ -163,8 +163,6 @@
                         android:layout_height="60px"
                         android:gravity="center_vertical"
                         android:background="@drawable/bg_sbo_rectangle_et"
-                        android:focusable="false"
-                        android:focusableInTouchMode="false"
                         android:text="0"
                         android:paddingLeft="20px"
                         android:textSize="14sp"/>
@@ -190,8 +188,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="60px"
                         android:background="@drawable/bg_sbo_rectangle_et"
-                        android:focusable="false"
-                        android:focusableInTouchMode="false"
                         android:hint="请输入拒收数"
                         android:paddingLeft="20px"
                         android:textSize="14sp"/>

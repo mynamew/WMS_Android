@@ -1,5 +1,6 @@
 package com.timi.sz.wms_android.mvp.UI.quity.nomal_quality;
 
+import com.timi.sz.wms_android.bean.quality.normal.NormalQualityData;
 import com.timi.sz.wms_android.mvp.base.view.iml.MvpBaseView;
 
 /**
@@ -9,4 +10,20 @@ import com.timi.sz.wms_android.mvp.base.view.iml.MvpBaseView;
  */
 
 public interface NormalQualityView extends MvpBaseView {
+    /**
+     * 获取普通质检的数据
+     *
+     * @param result
+     */
+    void getNormalQualityData(NormalQualityData result);
+
+    /**
+     * 提交普通质检的结果
+     */
+    void setNormalQualityData(boolean isQualified, int rejectNum);
+
+    /**
+     * 质检确认
+     */
+    void submitFinish();
 }

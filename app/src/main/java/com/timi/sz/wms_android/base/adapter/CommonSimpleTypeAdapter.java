@@ -8,8 +8,9 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
-/** 
+/**
  * base recycleview  adapter
+ *
  * @autor timi
  * create at 2017/5/22 14:06
  */
@@ -17,8 +18,6 @@ public abstract class CommonSimpleTypeAdapter<T> extends RecyclerView.Adapter<Co
     //存储监听回调
     private SparseArray<ItemClickListener> onClickListeners;
     private List<T> dataList;
-
-
 
     public interface ItemClickListener {
         void onItemClicked(View view, int position);
@@ -63,21 +62,21 @@ public abstract class CommonSimpleTypeAdapter<T> extends RecyclerView.Adapter<Co
      * @param position
      */
     @Override
-    public void onBindViewHolder(CommonViewHolder holder,final  int position) {
+    public void onBindViewHolder(CommonViewHolder holder, final int position) {
         T item = dataList.get(position);
         convert(holder, item, position);//子类实现
         //设置点击监听
-        for (int i = 0; i < onClickListeners.size(); ++i){
+        for (int i = 0; i < onClickListeners.size(); ++i) {
             int id = onClickListeners.keyAt(i);
             View view = holder.getView(id);
-            if(view == null)
+            if (view == null)
                 continue;
             final ItemClickListener listener = onClickListeners.get(id);
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(listener != null){
-                        listener.onItemClicked(v,position);
+                    if (listener != null) {
+                        listener.onItemClicked(v, position);
                     }
                 }
             });
@@ -86,21 +85,22 @@ public abstract class CommonSimpleTypeAdapter<T> extends RecyclerView.Adapter<Co
 
     @Override
     public int getItemCount() {
-        return dataList== null?0:dataList.size();
+        return dataList == null ? 0 : dataList.size();
     }
 
     /**
      * 销毁Adapter 优化
      */
-    public void destroyAdapter(){
-        if(onClickListeners != null)
+    public void destroyAdapter() {
+        if (onClickListeners != null)
             onClickListeners.clear();
         onClickListeners = null;
 
-        if(dataList != null)
+        if (dataList != null)
             dataList.clear();
         dataList = null;
     }
+
     /**
      * 获取列表控件的视图id(由子类负责完成)
      *

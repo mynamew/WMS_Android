@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--不良原因的弹出框-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:baselineAligned="false">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_sbo_rectangle_et"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="60px"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:text="@string/badness_num"/>
+        <TextView
+            android:id="@+id/tv_badness_reason"
+            android:layout_width="match_parent"
+            android:text="@string/badness_reason_tip"
+            android:layout_marginLeft="20px"
+            android:paddingLeft="20px"
+            android:gravity="center_vertical"
+            android:layout_height="60px"/>
+        <EditText
+            android:id="@+id/et_badness_num"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20px"
+            android:padding="20px"
+            android:inputType="number"
+            android:gravity="center"
+            android:textSize="14sp"
+            android:background="@drawable/bg_sbo_rectangle_et"
+            android:hint="@string/please_input_badness_num"
+            />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.1dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:background="@color/dialog_divider"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="100px"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn_cancel"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/bg_btn_logout_left"
+                android:gravity="center"
+                android:text="@string/cancel"
+                android:textColor="@color/tab_txt_unselect"
+                android:textSize="16sp"/>
+
+            <View
+                android:layout_width="0.1dp"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="5dp"
+                android:background="@color/dialog_divider"/>
+
+            <Button
+                android:id="@+id/btn_confirm"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/bg_btn_logout_right"
+                android:gravity="center"
+                android:text="@string/confirm"
+                android:textColor="@color/colorPrimary"
+                android:textSize="16sp"/>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.orhanobut.logger.Logger;
@@ -141,8 +142,8 @@ public class PackageUtils {
             }
         } catch (IOException ex) {
             // 赋予默认值
-            ex.printStackTrace();
+            macSerial="00-50-56-C0-00-01";
         }
-        return macSerial;
+        return TextUtils.isEmpty(macSerial)?"00-50-56-C0-00-01":macSerial;
     }
 }

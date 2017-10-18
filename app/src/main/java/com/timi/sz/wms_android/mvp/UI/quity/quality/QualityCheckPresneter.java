@@ -20,7 +20,8 @@ import java.util.Map;
 
 public class QualityCheckPresneter extends MvpBasePresenter<QualityCheckView> {
     private QualityCheckModel model;
-    private HttpSubscriber<QualityListBean> qualityListBeanHttpSubscriber;
+    private HttpSubscriber<List<QualityListBean>> qualityListBeanHttpSubscriber;
+    private HttpSubscriber<Object> dontNeedQualityHttpSubscriber;
 
     public QualityCheckPresneter(Context context) {
         super(context);
@@ -41,15 +42,52 @@ public class QualityCheckPresneter extends MvpBasePresenter<QualityCheckView> {
                 @Override
                 public void onError(String errorMsg) {
                     ToastUtils.showShort(errorMsg);
-                    List<QualityListBean> datas=new ArrayList<>();
-                    for (int i = 0; i <20 ; i++) {
-                        datas.add(new QualityListBean(i%2==0,"P2323","超然",i,i,i,"合格"));
-                    }
-                    getView().getQualityList(datas);
                 }
             });
         }
         model.getQualityList(params, qualityListBeanHttpSubscriber);
+    }
+
+    /**
+     * 免检
+     */
+    public void submitExemption(Map<String, Object> params, final int position) {
+        getView().showProgressDialog();
+        if (null == dontNeedQualityHttpSubscriber) {
+            dontNeedQualityHttpSubscriber = new HttpSubscriber<>(new OnResultCallBack<Object>() {
+                @Override
+                public void onSuccess(Object o) {
+                    getView().queryReceiptForIQC(position);
+                }
+
+                @Override
+                public void onError(String errorMsg) {
+                    ToastUtils.showShort(errorMsg);
+                    getView().queryReceiptForIQC(position);
+                }
+            });
+        }
+        model.submitExemption(params, dontNeedQualityHttpSubscriber);
+    }
+
+    /**
+     * 条件查询获取质量检验的列表
+     */
+    public void queryReceiptForIQC(Map<String, Object> params) {
+        if (null == qualityListBeanHttpSubscriber) {
+            qualityListBeanHttpSubscriber = new HttpSubscriber<>(new OnResultCallBack<List<QualityListBean>>() {
+                @Override
+                public void onSuccess(List<QualityListBean> o) {
+                    getView().getQualityList(o);
+                }
+
+                @Override
+                public void onError(String errorMsg) {
+                    ToastUtils.showShort(errorMsg);
+                }
+            });
+        }
+        model.queryReceiptForIQC(params, qualityListBeanHttpSubscriber);
     }
 
     @Override

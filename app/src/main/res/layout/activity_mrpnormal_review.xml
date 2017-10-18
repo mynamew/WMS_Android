@@ -1,0 +1,346 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/set_bg"
+    tools:context="com.timi.sz.wms_android.mvp.UI.quity.normal_review.MRPNormalReviewActivity">
+
+    <include
+        android:id="@+id/head"
+        layout="@layout/title_head"/>
+
+    <TextView
+        android:id="@+id/tv_confirm_review"
+        android:layout_width="match_parent"
+        android:layout_height="88px"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="20px"
+        android:layout_marginLeft="30px"
+        android:layout_marginRight="30px"
+        android:background="@drawable/selector_btn_bg_login"
+        android:gravity="center"
+        android:text="确认评审"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        />
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/head">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_orderno"
+                android:layout_width="match_parent"
+                android:layout_height="60px"
+                android:gravity="center_vertical"
+                android:paddingLeft="20px"
+                android:paddingTop="10px"
+                android:text="@string/receive_pro_num"
+                android:textColor="#333"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="60px"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_quality_date"
+                    android:layout_width="0dp"
+                    android:layout_height="60px"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="20px"
+                    android:paddingTop="10px"
+                    android:text="@string/tv_mrp_quality_date"
+                    android:textColor="#333"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="60px"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_order_num"
+                    android:layout_width="0dp"
+                    android:layout_height="60px"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="20px"
+                    android:paddingTop="10px"
+                    android:text="@string/order_no"
+                    android:textColor="#333"
+                    />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_mrp_normal_checker"
+                android:layout_width="match_parent"
+                android:layout_height="60px"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:paddingLeft="50px"
+                android:paddingTop="10px"
+                android:text="@string/mrp_normal_checker"
+                android:textColor="#333"
+                />
+
+            <TextView
+                android:id="@+id/tv_supplier"
+                android:layout_width="match_parent"
+                android:layout_height="60px"
+                android:gravity="center_vertical"
+                android:paddingLeft="30px"
+                android:paddingTop="10px"
+                android:text="@string/buy_from"
+                android:textColor="#333"
+                />
+
+            <TextView
+                android:id="@+id/tv_material_code"
+                android:layout_width="match_parent"
+                android:layout_height="60px"
+                android:gravity="center_vertical"
+                android:paddingLeft="20px"
+                android:paddingTop="10px"
+                android:text="@string/material_code"
+                android:textColor="#333"
+                />
+
+            <TextView
+                android:id="@+id/tv_material_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:paddingLeft="20px"
+                android:paddingTop="10px"
+                android:text="@string/material_name"
+                android:textColor="#333"
+                />
+
+            <TextView
+                android:id="@+id/tv_material_model"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:paddingLeft="20px"
+                android:paddingTop="10px"
+                android:text="@string/material_model"
+                android:textColor="#333"
+                />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="5px"
+                android:background="@color/tab_txt_unselect"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_receive_num"
+                    android:layout_width="0dp"
+                    android:layout_height="60px"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="30px"
+                    android:paddingTop="10px"
+                    android:text="@string/receive_num"
+                    android:textColor="#333"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_send_quality_num"
+                    android:layout_width="0dp"
+                    android:layout_height="60px"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="30px"
+                    android:paddingTop="10px"
+                    android:text="@string/send_quality_num_tip"
+                    android:textColor="#333"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_quality_num"
+                    android:layout_width="0dp"
+                    android:layout_height="60px"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="50px"
+                    android:paddingTop="10px"
+                    android:text="@string/mrp_quality_num_tip"
+                    android:textColor="#333"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_badbess_total_num"
+                    android:layout_width="0dp"
+                    android:layout_height="50px"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="0px"
+                    android:paddingTop="10px"
+                    android:text="@string/mrp_normal_badness_total_num"
+                    android:textColor="#333"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_badness_percent"
+                    android:layout_width="0dp"
+                    android:layout_height="60px"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="50px"
+                    android:paddingTop="10px"
+                    android:text="@string/mrp_normal_badness_percent"
+                    android:textColor="#333"
+                    />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="60px"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="30px"
+                    android:paddingTop="10px"
+                    android:text="@string/send_quality_num_tip"
+                    android:textColor="#333"
+                    android:visibility="invisible"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="60px"
+                android:layout_marginTop="10px"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="20px"
+                    android:text="评审结果："
+                    android:textColor="#333"/>
+
+                <RelativeLayout
+                    android:id="@+id/rl_select_review_result"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="20px"
+                    android:layout_marginRight="20px"
+                    android:background="@drawable/bg_sbo_rectangle_et">
+
+                    <TextView
+                        android:id="@+id/tv_select_mrpreview_result"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:hint="请选择评审结果"
+                        android:paddingLeft="20px"
+                        android:textColor="#333"
+                        android:textSize="14sp"/>
+
+                    <ImageView
+                        android:id="@+id/iv_mrp_down"
+                        android:layout_width="40px"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="20px"
+                        android:src="@mipmap/mrp_down"/>
+                </RelativeLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="60px"
+                android:layout_marginTop="10px"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="10px"
+                    android:text="挑选/特采："
+                    android:textColor="#333"/>
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="20px"
+                    android:layout_marginRight="20px"
+                    android:background="@drawable/bg_sbo_rectangle_et"
+                    android:hint="请输入挑选数量（或特采）"
+                    android:paddingLeft="20px"
+                    android:textSize="14sp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="70px"
+                    android:layout_marginTop="10px"
+                    android:text="备注："
+                    android:textColor="#333"
+                    android:textSize="14sp"/>
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="150px"
+                    android:layout_marginLeft="30px"
+                    android:layout_marginRight="20px"
+                    android:layout_marginTop="10px"
+                    android:background="@drawable/bg_sbo_rectangle_et"
+                    android:gravity="left"
+                    android:hint="请输入备注信息"
+                    android:paddingLeft="20px"
+                    android:paddingTop="10px"
+                    android:textSize="14sp"/>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="88px"/>
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+</RelativeLayout>

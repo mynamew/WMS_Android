@@ -5,14 +5,62 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/set_bg"
-    tools:context="com.timi.sz.wms_android.mvp.UI.quity.MRPReviewActivity">
-
+    android:orientation="vertical"
+    tools:context="com.timi.sz.wms_android.mvp.UI.quity.mrp.MRPReviewActivity">
     <include layout="@layout/title_head"/>
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rlv"
+    <LinearLayout
+        android:id="@+id/ll_tab"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="96px"
+        android:layout_below="@id/head"
+        android:background="#fff"
+        android:orientation="horizontal"
+        android:paddingLeft="24px"
+        android:paddingRight="24px">
+
+        <TextView
+            android:id="@+id/tv_material_code"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:gravity="center"
+            android:text="@string/item_material_code"/>
+
+        <TextView
+            android:id="@+id/tv_receive_num"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:text="@string/excel_head_real_receive_num"/>
+
+        <TextView
+            android:id="@+id/tv_send_quality_num"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:text="@string/mrp_sample_num"/>
+
+        <TextView
+            android:id="@+id/tv_quality_num"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:text="@string/excel_head_quality_num"/>
+
+        <TextView
+            android:id="@+id/tv_quality_result"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:text="@string/mrp_badness_percent"/>
+    </LinearLayout>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rlv_mrp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 </LinearLayout>

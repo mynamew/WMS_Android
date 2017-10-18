@@ -337,7 +337,36 @@
     /**====== 质量检验 ======**/
     <string name="quality_check_title">来料—品质检验</string>
     <string name="quality_material_quality">物料质检</string>
-    <string name="start_time_tip">开始日期：</string>
+    <string name="start_time_tip">开始日期</string>
+    <string name="end_time_tip">结束日期</string>
+    <string name="receive_material_orderno_tip">收料通知单：</string>
+    <string name="goods_code_tip">物品代码：</string>
+    <string name="supplier_name_tip">供应商名称：</string>
+    <string name="tv_pack_name_tip">包装条码：</string>
+    <string name="no_need_quality">免</string>
+    <string name="quality_pick">挑选</string>
+    <string name="quality_special_get">特采</string>
+    <string name="quality_all_return">全退</string>
+    <string name="excel_head_send_quality_num">送检</string>
+    <string name="excel_head_quality_num">合格</string>
+    <string name="excel_head_quality_result">质检结果</string>
+    <string name="please_input_badness_num">请输入不良数</string>
+    <string name="item_quality_status">状态</string>
+    <string name="item_material_code">物料编码</string>
+    <string name="item_arrive_date">到货日期：%1$s</string>
+    <string name="item_arrive_orderno">到货单号：%1$s</string>
+    <string name="materail_info">物料信息</string>
+    <string name="arrive_orderno_tip">到货单号</string>
+    <string name="please_input_arrive_orderno">请输入到货单号</string>
+    <string name="please_input_material_name">请输入物料名称</string>
+    <string name="item_material_name">物料名称</string>
+    <string name="please_input_material_code">请输入物料编码</string>
+    <string name="item_supplier">供应商</string>
+    <string name="scan_code">扫描条码</string>
+    <string name="wait_quality">待检</string>
+    <string name="wait_deal">待定</string>
+    <string name="unquality">不合格</string>
+    <string name="quality_query_result_nodata">未查询到您所搜索的质检信息，请重新输入！</string>
     /**====== 普通质检 ======**/
     <string name="receive_material_date">收料日期：%1$s</string>
     <string name="instock_total_num_tip">入库总数：</string>
@@ -346,10 +375,26 @@
     <string name="refuse_receive_num">拒收数：</string>
     <string name="spot_check_num">抽检数：</string>
     <string name="badness_total_num">不良总数：</string>
+    <string name="badness_num">不良数</string>
     <string name="badness_percent">不良率：</string>
     <string name="next_page">下一步</string>
     <string name="normal_quality_title">来料—质检详情（普检）</string>
-    /**====== 普通质检 ======**/
+    <string name="excel_head_quality">质检</string>
+    <string name="excel_head_goods_code">物品编码</string>
+    <string name="excel_head_supplier">供应商</string>
+    <string name="excel_head_real_receive_num">实收</string>
+    <string name="please_input_start_date">请选择开始日期</string>
+    <string name="please_input_end_date">请选择结束日期</string>
+    <string name="please_input_receive_material_orderno">请输入收料通知单号</string>
+    <string name="please_input_goods_code">请输入物品代码</string>
+    <string name="please_input_goods_name">请输入物品名称</string>
+    <string name="please_input_supplier_name">请输入供货商名称</string>
+    <string name="please_input_pack_code">请输入包装条码</string>
+    <string name="badness_reason_tip">不良原因：%1$s</string>
+    <string name="please_input_reject_num">请输入拒收数</string>
+    <string name="normal_unquality_tip">此物品质检结果为不合格，进入MRP评审操作流程！</string>
+    <string name="normal_quality_tip">此物品质检操作流程已完成，其质检结果为合格！</string>
+    /**====== 高级质检 ======**/
     <string name="standard_level">标准水平：%1$s</string>
     <string name="sample_half_yard">试样半码：%1$s</string>
     <string name="check_method">检验方法：%1$s</string>
@@ -361,10 +406,21 @@
     <string name="main_unqualitfied_tip">主要不合格原因：</string>
     <string name="tv_monor_unqualitfied_tip">催要不合格原因：</string>
     <string name="quality_complete">质检完成</string>
-    <string name="please_scan_assign_material_code">请扫描指定退料条码</string>
+    <string name="please_scan_assign_material_code">请输入或扫描指定退料条码</string>
     <string name="rd_qualified_tip">合格</string>
     <string name="rd_unqualified">不合格</string>
     <string name="rd_wait_deal">待定</string>
+    /**====== 质检拒收 ======**/
+    <string name="quality_reject_title">质检拒收</string>
+    /**====== MRP ======**/
+    <string name="mrp_badness_percent">不良率</string>
+    <string name="mrp_sample_num">抽检</string>
+    <string name="tv_mrp_quality_date">质检日期：%1$s</string>
+    <string name="mrp_title">来料-MRP评审</string>
+    <string name="send_quality_num_tip">送检数：%1$s</string>
+    <string name="mrp_normal_badness_percent">不良率：%1$s</string>
+    <string name="mrp_quality_num_tip">合格数：%1$s</string>
+    <string name="mrp_normal_badness_total_num">不良总数：%1$s</string>
     /******************************************************************************************************************************************************/
     /******************************************************************************************************************************************************/
     /**====== 库内作业 ======**/
@@ -421,11 +477,7 @@
     <string name="query_retrospective">追溯查询</string>
     <string name="query_record_tip">记录查询</string>
     <string name="query_statistical_tip">统计查询</string>
-    <string name="end_time_tip">结束日期：</string>
-    <string name="receive_material_orderno_tip">收料通知单：</string>
-    <string name="goods_code_tip">物品代码：</string>
-    <string name="supplier_name_tip">供应商名称：</string>
-    <string name="tv_pack_name_tip">包装条码：</string>
+    <string name="mrp_normal_checker">质检人：%1$s</string>
 
 
 </resources>

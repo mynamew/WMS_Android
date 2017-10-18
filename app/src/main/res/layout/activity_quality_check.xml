@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:ptr="http://schemas.android.com/apk/res-auto"
@@ -10,12 +10,102 @@
     android:orientation="vertical"
     tools:context="com.timi.sz.wms_android.mvp.UI.quity.quality.QualityCheckActivity">
 
-    <include layout="@layout/title_head"/>
+    <RelativeLayout
+        android:id="@+id/head"
+        android:background="@color/login_txt_color"
+        android:layout_height="88px"
+        android:layout_width="match_parent"
+       >
+        <ImageView
+            android:id="@+id/iv_title_back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:padding="20px"
+            android:src="@mipmap/back"/>
 
-    <com.timi.sz.wms_android.view.excelview.MyExcelView
-        android:id="@+id/myexcel_quality"
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:textColor="#fff"
+            android:textSize="18sp"/>
+
+        <ImageView
+            android:id="@+id/iv_title_right"
+            android:layout_width="80px"
+            android:padding="20px"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:scaleType="centerCrop"
+            android:paddingRight="20px"
+            android:paddingLeft="20px"
+            android:src="@mipmap/quality_infilter"
+            android:visibility="visible"/>
+    </RelativeLayout>
+    <LinearLayout
+        android:id="@+id/ll_tab"
+        android:layout_width="match_parent"
+        android:layout_height="96px"
+        android:layout_below="@id/head"
+        android:background="#fff"
+        android:orientation="horizontal"
+        android:paddingLeft="24px"
+        android:paddingRight="24px">
+
+        <TextView
+            android:id="@+id/tv_quality_status"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:text="@string/item_quality_status"/>
+
+        <TextView
+            android:id="@+id/tv_material_code"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:gravity="center"
+            android:text="@string/item_material_code"/>
+
+        <TextView
+            android:id="@+id/tv_receive_num"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:text="@string/excel_head_real_receive_num"/>
+
+        <TextView
+            android:id="@+id/tv_send_quality_num"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:text="@string/excel_head_send_quality_num"/>
+
+        <TextView
+            android:id="@+id/tv_quality_num"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:text="@string/excel_head_quality_num"/>
+
+        <TextView
+            android:id="@+id/tv_quality_result"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:gravity="center"
+            android:text="@string/excel_head_quality_result"/>
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rlv_quality"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="visible"
-        ptr:ptrMode="both"/>
-</LinearLayout>
+        android:layout_below="@id/ll_tab"/>
+</RelativeLayout>

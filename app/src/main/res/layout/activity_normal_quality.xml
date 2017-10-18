@@ -11,27 +11,12 @@
         android:id="@+id/head"
         layout="@layout/title_head"/>
 
-    <TextView
-        android:id="@+id/tv_next"
-        android:layout_width="match_parent"
-        android:layout_height="88px"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="20px"
-        android:layout_marginLeft="30px"
-        android:layout_marginRight="30px"
-
-        android:background="@drawable/selector_btn_bg_login"
-        android:gravity="center"
-        android:text="@string/next_page"
-        android:textColor="@color/white"
-        android:textSize="16sp"
-        />
-
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/tv_next"
-        android:layout_below="@id/head">
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/head">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -49,16 +34,23 @@
                 android:textColor="#333"
                 />
 
-            <TextView
-                android:id="@+id/tv_receive_material_date"
-                android:layout_width="match_parent"
-                android:layout_height="60px"
-                android:gravity="center_vertical"
-                android:paddingLeft="20px"
-                android:paddingTop="10px"
-                android:text="@string/receive_material_date"
-                android:textColor="#333"
-                />
+             <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="60px"
+                 android:orientation="horizontal">
+
+                 <TextView
+                     android:id="@+id/tv_quality_date"
+                     android:layout_width="0dp"
+                     android:layout_weight="1"
+                     android:layout_height="60px"
+                     android:gravity="center_vertical"
+                     android:paddingLeft="20px"
+                     android:paddingTop="10px"
+                     android:text="@string/tv_mrp_quality_date"
+                     android:textColor="#333"
+                     />
+             </LinearLayout>
 
             <TextView
                 android:id="@+id/tv_order_num"
@@ -96,7 +88,7 @@
             <TextView
                 android:id="@+id/tv_material_name"
                 android:layout_width="match_parent"
-                android:layout_height="60px"
+                android:layout_height="wrap_content"
                 android:gravity="center_vertical"
                 android:paddingLeft="20px"
                 android:paddingTop="10px"
@@ -107,7 +99,7 @@
             <TextView
                 android:id="@+id/tv_material_model"
                 android:layout_width="match_parent"
-                android:layout_height="60px"
+                android:layout_height="wrap_content"
                 android:gravity="center_vertical"
                 android:paddingLeft="20px"
                 android:paddingTop="10px"
@@ -162,9 +154,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="60px"
                         android:background="@drawable/bg_sbo_rectangle_et"
-                        android:focusable="false"
-                        android:focusableInTouchMode="false"
                         android:hint="@string/please_input_spot_check_num"
+                        android:inputType="number"
                         android:paddingLeft="20px"
                         android:textSize="14sp"/>
                 </LinearLayout>
@@ -189,9 +180,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="60px"
                         android:background="@drawable/bg_sbo_rectangle_et"
-                        android:focusable="false"
-                        android:focusableInTouchMode="false"
-                        android:hint="请输入拒收数"
+                        android:hint="@string/please_input_reject_num"
+                        android:inputType="number"
                         android:paddingLeft="20px"
                         android:textSize="14sp"/>
                 </LinearLayout>
@@ -212,7 +202,7 @@
                     android:layout_weight="1">
 
                     <TextView
-                        android:id="@+id/tv_badness_total_num"
+                        android:id="@+id/tv_badness_total_num_tip"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingLeft="20px"
@@ -222,13 +212,13 @@
                         />
 
                     <TextView
-                        android:id="@+id/et_badness_num"
+                        android:id="@+id/tv_badness_total_num"
                         android:layout_width="match_parent"
                         android:layout_height="60px"
-                        android:gravity="center_vertical"
                         android:background="@drawable/bg_sbo_rectangle_et"
                         android:focusable="false"
                         android:focusableInTouchMode="false"
+                        android:gravity="center_vertical"
                         android:paddingLeft="20px"
                         android:text="0"
                         android:textColor="#ff0000"
@@ -256,8 +246,8 @@
                         android:layout_height="60px"
                         android:background="@drawable/bg_sbo_rectangle_et"
                         android:focusable="false"
-                        android:gravity="center_vertical"
                         android:focusableInTouchMode="false"
+                        android:gravity="center_vertical"
                         android:paddingLeft="20px"
                         android:text="0 %"
                         android:textColor="#ff0000"
@@ -339,8 +329,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingLeft="40px"
-                        android:textColor="#333"
                         android:text="质检结果："
+                        android:textColor="#333"
                         android:textSize="15sp"/>
 
                     <RadioGroup
@@ -367,6 +357,25 @@
                     </RadioGroup>
                 </LinearLayout>
             </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="88px"/>
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
+
+    <TextView
+        android:id="@+id/tv_next"
+        android:layout_width="match_parent"
+        android:layout_height="88px"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="20px"
+        android:layout_marginLeft="30px"
+        android:layout_marginRight="30px"
+
+        android:background="@drawable/selector_btn_bg_login"
+        android:gravity="center"
+        android:text="@string/next_page"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        />
 </RelativeLayout>

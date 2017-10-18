@@ -13,4 +13,5 @@ import java.util.List;
 
 public interface QualityCheckView extends MvpBaseView {
     void getQualityList(List<QualityListBean> datas);
+    void queryReceiptForIQC(int position);
 }

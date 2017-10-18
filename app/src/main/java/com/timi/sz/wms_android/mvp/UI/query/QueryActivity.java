@@ -20,11 +20,6 @@ import butterknife.OnClick;
 public class QueryActivity extends BaseNoMvpActivity {
     @BindView(R.id.nescroll_query)
     NestedScrollView nescrollQuery;
-    @BindView(R.id.iv_title_bg)
-    ImageView ivTitleBg;
-    @BindView(R.id.iv_banner_bg)
-    ImageView ivBannerBg;
-
     @Override
     public int setLayoutId() {
         return R.layout.activity_query;
@@ -37,17 +32,6 @@ public class QueryActivity extends BaseNoMvpActivity {
 
     @Override
     public void initView() {
-        nescrollQuery.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
-            @Override
-            public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
-                /**
-                 * 设置可见 及透明度的变化
-                 */
-                ivTitleBg.setVisibility(View.VISIBLE);
-                ivTitleBg.setAlpha(scrollY);
-                ivBannerBg.setAlpha(255 - scrollY > 1 ? 255 - scrollY : 1);
-            }
-        });
     }
 
     @Override

@@ -13,8 +13,8 @@ import static com.timi.sz.wms_android.base.uils.PackageUtils.isApkDebugable;
 
 public class Constants {
     //base url
-    public static final String BASE_URL = "http://szjuqent.imwork.net:83/";
-//    public static final String BASE_URL = "http://192.168.0.102:8066/";
+//    public static final String BASE_URL = "http://szjuqent.imwork.net:83/";
+    public static final String BASE_URL = "http://192.168.0.39:8066/";
     //超时时间   5s
     public static int DEFAULT_TIMEOUT = 5000;
     /**********
@@ -61,6 +61,7 @@ public class Constants {
     public static final int REQUEST_SCAN_CODE_MATERIIAL = 1002;//物料条码 扫码
     public static final int REQUEST_SCAN_CODE_LIB_LOATION = 1003;//库位码  扫码
     public static final int REQUEST_SCAN_CODE_RETURN_MATERIAL = 1003;//退料单号  扫码
+    public static final int REQUEST_SCAN_CODE_BARCODE = 1004;//条码
     /***********
      * SharePerference存储token   key /  value的前缀
      *********************************************************************************************/

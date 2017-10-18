@@ -23,7 +23,10 @@ import com.timi.sz.wms_android.bean.outstock.buy.MaterialBean;
 import com.timi.sz.wms_android.bean.outstock.buy.OrderNoAddMaterial;
 import com.timi.sz.wms_android.bean.outstock.buy.OrderNoBean;
 import com.timi.sz.wms_android.bean.outstock.outsource.OutSourceFeedBean;
+import com.timi.sz.wms_android.bean.quality.BarcodeData;
 import com.timi.sz.wms_android.bean.quality.QualityListBean;
+import com.timi.sz.wms_android.bean.quality.mrp.MrpReviewData;
+import com.timi.sz.wms_android.bean.quality.normal.NormalQualityData;
 import com.timi.sz.wms_android.bean.stockin_work.LibraryAdjustResult;
 import com.timi.sz.wms_android.bean.stockin_work.ScanLocationResult;
 import com.timi.sz.wms_android.bean.stockin_work.ScanMaterialResult;
@@ -421,16 +424,119 @@ public interface ApiService {
     @POST("api/Account/ClientLogin")
     Observable<CommonResult<CommitMaterialScanToOredernoBean>> commitMaterialScanToOrederno(@Field("orderno") String orderno);
 
-
+    /**************************************************************************************************************/
+    /**************************************************************************************************************/
     /**====== 质量检验 ======**/
+    /**************************************************************************************************************/
+    /**====== 质检列表======**/
     /**
      * 获取质量检验的列表
      *
      * @return
      */
     @FormUrlEncoded
-    @POST("api/Account/ClientLogin")
-    Observable<CommonResult<QualityListBean>> getQualityList(@FieldMap Map<String, Object> params);
+    @POST("api/services/wpda/IQC/IQCGetDefaultReceiptForIQC")
+    Observable<CommonResult<List<QualityListBean>>> getQualityList(@FieldMap Map<String, Object> params);
+
+    /**
+     * 查询来料质检列表
+     *
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("api/services/wpda/IQC/IQCQueryReceiptForIQC")
+    Observable<CommonResult<List<QualityListBean>>> queryReceiptForIQC(@FieldMap Map<String, Object> params);
+
+    /**
+     * 免检
+     *
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("api/services/wpda/IQC/IQCSubmitExemption")
+    Observable<CommonResult<Object>> submitExemption(@FieldMap Map<String, Object> params);
+    /**====== 普通质检  高级质检======**/
+    /**
+     * 获取普通质检
+     *
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("api/services/wpda/IQC/IQCGetNormalData")
+    Observable<CommonResult<NormalQualityData>> getNormalQualityData(@FieldMap Map<String, Object> params);
+
+    /**
+     * 提交普通质检
+     *
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("api/services/wpda/IQC/IQCSetNormalData")
+    Observable<CommonResult<Object>> setNormalQualityData(@FieldMap Map<String, Object> params);
+
+    /**
+     * 获得质检条码信息
+     *
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("api/services/wpda/IQC/IQCGetBarcodeData")
+    Observable<CommonResult<BarcodeData>> getBarcodeData(@FieldMap Map<String, Object> params);
+
+    /**
+     * 质检拒收
+     *
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("api/services/wpda/IQC/IQCSetBarcodeReject")
+    Observable<CommonResult<BarcodeData>> setBarcodeReject(@FieldMap Map<String, Object> params);
+
+    /**
+     * 质检确认
+     *
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("api/services/wpda/IQC/IQCSubmitFinish")
+    Observable<CommonResult<Object>> submitFinish(@FieldMap Map<String, Object> params);
+
+    /**
+     * 高级质检1 的数据
+     *
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("api/services/wpda/IQC/IQCGetAdvanceData")
+    Observable<CommonResult<Object>> getAdvanceData(@FieldMap Map<String, Object> params);
+
+    /**
+     * 提交高级质检1 的数据
+     *
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("api/services/wpda/IQC/IQCSetAdvance1Data")
+    Observable<CommonResult<Object>> SetAdvance1Data(@FieldMap Map<String, Object> params);
+
+    /**
+     * 提交高级质检2 的数据
+     *
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("api/services/wpda/IQC/IQCSetAdvance2Data")
+    Observable<CommonResult<Object>> SetAdvance12Data(@FieldMap Map<String, Object> params);
+    /**======MRP评审=====**/
+    /**
+     * 查询MRP评审信息列表
+     *
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("api/services/wpda/IQC/IQCGetMRPReviewData")
+    Observable<CommonResult<List<MrpReviewData>>> getMRPReviewData(@FieldMap Map<String, Object> params);
+
     /**************************************************************************************************************/
     /**************************************************************************************************************/
     /**======库内操作======**/
@@ -455,6 +561,7 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("api/Account/ClientLogin")
     Observable<CommonResult<ScanMaterialResult>> scanMaterialCode(@FieldMap Map<String, Object> params);
+
     /**
      * 扫描库位码的返回
      *
@@ -476,6 +583,7 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("api/Account/ClientLogin")
     Observable<CommonResult<AllotScanResult>> queryAllotScan(@FieldMap Map<String, Object> params);
+
     /**
      * 一步调入查询
      *
@@ -485,6 +593,7 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("api/Account/ClientLogin")
     Observable<CommonResult<AllotOneSetpResult>> queryAllotOneStep(@FieldMap Map<String, Object> params);
+
     /**
      * 形态转换-出库 查询
      *
@@ -494,6 +603,7 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("api/Account/ClientLogin")
     Observable<CommonResult<FormChangeOutResult>> queryFormChangeOut(@FieldMap Map<String, Object> params);
+
     /**
      * 形态转换-出库 查询
      *
@@ -503,6 +613,7 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("api/Account/ClientLogin")
     Observable<CommonResult<FormChangeInResult>> queryFormChangeIn(@FieldMap Map<String, Object> params);
+
     /**
      * 库存查询 查询
      *
@@ -512,6 +623,7 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("api/Account/ClientLogin")
     Observable<CommonResult<StockQueryResult>> queryStockQuery(@FieldMap Map<String, Object> params);
+
     /**
      * 盘点查询
      *

@@ -1,5 +1,6 @@
 package com.timi.sz.wms_android.mvp.UI.quity.reject;
 
+import com.timi.sz.wms_android.bean.quality.BarcodeData;
 import com.timi.sz.wms_android.mvp.base.view.iml.MvpBaseView;
 
 /**
@@ -9,4 +10,7 @@ import com.timi.sz.wms_android.mvp.base.view.iml.MvpBaseView;
  */
 
 public interface QualityRejectView extends MvpBaseView {
+    void getBarcodeData(BarcodeData data, String result);
+
+    void submitFinish();
 }

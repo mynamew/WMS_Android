@@ -2,128 +2,162 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
+              android:background="#e7e7ed"
               android:orientation="vertical"
     >
-    <View
-        android:id="@+id/divide_bottom"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#999"/>
-
 
     <LinearLayout
-        android:id="@+id/ll_content"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="24px"
+        android:layout_marginRight="24px"
+        android:layout_marginTop="24px"
+        android:background="@drawable/bg_quality_item_white"
+        android:orientation="vertical">
 
-        <View
-            android:layout_width="1dp"
-            android:layout_height="40dp"
-            android:background="#999"/>
+        <LinearLayout
+            android:id="@+id/ll_tab"
+            android:layout_width="match_parent"
+            android:layout_height="88px"
+            android:layout_below="@id/head"
+            android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/tv_quality"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:gravity="center"
-            android:paddingLeft="20px"
-            android:paddingRight="20px"
-            android:text="质检"/>
+            <ImageView
+                android:id="@+id/iv_quality_status"
+                android:layout_width="0dp"
+                android:layout_height="60px"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="2"
+                android:src="@mipmap/quality_wait_quality"
+                />
 
-        <View
-            android:layout_width="1dp"
-            android:layout_height="40dp"
-            android:background="#999"/>
+            <TextView
+                android:id="@+id/tv_material_code"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:gravity="center"
+                android:text=""
+                android:textSize="24px"/>
 
-        <TextView
-            android:id="@+id/tv_material_code"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:gravity="center"
-            android:paddingLeft="20px"
-            android:paddingRight="20px"
-            android:text="物料编码"/>
+            <TextView
+                android:id="@+id/tv_receive_num"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:gravity="center"
+                android:text="0"
+                android:textSize="24px"/>
 
-        <View
-            android:layout_width="1dp"
-            android:layout_height="40dp"
-            android:background="#999"/>
+            <TextView
+                android:id="@+id/tv_send_quality_num"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:gravity="center"
+                android:text="0"
+                android:textSize="24px"/>
 
-        <TextView
-            android:id="@+id/tv_supplier"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:gravity="center"
-            android:paddingLeft="20px"
-            android:paddingRight="20px"
-            android:text="供应商"/>
+            <TextView
+                android:id="@+id/tv_quality_num"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:gravity="center"
 
-        <View
-            android:layout_width="1dp"
-            android:layout_height="40dp"
-            android:background="#999"/>
+                android:text="0"
+                android:textSize="24px"/>
 
-        <TextView
-            android:id="@+id/tv_receive_num"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:gravity="center"
-            android:paddingLeft="20px"
-            android:paddingRight="20px"
-            android:text="实收数"/>
+            <RelativeLayout
+                android:id="@+id/rl_quality_result"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                >
 
-        <View
-            android:layout_width="1dp"
-            android:layout_height="40dp"
-            android:background="#999"/>
+                <TextView
+                    android:id="@+id/tv_quality_result"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_centerHorizontal="true"
+                    android:gravity="center"
+                    android:text="待检"
+                    android:textSize="24px"/>
 
-        <TextView
-            android:id="@+id/tv_send_quality_num"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:gravity="center"
-            android:paddingLeft="20px"
-            android:paddingRight="20px"
-            android:text="送检数"/>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="30px"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10px"
+                    android:layout_toRightOf="@id/tv_quality_result"
+                    android:src="@mipmap/set_next_page"/>
+            </RelativeLayout>
 
-        <View
-            android:layout_width="1dp"
-            android:layout_height="40dp"
-            android:background="#999"/>
+        </LinearLayout>
 
-        <TextView
-            android:id="@+id/tv_quality_num"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:gravity="center"
-            android:paddingLeft="20px"
-            android:paddingRight="20px"
-            android:text="合格数"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="120px"
+            android:layout_margin="1dp"
+            android:background="@drawable/bg_quality_item_blue"
+            android:gravity="bottom"
+            android:orientation="vertical"
+            android:paddingLeft="10px"
+            android:paddingRight="10px">
 
-        <View
-            android:layout_width="1dp"
-            android:layout_height="40dp"
-            android:background="#999"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50px"
+                android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/tv_quality_result"
-            android:layout_width="wrap_content"
-            android:layout_height="80px"
-            android:gravity="center"
-            android:paddingLeft="20px"
-            android:paddingRight="20px"
-            android:text="质检结果"/>
+                <TextView
+                    android:id="@+id/tv_material_name"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="滑轨双孔梁496-蓝色"
+                    android:textColor="#666"
+                    android:textSize="22px"/>
 
-        <View
-            android:layout_width="1dp"
-            android:layout_height="40dp"
-            android:background="#999"/>
+                <TextView
+                    android:id="@+id/tv_arrive_date"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/item_arrive_date"
+                    android:textColor="#666"
+                    android:textSize="22px"/>
+            </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50px"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_supplier"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="深圳超然科技股份有限公司"
+                    android:textColor="#666"
+                    android:textSize="22px"/>
+
+                <TextView
+                    android:id="@+id/tv_arrive_orderno"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/item_arrive_orderno"
+                    android:textColor="#666"
+                    android:textSize="22px"/>
+            </LinearLayout>
+        </LinearLayout>
     </LinearLayout>
 
     <View
+        android:visibility="gone"
+        android:id="@+id/view_divide_bottom"
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#999"/>
+        android:layout_height="24px"/>
 </LinearLayout>

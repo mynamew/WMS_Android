@@ -25,11 +25,6 @@ import static com.timi.sz.wms_android.base.uils.Constants.CODE_STR;
  */
 public class StockInActivity extends BaseNoMvpActivity {
 
-
-    @BindView(R.id.iv_title_bg)
-    ImageView ivTitleBg;
-    @BindView(R.id.iv_banner_bg)
-    ImageView ivBannerBg;
     @BindView(R.id.nescroll_stock_in)
     NestedScrollView nescrollStockIn;
 
@@ -45,17 +40,6 @@ public class StockInActivity extends BaseNoMvpActivity {
 
     @Override
     public void initView() {
-        nescrollStockIn.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
-            @Override
-            public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
-                /**
-                 * 设置可见 及透明度的变化
-                 */
-                ivTitleBg.setVisibility(View.VISIBLE);
-                ivTitleBg.setAlpha(scrollY);
-                ivBannerBg.setAlpha(255 - scrollY > 1 ? 255 - scrollY : 1);
-            }
-        });
     }
 
     @Override

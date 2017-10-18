@@ -21,4 +21,7 @@
     <color name="black">#000000</color>
     <color name="beijin">#12619a</color>
     <color name="light_gray">#e6e6e6</color>
+    <color name="dialog_divider">#C6C6C6</color>
+    <color name="wait_quality">#1cb2ff</color>
+    <color name="unquality">#ffb700</color>
 </resources>

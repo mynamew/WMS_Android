@@ -53,12 +53,12 @@ public class MyDialog extends Dialog {
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.setCanceledOnTouchOutside(true);
         this.setContentView(rootView);
-        rootView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                MyDialog.this.dismiss();
-            }
-        });
+//        rootView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                MyDialog.this.dismiss();
+//            }
+//        });
         this.setOnDismissListener(new OnDismissListener() {
             @Override
             public void onDismiss(DialogInterface dialogInterface) {

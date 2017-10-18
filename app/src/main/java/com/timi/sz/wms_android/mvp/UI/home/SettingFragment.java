@@ -372,21 +372,6 @@ public class SettingFragment extends BaseFragment<SetFragmentView, SetFragmentPr
         if (null != bean) {
             tvSetUserName.setText(bean.userName);
         }
-        /**
-         * 滑动监听
-         */
-        scrollSet.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
-            @Override
-            public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
-                LogUitls.e("滑动--->", "scrollX-->" + scrollX + "---scrollY-->" + scrollY + "---oldScrollX--->" + oldScrollX + "---oldScrollY--->" + oldScrollY + "---总长度---->" + scrollSet.getHeight());
-                /**
-                 * 设置可见 及透明度的变化
-                 */
-                ivSetTitleBg.setVisibility(View.VISIBLE);
-                ivSetTitleBg.setAlpha(scrollY);
-                ivSetBannerBg.setAlpha(255-scrollY>1?255-scrollY:1);
-            }
-        });
     }
 
     @Override

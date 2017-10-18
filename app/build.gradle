@@ -50,6 +50,7 @@ dependencies {
     //butter knife
     //evnet bus
     compile project(':PullToRefresh')
+    compile project(':DateSelectlibrary')
     compile 'com.zhy:autolayout:1.4.5'
     compile 'com.orhanobut:logger:2.1.1'
     compile 'com.android.support:multidex:1.0.1'
