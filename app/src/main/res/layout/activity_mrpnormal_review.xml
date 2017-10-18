@@ -79,7 +79,7 @@
                     android:layout_height="60px"
                     android:layout_weight="1"
                     android:gravity="center_vertical"
-                    android:paddingLeft="20px"
+                    android:paddingLeft="30px"
                     android:paddingTop="10px"
                     android:text="@string/order_no"
                     android:textColor="#333"
@@ -268,7 +268,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
-                        android:hint="请选择评审结果"
+                        android:hint="@string/please_select_mrp_review_result"
                         android:paddingLeft="20px"
                         android:textColor="#333"
                         android:textSize="14sp"/>
@@ -296,16 +296,18 @@
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
                     android:paddingLeft="10px"
-                    android:text="挑选/特采："
+                    android:text="@string/mrp_normal_pick_tip"
                     android:textColor="#333"/>
 
                 <EditText
+                    android:id="@+id/et_pick_num"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="20px"
                     android:layout_marginRight="20px"
+                    android:inputType="number"
                     android:background="@drawable/bg_sbo_rectangle_et"
-                    android:hint="请输入挑选数量（或特采）"
+                    android:hint="@string/please_input_pick_num"
                     android:paddingLeft="20px"
                     android:textSize="14sp"/>
             </LinearLayout>
@@ -320,11 +322,12 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="70px"
                     android:layout_marginTop="10px"
-                    android:text="备注："
+                    android:text="@string/mrp_normal_mark_tip"
                     android:textColor="#333"
                     android:textSize="14sp"/>
 
                 <EditText
+                    android:id="@+id/et_mrp_normal_mark"
                     android:layout_width="match_parent"
                     android:layout_height="150px"
                     android:layout_marginLeft="30px"
@@ -332,7 +335,7 @@
                     android:layout_marginTop="10px"
                     android:background="@drawable/bg_sbo_rectangle_et"
                     android:gravity="left"
-                    android:hint="请输入备注信息"
+                    android:hint="@string/please_input_mark_info"
                     android:paddingLeft="20px"
                     android:paddingTop="10px"
                     android:textSize="14sp"/>

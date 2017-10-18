@@ -1,18 +1,27 @@
 package com.timi.sz.wms_android.mvp.UI.quity.normal_review;
 
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.timi.sz.wms_android.R;
+import com.timi.sz.wms_android.base.uils.PackageUtils;
+import com.timi.sz.wms_android.base.uils.SpUtils;
+import com.timi.sz.wms_android.base.uils.ToastUtils;
 import com.timi.sz.wms_android.bean.quality.mrp.MrpReviewData;
 import com.timi.sz.wms_android.mvp.base.BaseActivity;
 
 import java.text.NumberFormat;
+import java.util.HashMap;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -56,7 +65,15 @@ public class MRPNormalReviewActivity extends BaseActivity<MRPNormalReviewView, M
     TextView tvSelectMrpreviewResult;
     @BindView(R.id.iv_mrp_down)
     ImageView ivMrpDown;
+    @BindView(R.id.et_pick_num)
+    EditText etPickNum;
+    @BindView(R.id.et_mrp_normal_mark)
+    EditText etMrpNormalMark;
     private MrpReviewData mrpReviewData;
+    /**
+     * 评审结果  默认值是-1 未做任何操作
+     */
+    private int qcReviewResult = -1;
 
     @Override
     public int setLayoutId() {
@@ -151,6 +168,28 @@ public class MRPNormalReviewActivity extends BaseActivity<MRPNormalReviewView, M
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tv_confirm_review://确认评审结果
+                if (qcReviewResult == -1) {//提示
+                    ToastUtils.showShort(getString(R.string.please_select_mrp_review_result));
+                    return;
+                }
+                String pickNum = etPickNum.getText().toString();
+                if (TextUtils.isEmpty(pickNum)) {
+                    ToastUtils.showShort(getString(R.string.please_input_pick_num));
+                    return;
+                }
+                String mark = etMrpNormalMark.getText().toString();
+                /**
+                 * 提交请求
+                 */
+                Map<String, Object> params = new HashMap<>();
+                params.put("UserId", SpUtils.getInstance().getUserId());
+                params.put("OrgId", SpUtils.getInstance().getOrgId());
+                params.put("mac", PackageUtils.getMac());
+                params.put("Remark", mark);
+                params.put("ReviewQty", Integer.parseInt(pickNum));
+                params.put("QCReview", qcReviewResult);
+                params.put("QCId", mrpReviewData.getQCId());
+                getPresenter().setMRPReviewData(params);
                 break;
             case R.id.rl_select_review_result://选择评审结果
                 showSelectReviewResultPopWindow(view);
@@ -158,13 +197,70 @@ public class MRPNormalReviewActivity extends BaseActivity<MRPNormalReviewView, M
         }
     }
 
+    @Override
+    public void setMrpReviewData() {
+        onBackPressed();
+    }
+
+    PopupWindow selectReviewResultPopWindow;
+
     /**
      * 弹出选择评审结果的选择
      */
     private void showSelectReviewResultPopWindow(View view) {
-        PopupWindow popwindow = new PopupWindow(this);
-        View inflate = LayoutInflater.from(this).inflate(R.layout.pop_mrp_review_result, null);
-        popwindow.setContentView(inflate);
-        popwindow.showAsDropDown(view);
+        if (null == selectReviewResultPopWindow) {
+            selectReviewResultPopWindow = new PopupWindow(this);
+            View inflate = LayoutInflater.from(this).inflate(R.layout.pop_mrp_review_result, null);
+            /**
+             * 点击事件
+             */
+            inflate.findViewById(R.id.tv_pick).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    /**
+                     * 设置文本
+                     */
+                    tvSelectMrpreviewResult.setText(getString(R.string.quality_pick));
+                    /**
+                     * 结果的状态值
+                     */
+                    qcReviewResult = 1;
+                    /**
+                     * 小时
+                     */
+                    selectReviewResultPopWindow.dismiss();
+                }
+            });
+            inflate.findViewById(R.id.tv_special_get).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    tvSelectMrpreviewResult.setText(getString(R.string.quality_special_get));
+                    qcReviewResult = 2;
+                    selectReviewResultPopWindow.dismiss();
+                }
+            });
+            inflate.findViewById(R.id.tv_all_return).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    tvSelectMrpreviewResult.setText(getString(R.string.quality_all_return));
+                    qcReviewResult = 3;
+                    selectReviewResultPopWindow.dismiss();
+                }
+            });
+            inflate.findViewById(R.id.tv_right_get).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    tvSelectMrpreviewResult.setText(getString(R.string.quality_right_get));
+                    qcReviewResult = 4;
+                    selectReviewResultPopWindow.dismiss();
+                }
+            });
+            selectReviewResultPopWindow.setContentView(inflate);
+            selectReviewResultPopWindow.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#00000000")));
+            selectReviewResultPopWindow.setOutsideTouchable(true);
+        }
+        selectReviewResultPopWindow.showAsDropDown(view);
     }
+
+
 }

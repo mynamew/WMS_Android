@@ -341,4 +341,9 @@
     <string name="send_quality_num_tip">送检数：%1$s</string>
     <string name="mrp_normal_badness_total_num">不良总数：%1$s</string>
     <string name="mrp_normal_checker">质检人：%1$s</string>
+    <string name="please_select_mrp_review_result">请选择评审结果</string>
+    <string name="mrp_normal_pick_tip">挑选/特采：</string>
+    <string name="please_input_pick_num">请输入挑选数量（或特采）</string>
+    <string name="please_input_mark_info">请输入备注信息</string>
+    <string name="mrp_normal_mark_tip">备注：</string>
 </resources>

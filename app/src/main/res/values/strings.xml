@@ -347,6 +347,7 @@
     <string name="quality_pick">挑选</string>
     <string name="quality_special_get">特采</string>
     <string name="quality_all_return">全退</string>
+    <string name="quality_right_get">正采</string>
     <string name="excel_head_send_quality_num">送检</string>
     <string name="excel_head_quality_num">合格</string>
     <string name="excel_head_quality_result">质检结果</string>
@@ -478,6 +479,11 @@
     <string name="query_record_tip">记录查询</string>
     <string name="query_statistical_tip">统计查询</string>
     <string name="mrp_normal_checker">质检人：%1$s</string>
+    <string name="please_select_mrp_review_result">请选择评审结果</string>
+    <string name="mrp_normal_pick_tip">挑选/特采：</string>
+    <string name="please_input_pick_num">请输入挑选数量（或特采）</string>
+    <string name="please_input_mark_info">请输入备注信息</string>
+    <string name="mrp_normal_mark_tip">备注：</string>
 
 
 </resources>

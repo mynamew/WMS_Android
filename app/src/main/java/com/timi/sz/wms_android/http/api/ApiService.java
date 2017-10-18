@@ -537,6 +537,15 @@ public interface ApiService {
     @POST("api/services/wpda/IQC/IQCGetMRPReviewData")
     Observable<CommonResult<List<MrpReviewData>>> getMRPReviewData(@FieldMap Map<String, Object> params);
 
+    /**
+     * 提交评审结果
+     *
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("api/services/wpda/IQC/IQCSetMRPReviewData ")
+    Observable<CommonResult<Object>>setMRPReviewData(@FieldMap Map<String, Object> params);
+
     /**************************************************************************************************************/
     /**************************************************************************************************************/
     /**======库内操作======**/

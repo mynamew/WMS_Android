@@ -2,25 +2,21 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
+              android:background="#ddd"
               android:orientation="horizontal"
-              android:layout_marginRight="20px"
-              >
+    >
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:gravity="center_vertical"
-        android:paddingLeft="20px"
-        android:text="评审结果："
-        android:visibility="invisible"
-        android:textColor="#333"/>
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:padding="20px"
+        android:layout_width="538px"
+        android:layout_marginLeft="1dp"
+        android:layout_marginBottom="1dp"
+        android:layout_marginRight="1dp"
         android:layout_height="wrap_content"
-        android:background="@drawable/bg_mrp_review_result"
-        android:orientation="vertical">
+        android:background="#fff"
+        android:paddingLeft="10px"
+        android:orientation="vertical"
+       >
 
         <TextView
             android:id="@+id/tv_pick"
@@ -40,5 +36,10 @@
             android:layout_width="match_parent"
             android:layout_height="40px"
             android:text="@string/quality_all_return"/>
+        <TextView
+            android:id="@+id/tv_right_get"
+            android:layout_width="match_parent"
+            android:layout_height="40px"
+            android:text="@string/quality_right_get"/>
     </LinearLayout>
 </LinearLayout>
