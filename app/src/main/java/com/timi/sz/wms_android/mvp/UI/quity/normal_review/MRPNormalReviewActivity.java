@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.RotateAnimation;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
@@ -192,7 +195,11 @@ public class MRPNormalReviewActivity extends BaseActivity<MRPNormalReviewView, M
                 getPresenter().setMRPReviewData(params);
                 break;
             case R.id.rl_select_review_result://选择评审结果
-                showSelectReviewResultPopWindow(view);
+                if (null != selectReviewResultPopWindow && selectReviewResultPopWindow.isShowing()) {
+                    selectReviewResultPopWindow.dismiss();
+                } else {
+                    showSelectReviewResultPopWindow(view);
+                }
                 break;
         }
     }
@@ -259,7 +266,18 @@ public class MRPNormalReviewActivity extends BaseActivity<MRPNormalReviewView, M
             selectReviewResultPopWindow.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#00000000")));
             selectReviewResultPopWindow.setOutsideTouchable(true);
         }
+        selectReviewResultPopWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                Animation animation = AnimationUtils.loadAnimation(MRPNormalReviewActivity.this, R.anim.rotation_up);
+                animation.setFillAfter(true);
+                ivMrpDown.startAnimation(animation);
+            }
+        });
         selectReviewResultPopWindow.showAsDropDown(view);
+        Animation animation = AnimationUtils.loadAnimation(this, R.anim.rotation_down);
+        animation.setFillAfter(true);
+        ivMrpDown.startAnimation(animation);
     }
 
 
