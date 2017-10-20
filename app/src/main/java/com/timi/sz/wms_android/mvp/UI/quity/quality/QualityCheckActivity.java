@@ -406,7 +406,7 @@ public class QualityCheckActivity extends BaseActivity<QualityCheckView, Quality
                     /**
                      * 到货日期
                      */
-                    setTextViewText(holder.getTextView(R.id.tv_arrive_date), R.string.arrive_date, qualityListBean.getReceiptDate());
+                    setTextViewText(holder.getTextView(R.id.tv_arrive_date), R.string.item_arrive_date, qualityListBean.getReceiptDate());
                     /**
                      * 供应商
                      */

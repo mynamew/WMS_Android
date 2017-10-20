@@ -59,7 +59,7 @@
                 android:layout_marginBottom="10px"
                 android:layout_marginTop="10px"
                 android:inputType="number"
-                android:background="@drawable/bg_sbo_rectangle_et"
+                android:background="@drawable/bg_rectangle_et_focused"
                 android:gravity="center_vertical"
                 android:hint="@string/please_input_point_num"
                 android:maxLines="1"
@@ -88,7 +88,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginBottom="10px"
                 android:layout_marginTop="10px"
-                android:background="@drawable/bg_sbo_rectangle_et"
+                android:background="@drawable/bg_rectangle_et_focused"
                 android:gravity="center_vertical"
                 android:hint="@string/please_input_spare_num"
                 android:maxLines="1"
@@ -107,7 +107,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="80px"
                 android:layout_marginLeft="100px"
-                android:background="@drawable/bg_sbo_rectangle_et"
+                android:background="@drawable/bg_rectangle_et_focused"
                 android:text="@string/delete"
                 android:textColor="#666"/>
 
@@ -117,7 +117,7 @@
                 android:layout_height="80px"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="100px"
-                android:background="@drawable/bg_sbo_rectangle_et"
+                android:background="@drawable/bg_rectangle_et_focused"
                 android:text="@string/update"
                 android:textColor="#666"/>
         </RelativeLayout>

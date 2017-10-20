@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">智能仓储</string>
     <string name="title_activity_login">Sign in</string>
@@ -15,36 +14,33 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+    /******************************************************************************************************************************************************/
+    /******************************************************************************************************************************************************/
     /**====== 登录 ======**/
-    <string name="login_login">登录</string>
+    <string name="login_login">立即登录</string>
     <string name="login_inpiut_psw">请输入密码</string>
     <string name="login_input_username">请输入用户名</string>
     <string name="login_choose_servers">请选择服务器</string>
     <string name="login_app_name">智能仓库管理系统</string>
-    <string name="server_set">服务设置</string>
-    <string name="login_select_language">请选择语言</string>
-    <string name="login_url_tip">地址：</string>
-    <string name="login_zuhu">租户：</string>
-    <string name="login_language">语言：</string>
-    <string name="login_set">配置</string>
-    <string name="login_please_input_serverurl">请输入服务地址</string>
-    <string name="login_please_input_right_serverurl">请输入正确服务地址</string>
-    <string name="login_confirm_set">确认设置</string>
-    <string name="login_please_input_zuhu">请输入租户信息</string>
-    <string name="language_simple">简体</string>
-    <string name="language_tradtional">繁体</string>
-    <string name="language_english">英文</string>
-    /**====== 个人信息 ======**/
-    <string name="login_success_tip">提示：首次登录需进行个人信息确认，如有问题，请到ERP中进行修改。</string>
-    <string name="login_success_name">姓名：%1$s</string>
-    <string name="login_success_sex">性别：%1$s</string>
-    <string name="login_success_num">工号：%1$s</string>
-    <string name="login_success_depart">部门：%1$s</string>
-    <string name="login_success_tel">手机：%1$s</string>
-    <string name="confirm">确定</string>
     <string name="login_remember_psw">记录密码</string>
     <string name="login_version">V %1$s</string>
     <string name="login_success">登录成功</string>
+    <string name="language_simple">简体</string>
+    <string name="language_tradtional">繁体</string>
+    <string name="language_english">英文</string>
+    <string name="login_select_language">请选择语言</string>
+    /******************************************************************************************************************************************************/
+    /******************************************************************************************************************************************************/
+    /**====== 个人信息 ======**/
+    <string name="login_success_tip">提示：首次登录需进行个人信息确认，如有问题，请到ERP中进行修改。</string>
+    <string name="name">姓名：%1$s</string>
+    <string name="sex">性别：%1$s</string>
+    <string name="work_num">工号：%1$s</string>
+    <string name="depart">部门：%1$s</string>
+    <string name="tel">手机：%1$s</string>
+    <string name="confirm">确定</string>
+    /******************************************************************************************************************************************************/
+    /******************************************************************************************************************************************************/
     /**====== 首页 ======**/
     <string name="home">首页</string>
     <string name="home_in_lib">入库作业</string>
@@ -54,7 +50,10 @@
     <string name="home_detail">查看详情</string>
     <string name="home_query">综合查询</string>
     <string name="home_lib_in_deal">库内作业</string>
+    <string name="home_quilty">质量作业</string>
     <string name="home_set">设置</string>
+    <string name="home_title">智能仓储</string>
+    <string name="home_mine">我的</string>
     /**====== 入库 ======**/
     <string name="stock_in_receive_pro">收货</string>
     <string name="stock_in">入库</string>
@@ -69,6 +68,8 @@
     <string name="stock_in_out_return">委外退料</string>
     <string name="stock_in_produce_return">生产退料</string>
     <string name="stock_in_sale_return">销售退料</string>
+    /******************************************************************************************************************************************************/
+    /******************************************************************************************************************************************************/
     /**====== QRCode ======**/
     <string name="scan_allcode_title">二维码或条形码扫描</string>
     <string name="scan_barcode_hint">将条形码对入取景框，即可自动扫描</string>
@@ -115,6 +116,9 @@
     <string name="siw_check">盘点</string>
     <string name="stock_in_point">物品清点</string>
     <string name="stock_in_point_record">清点记录</string>
+    /******************************************************************************************************************************************************/
+    /******************************************************************************************************************************************************/
+    /**====== 个人设置 ======**/
     /**====== 用户信息 ======**/
     <string name="set_userinfo_num">编号：%1$s</string>
     <string name="set_userinfo_name">姓名：%1$s</string>
@@ -123,6 +127,14 @@
     <string name="set_userinfo_from">所属组织：%1$s</string>
     <string name="set_userinfo_depart">部门：%1$s</string>
     <string name="set_userinfo_root">权限组织：%1$s</string>
+    <string name="login_url_tip">地址：</string>
+    <string name="login_zuhu">租户：</string>
+    <string name="login_language">语言：</string>
+    <string name="login_set">配置服务</string>
+    <string name="login_please_input_serverurl">请输入服务地址</string>
+    <string name="login_please_input_right_serverurl">请输入正确地址</string>
+    <string name="login_confirm_set">确认设置</string>
+    <string name="login_please_input_zuhu">请输入租户信息</string>
     /**====== 設置 ======**/
     <string name="set_language">选择语言</string>
     <string name="set_exit">退出登录</string>
@@ -131,6 +143,7 @@
     <string name="set_update_psw">修改密码</string>
     <string name="set_device_info">设备信息</string>
     <string name="set_userinfo">用户信息</string>
+    <string name="server_set">服务设置</string>
     <string name="set_team">组织切换</string>
     /**====== 清点 ======**/
     <string name="order_no">\t订单号：%1$s</string>
@@ -140,6 +153,8 @@
     <string name="cancel">取消</string>
     <string name="save">保存</string>
     <string name="buy_num">采购数量：%1$s</string>
+    <string name="send_goods_num">送货数：%1$s</string>
+    <string name="have_receive_num">已收数：%1$s</string>
     <string name="arrive_good_num">到货数量：%1$s</string>
     <string name="point_num">清点数：</string>
     <string name="please_input_point_num">请输入请点数</string>
@@ -147,6 +162,11 @@
     <string name="please_input_spare_num">请输入备品数</string>
     <string name="point_record">清点记录</string>
     <string name="goods_point">物品清点</string>
+    <string name="point_date">清点日期</string>
+    <string name="line_name">行号</string>
+    <string name="item_buy_num">采购数</string>
+    <string name="item_arrive_goods_num">到货数</string>
+    <string name="item_in_stock_num">入库数</string>
     /**====== 设备信息 ======**/
     <string name="deviceinfo">设备信息</string>
     <string name="set_deviceinfo_num">设备编号：</string>
@@ -169,7 +189,11 @@
     <string name="reset_server_will_logout">重新配置服务将退出登录</string>
     <string name="delete">删除</string>
     <string name="update">修改</string>
+    /******************************************************************************************************************************************************/
+    /******************************************************************************************************************************************************/
+    /**====== 入库作业======**/
     /**====== 来料入库 ======**/
+    <string name="in_stock_num_title">入库-入库上架</string>
     <string name="receive_pro_num">收货单号：%1$s</string>
     <string name="create_orderno_date">制单日期：%1$s</string>
     <string name="arrive_pro_total_num">到货总数：%1$s</string>
@@ -178,8 +202,6 @@
     <string name="can_in_stock_num">可入库数：%1$s</string>
     <string name="wait_count_num">待点总数：%1$s</string>
     <string name="have_count_num">已点总数：%1$s</string>
-    <string name="product_warehous_warrent_num">产成品入库单：%1$s</string>
-    <string name="warehous_total_num">入库总数：%1$s</string>
     <string name="material_code">物料编码：%1$s</string>
     <string name="scan_material_hint">扫物料条码</string>
     <string name="scan_material">物料条码：</string>
@@ -189,45 +211,59 @@
     <string name="material_name">物料名称：%1$s</string>
     <string name="material_model">规格型号：%1$s</string>
     <string name="in_stock_total_num">入库总数：%1$s</string>
-    <string name="create_task_orderno">生产任务单：%1$s</string>
-    <string name="out_return_material_orderno">委外退料单：%1$s</string>
-    <string name="create_return_material_orderno">生产退料单：%1$s</string>
-    <string name="sale_return_material_orderno">委外退料单：%1$s</string>
-    <string name="other_scan_title">其他入库—扫描入库</string>
-    <string name="other_instock_orderno">其他入库单：%1$s</string>
-    <string name="orderno_num">单据总数：%1$s</string>
-    <string name="other_instock_orderno_title">其他入库—入库上架</string>
-    <string name="create_task_orderno_title">产成品入库—入库上架</string>
-    <string name="product_warehous_warrent_num_title">产成品入库—入库上架</string>
-    <string name="in_stock_num_title">入库-入库上架</string>
-    <string name="out_return_material_title">委外退料—入库上架</string>
-    <string name="create_return_material_title">生产退料—入库上架</string>
-    <string name="sale_return_material_title">销售退料—入库上架</string>
-    <string name="have_scan_num">已扫总数：</string>
+    <string name="material_scan_putaway_success">物品扫码入库上架成功</string>
     <string name="create_instock_orderno">生成入库单</string>
-    <string name="create_product_orderno">生成产成品入库单</string>
-    <string name="confirm_commit">确认提交</string>
     <string name="please_scan_lib_location_code">请扫库位码</string>
     <string name="please_scan_material_code">请扫物料码</string>
-    <string name="in_stock_receivce_goods_orderno">入库-收货单</string>
-    <string name="please_input_receivce_orderno_or_scan">请输入收货单号或扫码查询</string>
+    <string name="location_code_no_user">库位码无效，请扫描正确的库位码</string>
+    <string name="header_spare_num">备品数</string>
+    <string name="header_point_num">请点数</string>
+    /**====== 产成品入库 ======**/
+    <string name="product_warehous_warrent_num">产成品入库单：%1$s</string>
+    <string name="warehous_total_num">入库总数：%1$s</string>
+    <string name="create_product_orderno">生成产成品入库单</string>
+    <string name="confirm_commit">确认提交</string>
     <string name="produce_create_order">产成品-选单</string>
     <string name="please_input_create_product_orderno_or_scan">请输入产成品入库单单号或扫码查询</string>
+    /**====== 生产入库 ======**/
+    <string name="create_task_orderno">生产任务单：%1$s</string>
     <string name="create_task_orderno_tip">生产任务单</string>
     <string name="product_in_stock_create_orderno">产成品入库-生单</string>
     <string name="please_input_create_task_num_or_scan">请输入生产任务单号或扫码查询</string>
-    <string name="other_in_stock_orderno">其他入库单</string>
-    <string name="other_select_order_title">其他入库-选单</string>
-    <string name="please_input_other_lin_num_or_scan">请输入其他入库单号或扫码查询</string>
+
+    /**====== 委外退料 ======**/
+    <string name="out_return_material_title">委外退料—入库上架</string>
     <string name="out_return_order">委外退料单</string>
     <string name="out_return_material_select_orderno">委外退料-选单</string>
     <string name="pealse_out_return_material_select_orderno_or_scan">请输入委外退料单号或扫码查询</string>
+    <string name="out_return_material_orderno">委外退料单：%1$s</string>
+    /**====== 生产退料 ======**/
+    <string name="create_return_material_title">生产退料—入库上架</string>
     <string name="create_return_orderno">生产退料单</string>
     <string name="create_return_orderno_select_orderno">生产退料-选单</string>
     <string name="please_create_return_material_num_or_scan">请输入生产退料单号或扫码查询</string>
+    <string name="create_return_material_orderno">生产退料单：%1$s</string>
+    /**====== 销售退料 ======**/
+    <string name="sale_return_material_title">销售退料—入库上架</string>
     <string name="sale_return_material_tip">销售退货单</string>
     <string name="sale_return_material_select_orderno">销售退货-选单</string>
     <string name="please_input_sale_return_material_orderno_or_scan">请输入销售退料单号或扫码查询</string>
+    <string name="sale_return_material_orderno">销售退料单：%1$s</string>
+    /**====== 其他入库—扫描入库 ======**/
+    <string name="other_scan_title">其他入库—扫描入库</string>
+    <string name="other_in_stock_orderno">其他入库单</string>
+    <string name="other_select_order_title">其他入库-选单</string>
+    <string name="please_input_other_lin_num_or_scan">请输入其他入库单号或扫码查询</string>
+    <string name="other_instock_orderno">其他入库单：%1$s</string>
+    <string name="orderno_num">单据总数：%1$s</string>
+    /**====== 其他入库—入库上架 ======**/
+    <string name="other_instock_orderno_title">其他入库—入库上架</string>
+    /**====== 产成品入库—入库上架 ======**/
+    <string name="create_task_orderno_title">产成品入库—入库上架</string>
+    <string name="product_warehous_warrent_num_title">产成品入库—入库上架</string>
+    <string name="have_scan_num">已扫总数：</string>
+    <string name="in_stock_receivce_goods_orderno">入库-收货单</string>
+    <string name="please_input_receivce_orderno_or_scan">请输入收货单号或扫码查询</string>
     /**====== 搜索单号 ======**/
     <string name="orderno">单号</string>
     <string name="receive_goods_query">收货-订单查询</string>
@@ -235,6 +271,12 @@
     <string name="receive_goods_orderno_query">收货-单据查询</string>
     <string name="please_input_send_orderno_or_scan">请输入送货单号或扫码查询</string>
     <string name="detail">详情</string>
+    /******************************************************************************************************************************************************/
+    /******************************************************************************************************************************************************/
+    /**====== 出库 ======**/
+    <string name="stock_out_out_resource">委外</string>
+    <string name="stock_out_pick_tab">拣货</string>
+    <string name="stock_out_all">综合</string>
     /**====== 出库搜索 ======**/
     <string name="buy_return_material_orderno">退料单号：</string>
     <string name="out_stock_buy_return_material">出库—采购退料</string>
@@ -254,13 +296,12 @@
     /**====== 其他出库 出库扫描 ======**/
     <string name="other_out_stock_scan_title">其他出库—出库扫描</string>
     <string name="create_other_out_stock_orderno">生成其他出库单</string>
-    /**====== 网络异常 ======**/
+    /**====== 异常 ======**/
     <string name="exp_network_exception">网络连接异常，请检查您的网络状态</string>
     <string name="exp_network_timeout">网络连接超时，请检查您的网络状态，稍后重试</string>
     <string name="exp_json_error">数据解析错误</string>
     <string name="exp_server_timeout">服务器连接超时</string>
-    <string name="material_scan_putaway_success">物品扫码入库上架成功</string>
-    <string name="location_code_no_user">库位码无效，请扫描正确的库位码</string>
+    /**====== 出库 搜索 ======**/
     <string name="stock_out_outsource_feed_tip">委外补料单号</string>
     <string name="stock_out_outsource_feed_title">委外补料—选单</string>
     <string name="stock_out_outsource_audit_title">委外发料—选单</string>
@@ -268,76 +309,97 @@
     <string name="stock_out_outsource_bill_tip">委外订单号</string>
     <string name="stock_out_production_feed_title">生产补料—选单</string>
     <string name="stock_out_production_feed_tip">生产补料单号</string>
+    <string name="stock_out_production_audit_title">生产领料—选单</string>
+    <string name="stock_out_production_audit_tip">生产领料单号</string>
+    <string name="stock_out_production_bill_tip">生产任务单号</string>
+    <string name="stock_out_pick">拣货—选单</string>
+    <string name="stock_out_pick_tip">调拨单</string>
+    <string name="stock_out_pick_send_orderno">发货通知单</string>
+    <string name="stock_out_pick_sell_outstock_orderno">销售出库单</string>
+    <string name="stock_out_sell_audit_title">销售出库—选单</string>
+    <string name="stock_out_sell_audit_tip">销售出库单</string>
+    <string name="stock_out_sell_bill_tip">销售订单</string>
+    <string name="stock_out_other_audit_title">其他出库—选单</string>
+    <string name="stock_out_other_audit_tip">其他出库单</string>
+    <string name="stock_out_other_bill_title">其他出库—出库扫描</string>
+    /**====== 委外补料 ======**/
+    <string name="outsource_orderno">委外单号：%1$s</string>
+    <string name="lib_name">仓库名称：%1$s</string>
+    <string name="area_name">区域名称：%1$s</string>
+    <string name="send_material_num">发料数量：%1$s</string>
+    <string name="have_get_num">已领数量：%1$s</string>
+    <string name="can_get_num">可领数量：%1$s</string>
+    /**====== 委外补料 物品清点 ======**/
     <string name="outsource_feed_point_title">委外补料—物品清单</string>
     <string name="close">关闭</string>
-    <string name="send_material_lib_name">发料仓库</string>
-    <string name="other_add_attr">附加属性</string>
+    <string name="send_material_lib_name">发料仓库：%1$s</string>
+    <string name="other_add_attr">附加属性：%1$s</string>
+    /******************************************************************************************************************************************************/
+    /******************************************************************************************************************************************************/
+    /**====== 质量检验 ======**/
     <string name="quality_check_title">来料—品质检验</string>
-    <string name="code_type">条码类型：</string>
-    <string name="in_lib_location_code">移入库位码：</string>
-    <string name="material_code_tip">条码：</string>
-    <string name="goods_code">物品编码：</string>
-    <string name="goods_num_tip">物品数量：</string>
-    <string name="goods_name">物品名称：</string>
-    <string name="goods_model">规格型号：</string>
-    <string name="lib_location_change">库位调整</string>
-    <string name="home_title">智能仓储</string>
-    <string name="home_mine">我的</string>
-    <string name="stockin_work_change">调拨调整</string>
-    <string name="stockin_work_model_change">形态转换</string>
-    <string name="stockin_work_one_step_in">一步调入</string>
-    <string name="stockin_work_group_change">容器调整</string>
-    <string name="tv_stockinwork_out_stock">出库</string>
-    <string name="stockin_work_in_stock">入库</string>
-    <string name="stockin_work_query_and_count">查询盘点</string>
-    <string name="stockin_work_query_repertory">库存查询</string>
-    <string name="stockin_work_count">盘点</string>
-    <string name="stock_out_out_resource">委外</string>
-    <string name="stock_out_pick_tab">拣货</string>
-    <string name="stock_out_all">综合</string>
     <string name="quality_material_quality">物料质检</string>
-    <string name="query_library_transfer">库台转账</string>
-    <string name="query_repertory_tip">库存查询</string>
-    <string name="query_retrospective">追溯查询</string>
-    <string name="query_record_tip">记录查询</string>
-    <string name="query_statistical_tip">统计查询</string>
-    <string name="point_date">清点日期</string>
-    <string name="line_name">序号</string>
-    <string name="item_buy_num">采购数</string>
-    <string name="item_arrive_goods_num">到货数</string>
-    <string name="item_in_stock_num">入库数</string>
-    <string name="item_send_num">送货数</string>
-    <string name="item_have_receive_num">已收数</string>
-    <string name="item_point_num">请点数</string>
-    <string name="item_form_orderno">来源单据</string>
-    <string name="item_goods_code">物品编码</string>
-    <string name="pack_adjust">容器调整</string>
-    <string name="query_allot_scan_title">调拨—选单</string>
-    <string name="query_allot_scan_tip">调拨单</string>
-    <string name="query_allot_scan_hint">请输入单号进行查询</string>
-    <string name="query_form_change_title">形态转换—选单：</string>
-    <string name="query_form_change_tip">形态转换单：</string>
-    <string name="query_point_title">盘点—选单</string>
-    <string name="query_point_tip">盘点单</string>
-    <string name="stock_query_batch">批次</string>
-    <string name="item_goods_name">物品名称</string>
-    <string name="item_goods_model">规格型号</string>
-    <string name="item_goods_num">物品数量</string>
-    <string name="item_goods_current_status">当前状态</string>
-    <string name="instock_total_num_tip">入库总数：</string>
-    <string name="allot_orderno_tip">调拨单：</string>
-    <string name="wait_point_num_tip">待点总数：</string>
-    <string name="create_date_tip">制单日期：</string>
-    <string name="have_point_num_tip">已点总数：</string>
+    <string name="start_time_tip">开始日期</string>
+    <string name="end_time_tip">结束日期</string>
+    <string name="receive_material_orderno_tip">收料通知单：</string>
+    <string name="goods_code_tip">物品代码：</string>
+    <string name="supplier_name_tip">供应商名称：</string>
+    <string name="tv_pack_name_tip">包装条码：</string>
+    <string name="no_need_quality">免</string>
+    <string name="quality_pick">挑选</string>
+    <string name="quality_special_get">特采</string>
+    <string name="quality_all_return">全退</string>
+    <string name="quality_right_get">正采</string>
+    <string name="excel_head_send_quality_num">送检</string>
+    <string name="excel_head_quality_num">合格</string>
+    <string name="excel_head_quality_result">质检结果</string>
+    <string name="please_input_badness_num">请输入不良数</string>
+    <string name="item_quality_status">状态</string>
+    <string name="item_material_code">物料编码</string>
+    <string name="item_arrive_date">到货日期：%1$s</string>
+    <string name="item_arrive_orderno">到货单号：%1$s</string>
+    <string name="materail_info">物料信息</string>
+    <string name="arrive_orderno_tip">到货单号</string>
+    <string name="please_input_arrive_orderno">请输入到货单号</string>
+    <string name="please_input_material_name">请输入物料名称</string>
+    <string name="item_material_name">物料名称</string>
+    <string name="please_input_material_code">请输入物料编码</string>
+    <string name="item_supplier">供应商</string>
+    <string name="scan_code">扫描条码</string>
+    <string name="wait_quality">待检</string>
+    <string name="wait_deal">待定</string>
+    <string name="unquality">不合格</string>
+    <string name="quality_query_result_nodata">未查询到您所搜索的质检信息，请重新输入！</string>
+    /**====== 普通质检 ======**/
     <string name="receive_material_date">收料日期：%1$s</string>
+    <string name="instock_total_num_tip">入库总数：</string>
     <string name="receive_num">\t实收数：%1$s</string>
     <string name="please_input_spot_check_num">请输入抽检数</string>
-    <string name="refuse_receive_num">拒收数：</string>
-    <string name="spot_check_num">抽检数：</string>
-    <string name="badness_total_num">不良总数：</string>
-    <string name="badness_percent">不良率：</string>
+    <string name="refuse_receive_num">拒收数</string>
+    <string name="spot_check_num">抽检数</string>
+    <string name="badness_total_num">不良总数</string>
+    <string name="badness_num">不良数</string>
+    <string name="badness_percent">不良率</string>
     <string name="next_page">下一步</string>
-    <string name="normal_quality_title">来料—质检详情（普检）</string>
+    <string name="normal_quality_title">来料质检（普检）</string>
+    <string name="excel_head_quality">质检</string>
+    <string name="excel_head_goods_code">物品编码</string>
+    <string name="excel_head_supplier">供应商</string>
+    <string name="excel_head_real_receive_num">实收</string>
+    <string name="please_input_start_date">请选择开始日期</string>
+    <string name="please_input_end_date">请选择结束日期</string>
+    <string name="please_input_receive_material_orderno">请输入收料通知单号</string>
+    <string name="please_input_goods_code">请输入物品代码</string>
+    <string name="please_input_goods_name">请输入物品名称</string>
+    <string name="please_input_supplier_name">请输入供货商名称</string>
+    <string name="please_input_pack_code">请输入包装条码</string>
+    <string name="badness_reason_tip">不良原因：%1$s</string>
+    <string name="please_input_reject_num">请输入拒收数</string>
+    <string name="normal_unquality_tip">此物品质检结果为不合格，进入MRP评审操作流程！</string>
+    <string name="normal_quality_tip">此物品质检操作流程已完成，其质检结果为合格！</string>
+    <string name="quality_work">质检操作</string>
+    <string name="material_info">物料信息</string>
+    /**====== 高级质检 ======**/
     <string name="standard_level">标准水平：%1$s</string>
     <string name="sample_half_yard">试样半码：%1$s</string>
     <string name="check_method">检验方法：%1$s</string>
@@ -349,71 +411,10 @@
     <string name="main_unqualitfied_tip">主要不合格原因：</string>
     <string name="tv_monor_unqualitfied_tip">催要不合格原因：</string>
     <string name="quality_complete">质检完成</string>
-    <string name="please_scan_assign_material_code">请扫描指定退料条码</string>
+    <string name="please_scan_assign_material_code">请输入或扫描指定退料条码</string>
     <string name="rd_qualified_tip">合格</string>
     <string name="rd_unqualified">不合格</string>
     <string name="rd_wait_deal">待定</string>
-    <string name="start_time_tip">开始日期</string>
-    <string name="end_time_tip">结束日期</string>
-    <string name="receive_material_orderno_tip">收料通知单：</string>
-    <string name="goods_code_tip">物品代码：</string>
-    <string name="supplier_name_tip">供应商名称：</string>
-    <string name="tv_pack_name_tip">包装条码：</string>
-    <string name="no_need_quality">免</string>
-    <string name="quality_pick">挑选</string>
-    <string name="quality_special_get">特采</string>
-    <string name="quality_all_return">全退</string>
-    <string name="send_quality_num">送检数</string>
-    <string name="quality_num">合格数</string>
-    <string name="quality_result">质检结果</string>
-    <string name="excel_head_quality">质检</string>
-    <string name="excel_head_supplier">供应商</string>
-    <string name="please_input_start_date">请输入开始日期</string>
-    <string name="please_input_end_date">请输入结束日期</string>
-    <string name="please_input_receive_material_orderno">请输入收料通知单号</string>
-    <string name="please_input_goods_code">请输入物品代码</string>
-    <string name="please_input_goods_name">请输入物品名称</string>
-    <string name="please_input_supplier_name">请输入供货商名称</string>
-    <string name="please_input_pack_code">请输入包装条码</string>
-    <string name="badness_reason_tip">不良原因：%1$s</string>
-    <string name="please_input_badness_num">请输入不良数</string>
-    <string name="item_quality_status">状态</string>
-    <string name="item_material_code">物料编码</string>
-    <string name="arrive_date">到货日期：%1$s</string>
-    <string name="item_arrive_orderno">到货单号：%1$s</string>
-    <string name="materail_info">物料信息</string>
-    <string name="arrive_orderno_tip">到货单号</string>
-    <string name="please_input_arrive_orderno">请输入到货单号</string>
-    <string name="please_input_material_name">请输入物料名称</string>
-    <string name="item_material_name">物料名称</string>
-    <string name="please_input_material_code">请输入物料编码</string>
-    <string name="item_supplier">供应商</string>
-    <string name="scan_code">扫描条码</string>
-    <string name="wait_deal">待定</string>
-    <string name="unquality">不合格</string>
-    <string name="quality_query_result_nodata">未查询到您所搜索的质检信息，请重新输入！</string>
-    <string name="please_input_reject_num">请输入拒收数</string>
-    <string name="normal_unquality_tip">此物品质检结果为不合格，进入MRP评审操作流程！</string>
-    <string name="normal_quality_tip">此物品质检操作流程已完成，其质检结果为合格！</string>
-    <string name="quality_reject_title">质检拒收</string>
-    <string name="mrp_badness_percent">不良率</string>
-    <string name="mrp_sample_num">抽检</string>
-    <string name="tv_mrp_quality_date">质检日期：%1$s</string>
-    <string name="mrp_title">来料-MRP评审</string>
-    <string name="send_quality_num_tip">送检数：%1$s</string>
-    <string name="mrp_normal_badness_total_num">不良总数：%1$s</string>
-    <string name="mrp_normal_checker">质检人：%1$s</string>
-    <string name="please_select_mrp_review_result">请选择评审结果</string>
-    <string name="mrp_normal_pick_tip">挑选/特采：</string>
-    <string name="please_input_pick_num">请输入挑选数量（或特采）</string>
-    <string name="please_input_mark_info">请输入备注信息</string>
-    <string name="mrp_normal_mark_tip">备注：</string>
-    <string name="mr_advance_sample_num">样品数：%1$s</string>
-    <string name="mrp_advance_main_num">主要不良原因：%1$s</string>
-    <string name="mrp_advance_second_num">次要不良原因：%1$s</string>
-    <string name="mrp_aql_tip">AQL：%1$s</string>
-    <string name="header_spare_num">备品数</string>
-    <string name="header_point_num">请点数</string>
     <string name="quality_advance1_title">来料—质检详情（高检1）</string>
     <string name="sampleqty_more_receiveqty_please_repeat_input">抽检数不能大于实收数，请重新输入！</string>
     <string name="rejectnum_more_receiveqty_please_repeat_input">拒收数不能大于实收数，请重新输入！</string>
@@ -423,4 +424,89 @@
     <string name="dialog_from_orderno">来源单号：%1$s</string>
     <string name="pack_num">包装数：%1$s</string>
     <string name="material_attr">附加属性：%1$s</string>
+    /**====== 质检拒收 ======**/
+    <string name="quality_reject_title">质检拒收</string>
+    /**====== MRP ======**/
+    <string name="mrp_badness_percent">不良率</string>
+    <string name="mrp_sample_num">抽检</string>
+    <string name="tv_mrp_quality_date">质检日期：%1$s</string>
+    <string name="mrp_title">来料-MRP评审</string>
+    <string name="send_quality_num_tip">送检数：%1$s</string>
+    <string name="mrp_normal_badness_percent">不良率：%1$s</string>
+    <string name="mrp_quality_num_tip">合格数：%1$s</string>
+    <string name="mrp_normal_badness_total_num">不良总数：%1$s</string>
+    /**====== MRP高检 ======**/
+    <string name="mrp_normal_checker">质检人：%1$s</string>
+    <string name="please_select_mrp_review_result">请选择评审结果</string>
+    <string name="mrp_normal_pick_tip">挑选/特采：</string>
+    <string name="please_input_pick_num">请输入挑选数量（或特采）</string>
+    <string name="please_input_mark_info">请输入备注信息</string>
+    <string name="mrp_normal_mark_tip">备注：</string>
+    <string name="mr_advance_sample_num">样品数：%1$s</string>
+    <string name="mrp_advance_serious_num">严重不良原因：%1$s</string>
+    <string name="mrp_advance_main_num">主要不良原因：%1$s</string>
+    <string name="mrp_advance_second_num">次要不良原因：%1$s</string>
+    <string name="mrp_aql_tip">AQL：%1$s</string>
+    <string name="mrp_quality_total_num">合格总数：%1$s</string>
+
+    /******************************************************************************************************************************************************/
+    /******************************************************************************************************************************************************/
+    /**====== 库内作业 ======**/
+    <string name="stockin_work_change">调拨调整</string>
+    <string name="lib_location_change">库位调整</string>
+    <string name="stockin_work_model_change">形态转换</string>
+    <string name="stockin_work_one_step_in">一步调入</string>
+    <string name="stockin_work_group_change">容器调整</string>
+    <string name="tv_stockinwork_out_stock">出库</string>
+    <string name="stockin_work_in_stock">入库</string>
+    <string name="stockin_work_query_and_count">查询盘点</string>
+    <string name="stockin_work_query_repertory">库存查询</string>
+    <string name="stockin_work_count">盘点</string>
+    /**====== 库内搜索 ======**/
+    <string name="item_send_num">送货数</string>
+    <string name="item_have_receive_num">已收数</string>
+    <string name="item_point_num">请点数</string>
+    <string name="item_form_orderno">来源单据</string>
+    <string name="item_goods_code">物品编码</string>
+    <string name="pack_adjust">容器调整</string>
+    <string name="query_allot_scan_title">调拨—选单</string>
+    <string name="query_allot_scan_tip">调拨单：</string>
+    <string name="query_allot_scan_hint">请输入单号进行查询</string>
+    <string name="query_form_change_title">形态转换—选单：</string>
+    <string name="query_form_change_tip">形态转换单：</string>
+    <string name="query_point_title">盘点—选单</string>
+    <string name="query_point_tip">盘点单</string>
+    /**====== 库位调整 ======**/
+    <string name="code_type">条码类型：</string>
+    <string name="in_lib_location_code">移入库位码：</string>
+    <string name="material_code_tip">条码：</string>
+    <string name="goods_code">物品编码：</string>
+    <string name="goods_num_tip">物品数量：</string>
+    <string name="goods_name">物品名称：</string>
+    <string name="goods_model">规格型号：</string>
+    /**====== 容器调整 ======**/
+    /**====== 库存查询======**/
+    <string name="query_repertory_tip">库存查询</string>
+    <string name="goods_type">物品种类：%1$s</string>
+    <string name="goods_total_num">总数量：%1$s</string>
+    <string name="stock_query_batch">批次</string>
+    <string name="item_goods_name">物品名称</string>
+    <string name="item_goods_model">规格型号</string>
+    <string name="item_goods_num">物品数量</string>
+    <string name="item_goods_current_status">当前状态</string>
+    <string name="allot_orderno_tip">调拨单：</string>
+    <string name="wait_point_num_tip">待点总数：</string>
+    <string name="create_date_tip">制单日期：</string>
+    <string name="have_point_num_tip">已点总数：</string>
+    /******************************************************************************************************************************************************/
+    /******************************************************************************************************************************************************/
+    /**====== 综合查询 ======**/
+    <string name="query_library_transfer">库台转账</string>
+    <string name="query_retrospective">追溯查询</string>
+    <string name="query_record_tip">记录查询</string>
+    <string name="query_statistical_tip">统计查询</string>
+
+
+
+
 </resources>

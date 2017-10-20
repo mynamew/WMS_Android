@@ -122,7 +122,7 @@
                 android:layout_height="match_parent"
                 android:layout_margin="20px"
                 android:layout_toRightOf="@id/tv_stockout_tip"
-                android:background="@drawable/bg_sbo_rectangle_et"
+                android:background="@drawable/bg_rectangle_et_focused"
                 android:ellipsize="end"
                 android:hint="请输入物料条码或扫码"
                 android:imeOptions="actionSearch"

@@ -50,7 +50,7 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="20px"
             android:layout_toRightOf="@id/tv_min_pack_code"
-            android:background="@drawable/bg_sbo_rectangle_et"
+            android:background="@drawable/bg_rectangle_et_focused"
             android:hint="@string/please_scan_assign_material_code"
             android:paddingLeft="20px"
             android:singleLine="true"

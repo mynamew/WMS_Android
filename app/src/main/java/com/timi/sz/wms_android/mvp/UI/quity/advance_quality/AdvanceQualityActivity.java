@@ -85,8 +85,6 @@ public class AdvanceQualityActivity extends BaseActivity<AdvanceQualityView, Adv
     TextView tvSampleNum;
     @BindView(R.id.tv_check)
     TextView tvCheck;
-    @BindView(R.id.myexcel_advance_quality)
-    MyExcelView myexcelAdvanceQuality;
     @BindView(R.id.rlv_quality_advance)
     RecyclerView rlvQualityAdvance;
     //bundle

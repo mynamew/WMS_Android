@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
-        android:background="@drawable/bg_sbo_rectangle_et"
+        android:background="@drawable/bg_rectangle_et_focused"
         android:orientation="vertical">
 
         <TextView

@@ -69,7 +69,7 @@
                     android:layout_height="80px"
                     android:layout_centerVertical="true"
                     android:layout_toRightOf="@id/tv_material_tip"
-                    android:background="@drawable/bg_sbo_rectangle_et"
+                    android:background="@drawable/bg_rectangle_et_focused"
                     android:ellipsize="end"
                     android:gravity="center_vertical"
                     android:hint="@string/please_scan_material_code"

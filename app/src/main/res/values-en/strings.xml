@@ -421,5 +421,7 @@
     <string name="dialog_from_orderno">来源单号：%1$s</string>
     <string name="pack_num">包装数：%1$s</string>
     <string name="material_attr">附加属性：%1$s</string>
+    <string name="quality_work">质检操作</string>
+    <string name="material_info">物料信息</string>
 
 </resources>

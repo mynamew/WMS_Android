@@ -13,8 +13,10 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.timi.sz.wms_android.R;
+import com.timi.sz.wms_android.base.adapter.BaseRecyclerAdapter;
 import com.timi.sz.wms_android.base.adapter.CommonSimpleTypeAdapter;
 import com.timi.sz.wms_android.base.adapter.CommonViewHolder;
+import com.timi.sz.wms_android.base.adapter.RecyclerViewHolder;
 import com.timi.sz.wms_android.base.uils.LogUitls;
 import com.timi.sz.wms_android.base.uils.PackageUtils;
 import com.timi.sz.wms_android.base.uils.SpUtils;
@@ -128,7 +130,7 @@ public class NormalQualityActivity extends BaseActivity<NormalQualityView, Norma
         /**
          * 默认选择合格
          */
-        rdQualified.setChecked(true);
+        rdUnqualified.setChecked(false);
 
     }
 
@@ -291,27 +293,27 @@ public class NormalQualityActivity extends BaseActivity<NormalQualityView, Norma
         final List<NormalQualityData.FaultDataBean> faultData = result.getFaultData();
         if (null != faultData) {
             mFaultData = faultData;
-            final CommonSimpleTypeAdapter<NormalQualityData.FaultDataBean> commonSimpleTypeAdapter = new CommonSimpleTypeAdapter<NormalQualityData.FaultDataBean>(faultData) {
+            final BaseRecyclerAdapter<NormalQualityData.FaultDataBean> adapter = new BaseRecyclerAdapter<NormalQualityData.FaultDataBean>(this,faultData) {
                 @Override
-                public int getLayoutId(int viewType) {
+                protected int getItemLayoutId(int viewType) {
                     return R.layout.item_normal_quality;
                 }
 
                 @Override
-                public void convert(CommonViewHolder holder, NormalQualityData.FaultDataBean data, int position) {
-                    holder.getTextView(R.id.tv_badness_code).setText(data.getFaultCode());
-                    holder.getTextView(R.id.tv_badness_reason).setText(data.getFaultName());
-                    holder.getTextView(R.id.tv_badness_num).setText(data.getFaultQty() + "");
+                protected void bindData(RecyclerViewHolder holder, int position, NormalQualityData.FaultDataBean item) {
+                    holder.getTextView(R.id.tv_badness_code).setText(item.getFaultCode());
+                    holder.getTextView(R.id.tv_badness_reason).setText(item.getFaultName());
+                    holder.getTextView(R.id.tv_badness_num).setText(item.getFaultQty() + "");
                 }
             };
             rlvQuality.setLayoutManager(new LinearLayoutManager(this));
-            rlvQuality.setAdapter(commonSimpleTypeAdapter);
+            rlvQuality.setAdapter(adapter);
             /**
              * 点击不良原因的条目，弹出提示框 输入相应的不良数量
              */
-            commonSimpleTypeAdapter.setOnItemClickListener(R.id.ll_content, new CommonSimpleTypeAdapter.ItemClickListener() {
+            adapter.setOnItemClickListener(new BaseRecyclerAdapter.OnItemClickListener() {
                 @Override
-                public void onItemClicked(View view, final int position) {
+                public void onItemClick(View itemView, final int position) {
                     if (null == faultDataDialog) {
                         faultDataDialog = new MyDialog(NormalQualityActivity.this, R.layout.dialog_quality_faultdata);
                     }
@@ -348,7 +350,7 @@ public class NormalQualityActivity extends BaseActivity<NormalQualityView, Norma
                              * 设置原数据
                              */
                             mFaultData.get(position).setFaultQty(Integer.parseInt(badnessNumStr));
-                            commonSimpleTypeAdapter.notifyDataSetChanged();
+                            adapter.notifyDataSetChanged();
                             /**
                              * 当不良总数大于实收数 时提示用户
                              */
@@ -386,6 +388,7 @@ public class NormalQualityActivity extends BaseActivity<NormalQualityView, Norma
                     setTextViewText(faultDataDialog.getTextView(R.id.tv_badness_reason), R.string.badness_reason_tip, mFaultData.get(position).getFaultName());
                     faultDataDialog.show();
                 }
+
             });
         }
     }

@@ -375,11 +375,11 @@
     <string name="instock_total_num_tip">入库总数：</string>
     <string name="receive_num">\t实收数：%1$s</string>
     <string name="please_input_spot_check_num">请输入抽检数</string>
-    <string name="refuse_receive_num">拒收数：</string>
-    <string name="spot_check_num">抽检数：</string>
-    <string name="badness_total_num">不良总数：</string>
+    <string name="refuse_receive_num">拒收数</string>
+    <string name="spot_check_num">抽检数</string>
+    <string name="badness_total_num">不良总数</string>
     <string name="badness_num">不良数</string>
-    <string name="badness_percent">不良率：</string>
+    <string name="badness_percent">不良率</string>
     <string name="next_page">下一步</string>
     <string name="normal_quality_title">来料质检（普检）</string>
     <string name="excel_head_quality">质检</string>
@@ -397,6 +397,8 @@
     <string name="please_input_reject_num">请输入拒收数</string>
     <string name="normal_unquality_tip">此物品质检结果为不合格，进入MRP评审操作流程！</string>
     <string name="normal_quality_tip">此物品质检操作流程已完成，其质检结果为合格！</string>
+    <string name="quality_work">质检操作</string>
+    <string name="material_info">物料信息</string>
     /**====== 高级质检 ======**/
     <string name="standard_level">标准水平：%1$s</string>
     <string name="sample_half_yard">试样半码：%1$s</string>
@@ -413,6 +415,15 @@
     <string name="rd_qualified_tip">合格</string>
     <string name="rd_unqualified">不合格</string>
     <string name="rd_wait_deal">待定</string>
+    <string name="quality_advance1_title">来料—质检详情（高检1）</string>
+    <string name="sampleqty_more_receiveqty_please_repeat_input">抽检数不能大于实收数，请重新输入！</string>
+    <string name="rejectnum_more_receiveqty_please_repeat_input">拒收数不能大于实收数，请重新输入！</string>
+    <string name="input_orderno_more_four">输入查询单号位数必须是4位以上</string>
+    <string name="please_input_scan_barcode">请输入或扫描要修改的条码</string>
+    <string name="dialog_reject_num">拒收数：</string>
+    <string name="dialog_from_orderno">来源单号：%1$s</string>
+    <string name="pack_num">包装数：%1$s</string>
+    <string name="material_attr">附加属性：%1$s</string>
     /**====== 质检拒收 ======**/
     <string name="quality_reject_title">质检拒收</string>
     /**====== MRP ======**/
@@ -494,15 +505,8 @@
     <string name="query_retrospective">追溯查询</string>
     <string name="query_record_tip">记录查询</string>
     <string name="query_statistical_tip">统计查询</string>
-    <string name="quality_advance1_title">来料—质检详情（高检1）</string>
-    <string name="sampleqty_more_receiveqty_please_repeat_input">抽检数不能大于实收数，请重新输入！</string>
-    <string name="rejectnum_more_receiveqty_please_repeat_input">拒收数不能大于实收数，请重新输入！</string>
-    <string name="input_orderno_more_four">输入查询单号位数必须是4位以上</string>
-    <string name="please_input_scan_barcode">请输入或扫描要修改的条码</string>
-    <string name="dialog_reject_num">拒收数：</string>
-    <string name="dialog_from_orderno">来源单号：%1$s</string>
-    <string name="pack_num">包装数：%1$s</string>
-    <string name="material_attr">附加属性：%1$s</string>
+
+
 
 
 </resources>

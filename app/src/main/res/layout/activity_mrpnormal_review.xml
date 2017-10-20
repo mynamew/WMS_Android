@@ -261,7 +261,7 @@
                     android:layout_height="match_parent"
                     android:layout_marginLeft="20px"
                     android:layout_marginRight="20px"
-                    android:background="@drawable/bg_sbo_rectangle_et">
+                    android:background="@drawable/bg_rectangle_et_focused">
 
                     <TextView
                         android:id="@+id/tv_select_mrpreview_result"
@@ -306,7 +306,7 @@
                     android:layout_marginLeft="20px"
                     android:layout_marginRight="20px"
                     android:inputType="number"
-                    android:background="@drawable/bg_sbo_rectangle_et"
+                    android:background="@drawable/bg_rectangle_et_focused"
                     android:hint="@string/please_input_pick_num"
                     android:paddingLeft="20px"
                     android:textSize="14sp"/>
@@ -333,7 +333,7 @@
                     android:layout_marginLeft="30px"
                     android:layout_marginRight="20px"
                     android:layout_marginTop="10px"
-                    android:background="@drawable/bg_sbo_rectangle_et"
+                    android:background="@drawable/bg_rectangle_et_focused"
                     android:gravity="left"
                     android:hint="@string/please_input_mark_info"
                     android:paddingLeft="20px"

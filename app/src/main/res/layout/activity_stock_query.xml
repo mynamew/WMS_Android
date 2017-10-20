@@ -28,7 +28,7 @@
                 android:layout_height="88px"
                 android:layout_marginLeft="20px"
                 android:layout_marginRight="20px"
-                android:background="@drawable/bg_sbo_rectangle_et"
+                android:background="@drawable/bg_rectangle_et_focused"
                 android:hint="请输入您要查询的条码"
                 android:paddingLeft="20px"
                 android:textSize="14sp"/>

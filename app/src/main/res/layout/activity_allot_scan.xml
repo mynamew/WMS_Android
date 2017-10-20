@@ -112,7 +112,7 @@
         android:layout_margin="20px"
         app:layout_constraintTop_toBottomOf="@+id/view_divide"
         android:layout_toRightOf="@id/tv_putaway_scan_location_tip"
-        android:background="@drawable/bg_sbo_rectangle_et"
+        android:background="@drawable/bg_rectangle_et_focused"
         android:ellipsize="end"
         android:hint="@string/please_scan_lib_location_code"
         android:paddingLeft="20px"

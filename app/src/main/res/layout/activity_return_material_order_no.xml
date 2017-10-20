@@ -101,7 +101,7 @@
                     android:layout_height="match_parent"
                     android:layout_margin="20px"
                     android:layout_toRightOf="@id/tv_putaway_scan_material_tip"
-                    android:background="@drawable/bg_sbo_rectangle_et"
+                    android:background="@drawable/bg_rectangle_et_focused"
                     android:ellipsize="end"
                     android:gravity="center_vertical"
                     android:hint="@string/please_scan_material_code"

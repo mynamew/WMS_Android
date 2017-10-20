@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/set_bg"
+    android:background="#e7e7ed"
     tools:context="com.timi.sz.wms_android.mvp.UI.quity.nomal_quality.NormalQualityActivity">
 
     <include
@@ -38,294 +38,392 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/tv_orderno"
-                android:layout_width="match_parent"
-                android:layout_height="60px"
-                android:gravity="center_vertical"
-                android:paddingLeft="20px"
-                android:paddingTop="10px"
-                android:text="@string/receive_pro_num"
-                android:textColor="#333"
-                />
-            <TextView
-                android:id="@+id/tv_receive_material_date"
-                android:layout_width="match_parent"
-                android:layout_weight="1"
-                android:layout_height="60px"
-                android:gravity="center_vertical"
-                android:paddingLeft="20px"
-                android:paddingTop="10px"
-                android:text="@string/receive_material_date"
-                android:textColor="#333"
-                />
-            <TextView
-                android:id="@+id/tv_order_num"
-                android:layout_width="match_parent"
-                android:layout_height="60px"
-                android:gravity="center_vertical"
-                android:paddingLeft="30px"
-                android:paddingTop="10px"
-                android:text="@string/order_no"
-                android:textColor="#333"
-                />
-
-            <TextView
-                android:id="@+id/tv_supplier"
-                android:layout_width="match_parent"
-                android:layout_height="60px"
-                android:gravity="center_vertical"
-                android:paddingLeft="30px"
-                android:paddingTop="10px"
-                android:text="@string/buy_from"
-                android:textColor="#333"
-                />
-
-            <TextView
-                android:id="@+id/tv_material_code"
-                android:layout_width="match_parent"
-                android:layout_height="60px"
-                android:gravity="center_vertical"
-                android:paddingLeft="20px"
-                android:paddingTop="10px"
-                android:text="@string/material_code"
-                android:textColor="#333"
-                />
-
-            <TextView
-                android:id="@+id/tv_material_name"
-                android:layout_width="match_parent"
-                android:layout_height="60px"
-                android:gravity="center_vertical"
-                android:paddingLeft="20px"
-                android:paddingTop="10px"
-                android:text="@string/material_name"
-                android:textColor="#333"
-                />
-
-            <TextView
-                android:id="@+id/tv_material_model"
-                android:layout_width="match_parent"
-                android:layout_height="60px"
-                android:gravity="center_vertical"
-                android:paddingLeft="20px"
-                android:paddingTop="10px"
-                android:text="@string/material_model"
-                android:textColor="#333"
-                />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="5px"
-                android:background="@color/tab_txt_unselect"
-                />
-
-            <TextView
-                android:id="@+id/tv_receive_num"
-                android:layout_width="match_parent"
-                android:layout_height="60px"
-                android:gravity="center_vertical"
-                android:paddingLeft="30px"
-                android:paddingTop="10px"
-                android:text="@string/receive_num"
-                android:textColor="#333"
-                />
-
             <LinearLayout
-                android:id="@+id/ll_spot_check"
                 android:layout_width="match_parent"
-                android:layout_height="80px"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:paddingRight="20px"
-                >
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24px"
+                android:layout_marginLeft="30px"
+                android:layout_marginRight="30px"
+                android:layout_marginTop="24px"
+                android:background="@drawable/bg_rectangle_et_unfocused"
+                android:orientation="vertical"
+                android:paddingBottom="20px">
 
-                <LinearLayout
-                    android:layout_width="0dp"
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="72px"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="20px"
+                    android:paddingTop="10px"
+                    android:text="@string/material_info"
+                    android:textColor="#333"
+                    android:textSize="28px"
+                    android:textStyle="bold"
+                    />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:background="#d7d7dd"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_orderno"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1">
+                    android:gravity="center_vertical"
+                    android:paddingLeft="20px"
+                    android:paddingTop="20px"
+                    android:text="@string/receive_pro_num"
+                    android:textColor="#333"
+                    android:textSize="26px"
+                    />
 
-                    <TextView
-                        android:id="@+id/tv_spot_check_num"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingLeft="47px"
-                        android:paddingTop="10px"
-                        android:text="@string/sample_num"
-                        android:textColor="#333"
-                        />
 
-                    <TextView
-                        android:id="@+id/et_spot_check_num"
-                        android:layout_width="match_parent"
-                        android:layout_height="60px"
-                        android:gravity="center_vertical"
-                        android:background="@drawable/bg_sbo_rectangle_et"
-                        android:text="0"
-                        android:paddingLeft="20px"
-                        android:textSize="14sp"/>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="0dp"
+                <TextView
+                    android:id="@+id/tv_receive_material_date"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1">
+                    android:gravity="center_vertical"
+                    android:paddingLeft="20px"
+                    android:paddingTop="20px"
+                    android:text="@string/receive_material_date"
+                    android:textColor="#333"
+                    android:textSize="26px"
+                    />
 
-                    <TextView
-                        android:id="@+id/tv_refuse_receive_num"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingLeft="30px"
-                        android:paddingTop="10px"
-                        android:text="@string/refuse_receive_num"
-                        android:textColor="#333"
-                        />
-
-                    <EditText
-                        android:id="@+id/et_refuse_receive_num"
-                        android:layout_width="match_parent"
-                        android:layout_height="60px"
-                        android:background="@drawable/bg_sbo_rectangle_et"
-                        android:hint="请输入拒收数"
-                        android:paddingLeft="20px"
-                        android:textSize="14sp"/>
-                </LinearLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/ll_badness"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:paddingRight="20px"
-                >
-
-                <LinearLayout
-                    android:layout_width="0dp"
+                <TextView
+                    android:id="@+id/tv_order_num"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1">
+                    android:gravity="center_vertical"
+                    android:paddingLeft="30px"
+                    android:paddingTop="20px"
+                    android:text="@string/order_no"
+                    android:textColor="#333"
+                    android:textSize="26px"
+                    />
 
-                    <TextView
-                        android:id="@+id/tv_badness_total_num"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingLeft="20px"
-                        android:paddingTop="10px"
-                        android:text="@string/badness_total_num"
-                        android:textColor="#333"
-                        />
-
-                    <TextView
-                        android:id="@+id/et_badness_num"
-                        android:layout_width="match_parent"
-                        android:layout_height="60px"
-                        android:gravity="center_vertical"
-                        android:background="@drawable/bg_sbo_rectangle_et"
-                        android:focusable="false"
-                        android:focusableInTouchMode="false"
-                        android:paddingLeft="20px"
-                        android:text="0"
-                        android:textColor="#ff0000"
-                        android:textSize="14sp"/>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="0dp"
+                <TextView
+                    android:id="@+id/tv_supplier"
+                    android:layout_width="match_parent"
+                    android:layout_marginBottom="10px"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1">
+                    android:gravity="center_vertical"
+                    android:lineSpacingExtra="5px"
+                    android:paddingLeft="30px"
+                    android:paddingTop="20px"
+                    android:text="@string/buy_from"
+                    android:textColor="#333"
+                    android:textSize="26px"
+                    />
 
-                    <TextView
-                        android:id="@+id/tv_badness_percent"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingLeft="30px"
-                        android:paddingTop="10px"
-                        android:text="@string/badness_percent"
-                        android:textColor="#333"
-                        />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="10px"
+                    android:layout_marginLeft="30px"
+                    android:layout_marginRight="30px"
+                    android:background="@drawable/bg_quality_normal_divider"
+                    />
 
-                    <TextView
-                        android:id="@+id/et_badness_percent"
-                        android:layout_width="match_parent"
-                        android:layout_height="60px"
-                        android:background="@drawable/bg_sbo_rectangle_et"
-                        android:focusable="false"
-                        android:gravity="center_vertical"
-                        android:focusableInTouchMode="false"
-                        android:paddingLeft="20px"
-                        android:text="0 %"
-                        android:textColor="#ff0000"
-                        android:textSize="14sp"/>
-                </LinearLayout>
+                <TextView
+                    android:id="@+id/tv_material_code"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="20px"
+                    android:layout_marginTop="10px"
+                    android:text="@string/material_code"
+                    android:textColor="#333"
+                    android:textSize="26px"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_material_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:lineSpacingExtra="5px"
+                    android:paddingLeft="20px"
+                    android:paddingTop="20px"
+                    android:text="@string/material_name"
+                    android:textColor="#333"
+                    android:textSize="26px"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_material_model"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:lineSpacingExtra="5px"
+                    android:paddingLeft="20px"
+                    android:paddingTop="20px"
+                    android:text="@string/material_model"
+                    android:textColor="#333"
+                    android:textSize="26px"
+                    />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20px"
-                android:layout_marginRight="20px"
-                android:layout_marginTop="10px"
-                android:background="#999"
+                android:layout_marginLeft="30px"
+                android:layout_marginRight="30px"
+                android:background="@drawable/bg_rectangle_et_unfocused"
                 android:orientation="vertical"
-                android:padding="1dp"
-                >
+                android:paddingBottom="20px">
 
-                <LinearLayout
+                <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="50px"
-                    android:layout_marginBottom="1dp"
-                    android:background="#ddd"
-                    android:orientation="horizontal">
+                    android:layout_height="72px"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="20px"
+                    android:paddingTop="10px"
+                    android:text="@string/quality_work"
+                    android:textColor="#333"
+                    android:textSize="28px"
+                    android:textStyle="bold"
+                    />
 
-                    <TextView
-                        android:id="@+id/tv_badness_code"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="不良代码"
-                        android:textColor="#333"/>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:background="#d7d7dd"
+                    />
 
-                    <View
-                        android:layout_width="1dp"
-                        android:layout_height="match_parent"
-                        android:background="#999"/>
-
-                    <TextView
-                        android:id="@+id/tv_badness_reason"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="2"
-                        android:gravity="center"
-                        android:text="不良原因"
-                        android:textColor="#333"/>
-
-                    <View
-                        android:layout_width="1dp"
-                        android:layout_height="match_parent"
-                        android:background="#999"/>
-
-                    <TextView
-                        android:id="@+id/tv_badness_num"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="不良数"
-                        android:textColor="#333"/>
-                </LinearLayout>
-
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/rlv_quality"
+                <TextView
+                    android:id="@+id/tv_receive_num"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="#fff"/>
+                    android:gravity="center_vertical"
+                    android:paddingLeft="10px"
+                    android:paddingTop="20px"
+                    android:text="@string/receive_num"
+                    android:textColor="#333"
+                    android:textSize="28px"
+                    />
+
+                <LinearLayout
+                    android:id="@+id/ll_spot_check"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="20px"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingRight="20px"
+                    >
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:id="@+id/tv_spot_check_num"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="30px"
+                            android:paddingTop="10px"
+                            android:text="@string/spot_check_num"
+                            android:textColor="#333"
+                            android:textSize="28px"
+                            />
+
+                        <TextView
+                            android:id="@+id/et_spot_check_num"
+                            android:layout_width="match_parent"
+                            android:layout_height="60px"
+                            android:layout_marginLeft="20px"
+                            android:background="@drawable/bg_rectangle_et_unfocused"
+                            android:gravity="center"
+                            android:textColor="#333"
+                            android:text="0"
+                            android:inputType="number"
+                            android:paddingLeft="10px"
+                            android:textSize="26px"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:id="@+id/tv_refuse_receive_num"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="30px"
+                            android:paddingTop="10px"
+                            android:text="@string/refuse_receive_num"
+                            android:textColor="#333"
+                            android:textSize="28px"
+                            />
+
+                        <EditText
+                            android:id="@+id/et_refuse_receive_num"
+                            android:layout_width="match_parent"
+                            android:layout_height="60px"
+                            android:layout_marginLeft="10px"
+                            android:background="@drawable/selector_et"
+                            android:gravity="center"
+                            android:hint="@string/please_input_reject_num"
+                            android:inputType="number"
+                            android:paddingLeft="10px"
+                            android:textSize="26px"
+                            />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_badness"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="20px"
+                    android:layout_marginBottom="10px"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingRight="20px"
+                    >
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:id="@+id/tv_badness_total_num_tip"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="10px"
+                            android:paddingTop="10px"
+                            android:text="@string/badness_total_num"
+                            android:textColor="#333"
+                            android:textSize="28px"
+                            />
+
+                        <TextView
+                            android:id="@+id/tv_badness_total_num"
+                            android:layout_width="match_parent"
+                            android:layout_height="60px"
+                            android:layout_marginLeft="10px"
+
+                            android:background="@drawable/bg_rectangle_et_unfocused"
+                            android:focusable="false"
+                            android:focusableInTouchMode="false"
+                            android:gravity="center"
+                            android:paddingLeft="20px"
+                            android:text="0"
+                            android:textColor="@color/login_txt_color"
+                            android:textSize="26px"
+                            />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:id="@+id/tv_badness_percent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="30px"
+                            android:paddingTop="10px"
+                            android:text="@string/badness_percent"
+                            android:textColor="#333"
+                            android:textSize="28px"
+                            />
+
+                        <TextView
+                            android:id="@+id/et_badness_percent"
+                            android:layout_width="match_parent"
+                            android:layout_height="60px"
+                            android:layout_marginLeft="10px"
+                            android:background="@drawable/bg_rectangle_et_unfocused"
+                            android:focusable="false"
+                            android:focusableInTouchMode="false"
+                            android:gravity="center"
+                            android:paddingLeft="20px"
+                            android:text="0 %"
+                            android:textColor="@color/login_txt_color"
+                            android:textSize="26px"
+                            />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="10px"
+                    android:layout_marginLeft="30px"
+                    android:layout_marginRight="30px"
+                    android:background="@drawable/bg_quality_normal_divider"
+                    />
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="60px"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20px"
+                    android:layout_marginRight="20px"
+                    android:layout_marginTop="10px"
+                    android:background="@drawable/bg_rectangle_gray"
+                    android:orientation="vertical"
+                    >
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="50px"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/tv_badness_code"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="不良代码"
+                            android:textColor="#333"/>
+
+                        <TextView
+                            android:id="@+id/tv_badness_reason"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="2"
+                            android:gravity="center"
+                            android:text="不良原因"
+                            android:textColor="#333"/>
+
+
+                        <TextView
+                            android:id="@+id/tv_badness_num"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="不良数"
+                            android:textColor="#333"/>
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1px"
+                        android:background="#d7d7dd"
+                        />
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/rlv_quality"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20px"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="64px"
+                    android:layout_marginLeft="10px"
+                    android:layout_marginRight="10px"
+                    android:layout_marginTop="10px"
                     android:background="#fff"
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
@@ -335,13 +433,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingLeft="40px"
-                        android:textColor="#333"
                         android:text="质检结果："
-                        android:textSize="15sp"/>
+                        android:textColor="#333"
+                        android:textSize="28px"/>
 
                     <RadioGroup
                         android:id="@+id/rg_qualified"
                         android:layout_width="0dp"
+
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:orientation="horizontal"
@@ -349,30 +448,44 @@
 
                         <RadioButton
                             android:id="@+id/rd_qualified"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:clickable="false"
-                            android:text="@string/rd_qualified_tip"/>
-
+                            android:layout_width="138px"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/selector_rd_quality"
+                            android:button="@null"
+                            android:gravity="center"
+                            android:text="@string/rd_qualified_tip"
+                            android:textColor="#666"
+                            android:textSize="26px"/>
                         <RadioButton
                             android:id="@+id/rd_wait_deal"
-                            android:layout_width="0dp"
-                            android:clickable="false"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="@string/rd_wait_deal"/>
-
+                            android:layout_width="138px"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="30px"
+                            android:background="@drawable/selector_rd_quality"
+                            android:button="@null"
+                            android:gravity="center"
+                            android:text="@string/wait_deal"
+                            android:textColor="#666"
+                            android:textSize="26px"/>
                         <RadioButton
                             android:id="@+id/rd_unqualified"
-                            android:layout_width="0dp"
-                            android:clickable="false"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="@string/rd_unqualified"/>
+                            android:layout_width="138px"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="30px"
+                            android:background="@drawable/selector_rd_quality"
+                            android:button="@null"
+                            android:gravity="center"
+                            android:text="@string/unquality"
+                            android:textColor="#666"
+                            android:textSize="26px"/>
                     </RadioGroup>
                 </LinearLayout>
             </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="108px"/>
+
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 </RelativeLayout>

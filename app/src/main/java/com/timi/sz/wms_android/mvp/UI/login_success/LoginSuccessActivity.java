@@ -102,11 +102,11 @@ public class LoginSuccessActivity extends BaseActivity<LoginSuccessView, LoginSu
     @Override
     public void getUserinfo(UserInfoBean bean) {
         if (null != bean) {
-            tvLoginSuccessName.setText(String.format(getString(R.string.login_success_name), bean.userName));
-            tvLoginSuccessSex.setText(String.format(getString(R.string.login_success_sex), bean.userSex));
-            tvLoginSuccessTel.setText(String.format(getString(R.string.login_success_tel),bean.userTel));
-            tvLoginSuccessNum.setText(String.format(getString(R.string.login_success_num), bean.userNum));
-            tvLoginSuccessDepart.setText(String.format(getString(R.string.login_success_depart), bean.userDepart));
+            tvLoginSuccessName.setText(String.format(getString(R.string.name), bean.userName));
+            tvLoginSuccessSex.setText(String.format(getString(R.string.sex), bean.userSex));
+            tvLoginSuccessTel.setText(String.format(getString(R.string.tel),bean.userTel));
+            tvLoginSuccessNum.setText(String.format(getString(R.string.work_num), bean.userNum));
+            tvLoginSuccessDepart.setText(String.format(getString(R.string.depart), bean.userDepart));
         }
     }
 }
