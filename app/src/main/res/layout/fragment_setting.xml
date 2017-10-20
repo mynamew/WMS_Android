@@ -142,14 +142,6 @@
             android:layout_height="match_parent"
             android:background="@color/login_txt_color"
             android:visibility="gone"/>
-
-        <ImageView
-            android:id="@+id/iv_set_banner_bg"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:scaleType="centerCrop"
-            android:src="@mipmap/home_banner_head"/>
-
         <TextView
             android:id="@+id/tv_title"
             android:layout_width="wrap_content"

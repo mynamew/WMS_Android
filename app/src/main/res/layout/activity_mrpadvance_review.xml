@@ -418,8 +418,7 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_marginBottom="20px"
-                android:layout_height="88px"/>
+                android:layout_height="128px"/>
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
     <TextView

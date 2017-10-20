@@ -66,12 +66,6 @@ public class SettingFragment extends BaseFragment<SetFragmentView, SetFragmentPr
     TextView btnSetExit;
     @BindView(R.id.rl_set_update_version)
     RelativeLayout rlSetUpdateVersion;
-    @BindView(R.id.scroll_set)
-    NestedScrollView scrollSet;
-    @BindView(R.id.iv_set_title_bg)
-    ImageView ivSetTitleBg;
-    @BindView(R.id.iv_set_banner_bg)
-    ImageView ivSetBannerBg;
     private UserInfoBean bean = null;
 
     /**

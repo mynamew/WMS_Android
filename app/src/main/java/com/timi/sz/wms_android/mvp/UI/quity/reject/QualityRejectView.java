@@ -11,6 +11,7 @@ import com.timi.sz.wms_android.mvp.base.view.iml.MvpBaseView;
 
 public interface QualityRejectView extends MvpBaseView {
     void getBarcodeData(BarcodeData data, String result);
+    void setBarcodeData(BarcodeData data);
 
     void submitFinish();
 }

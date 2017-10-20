@@ -1,31 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/set_bg"
-    tools:context="com.timi.sz.wms_android.mvp.UI.quity.reject.QualityRejectActivity">
+    android:orientation="vertical"
+    tools:context="com.timi.sz.wms_android.mvp.UI.quity.update_barcode.UpdateBarcodeActivity">
 
-    <include
-        android:id="@+id/head"
-        layout="@layout/title_head"/>
-
-    <TextView
-        android:id="@+id/tv_quality_complete"
-        android:layout_width="match_parent"
-        android:layout_height="88px"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="20px"
-        android:layout_marginLeft="30px"
-        android:layout_marginRight="30px"
-        android:background="@drawable/selector_btn_bg_login"
-        android:gravity="center"
-        android:text="@string/quality_complete"
-        android:textColor="@color/white"
-        android:textSize="16sp"
-        />
+    <include layout="@layout/title_head"/>
 
     <RelativeLayout
         android:id="@+id/ll_min_pack_code"
@@ -44,16 +28,15 @@
             android:text="最小包装码："/>
 
         <EditText
-            android:id="@+id/et_min_pack_code"
+            android:id="@+id/et_barcode"
             android:layout_width="match_parent"
             android:layout_height="60px"
             android:layout_centerVertical="true"
             android:layout_marginRight="20px"
             android:layout_toRightOf="@id/tv_min_pack_code"
             android:background="@drawable/bg_sbo_rectangle_et"
-            android:hint="@string/please_scan_assign_material_code"
+            android:hint="@string/please_input_scan_barcode"
             android:paddingLeft="20px"
-            android:singleLine="true"
             android:textSize="14sp"/>
 
         <ImageView
@@ -187,4 +170,4 @@
 
         </LinearLayout>
     </LinearLayout>
-</RelativeLayout>
+</LinearLayout>

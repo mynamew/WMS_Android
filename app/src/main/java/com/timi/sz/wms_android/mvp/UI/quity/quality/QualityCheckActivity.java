@@ -313,6 +313,7 @@ public class QualityCheckActivity extends BaseActivity<QualityCheckView, Quality
             ToastUtils.showShort(getString(R.string.quality_query_result_nodata));
             return;
         }
+        mDatas.clear();
         /**
          * 存储下方列表的数据
          */
@@ -494,7 +495,14 @@ public class QualityCheckActivity extends BaseActivity<QualityCheckView, Quality
              * 清除数据 并且重新加载数据
              */
             mDatas.clear();
-            initData();
+            if (null == myDialog) {
+                initData();
+            } else {
+                /**
+                 * 调用点击事件
+                 */
+                myDialog.getView(R.id.btn_confirm).callOnClick();
+            }
         }
 
     }

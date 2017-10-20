@@ -11,6 +11,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
 import com.timi.sz.wms_android.R;
 import com.timi.sz.wms_android.base.adapter.CommonSimpleTypeAdapter;
 import com.timi.sz.wms_android.base.adapter.CommonViewHolder;
@@ -18,9 +19,11 @@ import com.timi.sz.wms_android.base.uils.LogUitls;
 import com.timi.sz.wms_android.base.uils.PackageUtils;
 import com.timi.sz.wms_android.base.uils.SpUtils;
 import com.timi.sz.wms_android.base.uils.ToastUtils;
+import com.timi.sz.wms_android.bean.quality.adavance.GetAdvanceData;
 import com.timi.sz.wms_android.bean.quality.normal.NormalQualityData;
 import com.timi.sz.wms_android.http.message.BaseMessage;
 import com.timi.sz.wms_android.http.message.event.QualityEvent;
+import com.timi.sz.wms_android.mvp.UI.quity.advance1_quality.Advance1QualityActivity;
 import com.timi.sz.wms_android.mvp.UI.quity.reject.QualityRejectActivity;
 import com.timi.sz.wms_android.mvp.base.BaseActivity;
 import com.timi.sz.wms_android.view.MyDialog;
@@ -80,7 +83,6 @@ public class NormalQualityActivity extends BaseActivity<NormalQualityView, Norma
     @BindView(R.id.rg_qualified)
     RadioGroup rgQualified;
 
-    private MyDialog faultDataDialog;
     //bundle
     private int receiptId;
     private int receiptDetailId;
@@ -88,8 +90,10 @@ public class NormalQualityActivity extends BaseActivity<NormalQualityView, Norma
     /**
      * 保存的数据
      */
-    private NormalQualityData.NormalSummaryBean mNormalSummary;
+    private NormalQualityData mData;
     private List<NormalQualityData.FaultDataBean> mFaultData;
+    private MyDialog faultDataDialog;
+
     /**
      * 不良原因
      */
@@ -160,11 +164,25 @@ public class NormalQualityActivity extends BaseActivity<NormalQualityView, Norma
             return;
         }
         /**
+         *当 抽检数大于实收数的时候提示
+         */
+        if (Integer.parseInt(spotCheckNum) > mData.getNormalSummary().getReceiveQty()) {
+            ToastUtils.showShort(getString(R.string.sampleqty_more_receiveqty_please_repeat_input));
+            return;
+        }
+        /**
          * 拒收数
          */
         String refuseReceiveNum = etRefuseReceiveNum.getText().toString();
         if (TextUtils.isEmpty(refuseReceiveNum)) {
             ToastUtils.showShort(getString(R.string.please_input_reject_num));
+            return;
+        }
+        /**
+         *当 拒收数大于实收数的时候提示
+         */
+        if (Integer.parseInt(refuseReceiveNum) > mData.getNormalSummary().getReceiveQty()) {
+            ToastUtils.showShort(getString(R.string.rejectnum_more_receiveqty_please_repeat_input));
             return;
         }
         /**
@@ -195,19 +213,53 @@ public class NormalQualityActivity extends BaseActivity<NormalQualityView, Norma
          */
         params.put("RejectQty", Integer.parseInt(refuseReceiveNum));
         /**
-         * 更改质检状态 质检已完成
+         * 更改质检状态 质检未完成
          */
-        params.put("QCStatus", 3);
+        params.put("QCStatus", 2);
         /**
          * 1  合格
          * 3  不合格
          */
         params.put("QCResult", isQualified ? 1 : 3);
+        /**
+         * 计算缺陷的个数
+         */
+        int FatalQty = 0;//致命缺陷
+        int SeriousQty = 0;//严重缺陷
+        int CommonlyQty = 0;//一般缺陷
+        int SlightQty = 0;//轻微缺陷
+        /**
+         * 根据选择了的不良原因 设置其缺陷的个数
+         */
+        for (int i = 0; i < mFaultData.size(); i++) {
+            NormalQualityData.FaultDataBean faultDataBean = mFaultData.get(i);
+            switch (faultDataBean.getQC_DefectGrade()) {
+                case "C"://致命缺陷
+                    FatalQty = FatalQty + faultDataBean.getFaultQty();
+                    break;
+                case "B"://严重缺陷
+                    SeriousQty = SeriousQty + faultDataBean.getFaultQty();
+                    break;
+                case "A"://一般缺陷
+                    CommonlyQty = CommonlyQty + faultDataBean.getFaultQty();
+                    break;
+                case "S"://轻微缺陷
+                    SlightQty = SlightQty + faultDataBean.getFaultQty();
+                    break;
+            }
+        }
         params.put("Remark", "");
-        params.put("FatalQty", 0);
-        params.put("SeriousQty", 0);
-        params.put("CommonlyQty", 0);
-        params.put("SlightQty", 0);
+        params.put("FatalQty", FatalQty);
+        params.put("SeriousQty", SeriousQty);
+        params.put("CommonlyQty", CommonlyQty);
+        params.put("SlightQty", SlightQty);
+        /**
+         * 设置  不良原因的链表
+         */
+        mSelectFaultData.clear();
+        for (int i = 0; i < mFaultData.size(); i++) {
+            mSelectFaultData.add(new FaultData(mFaultData.get(i).getFaultId(), mFaultData.get(i).getFaultQty()));
+        }
         params.put("FaultData", mSelectFaultData);
         LogUitls.e("params--->", params);
         getPresenter().setNormalQualityData(params, isQualified, Integer.parseInt(refuseReceiveNum));
@@ -215,6 +267,7 @@ public class NormalQualityActivity extends BaseActivity<NormalQualityView, Norma
 
     @Override
     public void getNormalQualityData(NormalQualityData result) {
+        mData = result;
         /**
          * 设置从质检清单获取到的数据，设置到当前界面
          */
@@ -223,8 +276,6 @@ public class NormalQualityActivity extends BaseActivity<NormalQualityView, Norma
             /**
              * 保存实体数据
              */
-            this.mNormalSummary = normalSummary;
-
             setTextViewText(tvOrderno, R.string.receive_pro_num, normalSummary.getReceiptCode());
             setTextViewText(tvReceiveMaterialDate, R.string.receive_material_date, normalSummary.getReceiptDate());
             setTextViewText(tvOrderNum, R.string.order_no, normalSummary.getSourceBillCode());
@@ -278,26 +329,20 @@ public class NormalQualityActivity extends BaseActivity<NormalQualityView, Norma
                                 ToastUtils.showShort(getString(R.string.please_input_badness_num));
                                 return;
                             }
+                            int totalBadnessNum = 0;
                             /**
-                             * 获取 点击的不良原因的位置
+                             * 计算获取所有的不良数的和
                              */
-                            int selectFaultDataPosition = -1;
-                            for (int i = 0; i < mSelectFaultData.size(); i++) {
-                                if (mSelectFaultData.get(i).FaultId == mFaultData.get(position).getFaultId()) {
-                                    selectFaultDataPosition = i;
-                                }
+                            for (int i = 0; i < mFaultData.size(); i++) {
+                                totalBadnessNum = totalBadnessNum + mFaultData.get(i).getFaultQty();
                             }
                             /**
-                             * 1、如果 未选择过这条不良原因 则直接加入一条不良原因s
-                             * 2、否则则直接设置其不良数
+                             * 计算不良总数  不良总数=不良总数-原来position位置的不良数+现在更改position位置的不良数
                              */
-                            if (selectFaultDataPosition == -1) {
-                                mSelectFaultData.add(new FaultData(mFaultData.get(position).getFaultId(), Integer.parseInt(badnessNumStr)));
-                            } else {
-                                /**
-                                 * 设置选择的数据
-                                 */
-                                mSelectFaultData.get(selectFaultDataPosition).FaultQty = Integer.parseInt(badnessNumStr);
+                            totalBadnessNum = totalBadnessNum - mFaultData.get(position).getFaultQty() + Integer.parseInt(badnessNumStr);
+                            if (totalBadnessNum > mData.getNormalSummary().getReceiveQty()) {
+                                ToastUtils.showShort("不良总数不能大于实收数，请重新输入");
+                                return;
                             }
                             /**
                              * 设置原数据
@@ -305,15 +350,11 @@ public class NormalQualityActivity extends BaseActivity<NormalQualityView, Norma
                             mFaultData.get(position).setFaultQty(Integer.parseInt(badnessNumStr));
                             commonSimpleTypeAdapter.notifyDataSetChanged();
                             /**
+                             * 当不良总数大于实收数 时提示用户
+                             */
+                            /**
                              * 设置文本的不良总数
                              */
-                            int totalBadnessNum = 0;
-                            /**
-                             * 计算获取所有的不良数的和
-                             */
-                            for (int i = 0; i < mSelectFaultData.size(); i++) {
-                                totalBadnessNum = totalBadnessNum + mSelectFaultData.get(i).FaultQty;
-                            }
                             tvBadnessTotalNum.setText(String.valueOf(totalBadnessNum));
                             /**
                              * 计算文本的不良率
@@ -321,7 +362,7 @@ public class NormalQualityActivity extends BaseActivity<NormalQualityView, Norma
                             //不良总数
                             double dTotalBadnessNum = (double) totalBadnessNum;
                             //实收数
-                            double dReceiveNum = (double) mNormalSummary.getReceiveQty();
+                            double dReceiveNum = (double) mData.getNormalSummary().getReceiveQty();
                             //转换成百分比
                             NumberFormat nFromat = NumberFormat.getPercentInstance();
                             String rates = nFromat.format(dTotalBadnessNum / dReceiveNum);
@@ -351,6 +392,7 @@ public class NormalQualityActivity extends BaseActivity<NormalQualityView, Norma
 
     @Override
     public void setNormalQualityData(boolean isQualified, int rejectNum) {
+        LogUitls.e("质检提交------>", "成功");
         /**
          * 发送质检成功的消息
          */
@@ -368,14 +410,13 @@ public class NormalQualityActivity extends BaseActivity<NormalQualityView, Norma
          * 设置按钮文字
          */
         if (isQualified) {//合格
-            if (rejectNum > 0) {//拒收数大于0  跳转到质检拒收
+            if (rejectNum > 0&&mData.getNormalSummary().isIsBarCode()) {//拒收数大于0  跳转到质检拒收并且有条码
                 /**
                  * 跳转到质检拒收
                  */
                 Intent intent = new Intent(NormalQualityActivity.this, QualityRejectActivity.class);
-                intent.putExtra("ReceiptId", receiptId);
+                intent.putExtra("mData", new Gson().toJson(mData));
                 intent.putExtra("rejectNum", rejectNum);
-                intent.putExtra("ReceiptDetailId", receiptDetailId);
                 startActivity(intent);
             } else {
                 tvNext.setText(getString(R.string.quality_complete));
@@ -390,6 +431,7 @@ public class NormalQualityActivity extends BaseActivity<NormalQualityView, Norma
 
     @Override
     public void submitFinish() {
+        LogUitls.e("质检确认------>", "成功");
         ToastUtils.showShort("质检确认完成！");
         /**
          * 关闭当前界面

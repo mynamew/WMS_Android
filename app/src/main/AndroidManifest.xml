@@ -233,7 +233,9 @@
             android:name=".mvp.UI.quity.advance_quality.AdvanceQualityActivity"
             android:windowSoftInputMode="stateVisible|adjustResize|stateHidden|stateAlwaysHidden">
         </activity>
-        <activity android:name=".mvp.UI.quity.reject.QualityRejectActivity">
+        <activity
+            android:name=".mvp.UI.quity.reject.QualityRejectActivity"
+            android:windowSoftInputMode="stateVisible|adjustResize|stateHidden|stateAlwaysHidden">
         </activity>
         <activity
             android:name=".mvp.UI.quity.advance1_quality.Advance1QualityActivity"
@@ -242,6 +244,8 @@
         <activity android:name=".mvp.UI.quity.normal_review.MRPNormalReviewActivity">
         </activity>
         <activity android:name=".mvp.UI.quity.advance_review.MRPAdvanceReviewActivity">
+        </activity>
+        <activity android:name=".mvp.UI.quity.update_barcode.UpdateBarcodeActivity">
         </activity>
     </application>
 

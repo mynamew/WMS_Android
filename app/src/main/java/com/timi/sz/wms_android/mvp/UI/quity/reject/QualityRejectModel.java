@@ -34,6 +34,19 @@ public class QualityRejectModel extends MvpBaseModel {
                 return apiService.getBarcodeData(params);
             }
         });
+    } /**
+     * 获取质检拒收条码的信息
+     *
+     * @param params
+     * @param observer
+     */
+    public void setBarcodeReject(final Map<String, Object> params, Observer<BarcodeData> observer) {
+        HttpManager.getInstance().HttpManagerRequest(observer, new ApiServiceMethodCallBack<BarcodeData>() {
+            @Override
+            public Observable<CommonResult<BarcodeData>> createObservable(ApiService apiService) {
+                return apiService.setBarcodeReject(params);
+            }
+        });
     }
 
     /**

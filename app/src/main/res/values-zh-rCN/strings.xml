@@ -343,7 +343,7 @@
     <string name="check_method">检验方法：%1$s</string>
     <string name="aql_tip">AQL：</string>
     <string name="stringency_tip">严格度：</string>
-    <string name="sample_num">样品数：%1$s</string>
+    <string name="sample_num">样品数：</string>
     <string name="serious_unqualitfied_tip">严重不合格原因：</string>
     <string name="badness_total_num_tip">不良样品总数：</string>
     <string name="main_unqualitfied_tip">主要不合格原因：</string>
@@ -414,4 +414,13 @@
     <string name="mrp_aql_tip">AQL：%1$s</string>
     <string name="header_spare_num">备品数</string>
     <string name="header_point_num">请点数</string>
+    <string name="quality_advance1_title">来料—质检详情（高检1）</string>
+    <string name="sampleqty_more_receiveqty_please_repeat_input">抽检数不能大于实收数，请重新输入！</string>
+    <string name="rejectnum_more_receiveqty_please_repeat_input">拒收数不能大于实收数，请重新输入！</string>
+    <string name="input_orderno_more_four">输入查询单号位数必须是4位以上</string>
+    <string name="please_input_scan_barcode">请输入或扫描要修改的条码</string>
+    <string name="dialog_reject_num">拒收数：</string>
+    <string name="dialog_from_orderno">来源单号：%1$s</string>
+    <string name="pack_num">包装数：%1$s</string>
+    <string name="material_attr">附加属性：%1$s</string>
 </resources>

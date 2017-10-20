@@ -40,14 +40,14 @@
                  android:orientation="horizontal">
 
                  <TextView
-                     android:id="@+id/tv_quality_date"
+                     android:id="@+id/tv_receive_material_date"
                      android:layout_width="0dp"
                      android:layout_weight="1"
                      android:layout_height="60px"
                      android:gravity="center_vertical"
                      android:paddingLeft="20px"
                      android:paddingTop="10px"
-                     android:text="@string/tv_mrp_quality_date"
+                     android:text="@string/receive_material_date"
                      android:textColor="#333"
                      />
              </LinearLayout>
@@ -110,7 +110,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_marginTop="5px"
+                android:layout_marginTop="20px"
                 android:background="@color/tab_txt_unselect"
                 />
 

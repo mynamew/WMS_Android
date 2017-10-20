@@ -48,10 +48,10 @@
                 android:text="@string/receive_pro_num"
                 android:textColor="#333"
                 />
-
             <TextView
                 android:id="@+id/tv_receive_material_date"
                 android:layout_width="match_parent"
+                android:layout_weight="1"
                 android:layout_height="60px"
                 android:gravity="center_vertical"
                 android:paddingLeft="20px"
@@ -59,7 +59,6 @@
                 android:text="@string/receive_material_date"
                 android:textColor="#333"
                 />
-
             <TextView
                 android:id="@+id/tv_order_num"
                 android:layout_width="match_parent"
@@ -353,20 +352,24 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
+                            android:clickable="false"
                             android:text="@string/rd_qualified_tip"/>
+
+                        <RadioButton
+                            android:id="@+id/rd_wait_deal"
+                            android:layout_width="0dp"
+                            android:clickable="false"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/rd_wait_deal"/>
 
                         <RadioButton
                             android:id="@+id/rd_unqualified"
                             android:layout_width="0dp"
+                            android:clickable="false"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="@string/rd_unqualified"/>
-                        <RadioButton
-                            android:id="@+id/rd_wait_deal"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="@string/rd_wait_deal"/>
                     </RadioGroup>
                 </LinearLayout>
             </LinearLayout>

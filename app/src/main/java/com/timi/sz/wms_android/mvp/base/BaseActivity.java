@@ -316,8 +316,9 @@ public abstract class BaseActivity<V extends MvpView, P extends MvpPresenter<V>>
 
     /**
      * 扫码的返回 监听器
-      */
+     */
     private ScanQRCodeResultListener mListener = null;
+
     /**
      * 调用相机扫描二维码的方法
      *
@@ -348,17 +349,13 @@ public abstract class BaseActivity<V extends MvpView, P extends MvpPresenter<V>>
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        switch (requestCode) {
-            case REQUEST_CODE:
-                if (resultCode == RESULT_OK) {
-                    Bundle bundle = data.getExtras();
-                    if (bundle != null) {
-                        if(null!=mListener){
-                            mListener.scanSuccess(REQUEST_CODE,bundle.getString("result"));
-                        }
-                    }
+        if (resultCode == RESULT_OK) {
+            Bundle bundle = data.getExtras();
+            if (bundle != null) {
+                if (null != mListener) {
+                    mListener.scanSuccess(requestCode, bundle.getString("result"));
                 }
-                break;
+            }
         }
     }
 
@@ -397,6 +394,6 @@ public abstract class BaseActivity<V extends MvpView, P extends MvpPresenter<V>>
      * zxing 扫码的回调接口
      */
     public interface ScanQRCodeResultListener {
-        void scanSuccess(int requestCode,String result);
+        void scanSuccess(int requestCode, String result);
     }
 }

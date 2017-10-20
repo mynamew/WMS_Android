@@ -3,28 +3,28 @@ package com.timi.sz.wms_android.bean.quality.adavance;
 import java.util.List;
 
 /**
- * $dsc 高级质检数据
+ * $dsc
  * author: timi
- * create at: 2017-10-17 13:27
+ * create at: 2017-10-18 16:52
  */
 
-public class GetAdvanceData {
+public class GetAdvance2Data {
 
     /**
-     * normalSummary : {"receiptId":9695,"receiptDetailId":23468,"receiptCode":"DH160921011","receiptDate":"2017-09-11","sourceBillCode":"CG160918120","supplierName":"深圳市日科实业有限公司","creater":null,"materialId":330,"materialCode":"10101010331","materialName":"贴片电阻","materialStandard":"47K/0402/±5%","materialAttribute":null,"receiveQty":10000,"sampleQty":80,"ngQty":0,"rejectQty":0,"qcStatus":0,"qcResult":0,"isBarCode":false,"barcodeSource":1}
-     * advanceSummary : {"qcType":2,"currentStrict":"正常","currentLevel":"I","sampleCode":"J","currentAQL":"0.65","acceptAQL":0,"rejectAQL":2,"beginQty":3201,"endQty":10000,"qcQty":0,"fatalQty":0,"seriousQty":0,"commonlyQty":0,"slightQty":0}
-     * checkItem : null
+     * normalSummary : {"receiptId":10224,"receiptDetailId":24805,"receiptCode":"DH161119004","receiptDate":"2017-09-11","sourceBillCode":"CG161116099","supplierName":"深圳市日科实业有限公司","creater":null,"materialId":333,"materialCode":"10101010334","materialName":"贴片电阻","materialStandard":"1R2/0805/±5%","materialAttribute":null,"receiveQty":5000,"sampleQty":200,"ngQty":0,"rejectQty":0,"qcStatus":0,"qcResult":0,"isBarCode":false,"barcodeSource":1}
+     * advanceSummary : {"qcType":3,"currentStrict":"正常","currentLevel":"II","sampleCode":"L","currentAQL":"0.15","acceptAQL":0,"rejectAQL":2,"beginQty":3201,"endQty":10000,"qcQty":0,"fatalQty":0,"seriousQty":0,"commonlyQty":0,"slightQty":0}
+     * checkItem : [{"checkItemId":3,"checkItemCode":"001","checkItemName":"宽度","judgeType":1,"unit":"厘米","limitLow":2.2,"limitHigh":2.5,"stardard":2.3,"remark":"手工填充","faultData":[{"faultId":28,"faultCode":"F013","faultName":"过宽","faultDesc":null,"faultQty":0},{"faultId":29,"faultCode":"F014","faultName":"过窄","faultDesc":null,"faultQty":0}]},{"checkItemId":2,"checkItemCode":"2","checkItemName":"温度","judgeType":1,"unit":"℃","limitLow":40.5,"limitHigh":40.8,"stardard":40.6,"remark":"手工填充","faultData":[{"faultId":30,"faultCode":"F015","faultName":"温度过高","faultDesc":null,"faultQty":0},{"faultId":31,"faultCode":"F016","faultName":"温度过低","faultDesc":null,"faultQty":0}]},{"checkItemId":1,"checkItemCode":"1","checkItemName":"外观","judgeType":2,"unit":" ","limitLow":0,"limitHigh":0,"stardard":0,"remark":"手工填充","faultData":[{"faultId":22,"faultCode":"F007","faultName":"表面凸起","faultDesc":null,"faultQty":0},{"faultId":23,"faultCode":"F008","faultName":"表面凹陷","faultDesc":null,"faultQty":0},{"faultId":24,"faultCode":"F009","faultName":"有裂缝","faultDesc":null,"faultQty":0},{"faultId":25,"faultCode":"F010","faultName":"破损","faultDesc":null,"faultQty":0},{"faultId":26,"faultCode":"F011","faultName":"沙眼","faultDesc":null,"faultQty":0}]}]
      * checkItemData : null
      * barcodeData : null
-     * faultData : [{"faultId":1,"faultCode":"001","faultName":"性能不良","faultDesc":"指产品表面擦伤刮伤","faultQty":0},{"faultId":2,"faultCode":"002","faultName":"外观不良","faultDesc":"外观不良","faultQty":0},{"faultId":3,"faultCode":"003","faultName":"尺寸不良","faultDesc":"尺寸不良","faultQty":0}]
+     * faultData : null
      */
 
     private NormalSummaryBean normalSummary;
     private AdvanceSummaryBean advanceSummary;
-    private Object checkItem;
     private Object checkItemData;
     private Object barcodeData;
-    private List<FaultDataBean> faultData;
+    private Object faultData;
+    private List<CheckItemBean> checkItem;
 
     public NormalSummaryBean getNormalSummary() {
         return normalSummary;
@@ -40,14 +40,6 @@ public class GetAdvanceData {
 
     public void setAdvanceSummary(AdvanceSummaryBean advanceSummary) {
         this.advanceSummary = advanceSummary;
-    }
-
-    public Object getCheckItem() {
-        return checkItem;
-    }
-
-    public void setCheckItem(Object checkItem) {
-        this.checkItem = checkItem;
     }
 
     public Object getCheckItemData() {
@@ -66,30 +58,38 @@ public class GetAdvanceData {
         this.barcodeData = barcodeData;
     }
 
-    public List<FaultDataBean> getFaultData() {
+    public Object getFaultData() {
         return faultData;
     }
 
-    public void setFaultData(List<FaultDataBean> faultData) {
+    public void setFaultData(Object faultData) {
         this.faultData = faultData;
+    }
+
+    public List<CheckItemBean> getCheckItem() {
+        return checkItem;
+    }
+
+    public void setCheckItem(List<CheckItemBean> checkItem) {
+        this.checkItem = checkItem;
     }
 
     public static class NormalSummaryBean {
         /**
-         * receiptId : 9695
-         * receiptDetailId : 23468
-         * receiptCode : DH160921011
+         * receiptId : 10224
+         * receiptDetailId : 24805
+         * receiptCode : DH161119004
          * receiptDate : 2017-09-11
-         * sourceBillCode : CG160918120
+         * sourceBillCode : CG161116099
          * supplierName : 深圳市日科实业有限公司
          * creater : null
-         * materialId : 330
-         * materialCode : 10101010331
+         * materialId : 333
+         * materialCode : 10101010334
          * materialName : 贴片电阻
-         * materialStandard : 47K/0402/±5%
+         * materialStandard : 1R2/0805/±5%
          * materialAttribute : null
-         * receiveQty : 10000
-         * sampleQty : 80
+         * receiveQty : 5000
+         * sampleQty : 200
          * ngQty : 0
          * rejectQty : 0
          * qcStatus : 0
@@ -282,11 +282,11 @@ public class GetAdvanceData {
 
     public static class AdvanceSummaryBean {
         /**
-         * qcType : 2
+         * qcType : 3
          * currentStrict : 正常
-         * currentLevel : I
-         * sampleCode : J
-         * currentAQL : 0.65
+         * currentLevel : II
+         * sampleCode : L
+         * currentAQL : 0.15
          * acceptAQL : 0
          * rejectAQL : 2
          * beginQty : 3201
@@ -426,68 +426,165 @@ public class GetAdvanceData {
         }
     }
 
-    public static class FaultDataBean {
+    public static class CheckItemBean {
         /**
-         * faultId : 1
-         * faultCode : 001
-         * faultName : 性能不良
-         * faultDesc : 指产品表面擦伤刮伤
-         * faultQty : 0
+         * checkItemId : 3
+         * checkItemCode : 001
+         * checkItemName : 宽度
+         * judgeType : 1
+         * unit : 厘米
+         * limitLow : 2.2
+         * limitHigh : 2.5
+         * stardard : 2.3
+         * remark : 手工填充
+         * faultData : [{"faultId":28,"faultCode":"F013","faultName":"过宽","faultDesc":null,"faultQty":0},{"faultId":29,"faultCode":"F014","faultName":"过窄","faultDesc":null,"faultQty":0}]
          */
 
-        private int faultId;
-        private String faultCode;
-        private String faultName;
-        private String faultDesc;
-        private int faultQty;
+        private int checkItemId;
+        private String checkItemCode;
+        private String checkItemName;
+        private int judgeType;
+        private String unit;
+        private double limitLow;
+        private double limitHigh;
+        private double stardard;
+        private String remark;
+        private List<FaultDataBean> faultData;
 
-        public String getqC_DefectGrade() {
-            return qC_DefectGrade;
+        public int getCheckItemId() {
+            return checkItemId;
         }
 
-        public void setqC_DefectGrade(String qC_DefectGrade) {
-            this.qC_DefectGrade = qC_DefectGrade;
+        public void setCheckItemId(int checkItemId) {
+            this.checkItemId = checkItemId;
         }
 
-        private String qC_DefectGrade;
-        public int getFaultId() {
-            return faultId;
+        public String getCheckItemCode() {
+            return checkItemCode;
         }
 
-        public void setFaultId(int faultId) {
-            this.faultId = faultId;
+        public void setCheckItemCode(String checkItemCode) {
+            this.checkItemCode = checkItemCode;
         }
 
-        public String getFaultCode() {
-            return faultCode;
+        public String getCheckItemName() {
+            return checkItemName;
         }
 
-        public void setFaultCode(String faultCode) {
-            this.faultCode = faultCode;
+        public void setCheckItemName(String checkItemName) {
+            this.checkItemName = checkItemName;
         }
 
-        public String getFaultName() {
-            return faultName;
+        public int getJudgeType() {
+            return judgeType;
         }
 
-        public void setFaultName(String faultName) {
-            this.faultName = faultName;
+        public void setJudgeType(int judgeType) {
+            this.judgeType = judgeType;
         }
 
-        public String getFaultDesc() {
-            return faultDesc;
+        public String getUnit() {
+            return unit;
         }
 
-        public void setFaultDesc(String faultDesc) {
-            this.faultDesc = faultDesc;
+        public void setUnit(String unit) {
+            this.unit = unit;
         }
 
-        public int getFaultQty() {
-            return faultQty;
+        public double getLimitLow() {
+            return limitLow;
         }
 
-        public void setFaultQty(int faultQty) {
-            this.faultQty = faultQty;
+        public void setLimitLow(double limitLow) {
+            this.limitLow = limitLow;
+        }
+
+        public double getLimitHigh() {
+            return limitHigh;
+        }
+
+        public void setLimitHigh(double limitHigh) {
+            this.limitHigh = limitHigh;
+        }
+
+        public double getStardard() {
+            return stardard;
+        }
+
+        public void setStardard(double stardard) {
+            this.stardard = stardard;
+        }
+
+        public String getRemark() {
+            return remark;
+        }
+
+        public void setRemark(String remark) {
+            this.remark = remark;
+        }
+
+        public List<FaultDataBean> getFaultData() {
+            return faultData;
+        }
+
+        public void setFaultData(List<FaultDataBean> faultData) {
+            this.faultData = faultData;
+        }
+
+        public static class FaultDataBean {
+            /**
+             * faultId : 28
+             * faultCode : F013
+             * faultName : 过宽
+             * faultDesc : null
+             * faultQty : 0
+             */
+
+            private int faultId;
+            private String faultCode;
+            private String faultName;
+            private Object faultDesc;
+            private int faultQty;
+
+            public int getFaultId() {
+                return faultId;
+            }
+
+            public void setFaultId(int faultId) {
+                this.faultId = faultId;
+            }
+
+            public String getFaultCode() {
+                return faultCode;
+            }
+
+            public void setFaultCode(String faultCode) {
+                this.faultCode = faultCode;
+            }
+
+            public String getFaultName() {
+                return faultName;
+            }
+
+            public void setFaultName(String faultName) {
+                this.faultName = faultName;
+            }
+
+            public Object getFaultDesc() {
+                return faultDesc;
+            }
+
+            public void setFaultDesc(Object faultDesc) {
+                this.faultDesc = faultDesc;
+            }
+
+            public int getFaultQty() {
+                return faultQty;
+            }
+
+            public void setFaultQty(int faultQty) {
+                this.faultQty = faultQty;
+            }
         }
     }
 }

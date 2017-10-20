@@ -25,6 +25,8 @@ import com.timi.sz.wms_android.bean.outstock.buy.OrderNoBean;
 import com.timi.sz.wms_android.bean.outstock.outsource.OutSourceFeedBean;
 import com.timi.sz.wms_android.bean.quality.BarcodeData;
 import com.timi.sz.wms_android.bean.quality.QualityListBean;
+import com.timi.sz.wms_android.bean.quality.adavance.GetAdvance2Data;
+import com.timi.sz.wms_android.bean.quality.adavance.GetAdvanceData;
 import com.timi.sz.wms_android.bean.quality.mrp.MrpReviewData;
 import com.timi.sz.wms_android.bean.quality.normal.NormalQualityData;
 import com.timi.sz.wms_android.bean.stockin_work.LibraryAdjustResult;
@@ -502,16 +504,25 @@ public interface ApiService {
     Observable<CommonResult<Object>> submitFinish(@FieldMap Map<String, Object> params);
 
     /**
-     * 高级质检1 的数据
+     * 获取高级质检1 的数据
      *
      * @return
      */
     @FormUrlEncoded
     @POST("api/services/wpda/IQC/IQCGetAdvanceData")
-    Observable<CommonResult<Object>> getAdvanceData(@FieldMap Map<String, Object> params);
+    Observable<CommonResult<GetAdvanceData>> getAdvanceData(@FieldMap Map<String, Object> params);
 
     /**
-     * 提交高级质检1 的数据
+     * 获取高级质检2的数据
+     *
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("api/services/wpda/IQC/IQCGetAdvanceData")
+    Observable<CommonResult<GetAdvance2Data>> getAdvance2Data(@FieldMap Map<String, Object> params);
+
+    /**
+     * 提交高级质检 的数据
      *
      * @return
      */
@@ -544,7 +555,7 @@ public interface ApiService {
      */
     @FormUrlEncoded
     @POST("api/services/wpda/IQC/IQCSetMRPReviewData ")
-    Observable<CommonResult<Object>>setMRPReviewData(@FieldMap Map<String, Object> params);
+    Observable<CommonResult<Object>> setMRPReviewData(@FieldMap Map<String, Object> params);
 
     /**************************************************************************************************************/
     /**************************************************************************************************************/

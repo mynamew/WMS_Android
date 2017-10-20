@@ -20,6 +20,7 @@ import java.util.Map;
 public class QualityRejectPresenter extends MvpBasePresenter<QualityRejectView> {
     private QualityRejectModel model;
     private HttpSubscriber<BarcodeData> barcodeDataHttpSubscriber;
+    private HttpSubscriber<BarcodeData> setBarcodeDataHttpSubscriber;
     private HttpSubscriber<Object> submitFinishHttpSubscriber;
 
     public QualityRejectPresenter(Context context) {
@@ -39,7 +40,7 @@ public class QualityRejectPresenter extends MvpBasePresenter<QualityRejectView> 
             barcodeDataHttpSubscriber = new HttpSubscriber<>(new OnResultCallBack<BarcodeData>() {
                 @Override
                 public void onSuccess(BarcodeData o) {
-                    getView().getBarcodeData(o,result);
+                    getView().getBarcodeData(o, result);
                 }
 
                 @Override
@@ -49,6 +50,29 @@ public class QualityRejectPresenter extends MvpBasePresenter<QualityRejectView> 
             });
         }
         model.getBarcodeData(params, barcodeDataHttpSubscriber);
+    }
+
+    /**
+     * 通过条码获取质检条码的数据
+     *
+     * @param params
+     */
+    public void setBarcodeData(Map<String, Object> params) {
+        getView().showProgressDialog();
+        if (null == setBarcodeDataHttpSubscriber) {
+            setBarcodeDataHttpSubscriber = new HttpSubscriber<>(new OnResultCallBack<BarcodeData>() {
+                @Override
+                public void onSuccess(BarcodeData o) {
+                    getView().setBarcodeData(o);
+                }
+
+                @Override
+                public void onError(String errorMsg) {
+                    ToastUtils.showShort(errorMsg);
+                }
+            });
+        }
+        model.setBarcodeReject(params, setBarcodeDataHttpSubscriber);
     }
 
     /**
@@ -84,6 +108,10 @@ public class QualityRejectPresenter extends MvpBasePresenter<QualityRejectView> 
         if (null != submitFinishHttpSubscriber) {
             submitFinishHttpSubscriber.unSubscribe();
             submitFinishHttpSubscriber = null;
+        }
+        if (null != setBarcodeDataHttpSubscriber) {
+            setBarcodeDataHttpSubscriber.unSubscribe();
+            setBarcodeDataHttpSubscriber = null;
         }
     }
 }
