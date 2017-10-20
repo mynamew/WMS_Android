@@ -381,7 +381,7 @@
     <string name="badness_num">不良数</string>
     <string name="badness_percent">不良率：</string>
     <string name="next_page">下一步</string>
-    <string name="normal_quality_title">来料—质检详情（普检）</string>
+    <string name="normal_quality_title">来料质检（普检）</string>
     <string name="excel_head_quality">质检</string>
     <string name="excel_head_goods_code">物品编码</string>
     <string name="excel_head_supplier">供应商</string>

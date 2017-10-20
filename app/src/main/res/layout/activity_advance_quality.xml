@@ -76,11 +76,13 @@
                     android:id="@+id/tv_check_method"
                     android:layout_width="wrap_content"
                     android:layout_height="60px"
+                    android:visibility="gone"
                     android:layout_marginLeft="100px"
                     android:text="@string/check_method"
                     android:textColor="#333"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tv_sample_half_yard"/>
+
                 <TextView
                     android:id="@+id/tv_aql"
                     android:layout_width="wrap_content"
@@ -101,6 +103,7 @@
                     android:textColor="#333"
                     app:layout_constraintRight_toLeftOf="@id/tv_aql"
                     app:layout_constraintTop_toBottomOf="parent"/>
+
                 <TextView
                     android:id="@+id/tv_stringency_tip"
                     android:layout_width="wrap_content"
@@ -404,7 +407,7 @@
                     android:background="@drawable/bg_sbo_rectangle_et"
                     android:gravity="center_vertical"
                     android:paddingLeft="20px"
-                    android:text="0"
+                    android:text="1"
                     android:textColor="#ff0000"/>
 
                 <TextView
@@ -419,11 +422,11 @@
                     android:textColor="#333"/>
             </LinearLayout>
 
-            <com.timi.sz.wms_android.view.excelview.MyExcelView
-                android:id="@+id/myexcel_advance_quality"
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rlv_quality_advance"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:ptrMode="both"/>
+                android:layout_height="wrap_content"/>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="100px"

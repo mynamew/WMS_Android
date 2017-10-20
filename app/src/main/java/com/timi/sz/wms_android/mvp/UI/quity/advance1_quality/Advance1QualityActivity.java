@@ -43,8 +43,8 @@ public class Advance1QualityActivity extends BaseActivity<Advance1QualityView, A
     TextView tvNext;
     @BindView(R.id.tv_orderno)
     TextView tvOrderno;
-    @BindView(R.id.tv_quality_date)
-    TextView tvQualityDate;
+    @BindView(R.id.tv_receive_material_date)
+    TextView tvReceiveMaterialDate;
     @BindView(R.id.tv_order_num)
     TextView tvOrderNum;
     @BindView(R.id.tv_supplier)
@@ -139,7 +139,7 @@ public class Advance1QualityActivity extends BaseActivity<Advance1QualityView, A
          * 设置从质检清单获取到的数据，设置到当前界面
          */
         setTextViewText(tvOrderno, R.string.receive_pro_num, "");
-        setTextViewText(tvQualityDate, R.string.tv_mrp_quality_date, "");
+        setTextViewText(tvReceiveMaterialDate, R.string.receive_material_date, "");
         setTextViewText(tvOrderNum, R.string.order_no, "");
         setTextViewText(tvSupplier, R.string.buy_from, "");
         setTextViewText(tvMaterialCode, R.string.material_code, "");
@@ -267,7 +267,7 @@ public class Advance1QualityActivity extends BaseActivity<Advance1QualityView, A
              * 设置相应的物料信息
              */
             setTextViewText(tvOrderno, R.string.receive_pro_num, normalSummary.getReceiptCode());
-            setTextViewText(tvQualityDate, R.string.tv_mrp_quality_date, normalSummary.getReceiptDate());
+            setTextViewText(tvReceiveMaterialDate, R.string.receive_material_date, normalSummary.getReceiptDate());
             setTextViewText(tvOrderNum, R.string.order_no, normalSummary.getSourceBillCode());
             setTextViewText(tvSupplier, R.string.buy_from, normalSummary.getSupplierName());
             setTextViewText(tvMaterialCode, R.string.material_code, normalSummary.getMaterialCode());

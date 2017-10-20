@@ -1,20 +1,20 @@
 package com.timi.sz.wms_android.mvp.UI.quity.advance_quality;
 
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.timi.sz.wms_android.R;
-import com.timi.sz.wms_android.base.adapter.CommonSimpleHeaderAndFooterTypeAdapter;
-import com.timi.sz.wms_android.base.adapter.CommonViewHolder;
-import com.timi.sz.wms_android.mvp.UI.stock_in_work.stock_query.StockQueryActivity;
+import com.timi.sz.wms_android.base.uils.PackageUtils;
+import com.timi.sz.wms_android.base.uils.SpUtils;
+import com.timi.sz.wms_android.bean.quality.adavance.GetAdvance2Data;
 import com.timi.sz.wms_android.mvp.base.BaseActivity;
-import com.timi.sz.wms_android.view.excelview.DisplayUtil;
+import com.timi.sz.wms_android.view.MyDialog;
 import com.timi.sz.wms_android.view.excelview.MyExcelView;
 
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -87,16 +87,15 @@ public class AdvanceQualityActivity extends BaseActivity<AdvanceQualityView, Adv
     TextView tvCheck;
     @BindView(R.id.myexcel_advance_quality)
     MyExcelView myexcelAdvanceQuality;
+    @BindView(R.id.rlv_quality_advance)
+    RecyclerView rlvQualityAdvance;
+    //bundle
+    private int receiptId;
+    private int receiptDetailId;
 
-    /**
-     * 第一行
-     */
-    ArrayList<String> mfristData = new ArrayList<>();
-    ArrayList<ArrayList<String>> mTableDatas = new ArrayList<>();
-    /**
-     * adapter
-     */
-    CommonSimpleHeaderAndFooterTypeAdapter<ArrayList<String>> commonSimpleHeaderTypeAdapter;
+
+    private GetAdvance2Data mData;
+
 
     @Override
     public int setLayoutId() {
@@ -105,49 +104,23 @@ public class AdvanceQualityActivity extends BaseActivity<AdvanceQualityView, Adv
 
     @Override
     public void initBundle(Bundle savedInstanceState) {
-        /**
-         * 设置表头
-         */
-//        mfristData.add("样品编号");
-//        mfristData.add("长度");
-//        mfristData.add("宽度");
-//        mfristData.add("温度");
-//        mfristData.add("电子性能");
-        /**
-         * 设置表头
-         */
-        mfristData.add(getString(R.string.stock_query_batch));
-        mfristData.add(getString(R.string.item_goods_name));
-        mfristData.add(getString(R.string.item_goods_code));
-        mfristData.add(getString(R.string.item_goods_model));
-        mfristData.add(getString(R.string.item_goods_num));
-        mfristData.add(getString(R.string.item_goods_current_status));
+        receiptId = getIntent().getIntExtra("ReceiptId", -1);
+        receiptDetailId = getIntent().getIntExtra("ReceiptDetailId", -1);
     }
 
     @Override
     public void initView() {
-        myexcelAdvanceQuality.setRefreshListener(new MyExcelView.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                // TODO: 2017/10/12 刷新的网络请求
-                for (int i = 0; i < 10; i++) {
-                    mTableDatas.add(mfristData);
-                }
-                adapterInit();
-            }
-
-            @Override
-            public void onLoadMore() {
-                // TODO: 2017/10/12  加载更多的网络请求
-            }
-        });
     }
 
     @Override
     public void initData() {
-
-
-        adapterInit();
+        Map<String, Object> params = new HashMap<>();
+        params.put("UserId", SpUtils.getInstance().getUserId());
+        params.put("OrgId", SpUtils.getInstance().getOrgId());
+        params.put("mac", PackageUtils.getMac());
+        params.put("ReceiptId", receiptId);
+        params.put("ReceiptDetailId", receiptDetailId);
+        getPresenter().getAdvance2Data(params);
     }
 
     @Override
@@ -166,99 +139,44 @@ public class AdvanceQualityActivity extends BaseActivity<AdvanceQualityView, Adv
             case R.id.tv_next:
                 break;
             case R.id.tv_check:
+                /**
+                 * 弹出检验的弹出框
+                 */
                 break;
         }
     }
 
-    /**
-     * 初始化adapter
-     */
-    private void adapterInit() {
-        commonSimpleHeaderTypeAdapter = null;
+    @Override
+    public void getAdvance2Data(GetAdvance2Data data) {
+        mData = data;
         /**
-         * adapter  为空 则初始化
+         * 初始化数据
          */
-        final ArrayList<Integer> allRowWidth = myexcelAdvanceQuality.getAllRowWidth(mTableDatas, mfristData);
-        commonSimpleHeaderTypeAdapter = new CommonSimpleHeaderAndFooterTypeAdapter<ArrayList<String>>(mTableDatas) {
-            @Override
-            public int getLayoutId(int viewType) {
-                return R.layout.item_stock_query;
-            }
+        GetAdvance2Data.NormalSummaryBean normalSummary = data.getNormalSummary();
+        /**
+         * 设置相应的物料信息
+         */
+        setTextViewText(tvOrderno, R.string.receive_pro_num, normalSummary.getReceiptCode());
+        setTextViewText(tvReceiveMaterialDate, R.string.receive_material_date, normalSummary.getReceiptDate());
+        setTextViewText(tvRecevieProOrderno, R.string.receive_pro_num, normalSummary.getSourceBillCode());
+        setTextViewText(tvSupplier, R.string.buy_from, normalSummary.getSupplierName());
+        setTextViewText(tvMaterialCode, R.string.material_code, normalSummary.getMaterialCode());
+        setTextViewText(tvMaterialName, R.string.material_name, normalSummary.getMaterialName());
+        setTextViewText(tvMaterialModel, R.string.material_model, normalSummary.getMaterialStandard());
+        setTextViewText(tvRealReceivceNum, R.string.receive_num, normalSummary.getReceiveQty());
+        setTextViewText(tvSampleCount, R.string.sample_num, normalSummary.getSampleQty());
+        /**
+         * 检验标准
+         */
+        GetAdvance2Data.AdvanceSummaryBean advanceSummary = data.getAdvanceSummary();
+        //标准水平
+        setTextViewText(tvStandardLevel, R.string.standard_level, advanceSummary.getCurrentLevel());
+        //AQL
+        tvAql.setText(advanceSummary.getCurrentAQL() + "(" + advanceSummary.getRejectAQL() + ")");
+        //试样半码
+        setTextViewText(tvSampleHalfYard, R.string.sample_half_yard, advanceSummary.getSampleCode());
+        //严格度
+        tvStringency.setText(advanceSummary.getCurrentStrict());
 
-            @Override
-            public void convert(CommonViewHolder holder, ArrayList<String> strings, int position) {
-
-//                for (int i = 0; i < strings.size(); i++) {
-//                    TextView textView = new TextView(AdvanceQualityActivity.this);
-//                    textView.setText(strings.get(i));
-//                    //设置布局
-//                    textView.setPadding(10, 10, 10, 10);
-//                    ViewGroup.LayoutParams layoutParams = textView.getLayoutParams();
-//                    layoutParams.width = DisplayUtil.dip2px(AdvanceQualityActivity.this, allRowWidth.get(i));
-//                    textView.setLayoutParams(layoutParams);
-//                    View view = new View(AdvanceQualityActivity.this);
-//                    ViewGroup.LayoutParams viewLayoutParams = textView.getLayoutParams();
-//                    viewLayoutParams.width = DisplayUtil.dip2px(AdvanceQualityActivity.this, 2);
-//                    viewLayoutParams.height=DisplayUtil.dip2px(AdvanceQualityActivity.this, 80);
-//                    textView.setLayoutParams(layoutParams);
-//                    ((LinearLayout) holder.getView(R.id.ll_content)).addView(view);
-//
-//                }
-                /**
-                 * 设置第一行的颜色
-                 */
-                int[] ids = new int[]{R.id.tv_batch, R.id.tv_goods_name, R.id.tv_goods_code, R.id.tv_goods_model, R.id.tv_goods_num, R.id.tv_goods_current_status};
-                for (int i = 0; i < ids.length; i++) {
-                    TextView textView = holder.getTextView(ids[i]);
-                    ViewGroup.LayoutParams layoutParams = textView.getLayoutParams();
-                    layoutParams.width = DisplayUtil.dip2px(AdvanceQualityActivity.this, allRowWidth.get(i));
-                    textView.setLayoutParams(layoutParams);
-                    textView.setPadding(20, 20, 20, 20);
-                    textView.setText(strings.get(i));
-                }
-                /**
-                 * 设置底边分割线
-                 */
-                if (position == 0) {
-                    holder.getView(R.id.divide_bottom).setVisibility(View.VISIBLE);
-                } else {
-                    holder.getView(R.id.divide_bottom).setVisibility(View.GONE);
-                }
-            }
-
-            @Override
-            protected int getHeaderLayoutId() {
-                return R.layout.header_stock_query;
-            }
-
-            @Override
-            protected void bindHeader(CommonViewHolder holder, int position) {
-
-                /**
-                 * 设置第一行的颜色
-                 */
-                int[] ids = new int[]{R.id.tv_batch, R.id.tv_goods_name, R.id.tv_goods_code, R.id.tv_goods_model, R.id.tv_goods_num, R.id.tv_goods_current_status};
-                for (int i = 0; i < ids.length; i++) {
-                    TextView textView = holder.getTextView(ids[i]);
-                    ViewGroup.LayoutParams layoutParams = textView.getLayoutParams();
-                    layoutParams.width = DisplayUtil.dip2px(AdvanceQualityActivity.this, allRowWidth.get(i));
-                    textView.setLayoutParams(layoutParams);
-                    textView.setPadding(20, 20, 20, 20);
-                    textView.setText(mfristData.get(i));
-                }
-                /**
-                 * 设置底边分割线
-                 */
-                if (position == 0) {
-                    holder.getView(R.id.divide_bottom).setVisibility(View.VISIBLE);
-                } else {
-                    holder.getView(R.id.divide_bottom).setVisibility(View.GONE);
-
-                }
-                holder.getView(R.id.ll_content).setBackgroundColor(getResources().getColor(R.color.beijin));
-            }
-
-        };
-        myexcelAdvanceQuality.loadData(commonSimpleHeaderTypeAdapter, mTableDatas);
     }
 }

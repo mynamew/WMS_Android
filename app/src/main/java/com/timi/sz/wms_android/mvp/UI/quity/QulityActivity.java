@@ -58,7 +58,7 @@ public class QulityActivity extends BaseNoMvpActivity {
                 startActivity(new Intent(this, MRPReviewActivity.class));
                 break;
             case R.id.tv_qulity_update_qr://条码修改
-                startActivity(new Intent(this, Advance1QualityActivity.class));
+                startActivity(new Intent(this, AdvanceQualityActivity.class));
                 break;
         }
     }
