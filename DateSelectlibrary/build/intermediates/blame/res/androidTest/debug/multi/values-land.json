@@ -1,0 +1,159 @@
+[
+    {
+        "outputFile": "D:\\WorkProjects\\WMS_Android\\DateSelectlibrary\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-land\\values-land.xml",
+        "map": [
+            {
+                "to": {
+                    "startLine": 2,
+                    "startColumn": 4,
+                    "startOffset": 55,
+                    "endColumn": 51,
+                    "endOffset": 102
+                },
+                "from": {
+                    "file": "D:\\WorkProjects\\WMS_Android\\DateSelectlibrary\\build\\intermediates\\bundles\\debug\\res\\values-land\\values-land.xml",
+                    "position": {
+                        "startLine": 2,
+                        "startColumn": 4,
+                        "startOffset": 55,
+                        "endColumn": 51,
+                        "endOffset": 102
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 3,
+                    "startColumn": 4,
+                    "startOffset": 107,
+                    "endColumn": 50,
+                    "endOffset": 153
+                },
+                "from": {
+                    "file": "D:\\WorkProjects\\WMS_Android\\DateSelectlibrary\\build\\intermediates\\bundles\\debug\\res\\values-land\\values-land.xml",
+                    "position": {
+                        "startLine": 3,
+                        "startColumn": 4,
+                        "startOffset": 107,
+                        "endColumn": 50,
+                        "endOffset": 153
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 4,
+                    "startColumn": 4,
+                    "startOffset": 158,
+                    "endColumn": 53,
+                    "endOffset": 207
+                },
+                "from": {
+                    "file": "D:\\WorkProjects\\WMS_Android\\DateSelectlibrary\\build\\intermediates\\bundles\\debug\\res\\values-land\\values-land.xml",
+                    "position": {
+                        "startLine": 4,
+                        "startColumn": 4,
+                        "startOffset": 158,
+                        "endColumn": 53,
+                        "endOffset": 207
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 5,
+                    "startColumn": 4,
+                    "startOffset": 212,
+                    "endColumn": 50,
+                    "endOffset": 258
+                },
+                "from": {
+                    "file": "D:\\WorkProjects\\WMS_Android\\DateSelectlibrary\\build\\intermediates\\bundles\\debug\\res\\values-land\\values-land.xml",
+                    "position": {
+                        "startLine": 5,
+                        "startColumn": 4,
+                        "startOffset": 212,
+                        "endColumn": 50,
+                        "endOffset": 258
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 6,
+                    "startColumn": 4,
+                    "startOffset": 263,
+                    "endColumn": 59,
+                    "endOffset": 318
+                },
+                "from": {
+                    "file": "D:\\WorkProjects\\WMS_Android\\DateSelectlibrary\\build\\intermediates\\bundles\\debug\\res\\values-land\\values-land.xml",
+                    "position": {
+                        "startLine": 6,
+                        "startColumn": 4,
+                        "startOffset": 263,
+                        "endColumn": 59,
+                        "endOffset": 318
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 7,
+                    "startColumn": 4,
+                    "startOffset": 323,
+                    "endColumn": 60,
+                    "endOffset": 379
+                },
+                "from": {
+                    "file": "D:\\WorkProjects\\WMS_Android\\DateSelectlibrary\\build\\intermediates\\bundles\\debug\\res\\values-land\\values-land.xml",
+                    "position": {
+                        "startLine": 7,
+                        "startColumn": 4,
+                        "startOffset": 323,
+                        "endColumn": 60,
+                        "endOffset": 379
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 8,
+                    "startColumn": 4,
+                    "startOffset": 384,
+                    "endColumn": 59,
+                    "endOffset": 439
+                },
+                "from": {
+                    "file": "D:\\WorkProjects\\WMS_Android\\DateSelectlibrary\\build\\intermediates\\bundles\\debug\\res\\values-land\\values-land.xml",
+                    "position": {
+                        "startLine": 8,
+                        "startColumn": 4,
+                        "startOffset": 384,
+                        "endColumn": 59,
+                        "endOffset": 439
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 9,
+                    "startColumn": 4,
+                    "startOffset": 444,
+                    "endColumn": 56,
+                    "endOffset": 496
+                },
+                "from": {
+                    "file": "D:\\WorkProjects\\WMS_Android\\DateSelectlibrary\\build\\intermediates\\bundles\\debug\\res\\values-land\\values-land.xml",
+                    "position": {
+                        "startLine": 9,
+                        "startColumn": 4,
+                        "startOffset": 444,
+                        "endColumn": 56,
+                        "endOffset": 496
+                    }
+                }
+            }
+        ]
+    }
+]

@@ -1,0 +1,18 @@
+[
+    {
+        "merged": "D:\\WorkProjects\\WMS_Android\\DateSelectlibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\color\\mdtp_done_text_color_dark.xml",
+        "source": "D:\\WorkProjects\\WMS_Android\\DateSelectlibrary\\build\\intermediates\\bundles\\debug\\res\\color\\mdtp_done_text_color_dark.xml"
+    },
+    {
+        "merged": "D:\\WorkProjects\\WMS_Android\\DateSelectlibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\color\\mdtp_date_picker_selector.xml",
+        "source": "D:\\WorkProjects\\WMS_Android\\DateSelectlibrary\\build\\intermediates\\bundles\\debug\\res\\color\\mdtp_date_picker_selector.xml"
+    },
+    {
+        "merged": "D:\\WorkProjects\\WMS_Android\\DateSelectlibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\color\\mdtp_date_picker_year_selector.xml",
+        "source": "D:\\WorkProjects\\WMS_Android\\DateSelectlibrary\\build\\intermediates\\bundles\\debug\\res\\color\\mdtp_date_picker_year_selector.xml"
+    },
+    {
+        "merged": "D:\\WorkProjects\\WMS_Android\\DateSelectlibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\color\\mdtp_done_text_color.xml",
+        "source": "D:\\WorkProjects\\WMS_Android\\DateSelectlibrary\\build\\intermediates\\bundles\\debug\\res\\color\\mdtp_done_text_color.xml"
+    }
+]

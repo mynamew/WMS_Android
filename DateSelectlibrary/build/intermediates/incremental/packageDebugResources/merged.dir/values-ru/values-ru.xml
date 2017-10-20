@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:ns1="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="mdtp_day_picker_description">Календарь</string>
+    <string name="mdtp_deleted_key"><ns1:g example="4" id="key">%1$s</ns1:g> удалён</string>
+    <string name="mdtp_done_label">Готово</string>
+    <string name="mdtp_from">ОТ</string>
+    <string name="mdtp_hour_picker_description">Круговой слайдер для выбора времени</string>
+    <string name="mdtp_item_is_selected"><ns1:g example="2013" id="item">%1$s</ns1:g> выбран</string>
+    <string name="mdtp_minute_picker_description">Круговой слайдер для выбора минут</string>
+    <string name="mdtp_select_day">Выберите месяц и день</string>
+    <string name="mdtp_select_hours">Выберите час</string>
+    <string name="mdtp_select_minutes">Выберите минуту</string>
+    <string name="mdtp_select_year">Выберите год</string>
+    <string name="mdtp_to">ДО</string>
+    <string name="mdtp_year_picker_description">Список годов</string>
+</resources>

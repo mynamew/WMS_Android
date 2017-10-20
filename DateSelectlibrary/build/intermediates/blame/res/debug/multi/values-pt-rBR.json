@@ -1,0 +1,311 @@
+[
+    {
+        "outputFile": "D:\\WorkProjects\\WMS_Android\\DateSelectlibrary\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-pt-rBR\\values-pt-rBR.xml",
+        "map": [
+            {
+                "to": {
+                    "startLine": 2,
+                    "startColumn": 4,
+                    "startOffset": 105,
+                    "endColumn": 62,
+                    "endOffset": 163
+                },
+                "from": {
+                    "file": "D:\\WorkProjects\\WMS_Android\\DateSelectlibrary\\src\\main\\res\\values-pt-rBR\\strings.xml",
+                    "position": {
+                        "startLine": 3,
+                        "startColumn": 4,
+                        "startOffset": 162,
+                        "endColumn": 62,
+                        "endOffset": 220
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 3,
+                    "startColumn": 4,
+                    "startOffset": 168,
+                    "endColumn": 77,
+                    "endOffset": 241
+                },
+                "from": {
+                    "file": "D:\\WorkProjects\\WMS_Android\\DateSelectlibrary\\src\\main\\res\\values-pt-rBR\\strings.xml",
+                    "position": {
+                        "startLine": 15,
+                        "startColumn": 4,
+                        "startOffset": 915,
+                        "endColumn": 77,
+                        "endOffset": 988
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 4,
+                    "startColumn": 4,
+                    "startOffset": 246,
+                    "endColumn": 94,
+                    "endOffset": 336
+                },
+                "from": {
+                    "file": "D:\\WorkProjects\\WMS_Android\\DateSelectlibrary\\src\\main\\res\\values-pt-rBR\\strings.xml",
+                    "position": {
+                        "startLine": 16,
+                        "startColumn": 4,
+                        "startOffset": 993,
+                        "endColumn": 98,
+                        "endOffset": 1087
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 5,
+                    "startColumn": 4,
+                    "startOffset": 341,
+                    "endColumn": 49,
+                    "endOffset": 386
+                },
+                "from": {
+                    "file": "D:\\WorkProjects\\WMS_Android\\DateSelectlibrary\\src\\main\\res\\values-pt-rBR\\strings.xml",
+                    "position": {
+                        "startLine": 5,
+                        "startColumn": 4,
+                        "startOffset": 280,
+                        "endColumn": 49,
+                        "endOffset": 325
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 6,
+                    "startColumn": 4,
+                    "startOffset": 391,
+                    "endColumn": 40,
+                    "endOffset": 427
+                },
+                "from": {
+                    "file": "D:\\WorkProjects\\WMS_Android\\DateSelectlibrary\\src\\main\\res\\values-pt-rBR\\strings.xml",
+                    "position": {
+                        "startLine": 6,
+                        "startColumn": 4,
+                        "startOffset": 330,
+                        "endColumn": 40,
+                        "endOffset": 366
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 7,
+                    "startColumn": 4,
+                    "startOffset": 432,
+                    "endColumn": 82,
+                    "endOffset": 510
+                },
+                "from": {
+                    "file": "D:\\WorkProjects\\WMS_Android\\DateSelectlibrary\\src\\main\\res\\values-pt-rBR\\strings.xml",
+                    "position": {
+                        "startLine": 14,
+                        "startColumn": 4,
+                        "startOffset": 832,
+                        "endColumn": 82,
+                        "endOffset": 910
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 8,
+                    "startColumn": 4,
+                    "startOffset": 515,
+                    "endColumn": 106,
+                    "endOffset": 617
+                },
+                "from": {
+                    "file": "D:\\WorkProjects\\WMS_Android\\DateSelectlibrary\\src\\main\\res\\values-pt-rBR\\strings.xml",
+                    "position": {
+                        "startLine": 17,
+                        "startColumn": 4,
+                        "startOffset": 1092,
+                        "endColumn": 110,
+                        "endOffset": 1198
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 9,
+                    "startColumn": 4,
+                    "startOffset": 622,
+                    "endColumn": 86,
+                    "endOffset": 704
+                },
+                "from": {
+                    "file": "D:\\WorkProjects\\WMS_Android\\DateSelectlibrary\\src\\main\\res\\values-pt-rBR\\strings.xml",
+                    "position": {
+                        "startLine": 13,
+                        "startColumn": 4,
+                        "startOffset": 745,
+                        "endColumn": 86,
+                        "endOffset": 827
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 10,
+                    "startColumn": 4,
+                    "startOffset": 709,
+                    "endColumn": 54,
+                    "endOffset": 759
+                },
+                "from": {
+                    "file": "D:\\WorkProjects\\WMS_Android\\DateSelectlibrary\\src\\main\\res\\values-pt-rBR\\strings.xml",
+                    "position": {
+                        "startLine": 4,
+                        "startColumn": 4,
+                        "startOffset": 225,
+                        "endColumn": 54,
+                        "endOffset": 275
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 11,
+                    "startColumn": 4,
+                    "startOffset": 764,
+                    "endColumn": 54,
+                    "endOffset": 814
+                },
+                "from": {
+                    "file": "D:\\WorkProjects\\WMS_Android\\DateSelectlibrary\\src\\main\\res\\values-pt-rBR\\strings.xml",
+                    "position": {
+                        "startLine": 2,
+                        "startColumn": 4,
+                        "startOffset": 107,
+                        "endColumn": 54,
+                        "endOffset": 157
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 12,
+                    "startColumn": 4,
+                    "startOffset": 819,
+                    "endColumn": 67,
+                    "endOffset": 882
+                },
+                "from": {
+                    "file": "D:\\WorkProjects\\WMS_Android\\DateSelectlibrary\\src\\main\\res\\values-pt-rBR\\strings.xml",
+                    "position": {
+                        "startLine": 8,
+                        "startColumn": 4,
+                        "startOffset": 412,
+                        "endColumn": 67,
+                        "endOffset": 475
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 13,
+                    "startColumn": 4,
+                    "startOffset": 887,
+                    "endColumn": 62,
+                    "endOffset": 945
+                },
+                "from": {
+                    "file": "D:\\WorkProjects\\WMS_Android\\DateSelectlibrary\\src\\main\\res\\values-pt-rBR\\strings.xml",
+                    "position": {
+                        "startLine": 9,
+                        "startColumn": 4,
+                        "startOffset": 480,
+                        "endColumn": 62,
+                        "endOffset": 538
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 14,
+                    "startColumn": 4,
+                    "startOffset": 950,
+                    "endColumn": 68,
+                    "endOffset": 1014
+                },
+                "from": {
+                    "file": "D:\\WorkProjects\\WMS_Android\\DateSelectlibrary\\src\\main\\res\\values-pt-rBR\\strings.xml",
+                    "position": {
+                        "startLine": 10,
+                        "startColumn": 4,
+                        "startOffset": 543,
+                        "endColumn": 68,
+                        "endOffset": 607
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 15,
+                    "startColumn": 4,
+                    "startOffset": 1019,
+                    "endColumn": 60,
+                    "endOffset": 1075
+                },
+                "from": {
+                    "file": "D:\\WorkProjects\\WMS_Android\\DateSelectlibrary\\src\\main\\res\\values-pt-rBR\\strings.xml",
+                    "position": {
+                        "startLine": 11,
+                        "startColumn": 4,
+                        "startOffset": 612,
+                        "endColumn": 60,
+                        "endOffset": 668
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 16,
+                    "startColumn": 4,
+                    "startOffset": 1080,
+                    "endColumn": 40,
+                    "endOffset": 1116
+                },
+                "from": {
+                    "file": "D:\\WorkProjects\\WMS_Android\\DateSelectlibrary\\src\\main\\res\\values-pt-rBR\\strings.xml",
+                    "position": {
+                        "startLine": 7,
+                        "startColumn": 4,
+                        "startOffset": 371,
+                        "endColumn": 40,
+                        "endOffset": 407
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 17,
+                    "startColumn": 4,
+                    "startOffset": 1121,
+                    "endColumn": 71,
+                    "endOffset": 1188
+                },
+                "from": {
+                    "file": "D:\\WorkProjects\\WMS_Android\\DateSelectlibrary\\src\\main\\res\\values-pt-rBR\\strings.xml",
+                    "position": {
+                        "startLine": 12,
+                        "startColumn": 4,
+                        "startOffset": 673,
+                        "endColumn": 71,
+                        "endOffset": 740
+                    }
+                }
+            }
+        ]
+    }
+]

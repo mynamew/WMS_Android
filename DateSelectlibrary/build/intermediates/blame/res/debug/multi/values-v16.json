@@ -1,0 +1,89 @@
+[
+    {
+        "outputFile": "D:\\WorkProjects\\WMS_Android\\DateSelectlibrary\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v16\\values-v16.xml",
+        "map": [
+            {
+                "to": {
+                    "startLine": 2,
+                    "startColumn": 4,
+                    "startOffset": 55,
+                    "endColumn": 97,
+                    "endOffset": 148
+                },
+                "from": {
+                    "file": "D:\\WorkProjects\\WMS_Android\\DateSelectlibrary\\src\\main\\res\\values-v16\\strings.xml",
+                    "position": {
+                        "startLine": 18,
+                        "startColumn": 4,
+                        "startOffset": 769,
+                        "endColumn": 97,
+                        "endOffset": 862
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 3,
+                    "startColumn": 4,
+                    "startOffset": 153,
+                    "endLine": 5,
+                    "endColumn": 12,
+                    "endOffset": 281
+                },
+                "from": {
+                    "file": "D:\\WorkProjects\\WMS_Android\\DateSelectlibrary\\src\\main\\res\\values-v16\\styles.xml",
+                    "position": {
+                        "startLine": 26,
+                        "startColumn": 4,
+                        "startOffset": 1022,
+                        "endLine": 28,
+                        "endColumn": 12,
+                        "endOffset": 1150
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 6,
+                    "startColumn": 4,
+                    "startOffset": 286,
+                    "endLine": 8,
+                    "endColumn": 12,
+                    "endOffset": 400
+                },
+                "from": {
+                    "file": "D:\\WorkProjects\\WMS_Android\\DateSelectlibrary\\src\\main\\res\\values-v16\\styles.xml",
+                    "position": {
+                        "startLine": 22,
+                        "startColumn": 4,
+                        "startOffset": 902,
+                        "endLine": 24,
+                        "endColumn": 12,
+                        "endOffset": 1016
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 9,
+                    "startColumn": 4,
+                    "startOffset": 405,
+                    "endLine": 11,
+                    "endColumn": 12,
+                    "endOffset": 517
+                },
+                "from": {
+                    "file": "D:\\WorkProjects\\WMS_Android\\DateSelectlibrary\\src\\main\\res\\values-v16\\styles.xml",
+                    "position": {
+                        "startLine": 18,
+                        "startColumn": 4,
+                        "startOffset": 784,
+                        "endLine": 20,
+                        "endColumn": 12,
+                        "endOffset": 896
+                    }
+                }
+            }
+        ]
+    }
+]
