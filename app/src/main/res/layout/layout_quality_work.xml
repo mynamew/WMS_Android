@@ -36,9 +36,11 @@
             android:id="@+id/tv_receive_num"
             android:layout_width="0dp"
             android:layout_height="88px"
+            android:layout_marginLeft="20px"
             android:layout_weight="1"
             android:gravity="center_vertical"
-            android:text="@string/receive_num"/>
+            android:text="@string/receive_num"
+            android:textSize="28px"/>
 
         <TextView
             android:id="@+id/tv_sample_num"
@@ -46,7 +48,8 @@
             android:layout_height="88px"
             android:layout_weight="1"
             android:gravity="center_vertical"
-            android:text="@string/mr_advance_sample_num"/>
+            android:text="@string/mr_advance_sample_num"
+            android:textSize="28px"/>
     </LinearLayout>
 
 
@@ -58,25 +61,27 @@
         android:orientation="horizontal">
 
         <com.timi.sz.wms_android.view.StandardLevelView
-            android:id="@+id/tv_serious_badness_num"
+            android:id="@+id/stand_fatal_badness_num"
             android:layout_width="160px"
             android:layout_height="120px"
+            app:standardLevelTitle="@string/fatal_badness_num"/>
+
+        <com.timi.sz.wms_android.view.StandardLevelView
+            android:id="@+id/stand_serious_badness_num"
+            android:layout_width="160px"
+            android:layout_height="120px"
+            android:layout_marginLeft="80px"
+
             app:standardLevelTitle="@string/serious_badness_num"/>
 
         <com.timi.sz.wms_android.view.StandardLevelView
-            android:id="@+id/tv_main_badness_num"
+            android:id="@+id/stand_normal_badness_num"
             android:layout_width="160px"
             android:layout_height="120px"
             android:layout_marginLeft="80px"
-            app:standardLevelTitle="@string/main_badness_num"/>
+            app:standardLevelTitle="@string/normal_badness_num"/>
 
-        <com.timi.sz.wms_android.view.StandardLevelView
-            android:id="@+id/tv_minor_badness_num"
-            android:layout_width="160px"
-            android:layout_height="120px"
 
-            android:layout_marginLeft="80px"
-            app:standardLevelTitle="@string/minor_badness_num"/>
     </LinearLayout>
 
     <LinearLayout
@@ -88,24 +93,26 @@
         android:orientation="horizontal">
 
         <com.timi.sz.wms_android.view.StandardLevelView
-            android:id="@+id/tv_badness_total_num"
+            android:id="@+id/stand_slight_badness_num"
             android:layout_width="160px"
             android:layout_height="120px"
+            app:standardLevelTitle="@string/slight_badness_num"/>
+
+        <com.timi.sz.wms_android.view.StandardLevelView
+            android:id="@+id/stand_badness_total_num"
+            android:layout_width="160px"
+            android:layout_height="120px"
+            android:layout_marginLeft="80px"
             app:standardLevelTitle="@string/badness_total_num"/>
 
         <com.timi.sz.wms_android.view.StandardLevelView
-            android:id="@+id/tv_badness_percent"
+            android:id="@+id/stand_badness_percent"
             android:layout_width="160px"
             android:layout_height="120px"
             android:layout_marginLeft="80px"
             app:standardLevelTitle="@string/badness_percent"/>
 
-        <com.timi.sz.wms_android.view.StandardLevelView
-            android:layout_width="160px"
-            android:layout_height="120px"
-            android:layout_marginLeft="80px"
-            android:visibility="invisible"
-            app:standardLevelTitle="试样半码"/>
+
     </LinearLayout>
 
     <LinearLayout
@@ -161,9 +168,9 @@
         <com.timi.sz.wms_android.view.WrapLayoutQualityResult
             android:id="@+id/wrap_quality_result"
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_margin="80px"
-            android:layout_marginBottom="30px"
-            android:layout_height="wrap_content"/>
+            android:layout_marginBottom="30px"/>
     </LinearLayout>
 
     <LinearLayout
@@ -201,6 +208,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/selector_rd_quality"
                 android:button="@null"
+                android:clickable="false"
                 android:gravity="center"
                 android:text="@string/rd_qualified_tip"
                 android:textColor="#666"
@@ -214,6 +222,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/selector_rd_quality"
                 android:button="@null"
+                android:clickable="false"
                 android:gravity="center"
                 android:text="@string/wait_deal"
                 android:textColor="#666"
@@ -227,6 +236,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/selector_rd_quality"
                 android:button="@null"
+                android:clickable="false"
                 android:gravity="center"
                 android:text="@string/unquality"
                 android:textColor="#666"

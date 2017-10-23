@@ -556,7 +556,7 @@ public interface ApiService {
      */
     @FormUrlEncoded
     @POST("api/services/wpda/IQC/IQCSetAdvance2Data")
-    Observable<CommonResult<Object>> setAdvance12Data(@FieldMap Map<String, Object> params);
+    Observable<CommonResult<Object>> setAdvance2Data(@FieldMap Map<String, Object> params);
     /**======MRP评审=====**/
     /**
      * 查询MRP评审信息列表

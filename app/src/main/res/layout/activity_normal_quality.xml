@@ -296,7 +296,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingLeft="40px"
-                        android:text="质检结果："
+                        android:text="@string/quality_result_tip"
                         android:textColor="#333"
                         android:textSize="28px"/>
 

@@ -2,8 +2,10 @@ package com.timi.sz.wms_android.view;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.SparseArray;
 import android.view.View;
 import android.view.ViewGroup;
+
 import com.timi.sz.wms_android.bean.quality.adavance.GetAdvance2Data;
 
 import java.util.ArrayList;
@@ -26,6 +28,8 @@ public class WrapLayoutQualityResult extends ViewGroup {
      */
     public int BUTTON_STYLE = 1;
     private int style;
+
+    private SparseArray<QualityResultView> views = new SparseArray<>();
 
     public WrapLayoutQualityResult(Context context) {
         super(context);
@@ -86,6 +90,7 @@ public class WrapLayoutQualityResult extends ViewGroup {
                     markClickListener.clickMark(finalI);
                 }
             });
+            views.put(i, view);
             this.addView(view);
         }
     }

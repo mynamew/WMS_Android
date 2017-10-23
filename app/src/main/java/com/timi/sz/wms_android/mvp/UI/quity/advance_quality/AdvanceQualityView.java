@@ -10,5 +10,8 @@ import com.timi.sz.wms_android.mvp.base.view.iml.MvpBaseView;
  */
 
 public interface AdvanceQualityView extends MvpBaseView {
-   void getAdvance2Data(GetAdvance2Data data);
+    void getAdvance2Data(GetAdvance2Data data);
+
+    void setAdvance2Data();
+    void submitFinish();
 }

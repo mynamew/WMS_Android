@@ -20,7 +20,8 @@ import io.reactivex.Observer;
 
 public class AdvanceQualityModel extends MvpBaseModel {
     /**
-     * 获取高级质检1 的数据
+     * 获取高级质检2 的数据
+     *
      * @param params
      * @param observer
      */
@@ -29,6 +30,35 @@ public class AdvanceQualityModel extends MvpBaseModel {
             @Override
             public Observable<CommonResult<GetAdvance2Data>> createObservable(ApiService apiService) {
                 return apiService.getAdvance2Data(params);
+            }
+        });
+    }
+
+    /**
+     * 设置高级质检2 的数据
+     *
+     * @param params
+     * @param observer
+     */
+    public void setAdvance2Data(final Map<String, Object> params, Observer<Object> observer) {
+        HttpManager.getInstance().HttpManagerRequest(observer, new ApiServiceMethodCallBack<Object>() {
+            @Override
+            public Observable<CommonResult<Object>> createObservable(ApiService apiService) {
+                return apiService.setAdvance2Data(params);
+            }
+        });
+    }
+    /**
+     * 质检确认
+     *
+     * @param params
+     * @param observer
+     */
+    public void submitFinish(final Map<String, Object> params, Observer<Object> observer) {
+        HttpManager.getInstance().HttpManagerRequest(observer, new ApiServiceMethodCallBack<Object>() {
+            @Override
+            public Observable<CommonResult<Object>> createObservable(ApiService apiService) {
+                return apiService.submitFinish(params);
             }
         });
     }
