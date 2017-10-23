@@ -20,8 +20,6 @@ import butterknife.OnClick;
  * create at: 2017/8/24 16:38
  */
 public class DeviceInfoActivity extends BaseActivity<DeviceInfoView, DeviceInfoPresenter> implements DeviceInfoView {
-
-
     @BindView(R.id.et_set_deviceinfo_num)
     EditText etSetDeviceinfoNum;
     @BindView(R.id.tv_set_deviceinfo_mac)
@@ -39,10 +37,10 @@ public class DeviceInfoActivity extends BaseActivity<DeviceInfoView, DeviceInfoP
         setActivityTitle(getString(R.string.deviceinfo));
         //设置mac地址
         String strMac = PackageUtils.getLocalMacAddressFromBusybox();
-        tvSetDeviceinfoMac.setText(String.format(getString(R.string.set_deviceinfo_mac),TextUtils.isEmpty(strMac)?"":strMac));
+        tvSetDeviceinfoMac.setText(String.format(getString(R.string.set_deviceinfo_mac), TextUtils.isEmpty(strMac) ? "" : strMac));
         //设置ip地址
-        String strIp= NetWorkUtils.getIP(this.getApplicationContext());
-        tvSetDeviceInfoIp.setText(String.format(getString(R.string.set_deviceinfo_ip),TextUtils.isEmpty(strIp)?"":strIp));
+        String strIp = NetWorkUtils.getIP(this.getApplicationContext());
+        tvSetDeviceInfoIp.setText(String.format(getString(R.string.set_deviceinfo_ip), TextUtils.isEmpty(strIp) ? "" : strIp));
     }
 
     @Override
@@ -75,5 +73,7 @@ public class DeviceInfoActivity extends BaseActivity<DeviceInfoView, DeviceInfoP
         }
         // TODO: 2017/8/24 进行网络请求设置 设备信息
     }
+
+
 
 }

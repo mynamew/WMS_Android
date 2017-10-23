@@ -209,9 +209,7 @@
         <activity
             android:name=".mvp.UI.quity.nomal_quality.NormalQualityActivity"
             android:hardwareAccelerated="false"
-            android:windowSoftInputMode="stateVisible|adjustResize|stateHidden|stateAlwaysHidden">
-
-            >
+            android:windowSoftInputMode="adjustPan|stateHidden">
         </activity>
         <activity android:name=".mvp.UI.stock_out.divide_print.SplitPrintActivity">
         </activity>
@@ -233,7 +231,9 @@
         </activity>
         <activity
             android:name=".mvp.UI.quity.advance_quality.AdvanceQualityActivity"
-            android:windowSoftInputMode="stateVisible|adjustResize|stateHidden|stateAlwaysHidden">
+            android:hardwareAccelerated="false"
+            android:windowSoftInputMode="adjustPan|stateHidden"
+            >
         </activity>
         <activity
             android:name=".mvp.UI.quity.reject.QualityRejectActivity"
@@ -241,11 +241,13 @@
         </activity>
         <activity
             android:name=".mvp.UI.quity.advance1_quality.Advance1QualityActivity"
-            android:windowSoftInputMode="stateVisible|adjustResize|stateHidden|stateAlwaysHidden">
+            android:hardwareAccelerated="false"
+            android:windowSoftInputMode="adjustPan|stateHidden"
+            >
         </activity>
-        <activity android:name=".mvp.UI.quity.normal_review.MRPNormalReviewActivity">
+        <activity android:name=".mvp.UI.quity.mrp.normal_review.MRPNormalReviewActivity">
         </activity>
-        <activity android:name=".mvp.UI.quity.advance_review.MRPAdvanceReviewActivity">
+        <activity android:name=".mvp.UI.quity.mrp.advance_review.MRPAdvanceReviewActivity">
         </activity>
         <activity android:name=".mvp.UI.quity.update_barcode.UpdateBarcodeActivity">
         </activity>

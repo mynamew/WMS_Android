@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.timi.sz.wms_android.R;
+import com.timi.sz.wms_android.mvp.UI.deviceinfo.DeviceInfoActivity;
 import com.timi.sz.wms_android.mvp.base.view.BaseNoMvpActivity;
 
 public class AboutActivity extends BaseNoMvpActivity {

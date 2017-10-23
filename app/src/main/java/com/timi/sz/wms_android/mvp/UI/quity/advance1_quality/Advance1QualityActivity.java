@@ -1,9 +1,12 @@
 package com.timi.sz.wms_android.mvp.UI.quity.advance1_quality;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -11,15 +14,20 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
 import com.timi.sz.wms_android.R;
-import com.timi.sz.wms_android.base.adapter.CommonSimpleTypeAdapter;
-import com.timi.sz.wms_android.base.adapter.CommonViewHolder;
+import com.timi.sz.wms_android.base.adapter.BaseRecyclerAdapter;
+import com.timi.sz.wms_android.base.adapter.RecyclerViewHolder;
+import com.timi.sz.wms_android.base.divider.DividerItemDecoration;
+import com.timi.sz.wms_android.base.uils.LogUitls;
 import com.timi.sz.wms_android.base.uils.PackageUtils;
 import com.timi.sz.wms_android.base.uils.SpUtils;
 import com.timi.sz.wms_android.base.uils.ToastUtils;
 import com.timi.sz.wms_android.bean.quality.adavance.GetAdvanceData;
-import com.timi.sz.wms_android.bean.quality.normal.NormalQualityData;
+import com.timi.sz.wms_android.http.message.BaseMessage;
+import com.timi.sz.wms_android.http.message.event.QualityEvent;
 import com.timi.sz.wms_android.mvp.UI.quity.nomal_quality.NormalQualityActivity;
+import com.timi.sz.wms_android.mvp.UI.quity.reject.QualityRejectActivity;
 import com.timi.sz.wms_android.mvp.base.BaseActivity;
 import com.timi.sz.wms_android.view.MyDialog;
 
@@ -38,6 +46,7 @@ import butterknife.OnClick;
  * create at: 2017/10/13 9:51
  */
 public class Advance1QualityActivity extends BaseActivity<Advance1QualityView, Advance1QualityPresenter> implements Advance1QualityView {
+
 
     @BindView(R.id.tv_next)
     TextView tvNext;
@@ -59,18 +68,16 @@ public class Advance1QualityActivity extends BaseActivity<Advance1QualityView, A
     TextView tvReceiveNum;
     @BindView(R.id.tv_spot_check_num)
     TextView tvSpotCheckNum;
-    @BindView(R.id.et_spot_check_num)
-    TextView etSpotCheckNum;
     @BindView(R.id.tv_refuse_receive_num)
     TextView tvRefuseReceiveNum;
     @BindView(R.id.et_refuse_receive_num)
     EditText etRefuseReceiveNum;
     @BindView(R.id.ll_spot_check)
     LinearLayout llSpotCheck;
+    @BindView(R.id.tv_badness_total_num_tip)
+    TextView tvBadnessTotalNumTip;
     @BindView(R.id.tv_badness_total_num)
     TextView tvBadnessTotalNum;
-    @BindView(R.id.et_badness_num)
-    TextView etBadnessNum;
     @BindView(R.id.tv_badness_percent)
     TextView tvBadnessPercent;
     @BindView(R.id.et_badness_percent)
@@ -95,7 +102,6 @@ public class Advance1QualityActivity extends BaseActivity<Advance1QualityView, A
     RadioButton rdUnqualified;
     @BindView(R.id.rg_qualified)
     RadioGroup rgQualified;
-
     //bundle
     private int receiptId;
     private int receiptDetailId;
@@ -115,7 +121,7 @@ public class Advance1QualityActivity extends BaseActivity<Advance1QualityView, A
      * 0 : 未质检 2：质检未完成 3:质检已完成
      */
     private int QCStatus = 0;
-    private GetAdvanceData data;
+    private GetAdvanceData mData;
     /**
      * 不良原因
      */
@@ -147,6 +153,86 @@ public class Advance1QualityActivity extends BaseActivity<Advance1QualityView, A
         setTextViewText(tvMaterialModel, R.string.material_model, "");
         setTextViewText(tvReceiveNum, R.string.receive_num, "");
 
+        etRefuseReceiveNum.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                /**
+                 *由拒收数输入变化而根据  不良总数去对质检结果进行改变
+                 */
+                String totalBadnessNumStr = tvBadnessTotalNum.getText().toString();
+                /**
+                 * 不良数的空判断
+                 */
+                if (TextUtils.isEmpty(totalBadnessNumStr)) {
+                    return;
+                }
+                int totalBadnessNum = Integer.parseInt(totalBadnessNumStr);
+                String rejectNumStr=editable.toString();
+                /**
+                 * 拒收数的空判断
+                 */
+                if (TextUtils.isEmpty(rejectNumStr)) {
+                    return;
+                }
+                int rejectNum=Integer.parseInt(rejectNumStr);
+                /**
+                 *当 拒收数大于不良总数的时候提示
+                 */
+                if (rejectNum>totalBadnessNum) {
+                    ToastUtils.showShort(getString(R.string.refusenum_no_more_badness_num_repeat_input));
+                    /**
+                     * 设置文本 设置光标
+                     */
+                    etRefuseReceiveNum.setText("0");
+                    etRefuseReceiveNum.setSelection(1);
+                    return;
+                }
+                /**
+                 *当 拒收数大于实收数的时候提示
+                 */
+                if (rejectNum > mData.getNormalSummary().getReceiveQty()) {
+                    ToastUtils.showShort(getString(R.string.rejectnum_more_receiveqty_please_repeat_input));
+                    return;
+                }
+                /**
+                 * 对不良数进行判断 设置质检结果
+                 */
+                GetAdvanceData.AdvanceSummaryBean advanceSummary = mData.getAdvanceSummary();
+                if (totalBadnessNum <= advanceSummary.getRejectAQL()) {//不良数小于接受数
+                    /**
+                     * 合格
+                     */
+                    rdQualified.setChecked(true);
+                    QCResult = 1;
+                    QCStatus = 2;
+                } else if (totalBadnessNum >= advanceSummary.getRejectAQL()) {//不合格
+                    /**
+                     * 不合格
+                     */
+                    rdUnqualified.setChecked(true);
+                    QCResult = 3;
+                    QCStatus = 2;
+                } else if (totalBadnessNum >= advanceSummary.getRejectAQL() && totalBadnessNum <= advanceSummary.getAcceptAQL()) {
+                    /**
+                     * 待定
+                     */
+                    rdWaitDeal.setChecked(true);
+                    QCResult = 2;
+                    QCStatus = 2;
+                }
+
+            }
+        });
     }
 
     @Override
@@ -180,28 +266,55 @@ public class Advance1QualityActivity extends BaseActivity<Advance1QualityView, A
         params.put("ReceiptId", receiptId);
         params.put("ReceiptDetailId", receiptDetailId);
         /**
-         * 判断是否输入了 拒收的数量
-         */
-        String badnessStr = etRefuseReceiveNum.getText().toString();
-        if (TextUtils.isEmpty(badnessStr)) {
-            ToastUtils.showShort(getString(R.string.please_input_reject_num));
-            return;
-        }
-        /**
          * 不良总数
          */
         String badnessNum = tvBadnessTotalNum.getText().toString();
         /**
+         * 判断是否输入了 拒收的数量
+         */
+        String refuseReceiveNum = etRefuseReceiveNum.getText().toString();
+        if (TextUtils.isEmpty(refuseReceiveNum)) {
+            ToastUtils.showShort(getString(R.string.please_input_reject_num));
+            return;
+        }
+        /**
+         *当 拒收数大于实收数的时候提示
+         */
+        if (Integer.parseInt(refuseReceiveNum) > mData.getNormalSummary().getReceiveQty()) {
+            ToastUtils.showShort(getString(R.string.rejectnum_more_receiveqty_please_repeat_input));
+            return;
+        }
+        /**
+         *当 拒收数大于不良总数的时候提示
+         */
+        if (Integer.parseInt(refuseReceiveNum) > Integer.parseInt(badnessNum)) {
+            ToastUtils.showShort(getString(R.string.refusenum_no_more_badness_num_repeat_input));
+            return;
+        }
+        /**
+         * 设置质检结果
+         */
+        if (rdQualified.isChecked()) {
+            QCResult = 1;
+        }
+        if (rdWaitDeal.isChecked()) {
+            QCResult = 2;
+        }
+        if (rdUnqualified.isChecked()) {
+            QCResult = 3;
+        }
+        /**
          * 不良率
          */
         String badnessPercent = tvBadnessPercent.getText().toString();
-        GetAdvanceData.NormalSummaryBean normalSummary = data.getNormalSummary();
+        GetAdvanceData.NormalSummaryBean normalSummary = mData.getNormalSummary();
         params.put("SampleQty", normalSummary.getSampleQty());
         params.put("NGQty", Integer.parseInt(badnessNum));
+        params.put("RejectQty", Integer.parseInt(refuseReceiveNum));
         params.put("QCStatus", QCStatus);
         params.put("QCResult", QCResult);
         params.put("Remark", "");
-        GetAdvanceData.AdvanceSummaryBean advanceSummary = data.getAdvanceSummary();
+        GetAdvanceData.AdvanceSummaryBean advanceSummary = mData.getAdvanceSummary();
         params.put("CurrentStrict", advanceSummary.getCurrentStrict());
         params.put("CurrentLevel", advanceSummary.getCurrentLevel());
         params.put("SampleCode", advanceSummary.getSampleCode());
@@ -249,20 +362,23 @@ public class Advance1QualityActivity extends BaseActivity<Advance1QualityView, A
             mSelectFaultData.add(new FaultData(mFaultData.get(i).getFaultId(), mFaultData.get(i).getFaultQty()));
         }
         params.put("FaultData", mSelectFaultData);
+        getPresenter().setAdvance1Data(params, QCResult, Integer.parseInt(refuseReceiveNum));
     }
 
     @Override
     public void getAdvance1Data(final GetAdvanceData data) {
+        /**
+         * 保存实体数据
+         */
+        this.mData = data;
+
         GetAdvanceData.NormalSummaryBean normalSummary = data.getNormalSummary();
         if (null != normalSummary) {
             /**
              * 抽样数
              */
             tvSpotCheckNum.setText(String.valueOf(normalSummary.getSampleQty()));
-            /**
-             * 保存实体数据
-             */
-            this.data = data;
+
             /**
              * 设置相应的物料信息
              */
@@ -280,27 +396,35 @@ public class Advance1QualityActivity extends BaseActivity<Advance1QualityView, A
             final List<GetAdvanceData.FaultDataBean> faultData = data.getFaultData();
             if (null != faultData) {
                 mFaultData = faultData;
-                final CommonSimpleTypeAdapter<GetAdvanceData.FaultDataBean> commonSimpleTypeAdapter = new CommonSimpleTypeAdapter<GetAdvanceData.FaultDataBean>(mFaultData) {
+                final BaseRecyclerAdapter<GetAdvanceData.FaultDataBean> adapter = new BaseRecyclerAdapter<GetAdvanceData.FaultDataBean>(this, faultData) {
                     @Override
-                    public int getLayoutId(int viewType) {
+                    protected int getItemLayoutId(int viewType) {
                         return R.layout.item_normal_quality;
                     }
 
                     @Override
-                    public void convert(CommonViewHolder holder, GetAdvanceData.FaultDataBean data, int position) {
-                        holder.getTextView(R.id.tv_badness_code).setText(data.getFaultCode());
-                        holder.getTextView(R.id.tv_badness_reason).setText(data.getFaultName());
-                        holder.getTextView(R.id.tv_badness_num).setText(String.valueOf(data.getFaultQty()));
+                    protected void bindData(RecyclerViewHolder holder, int position, GetAdvanceData.FaultDataBean item) {
+                        /**
+                         * 为了item的点击效果
+                         */
+//                    holder.getView(R.id.ll_content).setOnClickListener(null);
+                        /**
+                         * 设置数据
+                         */
+                        holder.getTextView(R.id.tv_badness_code).setText(item.getFaultCode());
+                        holder.getTextView(R.id.tv_badness_reason).setText(item.getFaultName());
+                        holder.getTextView(R.id.tv_badness_num).setText(item.getFaultQty() + "");
                     }
                 };
                 rlvQuality.setLayoutManager(new LinearLayoutManager(this));
-                rlvQuality.setAdapter(commonSimpleTypeAdapter);
+                rlvQuality.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST, R.drawable.item_badness_divider));
+                rlvQuality.setAdapter(adapter);
                 /**
                  * 点击不良原因的条目，弹出提示框 输入相应的不良数量
                  */
-                commonSimpleTypeAdapter.setOnItemClickListener(R.id.ll_content, new CommonSimpleTypeAdapter.ItemClickListener() {
+                adapter.setOnItemClickListener(new BaseRecyclerAdapter.OnItemClickListener() {
                     @Override
-                    public void onItemClicked(View view, final int position) {
+                    public void onItemClick(View itemView, final int position) {
                         if (null == faultDataDialog) {
                             faultDataDialog = new MyDialog(Advance1QualityActivity.this, R.layout.dialog_quality_faultdata);
                         }
@@ -326,14 +450,22 @@ public class Advance1QualityActivity extends BaseActivity<Advance1QualityView, A
                                  * 计算获取所有的不良数的和
                                  */
                                 for (int i = 0; i < mFaultData.size(); i++) {
+                                    /**
+                                     * 如果已存在 即设置过不良数则不将原来的不良数进行相加
+                                     */
+                                    if (mFaultData.get(i).getFaultId() == faultData.get(position).getFaultId()) {
+                                        continue;
+                                    }
                                     totalBadnessNum = totalBadnessNum + mFaultData.get(i).getFaultQty();
                                 }
                                 /**
-                                 * 当不良总数大于实收数 时提示用户
+                                 * 当不良总数大于抽样数 时提示用户
                                  */
-                                if(totalBadnessNum>data.getNormalSummary().getReceiveQty()){
-                                    ToastUtils.showShort("不良总数不能大于实收数，请重新输入");
+                                if ((totalBadnessNum + Integer.parseInt(badnessNumStr)) > data.getNormalSummary().getSampleQty()) {
+                                    ToastUtils.showShort("不良总数不能大于抽样数，请重新输入");
                                     return;
+                                } else {//如果不大于实收数 则添加不良数
+                                    totalBadnessNum = totalBadnessNum + Integer.parseInt(badnessNumStr);
                                 }
                                 tvBadnessTotalNum.setText(String.valueOf(totalBadnessNum));
                                 /**
@@ -341,7 +473,7 @@ public class Advance1QualityActivity extends BaseActivity<Advance1QualityView, A
                                  */
                                 mFaultData.get(position).setFaultQty(Integer.parseInt(badnessNumStr));
 
-                                commonSimpleTypeAdapter.notifyDataSetChanged();
+                                adapter.notifyDataSetChanged();
                                 /**
                                  * 通过不良数 获取是否合格
                                  */
@@ -379,7 +511,7 @@ public class Advance1QualityActivity extends BaseActivity<Advance1QualityView, A
                                 //转换成百分比
                                 NumberFormat nFromat = NumberFormat.getPercentInstance();
                                 String rates = nFromat.format(dTotalBadnessNum / dReceiveNum);
-                                tvBadnessPercent.setText(rates);
+                                etBadnessPercent.setText(rates);
                                 //dismiss
                                 dialog.dismiss();
                             }
@@ -394,6 +526,15 @@ public class Advance1QualityActivity extends BaseActivity<Advance1QualityView, A
                             }
                         });
                         /**
+                         * 关闭
+                         */
+                        faultDataDialog.getView(R.id.iv_close).setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                faultDataDialog.dismiss();
+                            }
+                        });
+                        /**
                          * 设置不良原因
                          */
                         setTextViewText(faultDataDialog.getTextView(R.id.tv_badness_reason), R.string.badness_reason_tip, mFaultData.get(position).getFaultName());
@@ -403,6 +544,62 @@ public class Advance1QualityActivity extends BaseActivity<Advance1QualityView, A
             }
         }
     }
+
+    @Override
+    public void setAdvance1Data(int isQualified, int rejectNum) {
+        LogUitls.e("质检提交------>", "成功");
+        /**
+         * 发送质检成功的消息
+         */
+        BaseMessage.post(new QualityEvent(QualityEvent.QUALITY_SUCCESS));
+        /**
+         * 参数
+         */
+        Map<String, Object> params = new HashMap<>();
+        params.put("UserId", SpUtils.getInstance().getUserId());
+        params.put("OrgId", SpUtils.getInstance().getOrgId());
+        params.put("mac", PackageUtils.getMac());
+        params.put("ReceiptId", receiptId);
+        params.put("ReceiptDetailId", receiptDetailId);
+        /**
+         * 设置按钮文字
+         */
+        switch (isQualified) {
+            case 1://合格
+                if (rejectNum > 0 && mData.getNormalSummary().isIsBarCode()) {//拒收数大于0  跳转到质检拒收并且有条码
+                    /**
+                     * 跳转到质检拒收
+                     */
+                    Intent intent = new Intent(Advance1QualityActivity.this, QualityRejectActivity.class);
+                    intent.putExtra("mData", new Gson().toJson(mData));
+                    intent.putExtra("rejectNum", rejectNum);
+                    startActivity(intent);
+                } else {
+                    tvNext.setText(getString(R.string.quality_complete));
+                    ToastUtils.showShort(getString(R.string.normal_quality_tip));
+                    getPresenter().submitFinish(params);
+                }
+                break;
+            case 2://待定  待定直接提示用户 质检结果为待定，并且关闭界面返回到清单的界面
+                ToastUtils.showShort(getString(R.string.quality_wait_deal_tip));
+                onBackPressed();
+                break;
+            case 3://不合格
+                ToastUtils.showShort(getString(R.string.normal_unquality_tip));
+                getPresenter().submitFinish(params);
+                break;
+        }
+    }
+
+    @Override
+    public void submitFinish() {
+        ToastUtils.showShort("质检确认完成！");
+        /**
+         * 关闭当前界面
+         */
+        onBackPressed();
+    }
+
 
     /**
      * 选择不良原因的实体类

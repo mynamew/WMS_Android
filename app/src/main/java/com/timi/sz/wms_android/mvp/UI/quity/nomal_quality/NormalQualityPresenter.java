@@ -106,6 +106,9 @@ public class NormalQualityPresenter extends MvpBasePresenter<NormalQualityView> 
         if (null != setNormalQualityDataHttpSubscriber) {
             setNormalQualityDataHttpSubscriber.unSubscribe();
             setNormalQualityDataHttpSubscriber = null;
+        }   if (null != submitFinishHttpSubscriber) {
+            submitFinishHttpSubscriber.unSubscribe();
+            submitFinishHttpSubscriber = null;
         }
     }
 }

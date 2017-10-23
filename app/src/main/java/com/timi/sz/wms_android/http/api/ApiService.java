@@ -24,6 +24,7 @@ import com.timi.sz.wms_android.bean.outstock.buy.OrderNoAddMaterial;
 import com.timi.sz.wms_android.bean.outstock.buy.OrderNoBean;
 import com.timi.sz.wms_android.bean.outstock.outsource.OutSourceFeedBean;
 import com.timi.sz.wms_android.bean.quality.BarcodeData;
+import com.timi.sz.wms_android.bean.quality.GetAQLList;
 import com.timi.sz.wms_android.bean.quality.QualityListBean;
 import com.timi.sz.wms_android.bean.quality.adavance.GetAdvance2Data;
 import com.timi.sz.wms_android.bean.quality.adavance.GetAdvanceData;
@@ -450,6 +451,24 @@ public interface ApiService {
     Observable<CommonResult<List<QualityListBean>>> queryReceiptForIQC(@FieldMap Map<String, Object> params);
 
     /**
+     * 获取AQL的列表
+     *
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("api/services/wpda/IQC/IQCGetAQLList")
+    Observable<CommonResult<GetAQLList>> getAQLList(@FieldMap Map<String, Object> params);
+
+    /**
+     * 设置AQL的参数
+     *
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("api/services/wpda/IQC/IQCSetAQLValue ")
+    Observable<CommonResult<Object>> setAQLValue(@FieldMap Map<String, Object> params);
+
+    /**
      * 免检
      *
      * @return
@@ -522,13 +541,13 @@ public interface ApiService {
     Observable<CommonResult<GetAdvance2Data>> getAdvance2Data(@FieldMap Map<String, Object> params);
 
     /**
-     * 提交高级质检 的数据
+     * 提交高级质检 1的数据
      *
      * @return
      */
     @FormUrlEncoded
     @POST("api/services/wpda/IQC/IQCSetAdvance1Data")
-    Observable<CommonResult<Object>> SetAdvance1Data(@FieldMap Map<String, Object> params);
+    Observable<CommonResult<Object>> setAdvance1Data(@FieldMap Map<String, Object> params);
 
     /**
      * 提交高级质检2 的数据
@@ -537,7 +556,7 @@ public interface ApiService {
      */
     @FormUrlEncoded
     @POST("api/services/wpda/IQC/IQCSetAdvance2Data")
-    Observable<CommonResult<Object>> SetAdvance12Data(@FieldMap Map<String, Object> params);
+    Observable<CommonResult<Object>> setAdvance12Data(@FieldMap Map<String, Object> params);
     /**======MRP评审=====**/
     /**
      * 查询MRP评审信息列表

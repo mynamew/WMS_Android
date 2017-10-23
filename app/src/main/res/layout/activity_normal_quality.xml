@@ -21,133 +21,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="24px"
-                android:layout_marginLeft="30px"
-                android:layout_marginRight="30px"
-                android:layout_marginTop="24px"
-                android:background="@drawable/bg_rectangle_et_unfocused"
-                android:orientation="vertical"
-                android:paddingBottom="20px">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="72px"
-                    android:gravity="center_vertical"
-                    android:paddingLeft="20px"
-                    android:paddingTop="10px"
-                    android:text="@string/material_info"
-                    android:textColor="#333"
-                    android:textSize="28px"
-                    android:textStyle="bold"
-                    />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1px"
-                    android:background="#d7d7dd"
-                    />
-
-                <TextView
-                    android:id="@+id/tv_orderno"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:paddingLeft="20px"
-                    android:paddingTop="20px"
-                    android:text="@string/receive_pro_num"
-                    android:textColor="#333"
-                    android:textSize="26px"
-                    />
-
-
-                <TextView
-                    android:id="@+id/tv_receive_material_date"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:paddingLeft="20px"
-                    android:paddingTop="20px"
-                    android:text="@string/receive_material_date"
-                    android:textColor="#333"
-                    android:textSize="26px"
-                    />
-
-                <TextView
-                    android:id="@+id/tv_order_num"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:paddingLeft="30px"
-                    android:paddingTop="20px"
-                    android:text="@string/order_no"
-                    android:textColor="#333"
-                    android:textSize="26px"
-                    />
-
-                <TextView
-                    android:id="@+id/tv_supplier"
-                    android:layout_width="match_parent"
-                    android:layout_marginBottom="10px"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:lineSpacingExtra="5px"
-                    android:paddingLeft="30px"
-                    android:paddingTop="20px"
-                    android:text="@string/buy_from"
-                    android:textColor="#333"
-                    android:textSize="26px"
-                    />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="10px"
-                    android:layout_marginLeft="30px"
-                    android:layout_marginRight="30px"
-                    android:background="@drawable/bg_quality_normal_divider"
-                    />
-
-                <TextView
-                    android:id="@+id/tv_material_code"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:paddingLeft="20px"
-                    android:layout_marginTop="10px"
-                    android:text="@string/material_code"
-                    android:textColor="#333"
-                    android:textSize="26px"
-                    />
-
-                <TextView
-                    android:id="@+id/tv_material_name"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:lineSpacingExtra="5px"
-                    android:paddingLeft="20px"
-                    android:paddingTop="20px"
-                    android:text="@string/material_name"
-                    android:textColor="#333"
-                    android:textSize="26px"
-                    />
-
-                <TextView
-                    android:id="@+id/tv_material_model"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:lineSpacingExtra="5px"
-                    android:paddingLeft="20px"
-                    android:paddingTop="20px"
-                    android:text="@string/material_model"
-                    android:textColor="#333"
-                    android:textSize="26px"
-                    />
-            </LinearLayout>
+            <!--物料信息-->
+            <include layout="@layout/layout_material_info"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -192,10 +67,10 @@
                     android:id="@+id/ll_spot_check"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingTop="20px"
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
                     android:paddingRight="20px"
+                    android:paddingTop="20px"
                     >
 
                     <LinearLayout
@@ -214,7 +89,7 @@
                             android:textSize="28px"
                             />
 
-                        <TextView
+                        <EditText
                             android:id="@+id/et_spot_check_num"
                             android:layout_width="match_parent"
                             android:layout_height="60px"
@@ -262,11 +137,11 @@
                     android:id="@+id/ll_badness"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingTop="20px"
                     android:layout_marginBottom="10px"
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
                     android:paddingRight="20px"
+                    android:paddingTop="20px"
                     >
 
                     <LinearLayout
@@ -355,7 +230,9 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="50px"
+                        android:layout_height="72px"
+                        android:paddingLeft="1px"
+                        android:paddingRight="1px"
                         android:orientation="horizontal">
 
                         <TextView
@@ -364,7 +241,7 @@
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:gravity="center"
-                            android:text="不良代码"
+                            android:text="@string/badness_code"
                             android:textColor="#333"/>
 
                         <TextView
@@ -373,7 +250,7 @@
                             android:layout_height="match_parent"
                             android:layout_weight="2"
                             android:gravity="center"
-                            android:text="不良原因"
+                            android:text="@string/badness_reason"
                             android:textColor="#333"/>
 
 
@@ -383,7 +260,7 @@
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:gravity="center"
-                            android:text="不良数"
+                            android:text="@string/badness_num"
                             android:textColor="#333"/>
                     </LinearLayout>
 
@@ -396,8 +273,11 @@
                     <android.support.v7.widget.RecyclerView
                         android:id="@+id/rlv_quality"
                         android:layout_width="match_parent"
+                        android:background="@color/white"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="20px"
+                        android:layout_marginLeft="1px"
+                        android:layout_marginRight="1px"
+                        android:layout_marginBottom="1px"
                         />
                 </LinearLayout>
 

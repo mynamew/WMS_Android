@@ -6,6 +6,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
 import com.borax12.materialdaterangepicker.date.DatePickerDialog;
 import com.timi.sz.wms_android.R;
@@ -17,10 +20,12 @@ import com.timi.sz.wms_android.base.uils.LogUitls;
 import com.timi.sz.wms_android.base.uils.PackageUtils;
 import com.timi.sz.wms_android.base.uils.SpUtils;
 import com.timi.sz.wms_android.base.uils.ToastUtils;
+import com.timi.sz.wms_android.bean.quality.GetAQLList;
 import com.timi.sz.wms_android.bean.quality.QualityListBean;
 import com.timi.sz.wms_android.http.message.BaseMessage;
 import com.timi.sz.wms_android.http.message.event.QualityEvent;
 import com.timi.sz.wms_android.mvp.UI.quity.advance1_quality.Advance1QualityActivity;
+import com.timi.sz.wms_android.mvp.UI.quity.advance_quality.AdvanceQualityActivity;
 import com.timi.sz.wms_android.mvp.UI.quity.nomal_quality.NormalQualityActivity;
 import com.timi.sz.wms_android.mvp.base.BaseActivity;
 import com.timi.sz.wms_android.view.MyDialog;
@@ -54,9 +59,33 @@ public class QualityCheckActivity extends BaseActivity<QualityCheckView, Quality
      */
     private MyDialog dontNeedQualityDialog;
     /**
+     * 设置aql的Dialog
+     */
+    private MyDialog setAQLDialog;
+    /**
      * adapter
      */
     private BaseRecyclerAdapter<QualityListBean> adapter;
+
+    /**
+     * 待定的spinner 的adapter
+     */
+    private ArrayAdapter<String> adapterStandardLevel;
+    private ArrayAdapter<String> adapterAQL;
+
+    /**
+     * 待定的设置aql的参数
+     */
+    private List<String> levelCodeLists = new ArrayList<>();//标准水平
+    private List<String> aqlLists = new ArrayList<>();//aql
+    /**
+     * 标准水平 选择的字符串
+     */
+    String standardLevelStr = "";
+    /**
+     * aql参数选择的字符串
+     */
+    String aqlStr = "";
 
     @Override
     public int setLayoutId() {
@@ -370,7 +399,7 @@ public class QualityCheckActivity extends BaseActivity<QualityCheckView, Quality
                     /**
                      * 合格数
                      */
-                    holder.setTextView(R.id.tv_send_quality_num, qualityListBean.getPassQty());
+                    holder.setTextView(R.id.tv_quality_num, qualityListBean.getPassQty());
                     /**
                      * 质检结果
                      */
@@ -441,6 +470,25 @@ public class QualityCheckActivity extends BaseActivity<QualityCheckView, Quality
                      */
                     if (qualityListBean.getQcType() == 0) {
                         showDontNeedQualityDialog(position);
+                    }
+                    /**
+                     * 待定的来料 需要先设置AQL
+                     */
+                    else if (qualityListBean.getQcResult() == 2) {//待定的状态 单独处理
+                        /**
+                         * 对dialog 进行判断 是否进行网络请求
+                         */
+                        if (null == setAQLDialog) {
+                            showProgressDialog();
+                            Map params = new HashMap();
+                            params.put("UserId", SpUtils.getInstance().getUserId());
+                            params.put("OrgId", SpUtils.getInstance().getOrgId());
+                            params.put("mac", PackageUtils.getMac());
+                            params.put("ReceiveQty", mDatas.get(position).getReceiveQty());
+                            getPresenter().getAQLList(params, position);
+                        } else {
+                            setAQLDialog.show();
+                        }
                     } else {
                         Intent intent = new Intent();
                         intent.putExtra("ReceiptId", qualityListBean.getReceiptId());
@@ -456,7 +504,7 @@ public class QualityCheckActivity extends BaseActivity<QualityCheckView, Quality
                                 intent.setClass(QualityCheckActivity.this, Advance1QualityActivity.class);
                                 break;
                             case 3://高级质检2
-                                intent.setClass(QualityCheckActivity.this, Advance1QualityActivity.class);
+                                intent.setClass(QualityCheckActivity.this, AdvanceQualityActivity.class);
                                 break;
                             default:
                                 intent.setClass(QualityCheckActivity.this, NormalQualityActivity.class);
@@ -480,6 +528,134 @@ public class QualityCheckActivity extends BaseActivity<QualityCheckView, Quality
         qualityListBean.setQcStatus(3);
         qualityListBean.setQcResult(1);
         adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void getAQLList(GetAQLList datas, final int position) {
+        levelCodeLists = datas.getLevelCodeLists();
+        aqlLists = datas.getAqlLists();
+        /**
+         *
+         * 设置AQL 参数的弹框
+         */
+        /**
+         * 标准水平的spinner
+         */
+        setAQLDialog = new MyDialog(QualityCheckActivity.this, R.layout.dialog_set_aql);
+        Spinner spStandardLevel = (Spinner) setAQLDialog.getView(R.id.spinner_standard_level);
+        adapterStandardLevel = new ArrayAdapter<>(QualityCheckActivity.this, android.R.layout.simple_list_item_1, levelCodeLists);
+        adapterStandardLevel.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spStandardLevel.setAdapter(adapterStandardLevel);
+        /**
+         * aql spinner
+         */
+        Spinner spAQL = (Spinner) setAQLDialog.getView(R.id.spinner_aql);
+        adapterAQL = new ArrayAdapter<>(QualityCheckActivity.this, android.R.layout.simple_list_item_1, aqlLists);
+        adapterAQL.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spAQL.setAdapter(adapterAQL);
+
+        /**
+         * 标准水平的点击事件
+         */
+        spStandardLevel.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                standardLevelStr = levelCodeLists.get(i);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+        /**
+         * aql列表的点击事件
+         */
+        spAQL.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                aqlStr = aqlLists.get(i);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+        /**
+         * 取消
+         */
+        setAQLDialog.setButtonListener(R.id.btn_cancel, null, new MyDialog.DialogClickListener() {
+            @Override
+            public void dialogClick(MyDialog dialog) {
+                setAQLDialog.dismiss();
+            }
+        });
+        /**
+         * 确定
+         */
+        setAQLDialog.setButtonListener(R.id.btn_confirm, null, new MyDialog.DialogClickListener() {
+            @Override
+            public void dialogClick(MyDialog dialog) {
+                if (TextUtils.isEmpty(standardLevelStr)) {
+                    ToastUtils.showShort(getString(R.string.please＿select_standard_level));
+                    return;
+                }
+                if (TextUtils.isEmpty(aqlStr)) {
+                    ToastUtils.showShort(getString(R.string.please_select_aql));
+                    return;
+                }
+                /**
+                 * 设置AQL的请求
+                 */
+                Map<String, Object> params = new HashMap<>();
+                params.put("UserId", SpUtils.getInstance().getUserId());
+                params.put("OrgId", SpUtils.getInstance().getOrgId());
+                params.put("MAC", PackageUtils.getMac());
+                params.put("ReceiptId", mDatas.get(position).getReceiptId());
+                params.put("ReceiptDetailId", mDatas.get(position).getReceiptDetailId());
+                params.put("LevelCode", standardLevelStr);
+                params.put("AQL", aqlStr);
+                getPresenter().setAQLValue(params, position);
+            }
+        });
+        /**
+         * 叉叉
+         */
+        setAQLDialog.getView(R.id.iv_close).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setAQLDialog.dismiss();
+            }
+        });
+        setAQLDialog.show();
+    }
+
+    @Override
+    public void setAQLValue(int position) {
+        ToastUtils.showShort("设置AQL参数成功！");
+        Intent intent = new Intent();
+        intent.putExtra("ReceiptId", mDatas.get(position).getReceiptId());
+        intent.putExtra("ReceiptDetailId", mDatas.get(position).getReceiptDetailId());
+        switch (mDatas.get(position).getQcType()) {
+            case 1:
+                /**
+                 * 普通检验
+                 */
+                intent.setClass(QualityCheckActivity.this, NormalQualityActivity.class);
+                break;
+            case 2://高级质检1
+                intent.setClass(QualityCheckActivity.this, Advance1QualityActivity.class);
+                break;
+            case 3://高级质检2
+                intent.setClass(QualityCheckActivity.this, AdvanceQualityActivity.class);
+                break;
+            default:
+                intent.setClass(QualityCheckActivity.this, NormalQualityActivity.class);
+                break;
+        }
+        startActivity(intent);
     }
 
     @Override

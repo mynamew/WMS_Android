@@ -1,4 +1,4 @@
-package com.timi.sz.wms_android.mvp.UI.quity.advance_review;
+package com.timi.sz.wms_android.mvp.UI.quity.mrp.advance_review;
 
 import com.timi.sz.wms_android.mvp.base.view.MvpView;
 

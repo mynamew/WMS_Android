@@ -363,4 +363,23 @@
     <string name="material_attr">附加属性：%1$s</string>
     <string name="quality_work">质检操作</string>
     <string name="material_info">物料信息</string>
+    <string name="badness_code">不良代码</string>
+    <string name="badness_reason">不良原因</string>
+    <string name="quality_standard">检验标准</string>
+    <string name="quality_level">检验水平</string>
+    <string name="sample_half_yard_tip">试样半码</string>
+    <string name="quality_strict">严格度</string>
+    <string name="quality_method">检验方法</string>
+    <string name="serious_badness_num">严重不良数</string>
+    <string name="main_badness_num">主要不良数</string>
+    <string name="minor_badness_num">次要不良数</string>
+    <string name="quality">检验</string>
+    <string name="advance_quality_title">来料质检(高检)</string>
+    <string name="please_select_quality_is_not_quality">请选择的质检是否合格</string>
+    <string name="refusenum_no_more_badness_num_repeat_input">拒收数不能大于不良总数，请重新输入</string>
+    <string name="quality_wait_deal_tip">此物品质检操作流程未完成，其质检结果为待定！</string>
+    <string name="dialog_standard_level">检验水平：</string>
+    <string name="dialog_aql">AQL：</string>
+    <string name="please_select_aql">请选择AQL！</string>
+    <string name="please＿select_standard_level">请选择标准水平！</string>
 </resources>

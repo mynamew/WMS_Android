@@ -137,7 +137,7 @@ public class RecyclerViewHolder extends RecyclerView.ViewHolder {
         if (null != content) {
             view.setText(String.valueOf(content));
         }
-        view.setTextColor(mContext.getColor(color));
+        view.setTextColor(mContext.getResources().getColor(color));
         return view;
     }
 

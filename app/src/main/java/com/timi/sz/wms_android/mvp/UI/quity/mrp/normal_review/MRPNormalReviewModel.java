@@ -1,13 +1,11 @@
-package com.timi.sz.wms_android.mvp.UI.quity.normal_review;
+package com.timi.sz.wms_android.mvp.UI.quity.mrp.normal_review;
 
-import com.timi.sz.wms_android.bean.quality.mrp.MrpReviewData;
 import com.timi.sz.wms_android.http.HttpManager;
 import com.timi.sz.wms_android.http.api.ApiService;
 import com.timi.sz.wms_android.http.api.CommonResult;
 import com.timi.sz.wms_android.http.callback.ApiServiceMethodCallBack;
 import com.timi.sz.wms_android.mvp.base.model.impl.MvpBaseModel;
 
-import java.util.List;
 import java.util.Map;
 
 import io.reactivex.Observable;

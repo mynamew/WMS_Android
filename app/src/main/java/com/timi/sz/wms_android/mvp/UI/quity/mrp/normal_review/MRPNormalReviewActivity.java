@@ -1,4 +1,4 @@
-package com.timi.sz.wms_android.mvp.UI.quity.normal_review;
+package com.timi.sz.wms_android.mvp.UI.quity.mrp.normal_review;
 
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -8,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.view.animation.RotateAnimation;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
@@ -27,7 +26,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**

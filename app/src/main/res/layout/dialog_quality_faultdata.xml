@@ -3,78 +3,116 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:baselineAligned="false">
+              android:baselineAligned="false"
+              android:gravity="center_horizontal">
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/bg_rectangle_et_focused"
+        android:layout_width="650px"
+        android:layout_height="548px"
+        android:layout_gravity="center"
+        android:background="@drawable/bg_quality_item_white"
         android:orientation="vertical">
 
-        <TextView
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="60px"
-            android:textSize="20sp"
-            android:gravity="center"
-            android:text="@string/badness_num"/>
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="100px"
+                android:layout_height="100px"
+                android:layout_centerInParent="true"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="40px"
+                android:src="@mipmap/quality_badness_icon"/>
+
+            <ImageView
+                android:id="@+id/iv_close"
+                android:padding="30px"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:src="@mipmap/quality_badness_close"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <View
+                android:layout_width="260px"
+                android:layout_height="2px"
+                android:layout_centerInParent="true"
+                android:background="#999"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="60px"
+                android:layout_centerInParent="true"
+                android:background="#fff"
+                android:gravity="center"
+                android:paddingLeft="20px"
+                android:paddingRight="20px"
+                android:text="@string/badness_num"
+                android:textColor="#333"
+                android:textSize="32px"/>
+        </RelativeLayout>
+
         <TextView
             android:id="@+id/tv_badness_reason"
-            android:layout_width="match_parent"
-            android:text="@string/badness_reason_tip"
-            android:layout_marginLeft="20px"
+            android:layout_width="406px"
+            android:layout_height="64px"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="10px"
+            android:layout_marginTop="50px"
+            android:background="@drawable/bg_quality_badness_reason"
+            android:gravity="center"
             android:paddingLeft="20px"
-            android:gravity="center_vertical"
-            android:layout_height="60px"/>
+            android:text="@string/badness_reason_tip"/>
+
         <EditText
             android:id="@+id/et_badness_num"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="20px"
-            android:padding="20px"
-            android:inputType="number"
-            android:gravity="center"
-            android:textSize="14sp"
+            android:layout_width="406px"
+            android:layout_height="64px"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="50px"
             android:background="@drawable/bg_rectangle_et_focused"
+            android:gravity="center"
             android:hint="@string/please_input_badness_num"
+            android:inputType="number"
+            android:textSize="14sp"
             />
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0.1dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:background="@color/dialog_divider"/>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="100px"
-            android:orientation="horizontal">
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20px"
+            android:layout_marginLeft="20px"
+            android:layout_marginRight="20px">
 
             <Button
                 android:id="@+id/btn_cancel"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_width="280px"
+                android:layout_height="72px"
+                android:layout_marginRight="20px"
                 android:layout_weight="1"
-                android:background="@drawable/bg_btn_logout_left"
+                android:background="@drawable/bg_dialog_badness_cancel"
                 android:gravity="center"
                 android:text="@string/cancel"
                 android:textColor="@color/tab_txt_unselect"
                 android:textSize="16sp"/>
 
-            <View
-                android:layout_width="0.1dp"
-                android:layout_height="match_parent"
-                android:layout_marginBottom="5dp"
-                android:background="@color/dialog_divider"/>
 
             <Button
                 android:id="@+id/btn_confirm"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_width="280px"
+                android:layout_height="72px"
+                android:layout_alignParentRight="true"
+                android:layout_marginLeft="20px"
                 android:layout_weight="1"
-                android:background="@drawable/bg_btn_logout_right"
+                android:background="@drawable/selector_btn_bg_login"
                 android:gravity="center"
                 android:text="@string/confirm"
-                android:textColor="@color/colorPrimary"
+                android:textColor="@color/white"
                 android:textSize="16sp"/>
         </LinearLayout>
     </LinearLayout>

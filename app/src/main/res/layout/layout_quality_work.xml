@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_marginLeft="30px"
+              android:layout_marginRight="30px"
+              android:layout_marginTop="16px"
+              android:background="@drawable/bg_rectangle_et_unfocused"
+              android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="72px"
+        android:gravity="center_vertical"
+        android:paddingLeft="20px"
+        android:paddingTop="10px"
+        android:text="@string/quality_work"
+        android:textColor="#333"
+        android:textSize="28px"
+        android:textStyle="bold"
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="#d7d7dd"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="88px"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_receive_num"
+            android:layout_width="0dp"
+            android:layout_height="88px"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="@string/receive_num"/>
+
+        <TextView
+            android:id="@+id/tv_sample_num"
+            android:layout_width="0dp"
+            android:layout_height="88px"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="@string/mr_advance_sample_num"/>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="120px"
+        android:layout_marginTop="20px"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <com.timi.sz.wms_android.view.StandardLevelView
+            android:id="@+id/tv_serious_badness_num"
+            android:layout_width="160px"
+            android:layout_height="120px"
+            app:standardLevelTitle="@string/serious_badness_num"/>
+
+        <com.timi.sz.wms_android.view.StandardLevelView
+            android:id="@+id/tv_main_badness_num"
+            android:layout_width="160px"
+            android:layout_height="120px"
+            android:layout_marginLeft="80px"
+            app:standardLevelTitle="@string/main_badness_num"/>
+
+        <com.timi.sz.wms_android.view.StandardLevelView
+            android:id="@+id/tv_minor_badness_num"
+            android:layout_width="160px"
+            android:layout_height="120px"
+
+            android:layout_marginLeft="80px"
+            app:standardLevelTitle="@string/minor_badness_num"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30px"
+        android:layout_marginTop="20px"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <com.timi.sz.wms_android.view.StandardLevelView
+            android:id="@+id/tv_badness_total_num"
+            android:layout_width="160px"
+            android:layout_height="120px"
+            app:standardLevelTitle="@string/badness_total_num"/>
+
+        <com.timi.sz.wms_android.view.StandardLevelView
+            android:id="@+id/tv_badness_percent"
+            android:layout_width="160px"
+            android:layout_height="120px"
+            android:layout_marginLeft="80px"
+            app:standardLevelTitle="@string/badness_percent"/>
+
+        <com.timi.sz.wms_android.view.StandardLevelView
+            android:layout_width="160px"
+            android:layout_height="120px"
+            android:layout_marginLeft="80px"
+            android:visibility="invisible"
+            app:standardLevelTitle="试样半码"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="88px"
+        android:background="#ffefd2"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="样品编码："
+            android:textColor="#333"
+            android:textSize="28px"/>
+
+        <TextView
+            android:id="@+id/tv_sample_code"
+            android:layout_width="208px"
+            android:layout_height="64px"
+            android:background="@drawable/bg_rectangle_et_unfocused"/>
+
+        <Button
+            android:id="@+id/tv_quality"
+            android:layout_width="152px"
+            android:layout_height="64px"
+            android:layout_marginLeft="20px"
+            android:background="@drawable/selector_btn_bg_login"
+            android:text="@string/quality"
+            android:textColor="#fff"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10px"
+        android:background="@drawable/bg_rectangle_gray"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="72px"
+            android:gravity="center"
+            android:text="样品编号 %1$s"
+            android:textColor="#333"
+            android:textSize="26px"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="#fff"/>
+
+        <com.timi.sz.wms_android.view.WrapLayoutQualityResult
+            android:id="@+id/wrap_quality_result"
+            android:layout_width="match_parent"
+            android:layout_margin="80px"
+            android:layout_marginBottom="30px"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="64px"
+        android:layout_marginBottom="20px"
+        android:layout_marginLeft="10px"
+        android:layout_marginRight="10px"
+        android:layout_marginTop="10px"
+        android:background="#fff"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_quality_result_tip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="40px"
+            android:text="质检结果："
+            android:textColor="#333"
+            android:textSize="28px"/>
+
+        <RadioGroup
+            android:id="@+id/rg_qualified"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:paddingLeft="30px">
+
+            <RadioButton
+                android:id="@+id/rd_qualified"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/selector_rd_quality"
+                android:button="@null"
+                android:gravity="center"
+                android:text="@string/rd_qualified_tip"
+                android:textColor="#666"
+                android:textSize="26px"/>
+
+            <RadioButton
+                android:id="@+id/rd_wait_deal"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="30px"
+                android:layout_weight="1"
+                android:background="@drawable/selector_rd_quality"
+                android:button="@null"
+                android:gravity="center"
+                android:text="@string/wait_deal"
+                android:textColor="#666"
+                android:textSize="26px"/>
+
+            <RadioButton
+                android:id="@+id/rd_unqualified"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="30px"
+                android:layout_weight="1"
+                android:background="@drawable/selector_rd_quality"
+                android:button="@null"
+                android:gravity="center"
+                android:text="@string/unquality"
+                android:textColor="#666"
+                android:textSize="26px"/>
+        </RadioGroup>
+    </LinearLayout>
+</LinearLayout>

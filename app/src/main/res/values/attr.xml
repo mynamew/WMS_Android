@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <declare-styleable name="MyTitleBar">
-        <attr name="title" format="string" />
-        <attr name="rlbg" format="color" />
-        <attr name="rightText" format="string" />
-        <attr name="rightImg" format="integer"/>
+    <declare-styleable name="StandardLevelView">
+        <attr name="standardLevelTitle" format="string"/>
     </declare-styleable>
 </resources>

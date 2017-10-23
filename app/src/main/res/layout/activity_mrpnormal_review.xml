@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/set_bg"
-    tools:context="com.timi.sz.wms_android.mvp.UI.quity.normal_review.MRPNormalReviewActivity">
+    tools:context=".mvp.UI.quity.mrp.normal_review.MRPNormalReviewActivity">
 
     <include
         android:id="@+id/head"

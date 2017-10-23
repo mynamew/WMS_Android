@@ -13,7 +13,7 @@ import com.timi.sz.wms_android.base.adapter.RecyclerViewHolder;
 import com.timi.sz.wms_android.base.uils.PackageUtils;
 import com.timi.sz.wms_android.base.uils.SpUtils;
 import com.timi.sz.wms_android.bean.quality.mrp.MrpReviewData;
-import com.timi.sz.wms_android.mvp.UI.quity.normal_review.MRPNormalReviewActivity;
+import com.timi.sz.wms_android.mvp.UI.quity.mrp.normal_review.MRPNormalReviewActivity;
 import com.timi.sz.wms_android.mvp.base.BaseActivity;
 
 import java.text.NumberFormat;

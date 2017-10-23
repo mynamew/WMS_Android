@@ -1,14 +1,12 @@
-package com.timi.sz.wms_android.mvp.UI.quity.normal_review;
+package com.timi.sz.wms_android.mvp.UI.quity.mrp.normal_review;
 
 import android.content.Context;
 
 import com.timi.sz.wms_android.base.uils.ToastUtils;
-import com.timi.sz.wms_android.bean.quality.mrp.MrpReviewData;
 import com.timi.sz.wms_android.http.callback.OnResultCallBack;
 import com.timi.sz.wms_android.http.subscriber.HttpSubscriber;
 import com.timi.sz.wms_android.mvp.base.presenter.impl.MvpBasePresenter;
 
-import java.util.List;
 import java.util.Map;
 
 /**

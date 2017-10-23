@@ -10,5 +10,20 @@ import com.timi.sz.wms_android.mvp.base.view.iml.MvpBaseView;
  */
 
 public interface Advance1QualityView extends MvpBaseView {
+    /**
+     * 获取高级质检1 的数据
+     * @param data
+     */
     void getAdvance1Data(GetAdvanceData data);
+
+    /**
+     * 设置高级质检1
+     * @param isQualified
+     * @param rejectNum
+     */
+    void setAdvance1Data(int isQualified, int rejectNum);
+    /**
+     * 质检确认
+     */
+    void submitFinish();
 }

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:layout_marginLeft="30px"
+              android:layout_marginRight="30px"
+              android:layout_marginTop="16px">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_rectangle_et_unfocused"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="72px"
+            android:gravity="center_vertical"
+            android:paddingLeft="20px"
+            android:paddingTop="10px"
+            android:text="@string/quality_standard"
+            android:textColor="#333"
+            android:textSize="28px"
+            android:textStyle="bold"
+            />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="#d7d7dd"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="120px"
+            android:layout_marginTop="20px"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <com.timi.sz.wms_android.view.StandardLevelView
+                android:id="@+id/stand_quality_level"
+                android:layout_width="160px"
+                android:layout_height="120px"
+                app:standardLevelTitle="@string/quality_level"/>
+
+            <com.timi.sz.wms_android.view.StandardLevelView
+                android:id="@+id/stand_aql"
+                android:layout_width="160px"
+                android:layout_height="120px"
+                android:layout_marginLeft="80px"
+                app:standardLevelTitle="AQL"/>
+
+            <com.timi.sz.wms_android.view.StandardLevelView
+                android:id="@+id/stand_sample_half_yard"
+                android:layout_width="160px"
+                android:layout_height="120px"
+
+                android:layout_marginLeft="80px"
+                app:standardLevelTitle="@string/sample_half_yard_tip"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="30px"
+            android:layout_marginTop="20px"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <com.timi.sz.wms_android.view.StandardLevelView
+                android:id="@+id/stand_strict"
+                android:layout_width="160px"
+                android:layout_height="120px"
+                app:standardLevelTitle="@string/quality_strict"/>
+
+            <com.timi.sz.wms_android.view.StandardLevelView
+                android:id="@+id/stand_check_method"
+                android:layout_width="160px"
+                android:layout_height="120px"
+                android:layout_marginLeft="80px"
+                app:standardLevelTitle="@string/quality_method"/>
+
+            <com.timi.sz.wms_android.view.StandardLevelView
+                android:layout_width="160px"
+                android:layout_height="120px"
+                android:layout_marginLeft="80px"
+                android:visibility="invisible"
+                app:standardLevelTitle="试样半码"/>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

@@ -1,5 +1,6 @@
 package com.timi.sz.wms_android.mvp.UI.quity.quality;
 
+import com.timi.sz.wms_android.bean.quality.GetAQLList;
 import com.timi.sz.wms_android.bean.quality.QualityListBean;
 import com.timi.sz.wms_android.http.HttpManager;
 import com.timi.sz.wms_android.http.api.ApiService;
@@ -21,8 +22,9 @@ import io.reactivex.Observer;
 
 public class QualityCheckModel extends MvpBaseModel {
     /**
-     *  获取质检列表
-      * @param params
+     * 获取质检列表
+     *
+     * @param params
      * @param observer
      */
     public void getQualityList(final Map<String, Object> params, Observer<List<QualityListBean>> observer) {
@@ -33,9 +35,11 @@ public class QualityCheckModel extends MvpBaseModel {
             }
         });
     }
+
     /**
-     *  条件查询获取质检列表
-      * @param params
+     * 条件查询获取质检列表
+     *
+     * @param params
      * @param observer
      */
     public void queryReceiptForIQC(final Map<String, Object> params, Observer<List<QualityListBean>> observer) {
@@ -46,9 +50,11 @@ public class QualityCheckModel extends MvpBaseModel {
             }
         });
     }
+
     /**
-     *  免检的请求
-      * @param params
+     * 免检的请求
+     *
+     * @param params
      * @param observer
      */
     public void submitExemption(final Map<String, Object> params, Observer<Object> observer) {
@@ -56,6 +62,36 @@ public class QualityCheckModel extends MvpBaseModel {
             @Override
             public Observable<CommonResult<Object>> createObservable(ApiService apiService) {
                 return apiService.submitExemption(params);
+            }
+        });
+    }
+
+    /**
+     * 获取AQL列表
+     *
+     * @param params
+     * @param observer
+     */
+    public void getAQLList(final Map<String, Object> params, Observer<GetAQLList> observer) {
+        HttpManager.getInstance().HttpManagerRequest(observer, new ApiServiceMethodCallBack<GetAQLList>() {
+            @Override
+            public Observable<CommonResult<GetAQLList>> createObservable(ApiService apiService) {
+                return apiService.getAQLList(params);
+            }
+        });
+    }
+
+    /**
+     * 设置AQL参数
+     *
+     * @param params
+     * @param observer
+     */
+    public void setAQLValue(final Map<String, Object> params, Observer<Object> observer) {
+        HttpManager.getInstance().HttpManagerRequest(observer, new ApiServiceMethodCallBack<Object>() {
+            @Override
+            public Observable<CommonResult<Object>> createObservable(ApiService apiService) {
+                return apiService.setAQLValue(params);
             }
         });
     }
