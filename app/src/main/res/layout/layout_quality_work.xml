@@ -40,6 +40,7 @@
             android:layout_weight="1"
             android:gravity="center_vertical"
             android:text="@string/receive_num"
+            android:textColor="#333"
             android:textSize="28px"/>
 
         <TextView
@@ -49,9 +50,26 @@
             android:layout_weight="1"
             android:gravity="center_vertical"
             android:text="@string/mr_advance_sample_num"
+            android:textColor="#333"
             android:textSize="28px"/>
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="88px"
+        android:layout_marginLeft="40px"
+        android:gravity="center_vertical"
+        android:layout_marginTop="20px"
+        >
+        <TextView
+            android:id="@+id/tv_refuse_receive_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/reject_num_format"
+            android:textColor="#333"
+            android:textSize="28px"
+            />
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -133,6 +151,7 @@
             android:id="@+id/tv_sample_code"
             android:layout_width="208px"
             android:layout_height="64px"
+            android:gravity="center"
             android:background="@drawable/bg_rectangle_et_unfocused"/>
 
         <Button
@@ -153,10 +172,11 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/tv_sample_code2"
             android:layout_width="match_parent"
             android:layout_height="72px"
             android:gravity="center"
-            android:text="样品编号 %1$s"
+            android:text="@string/sample_code_format"
             android:textColor="#333"
             android:textSize="26px"/>
 

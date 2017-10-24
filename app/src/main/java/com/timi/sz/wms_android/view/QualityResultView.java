@@ -77,4 +77,5 @@ public class QualityResultView extends LinearLayout {
             ivContent.setSelected(isQuality);
         }
     }
+
 }

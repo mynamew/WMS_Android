@@ -129,6 +129,7 @@
                 android:layout_height="64px"
                 android:background="@drawable/bg_rectangle_et_unfocused"
                 android:gravity="center"
+                android:inputType="numberDecimal"
                 android:hint="@string/please_input_measure_value"
                 android:textSize="24px"/>
 
@@ -156,29 +157,37 @@
                 android:textColor="#333"
                 android:textSize="28px"
                 android:visibility="invisible"/>
-               <RelativeLayout
-                   android:layout_width="263px"
-                   android:gravity="center_horizontal"
-                   android:layout_height="wrap_content">
-                   <TextView
-                       android:id="@+id/tv_limit_low"
-                       android:layout_width="wrap_content"
-                       android:textColor="@color/login_txt_color"
-                       android:textSize="24px"
-                       android:layout_height="wrap_content"/>
-                   <TextView
-                       android:layout_width="wrap_content"
-                       android:textColor="@color/login_txt_color"
-                       android:textSize="24px"
-                       android:text="≤ ok ≤ "
-                       android:layout_height="wrap_content"/>
-                   <TextView
-                       android:id="@+id/tv_limit_hight"
-                       android:layout_width="wrap_content"
-                       android:textColor="@color/login_txt_color"
-                       android:textSize="24px"
-                       android:layout_height="wrap_content"/>
-               </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="263px"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_limit_low"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/login_txt_color"
+
+                    android:textSize="24px"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10px"
+                    android:layout_marginRight="10px"
+                    android:text="≤ ok ≤ "
+                    android:textColor="@color/login_txt_color"
+                    android:textSize="24px"/>
+
+                <TextView
+                    android:id="@+id/tv_limit_hight"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/login_txt_color"
+                    android:textSize="24px"/>
+            </LinearLayout>
 
         </LinearLayout>
 
@@ -186,9 +195,10 @@
             android:layout_width="585px"
             android:layout_height="1px"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="30px"
             android:layout_marginBottom="30px"
+            android:layout_marginTop="30px"
             android:background="#eee"/>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="64px"
@@ -239,6 +249,7 @@
                     android:textSize="26px"/>
             </RadioGroup>
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -268,21 +279,23 @@
                     />
             </RelativeLayout>
         </LinearLayout>
+
         <View
             android:layout_width="585px"
             android:layout_height="1px"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="30px"
             android:layout_marginBottom="30px"
-            android:background="#eee"/>
-        <LinearLayout
             android:layout_marginTop="30px"
+            android:background="#eee"/>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:layout_marginBottom="20px"
             android:layout_marginLeft="20px"
             android:layout_marginRight="20px"
+            android:layout_marginTop="30px"
             android:gravity="bottom">
 
             <Button

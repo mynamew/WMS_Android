@@ -20,6 +20,7 @@ public class MyProgressDialog  extends MyDialog {
             synchronized (HttpManager.class) {
                 if (null == instance) {
                     instance = new MyProgressDialog(context, R.layout.dialog_progress);
+                    instance.setCantCancelByBackPress();
                 }
             }
         }

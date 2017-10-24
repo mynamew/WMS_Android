@@ -247,4 +247,34 @@ public class WrapLayoutQualityResult extends ViewGroup {
     public void setStyle(int style) {
         this.style = style;
     }
+
+    /**
+     * 获取view
+     *
+     * @param position
+     * @return
+     */
+    public QualityResultView getView(int position) {
+
+        return views.get(position);
+    }
+
+    /**
+     * 获取view
+     *
+     * @return
+     */
+    public SparseArray<QualityResultView> getViews() {
+
+        return views;
+    }
+
+    /**
+     * 获取检验结果是否通过
+     * @param postion
+     * @return
+     */
+    public boolean isPass(int postion) {
+        return views.get(postion).isSelected();
+    }
 }

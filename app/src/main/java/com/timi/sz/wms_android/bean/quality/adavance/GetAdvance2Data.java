@@ -12,8 +12,8 @@ public class GetAdvance2Data {
 
     /**
      * normalSummary : {"receiptId":10224,"receiptDetailId":24805,"receiptCode":"DH161119004","receiptDate":"2017-09-11","sourceBillCode":"CG161116099","supplierName":"深圳市日科实业有限公司","creater":null,"materialId":333,"materialCode":"10101010334","materialName":"贴片电阻","materialStandard":"1R2/0805/±5%","materialAttribute":null,"receiveQty":5000,"sampleQty":200,"ngQty":0,"rejectQty":0,"qcStatus":0,"qcResult":0,"isBarCode":false,"barcodeSource":1}
-     * advanceSummary : {"qcType":3,"currentStrict":"正常","currentLevel":"II","sampleCode":"L","currentAQL":"0.15","acceptAQL":0,"rejectAQL":2,"beginQty":3201,"endQty":10000,"qcQty":0,"fatalQty":0,"seriousQty":0,"commonlyQty":0,"slightQty":0}
-     * checkItem : [{"checkItemId":3,"checkItemCode":"001","checkItemName":"宽度","judgeType":1,"unit":"厘米","limitLow":2.2,"limitHigh":2.5,"stardard":2.3,"remark":"手工填充","faultData":[{"faultId":28,"faultCode":"F013","faultName":"过宽","faultDesc":null,"faultQty":0},{"faultId":29,"faultCode":"F014","faultName":"过窄","faultDesc":null,"faultQty":0}]},{"checkItemId":2,"checkItemCode":"2","checkItemName":"温度","judgeType":1,"unit":"℃","limitLow":40.5,"limitHigh":40.8,"stardard":40.6,"remark":"手工填充","faultData":[{"faultId":30,"faultCode":"F015","faultName":"温度过高","faultDesc":null,"faultQty":0},{"faultId":31,"faultCode":"F016","faultName":"温度过低","faultDesc":null,"faultQty":0}]},{"checkItemId":1,"checkItemCode":"1","checkItemName":"外观","judgeType":2,"unit":" ","limitLow":0,"limitHigh":0,"stardard":0,"remark":"手工填充","faultData":[{"faultId":22,"faultCode":"F007","faultName":"表面凸起","faultDesc":null,"faultQty":0},{"faultId":23,"faultCode":"F008","faultName":"表面凹陷","faultDesc":null,"faultQty":0},{"faultId":24,"faultCode":"F009","faultName":"有裂缝","faultDesc":null,"faultQty":0},{"faultId":25,"faultCode":"F010","faultName":"破损","faultDesc":null,"faultQty":0},{"faultId":26,"faultCode":"F011","faultName":"沙眼","faultDesc":null,"faultQty":0}]}]
+     * advanceSummary : {"qcType":3,"currentStrict":"正常","currentLevel":"II","sampleCode":"L","currentAQL":"0.15","aqlAcceptQty":0,"aqlRejectQty":2,"beginQty":3201,"endQty":10000,"qcQty":0,"fatalQty":0,"seriousQty":0,"commonlyQty":0,"slightQty":0}
+     * checkItem : [{"checkItemId":3,"checkItemCode":"001","checkItemName":"宽度","judgeType":1,"unit":"厘米","limitLow":2.2,"limitHigh":2.5,"stardard":2.3,"remark":"手工填充","faultData":[{"faultId":28,"faultCode":"F013","faultName":"过宽","faultDesc":"","faultQty":0,"qC_DefectGrade":"B"},{"faultId":29,"faultCode":"F014","faultName":"过窄","faultDesc":"","faultQty":0,"qC_DefectGrade":"B"}]},{"checkItemId":2,"checkItemCode":"2","checkItemName":"温度","judgeType":1,"unit":"℃","limitLow":40.5,"limitHigh":40.8,"stardard":40.6,"remark":"手工填充","faultData":[{"faultId":30,"faultCode":"F015","faultName":"温度过高","faultDesc":"","faultQty":0,"qC_DefectGrade":"B"},{"faultId":31,"faultCode":"F016","faultName":"温度过低","faultDesc":"","faultQty":0,"qC_DefectGrade":"A"}]},{"checkItemId":1,"checkItemCode":"1","checkItemName":"外观","judgeType":2,"unit":" ","limitLow":0,"limitHigh":0,"stardard":0,"remark":"手工填充","faultData":[{"faultId":23,"faultCode":"F0008","faultName":"表面凹陷","faultDesc":"","faultQty":0,"qC_DefectGrade":"B"},{"faultId":22,"faultCode":"F007","faultName":"表面凸起","faultDesc":"","faultQty":0,"qC_DefectGrade":"A"},{"faultId":24,"faultCode":"F009","faultName":"有裂缝","faultDesc":"","faultQty":0,"qC_DefectGrade":"B"},{"faultId":25,"faultCode":"F010","faultName":"破损","faultDesc":"","faultQty":0,"qC_DefectGrade":"C"},{"faultId":26,"faultCode":"F011","faultName":"沙眼","faultDesc":"","faultQty":0,"qC_DefectGrade":"A"}]}]
      * checkItemData : null
      * barcodeData : null
      * faultData : null
@@ -287,8 +287,8 @@ public class GetAdvance2Data {
          * currentLevel : II
          * sampleCode : L
          * currentAQL : 0.15
-         * acceptAQL : 0
-         * rejectAQL : 2
+         * aqlAcceptQty : 0
+         * aqlRejectQty : 2
          * beginQty : 3201
          * endQty : 10000
          * qcQty : 0
@@ -303,8 +303,8 @@ public class GetAdvance2Data {
         private String currentLevel;
         private String sampleCode;
         private String currentAQL;
-        private int acceptAQL;
-        private int rejectAQL;
+        private int aqlAcceptQty;
+        private int aqlRejectQty;
         private int beginQty;
         private int endQty;
         private int qcQty;
@@ -353,20 +353,20 @@ public class GetAdvance2Data {
             this.currentAQL = currentAQL;
         }
 
-        public int getAcceptAQL() {
-            return acceptAQL;
+        public int getAqlAcceptQty() {
+            return aqlAcceptQty;
         }
 
-        public void setAcceptAQL(int acceptAQL) {
-            this.acceptAQL = acceptAQL;
+        public void setAqlAcceptQty(int aqlAcceptQty) {
+            this.aqlAcceptQty = aqlAcceptQty;
         }
 
-        public int getRejectAQL() {
-            return rejectAQL;
+        public int getAqlRejectQty() {
+            return aqlRejectQty;
         }
 
-        public void setRejectAQL(int rejectAQL) {
-            this.rejectAQL = rejectAQL;
+        public void setAqlRejectQty(int aqlRejectQty) {
+            this.aqlRejectQty = aqlRejectQty;
         }
 
         public int getBeginQty() {
@@ -437,7 +437,7 @@ public class GetAdvance2Data {
          * limitHigh : 2.5
          * stardard : 2.3
          * remark : 手工填充
-         * faultData : [{"faultId":28,"faultCode":"F013","faultName":"过宽","faultDesc":null,"faultQty":0},{"faultId":29,"faultCode":"F014","faultName":"过窄","faultDesc":null,"faultQty":0}]
+         * faultData : [{"faultId":28,"faultCode":"F013","faultName":"过宽","faultDesc":"","faultQty":0,"qC_DefectGrade":"B"},{"faultId":29,"faultCode":"F014","faultName":"过窄","faultDesc":"","faultQty":0,"qC_DefectGrade":"B"}]
          */
 
         private int checkItemId;
@@ -536,15 +536,17 @@ public class GetAdvance2Data {
              * faultId : 28
              * faultCode : F013
              * faultName : 过宽
-             * faultDesc : null
+             * faultDesc :
              * faultQty : 0
+             * qC_DefectGrade : B
              */
 
             private int faultId;
             private String faultCode;
             private String faultName;
-            private Object faultDesc;
+            private String faultDesc;
             private int faultQty;
+            private String qC_DefectGrade;
 
             public int getFaultId() {
                 return faultId;
@@ -570,11 +572,11 @@ public class GetAdvance2Data {
                 this.faultName = faultName;
             }
 
-            public Object getFaultDesc() {
+            public String getFaultDesc() {
                 return faultDesc;
             }
 
-            public void setFaultDesc(Object faultDesc) {
+            public void setFaultDesc(String faultDesc) {
                 this.faultDesc = faultDesc;
             }
 
@@ -584,6 +586,14 @@ public class GetAdvance2Data {
 
             public void setFaultQty(int faultQty) {
                 this.faultQty = faultQty;
+            }
+
+            public String getQC_DefectGrade() {
+                return qC_DefectGrade;
+            }
+
+            public void setQC_DefectGrade(String qC_DefectGrade) {
+                this.qC_DefectGrade = qC_DefectGrade;
             }
         }
     }
