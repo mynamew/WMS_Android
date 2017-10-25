@@ -60,8 +60,6 @@ public class AdvanceQualityActivity extends BaseActivity<AdvanceQualityView, Adv
     TextView tvOrderno;
     @BindView(R.id.tv_receive_material_date)
     TextView tvReceiveMaterialDate;
-    @BindView(R.id.et_refuse_receive_num)
-    EditText etRejectNum;
     @BindView(R.id.tv_order_num)
     TextView tvOrderNum;
     @BindView(R.id.tv_supplier)
@@ -223,6 +221,7 @@ public class AdvanceQualityActivity extends BaseActivity<AdvanceQualityView, Adv
         setTextViewText(tvMaterialModel, R.string.material_model, normalSummary.getMaterialStandard());
         setTextViewText(tvOrderNum, R.string.order_no, normalSummary.getSourceBillCode());
         setTextViewText(tvSampleCode2, R.string.sample_code_format, String.valueOf(sampleCode));
+        setTextViewText(tvRefuseReceiveNum, R.string.reject_num_format, String.valueOf(0));
         tvSampleCode.setText(String.valueOf(sampleCode));
         /**
          * 设置质检操作的数据
@@ -803,7 +802,7 @@ public class AdvanceQualityActivity extends BaseActivity<AdvanceQualityView, Adv
         /**
          * 重置选择
          */
-        rdCheckUnQualitied.setChecked(false);
+        rdCheckQualitied.setChecked(false);
         rdCheckUnQualitied.setChecked(false);
         /**
          * 设置hint

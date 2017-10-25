@@ -11,35 +11,45 @@
         android:background="@drawable/bg_rectangle_login_server"
         android:orientation="vertical"
         android:padding="20px">
-        <TextView
-            android:id="@+id/tv_from_orderno"
+
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="80px"
-            android:gravity="center_vertical"
-            android:text="@string/dialog_from_orderno"
-            android:textColor="#333"
-            android:textSize="14sp"/>
-        <TextView
-            android:id="@+id/tv_supplier"
-            android:layout_width="match_parent"
-            android:layout_height="80px"
-            android:gravity="center_vertical"
-            android:paddingLeft="10px"
-            android:text="@string/buy_from"
-            android:textColor="#333"
-            android:textSize="14sp"/>
-        <TextView
-            android:id="@+id/tv_create_orderno_date"
-            android:layout_width="match_parent"
-            android:layout_height="80px"
-            android:gravity="center_vertical"
-            android:text="@string/create_orderno_date"
-            android:textColor="#333"
-            android:textSize="14sp"/>
+            android:layout_height="wrap_content">
+
+            <View
+                android:layout_width="260px"
+                android:layout_height="2px"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="85px"
+                android:background="#999"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="60px"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="55px"
+                android:background="#fff"
+                android:gravity="center"
+                android:paddingLeft="20px"
+                android:paddingRight="20px"
+                android:text="设置AQL"
+                android:textColor="#333"
+                android:textSize="32px"/>
+
+            <ImageView
+                android:id="@+id/iv_close"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:padding="30px"
+                android:src="@mipmap/quality_badness_close"/>
+        </RelativeLayout>
+
         <TextView
             android:id="@+id/tv_material_code"
             android:layout_width="match_parent"
             android:layout_height="80px"
+            android:layout_marginLeft="40px"
             android:gravity="center_vertical"
             android:text="@string/material_code"
             android:textColor="#333"
@@ -49,42 +59,47 @@
             android:id="@+id/tv_material_name"
             android:layout_width="match_parent"
             android:layout_height="80px"
+            android:layout_marginLeft="40px"
             android:gravity="center_vertical"
             android:text="@string/material_name"
             android:textColor="#333"
             android:textSize="14sp"/>
         >
-        <TextView
-            android:id="@+id/tv_material_attr"
-            android:layout_width="match_parent"
-            android:layout_height="80px"
-            android:gravity="center_vertical"
-            android:text="@string/material_attr"
-            android:textColor="#333"
-            android:textSize="14sp"/>
-        >
+
 
         <TextView
             android:id="@+id/tv_material_model"
             android:layout_width="match_parent"
             android:layout_height="80px"
+            android:layout_marginLeft="40px"
             android:gravity="center_vertical"
             android:text="@string/material_model"
             android:textColor="#333"
             android:textSize="14sp"/>
+
         <TextView
-            android:id="@+id/tv_pack_num"
+            android:id="@+id/tv_start_pack_num"
             android:layout_width="match_parent"
             android:layout_height="80px"
             android:gravity="center_vertical"
-            android:text="@string/pack_num"
+            android:paddingLeft="10px"
+            android:text="@string/start_pack_num"
             android:textColor="#333"
-            android:paddingLeft="30px"
+            android:textSize="14sp"/>
+
+        <TextView
+            android:id="@+id/tv_real_pack_num"
+            android:layout_width="match_parent"
+            android:layout_height="80px"
+            android:gravity="center_vertical"
+            android:paddingLeft="10px"
+            android:text="@string/real_pack_num"
+            android:textColor="#333"
             android:textSize="14sp"/>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="80px"
+            android:layout_height="72px"
             android:orientation="horizontal"
             >
 
@@ -93,8 +108,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
+                android:paddingLeft="60px"
                 android:text="@string/dialog_reject_num"
-                android:paddingLeft="30px"
                 android:textColor="#333"
                 android:textSize="14sp"/>
 
@@ -102,9 +117,7 @@
                 android:id="@+id/et_reject_num"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginBottom="10px"
-                android:layout_marginTop="10px"
-                android:background="@drawable/bg_rectangle_et_focused"
+                android:background="@drawable/selector_et"
                 android:gravity="center_vertical"
                 android:hint="@string/please_input_reject_num"
                 android:inputType="number"
@@ -113,29 +126,40 @@
                 android:textSize="14sp"/>
         </LinearLayout>
 
-        <RelativeLayout
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_marginTop="30px"
+            android:background="#eee"/>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="80px"
-            android:layout_marginTop="40px">
-
-            <Button
-                android:id="@+id/btn_cancel"
-                android:layout_width="wrap_content"
-                android:layout_height="80px"
-                android:layout_marginLeft="100px"
-                android:background="@drawable/bg_rectangle_et_focused"
-                android:text="@string/cancel"
-                android:textColor="#666"/>
+            android:layout_marginTop="40px"
+            android:orientation="horizontal">
 
             <Button
                 android:id="@+id/btn_commit"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="80px"
                 android:layout_alignParentRight="true"
-                android:layout_marginRight="100px"
-                android:background="@drawable/bg_rectangle_et_focused"
+                android:layout_marginRight="10px"
+                android:layout_weight="1"
+                android:background="@drawable/selector_btn_bg_login"
                 android:text="@string/confirm"
-                android:textColor="#666"/>
-        </RelativeLayout>
+                android:textColor="#fff"/>
+
+            <Button
+                android:id="@+id/btn_cancel"
+                android:layout_width="0dp"
+                android:layout_height="80px"
+                android:layout_marginLeft="10px"
+                android:layout_weight="1"
+                android:background="@drawable/bg_rectangle_gray"
+                android:text="@string/cancel"
+                android:textColor="#999"/>
+
+
+        </LinearLayout>
     </LinearLayout>
 </com.zhy.autolayout.AutoRelativeLayout>

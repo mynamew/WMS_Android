@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
+
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/set_bg"
+    android:background="@color/white"
+    android:orientation="vertical"
     tools:context="com.timi.sz.wms_android.mvp.UI.quity.reject.QualityRejectActivity">
 
     <include
@@ -13,19 +15,19 @@
         layout="@layout/title_head"/>
 
     <TextView
-        android:id="@+id/tv_quality_complete"
         android:layout_width="match_parent"
-        android:layout_height="88px"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="20px"
+        android:layout_height="96px"
         android:layout_marginLeft="30px"
-        android:layout_marginRight="30px"
-        android:background="@drawable/selector_btn_bg_login"
-        android:gravity="center"
-        android:text="@string/quality_complete"
-        android:textColor="@color/white"
-        android:textSize="16sp"
-        />
+        android:gravity="center_vertical"
+        android:text="扫码退料"
+        android:textColor="#333"
+        android:textSize="28px"
+        android:textStyle="bold"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="#e7e7dd"/>
 
     <RelativeLayout
         android:id="@+id/ll_min_pack_code"
@@ -50,7 +52,7 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="20px"
             android:layout_toRightOf="@id/tv_min_pack_code"
-            android:background="@drawable/bg_rectangle_et_focused"
+            android:background="@drawable/selector_et"
             android:hint="@string/please_scan_assign_material_code"
             android:paddingLeft="20px"
             android:singleLine="true"
@@ -64,127 +66,146 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="40px"
             android:scaleType="center"
-            android:src="@mipmap/quality_scan"
+            android:src="@mipmap/quality_reject_sacn"
             />
     </RelativeLayout>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="24px"
+        android:background="#e7e7dd"/>
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/ll_min_pack_code"
-        android:layout_margin="20px"
-        android:background="#333"
-        android:orientation="vertical"
-        android:padding="1dp"
-        >
+        android:layout_height="96px"
+        android:orientation="horizontal">
 
-        <LinearLayout
+        <TextView
             android:layout_width="match_parent"
-            android:layout_height="60px"
-            android:orientation="horizontal">
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#fff"
+            android:gravity="center"
+            android:paddingLeft="20px"
+            android:paddingRight="20px"
+            android:text="条码"
+            android:textColor="#333"/>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="#fff"
-                android:gravity="center"
-                android:paddingLeft="20px"
-                android:paddingRight="20px"
-                android:text="条码"
-                android:textColor="#333"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="2px"
+            android:background="#fff"
+            android:gravity="center"
+            android:paddingLeft="20px"
+            android:paddingRight="20px"
+            android:text="初始包装数"
+            android:textColor="#333"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="2px"
-                android:background="#fff"
-                android:gravity="center"
-                android:paddingLeft="20px"
-                android:paddingRight="20px"
-                android:text="初始包装数"
-                android:textColor="#333"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="2px"
+            android:background="#fff"
+            android:gravity="center"
+            android:paddingLeft="20px"
+            android:paddingRight="20px"
+            android:text="实际包装数"
+            android:textColor="#333"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="2px"
-                android:background="#fff"
-                android:gravity="center"
-                android:paddingLeft="20px"
-                android:paddingRight="20px"
-                android:text="实际包装数"
-                android:textColor="#333"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="2px"
+            android:background="#fff"
+            android:gravity="center"
+            android:paddingLeft="20px"
+            android:paddingRight="20px"
+            android:text="拒收数"
+            android:textColor="#333"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="2px"
-                android:background="#fff"
-                android:gravity="center"
-                android:paddingLeft="20px"
-                android:paddingRight="20px"
-                android:text="拒收数"
-                android:textColor="#333"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/ll_content"
-            android:layout_width="match_parent"
-            android:layout_height="60px"
-            android:layout_marginTop="2px"
-            android:orientation="horizontal"
-            android:visibility="gone">
-
-            <TextView
-                android:id="@+id/tv_material_code"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="#fff"
-                android:gravity="center"
-                android:paddingLeft="20px"
-                android:paddingRight="20px"
-                android:text=""
-                android:textColor="#333"/>
-
-            <TextView
-                android:id="@+id/tv_first_pack_num"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="2px"
-                android:background="#fff"
-                android:gravity="center"
-                android:paddingLeft="20px"
-                android:paddingRight="20px"
-                android:text=""
-                android:textColor="#333"/>
-
-            <TextView
-                android:id="@+id/tv_real_pack_num"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="2px"
-                android:background="#fff"
-                android:gravity="center"
-                android:paddingLeft="20px"
-                android:paddingRight="20px"
-                android:text=""
-                android:textColor="#333"/>
-
-            <TextView
-                android:id="@+id/tv_reject_num"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="2px"
-                android:background="#fff"
-                android:gravity="center"
-                android:paddingLeft="20px"
-                android:paddingRight="20px"
-                android:text=""
-                android:textColor="#333"/>
-
-        </LinearLayout>
     </LinearLayout>
-</RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="#e7e7dd"/>
+
+    <LinearLayout
+        android:id="@+id/ll_content"
+        android:layout_width="match_parent"
+        android:layout_height="96px"
+        android:orientation="horizontal"
+        android:visibility="visible">
+
+        <TextView
+            android:id="@+id/tv_material_code"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#fff"
+            android:gravity="center"
+            android:paddingLeft="20px"
+            android:paddingRight="20px"
+            android:text=""
+            android:textColor="#333"/>
+
+        <TextView
+            android:id="@+id/tv_first_pack_num"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="2px"
+            android:background="#fff"
+            android:gravity="center"
+            android:paddingLeft="20px"
+            android:paddingRight="20px"
+            android:text=""
+            android:textColor="#333"/>
+
+        <TextView
+            android:id="@+id/tv_real_pack_num"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="2px"
+            android:background="#fff"
+            android:gravity="center"
+            android:paddingLeft="20px"
+            android:paddingRight="20px"
+            android:text=""
+            android:textColor="#333"/>
+
+        <TextView
+            android:id="@+id/tv_reject_num"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="2px"
+            android:background="#fff"
+            android:gravity="center"
+            android:paddingLeft="20px"
+            android:paddingRight="20px"
+            android:text=""
+            android:textColor="#333"/>
+
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+    <TextView
+        android:id="@+id/tv_quality_complete"
+        android:layout_width="match_parent"
+        android:layout_height="88px"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="20px"
+        android:layout_marginLeft="30px"
+        android:layout_marginRight="30px"
+        android:background="@drawable/selector_btn_bg_login"
+        android:gravity="center"
+        android:text="@string/quality_complete"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        />
+</LinearLayout>

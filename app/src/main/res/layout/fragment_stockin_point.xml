@@ -12,56 +12,49 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <LinearLayout
+
+        <TextView
+            android:id="@+id/tv_sip_buy_num"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#fff"
-            android:orientation="horizontal">
+            android:layout_height="64px"
+            android:layout_marginLeft="20px"
+            android:gravity="center_vertical"
+            android:text="@string/order_no"
+            android:textColor="#333"
+            android:textSize="26px"/>
 
-            <TextView
-                android:id="@+id/tv_sip_buy_num"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:padding="10dp"
-                android:text="@string/order_no"
-                android:textColor="#333"/>
-
-            <TextView
-                android:id="@+id/tv_sip_buyer"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="right"
-                android:padding="10dp"
-                android:text="@string/buyer"
-                android:textColor="#333"/>
-        </LinearLayout>
-
-        <LinearLayout
+        <TextView
+            android:id="@+id/tv_sip_buy_date"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#fff"
-            android:orientation="vertical">
+            android:layout_height="64px"
+            android:layout_marginLeft="10px"
+            android:gravity="center_vertical"
+            android:text="@string/buy_date"
+            android:textColor="#333"
+            android:textSize="26px"
+            />
 
-            <TextView
-                android:id="@+id/tv_sip_buy_from"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:text="@string/buy_from"
-                android:textColor="#333"/>
+        <TextView
+            android:id="@+id/tv_sip_buyer"
+            android:layout_width="match_parent"
+            android:layout_height="64px"
+            android:layout_marginLeft="20px"
+            android:text="@string/buyer"
+            android:gravity="center_vertical"
+            android:textColor="#333"
+            android:textSize="26px"/>
 
-            <TextView
-                android:id="@+id/tv_sip_buy_date"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="right"
-                android:padding="10dp"
-                android:text="2017-08-17"
-                android:textColor="#999"
-                android:textSize="12sp"/>
-        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_sip_buy_from"
+            android:layout_width="match_parent"
+            android:layout_height="64px"
+            android:layout_marginLeft="20px"
+            android:textSize="26px"
+            android:gravity="center_vertical"
+            android:text="@string/buy_from"
+            android:textColor="#333"/>
+
     </LinearLayout>
 
     <Button

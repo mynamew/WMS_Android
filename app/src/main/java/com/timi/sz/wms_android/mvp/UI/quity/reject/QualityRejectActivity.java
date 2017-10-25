@@ -6,6 +6,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -21,7 +22,6 @@ import com.timi.sz.wms_android.bean.quality.BarcodeData;
 import com.timi.sz.wms_android.bean.quality.normal.NormalQualityData;
 import com.timi.sz.wms_android.http.message.BaseMessage;
 import com.timi.sz.wms_android.http.message.event.QualityEvent;
-import com.timi.sz.wms_android.mvp.UI.stock_in.query.SearchBuyOrderActivity;
 import com.timi.sz.wms_android.mvp.base.BaseActivity;
 import com.timi.sz.wms_android.view.MyDialog;
 
@@ -29,18 +29,21 @@ import java.util.HashMap;
 import java.util.Map;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
  * 质检拒收
  */
 public class QualityRejectActivity extends BaseActivity<QualityRejectView, QualityRejectPresenter> implements QualityRejectView {
-    @BindView(R.id.et_min_pack_code)
-    EditText etMinPackCode;
-    @BindView(R.id.tv_quality_complete)
-    TextView tvQualityComplete;
+
+
     @BindView(R.id.tv_min_pack_code)
     TextView tvMinPackCode;
+    @BindView(R.id.et_min_pack_code)
+    EditText etMinPackCode;
+    @BindView(R.id.iv_scan)
+    ImageView ivScan;
     @BindView(R.id.ll_min_pack_code)
     RelativeLayout llMinPackCode;
     @BindView(R.id.tv_material_code)
@@ -53,8 +56,8 @@ public class QualityRejectActivity extends BaseActivity<QualityRejectView, Quali
     TextView tvRejectNum;
     @BindView(R.id.ll_content)
     LinearLayout llContent;
-
-
+    @BindView(R.id.tv_quality_complete)
+    TextView tvQualityComplete;
     //bundle
     private NormalQualityData mData;
     private int rejectNum;
@@ -62,7 +65,10 @@ public class QualityRejectActivity extends BaseActivity<QualityRejectView, Quali
      * 条码信息
      */
     private BarcodeData mBarData;
-
+    /**
+     * 弹框
+     */
+    MyDialog myDialog;
     /**
      * 包装码
      */
@@ -120,20 +126,8 @@ public class QualityRejectActivity extends BaseActivity<QualityRejectView, Quali
                 /**
                  * 弹出设置拒收数量的dialog
                  */
-                final MyDialog myDialog = new MyDialog(QualityRejectActivity.this, R.layout.dialog_quality_reject);
+               myDialog = new MyDialog(QualityRejectActivity.this, R.layout.dialog_quality_reject);
                 NormalQualityData.NormalSummaryBean normalSummary = mData.getNormalSummary();
-                /**
-                 * 来源单号
-                 */
-                setTextViewText(myDialog.getTextView(R.id.tv_from_orderno), R.string.dialog_from_orderno, normalSummary.getReceiptCode());
-                /**
-                 * 制单日期
-                 */
-                setTextViewText(myDialog.getTextView(R.id.tv_create_orderno_date), R.string.create_orderno_date, normalSummary.getReceiptDate());
-                /**
-                 * 供应商
-                 */
-                setTextViewText(myDialog.getTextView(R.id.tv_supplier), R.string.buy_from, normalSummary.getSupplierName());
                 /**
                  * 物料编码
                  */
@@ -142,20 +136,11 @@ public class QualityRejectActivity extends BaseActivity<QualityRejectView, Quali
                  * 物料名称
                  */
                 setTextViewText(myDialog.getTextView(R.id.tv_material_name), R.string.material_name, normalSummary.getMaterialName());
-                /**
-                 * 附加属性
-                 */
-                setTextViewText(myDialog.getTextView(R.id.tv_material_attr), R.string.material_attr, (TextUtils.isEmpty(normalSummary.getMaterialStandard()) ? "无" : normalSummary.getMaterialStandard()));
-                /**
-                 * 包装数
-                 */
-                setTextViewText(myDialog.getTextView(R.id.tv_pack_num), R.string.pack_num, mBarData.getInitialQty());
-
                 myDialog.setButtonListener(R.id.btn_confirm, null, new MyDialog.DialogClickListener() {
                     @Override
                     public void dialogClick(MyDialog dialog) {
-                        String rejectNumStr=myDialog.getEdittext(R.id.et_reject_num).getText().toString();
-                        if(TextUtils.isEmpty(rejectNumStr)){
+                        String rejectNumStr = myDialog.getEdittext(R.id.et_reject_num).getText().toString();
+                        if (TextUtils.isEmpty(rejectNumStr)) {
                             ToastUtils.showShort(getString(R.string.please_input_reject_num));
                             return;
                         }
@@ -210,6 +195,11 @@ public class QualityRejectActivity extends BaseActivity<QualityRejectView, Quali
         tvFirstPackNum.setText(String.valueOf(data.getInitialQty()));
         tvRealPackNum.setText(String.valueOf(data.getCurrentQty()));
         tvRejectNum.setText(String.valueOf(data.getRejectQty()));
+        /**
+         * 初始包装  和实际包装
+         */
+        setTextViewText(myDialog.getTextView(R.id.tv_start_pack_num), R.string.start_pack_num, "");
+        setTextViewText(myDialog.getTextView(R.id.tv_real_pack_num), R.string.real_pack_num, "");
     }
 
     @Override
@@ -273,5 +263,12 @@ public class QualityRejectActivity extends BaseActivity<QualityRejectView, Quali
                 });
                 break;
         }
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
     }
 }

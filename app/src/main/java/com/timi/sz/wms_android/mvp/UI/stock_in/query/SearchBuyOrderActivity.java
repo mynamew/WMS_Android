@@ -36,6 +36,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 import static com.timi.sz.wms_android.base.uils.Constants.IN_STOCK_BUY_BEAN;
@@ -64,6 +65,8 @@ public class SearchBuyOrderActivity extends BaseActivity<SearchBuyOrderView, Sea
     LinearLayout activitySearchBuyOrder;
 
     int intentCode = Constants.BUY_ORDE_NUM;//默认的额跳转code值
+    @BindView(R.id.tv_query_title)
+    TextView tvQueryTitle;
 
     @Override
     public int setLayoutId() {
@@ -79,11 +82,13 @@ public class SearchBuyOrderActivity extends BaseActivity<SearchBuyOrderView, Sea
             case Constants.BUY_ORDE_NUM://采购单
                 tvSboTip.setText(R.string.orderno);
                 tvTitle.setText(R.string.receive_goods_query);
+                tvQueryTitle.setText(R.string.receive_goods_query);
                 etSboInput.setHint(R.string.please_input_orderno_or_scan);
                 break;
             case Constants.BUY_SEND_NUM://送货单
                 tvSboTip.setText(R.string.orderno);
                 tvTitle.setText(R.string.receive_goods_orderno_query);
+                tvQueryTitle.setText(R.string.receive_goods_orderno_query);
                 etSboInput.setHint(R.string.please_input_send_orderno_or_scan);
                 break;
             case Constants.COME_MATERAIL_NUM://来料单
@@ -182,7 +187,6 @@ public class SearchBuyOrderActivity extends BaseActivity<SearchBuyOrderView, Sea
                 break;
         }
     }
-
 
 
     /**
@@ -308,11 +312,11 @@ public class SearchBuyOrderActivity extends BaseActivity<SearchBuyOrderView, Sea
      * @param orderNum
      */
     public void requestManagerMethod(String orderNum) {
-        Map<String,Object> params=new HashMap<>();
-        params.put("UserId",SpUtils.getInstance().getUserId());
-        params.put("OrgId",SpUtils.getInstance().getOrgId());
-        params.put("MAC",PackageUtils.getMac());
-        params.put("BillNo",orderNum);
+        Map<String, Object> params = new HashMap<>();
+        params.put("UserId", SpUtils.getInstance().getUserId());
+        params.put("OrgId", SpUtils.getInstance().getOrgId());
+        params.put("MAC", PackageUtils.getMac());
+        params.put("BillNo", orderNum);
         /**
          * 不同的intentcode  请求不同
          */
@@ -345,5 +349,12 @@ public class SearchBuyOrderActivity extends BaseActivity<SearchBuyOrderView, Sea
                 getPresenter().searchSaleGoodsReturnOrderno(orderNum);
                 break;
         }
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
     }
 }

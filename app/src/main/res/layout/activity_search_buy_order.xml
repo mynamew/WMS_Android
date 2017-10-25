@@ -11,6 +11,18 @@
 
     <include layout="@layout/title_head"/>
 
+    <TextView
+        android:id="@+id/tv_query_title"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="20px"
+        android:layout_height="72px"
+        android:gravity="center_vertical"
+        android:textColor="#333"
+        android:textSize="28px"
+        android:text="采购订单查询"
+        android:textStyle="bold"
+        />
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="100px">
@@ -31,25 +43,28 @@
             android:layout_height="match_parent"
             android:layout_margin="20px"
             android:layout_toRightOf="@id/tv_sbo_tip"
-            android:background="@drawable/bg_rectangle_et_focused"
+            android:background="@drawable/selector_et"
             android:ellipsize="end"
             android:hint="请输入单号进行查询"
             android:imeOptions="actionSearch"
+            android:inputType="textVisiblePassword"
             android:paddingLeft="20px"
             android:paddingRight="80px"
-            android:inputType="textVisiblePassword"
             android:singleLine="true"
             android:text=""
             android:textSize="14sp"/>
-
-        <ImageView
-            android:id="@+id/iv_sbo_scan"
-            android:layout_width="100px"
-            android:layout_height="match_parent"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="30px"
-            android:paddingLeft="60px"
-            android:src="@mipmap/ic_scan"/>
     </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+    <ImageView
+        android:id="@+id/iv_sbo_scan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="20px"
+        android:src="@mipmap/query_scan"/>
 </LinearLayout>

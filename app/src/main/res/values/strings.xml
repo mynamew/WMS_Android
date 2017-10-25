@@ -266,9 +266,9 @@
     <string name="please_input_receivce_orderno_or_scan">请输入收货单号或扫码查询</string>
     /**====== 搜索单号 ======**/
     <string name="orderno">单号</string>
-    <string name="receive_goods_query">收货-订单查询</string>
+    <string name="receive_goods_query">采购订单查询</string>
     <string name="please_input_orderno_or_scan">请输入单号或扫码查询订单</string>
-    <string name="receive_goods_orderno_query">收货-单据查询</string>
+    <string name="receive_goods_orderno_query">送货单查询</string>
     <string name="please_input_send_orderno_or_scan">请输入送货单号或扫码查询</string>
     <string name="detail">详情</string>
     /******************************************************************************************************************************************************/
@@ -452,7 +452,17 @@
     <string name="fatal_badness_num">致命不良数</string>
     <string name="normal_badness_num">一般不良数</string>
     <string name="slight_badness_num">轻微不良数</string>
+    <string name="please_confirm_measure_value">请对测量值进行确定操作！</string>
+    <string name="sample_code_format">样品编号： %1$s</string>
+    <string name="please_select_quality_result">请选择质检结果！</string>
+    <string name="reject_num_format">拒收数：%1$s</string>
+    <string name="dialog_unpass_tip">\t\t抽检样品依据AQL标准进行质检，某一项AQL拒收数达到目标值，系统自动判定该批抽检样品质检结果为不合格，是否终止并提交质检操作结果？</string>
+    <string name="none">无</string>
+    <string name="quality_complete_tip">本批样品质检操作已全部完成</string>
+
     /**====== 质检拒收 ======**/
+    <string name="start_pack_num">初始包装数：%1$s</string>
+    <string name="real_pack_num">实际包装数：%1$s</string>
     <string name="quality_reject_title">质检拒收</string>
     /**====== MRP ======**/
     <string name="mrp_badness_percent">不良率</string>
@@ -533,13 +543,7 @@
     <string name="query_retrospective">追溯查询</string>
     <string name="query_record_tip">记录查询</string>
     <string name="query_statistical_tip">统计查询</string>
-    <string name="please_confirm_measure_value">请对测量值进行确定操作！</string>
-    <string name="sample_code_format">样品编号： %1$s</string>
-    <string name="please_select_quality_result">请选择质检结果！</string>
-    <string name="reject_num_format">拒收数：%1$s</string>
-    <string name="dialog_unpass_tip">\t\t抽检样品依据AQL标准进行质检，某一项AQL拒收数达到目标值，系统自动判定该批抽检样品质检结果为不合格，是否终止并提交质检操作结果？</string>
-    <string name="none">无</string>
-    <string name="quality_complete_tip">本批样品质检操作已全部完成</string>
+
 
 
 </resources>

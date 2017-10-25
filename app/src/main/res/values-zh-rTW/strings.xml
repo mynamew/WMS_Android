@@ -400,4 +400,6 @@
     <string name="dialog_unpass_tip">抽检样品依据AQL标准进行质检，某一项AQL拒收数达到目标值，系统自动判定该批抽检样品质检结果为不合格，是否终止并提交质检操作结果？</string>
     <string name="none">无</string>
     <string name="quality_complete_tip">本批样品质检操作已全部完成</string>
+    <string name="start_pack_num">初始包装数：%1$s</string>
+    <string name="real_pack_num">实际包装数：%1$s</string>
 </resources>
