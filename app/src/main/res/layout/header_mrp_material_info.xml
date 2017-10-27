@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_marginBottom="24px"
+              android:layout_marginLeft="30px"
+              android:layout_marginRight="30px"
+              android:layout_marginTop="24px"
+              android:background="@drawable/bg_rectangle_et_unfocused"
+              android:orientation="vertical"
+              android:paddingBottom="20px">
+
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="72px"
+       android:orientation="horizontal">
+       <View
+           android:layout_width="16px"
+           android:layout_height="24px"
+           android:layout_marginLeft="10px"
+           android:layout_gravity="center_vertical"
+           android:background="@drawable/bg_rectangle_mrp_header_tip"/>
+       <TextView
+           android:layout_width="match_parent"
+           android:layout_height="72px"
+           android:gravity="center_vertical"
+           android:paddingLeft="10px"
+           android:paddingTop="10px"
+           android:text="@string/material_info"
+           android:textColor="#333"
+           android:textSize="28px"
+           android:textStyle="bold"
+           />
+
+   </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="#d7d7dd"
+        />
+
+    <TextView
+        android:id="@+id/tv_orderno"
+        android:layout_width="match_parent"
+        android:layout_height="44px"
+        android:gravity="center_vertical"
+        android:paddingLeft="34px"
+        android:text="@string/receive_pro_num"
+        android:textColor="#333"
+        android:textSize="26px"
+        />
+
+
+    <TextView
+        android:id="@+id/tv_receive_material_date"
+        android:layout_width="match_parent"
+        android:layout_height="44px"
+        android:gravity="center_vertical"
+        android:paddingLeft="34px"
+        android:text="@string/receive_material_date"
+        android:textColor="#333"
+        android:textSize="26px"
+        />
+
+    <TextView
+        android:id="@+id/tv_order_num"
+        android:layout_width="match_parent"
+        android:layout_height="44px"
+        android:gravity="center_vertical"
+        android:paddingLeft="42px"
+        android:text="@string/order_no"
+        android:textColor="#333"
+        android:textSize="26px"
+        />
+
+    <TextView
+        android:id="@+id/tv_supplier"
+        android:layout_width="match_parent"
+        android:layout_height="44px"
+        android:layout_marginBottom="10px"
+        android:gravity="center_vertical"
+        android:lineSpacingExtra="5px"
+        android:paddingLeft="42px"
+        android:text="@string/buy_from"
+        android:textColor="#333"
+        android:textSize="26px"
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10px"
+        android:layout_marginLeft="30px"
+        android:layout_marginRight="30px"
+        android:background="@drawable/bg_quality_normal_divider"
+        />
+
+    <TextView
+        android:id="@+id/tv_quality_name"
+        android:layout_width="match_parent"
+        android:layout_height="44px"
+        android:gravity="center_vertical"
+        android:paddingLeft="62px"
+        android:text="@string/mrp_normal_checker"
+        android:textColor="#333"
+        android:textSize="26px"
+        />
+
+    <TextView
+        android:id="@+id/tv_quality_date"
+        android:layout_width="match_parent"
+        android:layout_height="44px"
+        android:layout_marginBottom="10px"
+        android:gravity="center_vertical"
+        android:lineSpacingExtra="5px"
+        android:paddingLeft="34px"
+        android:text="@string/tv_mrp_quality_date"
+        android:textColor="#333"
+        android:textSize="26px"
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10px"
+        android:layout_marginLeft="30px"
+        android:layout_marginRight="30px"
+        android:background="@drawable/bg_quality_normal_divider"
+        />
+
+    <TextView
+        android:id="@+id/tv_material_code"
+        android:layout_width="match_parent"
+        android:layout_height="44px"
+        android:gravity="center_vertical"
+        android:paddingLeft="34px"
+        android:text="@string/material_code"
+        android:textColor="#333"
+        android:textSize="26px"
+        />
+
+    <TextView
+        android:id="@+id/tv_material_name"
+        android:layout_width="match_parent"
+        android:layout_height="44px"
+        android:gravity="center_vertical"
+        android:lineSpacingExtra="5px"
+        android:paddingLeft="34px"
+        android:text="@string/material_name"
+        android:textColor="#333"
+        android:textSize="26px"
+        />
+
+    <TextView
+        android:id="@+id/tv_material_model"
+        android:layout_width="match_parent"
+        android:layout_height="44px"
+        android:gravity="center_vertical"
+        android:lineSpacingExtra="5px"
+        android:paddingLeft="34px"
+        android:text="@string/material_model"
+        android:textColor="#333"
+        android:textSize="26px"
+        />
+</LinearLayout>
+

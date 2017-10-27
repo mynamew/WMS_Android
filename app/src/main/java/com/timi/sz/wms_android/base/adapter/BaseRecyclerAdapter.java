@@ -67,6 +67,8 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<Recycl
     }
 
 
+
+
     /**
      * 如果你要用在GridLayout中使用header或footer，记得在setLayoutManager之后调用该方法
      *

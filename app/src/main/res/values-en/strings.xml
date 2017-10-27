@@ -462,5 +462,6 @@
     <string name="quality_complete_tip">本批样品质检操作已全部完成</string>
     <string name="start_pack_num">初始包装数：%1$s</string>
     <string name="real_pack_num">实际包装数：%1$s</string>
+    <string name="please_select_badness_reason">请选择不良原因</string>
 
 </resources>

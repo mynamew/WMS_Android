@@ -24,6 +24,9 @@ import com.timi.sz.wms_android.bean.outstock.buy.OrderNoAddMaterial;
 import com.timi.sz.wms_android.bean.outstock.buy.OrderNoBean;
 import com.timi.sz.wms_android.bean.outstock.outsource.OutSourceFeedBean;
 import com.timi.sz.wms_android.bean.quality.BarcodeData;
+import com.timi.sz.wms_android.bean.quality.adavance.CommitAdvance1Data;
+import com.timi.sz.wms_android.bean.quality.adavance.CommitAdvanceData;
+import com.timi.sz.wms_android.bean.quality.normal.CommitNormalData;
 import com.timi.sz.wms_android.bean.quality.GetAQLList;
 import com.timi.sz.wms_android.bean.quality.QualityListBean;
 import com.timi.sz.wms_android.bean.quality.adavance.GetAdvance2Data;
@@ -44,7 +47,9 @@ import java.util.List;
 import java.util.Map;
 
 import io.reactivex.Observable;
+import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
+import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
@@ -58,7 +63,23 @@ import retrofit2.http.Url;
  * author: timi
  * create at: 2017-08-15 09:58
  */
+/**
+ * 关于Api Servaice  注解的解释：
+ * 1、@Field 单个表单数据提交
+ * 2、@FieldMap 用map的形式提交一系列表单数据
+ * 3、@Body     用于提交实体转换成的json 对象的提交（为了处理类似链表形式的提交,
+ *              链表形式的提交用@FieldMap是实现不了的"），
+ */
 public interface ApiService {
+    /**
+     * 登录
+     * @param tenancyName
+     * @param usernameOrEmailAddress
+     * @param password
+     * @param deviceType
+     * @param mac
+     * @return
+     */
     @FormUrlEncoded
     @POST("api/Account/ClientLogin")
     Observable<CommonResult<LoginBean>> login(@Field("tenancyName") String tenancyName, @Field("usernameOrEmailAddress") String usernameOrEmailAddress, @Field("password") String password, @Field("deviceType") int deviceType, @Field("mac") String mac);
@@ -491,9 +512,15 @@ public interface ApiService {
      *
      * @return
      */
-    @FormUrlEncoded
     @POST("api/services/wpda/IQC/IQCSetNormalData")
-    Observable<CommonResult<Object>> setNormalQualityData(@FieldMap Map<String, Object> params);
+    Observable<CommonResult<Object>> setNormalQualityData(@Body RequestBody params);
+    /**
+     * 提交普通质检
+     *
+     * @return
+     */
+    @POST("api/services/wpda/IQC/IQCSetNormalData")
+    Observable<CommonResult<Object>> setNormalQualityData(@Body CommitNormalData params);
 
     /**
      * 获得质检条码信息
@@ -547,16 +574,15 @@ public interface ApiService {
      */
     @FormUrlEncoded
     @POST("api/services/wpda/IQC/IQCSetAdvance1Data")
-    Observable<CommonResult<Object>> setAdvance1Data(@FieldMap Map<String, Object> params);
+    Observable<CommonResult<Object>> setAdvance1Data(@Body CommitAdvance1Data params);
 
     /**
      * 提交高级质检2 的数据
      *
      * @return
      */
-    @FormUrlEncoded
     @POST("api/services/wpda/IQC/IQCSetAdvance2Data")
-    Observable<CommonResult<Object>> setAdvance2Data(@FieldMap Map<String, Object> params);
+    Observable<CommonResult<Object>> setAdvance2Data(@Body CommitAdvanceData data );
     /**======MRP评审=====**/
     /**
      * 查询MRP评审信息列表

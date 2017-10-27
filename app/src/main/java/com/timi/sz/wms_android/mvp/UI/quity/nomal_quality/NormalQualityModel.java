@@ -1,5 +1,6 @@
 package com.timi.sz.wms_android.mvp.UI.quity.nomal_quality;
 
+import com.timi.sz.wms_android.bean.quality.normal.CommitNormalData;
 import com.timi.sz.wms_android.bean.quality.normal.NormalQualityData;
 import com.timi.sz.wms_android.http.HttpManager;
 import com.timi.sz.wms_android.http.api.ApiService;
@@ -36,14 +37,13 @@ public class NormalQualityModel extends MvpBaseModel {
     /**
      * 提交普通质检的数据
      *
-     * @param params
      * @param observer
      */
-    public void setNormalQualityData(final Map<String, Object> params, Observer<Object> observer) {
+    public void setNormalQualityData(final CommitNormalData commitNormalData, Observer<Object> observer) {
         HttpManager.getInstance().HttpManagerRequest(observer, new ApiServiceMethodCallBack<Object>() {
             @Override
             public Observable<CommonResult<Object>> createObservable(ApiService apiService) {
-                return apiService.setNormalQualityData(params);
+                return apiService.setNormalQualityData(commitNormalData);
             }
         });
     }

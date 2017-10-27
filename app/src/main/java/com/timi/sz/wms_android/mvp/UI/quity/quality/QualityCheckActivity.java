@@ -365,17 +365,22 @@ public class QualityCheckActivity extends BaseActivity<QualityCheckView, Quality
                     switch (qualityListBean.getQcStatus()) {
                         case 0://待检
                             holder.setImageView(R.id.iv_quality_status, R.mipmap.quality_wait_quality);
+                            holder.getView(R.id.iv_next_page).setVisibility(View.VISIBLE);
                             break;
                         case 1:
+                            holder.getView(R.id.iv_next_page).setVisibility(View.VISIBLE);
                             break;
                         case 2://未完成
                             holder.setImageView(R.id.iv_quality_status, R.mipmap.quality_no_complete);
+                            holder.getView(R.id.iv_next_page).setVisibility(View.VISIBLE);
                             break;
                         case 3://已完成
                             holder.setImageView(R.id.iv_quality_status, R.mipmap.quality_complete);
+                            holder.getView(R.id.iv_next_page).setVisibility(View.INVISIBLE);
                             break;
                         default:
                             holder.setImageView(R.id.iv_quality_status, R.mipmap.quality_wait_quality);
+                            holder.getView(R.id.iv_next_page).setVisibility(View.VISIBLE);
                             break;
                     }
                     /**
@@ -383,6 +388,7 @@ public class QualityCheckActivity extends BaseActivity<QualityCheckView, Quality
                      */
                     if (qualityListBean.getQcType() == 0) {
                         holder.setImageView(R.id.iv_quality_status, R.mipmap.quality_dont_quality);
+                        holder.getView(R.id.iv_next_page).setVisibility(View.INVISIBLE);
                     }
                     /**
                      * 设置物品编码
@@ -408,16 +414,16 @@ public class QualityCheckActivity extends BaseActivity<QualityCheckView, Quality
                     } else {
                         switch (qualityListBean.getQcResult()) {
                             case 1://合格
-                                holder.setTextView(R.id.tv_quality_result, R.color.tab_txt_unselect, getString(R.string.excel_head_quality_num));
+                                holder.setTextView(R.id.tv_quality_result, qualityListBean.getQcStatus()==3?R.color.tab_txt_unselect:R.color.wait_quality, getString(R.string.excel_head_quality_num));
                                 break;
                             case 2://待定
-                                holder.setTextView(R.id.tv_quality_result, R.color.wait_quality, getString(R.string.wait_deal));
+                                holder.setTextView(R.id.tv_quality_result, qualityListBean.getQcStatus()==3?R.color.tab_txt_unselect:R.color.wait_quality, getString(R.string.wait_deal));
                                 break;
                             case 3://不合格
                                 holder.setTextView(R.id.tv_quality_result, R.color.unquality, getString(R.string.unquality));
                                 break;
                             case 4://挑选
-                                holder.setTextView(R.id.tv_quality_result, R.color.unquality, getString(R.string.quality_pick));
+                                holder.setTextView(R.id.tv_quality_result,  R.color.unquality, getString(R.string.quality_pick));
                                 break;
                             case 5://特采
                                 holder.setTextView(R.id.tv_quality_result, R.color.unquality, getString(R.string.quality_special_get));
@@ -461,7 +467,7 @@ public class QualityCheckActivity extends BaseActivity<QualityCheckView, Quality
                 @Override
                 public void onItemClick(View itemView, int position) {
                     QualityListBean qualityListBean = mDatas.get(position);
-                    if (qualityListBean.getQcStatus() != 0 && qualityListBean.getQcResult() != 2) {
+                    if (qualityListBean.getQcStatus()==3) {
                         return;
                     }
 

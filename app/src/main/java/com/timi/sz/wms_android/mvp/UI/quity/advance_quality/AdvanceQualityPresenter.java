@@ -4,8 +4,10 @@ import android.content.Context;
 
 import com.google.gson.Gson;
 import com.timi.sz.wms_android.base.uils.ToastUtils;
+import com.timi.sz.wms_android.bean.quality.adavance.CommitAdvanceData;
 import com.timi.sz.wms_android.bean.quality.adavance.GetAdvance2Data;
 import com.timi.sz.wms_android.bean.quality.adavance.GetAdvanceData;
+import com.timi.sz.wms_android.bean.quality.normal.CommitNormalData;
 import com.timi.sz.wms_android.http.callback.OnResultCallBack;
 import com.timi.sz.wms_android.http.subscriber.HttpSubscriber;
 import com.timi.sz.wms_android.mvp.base.presenter.impl.MvpBasePresenter;
@@ -46,10 +48,6 @@ public class AdvanceQualityPresenter extends MvpBasePresenter<AdvanceQualityView
                 @Override
                 public void onError(String errorMsg) {
                     ToastUtils.showShort(errorMsg);
-                    GetAdvance2Data getAdvance2Data = new GetAdvance2Data();
-
-
-                    getView().getAdvance2Data(getAdvance2Data);
                 }
             });
         }
@@ -59,9 +57,9 @@ public class AdvanceQualityPresenter extends MvpBasePresenter<AdvanceQualityView
     /**
      * 获取普通质检的数据
      *
-     * @param params
+     * @param data
      */
-    public void setAdvance2Data(Map<String, Object> params) {
+    public void setAdvance2Data(CommitAdvanceData data) {
         getView().showProgressDialog();
         if (null == setAdvance2DataHttpSubscriber) {
             setAdvance2DataHttpSubscriber = new HttpSubscriber<>(new OnResultCallBack<Object>() {
@@ -73,14 +71,10 @@ public class AdvanceQualityPresenter extends MvpBasePresenter<AdvanceQualityView
                 @Override
                 public void onError(String errorMsg) {
                     ToastUtils.showShort(errorMsg);
-                    GetAdvance2Data getAdvance2Data = new GetAdvance2Data();
-
-
-                    getView().getAdvance2Data(getAdvance2Data);
                 }
             });
         }
-        model.setAdvance2Data(params, setAdvance2DataHttpSubscriber);
+        model.setAdvance2Data(data, setAdvance2DataHttpSubscriber);
     }
 
     /**

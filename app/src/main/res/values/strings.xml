@@ -468,7 +468,7 @@
     <string name="mrp_badness_percent">不良率</string>
     <string name="mrp_sample_num">抽检</string>
     <string name="tv_mrp_quality_date">质检日期：%1$s</string>
-    <string name="mrp_title">来料-MRP评审</string>
+    <string name="mrp_title">MRP评审(来料)</string>
     <string name="send_quality_num_tip">送检数：%1$s</string>
     <string name="mrp_normal_badness_percent">不良率：%1$s</string>
     <string name="mrp_quality_num_tip">合格数：%1$s</string>
@@ -543,7 +543,7 @@
     <string name="query_retrospective">追溯查询</string>
     <string name="query_record_tip">记录查询</string>
     <string name="query_statistical_tip">统计查询</string>
-
+    <string name="please_select_badness_reason">请选择不良原因</string>
 
 
 </resources>

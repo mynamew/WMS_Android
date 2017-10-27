@@ -3,6 +3,7 @@ package com.timi.sz.wms_android.mvp.UI.quity.nomal_quality;
 import android.content.Context;
 
 import com.timi.sz.wms_android.base.uils.ToastUtils;
+import com.timi.sz.wms_android.bean.quality.normal.CommitNormalData;
 import com.timi.sz.wms_android.bean.quality.normal.NormalQualityData;
 import com.timi.sz.wms_android.http.callback.OnResultCallBack;
 import com.timi.sz.wms_android.http.subscriber.HttpSubscriber;
@@ -56,7 +57,7 @@ public class NormalQualityPresenter extends MvpBasePresenter<NormalQualityView> 
      * @param params
      * @param isQualified
      */
-    public void setNormalQualityData(Map<String, Object> params, final boolean isQualified,final int rejectNum) {
+    public void setNormalQualityData(CommitNormalData params, final boolean isQualified, final int rejectNum) {
         getView().showProgressDialog();
         if (null == setNormalQualityDataHttpSubscriber) {
             setNormalQualityDataHttpSubscriber = new HttpSubscriber<>(new OnResultCallBack<Object>() {
@@ -71,7 +72,7 @@ public class NormalQualityPresenter extends MvpBasePresenter<NormalQualityView> 
                 }
             });
         }
-        model.setNormalQualityData(params, setNormalQualityDataHttpSubscriber);
+        model.setNormalQualityData(params,setNormalQualityDataHttpSubscriber);
     }
     /**
      * 质检确认

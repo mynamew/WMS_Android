@@ -1,14 +1,25 @@
 package com.timi.sz.wms_android.mvp.UI.quity.advance_quality;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.media.Image;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.SparseArray;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.PopupWindow;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
@@ -16,13 +27,19 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.timi.sz.wms_android.R;
+import com.timi.sz.wms_android.base.adapter.BaseRecyclerAdapter;
+import com.timi.sz.wms_android.base.adapter.RecyclerViewHolder;
+import com.timi.sz.wms_android.base.uils.InputMethodUtils;
+import com.timi.sz.wms_android.base.uils.LogUitls;
 import com.timi.sz.wms_android.base.uils.PackageUtils;
 import com.timi.sz.wms_android.base.uils.SpUtils;
 import com.timi.sz.wms_android.base.uils.ToastUtils;
+import com.timi.sz.wms_android.bean.quality.adavance.CommitAdvanceData;
 import com.timi.sz.wms_android.bean.quality.adavance.GetAdvance2Data;
 import com.timi.sz.wms_android.http.message.BaseMessage;
 import com.timi.sz.wms_android.http.message.event.QualityEvent;
 import com.timi.sz.wms_android.mvp.UI.quity.advance1_quality.Advance1QualityActivity;
+import com.timi.sz.wms_android.mvp.UI.quity.mrp.normal_review.MRPNormalReviewActivity;
 import com.timi.sz.wms_android.mvp.UI.quity.reject.QualityRejectActivity;
 import com.timi.sz.wms_android.mvp.base.BaseActivity;
 import com.timi.sz.wms_android.view.MyDialog;
@@ -131,15 +148,18 @@ public class AdvanceQualityActivity extends BaseActivity<AdvanceQualityView, Adv
      * 不良原因的字符串 链表
      */
     List<String> badnessReasons = new ArrayList<>();
-
     /**
-     * 不练原因的适配器
+     * 检验项目的链表
      */
-    ArrayAdapter<String> badnessAdapter;
+    List<CommitAdvanceData.ItemDataBean> mSelectFaultData = new ArrayList<>();
+    /**
+     * 高检2提交的实体
+     */
+    private CommitAdvanceData mCommitAdvanceData = new CommitAdvanceData();
     /**
      * 检测项目的view
      */
-    TextView tvCode, tvCheckItem, tvCheckMode, tvLimmitLow, tvLimmitHigh;
+    TextView tvCode, tvCheckItem, tvCheckMode, tvLimmitLow, tvLimmitHigh, tvSelectBadness;
     EditText etMeasure;
     RadioButton rdCheckQualitied, rdCheckUnQualitied;
     Button dialogBtnNext;
@@ -154,6 +174,7 @@ public class AdvanceQualityActivity extends BaseActivity<AdvanceQualityView, Adv
      * 默认是合格
      */
     private int qcResult = 1;
+    private int rejectNum = 0;
 
     @Override
     public int setLayoutId() {
@@ -220,9 +241,7 @@ public class AdvanceQualityActivity extends BaseActivity<AdvanceQualityView, Adv
         setTextViewText(tvMaterialName, R.string.material_name, normalSummary.getMaterialName());
         setTextViewText(tvMaterialModel, R.string.material_model, normalSummary.getMaterialStandard());
         setTextViewText(tvOrderNum, R.string.order_no, normalSummary.getSourceBillCode());
-        setTextViewText(tvSampleCode2, R.string.sample_code_format, String.valueOf(sampleCode));
         setTextViewText(tvRefuseReceiveNum, R.string.reject_num_format, String.valueOf(0));
-        tvSampleCode.setText(String.valueOf(sampleCode));
         /**
          * 设置质检操作的数据
          */
@@ -259,7 +278,14 @@ public class AdvanceQualityActivity extends BaseActivity<AdvanceQualityView, Adv
         if (null != checkItem && !checkItem.isEmpty()) {
             wrapQualityResult.setData(checkItem, this, 0, 0, 0, 0, 0, 0, 0, 0, 0);
         }
-
+        /**
+         * 设置样品编码
+         */
+        if (null != mData.getCheckItemData() && !mData.getCheckItemData().isEmpty()) {
+            sampleCode = mData.getCheckItemData().get(0).getSampleSeq()+1;
+        }
+        setTextViewText(tvSampleCode2, R.string.sample_code_format, String.valueOf(sampleCode));
+        tvSampleCode.setText(String.valueOf(sampleCode));
     }
 
     /**
@@ -292,10 +318,17 @@ public class AdvanceQualityActivity extends BaseActivity<AdvanceQualityView, Adv
          */
         if (sampleCode == mData.getNormalSummary().getSampleQty()) {
             tvSampleCode.setText(R.string.none);
+            setTextViewText(tvSampleCode2, R.string.sample_code_format, R.string.none);
+            wrapQualityResult.setVisibility(View.GONE);
         } else {
+            /**
+             * sampleCode 自增，currentCheckposition为0，
+             */
             sampleCode += 1;
             currentCheckposition = 0;
             showCheckItemDialog(false, currentCheckposition);
+            setTextViewText(tvSampleCode2, R.string.sample_code_format, String.valueOf(sampleCode));
+            tvSampleCode.setText(String.valueOf(sampleCode));
         }
     }
 
@@ -303,7 +336,7 @@ public class AdvanceQualityActivity extends BaseActivity<AdvanceQualityView, Adv
      * 显示 不合格用户是否继续质检的dialog
      */
     private void showUnPassDialog() {
-        MyDialog myDialog = new MyDialog(this, R.layout.dialog_unpass_user_choose);
+        final MyDialog myDialog = new MyDialog(this, R.layout.dialog_unpass_user_choose);
         myDialog.setButtonListener(R.id.btn_confirm, null, new MyDialog.DialogClickListener() {
             @Override
             public void dialogClick(MyDialog dialog) {
@@ -326,6 +359,24 @@ public class AdvanceQualityActivity extends BaseActivity<AdvanceQualityView, Adv
         myDialog.setButtonListener(R.id.btn_cancel, null, new MyDialog.DialogClickListener() {
             @Override
             public void dialogClick(MyDialog dialog) {
+                dialog.dismiss();
+                /**
+                 * 判断是否自动显示检验的对话框
+                 */
+                showCheckItemDialogJust();
+                /**
+                 * 更改按钮状态设置成确定
+                 */
+                tvNext.setText(getString(R.string.confirm));
+            }
+        });
+        /**
+         * 当选择取消的时候，也就是i说用户选择继续进行质检
+         */
+        myDialog.getView(R.id.iv_close).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                myDialog.dismiss();
                 /**
                  * 判断是否自动显示检验的对话框
                  */
@@ -352,7 +403,6 @@ public class AdvanceQualityActivity extends BaseActivity<AdvanceQualityView, Adv
         /**
          *  如果质检合格的话 要对拒收数进行判断
          */
-        int rejectNum = Integer.parseInt(tvRefuseReceiveNum.getText().toString().trim());
         switch (qcResult) {
             case 1://合格
                 if (rejectNum > 0 && mData.getNormalSummary().isIsBarCode()) {//拒收数大于0  跳转到质检拒收并且有条码
@@ -420,17 +470,6 @@ public class AdvanceQualityActivity extends BaseActivity<AdvanceQualityView, Adv
                 break;
             case R.id.tv_quality:
                 /**
-                 * 存储样品编码对用的样品检查项目的数据
-                 * 1、为了存储相应的检验数据
-                 * 2、为了多条目的样品数据做准备
-                 *
-                 * 当点击检验的按钮时 进行添加存储的数据，
-                 * 如果samplecode的相应的数据已存在，则不进行添加
-                 */
-                if (null == checkItemDatas.get(sampleCode)) {
-                    checkItemDatas.put(sampleCode, mData.getCheckItem());
-                }
-                /**
                  * 如果样品全部质检完成
                  */
                 if (sampleCode == mData.getNormalSummary().getSampleQty()) {
@@ -457,6 +496,22 @@ public class AdvanceQualityActivity extends BaseActivity<AdvanceQualityView, Adv
     List<GetAdvance2Data.CheckItemBean.FaultDataBean> faultData;
 
     public void showCheckItemDialog(final boolean isUpdateResult, final int position) {
+        /**
+         * 存储样品编码对用的样品检查项目的数据
+         * 1、为了存储相应的检验数据
+         * 2、为了多条目的样品数据做准备
+         *
+         * 当点击检验的按钮时 进行添加存储的数据，
+         * 如果samplecode的相应的数据已存在，则不进行添加
+         */
+        if (!isUpdateResult) {
+            if (null == checkItemDatas.get(sampleCode)) {
+                checkItemDatas.put(sampleCode, mData.getCheckItem());
+            }
+        }
+        /**
+         * 更改dialog 数据
+         */
         updateDialogData(currentCheckposition);
         /**
          * 初始化dialog
@@ -471,56 +526,23 @@ public class AdvanceQualityActivity extends BaseActivity<AdvanceQualityView, Adv
             tvLimmitHigh = checkItemDialog.getTextView(R.id.tv_limit_hight);
             tvCheckItem = checkItemDialog.getTextView(R.id.tv_check_item);
             tvCheckMode = checkItemDialog.getTextView(R.id.tv_check_model);
+            tvSelectBadness = checkItemDialog.getTextView(R.id.tv_select_result);
             etMeasure = checkItemDialog.getEdittext(R.id.et_measure_value);
             rdCheckQualitied = (RadioButton) checkItemDialog.getView(R.id.rd_qualified);
             rdCheckUnQualitied = (RadioButton) checkItemDialog.getView(R.id.rd_unqualified);
             dialogBtnNext = (Button) checkItemDialog.getView(R.id.btn_next);
-            Spinner spBadnessReason = (Spinner) checkItemDialog.getView(R.id.spinner_badness_reason);
-            badnessAdapter = new ArrayAdapter<>(AdvanceQualityActivity.this, android.R.layout.simple_list_item_1, badnessReasons);
-            badnessAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            spBadnessReason.setAdapter(badnessAdapter);
+            ivMrpDown = (ImageView) checkItemDialog.getView(R.id.iv_down);
             /**
-             * 选择的监听器
+             * 显示弹框
              */
-            spBadnessReason.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            checkItemDialog.setViewListener(R.id.rl_select_badness_reason, new MyDialog.DialogClickListener() {
                 @Override
-                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                    /**
-                     *  是否是更改已经检测过的检查项目
-                     *
-                     */
-                    if (!isUpdateResult) {
-                        /**
-                         *  对不良原因的数量 进行加1的操作
-                         *  1、 samplecode  样品编码
-                         *  2、currentCheckposition 当前检验项目的位置（也就是检验的项目）
-                         *  3、设置 checkItemDatas的不良原因的数量t
-                         */
-                        List<GetAdvance2Data.CheckItemBean.FaultDataBean> faultData = checkItemDatas.get(sampleCode).get(currentCheckposition).getFaultData();
-                        GetAdvance2Data.CheckItemBean.FaultDataBean faultDataBean = faultData.get(i);
-                        faultDataBean.setFaultQty(faultDataBean.getFaultQty() + 1);
+                public void dialogClick(MyDialog dialog) {
+                    if (null != selectReviewResultPopWindow && selectReviewResultPopWindow.isShowing()) {
+                        selectReviewResultPopWindow.dismiss();
                     } else {
-                        /**
-                         * 如果是更改数据的话
-                         */
-                        List<GetAdvance2Data.CheckItemBean.FaultDataBean> faultData = checkItemDatas.get(sampleCode).get(position).getFaultData();
-                        /**
-                         * 对点击更改项目的faultdata进行清空（因为每一个检验的项目必然是只有一个或者0个不良数）
-                         */
-                        for (int j = 0; j < faultData.size(); j++) {
-                            faultData.get(i).setFaultQty(0);
-                        }
-                        /**
-                         * 设置不良数
-                         */
-                        GetAdvance2Data.CheckItemBean.FaultDataBean faultDataBean = faultData.get(i);
-                        faultDataBean.setFaultQty(faultDataBean.getFaultQty() + 1);
+                        showSelectReviewResultPopWindow(checkItemDialog.getView(R.id.rl_select_badness_reason), isUpdateResult, position);
                     }
-                }
-
-                @Override
-                public void onNothingSelected(AdapterView<?> adapterView) {
-
                 }
             });
             /**
@@ -530,6 +552,13 @@ public class AdvanceQualityActivity extends BaseActivity<AdvanceQualityView, Adv
             checkItemDialog.setButtonListener(R.id.btn_confirm, null, new MyDialog.DialogClickListener() {
                 @Override
                 public void dialogClick(MyDialog dialog) {
+                    /**
+                     * 隐藏软键盘
+                     */
+                    InputMethodUtils.hide(AdvanceQualityActivity.this);
+                    /**
+                     * 测量值
+                     */
                     String measureStr = etMeasure.getText().toString().trim();
                     if (TextUtils.isEmpty(measureStr)) {
                         ToastUtils.showShort(getString(R.string.please_input_measure_value));
@@ -563,6 +592,14 @@ public class AdvanceQualityActivity extends BaseActivity<AdvanceQualityView, Adv
                     dialog.dismiss();
                 }
             });
+            checkItemDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                @Override
+                public void onDismiss(DialogInterface dialogInterface) {
+                    if (null != selectReviewResultPopWindow && selectReviewResultPopWindow.isShowing()) {
+                        selectReviewResultPopWindow.dismiss();
+                    }
+                }
+            });
             checkItemDialog.setButtonListener(R.id.btn_next, null, new MyDialog.DialogClickListener() {
                 @Override
                 public void dialogClick(MyDialog dialog) {
@@ -592,29 +629,72 @@ public class AdvanceQualityActivity extends BaseActivity<AdvanceQualityView, Adv
                         return;
                     }
                     /**
+                     * 存储检验项目的结果
+                     */
+                    if (null == mCommitAdvanceData.getItemData()) {
+                        mCommitAdvanceData.setItemData(new ArrayList<CommitAdvanceData.ItemDataBean>());
+                    }
+                    /**
+                     * 清空链表
+                     */
+                    mCommitAdvanceData.getItemData().clear();
+                    /**
+                     * 设置链表中bean 的数据
+                     */
+                    List<GetAdvance2Data.CheckItemBean> checkItem = mData.getCheckItem();
+                    GetAdvance2Data.CheckItemBean checkItemBean = checkItem.get(currentCheckposition);
+                    CommitAdvanceData.ItemDataBean itemDataBean = new CommitAdvanceData.ItemDataBean();
+                    itemDataBean.setCheckItemId(checkItemBean.getCheckItemId());
+                    itemDataBean.setQCValue(TextUtils.isEmpty(measureStr) ? 0 : Integer.parseInt(measureStr));
+                    itemDataBean.setQCResult(rdCheckQualitied.isChecked() ? 0 : 1);
+                    itemDataBean.setRemark("");
+                    if (rdCheckUnQualitied.isChecked()) {//不合格才有不良原因
+                        /**
+                         * 遍历链表 获取哪个不良原因被选中（不良数部位0  即是被选中）
+                         */
+                        List<GetAdvance2Data.CheckItemBean.FaultDataBean> faultData = checkItemDatas.get(sampleCode).get(currentCheckposition).getFaultData();
+                        int faultId = 0;
+                        for (int i = 0; i < faultData.size(); i++) {
+                            if (faultData.get(i).getFaultQty() != 0) {
+                                faultId = faultData.get(i).getFaultId();
+                                break;
+                            }
+                        }
+                        itemDataBean.setFaultId(faultId);
+                    } else {//合格 默认传0
+                        itemDataBean.setFaultId(0);
+                    }
+                    mSelectFaultData.add(itemDataBean);
+                    mCommitAdvanceData.setItemData(mSelectFaultData);
+                    /**
                      * 如果有下一项则直接检查下一项， 否则直接关闭
                      */
                     if (currentCheckposition == mData.getCheckItem().size() - 1) {
+                        LogUitls.e("当前选择的不合格的原因的数据--->", checkItemDatas.get(sampleCode).get(currentCheckposition).getFaultData());
                         checkItemDialog.dismiss();
                         /**
                          * 设置高级质检2的结果
                          */
                         Map<String, Object> params = new HashMap<>();
-                        params.put("UserId", SpUtils.getInstance().getUserId());
-                        params.put("OrgId", SpUtils.getInstance().getOrgId());
-                        params.put("mac", PackageUtils.getMac());
-                        params.put("ReceiptId", receiptId);
-                        params.put("ReceiptDetailId", receiptDetailId);
-                        params.put("Remark", "");
+                        mCommitAdvanceData.setUserId(SpUtils.getInstance().getUserId());
+                        mCommitAdvanceData.setOrgId(SpUtils.getInstance().getOrgId());
+                        mCommitAdvanceData.setMAC(PackageUtils.getMac());
+                        mCommitAdvanceData.setReceiptId(receiptId);
+                        mCommitAdvanceData.setReceiptDetailId(receiptDetailId);
                         GetAdvance2Data.AdvanceSummaryBean advanceSummary = mData.getAdvanceSummary();
-                        params.put("CurrentStrict", advanceSummary.getCurrentStrict());
-                        params.put("CurrentLevel", advanceSummary.getCurrentLevel());
-                        params.put("SampleCode", advanceSummary.getSampleCode());
-                        params.put("BeginQty", advanceSummary.getBeginQty());
-                        params.put("EndQty", advanceSummary.getEndQty());
-                        params.put("CurrentAQL", advanceSummary.getCurrentAQL());
-                        params.put("AQLAcceptQty", advanceSummary.getAqlAcceptQty());
-                        params.put("AQLRejectQty", advanceSummary.getAqlRejectQty());
+                        mCommitAdvanceData.setCurrentStrict(advanceSummary.getCurrentStrict());
+                        mCommitAdvanceData.setSampleQty(mData.getNormalSummary().getSampleQty());
+                        mCommitAdvanceData.setCurrentLevel(advanceSummary.getCurrentLevel());
+                        mCommitAdvanceData.setSampleCode(advanceSummary.getSampleCode());
+                        mCommitAdvanceData.setBeginQty(advanceSummary.getBeginQty());
+                        mCommitAdvanceData.setEndQty(advanceSummary.getBeginQty());
+                        mCommitAdvanceData.setCurrentAQL(advanceSummary.getCurrentAQL());
+                        mCommitAdvanceData.setAQLAcceptQty(advanceSummary.getAqlAcceptQty());
+                        mCommitAdvanceData.setAQLRejectQty(advanceSummary.getAqlRejectQty());
+                        mCommitAdvanceData.setQCQty(sampleCode);
+                        mCommitAdvanceData.setRemark("");
+                        //设置质检未完成
+                        mCommitAdvanceData.setQCStatus(2);
                         /**
                          * 计算是否合格
                          */
@@ -629,8 +709,6 @@ public class AdvanceQualityActivity extends BaseActivity<AdvanceQualityView, Adv
                                 isPass = false;
                             }
                         }
-                        //设置质检未完成
-                        params.put("QCStatus", 2);
                         /**
                          * 不良缺陷的个数
                          */
@@ -641,15 +719,11 @@ public class AdvanceQualityActivity extends BaseActivity<AdvanceQualityView, Adv
                         /**
                          * 拒收的数量
                          */
-                        int rejectNum = 0;
+                        rejectNum = 0;
                         /**
                          * 不良总数
                          */
                         int totalBadnessNum = 0;
-                        /**
-                         * 不良原因的链表
-                         */
-                        List<FaultData> mSelectFaultData = new ArrayList<FaultData>();
                         /**
                          * 全部合格
                          */
@@ -666,8 +740,8 @@ public class AdvanceQualityActivity extends BaseActivity<AdvanceQualityView, Adv
                              * 计算所有的缺陷数
                              * 遍历链表
                              */
-                            for (int key = 1; key < sampleCode; key++) {
-                                List<GetAdvance2Data.CheckItemBean> checkItemBeen = checkItemDatas.get(key);
+                            for (int key = 1; key <= sampleCode; key++) {
+                                List<GetAdvance2Data.CheckItemBean> checkItemBeen = checkItemDatas.get(sampleCode);
                                 for (int i = 0; i < checkItemBeen.size(); i++) {
                                     List<GetAdvance2Data.CheckItemBean.FaultDataBean> faultData = checkItemBeen.get(i).getFaultData();
                                     GetAdvance2Data.CheckItemBean.FaultDataBean faultDataBean = faultData.get(i);
@@ -689,7 +763,6 @@ public class AdvanceQualityActivity extends BaseActivity<AdvanceQualityView, Adv
                                      * 如果不良数的数量不为0 则设置到选择的不良原因的链表，用于提交数据
                                      */
                                     if (faultDataBean.getFaultQty() != 0) {
-                                        mSelectFaultData.add(new FaultData(faultDataBean.getFaultId(), faultDataBean.getFaultQty()));
                                         /**
                                          * 如果不良原因的数量不为0 则需要再不良总数上+1
                                          */
@@ -707,50 +780,53 @@ public class AdvanceQualityActivity extends BaseActivity<AdvanceQualityView, Adv
                                         break;
                                     }
                                 }
-                                /**
-                                 * 设置拒收的数量
-                                 */
-                                setTextViewText(tvRefuseReceiveNum, R.string.reject_num_format, String.valueOf(rejectNum));
-                                /**
-                                 * 设置不良总数
-                                 */
-                                standBadnessTotalNum.setTextViewContent(totalBadnessNum);
-                                /**
-                                 * 设置不良缺陷数的设置
-                                 */
-                                standFatalBadnessNum.setTextViewContent(FatalQty);
-                                standSeriousBadnessNum.setTextViewContent(SeriousQty);
-                                standNormalBadnessNum.setTextViewContent(CommonlyQty);
-                                standSlightBadnessNum.setTextViewContent(SlightQty);
                             }
                             //允许拒收数
                             int aqlRejectQty = mData.getAdvanceSummary().getAqlRejectQty();
                             int aqlAcceptQty = mData.getAdvanceSummary().getAqlAcceptQty();
                             //拒收数
                             /**
-                             *  1、当拒收数 大于等于允许数并且小于拒收数的时候  qcResult = 2; 待定
-                             *  2、当拒收数 大于等于拒收数                     qcResult = 2; 不合格
+                             *  1、当拒收数 大于允许数并且小于拒收数的时候  qcResult = 2; 待定
+                             *  2、当拒收数 大于等于拒收数                     qcResult = 3; 不合格
+                             *  3、不同的qcResult 设置不同的质检结果（不是弹框的合不合格而是整个质检过程中的合不合格）
                              */
-                            if (rejectNum >= aqlAcceptQty && rejectNum < aqlRejectQty) {//待定的状态
+                            if (rejectNum > aqlAcceptQty && rejectNum < aqlRejectQty) {//待定的状态
                                 qcResult = 2;
+                                rdWaitDeal.setChecked(true);
                             } else if (rejectNum >= aqlRejectQty) {
                                 qcResult = 3;
+                                rdUnqualified.setChecked(true);
+                            } else {
+                                rdQualified.setChecked(true);
                             }
+                            /**
+                             * 设置拒收的数量
+                             */
+                            setTextViewText(tvRefuseReceiveNum, R.string.reject_num_format, String.valueOf(rejectNum));
+                            /**
+                             * 设置不良总数
+                             */
+                            standBadnessTotalNum.setTextViewContent(totalBadnessNum);
+                            /**
+                             * 设置不良缺陷数的设置
+                             */
+                            standFatalBadnessNum.setTextViewContent(FatalQty);
+                            standSeriousBadnessNum.setTextViewContent(SeriousQty);
+                            standNormalBadnessNum.setTextViewContent(CommonlyQty);
+                            standSlightBadnessNum.setTextViewContent(SlightQty);
                         }
-                        params.put("QCResult", qcResult);
+                        mCommitAdvanceData.setQCResult(qcResult);
+                        mCommitAdvanceData.setNGQty(totalBadnessNum);
+                        mCommitAdvanceData.setRejectQty(rejectNum);
                         /**
                          * 设置不良缺陷的个数
                          */
-                        params.put("FatalQty", FatalQty);
-                        params.put("SeriousQty", SeriousQty);
-                        params.put("CommonlyQty", CommonlyQty);
-                        params.put("SlightQty", SlightQty);
-
-                        /**
-                         * 设置 不良原因的链表
-                         */
-                        params.put("FaultData", mSelectFaultData);
-                        getPresenter().setAdvance2Data(params);
+                        mCommitAdvanceData.setFatalQty(FatalQty);
+                        mCommitAdvanceData.setSeriousQty(SeriousQty);
+                        mCommitAdvanceData.setSlightQty(SlightQty);
+                        mCommitAdvanceData.setCommonlyQty(CommonlyQty);
+                        LogUitls.e("提交的数据-->", new Gson().toJson(mCommitAdvanceData));
+                        getPresenter().setAdvance2Data(mCommitAdvanceData);
                     } else {
                         /**
                          * 更新位置
@@ -792,18 +868,14 @@ public class AdvanceQualityActivity extends BaseActivity<AdvanceQualityView, Adv
         tvLimmitLow.setText(String.valueOf(checkItemBean.getLimitLow()));
         tvLimmitHigh.setText(String.valueOf(checkItemBean.getLimitHigh()));
         /**
-         * 刷新
+         * 设置不良原因的文本
          */
-        badnessAdapter.notifyDataSetChanged();
+        tvSelectBadness.setText(getString(R.string.please_select_badness_reason));
         /**
          * 重置测量值
          */
         etMeasure.setText("");
-        /**
-         * 重置选择
-         */
-        rdCheckQualitied.setChecked(false);
-        rdCheckUnQualitied.setChecked(false);
+        rgQualified.clearCheck();
         /**
          * 设置hint
          */
@@ -813,9 +885,9 @@ public class AdvanceQualityActivity extends BaseActivity<AdvanceQualityView, Adv
          * 即当前检验的位置==检验项目的大小-1   currentCheckposition==mData.getCheckItem().size()-1
          */
         if (currentCheckposition == mData.getCheckItem().size() - 1) {
-            tvNext.setText(getString(R.string.confirm));
+            dialogBtnNext.setText(getString(R.string.confirm));
         } else {
-            tvNext.setText(getString(R.string.next_item));
+            dialogBtnNext.setText(getString(R.string.next_item));
         }
     }
 
@@ -859,15 +931,91 @@ public class AdvanceQualityActivity extends BaseActivity<AdvanceQualityView, Adv
     }
 
     /**
-     * 不良原因
+     * 选择不良原因的弹出框
      */
-    class FaultData {
-        int FaultId;
-        int FaultQty;
+    PopupWindow selectReviewResultPopWindow;
 
-        public FaultData(int faultId, int faultQty) {
-            FaultId = faultId;
-            FaultQty = faultQty;
+    /**
+     * 弹出选择评审结果的选择
+     */
+    private ImageView ivMrpDown;
+
+    /**
+     * @param view
+     * @param isUpdateResult    是否是更改检查项目
+     * @param checkItemposition 检查项目的位置（更改时点击）
+     */
+    private void showSelectReviewResultPopWindow(View view, final boolean isUpdateResult, final int checkItemposition) {
+        if (null == selectReviewResultPopWindow) {
+            selectReviewResultPopWindow = new PopupWindow(this);
+            View inflate = LayoutInflater.from(this).inflate(R.layout.popwindow_select_badness_reason, null);
+            RecyclerView recyclerView = inflate.findViewById(R.id.rlv_select_badness_reason);
+            recyclerView.setLayoutManager(new LinearLayoutManager(this));
+            BaseRecyclerAdapter<GetAdvance2Data.CheckItemBean.FaultDataBean> baseRecyclerAdapter = new BaseRecyclerAdapter<GetAdvance2Data.CheckItemBean.FaultDataBean>(this, mData.getCheckItem().get(currentCheckposition).getFaultData()) {
+                @Override
+                protected int getItemLayoutId(int viewType) {
+                    return R.layout.item_select_badness;
+                }
+
+                @Override
+                protected void bindData(RecyclerViewHolder holder, int position, GetAdvance2Data.CheckItemBean.FaultDataBean item) {
+                    holder.setTextView(R.id.tv_content, item.getFaultName());
+                }
+            };
+            recyclerView.setAdapter(baseRecyclerAdapter);
+            baseRecyclerAdapter.setOnItemClickListener(new BaseRecyclerAdapter.OnItemClickListener() {
+                @Override
+                public void onItemClick(View itemView, int pos) {
+                    /**
+                     * 是否是更改已经检测过的检查项目
+                     */
+                    if (!isUpdateResult) {
+                        /**
+                         *  对不良原因的数量 进行加1的操作
+                         *  1、 samplecode  样品编码
+                         *  2、currentCheckposition 当前检验项目的位置（也就是检验的项目）
+                         *  3、设置 checkItemDatas的不良原因的数量t
+                         */
+                        List<GetAdvance2Data.CheckItemBean.FaultDataBean> faultData = checkItemDatas.get(sampleCode).get(currentCheckposition).getFaultData();
+                        GetAdvance2Data.CheckItemBean.FaultDataBean faultDataBean = faultData.get(pos);
+                        faultDataBean.setFaultQty(faultDataBean.getFaultQty() + 1);
+                        tvSelectBadness.setText(faultDataBean.getFaultName());
+                    } else {
+                        /**
+                         * 如果是更改数据的话
+                         */
+                        List<GetAdvance2Data.CheckItemBean.FaultDataBean> faultData = checkItemDatas.get(sampleCode).get(checkItemposition).getFaultData();
+                        /**
+                         * 对点击更改项目的faultdata进行清空（因为每一个检验的项目必然是只有一个或者0个不良数）
+                         */
+                        for (int j = 0; j < faultData.size(); j++) {
+                            faultData.get(pos).setFaultQty(0);
+                        }
+                        /**
+                         * 设置不良数
+                         */
+                        GetAdvance2Data.CheckItemBean.FaultDataBean faultDataBean = faultData.get(pos);
+                        faultDataBean.setFaultQty(faultDataBean.getFaultQty() + 1);
+                        tvSelectBadness.setText(faultDataBean.getFaultName());
+                    }
+                    selectReviewResultPopWindow.dismiss();
+                }
+            });
+            selectReviewResultPopWindow.setContentView(inflate);
+            selectReviewResultPopWindow.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#00000000")));
+            selectReviewResultPopWindow.setOutsideTouchable(false);
         }
+        selectReviewResultPopWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                Animation animation = AnimationUtils.loadAnimation(AdvanceQualityActivity.this, R.anim.rotation_up);
+                animation.setFillAfter(true);
+                ivMrpDown.startAnimation(animation);
+            }
+        });
+        selectReviewResultPopWindow.showAsDropDown(view);
+        Animation animation = AnimationUtils.loadAnimation(this, R.anim.rotation_down);
+        animation.setFillAfter(true);
+        ivMrpDown.startAnimation(animation);
     }
 }

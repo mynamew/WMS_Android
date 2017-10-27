@@ -22,6 +22,7 @@ import com.timi.sz.wms_android.base.uils.LogUitls;
 import com.timi.sz.wms_android.base.uils.PackageUtils;
 import com.timi.sz.wms_android.base.uils.SpUtils;
 import com.timi.sz.wms_android.base.uils.ToastUtils;
+import com.timi.sz.wms_android.bean.quality.normal.CommitNormalData;
 import com.timi.sz.wms_android.bean.quality.normal.NormalQualityData;
 import com.timi.sz.wms_android.http.message.BaseMessage;
 import com.timi.sz.wms_android.http.message.event.QualityEvent;
@@ -92,13 +93,11 @@ public class NormalQualityActivity extends BaseActivity<NormalQualityView, Norma
      * 保存的数据
      */
     private NormalQualityData mData;
-    private List<NormalQualityData.FaultDataBean> mFaultData;
     private MyDialog faultDataDialog;
-
     /**
-     * 不良原因
+     * 实例化提交的实体
      */
-    private List<FaultData> mSelectFaultData = new ArrayList<>();
+    CommitNormalData commitNormalData = new CommitNormalData();
 
     @Override
     public int setLayoutId() {
@@ -305,27 +304,24 @@ public class NormalQualityActivity extends BaseActivity<NormalQualityView, Norma
         /**
          * 网络请求 进行下一步
          */
-        Map<String, Object> params = new HashMap<>();
-        params.put("UserId", SpUtils.getInstance().getUserId());
-        params.put("OrgId", SpUtils.getInstance().getOrgId());
-        params.put("mac", PackageUtils.getMac());
-        params.put("ReceiptId", receiptId);
-        params.put("ReceiptDetailId", receiptDetailId);
-        params.put("SampleQty", Integer.parseInt(spotCheckNum));
-        params.put("NGQty", Integer.parseInt(badnessNum));
-        LogUitls.e("NGQty--->", Integer.parseInt(badnessNum));
-        /**
-         */
-        params.put("RejectQty", Integer.parseInt(refuseReceiveNum));
-        /**
-         * 更改质检状态 质检未完成
-         */
-        params.put("QCStatus", 2);
+        commitNormalData.setMAC(PackageUtils.getMac());
+        commitNormalData.setOrgId(SpUtils.getInstance().getOrgId());
+        commitNormalData.setUserId(SpUtils.getInstance().getUserId());
+        commitNormalData.setReceiptId(receiptId);
+        commitNormalData.setReceiptDetailId(receiptDetailId);
+        commitNormalData.setSampleQty(Integer.parseInt(spotCheckNum));
+        commitNormalData.setNGQty(Integer.parseInt(badnessNum));
+        commitNormalData.setRejectQty(Integer.parseInt(refuseReceiveNum));
         /**
          * 1  合格
          * 3  不合格
          */
-        params.put("QCResult", isQualified ? 1 : 3);
+        commitNormalData.setQCResult(isQualified ? 1 : 3);
+        /**
+         * 更改质检状态 质检未完成
+         */
+        commitNormalData.setQCStatus(2);
+        commitNormalData.setRemark("");
         /**
          * 计算缺陷的个数
          */
@@ -336,9 +332,13 @@ public class NormalQualityActivity extends BaseActivity<NormalQualityView, Norma
         /**
          * 根据选择了的不良原因 设置其缺陷的个数
          */
-        for (int i = 0; i < mFaultData.size(); i++) {
-            NormalQualityData.FaultDataBean faultDataBean = mFaultData.get(i);
-            switch (faultDataBean.getQC_DefectGrade()) {
+        /**
+         * 原数据 获取不良缺陷数
+         */
+        List<NormalQualityData.FaultDataBean> faultData = mData.getFaultData();
+        for (int i = 0; i < faultData.size(); i++) {
+            NormalQualityData.FaultDataBean faultDataBean = faultData.get(i);
+            switch (faultData.get(i).getQC_DefectGrade()) {
                 case "C"://致命缺陷
                     FatalQty = FatalQty + faultDataBean.getFaultQty();
                     break;
@@ -353,22 +353,15 @@ public class NormalQualityActivity extends BaseActivity<NormalQualityView, Norma
                     break;
             }
         }
-        params.put("Remark", "");
-        params.put("FatalQty", FatalQty);
-        params.put("SeriousQty", SeriousQty);
-        params.put("CommonlyQty", CommonlyQty);
-        params.put("SlightQty", SlightQty);
-        /**
-         * 设置  不良原因的链表
-         */
-        mSelectFaultData.clear();
-        for (int i = 0; i < mFaultData.size(); i++) {
-            mSelectFaultData.add(new FaultData(mFaultData.get(i).getFaultId(), mFaultData.get(i).getFaultQty()));
-        }
-        params.put("FaultData", mSelectFaultData);
-        LogUitls.e("params--->", params);
-        getPresenter().setNormalQualityData(params, isQualified, Integer.parseInt(refuseReceiveNum));
-    }
+        commitNormalData.setFatalQty(FatalQty);
+        commitNormalData.setSeriousQty(SeriousQty);
+        commitNormalData.setCommonlyQty(CommonlyQty);
+        commitNormalData.setSlightQty(SlightQty);
+
+    getPresenter().
+
+    setNormalQualityData(commitNormalData, isQualified, Integer.parseInt(refuseReceiveNum));
+}
 
     @Override
     public void getNormalQualityData(NormalQualityData result) {
@@ -394,8 +387,20 @@ public class NormalQualityActivity extends BaseActivity<NormalQualityView, Norma
          * 不良原因
          */
         final List<NormalQualityData.FaultDataBean> faultData = result.getFaultData();
+        /**
+         * 设置提交的数据的不良原因的数据
+         */
+        commitNormalData.setFaultData(new ArrayList<CommitNormalData.FaultDataBean>());
+        for (int i = 0; i < faultData.size(); i++) {
+            CommitNormalData.FaultDataBean faultDataBean = new CommitNormalData.FaultDataBean();
+            faultDataBean.setFaultId(faultData.get(i).getFaultId());
+            faultDataBean.setFaultQty(faultData.get(i).getFaultQty());
+            commitNormalData.getFaultData().add(faultDataBean);
+        }
+        /**
+         * adapter初始化
+         */
         if (null != faultData) {
-            mFaultData = faultData;
             final BaseRecyclerAdapter<NormalQualityData.FaultDataBean> adapter = new BaseRecyclerAdapter<NormalQualityData.FaultDataBean>(this, faultData) {
                 @Override
                 protected int getItemLayoutId(int viewType) {
@@ -453,19 +458,19 @@ public class NormalQualityActivity extends BaseActivity<NormalQualityView, Norma
                             /**
                              * 计算获取所有的不良数的和
                              */
-                            for (int i = 0; i < mFaultData.size(); i++) {
-                                /**
-                                 * 如果已存在 即设置过不良数则不将原来的不良数进行相加
-                                 */
-                                if (mFaultData.get(i).getFaultId() == faultData.get(position).getFaultId()) {
-                                    continue;
-                                }
-                                totalBadnessNum = totalBadnessNum + mFaultData.get(i).getFaultQty();
-                            }
+                            List<CommitNormalData.FaultDataBean> commintFaultData = commitNormalData.getFaultData();
                             /**
-                             * 计算不良总数  不良总数=不良总数-原来position位置的不良数+现在更改position位置的不良数
+                             * 设置 提交数据 和源数据的不良数量
                              */
-                            totalBadnessNum = totalBadnessNum - mFaultData.get(position).getFaultQty() + Integer.parseInt(badnessNumStr);
+                            commintFaultData.get(position).setFaultQty(Integer.parseInt(badnessNumStr));
+                            faultData.get(position).setFaultQty(Integer.parseInt(badnessNumStr));
+
+                            /**
+                             *  遍历提交的选择链表 ，计算不良数
+                             */
+                            for (int i = 0; i < commintFaultData.size(); i++) {
+                                totalBadnessNum = totalBadnessNum + commintFaultData.get(i).getFaultQty();
+                            }
                             /**
                              * 输入的抽样数
                              */
@@ -473,13 +478,7 @@ public class NormalQualityActivity extends BaseActivity<NormalQualityView, Norma
                             if (totalBadnessNum + Integer.parseInt(badnessNumStr) > Integer.parseInt(inputSampleNumStr)) {
                                 ToastUtils.showShort("不良总数不能大于抽样数，请重新输入");
                                 return;
-                            } else {//如果不大于实收数 则添加不良数
-                                totalBadnessNum = totalBadnessNum + Integer.parseInt(badnessNumStr);
                             }
-                            /**
-                             * 设置原数据
-                             */
-                            mFaultData.get(position).setFaultQty(Integer.parseInt(badnessNumStr));
                             adapter.notifyDataSetChanged();
                             /**
                              * 当不良总数大于实收数 时提示用户
@@ -524,7 +523,7 @@ public class NormalQualityActivity extends BaseActivity<NormalQualityView, Norma
                     /**
                      * 设置不良原因
                      */
-                    setTextViewText(faultDataDialog.getTextView(R.id.tv_badness_reason), R.string.badness_reason_tip, mFaultData.get(position).getFaultName());
+                    setTextViewText(faultDataDialog.getTextView(R.id.tv_badness_reason), R.string.badness_reason_tip, faultData.get(position).getFaultName());
                     faultDataDialog.show();
                 }
 
@@ -581,18 +580,6 @@ public class NormalQualityActivity extends BaseActivity<NormalQualityView, Norma
         onBackPressed();
     }
 
-    /**
-     * 选择不良原因的实体类
-     */
-    class FaultData {
-        int FaultId;
-        int FaultQty;
-
-        public FaultData(int faultId, int faultQty) {
-            FaultId = faultId;
-            FaultQty = faultQty;
-        }
-    }
 
     @Override
     protected void onDestroy() {

@@ -83,7 +83,7 @@ public class MRPNormalReviewActivity extends BaseActivity<MRPNormalReviewView, M
 
     @Override
     public void initBundle(Bundle savedInstanceState) {
-        mrpReviewData = new Gson().fromJson(getIntent().getStringExtra("NormalReviewDetail"), MrpReviewData.class);
+        mrpReviewData = new Gson().fromJson(getIntent().getStringExtra("ReviewDetail"), MrpReviewData.class);
     }
 
     @Override

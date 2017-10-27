@@ -11,20 +11,20 @@ import java.util.List;
 public class GetAdvance2Data {
 
     /**
-     * normalSummary : {"receiptId":10224,"receiptDetailId":24805,"receiptCode":"DH161119004","receiptDate":"2017-09-11","sourceBillCode":"CG161116099","supplierName":"深圳市日科实业有限公司","creater":null,"materialId":333,"materialCode":"10101010334","materialName":"贴片电阻","materialStandard":"1R2/0805/±5%","materialAttribute":null,"receiveQty":5000,"sampleQty":200,"ngQty":0,"rejectQty":0,"qcStatus":0,"qcResult":0,"isBarCode":false,"barcodeSource":1}
-     * advanceSummary : {"qcType":3,"currentStrict":"正常","currentLevel":"II","sampleCode":"L","currentAQL":"0.15","aqlAcceptQty":0,"aqlRejectQty":2,"beginQty":3201,"endQty":10000,"qcQty":0,"fatalQty":0,"seriousQty":0,"commonlyQty":0,"slightQty":0}
-     * checkItem : [{"checkItemId":3,"checkItemCode":"001","checkItemName":"宽度","judgeType":1,"unit":"厘米","limitLow":2.2,"limitHigh":2.5,"stardard":2.3,"remark":"手工填充","faultData":[{"faultId":28,"faultCode":"F013","faultName":"过宽","faultDesc":"","faultQty":0,"qC_DefectGrade":"B"},{"faultId":29,"faultCode":"F014","faultName":"过窄","faultDesc":"","faultQty":0,"qC_DefectGrade":"B"}]},{"checkItemId":2,"checkItemCode":"2","checkItemName":"温度","judgeType":1,"unit":"℃","limitLow":40.5,"limitHigh":40.8,"stardard":40.6,"remark":"手工填充","faultData":[{"faultId":30,"faultCode":"F015","faultName":"温度过高","faultDesc":"","faultQty":0,"qC_DefectGrade":"B"},{"faultId":31,"faultCode":"F016","faultName":"温度过低","faultDesc":"","faultQty":0,"qC_DefectGrade":"A"}]},{"checkItemId":1,"checkItemCode":"1","checkItemName":"外观","judgeType":2,"unit":" ","limitLow":0,"limitHigh":0,"stardard":0,"remark":"手工填充","faultData":[{"faultId":23,"faultCode":"F0008","faultName":"表面凹陷","faultDesc":"","faultQty":0,"qC_DefectGrade":"B"},{"faultId":22,"faultCode":"F007","faultName":"表面凸起","faultDesc":"","faultQty":0,"qC_DefectGrade":"A"},{"faultId":24,"faultCode":"F009","faultName":"有裂缝","faultDesc":"","faultQty":0,"qC_DefectGrade":"B"},{"faultId":25,"faultCode":"F010","faultName":"破损","faultDesc":"","faultQty":0,"qC_DefectGrade":"C"},{"faultId":26,"faultCode":"F011","faultName":"沙眼","faultDesc":"","faultQty":0,"qC_DefectGrade":"A"}]}]
-     * checkItemData : null
-     * barcodeData : null
-     * faultData : null
+     * normalSummary : {"receiptId":8709,"receiptDetailId":20651,"receiptCode":"DH160628005","receiptDate":"2017-09-11","sourceBillCode":"CG160425242","supplierName":"深圳市宝安区大浪恒昶塑胶电子厂","creater":null,"materialId":3912,"materialCode":"20301010017","materialName":"750前壳(带音频)","materialStandard":"烤漆/哑黑/压铸锌合金/69*43*23/钻孔","materialAttribute":null,"receiveQty":600,"sampleQty":125,"ngQty":0,"rejectQty":0,"qcStatus":2,"qcResult":1,"isBarCode":false,"barcodeSource":1}
+     * advanceSummary : {"qcType":3,"currentStrict":"加严","currentLevel":"III","sampleCode":"K","currentAQL":"0.65","aqlAcceptQty":0,"aqlRejectQty":3,"beginQty":501,"endQty":501,"qcQty":1,"fatalQty":0,"seriousQty":0,"commonlyQty":0,"slightQty":0}
+     * checkItem : [{"checkItemId":44,"checkItemCode":"ITEM01","checkItemName":"PQC检验项目01","judgeType":0,"unit":"","limitLow":3,"limitHigh":2,"stardard":3,"remark":"","faultData":[{"faultId":22,"faultCode":"F007","faultName":"表面凸起","faultDesc":"","faultQty":0,"qC_DefectGrade":"A"}]}]
+     * checkItemData : [{"sampleSeq":1,"checkItemId":44,"qcValue":"0","qcResult":0,"faultId":0,"remark":""}]
+     * barcodeData : [{"BarcodeNo":"实收数","PackQty":44,"CurrentQty":"0","RejectQty":0}]
+     * faultData : [{"faultId":2,"faultCode":"002","faultName":"外观不良","faultDesc":"外观不良","faultQty":2,"qC_DefectGrade":"B"}]
      */
 
     private NormalSummaryBean normalSummary;
     private AdvanceSummaryBean advanceSummary;
-    private Object checkItemData;
-    private Object barcodeData;
-    private Object faultData;
     private List<CheckItemBean> checkItem;
+    private List<CheckItemDataBean> checkItemData;
+    private List<BarcodeDataBean> barcodeData;
+    private List<FaultDataBeanX> faultData;
 
     public NormalSummaryBean getNormalSummary() {
         return normalSummary;
@@ -42,30 +42,6 @@ public class GetAdvance2Data {
         this.advanceSummary = advanceSummary;
     }
 
-    public Object getCheckItemData() {
-        return checkItemData;
-    }
-
-    public void setCheckItemData(Object checkItemData) {
-        this.checkItemData = checkItemData;
-    }
-
-    public Object getBarcodeData() {
-        return barcodeData;
-    }
-
-    public void setBarcodeData(Object barcodeData) {
-        this.barcodeData = barcodeData;
-    }
-
-    public Object getFaultData() {
-        return faultData;
-    }
-
-    public void setFaultData(Object faultData) {
-        this.faultData = faultData;
-    }
-
     public List<CheckItemBean> getCheckItem() {
         return checkItem;
     }
@@ -74,26 +50,50 @@ public class GetAdvance2Data {
         this.checkItem = checkItem;
     }
 
+    public List<CheckItemDataBean> getCheckItemData() {
+        return checkItemData;
+    }
+
+    public void setCheckItemData(List<CheckItemDataBean> checkItemData) {
+        this.checkItemData = checkItemData;
+    }
+
+    public List<BarcodeDataBean> getBarcodeData() {
+        return barcodeData;
+    }
+
+    public void setBarcodeData(List<BarcodeDataBean> barcodeData) {
+        this.barcodeData = barcodeData;
+    }
+
+    public List<FaultDataBeanX> getFaultData() {
+        return faultData;
+    }
+
+    public void setFaultData(List<FaultDataBeanX> faultData) {
+        this.faultData = faultData;
+    }
+
     public static class NormalSummaryBean {
         /**
-         * receiptId : 10224
-         * receiptDetailId : 24805
-         * receiptCode : DH161119004
+         * receiptId : 8709
+         * receiptDetailId : 20651
+         * receiptCode : DH160628005
          * receiptDate : 2017-09-11
-         * sourceBillCode : CG161116099
-         * supplierName : 深圳市日科实业有限公司
+         * sourceBillCode : CG160425242
+         * supplierName : 深圳市宝安区大浪恒昶塑胶电子厂
          * creater : null
-         * materialId : 333
-         * materialCode : 10101010334
-         * materialName : 贴片电阻
-         * materialStandard : 1R2/0805/±5%
+         * materialId : 3912
+         * materialCode : 20301010017
+         * materialName : 750前壳(带音频)
+         * materialStandard : 烤漆/哑黑/压铸锌合金/69*43*23/钻孔
          * materialAttribute : null
-         * receiveQty : 5000
-         * sampleQty : 200
+         * receiveQty : 600
+         * sampleQty : 125
          * ngQty : 0
          * rejectQty : 0
-         * qcStatus : 0
-         * qcResult : 0
+         * qcStatus : 2
+         * qcResult : 1
          * isBarCode : false
          * barcodeSource : 1
          */
@@ -283,15 +283,15 @@ public class GetAdvance2Data {
     public static class AdvanceSummaryBean {
         /**
          * qcType : 3
-         * currentStrict : 正常
-         * currentLevel : II
-         * sampleCode : L
-         * currentAQL : 0.15
+         * currentStrict : 加严
+         * currentLevel : III
+         * sampleCode : K
+         * currentAQL : 0.65
          * aqlAcceptQty : 0
-         * aqlRejectQty : 2
-         * beginQty : 3201
-         * endQty : 10000
-         * qcQty : 0
+         * aqlRejectQty : 3
+         * beginQty : 501
+         * endQty : 501
+         * qcQty : 1
          * fatalQty : 0
          * seriousQty : 0
          * commonlyQty : 0
@@ -428,16 +428,16 @@ public class GetAdvance2Data {
 
     public static class CheckItemBean {
         /**
-         * checkItemId : 3
-         * checkItemCode : 001
-         * checkItemName : 宽度
-         * judgeType : 1
-         * unit : 厘米
-         * limitLow : 2.2
-         * limitHigh : 2.5
-         * stardard : 2.3
-         * remark : 手工填充
-         * faultData : [{"faultId":28,"faultCode":"F013","faultName":"过宽","faultDesc":"","faultQty":0,"qC_DefectGrade":"B"},{"faultId":29,"faultCode":"F014","faultName":"过窄","faultDesc":"","faultQty":0,"qC_DefectGrade":"B"}]
+         * checkItemId : 44
+         * checkItemCode : ITEM01
+         * checkItemName : PQC检验项目01
+         * judgeType : 0
+         * unit :
+         * limitLow : 3
+         * limitHigh : 2
+         * stardard : 3
+         * remark :
+         * faultData : [{"faultId":22,"faultCode":"F007","faultName":"表面凸起","faultDesc":"","faultQty":0,"qC_DefectGrade":"A"}]
          */
 
         private int checkItemId;
@@ -445,9 +445,9 @@ public class GetAdvance2Data {
         private String checkItemName;
         private int judgeType;
         private String unit;
-        private double limitLow;
-        private double limitHigh;
-        private double stardard;
+        private int limitLow;
+        private int limitHigh;
+        private int stardard;
         private String remark;
         private List<FaultDataBean> faultData;
 
@@ -491,27 +491,27 @@ public class GetAdvance2Data {
             this.unit = unit;
         }
 
-        public double getLimitLow() {
+        public int getLimitLow() {
             return limitLow;
         }
 
-        public void setLimitLow(double limitLow) {
+        public void setLimitLow(int limitLow) {
             this.limitLow = limitLow;
         }
 
-        public double getLimitHigh() {
+        public int getLimitHigh() {
             return limitHigh;
         }
 
-        public void setLimitHigh(double limitHigh) {
+        public void setLimitHigh(int limitHigh) {
             this.limitHigh = limitHigh;
         }
 
-        public double getStardard() {
+        public int getStardard() {
             return stardard;
         }
 
-        public void setStardard(double stardard) {
+        public void setStardard(int stardard) {
             this.stardard = stardard;
         }
 
@@ -533,12 +533,12 @@ public class GetAdvance2Data {
 
         public static class FaultDataBean {
             /**
-             * faultId : 28
-             * faultCode : F013
-             * faultName : 过宽
+             * faultId : 22
+             * faultCode : F007
+             * faultName : 表面凸起
              * faultDesc :
              * faultQty : 0
-             * qC_DefectGrade : B
+             * qC_DefectGrade : A
              */
 
             private int faultId;
@@ -595,6 +595,184 @@ public class GetAdvance2Data {
             public void setQC_DefectGrade(String qC_DefectGrade) {
                 this.qC_DefectGrade = qC_DefectGrade;
             }
+        }
+    }
+
+    public static class CheckItemDataBean {
+        /**
+         * sampleSeq : 1
+         * checkItemId : 44
+         * qcValue : 0
+         * qcResult : 0
+         * faultId : 0
+         * remark :
+         */
+
+        private int sampleSeq;
+        private int checkItemId;
+        private String qcValue;
+        private int qcResult;
+        private int faultId;
+        private String remark;
+
+        public int getSampleSeq() {
+            return sampleSeq;
+        }
+
+        public void setSampleSeq(int sampleSeq) {
+            this.sampleSeq = sampleSeq;
+        }
+
+        public int getCheckItemId() {
+            return checkItemId;
+        }
+
+        public void setCheckItemId(int checkItemId) {
+            this.checkItemId = checkItemId;
+        }
+
+        public String getQcValue() {
+            return qcValue;
+        }
+
+        public void setQcValue(String qcValue) {
+            this.qcValue = qcValue;
+        }
+
+        public int getQcResult() {
+            return qcResult;
+        }
+
+        public void setQcResult(int qcResult) {
+            this.qcResult = qcResult;
+        }
+
+        public int getFaultId() {
+            return faultId;
+        }
+
+        public void setFaultId(int faultId) {
+            this.faultId = faultId;
+        }
+
+        public String getRemark() {
+            return remark;
+        }
+
+        public void setRemark(String remark) {
+            this.remark = remark;
+        }
+    }
+
+    public static class BarcodeDataBean {
+        /**
+         * BarcodeNo : 实收数
+         * PackQty : 44
+         * CurrentQty : 0
+         * RejectQty : 0
+         */
+
+        private String BarcodeNo;
+        private int PackQty;
+        private String CurrentQty;
+        private int RejectQty;
+
+        public String getBarcodeNo() {
+            return BarcodeNo;
+        }
+
+        public void setBarcodeNo(String BarcodeNo) {
+            this.BarcodeNo = BarcodeNo;
+        }
+
+        public int getPackQty() {
+            return PackQty;
+        }
+
+        public void setPackQty(int PackQty) {
+            this.PackQty = PackQty;
+        }
+
+        public String getCurrentQty() {
+            return CurrentQty;
+        }
+
+        public void setCurrentQty(String CurrentQty) {
+            this.CurrentQty = CurrentQty;
+        }
+
+        public int getRejectQty() {
+            return RejectQty;
+        }
+
+        public void setRejectQty(int RejectQty) {
+            this.RejectQty = RejectQty;
+        }
+    }
+
+    public static class FaultDataBeanX {
+        /**
+         * faultId : 2
+         * faultCode : 002
+         * faultName : 外观不良
+         * faultDesc : 外观不良
+         * faultQty : 2
+         * qC_DefectGrade : B
+         */
+
+        private int faultId;
+        private String faultCode;
+        private String faultName;
+        private String faultDesc;
+        private int faultQty;
+        private String qC_DefectGrade;
+
+        public int getFaultId() {
+            return faultId;
+        }
+
+        public void setFaultId(int faultId) {
+            this.faultId = faultId;
+        }
+
+        public String getFaultCode() {
+            return faultCode;
+        }
+
+        public void setFaultCode(String faultCode) {
+            this.faultCode = faultCode;
+        }
+
+        public String getFaultName() {
+            return faultName;
+        }
+
+        public void setFaultName(String faultName) {
+            this.faultName = faultName;
+        }
+
+        public String getFaultDesc() {
+            return faultDesc;
+        }
+
+        public void setFaultDesc(String faultDesc) {
+            this.faultDesc = faultDesc;
+        }
+
+        public int getFaultQty() {
+            return faultQty;
+        }
+
+        public void setFaultQty(int faultQty) {
+            this.faultQty = faultQty;
+        }
+
+        public String getQC_DefectGrade() {
+            return qC_DefectGrade;
+        }
+
+        public void setQC_DefectGrade(String qC_DefectGrade) {
+            this.qC_DefectGrade = qC_DefectGrade;
         }
     }
 }

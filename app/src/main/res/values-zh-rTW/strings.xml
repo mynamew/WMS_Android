@@ -337,7 +337,7 @@
     <string name="mrp_badness_percent">不良率</string>
     <string name="mrp_sample_num">抽检</string>
     <string name="tv_mrp_quality_date">质检日期：%1$s</string>
-    <string name="mrp_title">来料-MRP评审</string>
+    <string name="mrp_title">MRP评审(来料)</string>
     <string name="send_quality_num_tip">送检数：%1$s</string>
     <string name="mrp_normal_badness_total_num">不良总数：%1$s</string>
     <string name="mrp_normal_checker">质检人：%1$s</string>
@@ -402,4 +402,5 @@
     <string name="quality_complete_tip">本批样品质检操作已全部完成</string>
     <string name="start_pack_num">初始包装数：%1$s</string>
     <string name="real_pack_num">实际包装数：%1$s</string>
+    <string name="please_select_badness_reason">请选择不良原因</string>
 </resources>

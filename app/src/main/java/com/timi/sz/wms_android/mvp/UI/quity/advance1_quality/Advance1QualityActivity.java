@@ -23,7 +23,9 @@ import com.timi.sz.wms_android.base.uils.LogUitls;
 import com.timi.sz.wms_android.base.uils.PackageUtils;
 import com.timi.sz.wms_android.base.uils.SpUtils;
 import com.timi.sz.wms_android.base.uils.ToastUtils;
+import com.timi.sz.wms_android.bean.quality.adavance.CommitAdvance1Data;
 import com.timi.sz.wms_android.bean.quality.adavance.GetAdvanceData;
+import com.timi.sz.wms_android.bean.quality.normal.CommitNormalData;
 import com.timi.sz.wms_android.http.message.BaseMessage;
 import com.timi.sz.wms_android.http.message.event.QualityEvent;
 import com.timi.sz.wms_android.mvp.UI.quity.nomal_quality.NormalQualityActivity;
@@ -125,8 +127,12 @@ public class Advance1QualityActivity extends BaseActivity<Advance1QualityView, A
     /**
      * 不良原因
      */
-    private List<FaultData> mSelectFaultData = new ArrayList<>();
-
+    private List<CommitAdvance1Data.FaultDataBean> mSelectFaultData = new ArrayList<>();
+    private  CommitAdvance1Data commitAdvance1Data;
+    /**
+     * 提交高级质检1 的实体
+     * @return
+     */
     @Override
     public int setLayoutId() {
         return R.layout.activity_advance1_quality;
@@ -259,12 +265,6 @@ public class Advance1QualityActivity extends BaseActivity<Advance1QualityView, A
 
     @OnClick(R.id.tv_next)
     public void onViewClicked() {
-        Map<String, Object> params = new HashMap<>();
-        params.put("UserId", SpUtils.getInstance().getUserId());
-        params.put("OrgId", SpUtils.getInstance().getOrgId());
-        params.put("mac", PackageUtils.getMac());
-        params.put("ReceiptId", receiptId);
-        params.put("ReceiptDetailId", receiptDetailId);
         /**
          * 不良总数
          */
@@ -303,26 +303,17 @@ public class Advance1QualityActivity extends BaseActivity<Advance1QualityView, A
         if (rdUnqualified.isChecked()) {
             QCResult = 3;
         }
-        /**
-         * 不良率
-         */
-        String badnessPercent = tvBadnessPercent.getText().toString();
-        GetAdvanceData.NormalSummaryBean normalSummary = mData.getNormalSummary();
-        params.put("SampleQty", normalSummary.getSampleQty());
-        params.put("NGQty", Integer.parseInt(badnessNum));
-        params.put("RejectQty", Integer.parseInt(refuseReceiveNum));
-        params.put("QCStatus", QCStatus);
-        params.put("QCResult", QCResult);
-        params.put("Remark", "");
-        GetAdvanceData.AdvanceSummaryBean advanceSummary = mData.getAdvanceSummary();
-        params.put("CurrentStrict", advanceSummary.getCurrentStrict());
-        params.put("CurrentLevel", advanceSummary.getCurrentLevel());
-        params.put("SampleCode", advanceSummary.getSampleCode());
-        params.put("BeginQty", advanceSummary.getBeginQty());
-        params.put("EndQty", advanceSummary.getEndQty());
-        params.put("CurrentAQL", advanceSummary.getCurrentAQL());
-        params.put("AQLAcceptQty", advanceSummary.getAcceptAQL());
-        params.put("AQLRejectQty", advanceSummary.getRejectAQL());
+        commitAdvance1Data.setMAC(PackageUtils.getMac());
+        commitAdvance1Data.setOrgId(SpUtils.getInstance().getOrgId());
+        commitAdvance1Data.setUserId(SpUtils.getInstance().getUserId());
+        commitAdvance1Data.setReceiptId(receiptId);
+        commitAdvance1Data.setReceiptDetailId(receiptDetailId);
+        commitAdvance1Data.setSampleQty(mData.getNormalSummary().getSampleQty());
+        commitAdvance1Data.setNGQty(Integer.parseInt(badnessNum));
+        commitAdvance1Data.setRejectQty(Integer.parseInt(refuseReceiveNum));
+        commitAdvance1Data.setQCResult(QCResult);
+        commitAdvance1Data.setQCStatus(2);
+        commitAdvance1Data.setRemark("");
         /**
          * 计算缺陷的个数
          */
@@ -350,19 +341,11 @@ public class Advance1QualityActivity extends BaseActivity<Advance1QualityView, A
                     break;
             }
         }
-        params.put("FatalQty", FatalQty);
-        params.put("SeriousQty", SeriousQty);
-        params.put("CommonlyQty", CommonlyQty);
-        params.put("SlightQty", SlightQty);
-        /**
-         * 设置  不良原因的链表
-         */
-        mSelectFaultData.clear();
-        for (int i = 0; i < mFaultData.size(); i++) {
-            mSelectFaultData.add(new FaultData(mFaultData.get(i).getFaultId(), mFaultData.get(i).getFaultQty()));
-        }
-        params.put("FaultData", mSelectFaultData);
-        getPresenter().setAdvance1Data(params, QCResult, Integer.parseInt(refuseReceiveNum));
+        commitAdvance1Data.setFatalQty(FatalQty);
+        commitAdvance1Data.setSeriousQty(SeriousQty);
+        commitAdvance1Data.setCommonlyQty(CommonlyQty);
+        commitAdvance1Data.setSlightQty(SlightQty);
+        getPresenter().setAdvance1Data(commitAdvance1Data, QCResult, Integer.parseInt(refuseReceiveNum));
     }
 
     @Override
@@ -394,6 +377,16 @@ public class Advance1QualityActivity extends BaseActivity<Advance1QualityView, A
              * 不良原因
              */
             final List<GetAdvanceData.FaultDataBean> faultData = data.getFaultData();
+            /**
+             * 设置提交的数据的不良原因的数据
+             */
+            commitAdvance1Data.setFaultData(new ArrayList<CommitAdvance1Data.FaultDataBean>());
+            for (int i = 0; i < faultData.size(); i++) {
+                CommitAdvance1Data.FaultDataBean faultDataBean = new CommitAdvance1Data.FaultDataBean();
+                faultDataBean.setFaultId(faultData.get(i).getFaultId());
+                faultDataBean.setFaultQty(faultData.get(i).getFaultQty());
+                commitAdvance1Data.getFaultData().add(faultDataBean);
+            }
             if (null != faultData) {
                 mFaultData = faultData;
                 final BaseRecyclerAdapter<GetAdvanceData.FaultDataBean> adapter = new BaseRecyclerAdapter<GetAdvanceData.FaultDataBean>(this, faultData) {
@@ -442,76 +435,42 @@ public class Advance1QualityActivity extends BaseActivity<Advance1QualityView, A
                                     ToastUtils.showShort(getString(R.string.please_input_badness_num));
                                     return;
                                 }
-                                /**
-                                 * 设置文本的不良总数
-                                 */
                                 int totalBadnessNum = 0;
                                 /**
                                  * 计算获取所有的不良数的和
                                  */
-                                for (int i = 0; i < mFaultData.size(); i++) {
-                                    /**
-                                     * 如果已存在 即设置过不良数则不将原来的不良数进行相加
-                                     */
-                                    if (mFaultData.get(i).getFaultId() == faultData.get(position).getFaultId()) {
-                                        continue;
-                                    }
-                                    totalBadnessNum = totalBadnessNum + mFaultData.get(i).getFaultQty();
-                                }
+                                List<CommitAdvance1Data.FaultDataBean> commintFaultData = commitAdvance1Data.getFaultData();
                                 /**
-                                 * 当不良总数大于抽样数 时提示用户
+                                 * 设置 提交数据 和源数据的不良数量
                                  */
-                                if ((totalBadnessNum + Integer.parseInt(badnessNumStr)) > data.getNormalSummary().getSampleQty()) {
-                                    ToastUtils.showShort("不良总数不能大于抽样数，请重新输入");
-                                    return;
-                                } else {//如果不大于实收数 则添加不良数
-                                    totalBadnessNum = totalBadnessNum + Integer.parseInt(badnessNumStr);
-                                }
-                                tvBadnessTotalNum.setText(String.valueOf(totalBadnessNum));
-                                /**
-                                 * 设置原数据
-                                 */
-                                mFaultData.get(position).setFaultQty(Integer.parseInt(badnessNumStr));
+                                commintFaultData.get(position).setFaultQty(Integer.parseInt(badnessNumStr));
+                                faultData.get(position).setFaultQty(Integer.parseInt(badnessNumStr));
 
+                                /**
+                                 *  遍历提交的选择链表 ，计算不良数
+                                 */
+                                for (int i = 0; i < commintFaultData.size(); i++) {
+                                    totalBadnessNum = totalBadnessNum + commintFaultData.get(i).getFaultQty();
+                                }
                                 adapter.notifyDataSetChanged();
                                 /**
-                                 * 通过不良数 获取是否合格
+                                 * 当不良总数大于实收数 时提示用户
                                  */
-                                GetAdvanceData.AdvanceSummaryBean advanceSummary = data.getAdvanceSummary();
-                                if (totalBadnessNum <= advanceSummary.getRejectAQL()) {//不良数小于接受数
-                                    /**
-                                     * 合格
-                                     */
-                                    rdQualified.setChecked(true);
-                                    QCResult = 1;
-                                    QCStatus = 2;
-                                } else if (totalBadnessNum >= advanceSummary.getRejectAQL()) {//不合格
-                                    /**
-                                     * 不合格
-                                     */
-                                    rdUnqualified.setChecked(true);
-                                    QCResult = 3;
-                                    QCStatus = 2;
-                                } else if (totalBadnessNum >= advanceSummary.getRejectAQL() && totalBadnessNum <= advanceSummary.getAcceptAQL()) {
-                                    /**
-                                     * 待定
-                                     */
-                                    rdWaitDeal.setChecked(true);
-                                    QCResult = 2;
-                                    QCStatus = 2;
-                                }
-
+                                /**
+                                 * 设置文本的不良总数
+                                 */
+                                tvBadnessTotalNum.setText(String.valueOf(totalBadnessNum));
                                 /**
                                  * 计算文本的不良率
                                  */
                                 //不良总数
                                 double dTotalBadnessNum = (double) totalBadnessNum;
                                 //实收数
-                                double dReceiveNum = (double) data.getNormalSummary().getReceiveQty();
+                                double dReceiveNum = (double) mData.getNormalSummary().getReceiveQty();
                                 //转换成百分比
                                 NumberFormat nFromat = NumberFormat.getPercentInstance();
                                 String rates = nFromat.format(dTotalBadnessNum / dReceiveNum);
-                                etBadnessPercent.setText(rates);
+                                tvBadnessPercent.setText(rates);
                                 //dismiss
                                 dialog.dismiss();
                             }

@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.google.gson.Gson;
 import com.timi.sz.wms_android.base.uils.ToastUtils;
+import com.timi.sz.wms_android.bean.quality.adavance.CommitAdvance1Data;
 import com.timi.sz.wms_android.bean.quality.adavance.GetAdvanceData;
 import com.timi.sz.wms_android.bean.quality.normal.NormalQualityData;
 import com.timi.sz.wms_android.http.callback.OnResultCallBack;
@@ -114,7 +115,7 @@ public class Advance1QualityPresenter extends MvpBasePresenter<Advance1QualityVi
      * @param params
      * @param isQualified
      */
-    public void setAdvance1Data(Map<String, Object> params, final int isQualified, final int rejectNum) {
+    public void setAdvance1Data(CommitAdvance1Data params, final int isQualified, final int rejectNum) {
         getView().showProgressDialog();
         if (null == setAdvance1QualityDataHttpSubscriber) {
             setAdvance1QualityDataHttpSubscriber = new HttpSubscriber<>(new OnResultCallBack<Object>() {

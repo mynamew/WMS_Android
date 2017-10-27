@@ -1,6 +1,8 @@
 package com.timi.sz.wms_android.mvp.UI.quity.advance_quality;
 
+import com.timi.sz.wms_android.bean.quality.adavance.CommitAdvanceData;
 import com.timi.sz.wms_android.bean.quality.adavance.GetAdvance2Data;
+import com.timi.sz.wms_android.bean.quality.normal.CommitNormalData;
 import com.timi.sz.wms_android.http.HttpManager;
 import com.timi.sz.wms_android.http.api.ApiService;
 import com.timi.sz.wms_android.http.api.CommonResult;
@@ -37,14 +39,14 @@ public class AdvanceQualityModel extends MvpBaseModel {
     /**
      * 设置高级质检2 的数据
      *
-     * @param params
+     * @param data
      * @param observer
      */
-    public void setAdvance2Data(final Map<String, Object> params, Observer<Object> observer) {
+    public void setAdvance2Data(final CommitAdvanceData data , Observer<Object> observer) {
         HttpManager.getInstance().HttpManagerRequest(observer, new ApiServiceMethodCallBack<Object>() {
             @Override
             public Observable<CommonResult<Object>> createObservable(ApiService apiService) {
-                return apiService.setAdvance2Data(params);
+                return apiService.setAdvance2Data(data);
             }
         });
     }

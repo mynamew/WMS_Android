@@ -85,6 +85,7 @@
                     android:textSize="24px"/>
 
                 <ImageView
+                    android:id="@+id/iv_next_page"
                     android:layout_width="wrap_content"
                     android:layout_height="30px"
                     android:layout_centerVertical="true"

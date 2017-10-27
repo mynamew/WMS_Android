@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/set_bg"
+    android:background="#e7e7ed"
     tools:context=".mvp.UI.quity.mrp.normal_review.MRPNormalReviewActivity">
 
     <include
@@ -39,207 +39,97 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/tv_orderno"
-                android:layout_width="match_parent"
-                android:layout_height="60px"
-                android:gravity="center_vertical"
-                android:paddingLeft="20px"
-                android:paddingTop="10px"
-                android:text="@string/receive_pro_num"
-                android:textColor="#333"
-                />
+            <include layout="@layout/header_mrp_material_info"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="60px"
-                android:orientation="horizontal">
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30px"
+                android:layout_marginRight="30px"
+                android:background="@drawable/bg_rectangle_et_unfocused"
+                android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/tv_quality_date"
-                    android:layout_width="0dp"
-                    android:layout_height="60px"
-                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="72px"
                     android:gravity="center_vertical"
                     android:paddingLeft="20px"
                     android:paddingTop="10px"
-                    android:text="@string/tv_mrp_quality_date"
+                    android:text="质检信息"
                     android:textColor="#333"
+                    android:textSize="28px"
+                    android:textStyle="bold"
                     />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:background="#d7d7dd"
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="120px"
+                    android:layout_marginTop="20px"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <com.timi.sz.wms_android.view.StandardLevelView
+                        android:id="@+id/stand_fatal_badness_num"
+                        android:layout_width="160px"
+                        android:layout_height="120px"
+                        app:standardLevelTitle="@string/fatal_badness_num"/>
+
+                    <com.timi.sz.wms_android.view.StandardLevelView
+                        android:id="@+id/stand_serious_badness_num"
+                        android:layout_width="160px"
+                        android:layout_height="120px"
+                        android:layout_marginLeft="80px"
+
+                        app:standardLevelTitle="@string/serious_badness_num"/>
+
+                    <com.timi.sz.wms_android.view.StandardLevelView
+                        android:id="@+id/stand_normal_badness_num"
+                        android:layout_width="160px"
+                        android:layout_height="120px"
+                        android:layout_marginLeft="80px"
+                        app:standardLevelTitle="@string/normal_badness_num"/>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="30px"
+                    android:layout_marginTop="20px"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <com.timi.sz.wms_android.view.StandardLevelView
+                        android:id="@+id/stand_slight_badness_num"
+                        android:layout_width="160px"
+                        android:layout_height="120px"
+                        app:standardLevelTitle="@string/slight_badness_num"/>
+
+                    <com.timi.sz.wms_android.view.StandardLevelView
+                        android:id="@+id/stand_badness_total_num"
+                        android:layout_width="160px"
+                        android:layout_height="120px"
+                        android:layout_marginLeft="80px"
+                        app:standardLevelTitle="@string/badness_total_num"/>
+
+                    <com.timi.sz.wms_android.view.StandardLevelView
+                        android:id="@+id/stand_badness_percent"
+                        android:layout_width="160px"
+                        android:layout_height="120px"
+                        android:layout_marginLeft="80px"
+                        app:standardLevelTitle="@string/badness_percent"/>
+
+
+                </LinearLayout>
             </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="60px"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/tv_order_num"
-                    android:layout_width="0dp"
-                    android:layout_height="60px"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"
-                    android:paddingLeft="30px"
-                    android:paddingTop="10px"
-                    android:text="@string/order_no"
-                    android:textColor="#333"
-                    />
-
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/tv_mrp_normal_checker"
-                android:layout_width="match_parent"
-                android:layout_height="60px"
-                android:layout_weight="1"
-                android:gravity="center_vertical"
-                android:paddingLeft="50px"
-                android:paddingTop="10px"
-                android:text="@string/mrp_normal_checker"
-                android:textColor="#333"
-                />
-
-            <TextView
-                android:id="@+id/tv_supplier"
-                android:layout_width="match_parent"
-                android:layout_height="60px"
-                android:gravity="center_vertical"
-                android:paddingLeft="30px"
-                android:paddingTop="10px"
-                android:text="@string/buy_from"
-                android:textColor="#333"
-                />
-
-            <TextView
-                android:id="@+id/tv_material_code"
-                android:layout_width="match_parent"
-                android:layout_height="60px"
-                android:gravity="center_vertical"
-                android:paddingLeft="20px"
-                android:paddingTop="10px"
-                android:text="@string/material_code"
-                android:textColor="#333"
-                />
-
-            <TextView
-                android:id="@+id/tv_material_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:paddingLeft="20px"
-                android:paddingTop="10px"
-                android:text="@string/material_name"
-                android:textColor="#333"
-                />
-
-            <TextView
-                android:id="@+id/tv_material_model"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:paddingLeft="20px"
-                android:paddingTop="10px"
-                android:text="@string/material_model"
-                android:textColor="#333"
-                />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="5px"
-                android:background="@color/tab_txt_unselect"
-                />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/tv_receive_num"
-                    android:layout_width="0dp"
-                    android:layout_height="60px"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"
-                    android:paddingLeft="30px"
-                    android:paddingTop="10px"
-                    android:text="@string/receive_num"
-                    android:textColor="#333"
-                    />
-
-                <TextView
-                    android:id="@+id/tv_send_quality_num"
-                    android:layout_width="0dp"
-                    android:layout_height="60px"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"
-                    android:paddingLeft="30px"
-                    android:paddingTop="10px"
-                    android:text="@string/send_quality_num_tip"
-                    android:textColor="#333"
-                    />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/tv_quality_num"
-                    android:layout_width="0dp"
-                    android:layout_height="60px"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"
-                    android:paddingLeft="50px"
-                    android:paddingTop="10px"
-                    android:text="@string/mrp_quality_num_tip"
-                    android:textColor="#333"
-                    />
-
-                <TextView
-                    android:id="@+id/tv_badbess_total_num"
-                    android:layout_width="0dp"
-                    android:layout_height="50px"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"
-                    android:paddingLeft="0px"
-                    android:paddingTop="10px"
-                    android:text="@string/mrp_normal_badness_total_num"
-                    android:textColor="#333"
-                    />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/tv_badness_percent"
-                    android:layout_width="0dp"
-                    android:layout_height="60px"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"
-                    android:paddingLeft="50px"
-                    android:paddingTop="10px"
-                    android:text="@string/mrp_normal_badness_percent"
-                    android:textColor="#333"
-                    />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="60px"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"
-                    android:paddingLeft="30px"
-                    android:paddingTop="10px"
-                    android:text="@string/send_quality_num_tip"
-                    android:textColor="#333"
-                    android:visibility="invisible"
-                    />
-            </LinearLayout>
-
+            <!--评审操作-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="60px"
@@ -305,9 +195,9 @@
                     android:layout_height="match_parent"
                     android:layout_marginLeft="20px"
                     android:layout_marginRight="20px"
-                    android:inputType="number"
                     android:background="@drawable/bg_rectangle_et_focused"
                     android:hint="@string/please_input_pick_num"
+                    android:inputType="number"
                     android:paddingLeft="20px"
                     android:textSize="14sp"/>
             </LinearLayout>

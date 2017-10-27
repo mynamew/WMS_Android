@@ -1,5 +1,6 @@
 package com.timi.sz.wms_android.mvp.UI.quity.advance1_quality;
 
+import com.timi.sz.wms_android.bean.quality.adavance.CommitAdvance1Data;
 import com.timi.sz.wms_android.bean.quality.adavance.GetAdvanceData;
 import com.timi.sz.wms_android.http.HttpManager;
 import com.timi.sz.wms_android.http.api.ApiService;
@@ -37,7 +38,7 @@ public class Advance1QualityModel extends MvpBaseModel {
      * @param params
      * @param observer
      */
-    public void setAdvance1Data(final Map<String, Object> params, Observer<Object> observer) {
+    public void setAdvance1Data(final CommitAdvance1Data params, Observer<Object> observer) {
         HttpManager.getInstance().HttpManagerRequest(observer, new ApiServiceMethodCallBack<Object>() {
             @Override
             public Observable<CommonResult<Object>> createObservable(ApiService apiService) {

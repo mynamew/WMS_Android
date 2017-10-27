@@ -128,9 +128,24 @@ public class MRPReviewActivity extends BaseActivity<MRPReviewView, MRPReviewPres
             adapter.setOnItemClickListener(new BaseRecyclerAdapter.OnItemClickListener() {
                 @Override
                 public void onItemClick(View itemView, int pos) {
-                    Intent intent = new Intent(MRPReviewActivity.this, MRPNormalReviewActivity.class);
-                    intent.putExtra("NormalReviewDetail", new Gson().toJson(datas.get(pos)));
+                    Intent intent = new Intent();
+                    switch (datas.get(pos).getQcType()) {
+                        case 1://普通质检
+                            intent.setClass(MRPReviewActivity.this, MRPNormalReviewActivity.class);
+                            intent.putExtra("ReviewDetail", new Gson().toJson(datas.get(pos)));
+                            intent.putExtra("ReviewDetail", new Gson().toJson(datas.get(pos)));
+                            break;
+                        case 2://高级质检1
+                            intent.setClass(MRPReviewActivity.this, MRPNormalReviewActivity.class);
+                            intent.putExtra("ReviewDetail", new Gson().toJson(datas.get(pos)));
+                            break;
+                        case 3://高级质检2
+                            intent.setClass(MRPReviewActivity.this, MRPNormalReviewActivity.class);
+                            intent.putExtra("ReviewDetail", new Gson().toJson(datas.get(pos)));
+                            break;
+                    }
                     startActivity(intent);
+
                 }
             });
         }
