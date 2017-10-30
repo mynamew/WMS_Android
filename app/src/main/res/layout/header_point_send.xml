@@ -2,190 +2,118 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
+              android:background="@color/white"
               android:orientation="vertical"
     >
-    <!--送货单的item-->
-    <View
-        android:id="@+id/divide_bottom"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#999"/>
-
 
     <LinearLayout
-        android:id="@+id/ll_content"
+        android:id="@+id/ll_tab"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:background="@color/beijin"
+        android:layout_height="88px"
+        android:layout_below="@id/head"
+        android:paddingLeft="10px"
+        android:paddingRight="10px"
         android:orientation="horizontal">
 
-        <View
-            android:layout_width="1dp"
-            android:layout_height="40dp"
-            android:background="#999"/>
-
         <TextView
-            android:id="@+id/tv_line_name"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            android:id="@+id/tv_line_num"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="2"
             android:gravity="center"
-            android:paddingLeft="20px"
-            android:paddingRight="20px"
             android:text="@string/line_name"
-            android:textColor="#fff"/>
-
-        <View
-            android:layout_width="1dp"
-            android:layout_height="40dp"
-            android:background="#999"/>
+            android:textColor="#333"
+            android:textSize="26px"
+            />
 
         <TextView
-            android:id="@+id/tv_goods_code"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            android:id="@+id/tv_material_code"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="4"
             android:gravity="center"
-            android:paddingLeft="20px"
-            android:paddingRight="20px"
-
-            android:text="@string/goods_code"
-            android:textColor="#fff"/>
-
-        <View
-            android:layout_width="1dp"
-            android:layout_height="40dp"
-            android:background="#999"/>
-
-        <TextView
-            android:id="@+id/tv_send_num"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:gravity="center"
-            android:paddingLeft="20px"
-            android:paddingRight="20px"
-
-            android:text="@string/item_send_num"
-            android:textColor="#fff"/>
-
-        <View
-            android:layout_width="1dp"
-            android:layout_height="40dp"
-            android:background="#999"/>
-
-        <TextView
-            android:id="@+id/tv_have_receive_num"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:gravity="center"
-            android:paddingLeft="20px"
-
-            android:paddingRight="20px"
-            android:text="@string/item_have_receive_num"
-            android:textColor="#fff"/>
-
-        <View
-            android:layout_width="1dp"
-            android:layout_height="40dp"
-            android:background="#999"/>
+            android:text="@string/item_material_code"
+            android:textColor="#333"
+            android:textSize="24px"/>
 
         <TextView
             android:id="@+id/tv_point_num"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
             android:gravity="center"
-            android:paddingLeft="20px"
-            android:paddingRight="20px"
+            android:text="@string/item_point_point_num"
 
-            android:text="@string/item_point_num"
-            android:textColor="#fff"/>
+            android:textColor="#333"
+            android:textSize="24px"/>
 
-        <View
-            android:layout_width="1dp"
-            android:layout_height="40dp"
-            android:background="#999"/>
 
         <TextView
             android:id="@+id/tv_spare_num"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:layout_weight="2"
             android:gravity="center"
-            android:paddingLeft="20px"
-            android:paddingRight="20px"
+            android:text="@string/item_point_spare_num"
+            android:textColor="#333"
+            android:textSize="24px"/>
 
-            android:text="@string/spare_num"
-            android:textColor="#fff"/>
+        <TextView
+            android:id="@+id/tv_send_good_num"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:text="@string/header_point_send_good"
+            android:textColor="#333"
+            android:textSize="24px"/>
 
-        <!--<View-->
-            <!--android:layout_width="1dp"-->
-            <!--android:layout_height="40dp"-->
-            <!--android:background="#999"/>-->
+        <TextView
+            android:id="@+id/tv_have_receive_num"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:text="@string/header_point_have_receive_num"
+            android:textColor="#333"
+            android:textSize="24px"/>
 
-        <!--<TextView-->
-            <!--android:id="@+id/tv_form_orderno"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="40dp"-->
-            <!--android:gravity="center"-->
-            <!--android:paddingLeft="20px"-->
-            <!--android:paddingRight="20px"-->
-
-            <!--android:text="@string/item_form_orderno"-->
-            <!--android:textColor="#fff"/>-->
-
-        <View
-            android:layout_width="1dp"
-            android:layout_height="40dp"
-            android:background="#999"/>
+        <TextView
+            android:id="@+id/tv_arrive_good_num"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:text="@string/item_point_buy_num"
+            android:textColor="#333"
+            android:textSize="24px"/>
 
         <TextView
             android:id="@+id/tv_buy_num"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
             android:gravity="center"
-            android:paddingLeft="20px"
-
-            android:paddingRight="20px"
-            android:text="@string/item_buy_num"
-            android:textColor="#fff"/>
-
-        <View
-            android:layout_width="1dp"
-            android:layout_height="40dp"
-            android:background="#999"/>
+            android:text="@string/item_point_arrive_num"
+            android:textColor="#333"
+            android:textSize="24px"/>
 
         <TextView
-            android:id="@+id/tv_arrive_goods_num"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            android:id="@+id/tv_instock_num"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
             android:gravity="center"
-            android:paddingLeft="20px"
-            android:paddingRight="20px"
-            android:text="@string/item_arrive_goods_num"
+            android:text="@string/item_point_instock_num"
+            android:textColor="#333"
+            android:textSize="24px"/>
 
-            android:textColor="#fff"/>
 
-        <View
-            android:layout_width="1dp"
-            android:layout_height="40dp"
-            android:background="#999"/>
-
-        <TextView
-            android:id="@+id/tv_in_stock_num"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:gravity="center"
-            android:paddingLeft="20px"
-            android:paddingRight="20px"
-
-            android:text="@string/item_in_stock_num"
-            android:textColor="#fff"/>
-
-        <View
-            android:layout_width="1dp"
-            android:layout_height="40dp"
-            android:background="#999"/>
     </LinearLayout>
-
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#999"/>
+        android:layout_height="1px"
+        android:background="#e7e7ed"/>
 </LinearLayout>

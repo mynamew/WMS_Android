@@ -5,31 +5,34 @@
     android:id="@+id/activity_stock_in_point"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/set_bg"
+    android:background="#fff"
     android:orientation="vertical"
     tools:context="com.timi.sz.wms_android.mvp.UI.stock_in.point.StockInPointActivity">
 
     <include layout="@layout/title_head"/>
+
     <android.support.design.widget.TabLayout
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/tab_stockin_point"
         style="@style/MyCustomTabLayout"
-        android:background="#fff"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:tabIndicatorColor="@color/colorPrimary"
+        android:background="#fff"
+        app:tabIndicatorColor="@color/login_txt_color"
         app:tabMode="scrollable"
-        app:tabSelectedTextColor="@color/colorPrimary"
+        app:tabSelectedTextColor="@color/login_txt_color"
         app:tabTextColor="@color/tab_txt_unselect"/>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1px"
-        android:background="@color/tab_txt_unselect"/>
+        android:background="#e7e7ed"/>
+
     <RadioGroup
         android:layout_width="match_parent"
         android:layout_height="100px"
-        android:visibility="gone"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:visibility="gone">
 
         <RadioButton
             android:id="@+id/rd_stock_in_point"
@@ -43,6 +46,7 @@
             android:text="@string/stock_in_point_record"
             />
     </RadioGroup>
+
     <FrameLayout
         android:id="@+id/fl_stockin_point_content"
         android:layout_width="match_parent"

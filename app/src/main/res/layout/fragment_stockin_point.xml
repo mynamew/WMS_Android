@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/set_bg"
-                android:orientation="vertical">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/white"
+              android:orientation="vertical">
 
     <LinearLayout
         android:id="@+id/ll_top"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="30px"
         android:orientation="vertical">
 
 
@@ -39,8 +40,8 @@
             android:layout_width="match_parent"
             android:layout_height="64px"
             android:layout_marginLeft="20px"
-            android:text="@string/buyer"
             android:gravity="center_vertical"
+            android:text="@string/buyer"
             android:textColor="#333"
             android:textSize="26px"/>
 
@@ -50,12 +51,24 @@
             android:layout_width="match_parent"
             android:layout_height="64px"
             android:layout_marginLeft="20px"
-            android:textSize="26px"
             android:gravity="center_vertical"
             android:text="@string/buy_from"
-            android:textColor="#333"/>
+            android:textColor="#333"
+            android:textSize="26px"/>
 
     </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="24px"
+        android:background="#e7e7ed"/>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rlv_point"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/btn_point_commit"
+        android:layout_below="@id/ll_top"
+        android:layout_weight="1"/>
 
     <Button
         android:id="@+id/btn_point_commit"
@@ -67,15 +80,4 @@
         android:text="@string/confirm_commit"
         android:textColor="#fff"
         android:textSize="18sp"/>
-
-    <com.timi.sz.wms_android.view.excelview.MyExcelView
-        android:id="@+id/myexcel_point"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@id/btn_point_commit"
-        android:layout_below="@id/ll_top"
-        android:visibility="visible"
-        app:ptrMode="both"/>
-
-
-</RelativeLayout>
+</LinearLayout>

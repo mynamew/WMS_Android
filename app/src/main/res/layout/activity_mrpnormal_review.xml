@@ -12,21 +12,6 @@
         android:id="@+id/head"
         layout="@layout/title_head"/>
 
-    <TextView
-        android:id="@+id/tv_confirm_review"
-        android:layout_width="match_parent"
-        android:layout_height="88px"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="20px"
-        android:layout_marginLeft="30px"
-        android:layout_marginRight="30px"
-        android:background="@drawable/selector_btn_bg_login"
-        android:gravity="center"
-        android:text="确认评审"
-        android:textColor="@color/white"
-        android:textSize="16sp"
-        />
-
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -49,17 +34,294 @@
                 android:background="@drawable/bg_rectangle_et_unfocused"
                 android:orientation="vertical">
 
-                <TextView
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="72px"
-                    android:gravity="center_vertical"
-                    android:paddingLeft="20px"
-                    android:paddingTop="10px"
-                    android:text="质检信息"
-                    android:textColor="#333"
-                    android:textSize="28px"
-                    android:textStyle="bold"
+                    android:orientation="horizontal">
+
+                    <View
+                        android:layout_width="16px"
+                        android:layout_height="24px"
+                        android:layout_marginTop="2px"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="10px"
+                        android:background="@drawable/bg_rectangle_mrp_header_tip"/>
+
+                    <TextView
+                        android:id="@+id/tv_qctype_tip"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:paddingLeft="10px"
+                        android:paddingTop="10px"
+                        android:text="@string/mrp_normal_review_work_tip"
+                        android:textColor="#333"
+                        android:textSize="28px"
+                        android:textStyle="bold"
+                        />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="64px"
+                    android:gravity="fill_vertical"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="30px"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/receive_num_tip"
+                            android:textColor="#666"
+                            android:textSize="26px"/>
+
+                        <TextView
+                            android:id="@+id/tv_receive_num"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="40px"
+                            android:layout_weight="1"
+                            android:text="0"
+                            android:textColor="#333"
+                            android:textSize="26px"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="30px"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/send_check_tip"
+                            android:textColor="#666"
+                            android:textSize="26px"/>
+
+                        <TextView
+                            android:id="@+id/tv_send_check_num"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="65px"
+                            android:layout_weight="1"
+                            android:text="0"
+                            android:textColor="#333"
+                            android:textSize="26px"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="64px"
+                    android:gravity="fill_vertical"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="30px"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/pass_num_tip"
+                            android:textColor="#666"
+                            android:textSize="26px"/>
+
+                        <TextView
+                            android:id="@+id/tv_pass_num"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="40px"
+                            android:layout_weight="1"
+                            android:text="0"
+                            android:textColor="#333"
+                            android:textSize="26px"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="30px"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/badness_total_num_tip"
+                            android:textColor="#666"
+                            android:textSize="26px"/>
+
+                        <TextView
+                            android:id="@+id/tv_badness_total_num"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="40px"
+                            android:layout_weight="1"
+                            android:text="0"
+                            android:textColor="#333"
+                            android:textSize="26px"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="64px"
+                    android:layout_marginBottom="20px"
+                    android:gravity="fill_vertical"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="30px"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/badness_percent_tip"
+                            android:textColor="#666"
+                            android:textSize="26px"/>
+
+                        <TextView
+                            android:id="@+id/tv_badness_percent"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="40px"
+                            android:layout_weight="1"
+                            android:text=""
+                            android:textColor="#333"
+                            android:textSize="26px"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="30px"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:visibility="invisible">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/send_check_tip"
+                            android:textSize="26px"/>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text=""
+                            android:textSize="26px"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <include
+                    android:id="@+id/layout_advance_work"
+                    layout="@layout/mrp_check_advance_work"
+                    android:visibility="gone"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:background="#d7d7dd"
                     />
+                <!--评审操作-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="88px"
+                    android:layout_marginTop="10px"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="30px"
+                        android:text="评审结果"
+                        android:textColor="#666"
+                        android:textSize="26px"/>
+
+                    <RadioGroup
+                        android:id="@+id/rg_qualified"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="10px"
+                        android:layout_marginLeft="20px"
+                        android:layout_marginRight="20px"
+                        android:layout_marginTop="10px"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        >
+
+                        <RadioButton
+                            android:id="@+id/rd_pick"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@drawable/selector_rd_quality"
+                            android:button="@null"
+                            android:gravity="center"
+                            android:text="@string/quality_pick"
+                            android:textColor="#666"
+                            android:textSize="26px"/>
+
+                        <RadioButton
+                            android:id="@+id/rd_quality_special_get"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="30px"
+                            android:layout_weight="1"
+                            android:background="@drawable/selector_rd_quality"
+                            android:button="@null"
+                            android:gravity="center"
+                            android:text="@string/quality_special_get"
+                            android:textColor="#666"
+                            android:textSize="26px"/>
+
+                        <RadioButton
+                            android:id="@+id/rd_quality_all_return"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="30px"
+                            android:layout_weight="1"
+                            android:background="@drawable/selector_rd_quality"
+                            android:button="@null"
+                            android:gravity="center"
+                            android:text="@string/quality_all_return"
+                            android:textColor="#666"
+                            android:textSize="26px"/>
+
+                        <RadioButton
+                            android:id="@+id/rd_quality_right_get"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="30px"
+                            android:layout_weight="1"
+                            android:background="@drawable/selector_rd_quality"
+                            android:button="@null"
+                            android:gravity="center"
+                            android:text="@string/quality_right_get"
+                            android:textColor="#666"
+                            android:textSize="26px"/>
+                    </RadioGroup>
+                </LinearLayout>
 
                 <View
                     android:layout_width="match_parent"
@@ -69,171 +331,89 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="120px"
-                    android:layout_marginTop="20px"
-                    android:gravity="center"
+                    android:layout_height="88px"
+                    android:layout_marginTop="10px"
+                    android:gravity="center_vertical"
                     android:orientation="horizontal">
 
-                    <com.timi.sz.wms_android.view.StandardLevelView
-                        android:id="@+id/stand_fatal_badness_num"
-                        android:layout_width="160px"
-                        android:layout_height="120px"
-                        app:standardLevelTitle="@string/fatal_badness_num"/>
+                    <TextView
+                        android:id="@+id/textView2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="30px"
+                        android:text="@string/mrp_normal_pick_tip"
+                        android:textColor="#666"
+                        android:textSize="26px"/>
 
-                    <com.timi.sz.wms_android.view.StandardLevelView
-                        android:id="@+id/stand_serious_badness_num"
-                        android:layout_width="160px"
-                        android:layout_height="120px"
-                        android:layout_marginLeft="80px"
-
-                        app:standardLevelTitle="@string/serious_badness_num"/>
-
-                    <com.timi.sz.wms_android.view.StandardLevelView
-                        android:id="@+id/stand_normal_badness_num"
-                        android:layout_width="160px"
-                        android:layout_height="120px"
-                        android:layout_marginLeft="80px"
-                        app:standardLevelTitle="@string/normal_badness_num"/>
-
-
+                    <EditText
+                        android:id="@+id/et_pick_num"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="20px"
+                        android:layout_marginRight="20px"
+                        android:background="@null"
+                        android:hint="@string/please_input_pick_num"
+                        android:inputType="number"
+                        android:paddingLeft="20px"
+                        android:textSize="14sp"/>
                 </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:background="#d7d7dd"
+                    />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="30px"
-                    android:layout_marginTop="20px"
-                    android:gravity="center"
+                    android:layout_marginBottom="20px"
                     android:orientation="horizontal">
 
-                    <com.timi.sz.wms_android.view.StandardLevelView
-                        android:id="@+id/stand_slight_badness_num"
-                        android:layout_width="160px"
-                        android:layout_height="120px"
-                        app:standardLevelTitle="@string/slight_badness_num"/>
-
-                    <com.timi.sz.wms_android.view.StandardLevelView
-                        android:id="@+id/stand_badness_total_num"
-                        android:layout_width="160px"
-                        android:layout_height="120px"
-                        android:layout_marginLeft="80px"
-                        app:standardLevelTitle="@string/badness_total_num"/>
-
-                    <com.timi.sz.wms_android.view.StandardLevelView
-                        android:id="@+id/stand_badness_percent"
-                        android:layout_width="160px"
-                        android:layout_height="120px"
-                        android:layout_marginLeft="80px"
-                        app:standardLevelTitle="@string/badness_percent"/>
-
-
-                </LinearLayout>
-            </LinearLayout>
-            <!--评审操作-->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="60px"
-                android:layout_marginTop="10px"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:gravity="center_vertical"
-                    android:paddingLeft="20px"
-                    android:text="评审结果："
-                    android:textColor="#333"/>
-
-                <RelativeLayout
-                    android:id="@+id/rl_select_review_result"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="20px"
-                    android:layout_marginRight="20px"
-                    android:background="@drawable/bg_rectangle_et_focused">
-
                     <TextView
-                        android:id="@+id/tv_select_mrpreview_result"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:gravity="center_vertical"
-                        android:hint="@string/please_select_mrp_review_result"
-                        android:paddingLeft="20px"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="70px"
+                        android:layout_marginTop="10px"
+                        android:text="@string/mrp_normal_mark_tip"
                         android:textColor="#333"
                         android:textSize="14sp"/>
 
-                    <ImageView
-                        android:id="@+id/iv_mrp_down"
-                        android:layout_width="40px"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
+                    <EditText
+                        android:id="@+id/et_mrp_normal_mark"
+                        android:layout_width="match_parent"
+                        android:layout_height="150px"
+                        android:layout_marginLeft="30px"
                         android:layout_marginRight="20px"
-                        android:src="@mipmap/mrp_down"/>
-                </RelativeLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="60px"
-                android:layout_marginTop="10px"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:gravity="center_vertical"
-                    android:paddingLeft="10px"
-                    android:text="@string/mrp_normal_pick_tip"
-                    android:textColor="#333"/>
-
-                <EditText
-                    android:id="@+id/et_pick_num"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="20px"
-                    android:layout_marginRight="20px"
-                    android:background="@drawable/bg_rectangle_et_focused"
-                    android:hint="@string/please_input_pick_num"
-                    android:inputType="number"
-                    android:paddingLeft="20px"
-                    android:textSize="14sp"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="70px"
-                    android:layout_marginTop="10px"
-                    android:text="@string/mrp_normal_mark_tip"
-                    android:textColor="#333"
-                    android:textSize="14sp"/>
-
-                <EditText
-                    android:id="@+id/et_mrp_normal_mark"
-                    android:layout_width="match_parent"
-                    android:layout_height="150px"
-                    android:layout_marginLeft="30px"
-                    android:layout_marginRight="20px"
-                    android:layout_marginTop="10px"
-                    android:background="@drawable/bg_rectangle_et_focused"
-                    android:gravity="left"
-                    android:hint="@string/please_input_mark_info"
-                    android:paddingLeft="20px"
-                    android:paddingTop="10px"
-                    android:textSize="14sp"/>
+                        android:layout_marginTop="10px"
+                        android:background="@drawable/bg_rectangle_et_focused"
+                        android:gravity="left"
+                        android:hint="@string/please_input_mark_info"
+                        android:paddingLeft="20px"
+                        android:paddingTop="10px"
+                        android:textSize="14sp"/>
+                </LinearLayout>
             </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="88px"/>
+                android:layout_height="118px"/>
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
+
+    <TextView
+        android:id="@+id/tv_confirm_review"
+        android:layout_width="match_parent"
+        android:layout_height="88px"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="20px"
+        android:layout_marginLeft="30px"
+        android:layout_marginRight="30px"
+        android:background="@drawable/selector_btn_bg_login"
+        android:gravity="center"
+        android:text="确认评审"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        />
 </RelativeLayout>

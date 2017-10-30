@@ -245,9 +245,9 @@
             android:windowSoftInputMode="adjustPan|stateHidden"
             >
         </activity>
-        <activity android:name=".mvp.UI.quity.mrp.normal_review.MRPNormalReviewActivity">
-        </activity>
-        <activity android:name=".mvp.UI.quity.mrp.advance_review.MRPAdvanceReviewActivity">
+        <activity
+            android:name=".mvp.UI.quity.mrp.normal_review.MRPNormalReviewActivity"
+            android:hardwareAccelerated="false">
         </activity>
         <activity android:name=".mvp.UI.quity.update_barcode.UpdateBarcodeActivity">
         </activity>

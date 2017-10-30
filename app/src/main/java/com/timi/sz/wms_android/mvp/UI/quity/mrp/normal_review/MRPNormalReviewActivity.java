@@ -1,16 +1,12 @@
 package com.timi.sz.wms_android.mvp.UI.quity.mrp.normal_review;
 
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.PopupWindow;
+import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -19,6 +15,8 @@ import com.timi.sz.wms_android.base.uils.PackageUtils;
 import com.timi.sz.wms_android.base.uils.SpUtils;
 import com.timi.sz.wms_android.base.uils.ToastUtils;
 import com.timi.sz.wms_android.bean.quality.mrp.MrpReviewData;
+import com.timi.sz.wms_android.http.message.BaseMessage;
+import com.timi.sz.wms_android.http.message.event.MrpEvent;
 import com.timi.sz.wms_android.mvp.base.BaseActivity;
 
 import java.text.NumberFormat;
@@ -26,6 +24,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
@@ -34,14 +33,21 @@ import butterknife.OnClick;
  * create at: 2017/10/17 16:54
  */
 public class MRPNormalReviewActivity extends BaseActivity<MRPNormalReviewView, MRPNormalReviewPresenter> implements MRPNormalReviewView {
+
     @BindView(R.id.tv_confirm_review)
     TextView tvConfirmReview;
     @BindView(R.id.tv_orderno)
     TextView tvOrderno;
+    @BindView(R.id.tv_receive_date)
+    TextView tvReceiveDate;
     @BindView(R.id.tv_order_num)
     TextView tvOrderNum;
     @BindView(R.id.tv_supplier)
     TextView tvSupplier;
+    @BindView(R.id.tv_checker)
+    TextView tvChecker;
+    @BindView(R.id.tv_check_date)
+    TextView tvCheckDate;
     @BindView(R.id.tv_material_code)
     TextView tvMaterialCode;
     @BindView(R.id.tv_material_name)
@@ -50,31 +56,61 @@ public class MRPNormalReviewActivity extends BaseActivity<MRPNormalReviewView, M
     TextView tvMaterialModel;
     @BindView(R.id.tv_receive_num)
     TextView tvReceiveNum;
-    @BindView(R.id.tv_send_quality_num)
-    TextView tvSendQualityNum;
-    @BindView(R.id.tv_quality_num)
-    TextView tvQualityNum;
-    @BindView(R.id.tv_badbess_total_num)
-    TextView tvBadbessTotalNum;
+    @BindView(R.id.tv_send_check_num)
+    TextView tvSendCheckNum;
+    @BindView(R.id.tv_pass_num)
+    TextView tvPassNum;
+    @BindView(R.id.tv_badness_total_num)
+    TextView tvBadnessTotalNum;
     @BindView(R.id.tv_badness_percent)
     TextView tvBadnessPercent;
-    @BindView(R.id.tv_quality_date)
-    TextView tvQualityDate;
-    @BindView(R.id.tv_mrp_normal_checker)
-    TextView tvMrpNormalChecker;
-    @BindView(R.id.tv_select_mrpreview_result)
-    TextView tvSelectMrpreviewResult;
-    @BindView(R.id.iv_mrp_down)
-    ImageView ivMrpDown;
+    @BindView(R.id.rd_pick)
+    RadioButton rdPick;
+    @BindView(R.id.rd_quality_special_get)
+    RadioButton rdQualitySpecialGet;
+    @BindView(R.id.rd_quality_all_return)
+    RadioButton rdQualityAllReturn;
+    @BindView(R.id.rd_quality_right_get)
+    RadioButton rdQualityRightGet;
+    @BindView(R.id.rg_qualified)
+    RadioGroup rgQualified;
+    @BindView(R.id.textView2)
+    TextView textView2;
+    @BindView(R.id.tv_qctype_tip)
+    TextView tvQctypeTip;
     @BindView(R.id.et_pick_num)
     EditText etPickNum;
     @BindView(R.id.et_mrp_normal_mark)
     EditText etMrpNormalMark;
+    @BindView(R.id.tv_fatal_badness_num)
+    TextView tvFatalBadnessNum;
+    @BindView(R.id.tv_serious_badness_num)
+    TextView tvSeriousBadnessNum;
+    @BindView(R.id.tv_common_badness_num)
+    TextView tvCommonBadnessNum;
+    @BindView(R.id.tv_slight_badness_num)
+    TextView tvSlightBadnessNum;
+    @BindView(R.id.textView3)
+    TextView textView3;
+    @BindView(R.id.tv_standard_level)
+    TextView tvStandardLevel;
+    @BindView(R.id.tv_check_method)
+    TextView tvCheckMethod;
+    @BindView(R.id.tv_mrp_sample_half_yard)
+    TextView tvMrpSampleHalfYard;
+    @BindView(R.id.tv_aql)
+    TextView tvAQL;
+    @BindView(R.id.layout_advance_work)
+    LinearLayout layoutAdvanceWork;
     private MrpReviewData mrpReviewData;
     /**
      * 评审结果  默认值是-1 未做任何操作
      */
     private int qcReviewResult = -1;
+    /**
+     * 1：普捡  2：高检1  3：高检2
+     */
+    private int qcType = 1;
 
     @Override
     public int setLayoutId() {
@@ -84,6 +120,7 @@ public class MRPNormalReviewActivity extends BaseActivity<MRPNormalReviewView, M
     @Override
     public void initBundle(Bundle savedInstanceState) {
         mrpReviewData = new Gson().fromJson(getIntent().getStringExtra("ReviewDetail"), MrpReviewData.class);
+        qcType = getIntent().getIntExtra("QcType", 1);
     }
 
     @Override
@@ -95,57 +132,92 @@ public class MRPNormalReviewActivity extends BaseActivity<MRPNormalReviewView, M
             /**
              * 到货单号
              */
-            setTextViewText(tvReceiveNum, R.string.receive_pro_num, mrpReviewData.getReceiptCode());
+            tvReceiveNum.setText(mrpReviewData.getReceiptCode());
             /**
              *质检日期
              */
-            setTextViewText(tvQualityDate, R.string.tv_mrp_quality_date, mrpReviewData.getCheckDate());
+            tvCheckDate.setText(mrpReviewData.getCheckDate());
             /**
              * 订单号
              */
-            setTextViewText(tvOrderNum, R.string.order_no, mrpReviewData.getSourceBillCode());
+            tvOrderNum.setText(mrpReviewData.getSourceBillCode());
+            /**
+             * 到货日期
+             */
+            tvReceiveDate.setText(mrpReviewData.getReceiptDate());
             /**
              * 质检人
              */
-            setTextViewText(tvMrpNormalChecker, R.string.mrp_normal_checker, mrpReviewData.getChecker());
+            tvChecker.setText(mrpReviewData.getChecker());
             /**
              * 供应商
              */
-            setTextViewText(tvSupplier, R.string.buy_from, mrpReviewData.getSupplierName());
+            tvSupplier.setText(mrpReviewData.getSupplierName());
             /**
              * 物品编码
              */
-            setTextViewText(tvMaterialCode, R.string.material_code, mrpReviewData.getMaterialCode());
+            tvMaterialCode.setText(mrpReviewData.getMaterialCode());
             /**
              * 物料名称
              */
-            setTextViewText(tvMaterialName, R.string.material_name, mrpReviewData.getMaterialName());
+            tvMaterialName.setText(mrpReviewData.getMaterialName());
             /**
              * 规格型号
              */
-            setTextViewText(tvMaterialModel, R.string.material_model, mrpReviewData.getMaterialStandard());
+            tvMaterialModel.setText(mrpReviewData.getMaterialStandard());
             /**
              * 实收数
              */
-            setTextViewText(tvReceiveNum, R.string.receive_num, mrpReviewData.getReceiveQty());
+            tvReceiveNum.setText(String.valueOf(mrpReviewData.getReceiveQty()));
             /**
              * 送检数
              */
-            setTextViewText(tvSendQualityNum, R.string.send_quality_num_tip, mrpReviewData.getSampleQty());
+            tvSendCheckNum.setText(String.valueOf(mrpReviewData.getSampleQty()));
             /**
              * 合格数
              */
-            setTextViewText(tvQualityNum, R.string.mrp_quality_num_tip, mrpReviewData.getPassQty());
+            tvPassNum.setText(String.valueOf(mrpReviewData.getPassQty()));
             /**
              * 不良总数
              */
-            setTextViewText(tvBadbessTotalNum, R.string.mrp_normal_badness_total_num, mrpReviewData.getNgQty());
+            tvBadnessTotalNum.setText(String.valueOf(mrpReviewData.getNgQty()));
             /**
              * 不良率
              */
             NumberFormat nFromat = NumberFormat.getPercentInstance();
             String rates = nFromat.format(mrpReviewData.getNgQty() / mrpReviewData.getReceiveQty());
-            setTextViewText(tvBadnessPercent, R.string.mrp_normal_badness_percent, rates);
+            tvBadnessPercent.setText(rates);
+            /**
+             * 设置标题和普捡 高检1 文本
+             */
+            switch (qcType) {
+                case 1:
+                    tvQctypeTip.setText(getString(R.string.mrp_normal_review_work_tip));
+                    setActivityTitle(getString(R.string.mrp_normal_check_title));
+                    layoutAdvanceWork.setVisibility(View.GONE);
+                    break;
+                case 2:
+                    tvQctypeTip.setText(R.string.mrp_reveiw_advance1);
+                    setActivityTitle(getString(R.string.mrp_review_advance1_title));
+                    layoutAdvanceWork.setVisibility(View.GONE);
+                    break;
+                case 3:
+                    tvQctypeTip.setText(R.string.mrp_review_advance2_tip);
+                    setActivityTitle(getString(R.string.mrp_review_advance2_title));
+                    layoutAdvanceWork.setVisibility(View.VISIBLE);
+                    tvFatalBadnessNum.setText(String.valueOf(mrpReviewData.getFatalQty()));
+                    tvSeriousBadnessNum.setText(String.valueOf(mrpReviewData.getSeriousQty()));
+                    tvCommonBadnessNum.setText(String.valueOf(mrpReviewData.getCommonlyQty()));
+                    tvSlightBadnessNum.setText(String.valueOf(mrpReviewData.getSlightQty()));
+                    tvStandardLevel.setText(String.valueOf(mrpReviewData.getCurrentLevel()));
+                    tvMrpSampleHalfYard.setText(mrpReviewData.getSampleCode());
+                    tvAQL.setText(mrpReviewData.getCurrentAQL());
+                    //严格度
+                    tvCheckMethod.setText(mrpReviewData.getCurrentStrict());
+                    break;
+                default:
+                    break;
+            }
         }
     }
 
@@ -165,19 +237,42 @@ public class MRPNormalReviewActivity extends BaseActivity<MRPNormalReviewView, M
     }
 
 
-    @OnClick({R.id.tv_confirm_review, R.id.rl_select_review_result})
+    @OnClick({R.id.tv_confirm_review,})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tv_confirm_review://确认评审结果
+                /**
+                 * 评审结果
+                 */
+                if (rdPick.isChecked()) {//挑选
+                    qcReviewResult = 1;
+                }
+                if (rdQualitySpecialGet.isChecked()) {//特采
+                    qcReviewResult = 2;
+                }
+                if (rdQualityAllReturn.isChecked()) {//全退
+                    qcReviewResult = 3;
+                }
+                if (rdQualityRightGet.isChecked()) {//正采
+                    qcReviewResult = 4;
+                }
                 if (qcReviewResult == -1) {//提示
                     ToastUtils.showShort(getString(R.string.please_select_mrp_review_result));
                     return;
                 }
-                String pickNum = etPickNum.getText().toString();
-                if (TextUtils.isEmpty(pickNum)) {
+                String pickNumStr = etPickNum.getText().toString();
+                if (TextUtils.isEmpty(pickNumStr)) {
                     ToastUtils.showShort(getString(R.string.please_input_pick_num));
                     return;
                 }
+                int pickNum = Integer.parseInt(pickNumStr);
+                if (pickNum > mrpReviewData.getReceiveQty()) {//挑选或特采数量大于实收数
+                    ToastUtils.showShort(getString(R.string.mrp_more_receive_num_tip));
+                    return;
+                }
+                /**
+                 * 备注
+                 */
                 String mark = etMrpNormalMark.getText().toString();
                 /**
                  * 提交请求
@@ -187,96 +282,24 @@ public class MRPNormalReviewActivity extends BaseActivity<MRPNormalReviewView, M
                 params.put("OrgId", SpUtils.getInstance().getOrgId());
                 params.put("mac", PackageUtils.getMac());
                 params.put("Remark", mark);
-                params.put("ReviewQty", Integer.parseInt(pickNum));
+                params.put("ReviewQty", pickNum);
                 params.put("QCReview", qcReviewResult);
-                params.put("QCId", mrpReviewData.getQCId());
+                params.put("QCId", mrpReviewData.getQcId());
                 getPresenter().setMRPReviewData(params);
-                break;
-            case R.id.rl_select_review_result://选择评审结果
-                if (null != selectReviewResultPopWindow && selectReviewResultPopWindow.isShowing()) {
-                    selectReviewResultPopWindow.dismiss();
-                } else {
-                    showSelectReviewResultPopWindow(view);
-                }
                 break;
         }
     }
 
     @Override
     public void setMrpReviewData() {
+        BaseMessage.post(new MrpEvent(MrpEvent.MRP_REVIEW_SUCCESS));
         onBackPressed();
     }
 
-    PopupWindow selectReviewResultPopWindow;
-
-    /**
-     * 弹出选择评审结果的选择
-     */
-    private void showSelectReviewResultPopWindow(View view) {
-        if (null == selectReviewResultPopWindow) {
-            selectReviewResultPopWindow = new PopupWindow(this);
-            View inflate = LayoutInflater.from(this).inflate(R.layout.pop_mrp_review_result, null);
-            /**
-             * 点击事件
-             */
-            inflate.findViewById(R.id.tv_pick).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    /**
-                     * 设置文本
-                     */
-                    tvSelectMrpreviewResult.setText(getString(R.string.quality_pick));
-                    /**
-                     * 结果的状态值
-                     */
-                    qcReviewResult = 1;
-                    /**
-                     * 小时
-                     */
-                    selectReviewResultPopWindow.dismiss();
-                }
-            });
-            inflate.findViewById(R.id.tv_special_get).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    tvSelectMrpreviewResult.setText(getString(R.string.quality_special_get));
-                    qcReviewResult = 2;
-                    selectReviewResultPopWindow.dismiss();
-                }
-            });
-            inflate.findViewById(R.id.tv_all_return).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    tvSelectMrpreviewResult.setText(getString(R.string.quality_all_return));
-                    qcReviewResult = 3;
-                    selectReviewResultPopWindow.dismiss();
-                }
-            });
-            inflate.findViewById(R.id.tv_right_get).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    tvSelectMrpreviewResult.setText(getString(R.string.quality_right_get));
-                    qcReviewResult = 4;
-                    selectReviewResultPopWindow.dismiss();
-                }
-            });
-            selectReviewResultPopWindow.setContentView(inflate);
-            selectReviewResultPopWindow.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#00000000")));
-            selectReviewResultPopWindow.setOutsideTouchable(true);
-        }
-        selectReviewResultPopWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
-            @Override
-            public void onDismiss() {
-                Animation animation = AnimationUtils.loadAnimation(MRPNormalReviewActivity.this, R.anim.rotation_up);
-                animation.setFillAfter(true);
-                ivMrpDown.startAnimation(animation);
-            }
-        });
-        selectReviewResultPopWindow.showAsDropDown(view);
-        Animation animation = AnimationUtils.loadAnimation(this, R.anim.rotation_down);
-        animation.setFillAfter(true);
-        ivMrpDown.startAnimation(animation);
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
     }
-
-
 }

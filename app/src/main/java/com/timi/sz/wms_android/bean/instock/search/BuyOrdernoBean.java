@@ -112,19 +112,22 @@ public class BuyOrdernoBean   {
     }
 
     public static class DetailResultsBean {
+
         /**
          * poLine : 1
-         * materialId : 3714
-         * materialCode : 20103010006
-         * materialName : 708按键板(数字)
-         * materialStandard : 六按键/152*15*1.6/装数字显示器
-         * materialAttribute : null
-         * poQty : 5158
-         * arrivalQty : 5158
-         * inStockQty : 5158
-         * countQty : 0
-         * giveQty : 0
-         * id : 455
+         * materialId : 3912
+         * materialCode : 20301010017
+         * materialName : 750前壳(带音频)
+         * materialStandard : 烤漆/哑黑/压铸锌合金/69*43*23/钻孔
+         * materialAttribute :
+         * dnQty : 100
+         * recvQty : 112
+         * poQty : 20000
+         * arrivalQty : 10718
+         * inStockQty : 11932
+         * countQty : 27
+         * giveQty : 1
+         * id : 1
          */
 
         private int poLine;
@@ -132,7 +135,9 @@ public class BuyOrdernoBean   {
         private String materialCode;
         private String materialName;
         private String materialStandard;
-        private Object materialAttribute;
+        private String materialAttribute;
+        private int dnQty;
+        private int recvQty;
         private int poQty;
         private int arrivalQty;
         private int inStockQty;
@@ -180,12 +185,28 @@ public class BuyOrdernoBean   {
             this.materialStandard = materialStandard;
         }
 
-        public Object getMaterialAttribute() {
+        public String getMaterialAttribute() {
             return materialAttribute;
         }
 
-        public void setMaterialAttribute(Object materialAttribute) {
+        public void setMaterialAttribute(String materialAttribute) {
             this.materialAttribute = materialAttribute;
+        }
+
+        public int getDnQty() {
+            return dnQty;
+        }
+
+        public void setDnQty(int dnQty) {
+            this.dnQty = dnQty;
+        }
+
+        public int getRecvQty() {
+            return recvQty;
+        }
+
+        public void setRecvQty(int recvQty) {
+            this.recvQty = recvQty;
         }
 
         public int getPoQty() {

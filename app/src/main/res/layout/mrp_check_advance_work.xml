@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="vertical">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10px"
+        android:layout_marginBottom="10px"
+        android:layout_marginLeft="30px"
+        android:layout_marginRight="30px"
+        android:layout_marginTop="10px"
+        android:background="@drawable/bg_quality_normal_divider"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="64px"
+        android:layout_marginLeft="30px"
+        android:gravity="center_vertical"
+        android:text="@string/badness_reason"
+        android:textColor="#333"
+        android:textSize="28px"
+        android:textStyle="bold"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="64px"
+        android:gravity="fill_vertical"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="30px"
+            android:layout_weight="1"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/fatal_badness_num_tip"
+                android:textColor="#666"
+                android:textSize="26px"/>
+
+            <TextView
+                android:id="@+id/tv_fatal_badness_num"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40px"
+                android:layout_weight="1"
+                android:text="0"
+                android:textColor="#333"
+                android:textSize="26px"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="30px"
+            android:layout_weight="1"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/serious_badness_num_tip"
+                android:textColor="#666"
+                android:textSize="26px"/>
+
+            <TextView
+                android:id="@+id/tv_serious_badness_num"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40px"
+                android:layout_weight="1"
+                android:text="0"
+                android:textColor="#333"
+                android:textSize="26px"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="64px"
+        android:gravity="fill_vertical"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="30px"
+            android:layout_weight="1"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/common_badness_num_tip"
+                android:textColor="#666"
+                android:textSize="26px"/>
+
+            <TextView
+                android:id="@+id/tv_common_badness_num"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40px"
+                android:layout_weight="1"
+                android:text="0"
+                android:textColor="#333"
+                android:textSize="26px"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="30px"
+            android:layout_weight="1"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/slight_badness_num_tip"
+                android:textColor="#666"
+                android:textSize="26px"/>
+
+            <TextView
+                android:id="@+id/tv_slight_badness_num"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="0"
+                android:layout_marginLeft="40px"
+                android:textColor="#333"
+                android:textSize="26px"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10px"
+        android:layout_marginBottom="10px"
+        android:layout_marginLeft="30px"
+        android:layout_marginRight="30px"
+        android:layout_marginTop="10px"
+        android:background="@drawable/bg_quality_normal_divider"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="64px"
+        android:gravity="fill_vertical"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="30px"
+            android:layout_weight="1"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/standard_level_tip"
+                android:textColor="#666"
+                android:textSize="26px"/>
+
+            <TextView
+                android:id="@+id/tv_standard_level"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40px"
+                android:layout_weight="1"
+                android:text="0"
+                android:textColor="#333"
+                android:textSize="26px"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="30px"
+            android:layout_weight="1"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/current_strict_tip"
+                android:textColor="#666"
+                android:textSize="26px"/>
+
+            <TextView
+                android:id="@+id/tv_check_method"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="0"
+                android:layout_marginLeft="65px"
+                android:textColor="#333"
+                android:textSize="26px"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="64px"
+        android:gravity="fill_vertical"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="30px"
+            android:layout_weight="1"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/mrp_sample_half_yard_tip"
+                android:textColor="#666"
+                android:textSize="26px"/>
+
+            <TextView
+                android:id="@+id/tv_mrp_sample_half_yard"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40px"
+                android:layout_weight="1"
+                android:text="0"
+                android:textColor="#333"
+                android:textSize="26px"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="30px"
+            android:layout_weight="1"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/mrp_advance_aql_tip"
+                android:textColor="#666"
+                android:textSize="26px"/>
+
+            <TextView
+                android:id="@+id/tv_aql"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="0"
+                android:layout_marginLeft="70px"
+                android:textColor="#333"
+                android:textSize="26px"/>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

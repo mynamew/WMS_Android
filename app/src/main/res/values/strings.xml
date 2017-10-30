@@ -156,9 +156,9 @@
     <string name="send_goods_num">送货数：%1$s</string>
     <string name="have_receive_num">已收数：%1$s</string>
     <string name="arrive_good_num">到货数量：%1$s</string>
-    <string name="point_num">清点数：</string>
+    <string name="point_num">清点数</string>
     <string name="please_input_point_num">请输入请点数</string>
-    <string name="spare_num">备品数：</string>
+    <string name="spare_num">备品数</string>
     <string name="please_input_spare_num">请输入备品数</string>
     <string name="point_record">清点记录</string>
     <string name="goods_point">物品清点</string>
@@ -192,6 +192,14 @@
     /******************************************************************************************************************************************************/
     /******************************************************************************************************************************************************/
     /**====== 入库作业======**/
+    /**====== 物品清点======**/
+    <string name="item_point_buy_num">采购</string>
+    <string name="item_point_arrive_num">到货</string>
+    <string name="item_point_instock_num">入库</string>
+    <string name="item_point_point_num">清点</string>
+    <string name="item_point_spare_num">备品</string>
+    <string name="point_num_and_spare_num_no_zero">请点数和备品数不能同时为0</string>
+    <string name="point_num_no_more_arrvice_num">清点数量不能大于送货数量，请重新输入！</string>
     /**====== 来料入库 ======**/
     <string name="in_stock_num_title">入库-入库上架</string>
     <string name="receive_pro_num">收货单号：%1$s</string>
@@ -410,7 +418,7 @@
     <string name="stringency_tip">严格度：</string>
     <string name="sample_num">样品数：</string>
     <string name="serious_unqualitfied_tip">严重不合格原因：</string>
-    <string name="badness_total_num_tip">不良样品总数：</string>
+    <string name="badness_total_num_tip">不良总数：</string>
     <string name="main_unqualitfied_tip">主要不合格原因：</string>
     <string name="tv_monor_unqualitfied_tip">催要不合格原因：</string>
     <string name="quality_complete">质检完成</string>
@@ -459,6 +467,7 @@
     <string name="dialog_unpass_tip">\t\t抽检样品依据AQL标准进行质检，某一项AQL拒收数达到目标值，系统自动判定该批抽检样品质检结果为不合格，是否终止并提交质检操作结果？</string>
     <string name="none">无</string>
     <string name="quality_complete_tip">本批样品质检操作已全部完成</string>
+    <string name="please_select_badness_reason">请选择不良原因</string>
 
     /**====== 质检拒收 ======**/
     <string name="start_pack_num">初始包装数：%1$s</string>
@@ -473,20 +482,40 @@
     <string name="mrp_normal_badness_percent">不良率：%1$s</string>
     <string name="mrp_quality_num_tip">合格数：%1$s</string>
     <string name="mrp_normal_badness_total_num">不良总数：%1$s</string>
+    <string name="arrive_date_tip">到货日期</string>
+    <string name="order_no_tip">订单号</string>
+    <string name="checker">质检人</string>
+    <string name="check_date">质检日期</string>
+    <string name="receive_num_tip">实收数：</string>
+    <string name="send_check_tip">送检数：</string>
+    <string name="pass_num_tip">合格数：</string>
+    <string name="badness_percent_tip">不良率：</string>
+    <string name="mrp_normal_review_work_tip">质检操作（普检）</string>
+    <string name="mrp_more_receive_num_tip">挑选/特采/蒸菜的数量不能大于实收数，请重新输入</string>
     /**====== MRP高检 ======**/
     <string name="mrp_normal_checker">质检人：%1$s</string>
     <string name="please_select_mrp_review_result">请选择评审结果</string>
-    <string name="mrp_normal_pick_tip">挑选/特采：</string>
+    <string name="mrp_normal_pick_tip">挑选/特采</string>
     <string name="please_input_pick_num">请输入挑选数量（或特采）</string>
     <string name="please_input_mark_info">请输入备注信息</string>
-    <string name="mrp_normal_mark_tip">备注：</string>
+    <string name="mrp_normal_mark_tip">备注</string>
     <string name="mr_advance_sample_num">样品数：%1$s</string>
-    <string name="mrp_advance_serious_num">严重不良原因：%1$s</string>
-    <string name="mrp_advance_main_num">主要不良原因：%1$s</string>
-    <string name="mrp_advance_second_num">次要不良原因：%1$s</string>
     <string name="mrp_aql_tip">AQL：%1$s</string>
     <string name="mrp_quality_total_num">合格总数：%1$s</string>
-
+    <string name="mrp_normal_check_title">MRP评审(普捡)</string>
+    <string name="mrp_reveiw_advance1">质检操作(高检1)</string>
+    <string name="mrp_review_advance1_title">MRP评审(高检1)</string>
+    <string name="mrp_review_advance2_tip">质检操作(高检2)</string>
+    <string name="mrp_review_advance2_title">MRP评审(高检2)</string>
+    <string name="fatal_badness_num_tip">致命不良：</string>
+    <string name="serious_badness_num_tip">严重不良：</string>
+    <string name="common_badness_num_tip">一般不良：</string>
+    <string name="slight_badness_num_tip">轻微不良：</string>
+    <string name="standard_level_tip">标准水平：</string>
+    <string name="check_method_tip">检验方法：</string>
+    <string name="mrp_sample_half_yard_tip">试样半码：</string>
+    <string name="mrp_advance_aql_tip">AQL数：</string>
+    <string name="current_strict_tip">严格度：</string>
     /******************************************************************************************************************************************************/
     /******************************************************************************************************************************************************/
     /**====== 库内作业 ======**/
@@ -543,7 +572,11 @@
     <string name="query_retrospective">追溯查询</string>
     <string name="query_record_tip">记录查询</string>
     <string name="query_statistical_tip">统计查询</string>
-    <string name="please_select_badness_reason">请选择不良原因</string>
+    <string name="dialog_material_point">物料清点</string>
+    <string name="item_material_model">规格型号</string>
+    <string name="item_point_date">清点日期：%1$s</string>
+    <string name="header_point_send_good">送货</string>
+    <string name="header_point_have_receive_num">已收</string>
 
 
 </resources>

@@ -1,7 +1,5 @@
 package com.timi.sz.wms_android.bean.quality.mrp;
 
-import com.google.gson.annotations.SerializedName;
-
 /**
  * $dsc
  * author: timi
@@ -10,8 +8,47 @@ import com.google.gson.annotations.SerializedName;
 
 public class MrpReviewData {
 
+    /**
+     * qcId : 118
+     * orgId : 1
+     * receiptId : 8709
+     * receiptCode : DH160628005
+     * receiptDate : 2016-06-28
+     * receiptDetailId : 20651
+     * receiptLine : 1
+     * materialId : 3912
+     * materialCode : 20301010017
+     * materialName : 750前壳(带音频)
+     * materialStandard : 烤漆/哑黑/压铸锌合金/69*43*23/钻孔
+     * materialAttribute : null
+     * supplierName : 深圳市宝安区大浪恒昶塑胶电子厂
+     * sourceBillType : 11
+     * sourceBillId : 6178
+     * sourceBillCode : CG160425242
+     * qcType : 3
+     * qcStatus : 3
+     * qcResult : 3
+     * receiveQty : 600
+     * sampleQty : 125
+     * passQty : 119
+     * ngQty : 6
+     * rejectQty : 6
+     * checker : ADMIN
+     * checkDate : 2017-10-27 02:48:58
+     * currentStrict : 加严
+     * currentLevel : III
+     * sampleCode : K
+     * currentAQL : 0.65
+     * aqlAcceptQty : 0
+     * aqlRejectQty : 3
+     * fatalQty : 0
+     * seriousQty : 0
+     * commonlyQty : 0
+     * slightQty : 0
+     */
+
+    private int qcId;
     private int orgId;
-    private int QCId;
     private int receiptId;
     private String receiptCode;
     private String receiptDate;
@@ -47,13 +84,14 @@ public class MrpReviewData {
     private int commonlyQty;
     private int slightQty;
 
-    public int getQCId() {
-        return QCId;
+    public int getQcId() {
+        return qcId;
     }
 
-    public void setQCId(int QCId) {
-        this.QCId = QCId;
+    public void setQcId(int qcId) {
+        this.qcId = qcId;
     }
+
     public int getOrgId() {
         return orgId;
     }

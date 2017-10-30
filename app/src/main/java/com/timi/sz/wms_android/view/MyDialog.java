@@ -74,7 +74,7 @@ public class MyDialog extends Dialog {
      * @autor timi
      * create at 2017/5/5 14:34
      */
-    public MyDialog setTextViewContent(int resId, String content) {
+    public MyDialog setTextViewContent(int resId, Object content) {
         if (!(rootView.findViewById(resId) instanceof TextView)) {
             return this;
         }
@@ -82,8 +82,8 @@ public class MyDialog extends Dialog {
         //存储控件
         views.put(resId, tv);
         //设置内容
-        if (null != tv && null != content && !TextUtils.isEmpty(content)) {
-            tv.setText(content);
+        if (null != tv && null != content ) {
+            tv.setText(String.valueOf(content));
         }
         return this;
     }

@@ -5,83 +5,217 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_centerInParent="true"
         android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
         android:background="@drawable/bg_rectangle_login_server"
         android:orientation="vertical"
-        android:paddingLeft="20px">
+        >
 
-        <TextView
-            android:id="@+id/tv_stockin_point_pronum"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="80px"
-            android:gravity="center_vertical"
-            android:text="@string/material_code"
-            android:textColor="#333"
-            android:textSize="14sp"/>
+            android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/tv_stockin_point_proname"
-            android:layout_width="match_parent"
-            android:layout_height="80px"
-            android:gravity="center_vertical"
-            android:text="@string/material_name"
-            android:textColor="#333"
-            android:textSize="14sp"/>
+            <View
+                android:layout_width="260px"
+                android:layout_height="2px"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="85px"
+                android:background="#999"/>
 
-        <TextView
-            android:id="@+id/tv_stockin_point_promodel"
-            android:layout_width="match_parent"
-            android:layout_height="80px"
-            android:gravity="center_vertical"
-            android:text="@string/material_model"
-            android:textColor="#333"
-            android:textSize="14sp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="60px"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="55px"
+                android:background="#fff"
+                android:gravity="center"
+                android:paddingLeft="20px"
+                android:paddingRight="20px"
+                android:text="@string/dialog_material_point"
+                android:textColor="#333"
+                android:textSize="32px"/>
 
-        <TextView
-            android:id="@+id/tv_stockin_point_buynum"
-            android:layout_width="match_parent"
-            android:layout_height="80px"
-            android:gravity="center_vertical"
-            android:text="@string/buy_num"
-            android:textColor="#333"
-            android:textSize="14sp"/>
+            <ImageView
+                android:id="@+id/iv_close"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:padding="30px"
+                android:src="@mipmap/quality_badness_close"/>
+        </RelativeLayout>
 
-        <TextView
-            android:id="@+id/tv_stockin_point_receive_pro_num"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="80px"
+            android:layout_height="wrap_content"
             android:gravity="center_vertical"
-            android:text="@string/arrive_good_num"
-            android:textColor="#333"
-            android:textSize="14sp"/>
+            android:orientation="horizontal"
+
+            android:paddingBottom="10px"
+            android:paddingLeft="30px"
+            android:paddingTop="10px">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/item_material_code"
+                android:textColor="#333"/>
+
+            <TextView
+                android:id="@+id/tv_material_code"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:paddingLeft="60px"
+                android:text=""
+                android:textColor="#000"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingBottom="10px"
+
+            android:paddingLeft="30px"
+            android:paddingTop="10px">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="@string/item_material_name"
+                android:textColor="#333"/>
+
+            <TextView
+                android:id="@+id/tv_material_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:paddingLeft="60px"
+                android:text=""
+                android:textColor="#000"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingBottom="10px"
+            android:paddingLeft="30px"
+            android:paddingTop="10px">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/item_material_model"
+                android:textColor="#333"/>
+
+            <TextView
+                android:id="@+id/tv_material_model"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:paddingLeft="60px"
+                android:text=""
+                android:textColor="#000"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+
+            android:paddingBottom="10px"
+            android:paddingLeft="30px"
+            android:paddingTop="10px">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30px"
+                android:gravity="center"
+                android:text="@string/item_buy_num"
+                android:textColor="#333"/>
+
+            <TextView
+                android:id="@+id/tv_buy_num"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="60px"
+                android:gravity="center_vertical"
+                android:text=""
+                android:textColor="#000"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingBottom="10px"
+
+            android:paddingLeft="30px"
+            android:paddingTop="10px">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30px"
+                android:gravity="center"
+                android:text="@string/item_arrive_goods_num"
+                android:textColor="#333"/>
+
+            <TextView
+                android:id="@+id/tv_arrive_goods_num"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="60px"
+                android:gravity="center_vertical"
+                android:text=""
+                android:textColor="#000"/>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_marginBottom="10px"
+            android:layout_marginTop="10px"
+            android:background="#e7e7ed"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="80px"
             android:gravity="center_vertical"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:paddingLeft="30px">
 
             <TextView
                 android:id="@+id/tv_stockin_point_pro_point_num"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:layout_marginLeft="30px"
                 android:gravity="center_vertical"
                 android:text="@string/point_num"
                 android:textColor="#333"
                 android:textSize="14sp"/>
 
             <EditText
-                android:layout_marginRight="20px"
                 android:id="@+id/et_stockin_point_pro_point_num"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:inputType="number"
                 android:layout_marginBottom="10px"
+                android:layout_marginLeft="60px"
+                android:layout_marginRight="20px"
                 android:layout_marginTop="10px"
-                android:background="@drawable/bg_rectangle_et_focused"
+                android:background="@drawable/selector_et"
                 android:gravity="center_vertical"
                 android:hint="@string/please_input_point_num"
+                android:inputType="number"
                 android:maxLines="1"
                 android:paddingLeft="20px"
                 android:textSize="14sp"/>
@@ -91,12 +225,13 @@
             android:layout_width="match_parent"
             android:layout_height="80px"
             android:orientation="horizontal"
+            android:paddingLeft="30px"
             >
 
             <TextView
-                android:id="@+id/tv_stockin_point_sparenum"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:layout_marginLeft="30px"
                 android:gravity="center_vertical"
                 android:text="@string/spare_num"
                 android:textColor="#333"
@@ -107,41 +242,55 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginBottom="10px"
-                android:layout_marginTop="10px"
-                android:background="@drawable/bg_rectangle_et_focused"
-                android:gravity="center_vertical"
-                android:inputType="number"
-                android:hint="@string/please_input_spare_num"
+                android:layout_marginLeft="60px"
                 android:layout_marginRight="20px"
+                android:layout_marginTop="10px"
+                android:background="@drawable/selector_et"
+                android:gravity="center_vertical"
+                android:hint="@string/please_input_spare_num"
+                android:inputType="number"
                 android:maxLines="1"
                 android:paddingLeft="20px"
                 android:textSize="14sp"/>
         </LinearLayout>
 
-        <RelativeLayout
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_marginBottom="30px"
+            android:layout_marginTop="10px"
+            android:background="#e7e7ed"/>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="80px"
-            android:layout_marginBottom="20px"
-            android:layout_marginTop="20px">
+            android:layout_marginBottom="30px"
+            android:layout_marginLeft="20px"
+            android:layout_marginRight="20px"
+            android:orientation="horizontal">
+
 
             <Button
-                android:id="@+id/btn_stockin_point_cancel"
-                android:layout_width="wrap_content"
+                android:id="@+id/btn_cancel"
+                android:layout_width="0dp"
                 android:layout_height="80px"
-                android:layout_marginLeft="100px"
-                android:background="@drawable/bg_rectangle_et_focused"
+                android:layout_weight="1"
+                android:background="@drawable/bg_rectangle_gray"
                 android:text="@string/cancel"
-                android:textColor="#666"/>
+                android:textColor="#999"/>
 
             <Button
-                android:id="@+id/btn_stockin_point_save"
-                android:layout_width="wrap_content"
+                android:id="@+id/btn_commit"
+                android:layout_width="0dp"
                 android:layout_height="80px"
                 android:layout_alignParentRight="true"
-                android:layout_marginRight="100px"
-                android:background="@drawable/bg_rectangle_et_focused"
-                android:text="@string/save"
-                android:textColor="#666"/>
-        </RelativeLayout>
+                android:layout_marginLeft="10px"
+
+                android:layout_marginRight="10px"
+                android:layout_weight="1"
+                android:background="@drawable/selector_btn_bg_login"
+                android:text="@string/confirm"
+                android:textColor="#fff"/>
+        </LinearLayout>
     </LinearLayout>
 </com.zhy.autolayout.AutoRelativeLayout>

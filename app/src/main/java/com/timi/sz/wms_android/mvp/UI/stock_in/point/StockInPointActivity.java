@@ -40,7 +40,7 @@ public class StockInPointActivity extends BaseActivity<StockInPointView, StockIn
 
     @Override
     public void initBundle(Bundle savedInstanceState) {
-        setActivityTitle("收货-物品清点");
+        setActivityTitle(getString(R.string.stock_in_point));
         intentCode = getIntent().getIntExtra(Constants.CODE_STR, Constants.BUY_ORDE_NUM);
         if (intentCode == Constants.BUY_ORDE_NUM)
             mBuyBean=getIntent().getParcelableExtra(Constants.IN_STOCK_BUY_BEAN);

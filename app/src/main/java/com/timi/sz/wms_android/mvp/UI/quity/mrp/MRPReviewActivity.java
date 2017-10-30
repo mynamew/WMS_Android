@@ -13,8 +13,13 @@ import com.timi.sz.wms_android.base.adapter.RecyclerViewHolder;
 import com.timi.sz.wms_android.base.uils.PackageUtils;
 import com.timi.sz.wms_android.base.uils.SpUtils;
 import com.timi.sz.wms_android.bean.quality.mrp.MrpReviewData;
+import com.timi.sz.wms_android.http.message.BaseMessage;
+import com.timi.sz.wms_android.http.message.event.MrpEvent;
 import com.timi.sz.wms_android.mvp.UI.quity.mrp.normal_review.MRPNormalReviewActivity;
 import com.timi.sz.wms_android.mvp.base.BaseActivity;
+
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.text.NumberFormat;
 import java.util.HashMap;
@@ -37,6 +42,7 @@ public class MRPReviewActivity extends BaseActivity<MRPReviewView, MRPReviewPres
     @Override
     public void initBundle(Bundle savedInstanceState) {
         setActivityTitle(getString(R.string.mrp_title));
+        BaseMessage.register(this);
     }
 
     @Override
@@ -75,6 +81,9 @@ public class MRPReviewActivity extends BaseActivity<MRPReviewView, MRPReviewPres
                 @Override
                 protected void bindData(RecyclerViewHolder holder, int position, MrpReviewData item) {
                     /**
+                     * 行号
+                     */
+                    holder.setTextView(R.id.tv_mrp_line_num, item.getReceiptLine());   /**
                      * 物品编码
                      */
                     holder.setTextView(R.id.tv_mrp_material_code, item.getMaterialCode());
@@ -129,25 +138,27 @@ public class MRPReviewActivity extends BaseActivity<MRPReviewView, MRPReviewPres
                 @Override
                 public void onItemClick(View itemView, int pos) {
                     Intent intent = new Intent();
-                    switch (datas.get(pos).getQcType()) {
-                        case 1://普通质检
-                            intent.setClass(MRPReviewActivity.this, MRPNormalReviewActivity.class);
-                            intent.putExtra("ReviewDetail", new Gson().toJson(datas.get(pos)));
-                            intent.putExtra("ReviewDetail", new Gson().toJson(datas.get(pos)));
-                            break;
-                        case 2://高级质检1
-                            intent.setClass(MRPReviewActivity.this, MRPNormalReviewActivity.class);
-                            intent.putExtra("ReviewDetail", new Gson().toJson(datas.get(pos)));
-                            break;
-                        case 3://高级质检2
-                            intent.setClass(MRPReviewActivity.this, MRPNormalReviewActivity.class);
-                            intent.putExtra("ReviewDetail", new Gson().toJson(datas.get(pos)));
-                            break;
-                    }
+                    intent.setClass(MRPReviewActivity.this, MRPNormalReviewActivity.class);
+                    intent.putExtra("ReviewDetail", new Gson().toJson(datas.get(pos)));
+                    intent.putExtra("QcType", datas.get(pos).getQcType());
                     startActivity(intent);
 
                 }
             });
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        BaseMessage.unregister(this);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void refreshMrpReviewData(MrpEvent event) {
+        if (event.getEvent().equals(MrpEvent.MRP_REVIEW_SUCCESS)) {
+            initData();
+        }
+
     }
 }

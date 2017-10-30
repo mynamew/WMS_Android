@@ -61,26 +61,6 @@
             android:textSize="24px"/>
 
         <TextView
-            android:id="@+id/tv_send_good_num"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="2"
-            android:gravity="center"
-            android:text="@string/header_point_send_good"
-            android:textColor="#333"
-            android:textSize="24px"/>
-
-        <TextView
-            android:id="@+id/tv_have_receive_num"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="2"
-            android:gravity="center"
-            android:text="@string/header_point_have_receive_num"
-            android:textColor="#333"
-            android:textSize="24px"/>
-
-        <TextView
             android:id="@+id/tv_arrive_good_num"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -113,4 +93,8 @@
 
     </LinearLayout>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="#e7e7ed"/>
 </LinearLayout>
