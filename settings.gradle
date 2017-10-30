@@ -1,1 +1,1 @@
-include ':app', ':PullToRefresh', ':DateSelectlibrary', ':FlycoTabLayout_Lib'
+include ':app', ':PullToRefresh', ':DateSelectlibrary'

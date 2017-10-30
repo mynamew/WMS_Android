@@ -9,7 +9,6 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/DateSelectlibrary" />
-            <option value="$PROJECT_DIR$/FlycoTabLayout_Lib" />
             <option value="$PROJECT_DIR$/PullToRefresh" />
             <option value="$PROJECT_DIR$/app" />
           </set>
