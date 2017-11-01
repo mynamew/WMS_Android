@@ -1,6 +1,10 @@
 package com.timi.sz.wms_android.mvp.UI.quity.update_barcode;
 
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.view.KeyEvent;
+import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -8,21 +12,28 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.timi.sz.wms_android.R;
-import com.timi.sz.wms_android.bean.quality.BarcodeData;
-import com.timi.sz.wms_android.mvp.UI.quity.reject.QualityRejectPresenter;
-import com.timi.sz.wms_android.mvp.UI.quity.reject.QualityRejectView;
+import com.timi.sz.wms_android.base.uils.Constants;
+import com.timi.sz.wms_android.base.uils.InputMethodUtils;
+import com.timi.sz.wms_android.base.uils.PackageUtils;
+import com.timi.sz.wms_android.base.uils.SpUtils;
+import com.timi.sz.wms_android.base.uils.ToastUtils;
+import com.timi.sz.wms_android.bean.quality.update_barcode.BarEditGetUnInstockBarcodeData;
 import com.timi.sz.wms_android.mvp.base.BaseActivity;
+import com.timi.sz.wms_android.view.MyDialog;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
+import butterknife.OnClick;
 
-public class UpdateBarcodeActivity extends BaseActivity<QualityRejectView, QualityRejectPresenter> implements QualityRejectView {
+public class UpdateBarcodeActivity extends BaseActivity<UpdateBarcodeView, UpdateBarcodePresenter> implements UpdateBarcodeView {
 
 
     @BindView(R.id.tv_min_pack_code)
     TextView tvMinPackCode;
-    @BindView(R.id.et_barcode)
-    EditText etBarcode;
+    @BindView(R.id.et_min_pack_code)
+    EditText etMinPackCode;
     @BindView(R.id.iv_scan)
     ImageView ivScan;
     @BindView(R.id.ll_min_pack_code)
@@ -37,6 +48,10 @@ public class UpdateBarcodeActivity extends BaseActivity<QualityRejectView, Quali
     TextView tvRejectNum;
     @BindView(R.id.ll_content)
     LinearLayout llContent;
+    /**
+     * 当前的条码
+     */
+    private String currentBarCode = "";
 
     @Override
     public int setLayoutId() {
@@ -45,12 +60,39 @@ public class UpdateBarcodeActivity extends BaseActivity<QualityRejectView, Quali
 
     @Override
     public void initBundle(Bundle savedInstanceState) {
+        setActivityTitle(getString(R.string.update_barcode_title));
 
     }
 
     @Override
     public void initView() {
+        etMinPackCode.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
 
+                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                    InputMethodUtils.hide(UpdateBarcodeActivity.this);
+                    String minPackCode = etMinPackCode.getText().toString().trim();
+                    if (TextUtils.isEmpty(minPackCode)) {
+                        ToastUtils.showShort(getString(R.string.please_input_or_scan_need_update_barcode));
+                    }
+                    if (minPackCode.length() < 4) {
+                        ToastUtils.showShort(getString(R.string.input_orderno_more_four));
+                    } else {
+                        /**
+                         * 发起请求
+                         */
+                        Map<String, Object> params = new HashMap<>();
+                        params.put("UserId", SpUtils.getInstance().getUserId());
+                        params.put("OrgId", SpUtils.getInstance().getOrgId());
+                        params.put("MAC", PackageUtils.getMac());
+                        params.put("BarcodeNo", minPackCode);
+                        getPresenter().barEditGetUnInstockBarcodeData(params, minPackCode);
+                    }
+                }
+                return false;
+            }
+        });
     }
 
     @Override
@@ -59,34 +101,119 @@ public class UpdateBarcodeActivity extends BaseActivity<QualityRejectView, Quali
     }
 
     @Override
-    public QualityRejectPresenter createPresenter() {
-        return new QualityRejectPresenter(this);
+    public UpdateBarcodePresenter createPresenter() {
+        return new UpdateBarcodePresenter(this);
     }
 
     @Override
-    public QualityRejectView createView() {
+    public UpdateBarcodeView createView() {
         return this;
     }
 
-    @Override
-    public void getBarcodeData(BarcodeData data, String result) {
 
+    @Override
+    public void barEditGetUnInstockBarcodeData(BarEditGetUnInstockBarcodeData data, String result) {
+        llContent.setVisibility(View.VISIBLE);
+        tvMaterialCode.setText(data.getMaterialCode());
+        tvFirstPackNum.setText(String.valueOf(data.getInitialQty()));
+        tvRealPackNum.setText(String.valueOf(data.getCurrentQty()));
+        tvRejectNum.setText(String.valueOf(data.getPackQty() - data.getCurrentQty()));
+        initUpdateBarcodeDialog(data, result);
     }
 
     @Override
-    public void setBarcodeData(BarcodeData data) {
-
+    public void barEditSetUnInstockBarcodeData(int packQty, int rejectNum) {
+        ToastUtils.showShort(getString(R.string.update_barcode_success));
+        tvRealPackNum.setText(String.valueOf(packQty));
+        tvRejectNum.setText(String.valueOf(rejectNum));
     }
 
-    @Override
-    public void submitFinish() {
-
+    @OnClick({R.id.ll_content, R.id.iv_scan})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.ll_content:
+                updateBarcodeDialog.show();
+                break;
+            case R.id.iv_scan:
+                scan(Constants.REQUEST_SCAN_CODE_BARCODE, new ScanQRCodeResultListener() {
+                    @Override
+                    public void scanSuccess(int requestCode, String result) {
+                        etMinPackCode.setText(result);
+                        /**
+                         *  发起请求
+                         */
+                        Map<String, Object> params = new HashMap<>();
+                        params.put("UserId", SpUtils.getInstance().getUserId());
+                        params.put("OrgId", SpUtils.getInstance().getOrgId());
+                        params.put("MAC", PackageUtils.getMac());
+                        params.put("BarcodeNo", result);
+                        getPresenter().barEditGetUnInstockBarcodeData(params, result);
+                    }
+                });
+                break;
+        }
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
+    private MyDialog updateBarcodeDialog;
+
+    /**
+     * 显示更改条码的弹框
+     *
+     * @param data
+     * @param result
+     */
+    private void initUpdateBarcodeDialog(final BarEditGetUnInstockBarcodeData data, final String result) {
+        if (null == updateBarcodeDialog) {
+            updateBarcodeDialog = new MyDialog(this, R.layout.dialog_update_barcode);
+            setTextViewText(updateBarcodeDialog.getTextView(R.id.tv_from_orderno), R.string.dialog_from_orderno, data.getSourceBillCode());
+            setTextViewText(updateBarcodeDialog.getTextView(R.id.tv_material_code), R.string.material_code, data.getMaterialCode());
+            setTextViewText(updateBarcodeDialog.getTextView(R.id.tv_material_name), R.string.material_name, data.getMaterialName());
+            setTextViewText(updateBarcodeDialog.getTextView(R.id.tv_material_model), R.string.material_model, data.getMaterialStandard());
+            setTextViewText(updateBarcodeDialog.getTextView(R.id.tv_real_pack_num), R.string.real_pack_num, data.getCurrentQty());
+            setTextViewText(updateBarcodeDialog.getTextView(R.id.tv_material_attr), R.string.material_attr, TextUtils.isEmpty(data.getMaterialAttribute()) ? getString(R.string.none) : data.getMaterialAttribute());
+            updateBarcodeDialog.setViewListener(R.id.iv_close, new MyDialog.DialogClickListener() {
+                @Override
+                public void dialogClick(MyDialog dialog) {
+                    dialog.dismiss();
+                }
+            });
+            updateBarcodeDialog.setViewListener(R.id.btn_cancel, new MyDialog.DialogClickListener() {
+                @Override
+                public void dialogClick(MyDialog dialog) {
+                    dialog.dismiss();
+                }
+            });
+            updateBarcodeDialog.setButtonListener(R.id.btn_commit, null, new MyDialog.DialogClickListener() {
+                @Override
+                public void dialogClick(MyDialog dialog) {
+                    String rejectNumStr = updateBarcodeDialog.getEdittext(R.id.et_reject_num).getText().toString().trim();
+                    /**
+                     * 请输入数量
+                     */
+                    if (TextUtils.isEmpty(rejectNumStr)) {
+                        ToastUtils.showShort(getString(R.string.please_input_reject_num));
+                        return;
+                    }
+                    /**
+                     * 如果拒收数量大于实际包装数
+                     */
+                    if (Integer.parseInt(rejectNumStr) > data.getCurrentQty()) {
+                        ToastUtils.showShort(getString(R.string.reject_num_more_current_pack_num));
+                        return;
+                    }
+                    dialog.dismiss();
+                    /**
+                     * 发起请求
+                     */
+                    Map<String, Object> params = new HashMap<>();
+                    params.put("UserId", SpUtils.getInstance().getUserId());
+                    params.put("OrgId", SpUtils.getInstance().getOrgId());
+                    params.put("MAC", PackageUtils.getMac());
+                    params.put("BarcodeNo", result);
+                    params.put("UpdateQty", Integer.parseInt(rejectNumStr));
+                    getPresenter().barEditSetUnInstockBarcodeData(params, data.getPackQty(), Integer.parseInt(rejectNumStr));
+                }
+            });
+        }
     }
 }

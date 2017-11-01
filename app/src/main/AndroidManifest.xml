@@ -184,7 +184,9 @@
         <activity android:name=".mvp.UI.deviceinfo.DeviceInfoActivity"/>
         <activity android:name=".mvp.UI.update_password.UpdatePasswordActivity"/>
         <activity android:name=".mvp.UI.about.AboutActivity"/>
-        <activity android:name=".mvp.UI.stock_in.putaway.PutAwayActivity">
+        <activity
+            android:name=".mvp.UI.stock_in.putaway.PutAwayActivity"
+            android:windowSoftInputMode="stateHidden">
         </activity>
         <activity android:name=".mvp.UI.stock_in.detail.StockInDetailActivity">
         </activity>
@@ -207,7 +209,7 @@
         <activity android:name=".mvp.UI.quity.quality.QualityCheckActivity">
         </activity>
         <activity
-            android:name=".mvp.UI.quity.nomal_quality.NormalQualityActivity"
+            android:name=".mvp.UI.quity.quality.nomal_quality.NormalQualityActivity"
             android:hardwareAccelerated="false"
             android:windowSoftInputMode="adjustPan|stateHidden">
         </activity>
@@ -230,26 +232,38 @@
         <activity android:name=".mvp.UI.stock_in_work.allot_scan.AllotScanActivity">
         </activity>
         <activity
-            android:name=".mvp.UI.quity.advance_quality.AdvanceQualityActivity"
+            android:name=".mvp.UI.quity.quality.advance_quality.AdvanceQualityActivity"
             android:hardwareAccelerated="false"
-            android:windowSoftInputMode="adjustPan|stateHidden"
-            >
+            android:windowSoftInputMode="adjustPan|stateHidden">
         </activity>
         <activity
             android:name=".mvp.UI.quity.reject.QualityRejectActivity"
             android:windowSoftInputMode="stateVisible|adjustResize|stateHidden|stateAlwaysHidden">
         </activity>
         <activity
-            android:name=".mvp.UI.quity.advance1_quality.Advance1QualityActivity"
+            android:name=".mvp.UI.quity.quality.advance1_quality.Advance1QualityActivity"
             android:hardwareAccelerated="false"
-            android:windowSoftInputMode="adjustPan|stateHidden"
-            >
+            android:windowSoftInputMode="adjustPan|stateHidden">
         </activity>
         <activity
             android:name=".mvp.UI.quity.mrp.normal_review.MRPNormalReviewActivity"
             android:hardwareAccelerated="false">
         </activity>
         <activity android:name=".mvp.UI.quity.update_barcode.UpdateBarcodeActivity">
+        </activity>
+        <activity android:name=".mvp.UI.stock_in.putaway.FinishedGoodsAuditPutAwayActivity">
+        </activity>
+        <activity android:name=".mvp.UI.stock_in.putaway.FinishedGoodsCreateBillPutAwayActivity">
+        </activity>
+        <activity
+            android:name=".mvp.UI.stock_in.putaway.OtherAuditActivity"
+            android:theme="@style/AppTheme">
+        </activity>
+        <activity android:name=".mvp.UI.stock_in.putaway.OutMaterialReturnActivity">
+        </activity>
+        <activity android:name=".mvp.UI.stock_in.putaway.ProductionMaterialReturnActivity">
+        </activity>
+        <activity android:name=".mvp.UI.stock_in.putaway.SaleGoodsReturnActivity">
         </activity>
     </application>
 

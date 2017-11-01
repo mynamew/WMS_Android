@@ -24,4 +24,5 @@
     <color name="dialog_divider">#C6C6C6</color>
     <color name="wait_quality">#1cb2ff</color>
     <color name="unquality">#ffb700</color>
+    <color name="divide_color">#e7e7ed</color>
 </resources>

@@ -177,9 +177,9 @@ public class FragmentPointRecord extends BaseFragment<FragmentPointRecordView, F
                 @Override
                 protected void bindData(RecyclerViewHolder holder, int position, StockinMaterialBean item) {
                     holder.setTextView(R.id.tv_line_name,position+1);
-                    holder.setTextView(R.id.tv_material_code,item.getMaterialCode());
+                    setTextViewText(holder.getTextView(R.id.tv_material_code),R.string.material_code,item.getMaterialCode());
+                    setTextViewText(holder.getTextView(R.id.tv_material_name),R.string.material_name,item.getMaterialName());
                     holder.setTextView(R.id.tv_point_num,item.getCountQty());
-                    holder.setTextView(R.id.tv_material_name,item.getMaterialName());
                     holder.setTextView(R.id.tv_spare_num,item.getGiveQty());
                     setTextViewText(holder.getTextView(R.id.tv_point_date),R.string.item_point_date,item.getCreateDateTime());
 
@@ -187,7 +187,6 @@ public class FragmentPointRecord extends BaseFragment<FragmentPointRecordView, F
             };
             rlvPointRecord.setAdapter(adapter);
             rlvPointRecord.setLayoutManager(new LinearLayoutManager(getActivity()));
-            rlvPointRecord.addItemDecoration(new DividerItemDecoration(getActivity(),DividerItemDecoration.VERTICAL_LIST,R.drawable.item_point_divider));
             adapter.setOnItemClickListener(new BaseRecyclerAdapter.OnItemClickListener() {
                 @Override
                 public void onItemClick(View itemView, int pos) {

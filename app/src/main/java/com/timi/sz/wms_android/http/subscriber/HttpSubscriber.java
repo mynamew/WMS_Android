@@ -98,6 +98,14 @@ public class HttpSubscriber<T> implements Observer<T> {
                 if (!TextUtils.isEmpty(httpResultBean.getError().getDetails())) {
                     messageStr = httpResultBean.getError().getDetails();
                 }
+                /**
+                 * 如果返回的tocken 失效 跳转到登录的界面
+                 */
+                if (httpResultBean.isUnAuthorizedRequest()) {
+                    BaseActivity currentActivty = (BaseActivity) BaseActivity.getCurrentActivty();
+                    currentActivty.jumpToLoginActivity();
+                }
+                
                 ToastUtils.showShort(messageStr);
                 mOnResultListener.onError(messageStr);
 //                LogUitls.e("打印输出错误代码httpResultBean---->", httpResultBean.toString());
@@ -123,7 +131,6 @@ public class HttpSubscriber<T> implements Observer<T> {
              */
             mOnResultListener.onError(e.getMessage());
         }
-        //进度条消失
     }
 
     @Override

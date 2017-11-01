@@ -5,7 +5,6 @@ import com.timi.sz.wms_android.bean.LoginBean;
 import com.timi.sz.wms_android.bean.UserInfoBean;
 import com.timi.sz.wms_android.bean.VersionBean;
 import com.timi.sz.wms_android.bean.instock.search.BuyOrdernoBean;
-import com.timi.sz.wms_android.bean.instock.CreateInStockOrdernoBean;
 import com.timi.sz.wms_android.bean.instock.search.FinishGoodsCreateBillBean;
 import com.timi.sz.wms_android.bean.instock.search.FinishGoodsOrdernoBean;
 import com.timi.sz.wms_android.bean.instock.MaterialScanPutAwayBean;
@@ -33,6 +32,7 @@ import com.timi.sz.wms_android.bean.quality.adavance.GetAdvance2Data;
 import com.timi.sz.wms_android.bean.quality.adavance.GetAdvanceData;
 import com.timi.sz.wms_android.bean.quality.mrp.MrpReviewData;
 import com.timi.sz.wms_android.bean.quality.normal.NormalQualityData;
+import com.timi.sz.wms_android.bean.quality.update_barcode.BarEditGetUnInstockBarcodeData;
 import com.timi.sz.wms_android.bean.stockin_work.LibraryAdjustResult;
 import com.timi.sz.wms_android.bean.stockin_work.ScanLocationResult;
 import com.timi.sz.wms_android.bean.stockin_work.ScanMaterialResult;
@@ -63,16 +63,18 @@ import retrofit2.http.Url;
  * author: timi
  * create at: 2017-08-15 09:58
  */
+
 /**
  * 关于Api Servaice  注解的解释：
  * 1、@Field 单个表单数据提交
  * 2、@FieldMap 用map的形式提交一系列表单数据
  * 3、@Body     用于提交实体转换成的json 对象的提交（为了处理类似链表形式的提交,
- *              链表形式的提交用@FieldMap是实现不了的"），
+ * 链表形式的提交用@FieldMap是实现不了的"），
  */
 public interface ApiService {
     /**
      * 登录
+     *
      * @param tenancyName
      * @param usernameOrEmailAddress
      * @param password
@@ -222,14 +224,14 @@ public interface ApiService {
     Observable<CommonResult<MaterialBean>> materialScan(@Field("scamStr") String scamStr);
 
     /**
-     * 搜索收货单的返回结果
+     * 搜索收货单的返回结果（来料入库）
      *
-     * @param orderno
+     * @param params
      * @return
      */
     @FormUrlEncoded
-    @POST("api/Account/ClientLogin")
-    Observable<CommonResult<ReceiveOrdernoBean>> searchReceiveGoodOrderno(@Field("orderno") String orderno);
+    @POST("api/services/wpda/PurInstock/QueryReceiptDataByInput")
+    Observable<CommonResult<ReceiveOrdernoBean>> searchReceiveGoodOrderno(@FieldMap Map<String, Object> params);
 
     /**
      * 搜索产成品-审核的返回结果
@@ -295,34 +297,32 @@ public interface ApiService {
     /**
      * 物料扫码并入库上架
      *
-     * @param locationCode
-     * @param materialCode
-     * @param userId
+     * @param params
      * @return
      */
     @FormUrlEncoded
     @POST("api/Account/ClientLogin")
-    Observable<CommonResult<MaterialScanPutAwayBean>> materialScanPutAawy(@Field("locationCode") String locationCode, @Field("materialCode") String materialCode, @Field("userId") int userId);
+    Observable<CommonResult<MaterialScanPutAwayBean>> materialScanPutAawy(@FieldMap Map<String,Object> params);
 
     /**
      * 验证库位码是否有效
      *
-     * @param locationCode
+     * @param params
      * @return
      */
     @FormUrlEncoded
-    @POST("api/Account/ClientLogin")
-    Observable<CommonResult<VertifyLocationCodeBean>> vertifyLocationCode(@Field("locationCode") String locationCode);
+    @POST("api/services/wpda/common/VerifyBinCode")
+    Observable<CommonResult<VertifyLocationCodeBean>> vertifyLocationCode(@FieldMap Map<String,Object> params);
 
     /**
-     * 生成入库单
+     * 提交制单和审核生成入库单
      *
-     * @param locationCode
+     * @param params
      * @return
      */
     @FormUrlEncoded
-    @POST("api/Account/ClientLogin")
-    Observable<CommonResult<CreateInStockOrdernoBean>> createInStockOrderno(@Field("locationCode") String locationCode);
+    @POST("api/services/wpda/common/SubmitMakeOrAuditBill")
+    Observable<CommonResult<Object>> createInStockOrderno(@FieldMap Map<String,Object> params);
 
     /**************************************************************************************************************/
     /**************************************************************************************************************/
@@ -514,6 +514,7 @@ public interface ApiService {
      */
     @POST("api/services/wpda/IQC/IQCSetNormalData")
     Observable<CommonResult<Object>> setNormalQualityData(@Body RequestBody params);
+
     /**
      * 提交普通质检
      *
@@ -582,7 +583,7 @@ public interface ApiService {
      * @return
      */
     @POST("api/services/wpda/IQC/IQCSetAdvance2Data")
-    Observable<CommonResult<Object>> setAdvance2Data(@Body CommitAdvanceData data );
+    Observable<CommonResult<Object>> setAdvance2Data(@Body CommitAdvanceData data);
     /**======MRP评审=====**/
     /**
      * 查询MRP评审信息列表
@@ -599,9 +600,22 @@ public interface ApiService {
      * @return
      */
     @FormUrlEncoded
-    @POST("api/services/wpda/IQC/IQCSetMRPReviewData ")
+    @POST("api/services/wpda/IQC/IQCSetMRPReviewData")
     Observable<CommonResult<Object>> setMRPReviewData(@FieldMap Map<String, Object> params);
 
+    /**
+     * 查询未入库的条码信息
+     */
+    @FormUrlEncoded
+    @POST("api/services/wpda/BarcodeEdit/BarEditGetUnInstockBarcodeData")
+    Observable<CommonResult<BarEditGetUnInstockBarcodeData>> barEditGetUnInstockBarcodeData(@FieldMap Map<String, Object> params);
+
+    /**
+     * 修改未入库的条码信息
+     */
+    @FormUrlEncoded
+    @POST("api/services/wpda/BarcodeEdit/BarEditSetBarcodeQty")
+    Observable<CommonResult<Object>> barEditSetBarcodeQty(@FieldMap Map<String, Object> params);
     /**************************************************************************************************************/
     /**************************************************************************************************************/
     /**======库内操作======**/

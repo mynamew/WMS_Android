@@ -26,7 +26,6 @@ public interface OtherScanView extends MvpBaseView {
 
     /**
      * 创建入库单
-     * @param isCreateSuccess
      */
-    void createInStockOrderno(boolean isCreateSuccess);
+    void createInStockOrderno( );
 }

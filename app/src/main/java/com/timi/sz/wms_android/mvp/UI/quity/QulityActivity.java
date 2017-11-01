@@ -5,15 +5,12 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.timi.sz.wms_android.R;
-import com.timi.sz.wms_android.mvp.UI.quity.advance1_quality.Advance1QualityActivity;
-import com.timi.sz.wms_android.mvp.UI.quity.advance_quality.AdvanceQualityActivity;
-import com.timi.sz.wms_android.mvp.UI.quity.advance_quality.AdvanceQualityView;
+import com.timi.sz.wms_android.mvp.UI.quity.quality.advance_quality.AdvanceQualityActivity;
 import com.timi.sz.wms_android.mvp.UI.quity.mrp.MRPReviewActivity;
 import com.timi.sz.wms_android.mvp.UI.quity.quality.QualityCheckActivity;
-import com.timi.sz.wms_android.mvp.UI.quity.reject.QualityRejectActivity;
+import com.timi.sz.wms_android.mvp.UI.quity.update_barcode.UpdateBarcodeActivity;
 import com.timi.sz.wms_android.mvp.base.view.BaseNoMvpActivity;
 
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
@@ -58,7 +55,7 @@ public class QulityActivity extends BaseNoMvpActivity {
                 startActivity(new Intent(this, MRPReviewActivity.class));
                 break;
             case R.id.tv_qulity_update_qr://条码修改
-                startActivity(new Intent(this, AdvanceQualityActivity.class));
+                startActivity(new Intent(this, UpdateBarcodeActivity.class));
                 break;
         }
     }

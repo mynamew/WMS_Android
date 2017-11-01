@@ -9,7 +9,10 @@ import android.widget.ImageView;
 import com.timi.sz.wms_android.R;
 import com.timi.sz.wms_android.base.uils.Constants;
 import com.timi.sz.wms_android.mvp.UI.stock_in.other_scan.OtherScanActivity;
+import com.timi.sz.wms_android.mvp.UI.stock_in.putaway.FinishedGoodsAuditPutAwayActivity;
+import com.timi.sz.wms_android.mvp.UI.stock_in.putaway.OtherAuditActivity;
 import com.timi.sz.wms_android.mvp.UI.stock_in.query.SearchBuyOrderActivity;
+import com.timi.sz.wms_android.mvp.UI.stock_in_work.StockInWorkActivity;
 import com.timi.sz.wms_android.mvp.base.view.BaseNoMvpActivity;
 
 import butterknife.BindView;
@@ -49,7 +52,9 @@ public class StockInActivity extends BaseNoMvpActivity {
 
     @OnClick({R.id.tv_stockin_buy_order, R.id.tv_stock_in_send_order, R.id.tv_stockin_inlib, R.id.tv_stock_in_check, R.id.tv_stock_in_create_order, R.id.tv_stockin_other_inlib_check, R.id.tv_stockin_other_inlib_create_order, R.id.tv_stockin_out_return, R.id.tv_stock_in_produce_return, R.id.tv_stock_in_sale_return})
     public void onViewClicked(View view) {
-        Intent it = new Intent(StockInActivity.this, SearchBuyOrderActivity.class);
+        Intent it = new Intent();
+        it.setClass(StockInActivity.this, SearchBuyOrderActivity.class);
+
         switch (view.getId()) {
             case R.id.tv_stockin_buy_order://采购单
                 it.putExtra(CODE_STR, Constants.BUY_ORDE_NUM);
@@ -84,12 +89,5 @@ public class StockInActivity extends BaseNoMvpActivity {
                 break;
         }
         startActivity(it);
-    }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
     }
 }

@@ -80,25 +80,7 @@
             android:textColor="#333"
             android:textSize="24px"/>
 
-        <TextView
-            android:id="@+id/tv_arrive_good_num"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="2"
-            android:gravity="center"
-            android:text="@string/item_point_buy_num"
-            android:textColor="#333"
-            android:textSize="24px"/>
 
-        <TextView
-            android:id="@+id/tv_buy_num"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="2"
-            android:gravity="center"
-            android:text="@string/item_point_arrive_num"
-            android:textColor="#333"
-            android:textSize="24px"/>
 
         <TextView
             android:id="@+id/tv_instock_num"

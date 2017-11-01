@@ -155,14 +155,13 @@
     <string name="buy_num">采购数量：%1$s</string>
     <string name="send_goods_num">送货数：%1$s</string>
     <string name="have_receive_num">已收数：%1$s</string>
-    <string name="arrive_good_num">到货数量：%1$s</string>
-    <string name="point_num">清点数</string>
+    <string name="point_num">清点数：</string>
     <string name="please_input_point_num">请输入请点数</string>
-    <string name="spare_num">备品数</string>
+    <string name="spare_num">备品数：</string>
     <string name="please_input_spare_num">请输入备品数</string>
     <string name="point_record">清点记录</string>
     <string name="goods_point">物品清点</string>
-    <string name="point_date">清点日期</string>
+    <string name="point_date">清点日期：%1$s</string>
     <string name="line_name">行号</string>
     <string name="item_buy_num">采购数</string>
     <string name="item_arrive_goods_num">到货数</string>
@@ -192,16 +191,24 @@
     /******************************************************************************************************************************************************/
     /******************************************************************************************************************************************************/
     /**====== 入库作业======**/
+    /**====== 物品清点======**/
+    <string name="item_point_buy_num">采购</string>
+    <string name="item_point_arrive_num">到货</string>
+    <string name="item_point_instock_num">入库</string>
+    <string name="item_point_point_num">清点</string>
+    <string name="item_point_spare_num">备品</string>
+    <string name="point_num_and_spare_num_no_zero">请点数和备品数不能同时为0</string>
+    <string name="point_num_no_more_arrvice_num">清点数量不能大于送货数量，请重新输入！</string>
     /**====== 来料入库 ======**/
     <string name="in_stock_num_title">入库-入库上架</string>
-    <string name="receive_pro_num">收货单号：%1$s</string>
-    <string name="create_orderno_date">制单日期：%1$s</string>
-    <string name="arrive_pro_total_num">到货总数：%1$s</string>
-    <string name="right_pro_num">合格总数：%1$s</string>
-    <string name="have_in_stock_num">已入库数：%1$s</string>
-    <string name="can_in_stock_num">可入库数：%1$s</string>
-    <string name="wait_count_num">待点总数：%1$s</string>
-    <string name="have_count_num">已点总数：%1$s</string>
+    <string name="receive_pro_num">到货单号：</string>
+    <string name="create_orderno_date">到货日期：</string>
+    <string name="arrive_pro_total_num">到货总数：</string>
+    <string name="right_pro_num">合格总数：</string>
+    <string name="have_in_stock_num">已入库数：</string>
+    <string name="can_in_stock_num">可入库数：</string>
+    <string name="wait_count_num">待点总数：</string>
+    <string name="have_count_num">已点总数：</string>
     <string name="material_code">物料编码：%1$s</string>
     <string name="scan_material_hint">扫物料条码</string>
     <string name="scan_material">物料条码：</string>
@@ -210,17 +217,30 @@
     <string name="material_num">物料数量：%1$s</string>
     <string name="material_name">物料名称：%1$s</string>
     <string name="material_model">规格型号：%1$s</string>
-    <string name="in_stock_total_num">入库总数：%1$s</string>
+    <string name="in_stock_total_num">入库总数：</string>
     <string name="material_scan_putaway_success">物品扫码入库上架成功</string>
     <string name="create_instock_orderno">生成入库单</string>
-    <string name="please_scan_lib_location_code">请扫库位码</string>
-    <string name="please_scan_material_code">请扫物料码</string>
+    <string name="please_scan_lib_location_code">请输入或扫描库位码</string>
+    <string name="please_scan_material_code">请输入或扫描物料码</string>
     <string name="location_code_no_user">库位码无效，请扫描正确的库位码</string>
     <string name="header_spare_num">备品数</string>
     <string name="header_point_num">请点数</string>
+    <string name="dialog_material_point">物料清点</string>
+    <string name="item_material_model">规格型号</string>
+    <string name="item_point_date">清点日期：%1$s</string>
+    <string name="header_point_send_good">送货</string>
+    <string name="header_point_have_receive_num">已收</string>
+    <string name="update_barcode_title">条码修改</string>
+    <string name="arrive_good_num">到货数量：</string>
+    <string name="come_material_in_stock_info">来料入库单据信息</string>
+    <string name="instock_info">入库信息</string>
+    <string name="instock_material_code">物料编码：</string>
+    <string name="instock_material_name">物料名称：</string>
+    <string name="instock_material_model">规格型号：</string>
+    <string name="putaway_material_num">物料数量：</string>
     /**====== 产成品入库 ======**/
-    <string name="product_warehous_warrent_num">产成品入库单：%1$s</string>
-    <string name="warehous_total_num">入库总数：%1$s</string>
+    <string name="product_warehous_warrent_num">产成品入库单：</string>
+    <string name="warehous_total_num">入库总数：</string>
     <string name="create_product_orderno">生成产成品入库单</string>
     <string name="confirm_commit">确认提交</string>
     <string name="produce_create_order">产成品-选单</string>
@@ -285,7 +305,7 @@
     <string name="orderno_date">订单日期：%1$s</string>
     <string name="have_return_num">已退数量：%1$s</string>
     <string name="buy_return_material_scan">采购退料—退料扫描</string>
-    <string name="in_stock_num">入库数量：%1$s</string>
+    <string name="in_stock_num">入库数量：</string>
     /**====== 采购退料 退料单号 ======**/
     <string name="return_material_orderno">退料单号：%1$s</string>
     <string name="wait_scan_num">待扫总数：%1$s</string>
@@ -484,7 +504,6 @@
     <string name="badness_percent_tip">不良率：</string>
     <string name="mrp_normal_review_work_tip">质检操作（普检）</string>
     <string name="mrp_more_receive_num_tip">挑选/特采/蒸菜的数量不能大于实收数，请重新输入</string>
-    /**====== MRP高检 ======**/
     <string name="mrp_normal_checker">质检人：%1$s</string>
     <string name="please_select_mrp_review_result">请选择评审结果</string>
     <string name="mrp_normal_pick_tip">挑选/特采</string>
@@ -503,6 +522,19 @@
     <string name="serious_badness_num_tip">严重不良：</string>
     <string name="common_badness_num_tip">一般不良：</string>
     <string name="slight_badness_num_tip">轻微不良：</string>
+    <string name="standard_level_tip">标准水平：</string>
+    <string name="check_method_tip">检验方法：</string>
+    <string name="mrp_sample_half_yard_tip">试样半码：</string>
+    <string name="mrp_advance_aql_tip">AQL数：</string>
+    <string name="current_strict_tip">严格度：</string>
+    /**======条码修改 ======**/
+    <string name="min_pack_code">最小包装码</string>
+    <string name="bar_code_tip">条码</string>
+    <string name="first_pack_num">初始包装数</string>
+    <string name="item_real_pack_num">实际包装数</string>
+    <string name="reject_num">拒收数</string>
+    <string name="please_input_or_scan_need_update_barcode">请输入或扫描要修改的条码</string>
+
     /******************************************************************************************************************************************************/
     /******************************************************************************************************************************************************/
     /**====== 库内作业 ======**/
@@ -559,23 +591,12 @@
     <string name="query_retrospective">追溯查询</string>
     <string name="query_record_tip">记录查询</string>
     <string name="query_statistical_tip">统计查询</string>
-    <string name="standard_level_tip">标准水平：</string>
-    <string name="check_method_tip">检验方法：</string>
-    <string name="mrp_sample_half_yard_tip">试样半码：</string>
-    <string name="mrp_advance_aql_tip">AQL数：</string>
-    <string name="current_strict_tip">严格度：</string>
-    <string name="item_point_buy_num">采购</string>
-    <string name="item_point_arrive_num">到货</string>
-    <string name="item_point_instock_num">入库</string>
-    <string name="item_point_point_num">清点</string>
-    <string name="item_point_spare_num">备品</string>
-    <string name="point_num_and_spare_num_no_zero">请点数和备品数不能同时为0</string>
-    <string name="point_num_no_more_arrvice_num">清点数量不能大于送货数量，请重新输入！</string>
-    <string name="dialog_material_point">物料清点</string>
-    <string name="item_material_model">规格型号</string>
-    <string name="item_point_date">清点日期：%1$s</string>
-    <string name="header_point_send_good">送货</string>
-    <string name="header_point_have_receive_num">已收</string>
+    <string name="scan_return_material">扫码退料</string>
+    <string name="dialog_update_barcode">修改条码</string>
+    <string name="reject_num_more_current_pack_num">拒收数量不能大于实际包装数，请重新输入！</string>
+    <string name="scan_get_data_fail_repeat_input">扫码获取数据失败，请确认后，重新扫码！</string>
+    <string name="update_barcode_success">条码信息修改成功！</string>
+    <string name="finish_goods_in_stock_title">入库上架（产成品）</string>
 
 
 </resources>

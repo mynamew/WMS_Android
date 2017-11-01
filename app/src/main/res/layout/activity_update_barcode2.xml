@@ -5,169 +5,204 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/set_bg"
     android:orientation="vertical"
-    tools:context="com.timi.sz.wms_android.mvp.UI.quity.update_barcode.UpdateBarcodeActivity">
-
-    <include layout="@layout/title_head"/>
-
-    <RelativeLayout
-        android:id="@+id/ll_min_pack_code"
-        android:layout_width="match_parent"
-        android:layout_height="88px"
-        android:layout_below="@id/head"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:paddingLeft="20px">
-
-        <TextView
-            android:id="@+id/tv_min_pack_code"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:text="最小包装码："/>
-
-        <EditText
-            android:id="@+id/et_barcode"
-            android:layout_width="match_parent"
-            android:layout_height="60px"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="20px"
-            android:layout_toRightOf="@id/tv_min_pack_code"
-            android:background="@drawable/bg_rectangle_et_focused"
-            android:hint="@string/please_input_scan_barcode"
-            android:paddingLeft="20px"
-            android:textSize="14sp"/>
-
-        <ImageView
-            android:id="@+id/iv_scan"
-            android:layout_width="40px"
-            android:layout_height="40px"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="40px"
-            android:scaleType="center"
-            android:src="@mipmap/quality_scan"
-            />
-    </RelativeLayout>
+    tools:context=".mvp.UI.quity.update_barcode.UpdateBarcodeActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/ll_min_pack_code"
-        android:layout_margin="20px"
-        android:background="#333"
-        android:orientation="vertical"
-        android:padding="1dp"
-        >
+        android:layout_height="match_parent"
+        android:background="#fff"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/head"
+            layout="@layout/title_head"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="96px"
+            android:gravity="center_vertical"
+            android:paddingLeft="30px"
+            android:text="扫码退料"
+            android:textColor="#333"
+            android:textSize="28px"
+            android:textStyle="bold"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="#e7e7ed"/>
+
+        <RelativeLayout
+            android:id="@+id/ll_min_pack_code"
+            android:layout_width="match_parent"
+            android:layout_height="72px"
+            android:layout_below="@id/head"
+            android:layout_marginBottom="20px"
+            android:layout_marginTop="20px"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="20px">
+
+            <TextView
+                android:id="@+id/tv_min_pack_code"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10px"
+                android:text="@string/min_pack_code"
+                android:textColor="#333"
+                android:textSize="26px"/>
+
+            <EditText
+                android:id="@+id/et_min_pack_code"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20px"
+                android:layout_marginRight="20px"
+                android:layout_toRightOf="@id/tv_min_pack_code"
+                android:background="@drawable/selector_et"
+                android:hint="@string/please_input_or_scan_need_update_barcode"
+                android:paddingLeft="20px"
+                android:singleLine="true"
+                android:textSize="14sp"/>
+
+            <ImageView
+                android:id="@+id/iv_scan"
+                android:layout_width="60px"
+                android:layout_height="60px"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="40px"
+                android:scaleType="center"
+                android:src="@mipmap/quality_reject_sacn"
+                />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="24px"
+            android:background="#e7e7ed"/>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="60px"
-            android:orientation="horizontal">
+            android:layout_height="96px"
+            android:background="@color/white"
+            android:orientation="horizontal"
+            android:paddingLeft="20px"
+            android:paddingRight="20px">
 
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:background="#fff"
+                android:gravity="center"
+                android:paddingLeft="20px"
+                android:paddingRight="20px"
+                android:text="@string/bar_code_tip"
+                android:textColor="#333"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:background="#fff"
+                android:gravity="center"
+                android:text="@string/first_pack_num"
+                android:textColor="#333"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:background="#fff"
+                android:gravity="center"
+                android:text="@string/item_real_pack_num"
+                android:textColor="#333"/>
+
+            <TextView
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="#fff"
                 android:gravity="center"
-                android:paddingLeft="20px"
-                android:paddingRight="20px"
-                android:text="条码"
-                android:textColor="#333"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="2px"
-                android:background="#fff"
-                android:gravity="center"
-                android:paddingLeft="20px"
-                android:paddingRight="20px"
-                android:text="初始包装数"
-                android:textColor="#333"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="2px"
-                android:background="#fff"
-                android:gravity="center"
-                android:paddingLeft="20px"
-                android:paddingRight="20px"
-                android:text="实际包装数"
-                android:textColor="#333"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="2px"
-                android:background="#fff"
-                android:gravity="center"
-                android:paddingLeft="20px"
-                android:paddingRight="20px"
-                android:text="拒收数"
+                android:text="@string/reject_num"
                 android:textColor="#333"/>
 
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/ll_content"
+        <View
             android:layout_width="match_parent"
-            android:layout_height="60px"
-            android:layout_marginTop="2px"
-            android:orientation="horizontal"
-            android:visibility="gone">
+            android:layout_height="1px"
+            android:background="#e7e7dd"/>
 
-            <TextView
-                android:id="@+id/tv_material_code"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/ll_content"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="#fff"
-                android:gravity="center"
-                android:paddingLeft="20px"
-                android:paddingRight="20px"
-                android:text=""
-                android:textColor="#333"/>
+                android:layout_height="96px"
+                android:background="@color/white"
+                android:orientation="horizontal"
+                android:paddingLeft="10px"
+                android:paddingRight="10px"
+                android:visibility="gone">
 
-            <TextView
-                android:id="@+id/tv_first_pack_num"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="2px"
-                android:background="#fff"
-                android:gravity="center"
-                android:paddingLeft="20px"
-                android:paddingRight="20px"
-                android:text=""
-                android:textColor="#333"/>
+                <TextView
+                    android:id="@+id/tv_material_code"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3"
+                    android:background="#fff"
+                    android:gravity="center"
+                    android:paddingLeft="20px"
+                    android:paddingRight="20px"
+                    android:text=""
+                    android:textColor="#333"/>
 
-            <TextView
-                android:id="@+id/tv_real_pack_num"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="2px"
-                android:background="#fff"
-                android:gravity="center"
-                android:paddingLeft="20px"
-                android:paddingRight="20px"
-                android:text=""
-                android:textColor="#333"/>
+                <TextView
+                    android:id="@+id/tv_first_pack_num"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:background="#fff"
+                    android:gravity="center"
+                    android:text=""
+                    android:textColor="#333"/>
 
-            <TextView
-                android:id="@+id/tv_reject_num"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="2px"
-                android:background="#fff"
-                android:gravity="center"
-                android:paddingLeft="20px"
-                android:paddingRight="20px"
-                android:text=""
-                android:textColor="#333"/>
+                <TextView
+                    android:id="@+id/tv_real_pack_num"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="2px"
+                    android:layout_weight="2"
+                    android:background="#fff"
+                    android:gravity="center"
+                    android:text=""
+                    android:textColor="#333"/>
 
+                <TextView
+                    android:id="@+id/tv_reject_num"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="2px"
+                    android:layout_weight="1"
+                    android:background="#fff"
+                    android:gravity="center"
+                    android:text=""
+                    android:textColor="#333"/>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="#e7e7ed"/>
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

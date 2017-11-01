@@ -11,22 +11,59 @@
 
     <include layout="@layout/title_head"/>
 
-    <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        android:bufferType="editable"
-        android:buttonTint="#666"
-        android:paddingRight="30px"
-        android:text="显示全部"
-        android:textColor="#666"
-        />
-
-    <LinearLayout
-        android:id="@+id/ll_content"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        />
+        android:layout_height="96px"
+        android:background="#fff">
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="30px"
+            android:text="@string/come_material_in_stock_info"
+            android:textColor="#333"
+            android:textStyle="bold"/>
+
+        <ImageView
+            android:id="@+id/iv_show_more"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="20px"
+            android:src="@drawable/selector_stockin_detail"/>
+
+
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="72px"
+        android:layout_marginLeft="30px"
+        android:gravity="center_vertical"
+        android:text="未入库上架"
+        android:textColor="#333"
+        android:textSize="26px"
+        android:textStyle="bold"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rlv_un_instock"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="72px"
+        android:layout_marginLeft="30px"
+        android:gravity="center_vertical"
+        android:text="已入库上架"
+        android:textColor="#333"
+        android:textSize="26px"
+        android:textStyle="bold"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rlv_have_instock"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 </LinearLayout>

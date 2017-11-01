@@ -1,4 +1,4 @@
-package com.timi.sz.wms_android.mvp.UI.quity.nomal_quality;
+package com.timi.sz.wms_android.mvp.UI.quity.quality.nomal_quality;
 
 import android.content.Intent;
 import android.os.Bundle;

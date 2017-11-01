@@ -10,11 +10,16 @@ import android.widget.TextView;
 import com.timi.sz.wms_android.R;
 import com.timi.sz.wms_android.base.uils.Constants;
 import com.timi.sz.wms_android.base.uils.LogUitls;
+import com.timi.sz.wms_android.base.uils.PackageUtils;
+import com.timi.sz.wms_android.base.uils.SpUtils;
 import com.timi.sz.wms_android.base.uils.ToastUtils;
 import com.timi.sz.wms_android.bean.instock.MaterialScanPutAwayBean;
 import com.timi.sz.wms_android.bean.instock.VertifyLocationCodeBean;
 import com.timi.sz.wms_android.mvp.UI.stock_in.detail.StockInDetailActivity;
 import com.timi.sz.wms_android.mvp.base.BaseActivity;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -129,7 +134,12 @@ public class OtherScanActivity extends BaseActivity<OtherScanView, OtherScanPres
                 /**
                  * 生成入库单
                  */
-                getPresenter().createInSockOrderno(locationCode);
+                Map<String, Object> params = new HashMap<>();
+                params.put("UserId", SpUtils.getInstance().getUserId());
+                params.put("OrgId", SpUtils.getInstance().getOrgId());
+                params.put("MAC", PackageUtils.getMac());
+                params.put("BillNo", locationCode);
+                getPresenter().createInSockOrderno(params);
                 break;
         }
     }
@@ -166,21 +176,16 @@ public class OtherScanActivity extends BaseActivity<OtherScanView, OtherScanPres
     }
 
     @Override
-    public void createInStockOrderno(boolean isCreateSuccess) {
-        if (isCreateSuccess) {
-            ToastUtils.showShort("生成入库单成功");
-            //如果成功  入库单号存储起来
-            inStockOrderno = "q1231221";
-            onBackPressed();
-        } else {
-            ToastUtils.showShort("生成入库单失败");
-            onBackPressed();
-        }
+    public void createInStockOrderno() {
+        ToastUtils.showShort("生成入库单成功");
+        //如果成功  入库单号存储起来
+        onBackPressed();
     }
 
     /**
      * 扫码返回 请求
-      * @param requestCode
+     *
+     * @param requestCode
      * @param result
      */
     @Override
@@ -192,7 +197,12 @@ public class OtherScanActivity extends BaseActivity<OtherScanView, OtherScanPres
                 /**
                  * 物料扫码并上架的网络请求
                  */
-                getPresenter().materialScanNetWork(locationCode, result);
+                Map<String, Object> params = new HashMap<>();
+                params.put("UserId", SpUtils.getInstance().getUserId());
+                params.put("OrgId", SpUtils.getInstance().getOrgId());
+                params.put("MAC", PackageUtils.getMac());
+                params.put("BillNo", result);
+                getPresenter().materialScanNetWork(params);
                 break;
             case REQUEST_SCAN_CODE_LIB_LOATION:
                 LogUitls.d("库位码扫码--->", result);
@@ -200,8 +210,13 @@ public class OtherScanActivity extends BaseActivity<OtherScanView, OtherScanPres
                 locationCode = result;
                 //设置库位码
                 tvScanLocation.setText(locationCode);
+                Map<String, Object> params1 = new HashMap<>();
+                params1.put("UserId", SpUtils.getInstance().getUserId());
+                params1.put("OrgId", SpUtils.getInstance().getOrgId());
+                params1.put("MAC", PackageUtils.getMac());
+                params1.put("BillNo", result);
                 //判断库位码是否有效
-                getPresenter().vertifyLocationCode(locationCode);
+                getPresenter().vertifyLocationCode(params1);
                 break;
         }
     }

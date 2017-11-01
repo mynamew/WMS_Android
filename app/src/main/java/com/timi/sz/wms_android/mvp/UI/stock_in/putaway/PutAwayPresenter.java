@@ -2,15 +2,15 @@ package com.timi.sz.wms_android.mvp.UI.stock_in.putaway;
 
 import android.content.Context;
 
-import com.timi.sz.wms_android.base.uils.SpUtils;
-import com.timi.sz.wms_android.bean.instock.CreateInStockOrdernoBean;
-import com.timi.sz.wms_android.bean.instock.search.FinishGoodsOrdernoBean;
+import com.timi.sz.wms_android.base.uils.ToastUtils;
 import com.timi.sz.wms_android.bean.instock.MaterialScanPutAwayBean;
 import com.timi.sz.wms_android.bean.instock.search.ReceiveOrdernoBean;
 import com.timi.sz.wms_android.bean.instock.VertifyLocationCodeBean;
 import com.timi.sz.wms_android.http.callback.OnResultCallBack;
 import com.timi.sz.wms_android.http.subscriber.HttpSubscriber;
 import com.timi.sz.wms_android.mvp.base.presenter.impl.MvpBasePresenter;
+
+import java.util.Map;
 
 /**
  * $dsc
@@ -22,8 +22,7 @@ public class PutAwayPresenter extends MvpBasePresenter<PutAwayView> {
     private PutAwayModel model = null;
     private HttpSubscriber<MaterialScanPutAwayBean> subscriber = null;
     private HttpSubscriber<VertifyLocationCodeBean> vertifyLocationCodeBeanHttpSubscriber = null;
-    private HttpSubscriber<CreateInStockOrdernoBean> createInStockOrdernoBeanHttpSubscriber = null;
-    private HttpSubscriber<FinishGoodsOrdernoBean> searchFinishGoodsOrdernoHttpSubscriber = null;
+    private HttpSubscriber<Object> createInStockOrdernoBeanHttpSubscriber = null;
     private HttpSubscriber<ReceiveOrdernoBean> receiveOrdernoBeanHttpSubscriber = null;
 
     public PutAwayPresenter(Context context) {
@@ -32,57 +31,12 @@ public class PutAwayPresenter extends MvpBasePresenter<PutAwayView> {
     }
 
     /**
-     * 搜索收货单的请求
-     *
-     * @param orderno
-     */
-    public void searchReceiveGoodOrderno(final String orderno) {
-        if (null == receiveOrdernoBeanHttpSubscriber) {
-            receiveOrdernoBeanHttpSubscriber = new HttpSubscriber<>(new OnResultCallBack<ReceiveOrdernoBean>() {
-                @Override
-                public void onSuccess(ReceiveOrdernoBean materialBean) {
-                    getView().searchReceiveGoodOrderno(materialBean);
-                }
-
-                @Override
-                public void onError(String errorMsg) {
-                    getView().searchReceiveGoodOrderno(new ReceiveOrdernoBean("CD7000101",200,100,50,50,50,50,"2017-8-29"));
-
-                }
-            });
-        }
-        model.searchReceiveGoodOrderno(orderno, receiveOrdernoBeanHttpSubscriber);
-    }
-    /**
-     * 搜索产成品单号的方法
-     *
-     * @param orderno
-     */
-    public void searchFinishGoodOrderno(final String orderno) {
-        if (null == searchFinishGoodsOrdernoHttpSubscriber) {
-            searchFinishGoodsOrdernoHttpSubscriber = new HttpSubscriber<>(new OnResultCallBack<FinishGoodsOrdernoBean>() {
-                @Override
-                public void onSuccess(FinishGoodsOrdernoBean materialBean) {
-                    getView().searchFinishGoodsOrderno(materialBean);
-                }
-
-                @Override
-                public void onError(String errorMsg) {
-                    getView().searchFinishGoodsOrderno(new FinishGoodsOrdernoBean("CD7000101",200,150,"2017-8-29",100));
-
-                }
-            });
-        }
-        model.searchFinishGoodsOrderno(orderno, searchFinishGoodsOrdernoHttpSubscriber );
-    }
-
-    /**
      * 扫物料码并上架的方法
      *
-     * @param locationCode
+     * @param params
      * @param materialCode
      */
-    public void materialScanNetWork(final String locationCode, final String materialCode) {
+    public void materialScanNetWork(final Map<String,Object> params, final String materialCode) {
         if (null == subscriber) {
             subscriber = new HttpSubscriber<>(new OnResultCallBack<MaterialScanPutAwayBean>() {
                 @Override
@@ -97,15 +51,15 @@ public class PutAwayPresenter extends MvpBasePresenter<PutAwayView> {
                 }
             });
         }
-        model.materialScanPutAawy(locationCode, materialCode, SpUtils.getInstance().getUserId(), subscriber);
+        model.materialScanPutAawy(params, subscriber);
     }
 
     /**
      * 验证库位码 是否有效
      *
-     * @param locationCode
+     * @param params
      */
-    public void vertifyLocationCode(String locationCode) {
+    public void vertifyLocationCode(final Map<String,Object> params) {
         if (null == vertifyLocationCodeBeanHttpSubscriber) {
             vertifyLocationCodeBeanHttpSubscriber = new HttpSubscriber<>(new OnResultCallBack<VertifyLocationCodeBean>() {
                 @Override
@@ -120,29 +74,30 @@ public class PutAwayPresenter extends MvpBasePresenter<PutAwayView> {
                 }
             });
         }
-        model.vertifyLocationCode(locationCode, vertifyLocationCodeBeanHttpSubscriber);
+        model.vertifyLocationCode(params, vertifyLocationCodeBeanHttpSubscriber);
     }
 
     /**
-     * 验证库位码 是否有效
+     * 创建入库单
      *
-     * @param locationCode
+     * @param params
      */
-    public void createInSockOrderno(String locationCode) {
+    public void createInSockOrderno(final Map<String,Object> params) {
         if (null == createInStockOrdernoBeanHttpSubscriber) {
-            createInStockOrdernoBeanHttpSubscriber = new HttpSubscriber<>(new OnResultCallBack<CreateInStockOrdernoBean>() {
+            createInStockOrdernoBeanHttpSubscriber = new HttpSubscriber<>(new OnResultCallBack<Object>() {
                 @Override
-                public void onSuccess(CreateInStockOrdernoBean bean) {
-                    getView().createInStockOrderno(bean.isSuccess);
+                public void onSuccess(Object bean) {
+                    getView().createInStockOrderno();
                 }
 
                 @Override
                 public void onError(String errorMsg) {
-                    getView().createInStockOrderno(false);
+
+                    ToastUtils.showShort(errorMsg);
                 }
             });
         }
-        model.createInStockOrderno(locationCode, createInStockOrdernoBeanHttpSubscriber);
+        model.createInStockOrderno(params, createInStockOrdernoBeanHttpSubscriber);
     }
 
     @Override

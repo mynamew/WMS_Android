@@ -47,7 +47,7 @@ public class SearchBuyOrderPresenter extends MvpBasePresenter<SearchBuyOrderView
     /**
      * 采购单查询的方法
      */
-    public void buyOrdernoQuery(Map<String,Object> params) {
+    public void buyOrdernoQuery(Map<String, Object> params) {
         getView().showProgressDialog();
         if (null == mBuyHttpSubscriber) {
             mBuyHttpSubscriber = new HttpSubscriber<>(new OnResultCallBack<BuyOrdernoBean>() {
@@ -91,7 +91,7 @@ public class SearchBuyOrderPresenter extends MvpBasePresenter<SearchBuyOrderView
      *
      * @param orderno
      */
-    public void searchReceiveGoodOrderno(final String orderno) {
+    public void searchReceiveGoodOrderno(final Map<String, Object> orderno) {
         if (null == mReceiveSubscriber) {
             mReceiveSubscriber = new HttpSubscriber<>(new OnResultCallBack<ReceiveOrdernoBean>() {
                 @Override
@@ -102,7 +102,7 @@ public class SearchBuyOrderPresenter extends MvpBasePresenter<SearchBuyOrderView
 
                 @Override
                 public void onError(String errorMsg) {
-                    getView().searchReceiveGoodOrderno(new ReceiveOrdernoBean("CD7000101", 200, 100, 50, 50, 50, 50, "2017-8-29"));
+                    ToastUtils.showShort(errorMsg);
                 }
             });
         }
@@ -125,7 +125,7 @@ public class SearchBuyOrderPresenter extends MvpBasePresenter<SearchBuyOrderView
 
                 @Override
                 public void onError(String errorMsg) {
-                    getView().searchFinishGoodsOrderno(new FinishGoodsOrdernoBean("CD7000101", 200, 100, "2017-8-29", 50));
+                    ToastUtils.showShort(errorMsg);
                 }
             });
         }
@@ -148,7 +148,7 @@ public class SearchBuyOrderPresenter extends MvpBasePresenter<SearchBuyOrderView
 
                 @Override
                 public void onError(String errorMsg) {
-                    getView().searchFinishGoodsCreateBillOrderno(new FinishGoodsCreateBillBean("CD7000101", "2017-8-29", 200, 100, 50, 211, 22));
+                    ToastUtils.showShort(errorMsg);
                 }
             });
         }
@@ -170,7 +170,7 @@ public class SearchBuyOrderPresenter extends MvpBasePresenter<SearchBuyOrderView
 
                 @Override
                 public void onError(String errorMsg) {
-                    getView().searchOtherAuditSelectOrderno(new OtherAuditSelectOrdernoBean("A21312", 100, 100, "2017-8-29", 100));
+                    ToastUtils.showShort(errorMsg);
                 }
             });
         }
@@ -192,7 +192,7 @@ public class SearchBuyOrderPresenter extends MvpBasePresenter<SearchBuyOrderView
 
                 @Override
                 public void onError(String errorMsg) {
-                    getView().searchOutReturnMaterialOrderno(new OutReturnMaterialBean("A21312", 100, 100, "2017-8-29", 100));
+                    ToastUtils.showShort(errorMsg);
                 }
             });
         }
@@ -214,7 +214,7 @@ public class SearchBuyOrderPresenter extends MvpBasePresenter<SearchBuyOrderView
 
                 @Override
                 public void onError(String errorMsg) {
-                    getView().searchProductionReturnMaterialOrderno(new ProductionReturnMaterialBean("A21312", 100, 100, "2017-8-29", 100));
+                  ToastUtils.showShort(errorMsg);
                 }
             });
         }
@@ -236,8 +236,8 @@ public class SearchBuyOrderPresenter extends MvpBasePresenter<SearchBuyOrderView
 
                 @Override
                 public void onError(String errorMsg) {
-                    getView().searchSaleGoodsReturnOrderno(new SaleGoodsReturnBean("A21312", 100, 100, "2017-8-29", 100));
-                }
+                 ToastUtils.showShort(errorMsg);
+             }
             });
         }
         model.searchSaleGoodsReturnOrderno(orderno, mSaleSubscriber);

@@ -1,4 +1,4 @@
-package com.timi.sz.wms_android.mvp.UI.quity.advance1_quality;
+package com.timi.sz.wms_android.mvp.UI.quity.quality.advance1_quality;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -25,10 +25,8 @@ import com.timi.sz.wms_android.base.uils.SpUtils;
 import com.timi.sz.wms_android.base.uils.ToastUtils;
 import com.timi.sz.wms_android.bean.quality.adavance.CommitAdvance1Data;
 import com.timi.sz.wms_android.bean.quality.adavance.GetAdvanceData;
-import com.timi.sz.wms_android.bean.quality.normal.CommitNormalData;
 import com.timi.sz.wms_android.http.message.BaseMessage;
 import com.timi.sz.wms_android.http.message.event.QualityEvent;
-import com.timi.sz.wms_android.mvp.UI.quity.nomal_quality.NormalQualityActivity;
 import com.timi.sz.wms_android.mvp.UI.quity.reject.QualityRejectActivity;
 import com.timi.sz.wms_android.mvp.base.BaseActivity;
 import com.timi.sz.wms_android.view.MyDialog;

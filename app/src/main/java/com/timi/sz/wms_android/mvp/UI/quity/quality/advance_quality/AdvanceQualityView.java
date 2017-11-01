@@ -1,4 +1,4 @@
-package com.timi.sz.wms_android.mvp.UI.quity.advance_quality;
+package com.timi.sz.wms_android.mvp.UI.quity.quality.advance_quality;
 
 import com.timi.sz.wms_android.bean.quality.adavance.GetAdvance2Data;
 import com.timi.sz.wms_android.mvp.base.view.iml.MvpBaseView;

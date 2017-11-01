@@ -1,4 +1,4 @@
-package com.timi.sz.wms_android.mvp.UI.quity.nomal_quality;
+package com.timi.sz.wms_android.mvp.UI.quity.quality.nomal_quality;
 
 import com.timi.sz.wms_android.bean.quality.normal.NormalQualityData;
 import com.timi.sz.wms_android.mvp.base.view.iml.MvpBaseView;

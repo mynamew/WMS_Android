@@ -45,7 +45,7 @@ public class LoginSuccessActivity extends BaseActivity<LoginSuccessView, LoginSu
     TextView tvTitleRight;
     @BindView(R.id.activity_login_success)
     LinearLayout activityLoginSuccess;
-
+    private boolean unAuthorizedRequest;
     @Override
     public int setLayoutId() {
         return R.layout.activity_login_success;
@@ -54,6 +54,7 @@ public class LoginSuccessActivity extends BaseActivity<LoginSuccessView, LoginSu
     @Override
     public void initBundle(Bundle savedInstanceState) {
         tvTitle.setText("首次登陆");
+        unAuthorizedRequest= getIntent().getBooleanExtra("unAuthorizedRequest",false);
 
     }
 
@@ -89,12 +90,20 @@ public class LoginSuccessActivity extends BaseActivity<LoginSuccessView, LoginSu
 
     @OnClick(R.id.btn_login_success_confirm)
     public void confirm() {
+        if(unAuthorizedRequest){
+            onBackPressed();
+            return;
+        }
         startActivity(new Intent(LoginSuccessActivity.this, MainActivity.class));
         onBackPressed();
     }
 
     @OnClick(R.id.iv_title_back)
     public void back() {
+        if(unAuthorizedRequest){
+            onBackPressed();
+            return;
+        }
         startActivity(new Intent(LoginSuccessActivity.this, MainActivity.class));
         onBackPressed();
     }

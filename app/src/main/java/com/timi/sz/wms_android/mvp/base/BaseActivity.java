@@ -300,6 +300,7 @@ public abstract class BaseActivity<V extends MvpView, P extends MvpPresenter<V>>
         //做清除数据的操作
         // 做跳转的操作
         Intent it = new Intent(currentActivity, LoginActivity.class);
+        it.putExtra("unAuthorizedRequest", true);
         startActivity(it, Interlude.POP_FROM_BOTTOM);
     }
 

@@ -1,139 +1,125 @@
 package com.timi.sz.wms_android.bean.instock.search;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
-import com.timi.sz.wms_android.R;
-
 /**
  * $dsc  收货单
  * author: timi
  * create at: 2017-08-31 11:11
  */
 
-public class ReceiveOrdernoBean implements Parcelable {
+public class ReceiveOrdernoBean  {
 
-    public String orderNo;
-    public int totalNum;
-    public int qualifiedNum;
-    public int inStockNum;
-    public int canInStockNum;
-    public int waitPointNum;
-    public int havePointNum;
-    public String  date;
 
-    public ReceiveOrdernoBean(String orderNo, int totalNum, int qualifiedNum, int inStockNum, int canInStockNum, int waitPointNum, int havePointNum, String date) {
-        this.orderNo = orderNo;
-        this.totalNum = totalNum;
-        this.qualifiedNum = qualifiedNum;
-        this.inStockNum = inStockNum;
-        this.canInStockNum = canInStockNum;
-        this.waitPointNum = waitPointNum;
-        this.havePointNum = havePointNum;
-        this.date = date;
+    /**
+     * receipId : 10408
+     * receiptCode : DH161018020
+     * receipDate : 2017-10-18
+     * supplierName : 深圳市宝安区大浪恒昶塑胶电子厂
+     * createrName :
+     * scanId : 0
+     * receiptQty : 11
+     * passQty : 10
+     * instockQty : 0
+     * waitQty : 10
+     * scanQty : 0
+     */
+
+    private int receipId;
+    private String receiptCode;
+    private String receipDate;
+    private String supplierName;
+    private String createrName;
+    private int scanId;
+    private int receiptQty;
+    private int passQty;
+    private int instockQty;
+    private int waitQty;
+    private int scanQty;
+
+    public int getReceipId() {
+        return receipId;
     }
 
-    protected ReceiveOrdernoBean(Parcel in) {
-        orderNo = in.readString();
-        totalNum = in.readInt();
-        qualifiedNum = in.readInt();
-        inStockNum = in.readInt();
-        canInStockNum = in.readInt();
-        waitPointNum = in.readInt();
-        havePointNum = in.readInt();
-        date = in.readString();
+    public void setReceipId(int receipId) {
+        this.receipId = receipId;
     }
 
-    public static final Creator<ReceiveOrdernoBean> CREATOR = new Creator<ReceiveOrdernoBean>() {
-        @Override
-        public ReceiveOrdernoBean createFromParcel(Parcel in) {
-            return new ReceiveOrdernoBean(in);
-        }
-
-        @Override
-        public ReceiveOrdernoBean[] newArray(int size) {
-            return new ReceiveOrdernoBean[size];
-        }
-    };
-
-    public int getWaitPointNum() {
-        return waitPointNum;
+    public String getReceiptCode() {
+        return receiptCode;
     }
 
-    public void setWaitPointNum(int waitPointNum) {
-        this.waitPointNum = waitPointNum;
+    public void setReceiptCode(String receiptCode) {
+        this.receiptCode = receiptCode;
     }
 
-    public int getHavePointNum() {
-        return havePointNum;
+    public String getReceipDate() {
+        return receipDate;
     }
 
-    public void setHavePointNum(int havePointNum) {
-        this.havePointNum = havePointNum;
+    public void setReceipDate(String receipDate) {
+        this.receipDate = receipDate;
     }
 
-    public String getDate() {
-        return date;
+    public String getSupplierName() {
+        return supplierName;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setSupplierName(String supplierName) {
+        this.supplierName = supplierName;
     }
 
-    public String getOrderNo() {
-        return orderNo;
+    public String getCreaterName() {
+        return createrName;
     }
 
-    public void setOrderNo(String orderNo) {
-        this.orderNo = orderNo;
+    public void setCreaterName(String createrName) {
+        this.createrName = createrName;
     }
 
-    public int getTotalNum() {
-        return totalNum;
+    public int getScanId() {
+        return scanId;
     }
 
-    public void setTotalNum(int totalNum) {
-        this.totalNum = totalNum;
+    public void setScanId(int scanId) {
+        this.scanId = scanId;
     }
 
-    public int getQualifiedNum() {
-        return qualifiedNum;
+    public int getReceiptQty() {
+        return receiptQty;
     }
 
-    public void setQualifiedNum(int qualifiedNum) {
-        this.qualifiedNum = qualifiedNum;
+    public void setReceiptQty(int receiptQty) {
+        this.receiptQty = receiptQty;
     }
 
-    public int getInStockNum() {
-        return inStockNum;
+    public int getPassQty() {
+        return passQty;
     }
 
-    public void setInStockNum(int inStockNum) {
-        this.inStockNum = inStockNum;
+    public void setPassQty(int passQty) {
+        this.passQty = passQty;
     }
 
-    public int getCanInStockNum() {
-        return canInStockNum;
+    public int getInstockQty() {
+        return instockQty;
     }
 
-    public void setCanInStockNum(int canInStockNum) {
-        this.canInStockNum = canInStockNum;
+    public void setInstockQty(int instockQty) {
+        this.instockQty = instockQty;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
+    public int getWaitQty() {
+        return waitQty;
     }
 
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(orderNo);
-        dest.writeInt(totalNum);
-        dest.writeInt(qualifiedNum);
-        dest.writeInt(inStockNum);
-        dest.writeInt(canInStockNum);
-        dest.writeInt(waitPointNum);
-        dest.writeInt(havePointNum);
-        dest.writeString(date);
+    public void setWaitQty(int waitQty) {
+        this.waitQty = waitQty;
+    }
+
+    public int getScanQty() {
+        return scanQty;
+    }
+
+    public void setScanQty(int scanQty) {
+        this.scanQty = scanQty;
     }
 }

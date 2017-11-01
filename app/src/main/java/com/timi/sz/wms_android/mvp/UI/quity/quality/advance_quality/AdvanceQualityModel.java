@@ -1,7 +1,7 @@
-package com.timi.sz.wms_android.mvp.UI.quity.advance1_quality;
+package com.timi.sz.wms_android.mvp.UI.quity.quality.advance_quality;
 
-import com.timi.sz.wms_android.bean.quality.adavance.CommitAdvance1Data;
-import com.timi.sz.wms_android.bean.quality.adavance.GetAdvanceData;
+import com.timi.sz.wms_android.bean.quality.adavance.CommitAdvanceData;
+import com.timi.sz.wms_android.bean.quality.adavance.GetAdvance2Data;
 import com.timi.sz.wms_android.http.HttpManager;
 import com.timi.sz.wms_android.http.api.ApiService;
 import com.timi.sz.wms_android.http.api.CommonResult;
@@ -16,33 +16,36 @@ import io.reactivex.Observer;
 /**
  * $dsc
  * author: timi
- * create at: 2017-10-18 16:57
+ * create at: 2017-10-12 14:54
  */
 
-public class Advance1QualityModel extends MvpBaseModel {
+public class AdvanceQualityModel extends MvpBaseModel {
     /**
-     * 获取高级质检1 的数据
-      * @param params
-     * @param observer
-     */
-    public void getAdvacen1Data(final Map<String, Object> params, Observer<GetAdvanceData> observer) {
-        HttpManager.getInstance().HttpManagerRequest(observer, new ApiServiceMethodCallBack<GetAdvanceData>() {
-            @Override
-            public Observable<CommonResult<GetAdvanceData>> createObservable(ApiService apiService) {
-                return apiService.getAdvanceData(params);
-            }
-        });
-    }
-    /**
-     * 设置高级质检1 的数据
+     * 获取高级质检2 的数据
+     *
      * @param params
      * @param observer
      */
-    public void setAdvance1Data(final CommitAdvance1Data params, Observer<Object> observer) {
+    public void getAdvance2Data(final Map<String, Object> params, Observer<GetAdvance2Data> observer) {
+        HttpManager.getInstance().HttpManagerRequest(observer, new ApiServiceMethodCallBack<GetAdvance2Data>() {
+            @Override
+            public Observable<CommonResult<GetAdvance2Data>> createObservable(ApiService apiService) {
+                return apiService.getAdvance2Data(params);
+            }
+        });
+    }
+
+    /**
+     * 设置高级质检2 的数据
+     *
+     * @param data
+     * @param observer
+     */
+    public void setAdvance2Data(final CommitAdvanceData data , Observer<Object> observer) {
         HttpManager.getInstance().HttpManagerRequest(observer, new ApiServiceMethodCallBack<Object>() {
             @Override
             public Observable<CommonResult<Object>> createObservable(ApiService apiService) {
-                return apiService.setAdvance1Data(params);
+                return apiService.setAdvance2Data(data);
             }
         });
     }

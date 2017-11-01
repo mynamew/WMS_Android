@@ -1,12 +1,10 @@
-package com.timi.sz.wms_android.mvp.UI.quity.advance1_quality;
+package com.timi.sz.wms_android.mvp.UI.quity.quality.advance1_quality;
 
 import android.content.Context;
 
-import com.google.gson.Gson;
 import com.timi.sz.wms_android.base.uils.ToastUtils;
 import com.timi.sz.wms_android.bean.quality.adavance.CommitAdvance1Data;
 import com.timi.sz.wms_android.bean.quality.adavance.GetAdvanceData;
-import com.timi.sz.wms_android.bean.quality.normal.NormalQualityData;
 import com.timi.sz.wms_android.http.callback.OnResultCallBack;
 import com.timi.sz.wms_android.http.subscriber.HttpSubscriber;
 import com.timi.sz.wms_android.mvp.base.presenter.impl.MvpBasePresenter;

@@ -57,7 +57,7 @@ public class SearchBuyModel extends MvpBaseModel {
      * @param orderno
      * @param observer
      */
-    public void searchReceiveGoodOrderno(final String orderno,
+    public void searchReceiveGoodOrderno(final Map<String,Object> orderno,
                                          final Observer<ReceiveOrdernoBean> observer) {
         HttpManager.getInstance().HttpManagerRequest(observer,
                 new ApiServiceMethodCallBack<ReceiveOrdernoBean>() {

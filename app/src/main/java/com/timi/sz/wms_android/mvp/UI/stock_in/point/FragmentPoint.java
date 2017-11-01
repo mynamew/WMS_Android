@@ -157,11 +157,7 @@ public class FragmentPoint extends BaseFragment<FragmentPointView, FragmentPoint
                     holder.setTextView(R.id.tv_instock_num, item.getInStockQty());
                     holder.setTextView(R.id.tv_point_num, item.getCountQty());
                     holder.setTextView(R.id.tv_spare_num, item.getGiveQty());
-                    if(intentCode==BUY_ORDE_NUM){
-                    }else {
-                        holder.setTextView(R.id.tv_send_good_num, item.getDnQty());
-                        holder.setTextView(R.id.tv_have_receive_num, item.getRecvQty());
-                    }
+
                 }
             };
         }
@@ -171,7 +167,7 @@ public class FragmentPoint extends BaseFragment<FragmentPointView, FragmentPoint
         adapter.setOnItemClickListener(new BaseRecyclerAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View itemView, int pos) {
-                showGoodsPointDialog(pos+1);
+                showGoodsPointDialog(pos);
             }
         });
     }

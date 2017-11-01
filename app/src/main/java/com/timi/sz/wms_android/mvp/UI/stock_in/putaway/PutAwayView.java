@@ -13,16 +13,6 @@ import com.timi.sz.wms_android.mvp.base.view.iml.MvpBaseView;
  */
 
 public interface PutAwayView extends MvpBaseView {
-    /**
-     * 搜索收货单
-     * @param bean
-     */
-    void searchReceiveGoodOrderno(ReceiveOrdernoBean bean);
-    /**
-     * 搜索收货单
-     * @param bean
-     */
-    void searchFinishGoodsOrderno(FinishGoodsOrdernoBean bean);
 
     /**
      * 物料扫码
@@ -38,8 +28,7 @@ public interface PutAwayView extends MvpBaseView {
 
     /**
      * 创建入库单
-      * @param isCreateSuccess
      */
-    void createInStockOrderno(boolean isCreateSuccess);
+    void createInStockOrderno();
 
 }

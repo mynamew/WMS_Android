@@ -437,4 +437,22 @@
     <string name="item_point_date">清点日期：%1$s</string>
     <string name="header_point_send_good">送货</string>
     <string name="header_point_have_receive_num">已收</string>
+    <string name="update_barcode_title">条码修改</string>
+    <string name="scan_return_material">扫码退料</string>
+    <string name="min_pack_code">最小包装码</string>
+    <string name="bar_code_tip">条码</string>
+    <string name="first_pack_num">初始包装数</string>
+    <string name="item_real_pack_num">实际包装数</string>
+    <string name="please_input_or_scan_need_update_barcode">请输入或扫描要修改的条码</string>
+    <string name="dialog_update_barcode">修改条码</string>
+    <string name="reject_num_more_current_pack_num">拒收数量不能大于实际包装数，请重新输入！</string>
+    <string name="scan_get_data_fail_repeat_input">扫码获取数据失败，请确认后，重新扫码！</string>
+    <string name="update_barcode_success">条码信息修改成功！</string>
+    <string name="come_material_in_stock_info">来料入库单据信息</string>
+    <string name="instock_info">入库信息</string>
+    <string name="instock_material_code">物料编码：</string>
+    <string name="instock_material_name">物料名称：</string>
+    <string name="instock_material_model">规格型号：</string>
+    <string name="putaway_material_num">物料数量：</string>
+    <string name="finish_goods_in_stock_title">入库上架（产成品）</string>
 </resources>

@@ -24,9 +24,9 @@ import com.timi.sz.wms_android.bean.quality.GetAQLList;
 import com.timi.sz.wms_android.bean.quality.QualityListBean;
 import com.timi.sz.wms_android.http.message.BaseMessage;
 import com.timi.sz.wms_android.http.message.event.QualityEvent;
-import com.timi.sz.wms_android.mvp.UI.quity.advance1_quality.Advance1QualityActivity;
-import com.timi.sz.wms_android.mvp.UI.quity.advance_quality.AdvanceQualityActivity;
-import com.timi.sz.wms_android.mvp.UI.quity.nomal_quality.NormalQualityActivity;
+import com.timi.sz.wms_android.mvp.UI.quity.quality.advance1_quality.Advance1QualityActivity;
+import com.timi.sz.wms_android.mvp.UI.quity.quality.advance_quality.AdvanceQualityActivity;
+import com.timi.sz.wms_android.mvp.UI.quity.quality.nomal_quality.NormalQualityActivity;
 import com.timi.sz.wms_android.mvp.base.BaseActivity;
 import com.timi.sz.wms_android.view.MyDialog;
 
