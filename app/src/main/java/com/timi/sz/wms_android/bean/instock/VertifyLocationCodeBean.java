@@ -7,9 +7,28 @@ package com.timi.sz.wms_android.bean.instock;
  */
 
 public class VertifyLocationCodeBean {
-    public boolean isTure;
 
-    public VertifyLocationCodeBean(boolean isTure) {
-        this.isTure = isTure;
+    /**
+     * whId : 1
+     * binId : 13
+     */
+
+    private int whId;
+    private int binId;
+
+    public int getWhId() {
+        return whId;
+    }
+
+    public void setWhId(int whId) {
+        this.whId = whId;
+    }
+
+    public int getBinId() {
+        return binId;
+    }
+
+    public void setBinId(int binId) {
+        this.binId = binId;
     }
 }

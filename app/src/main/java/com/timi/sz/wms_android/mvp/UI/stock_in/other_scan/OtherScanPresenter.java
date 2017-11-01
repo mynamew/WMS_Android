@@ -22,16 +22,18 @@ public class OtherScanPresenter extends MvpBasePresenter<OtherScanView> {
     private HttpSubscriber<MaterialScanPutAwayBean> subscriber = null;
     private HttpSubscriber<VertifyLocationCodeBean> vertifyLocationCodeBeanHttpSubscriber = null;
     private HttpSubscriber<Object> createInStockOrdernoBeanHttpSubscriber = null;
+
     public OtherScanPresenter(Context context) {
         super(context);
         model = new OtherScanModel();
     }
+
     /**
      * 扫物料码并上架的方法
      *
      * @param params
      */
-    public void materialScanNetWork(Map<String,Object> params) {
+    public void materialScanNetWork(Map<String, Object> params) {
         if (null == subscriber) {
             subscriber = new HttpSubscriber<>(new OnResultCallBack<MaterialScanPutAwayBean>() {
                 @Override
@@ -53,7 +55,7 @@ public class OtherScanPresenter extends MvpBasePresenter<OtherScanView> {
      *
      * @param params
      */
-    public void vertifyLocationCode(Map<String,Object> params) {
+    public void vertifyLocationCode(Map<String, Object> params) {
         if (null == vertifyLocationCodeBeanHttpSubscriber) {
             vertifyLocationCodeBeanHttpSubscriber = new HttpSubscriber<>(new OnResultCallBack<VertifyLocationCodeBean>() {
                 @Override
@@ -63,8 +65,7 @@ public class OtherScanPresenter extends MvpBasePresenter<OtherScanView> {
 
                 @Override
                 public void onError(String errorMsg) {
-                    getView().vertifyLocationCode(new VertifyLocationCodeBean(System.currentTimeMillis() % 2 == 0));
-
+                    ToastUtils.showShort(errorMsg);
                 }
             });
         }
@@ -76,7 +77,7 @@ public class OtherScanPresenter extends MvpBasePresenter<OtherScanView> {
      *
      * @param params
      */
-    public void createInSockOrderno(final Map<String,Object> params) {
+    public void createInSockOrderno(final Map<String, Object> params) {
         if (null == createInStockOrdernoBeanHttpSubscriber) {
             createInStockOrdernoBeanHttpSubscriber = new HttpSubscriber<>(new OnResultCallBack<Object>() {
                 @Override

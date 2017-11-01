@@ -137,16 +137,7 @@ public class FinishedGoodsAuditPutAwayActivity extends BaseActivity<PutAwayView,
 
     @Override
     public void vertifyLocationCode(VertifyLocationCodeBean bean) {
-/**
- * 库位码无效 清除
- */
-        if (!bean.isTure) {
-            ToastUtils.showShort(getString(R.string.location_code_no_user));
-            //保存库位码
-            locationCode = "";
-            //设置库位码
-            etPutawayScanLocation.setText(getString(R.string.please_scan_lib_location_code));
-        }
+
     }
 
     @Override

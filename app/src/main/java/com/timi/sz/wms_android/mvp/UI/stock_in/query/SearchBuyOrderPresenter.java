@@ -49,6 +49,7 @@ public class SearchBuyOrderPresenter extends MvpBasePresenter<SearchBuyOrderView
      */
     public void buyOrdernoQuery(Map<String, Object> params) {
         getView().showProgressDialog();
+
         if (null == mBuyHttpSubscriber) {
             mBuyHttpSubscriber = new HttpSubscriber<>(new OnResultCallBack<BuyOrdernoBean>() {
                 @Override
@@ -92,6 +93,7 @@ public class SearchBuyOrderPresenter extends MvpBasePresenter<SearchBuyOrderView
      * @param orderno
      */
     public void searchReceiveGoodOrderno(final Map<String, Object> orderno) {
+        getView().showProgressDialog();
         if (null == mReceiveSubscriber) {
             mReceiveSubscriber = new HttpSubscriber<>(new OnResultCallBack<ReceiveOrdernoBean>() {
                 @Override
@@ -115,6 +117,7 @@ public class SearchBuyOrderPresenter extends MvpBasePresenter<SearchBuyOrderView
      * @param orderno
      */
     public void searchFinishGoodsOrderno(final String orderno) {
+        getView().showProgressDialog();
         if (null == mFinishSubscriber) {
             mFinishSubscriber = new HttpSubscriber<>(new OnResultCallBack<FinishGoodsOrdernoBean>() {
                 @Override
@@ -138,6 +141,7 @@ public class SearchBuyOrderPresenter extends MvpBasePresenter<SearchBuyOrderView
      * @param orderno
      */
     public void searchFinishGoodsCreateBillOrderno(final String orderno) {
+        getView().showProgressDialog();
         if (null == mFinishCreateSubscriber) {
             mFinishCreateSubscriber = new HttpSubscriber<>(new OnResultCallBack<FinishGoodsCreateBillBean>() {
                 @Override
@@ -161,6 +165,7 @@ public class SearchBuyOrderPresenter extends MvpBasePresenter<SearchBuyOrderView
      * @param orderno
      */
     public void searchOtherAuditSelectOrderno(final String orderno) {
+        getView().showProgressDialog();
         if (null == mOtherSubscriber) {
             mOtherSubscriber = new HttpSubscriber<>(new OnResultCallBack<OtherAuditSelectOrdernoBean>() {
                 @Override
@@ -183,6 +188,7 @@ public class SearchBuyOrderPresenter extends MvpBasePresenter<SearchBuyOrderView
      * @param orderno
      */
     public void searchOutReturnMaterialOrderno(final String orderno) {
+        getView().showProgressDialog();
         if (null == mOutSubscriber) {
             mOutSubscriber = new HttpSubscriber<>(new OnResultCallBack<OutReturnMaterialBean>() {
                 @Override
@@ -205,6 +211,7 @@ public class SearchBuyOrderPresenter extends MvpBasePresenter<SearchBuyOrderView
      * @param orderno
      */
     public void searchProductionReturnMaterialOrderno(final String orderno) {
+        getView().showProgressDialog();
         if (null == mProductionSubscriber) {
             mProductionSubscriber = new HttpSubscriber<>(new OnResultCallBack<ProductionReturnMaterialBean>() {
                 @Override
@@ -214,7 +221,7 @@ public class SearchBuyOrderPresenter extends MvpBasePresenter<SearchBuyOrderView
 
                 @Override
                 public void onError(String errorMsg) {
-                  ToastUtils.showShort(errorMsg);
+                    ToastUtils.showShort(errorMsg);
                 }
             });
         }
@@ -227,6 +234,7 @@ public class SearchBuyOrderPresenter extends MvpBasePresenter<SearchBuyOrderView
      * @param orderno
      */
     public void searchSaleGoodsReturnOrderno(final String orderno) {
+        getView().showProgressDialog();
         if (null == mSaleSubscriber) {
             mSaleSubscriber = new HttpSubscriber<>(new OnResultCallBack<SaleGoodsReturnBean>() {
                 @Override
@@ -236,8 +244,8 @@ public class SearchBuyOrderPresenter extends MvpBasePresenter<SearchBuyOrderView
 
                 @Override
                 public void onError(String errorMsg) {
-                 ToastUtils.showShort(errorMsg);
-             }
+                    ToastUtils.showShort(errorMsg);
+                }
             });
         }
         model.searchSaleGoodsReturnOrderno(orderno, mSaleSubscriber);

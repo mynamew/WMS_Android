@@ -60,6 +60,7 @@ public class PutAwayPresenter extends MvpBasePresenter<PutAwayView> {
      * @param params
      */
     public void vertifyLocationCode(final Map<String,Object> params) {
+        getView().showProgressDialog();
         if (null == vertifyLocationCodeBeanHttpSubscriber) {
             vertifyLocationCodeBeanHttpSubscriber = new HttpSubscriber<>(new OnResultCallBack<VertifyLocationCodeBean>() {
                 @Override
@@ -69,8 +70,7 @@ public class PutAwayPresenter extends MvpBasePresenter<PutAwayView> {
 
                 @Override
                 public void onError(String errorMsg) {
-                    getView().vertifyLocationCode(new VertifyLocationCodeBean(System.currentTimeMillis() % 2 == 0));
-
+                    ToastUtils.showShort(errorMsg);
                 }
             });
         }

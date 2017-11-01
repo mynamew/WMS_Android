@@ -299,24 +299,18 @@ public class PutAwayActivity extends BaseActivity<PutAwayView, PutAwayPresenter>
 
     }
 
+    private VertifyLocationCodeBean mVertifyLocationCodeBean;
+
     @Override
     public void vertifyLocationCode(VertifyLocationCodeBean bean) {
-        /**
-         * 库位码无效 清除
-         */
-        if (!bean.isTure) {
-            ToastUtils.showShort(getString(R.string.location_code_no_user));
-            //保存库位码
-            locationCode = "";
-            //设置库位码
-            etPutawayScanLocation.setText(getString(R.string.please_scan_lib_location_code));
-        }
+        ToastUtils.showShort("库位码有效！");
+        mVertifyLocationCodeBean = bean;
     }
 
     @Override
     public void createInStockOrderno() {
-            ToastUtils.showShort("生成入库单失败");
-            onBackPressed();
+        ToastUtils.showShort("生成入库单成功");
+        onBackPressed();
     }
 
     /**
