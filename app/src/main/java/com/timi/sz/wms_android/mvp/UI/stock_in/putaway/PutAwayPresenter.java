@@ -36,7 +36,8 @@ public class PutAwayPresenter extends MvpBasePresenter<PutAwayView> {
      * @param params
      * @param materialCode
      */
-    public void materialScanNetWork(final Map<String,Object> params, final String materialCode) {
+    public void materialScanNetWork(final Map<String, Object> params, final String materialCode) {
+        getView().showProgressDialog();
         if (null == subscriber) {
             subscriber = new HttpSubscriber<>(new OnResultCallBack<MaterialScanPutAwayBean>() {
                 @Override
@@ -46,8 +47,7 @@ public class PutAwayPresenter extends MvpBasePresenter<PutAwayView> {
 
                 @Override
                 public void onError(String errorMsg) {
-                    getView().materialScanResult(new MaterialScanPutAwayBean("滑轨双孔梁496-蓝色", "CD7000101", "Slide Beam0824-496铝挤压加工", "50"));
-
+                    ToastUtils.showShort(errorMsg);
                 }
             });
         }
@@ -59,7 +59,7 @@ public class PutAwayPresenter extends MvpBasePresenter<PutAwayView> {
      *
      * @param params
      */
-    public void vertifyLocationCode(final Map<String,Object> params) {
+    public void vertifyLocationCode(final Map<String, Object> params) {
         getView().showProgressDialog();
         if (null == vertifyLocationCodeBeanHttpSubscriber) {
             vertifyLocationCodeBeanHttpSubscriber = new HttpSubscriber<>(new OnResultCallBack<VertifyLocationCodeBean>() {
@@ -82,7 +82,7 @@ public class PutAwayPresenter extends MvpBasePresenter<PutAwayView> {
      *
      * @param params
      */
-    public void createInSockOrderno(final Map<String,Object> params) {
+    public void createInSockOrderno(final Map<String, Object> params) {
         if (null == createInStockOrdernoBeanHttpSubscriber) {
             createInStockOrdernoBeanHttpSubscriber = new HttpSubscriber<>(new OnResultCallBack<Object>() {
                 @Override

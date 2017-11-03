@@ -152,8 +152,8 @@ public class OtherScanActivity extends BaseActivity<OtherScanView, OtherScanPres
          */
         setTextViewText(tvMaterialCode, R.string.material_code, bean.getMaterialCode());
         setTextViewText(tvMaterialName, R.string.material_name, bean.getMaterialName());
-        setTextViewText(tvMaterialNmodel, R.string.material_model, bean.getMaterialModel());
-        setTextViewText(tvMaterialNum, R.string.material_num, bean.getMaterialBuyNum());
+        setTextViewText(tvMaterialNmodel, R.string.material_model, bean.getMaterialStandard());
+        setTextViewText(tvMaterialNum, R.string.material_num, bean.getBarcodeQty());
         /**
          * 已扫的总数
          */
@@ -161,9 +161,15 @@ public class OtherScanActivity extends BaseActivity<OtherScanView, OtherScanPres
         tvHaveScanNum.setText(haveScanNum + "");
     }
 
+    /**
+     * 库位码扫码的输入
+     */
+    private VertifyLocationCodeBean mVertifyLocationCodeBean;
+
     @Override
     public void vertifyLocationCode(VertifyLocationCodeBean bean) {
-
+        ToastUtils.showShort("库位码有效！");
+        mVertifyLocationCodeBean = bean;
     }
 
     @Override

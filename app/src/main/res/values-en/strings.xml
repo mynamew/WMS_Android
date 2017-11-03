@@ -516,5 +516,7 @@
     <string name="instock_material_model">规格型号：</string>
     <string name="putaway_material_num">物料数量：</string>
     <string name="finish_goods_in_stock_title">入库上架（产成品）</string>
+    <string name="create_instock_bill_success">生成入库单成功</string>
+    <string name="location_code_is_visible">库位码有效！</string>
 
 </resources>

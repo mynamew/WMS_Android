@@ -44,6 +44,7 @@
         android:gravity="center_vertical"
         android:text="未入库上架"
         android:textColor="#333"
+        android:visibility="gone"
         android:textSize="26px"
         android:textStyle="bold"/>
 
@@ -58,12 +59,8 @@
         android:layout_marginLeft="30px"
         android:gravity="center_vertical"
         android:text="已入库上架"
+        android:visibility="gone"
         android:textColor="#333"
         android:textSize="26px"
         android:textStyle="bold"/>
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rlv_have_instock"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
 </LinearLayout>

@@ -1,12 +1,14 @@
 package com.timi.sz.wms_android.mvp.UI.stock_out.buy_return_material;
 
-import com.timi.sz.wms_android.bean.outstock.buy.BuyReturnMaterialOrdernoBean;
-import com.timi.sz.wms_android.bean.outstock.buy.OrderNoBean;
+import com.timi.sz.wms_android.bean.outstock.buy.BuyReturnMaterialByMaterialCodeData;
+import com.timi.sz.wms_android.bean.outstock.buy.BuyReturnMaterialByOrdernoData;
 import com.timi.sz.wms_android.http.HttpManager;
 import com.timi.sz.wms_android.http.api.ApiService;
 import com.timi.sz.wms_android.http.api.CommonResult;
 import com.timi.sz.wms_android.http.callback.ApiServiceMethodCallBack;
 import com.timi.sz.wms_android.mvp.base.model.impl.MvpBaseModel;
+
+import java.util.Map;
 
 import io.reactivex.Observable;
 import io.reactivex.Observer;
@@ -20,28 +22,28 @@ import io.reactivex.Observer;
 public class BuyReturnMaterialModel extends MvpBaseModel {
     /**
      * 物料扫码 获取采购退货单
-     * @param materialCode
+     * @param params
      * @param observer
      */
-    public void materialScanGetBuyRetrurnOrderNo(final String materialCode, Observer<BuyReturnMaterialOrdernoBean> observer){
-        HttpManager.getInstance().HttpManagerRequest(observer, new ApiServiceMethodCallBack<BuyReturnMaterialOrdernoBean>() {
+    public void materialScanGetBuyRetrurnOrderNo(final Map<String,Object> params, Observer<BuyReturnMaterialByMaterialCodeData> observer){
+        HttpManager.getInstance().HttpManagerRequest(observer, new ApiServiceMethodCallBack<BuyReturnMaterialByMaterialCodeData>() {
             @Override
-            public Observable<CommonResult<BuyReturnMaterialOrdernoBean>> createObservable(ApiService apiService) {
-                return apiService.materialScanGetBuyRetrurnOrderNo(materialCode);
+            public Observable<CommonResult<BuyReturnMaterialByMaterialCodeData>> createObservable(ApiService apiService) {
+                return apiService.materialScanGetBuyRetrurnOrderNo(params);
             }
         });
 
     }
     /**
      * 退料单号的扫码请求
-     * @param oderNo
+     * @param params
      * @param observer
      */
-      public void returnMaterialOrderNoScanNetWork(final String oderNo, final Observer<OrderNoBean> observer){
-          HttpManager.getInstance().HttpManagerRequest(observer, new ApiServiceMethodCallBack<OrderNoBean>() {
+      public void returnMaterialOrderNoScanNetWork(final Map<String,Object> params, final Observer<BuyReturnMaterialByOrdernoData> observer){
+          HttpManager.getInstance().HttpManagerRequest(observer, new ApiServiceMethodCallBack<BuyReturnMaterialByOrdernoData>() {
               @Override
-              public Observable<CommonResult<OrderNoBean>> createObservable(ApiService apiService) {
-                  return apiService.returnMaterialOrderNoScan(oderNo);
+              public Observable<CommonResult<BuyReturnMaterialByOrdernoData>> createObservable(ApiService apiService) {
+                  return apiService.returnMaterialOrderNoScan(params);
               }
           });
       }

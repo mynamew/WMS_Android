@@ -464,7 +464,7 @@ public class Advance1QualityActivity extends BaseActivity<Advance1QualityView, A
                                 //不良总数
                                 double dTotalBadnessNum = (double) totalBadnessNum;
                                 //实收数
-                                double dReceiveNum = (double) mData.getNormalSummary().getReceiveQty();
+                                double dReceiveNum =(double) mData.getNormalSummary().getSampleQty();
                                 //转换成百分比
                                 NumberFormat nFromat = NumberFormat.getPercentInstance();
                                 String rates = nFromat.format(dTotalBadnessNum / dReceiveNum);

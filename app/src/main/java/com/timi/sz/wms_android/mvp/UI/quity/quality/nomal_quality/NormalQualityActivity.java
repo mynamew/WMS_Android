@@ -374,7 +374,7 @@ public class NormalQualityActivity extends BaseActivity<NormalQualityView, Norma
             /**
              * 保存实体数据
              */
-            setTextViewText(tvOrderno, R.string.receive_pro_num, normalSummary.getReceiptCode());
+            setTextViewText(tvOrderno, R.string.item_arrive_orderno, normalSummary.getReceiptCode());
             setTextViewText(tvReceiveMaterialDate, R.string.receive_material_date, normalSummary.getReceiptDate());
             setTextViewText(tvOrderNum, R.string.order_no, normalSummary.getSourceBillCode());
             setTextViewText(tvSupplier, R.string.buy_from, normalSummary.getSupplierName());
@@ -492,8 +492,8 @@ public class NormalQualityActivity extends BaseActivity<NormalQualityView, Norma
                              */
                             //不良总数
                             double dTotalBadnessNum = (double) totalBadnessNum;
-                            //实收数
-                            double dReceiveNum = (double) mData.getNormalSummary().getReceiveQty();
+                            //抽样数
+                            double dReceiveNum =Double.parseDouble(etSpotCheckNum.getText().toString().trim());
                             //转换成百分比
                             NumberFormat nFromat = NumberFormat.getPercentInstance();
                             String rates = nFromat.format(dTotalBadnessNum / dReceiveNum);

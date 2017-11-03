@@ -198,9 +198,9 @@
     <string name="item_point_point_num">清点</string>
     <string name="item_point_spare_num">备品</string>
     <string name="point_num_and_spare_num_no_zero">请点数和备品数不能同时为0</string>
-    <string name="point_num_no_more_arrvice_num">清点数量不能大于送货数量，请重新输入！</string>
+    <string name="point_num_no_more_buy_num">清点数量不能大于采购数,重新输入！</string>
     /**====== 来料入库 ======**/
-    <string name="in_stock_num_title">入库-入库上架</string>
+    <string name="in_stock_num_title">入库上架(来料入库)</string>
     <string name="receive_pro_num">到货单号：</string>
     <string name="create_orderno_date">到货日期：</string>
     <string name="arrive_pro_total_num">到货总数：</string>
@@ -504,7 +504,7 @@
     <string name="pass_num_tip">合格数：</string>
     <string name="badness_percent_tip">不良率：</string>
     <string name="mrp_normal_review_work_tip">质检操作（普检）</string>
-    <string name="mrp_more_receive_num_tip">挑选/特采/蒸菜的数量不能大于实收数，请重新输入</string>
+    <string name="mrp_more_receive_num_tip">挑选/特采/正采的数量不能大于实收数，请重新输入</string>
     <string name="mrp_normal_checker">质检人：%1$s</string>
     <string name="please_select_mrp_review_result">请选择评审结果</string>
     <string name="mrp_normal_pick_tip">挑选/特采</string>
@@ -597,6 +597,8 @@
     <string name="reject_num_more_current_pack_num">拒收数量不能大于实际包装数，请重新输入！</string>
     <string name="scan_get_data_fail_repeat_input">扫码获取数据失败，请确认后，重新扫码！</string>
     <string name="update_barcode_success">条码信息修改成功！</string>
+    <string name="create_instock_bill_success">生成入库单成功</string>
+    <string name="location_code_is_visible">库位码有效！</string>
 
 
 </resources>

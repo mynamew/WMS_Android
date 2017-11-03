@@ -5,22 +5,94 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/set_bg"
+    android:background="@color/white"
     android:orientation="vertical"
     tools:context="com.timi.sz.wms_android.mvp.UI.stock_out.buy_return_material.BuyReturnMaterialActivity">
 
     <include layout="@layout/title_head"/>
 
     <TextView
-        android:id="@+id/tv_buy_return_material_tip"
-        android:layout_width="wrap_content"
+        android:id="@+id/tv_query_title"
+        android:layout_width="match_parent"
+        android:layout_height="72px"
+        android:layout_marginLeft="30px"
+        android:gravity="center_vertical"
+        android:text="出库-采购退料"
+        android:textColor="#333"
+        android:textSize="28px"
+        android:textStyle="bold"
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/divide_color"/>
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="match_parent"
+        android:layout_height="72px"
+        android:layout_marginLeft="30px"
+        android:gravity="center_vertical"
+        android:text="温馨提示"
+        android:textColor="@color/login_txt_color"
+        android:textSize="28px"
+        android:textStyle="bold"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:lineSpacingExtra="5dp"
-        android:paddingBottom="10px"
-        android:paddingLeft="20px"
-        android:paddingRight="20px"
-        android:paddingTop="10px"
-        android:text="提示：\n\t\t1、扫描物品条码系统自动获取对应供应商的未关闭采购订单，并在ERP自动生成采购退料单；\n\t\t2、在ERP中制作采购退料单，然后通过PDA清点审核;"/>
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="30px">
+
+        <ImageView
+            android:layout_width="15px"
+            android:layout_height="15px"
+            android:src="@drawable/bg_circle_buy_return"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:lineSpacingExtra="5dp"
+            android:paddingBottom="10px"
+            android:paddingLeft="20px"
+            android:paddingRight="20px"
+            android:paddingTop="10px"
+            android:text="扫描物品条码系统自动获取对应供应商的未关闭采购订单，并在ERP自动生成采购退料单；"
+            android:textColor="@color/login_txt_color"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="30px">
+
+        <ImageView
+            android:layout_width="15px"
+            android:layout_height="15px"
+            android:src="@drawable/bg_circle_buy_return"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:lineSpacingExtra="5dp"
+            android:paddingBottom="10px"
+            android:paddingLeft="20px"
+            android:paddingRight="20px"
+            android:paddingTop="10px"
+            android:text="在ERP中制作采购退料单，然后通过PDA清点审核;"
+            android:textColor="@color/login_txt_color"/>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="24px"
+        android:background="@color/divide_color"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -36,11 +108,12 @@
             android:textColor="#333"
             />
 
-        <TextView
-            android:id="@+id/tv_putaway_scan_material"
+        <EditText
+            android:id="@+id/et_putaway_scan_material"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="20px"
+            android:imeOptions="actionSearch"
             android:layout_toRightOf="@id/tv_putaway_scan_material_tip"
             android:background="@drawable/bg_rectangle_et_focused"
             android:ellipsize="end"
@@ -62,6 +135,11 @@
             android:paddingLeft="60px"
             android:src="@mipmap/ic_scan"/>
     </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="24px"
+        android:background="@color/divide_color"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -87,11 +165,11 @@
             android:ellipsize="end"
             android:gravity="center_vertical"
             android:hint="@string/please_input_return_material_orderno_or_scan"
+            android:imeOptions="actionSearch"
             android:paddingLeft="20px"
             android:paddingRight="80px"
             android:singleLine="true"
             android:text=""
-            android:imeOptions="actionSearch"
             android:textSize="14sp"/>
 
         <ImageView

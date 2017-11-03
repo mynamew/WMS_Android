@@ -131,18 +131,18 @@ public class FragmentPoint extends BaseFragment<FragmentPointView, FragmentPoint
             adapter = new BaseRecyclerAdapter<BuyOrdernoBean.DetailResultsBean>(getActivity(), intentCode == BUY_ORDE_NUM ? mBuyBean.getDetailResults() : mSendBean.getDetailResults()) {
                 @Override
                 protected int getItemLayoutId(int viewType) {
-                    if(intentCode==BUY_ORDE_NUM){
+                    if (intentCode == BUY_ORDE_NUM) {
                         return R.layout.item_point;
-                    }else {
+                    } else {
                         return R.layout.item_point_send;
                     }
                 }
 
                 @Override
                 protected int getHeaderLayoutId() {
-                    if(intentCode==BUY_ORDE_NUM){
+                    if (intentCode == BUY_ORDE_NUM) {
                         return R.layout.header_point_buy;
-                    }else {
+                    } else {
                         return R.layout.header_point_send;
                     }
 
@@ -215,9 +215,9 @@ public class FragmentPoint extends BaseFragment<FragmentPointView, FragmentPoint
                                 ToastUtils.showShort(getActivity(), getString(R.string.point_num_and_spare_num_no_zero));
                                 return;
                             }
-                            int receiveNum = intentCode == BUY_ORDE_NUM ? mBuyBean.getDetailResults().get(position).getArrivalQty() : mSendBean.getDetailResults().get(position).getArrivalQty();
+                            int receiveNum = intentCode == BUY_ORDE_NUM ? mBuyBean.getDetailResults().get(position).getPoQty() : mSendBean.getDetailResults().get(position).getPoQty();
                             if (pointNum > receiveNum) {
-                                ToastUtils.showShort(getActivity(), getString(R.string.point_num_no_more_arrvice_num));
+                                ToastUtils.showShort(getActivity(), getString(R.string.point_num_no_more_buy_num));
                                 return;
                             }
                             Map<String, Object> params = new HashMap<>();
@@ -317,6 +317,7 @@ public class FragmentPoint extends BaseFragment<FragmentPointView, FragmentPoint
         if (spareNum > 0) {
             detailResultsBean.setGiveQty(lastSpareNum + spareNum);
         }
+        adapter.notifyDataSetChanged();
     }
 
     @Override

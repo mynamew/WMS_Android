@@ -672,7 +672,7 @@ public class QualityCheckActivity extends BaseActivity<QualityCheckView, Quality
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void refresgQualityList(QualityEvent event) {
-        if (event.getEvent().equals(QualityEvent.QUALITY_SUCCESS)) {
+        if (event.getEvent().equals(QualityEvent.QUALITY_SUCCESS)||event.getEvent().equals(QualityEvent.QUALITY_CONFRIM)) {
             /**
              * 清除数据 并且重新加载数据
              */

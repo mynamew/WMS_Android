@@ -61,6 +61,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="20px"
                 android:layout_marginRight="20px"
+                android:imeOptions="actionSearch"
                 android:layout_toRightOf="@id/tv_min_pack_code"
                 android:background="@drawable/selector_et"
                 android:hint="@string/please_input_or_scan_need_update_barcode"

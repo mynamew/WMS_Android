@@ -227,7 +227,7 @@ public class AdvanceQualityActivity extends BaseActivity<AdvanceQualityView, Adv
         /**
          * 设置相应的物料信息
          */
-        setTextViewText(tvOrderno, R.string.receive_pro_num, normalSummary.getReceiptCode());
+        setTextViewText(tvOrderno, R.string.item_arrive_orderno, normalSummary.getReceiptCode());
         setTextViewText(tvReceiveMaterialDate, R.string.receive_material_date, normalSummary.getReceiptDate());
         setTextViewText(tvOrderno, R.string.receive_pro_num, normalSummary.getReceiptCode());
         setTextViewText(tvSupplier, R.string.buy_from, normalSummary.getSupplierName());
@@ -532,11 +532,13 @@ public class AdvanceQualityActivity extends BaseActivity<AdvanceQualityView, Adv
             checkItemDialog.setViewListener(R.id.rl_select_badness_reason, new MyDialog.DialogClickListener() {
                 @Override
                 public void dialogClick(MyDialog dialog) {
-                    if (null != selectReviewResultPopWindow && selectReviewResultPopWindow.isShowing()) {
-                        selectReviewResultPopWindow.dismiss();
-                    } else {
-                        showSelectReviewResultPopWindow(checkItemDialog.getView(R.id.rl_select_badness_reason), isUpdateResult, position);
-                    }
+                   if(rdCheckUnQualitied.isChecked()){
+                       if (null != selectReviewResultPopWindow && selectReviewResultPopWindow.isShowing()) {
+                           selectReviewResultPopWindow.dismiss();
+                       } else {
+                           showSelectReviewResultPopWindow(checkItemDialog.getView(R.id.rl_select_badness_reason), isUpdateResult, position);
+                       }
+                   }
                 }
             });
             /**
@@ -654,6 +656,13 @@ public class AdvanceQualityActivity extends BaseActivity<AdvanceQualityView, Adv
                                 break;
                             }
                         }
+                        /**
+                         * 选择了不合格 但是没选择不良原因 则提示用户选择不良原因，并且返回
+                         */
+                        if(faultId==0){
+                             ToastUtils.showShort("请选择不良原因！");
+                            return;
+                        }
                         itemDataBean.setFaultId(faultId);
                     } else {//合格 默认传0
                         itemDataBean.setFaultId(0);
@@ -669,7 +678,6 @@ public class AdvanceQualityActivity extends BaseActivity<AdvanceQualityView, Adv
                         /**
                          * 设置高级质检2的结果
                          */
-                        Map<String, Object> params = new HashMap<>();
                         mCommitAdvanceData.setUserId(SpUtils.getInstance().getUserId());
                         mCommitAdvanceData.setOrgId(SpUtils.getInstance().getOrgId());
                         mCommitAdvanceData.setMAC(PackageUtils.getMac());
@@ -939,13 +947,16 @@ public class AdvanceQualityActivity extends BaseActivity<AdvanceQualityView, Adv
      * @param isUpdateResult    是否是更改检查项目
      * @param checkItemposition 检查项目的位置（更改时点击）
      */
+    private BaseRecyclerAdapter<GetAdvance2Data.CheckItemBean.FaultDataBean> baseRecyclerAdapter;
+
     private void showSelectReviewResultPopWindow(View view, final boolean isUpdateResult, final int checkItemposition) {
+        selectReviewResultPopWindow=null;
         if (null == selectReviewResultPopWindow) {
             selectReviewResultPopWindow = new PopupWindow(this);
             View inflate = LayoutInflater.from(this).inflate(R.layout.popwindow_select_badness_reason, null);
             RecyclerView recyclerView = inflate.findViewById(R.id.rlv_select_badness_reason);
             recyclerView.setLayoutManager(new LinearLayoutManager(this));
-            BaseRecyclerAdapter<GetAdvance2Data.CheckItemBean.FaultDataBean> baseRecyclerAdapter = new BaseRecyclerAdapter<GetAdvance2Data.CheckItemBean.FaultDataBean>(this, mData.getCheckItem().get(currentCheckposition).getFaultData()) {
+            baseRecyclerAdapter = new BaseRecyclerAdapter<GetAdvance2Data.CheckItemBean.FaultDataBean>(this, mData.getCheckItem().get(currentCheckposition).getFaultData()) {
                 @Override
                 protected int getItemLayoutId(int viewType) {
                     return R.layout.item_select_badness;

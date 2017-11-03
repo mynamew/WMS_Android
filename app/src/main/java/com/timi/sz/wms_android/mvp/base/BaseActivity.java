@@ -16,6 +16,7 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -24,6 +25,7 @@ import com.orhanobut.logger.Logger;
 import com.timi.sz.wms_android.R;
 import com.timi.sz.wms_android.base.uils.Constants;
 import com.timi.sz.wms_android.base.uils.InputMethodUtils;
+import com.timi.sz.wms_android.base.uils.TypefaceUtil;
 import com.timi.sz.wms_android.base.uils.statusutils.StatusBarUtil;
 import com.timi.sz.wms_android.mvp.UI.login.LoginActivity;
 import com.timi.sz.wms_android.mvp.base.presenter.MvpPresenter;
@@ -71,14 +73,17 @@ public abstract class BaseActivity<V extends MvpView, P extends MvpPresenter<V>>
         // 不需要侧滑的布局id  进行过滤
         if (layoutResID == R.layout.activity_main) {
             setContentView(layoutResID);
-        }
-        //添加 侧滑布局
-        else {
+        } else {
             setContentView(getContainer());
             View view = LayoutInflater.from(this).inflate(layoutResID, null);
             view.setBackgroundColor(getResources().getColor(R.color.app_background));
             swipeBackLayout.addView(view);
         }
+        /**
+         * 更改字体
+         */
+//        TypefaceUtil.replaceSystemDefaultFont(this,"fonts/normal.otf");
+        //添加 侧滑布局
         //注入
         ButterKnife.bind(this);
         //绑定 presenter
@@ -115,9 +120,42 @@ public abstract class BaseActivity<V extends MvpView, P extends MvpPresenter<V>>
     }
 
     @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        InputMethodUtils.hidSoftInput(event, this);
-        return super.onTouchEvent(event);
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        switch (ev.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                View view = getCurrentFocus();
+                hideKeyboard(ev, view);//调用方法判断是否需要隐藏键盘
+                break;
+            default:
+                break;
+        }
+        return super.dispatchTouchEvent(ev);
+    }
+
+    /**
+     * 隐藏软键盘
+     *
+     * @param event
+     * @param view
+     */
+    public void hideKeyboard(MotionEvent event, View view) {
+        try {
+            if (view != null && view instanceof EditText
+                    ) {
+                int[] location = {0, 0};
+                view.getLocationInWindow(location);
+                int left = location[0], top = location[1], right = left
+                        + view.getWidth(), bootom = top + view.getHeight();
+                // 判断焦点位置坐标是否在空间内，如果位置在控件外，则隐藏键盘
+                if (event.getRawX() < left || event.getRawX() > right
+                        || event.getY() < top || event.getRawY() > bootom) {
+                    // 隐藏键盘
+                    InputMethodUtils.hidSoftInput(event, BaseActivity.this);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

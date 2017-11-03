@@ -1,6 +1,5 @@
 package com.timi.sz.wms_android.mvp.UI.stock_out.buy_return_material.material;
 
-import com.timi.sz.wms_android.bean.outstock.buy.BuyReturnMaterialOrdernoBean;
 import com.timi.sz.wms_android.bean.outstock.buy.CommitMaterialScanToOredernoBean;
 import com.timi.sz.wms_android.bean.outstock.buy.MaterialBean;
 import com.timi.sz.wms_android.http.HttpManager;
@@ -43,20 +42,6 @@ public class ScanReturnMaterialMdel extends MvpBaseModel {
             @Override
             public Observable<CommonResult<CommitMaterialScanToOredernoBean>> createObservable(ApiService apiService) {
                 return apiService.commitMaterialScanToOrederno(materialCode);
-            }
-        });
-
-    }
-    /**
-     * 物料扫码 获取采购退货单
-     * @param materialCode
-     * @param observer
-     */
-    public void materialScanGetBuyRetrurnOrderNo(final String materialCode, Observer<BuyReturnMaterialOrdernoBean> observer){
-        HttpManager.getInstance().HttpManagerRequest(observer, new ApiServiceMethodCallBack<BuyReturnMaterialOrdernoBean>() {
-            @Override
-            public Observable<CommonResult<BuyReturnMaterialOrdernoBean>> createObservable(ApiService apiService) {
-                return apiService.materialScanGetBuyRetrurnOrderNo(materialCode);
             }
         });
 

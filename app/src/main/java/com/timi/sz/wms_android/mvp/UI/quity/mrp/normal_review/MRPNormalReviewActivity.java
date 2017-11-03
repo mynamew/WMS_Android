@@ -185,7 +185,7 @@ public class MRPNormalReviewActivity extends BaseActivity<MRPNormalReviewView, M
              * 不良率
              */
             NumberFormat nFromat = NumberFormat.getPercentInstance();
-            String rates = nFromat.format(mrpReviewData.getNgQty() / mrpReviewData.getReceiveQty());
+            String rates = nFromat.format((Double.parseDouble(String.valueOf(mrpReviewData.getNgQty())) / Double.parseDouble(String.valueOf(mrpReviewData.getSampleQty()))));
             tvBadnessPercent.setText(rates);
             /**
              * 设置标题和普捡 高检1 文本
@@ -294,12 +294,5 @@ public class MRPNormalReviewActivity extends BaseActivity<MRPNormalReviewView, M
     public void setMrpReviewData() {
         BaseMessage.post(new MrpEvent(MrpEvent.MRP_REVIEW_SUCCESS));
         onBackPressed();
-    }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
     }
 }

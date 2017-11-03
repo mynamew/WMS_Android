@@ -123,47 +123,57 @@ public class QualityRejectActivity extends BaseActivity<QualityRejectView, Quali
         llContent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /**
-                 * 弹出设置拒收数量的dialog
-                 */
-               myDialog = new MyDialog(QualityRejectActivity.this, R.layout.dialog_quality_reject);
-                NormalQualityData.NormalSummaryBean normalSummary = mData.getNormalSummary();
-                /**
-                 * 物料编码
-                 */
-                setTextViewText(myDialog.getTextView(R.id.tv_material_code), R.string.material_code, normalSummary.getMaterialCode());
-                /**
-                 * 物料名称
-                 */
-                setTextViewText(myDialog.getTextView(R.id.tv_material_name), R.string.material_name, normalSummary.getMaterialName());
-                myDialog.setButtonListener(R.id.btn_confirm, null, new MyDialog.DialogClickListener() {
-                    @Override
-                    public void dialogClick(MyDialog dialog) {
-                        String rejectNumStr = myDialog.getEdittext(R.id.et_reject_num).getText().toString();
-                        if (TextUtils.isEmpty(rejectNumStr)) {
-                            ToastUtils.showShort(getString(R.string.please_input_reject_num));
-                            return;
-                        }
-                        /**
-                         *提交质检拒收
-                         */
-                        Map<String, Object> params = new HashMap<>();
-                        params.put("UserId", SpUtils.getInstance().getUserId());
-                        params.put("OrgId", SpUtils.getInstance().getOrgId());
-                        params.put("mac", PackageUtils.getMac());
-                        params.put("ReceiptId", mData.getNormalSummary().getReceiptId());
-                        params.put("RejectQty", Integer.parseInt(rejectNumStr));
-                        params.put("BarcodeNo", barcodeStr);
-                        params.put("ReceiptDetailId", mData.getNormalSummary().getReceiptDetailId());
-                        getPresenter().setBarcodeData(params);
-                    }
-                });
-                myDialog.setButtonListener(R.id.btn_cancel, null, new MyDialog.DialogClickListener() {
-                    @Override
-                    public void dialogClick(MyDialog dialog) {
-                        dialog.dismiss();
-                    }
-                });
+               if(null==myDialog){
+                   /**
+                    * 弹出设置拒收数量的dialog
+                    */
+                   myDialog = new MyDialog(QualityRejectActivity.this, R.layout.dialog_quality_reject);
+                   NormalQualityData.NormalSummaryBean normalSummary = mData.getNormalSummary();
+                   /**
+                    * 物料编码
+                    */
+                   setTextViewText(myDialog.getTextView(R.id.tv_material_code), R.string.material_code, normalSummary.getMaterialCode());
+                   /**
+                    * 物料名称
+                    */
+                   setTextViewText(myDialog.getTextView(R.id.tv_material_name), R.string.material_name, normalSummary.getMaterialName());
+
+                   setTextViewText(myDialog.getTextView(R.id.tv_material_model), R.string.material_model, normalSummary.getMaterialStandard());
+                   setTextViewText(myDialog.getTextView(R.id.tv_start_pack_num), R.string.start_pack_num, mBarData.getInitialQty());
+                   setTextViewText(myDialog.getTextView(R.id.tv_real_pack_num), R.string.real_pack_num, mBarData.getCurrentQty());
+
+                   myDialog.getEdittext(R.id.et_reject_num).setText(String.valueOf(rejectNum));
+                   myDialog.setButtonListener(R.id.btn_commit, null, new MyDialog.DialogClickListener() {
+                       @Override
+                       public void dialogClick(MyDialog dialog) {
+                           String rejectNumStr = myDialog.getEdittext(R.id.et_reject_num).getText().toString();
+                           if (TextUtils.isEmpty(rejectNumStr)) {
+                               ToastUtils.showShort(getString(R.string.please_input_reject_num));
+                               return;
+                           }
+                           dialog.dismiss();
+                           /**
+                            *提交质检拒收
+                            */
+                           Map<String, Object> params = new HashMap<>();
+                           params.put("UserId", SpUtils.getInstance().getUserId());
+                           params.put("OrgId", SpUtils.getInstance().getOrgId());
+                           params.put("mac", PackageUtils.getMac());
+                           params.put("ReceiptId", mData.getNormalSummary().getReceiptId());
+                           params.put("RejectQty", Integer.parseInt(rejectNumStr));
+                           params.put("BarcodeNo", barcodeStr);
+                           params.put("ReceiptDetailId", mData.getNormalSummary().getReceiptDetailId());
+                           getPresenter().setBarcodeData(params);
+                       }
+                   });
+                   myDialog.setButtonListener(R.id.btn_cancel, null, new MyDialog.DialogClickListener() {
+                       @Override
+                       public void dialogClick(MyDialog dialog) {
+                           dialog.dismiss();
+                       }
+                   });
+               }
+               myDialog.show();
             }
         });
     }
@@ -195,21 +205,36 @@ public class QualityRejectActivity extends BaseActivity<QualityRejectView, Quali
         tvFirstPackNum.setText(String.valueOf(data.getInitialQty()));
         tvRealPackNum.setText(String.valueOf(data.getCurrentQty()));
         tvRejectNum.setText(String.valueOf(data.getRejectQty()));
-        /**
-         * 初始包装  和实际包装
-         */
-        setTextViewText(myDialog.getTextView(R.id.tv_start_pack_num), R.string.start_pack_num, "");
-        setTextViewText(myDialog.getTextView(R.id.tv_real_pack_num), R.string.real_pack_num, "");
+        if(null!=myDialog){
+            /**
+             * 初始包装  和实际包装
+             */
+            setTextViewText(myDialog.getTextView(R.id.tv_start_pack_num), R.string.start_pack_num, data.getInitialQty());
+            setTextViewText(myDialog.getTextView(R.id.tv_real_pack_num), R.string.real_pack_num, data.getCurrentQty());
+        }
     }
 
     @Override
     public void setBarcodeData(BarcodeData data) {
-
+        mBarData = data;
+        /**
+         * 设置数据
+         */
+        llContent.setVisibility(View.VISIBLE);
+        tvFirstPackNum.setText(String.valueOf(data.getInitialQty()));
+        tvRealPackNum.setText(String.valueOf(data.getCurrentQty()));
+        tvRejectNum.setText(String.valueOf(data.getRejectQty()));
+        if(null!=myDialog){
+            /**
+             * 初始包装  和实际包装
+             */
+            setTextViewText(myDialog.getTextView(R.id.tv_start_pack_num), R.string.start_pack_num, data.getInitialQty());
+            setTextViewText(myDialog.getTextView(R.id.tv_real_pack_num), R.string.real_pack_num, data.getCurrentQty());
+        }
     }
 
     @Override
     public void submitFinish() {
-        BaseMessage.post(new QualityEvent(QualityEvent.QUALITY_SUCCESS));
         BaseMessage.post(new QualityEvent(QualityEvent.QUALITY_CONFRIM));
         onBackPressed();
     }
@@ -263,12 +288,5 @@ public class QualityRejectActivity extends BaseActivity<QualityRejectView, Quali
                 });
                 break;
         }
-    }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
     }
 }

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
@@ -110,6 +111,7 @@ public class PutAwayActivity extends BaseActivity<PutAwayView, PutAwayPresenter>
                  */
                 Intent it = new Intent(PutAwayActivity.this, StockInDetailActivity.class);
                 it.putExtra(Constants.CODE_STR, intentCode);
+                it.putExtra("BillId", mReceiveBean.getReceipId());
                 startActivity(it);
             }
         });
@@ -127,14 +129,19 @@ public class PutAwayActivity extends BaseActivity<PutAwayView, PutAwayPresenter>
                     if (TextUtils.isEmpty(orderNum)) {
                         ToastUtils.showShort(getString(R.string.please_scan_material_code));
                     }
-                    if (orderNum.length() < 4) {
-                        ToastUtils.showShort(getString(R.string.input_orderno_more_four));
-                    } else {
-                        /**
-                         * 发起请求
-                         */
-                        scan(Constants.REQUEST_SCAN_CODE_MATERIIAL, PutAwayActivity.this);
-                    }
+                    /**
+                     * 物料扫码并上架的网络请求
+                     */
+                    Map<String, Object> params1 = new HashMap<>();
+                    params1.put("UserId", SpUtils.getInstance().getUserId());
+                    params1.put("OrgId", SpUtils.getInstance().getOrgId());
+                    params1.put("MAC", PackageUtils.getMac());
+                    params1.put("SrcBillType", 13);
+                    params1.put("DestBillType", 14);
+                    params1.put("ScanId", mReceiveBean.getScanId());
+                    params1.put("BinCode",locationCode);
+                    params1.put("BarcodeNo", orderNum);
+                    getPresenter().materialScanNetWork(params1, orderNum);
                 }
                 return false;
             }
@@ -149,14 +156,22 @@ public class PutAwayActivity extends BaseActivity<PutAwayView, PutAwayPresenter>
                     if (TextUtils.isEmpty(orderNum)) {
                         ToastUtils.showShort(getString(R.string.please_scan_lib_location_code));
                     }
-                    if (orderNum.length() < 4) {
-                        ToastUtils.showShort(getString(R.string.input_orderno_more_four));
-                    } else {
-                        /**
-                         * 发起请求
-                         */
-                        scan(Constants.REQUEST_SCAN_CODE_LIB_LOATION, PutAwayActivity.this);
-                    }
+                    /**
+                     * 保存库位码
+                     */
+                    locationCode = orderNum;
+                    /**
+                     * 发起请求
+                     */
+                    /**
+                     * 判断库位码是否有效
+                     */
+                    Map<String, Object> params = new HashMap<>();
+                    params.put("UserId", SpUtils.getInstance().getUserId());
+                    params.put("OrgId", SpUtils.getInstance().getOrgId());
+                    params.put("MAC", PackageUtils.getMac());
+                    params.put("BinCode", orderNum);
+                    getPresenter().vertifyLocationCode(params);
                 }
                 return false;
             }
@@ -166,18 +181,6 @@ public class PutAwayActivity extends BaseActivity<PutAwayView, PutAwayPresenter>
     /****************一大堆 接受数据的实体，太不是人了************************************************/
     //收货单实体
     private ReceiveOrdernoBean mReceiveBean;
-    //产成品 选单实体
-    private FinishGoodsOrdernoBean mFinishBean;
-    //产成品 生单实体
-    private FinishGoodsCreateBillBean mFinishCreateBean;
-    //其他   选单实体
-    private OtherAuditSelectOrdernoBean mOtherBean;
-    //委外 实体
-    private OutReturnMaterialBean mOutBean;
-    //生产 实体
-    private ProductionReturnMaterialBean mProductBean;
-    //销售 实体
-    private SaleGoodsReturnBean mSaleBean;
 
     @Override
     public void initData() {
@@ -246,6 +249,10 @@ public class PutAwayActivity extends BaseActivity<PutAwayView, PutAwayPresenter>
 
     }
 
+    /**
+     * 扫描的Id  默认是0  当提交物料扫码入库后 会返回sanid
+     */
+    private int ScanId=0;
     @OnClick({R.id.iv_putaway_scan_location, R.id.iv_putaway_scan_material, R.id.btn_login})
     public void onViewClicked(View view) {
         switch (view.getId()) {
@@ -257,11 +264,19 @@ public class PutAwayActivity extends BaseActivity<PutAwayView, PutAwayPresenter>
                     ToastUtils.showShort(getString(R.string.please_scan_lib_location_code));
                     return;
                 }
+                if (!locationCodeIsUse) {
+                    ToastUtils.showShort(getString(R.string.location_code_no_user));
+                    return;
+                }
                 scan(Constants.REQUEST_SCAN_CODE_MATERIIAL, this);
                 break;
             case R.id.btn_login://确认提交
                 if (TextUtils.isEmpty(locationCode)) {
                     ToastUtils.showShort(getString(R.string.please_scan_lib_location_code));
+                    return;
+                }
+                if (!locationCodeIsUse) {
+                    ToastUtils.showShort(getString(R.string.location_code_no_user));
                     return;
                 }
                 String materialCode = etPutawayScanMaterial.getText().toString();
@@ -276,7 +291,8 @@ public class PutAwayActivity extends BaseActivity<PutAwayView, PutAwayPresenter>
                 params.put("UserId", SpUtils.getInstance().getUserId());
                 params.put("OrgId", SpUtils.getInstance().getOrgId());
                 params.put("MAC", PackageUtils.getMac());
-                params.put("BillNo", locationCode);
+                params.put("ScanId",ScanId);
+                params.put("SubmitType", 0);
                 getPresenter().createInSockOrderno(params);
         }
     }
@@ -294,22 +310,36 @@ public class PutAwayActivity extends BaseActivity<PutAwayView, PutAwayPresenter>
          */
         tvPutawayMaterialCode.setText(bean.getMaterialCode());
         tvPutawayMaterialName.setText(bean.getMaterialName());
-        tvPutawayMaterialNmodel.setText(bean.getMaterialModel());
-        tvPutawayMaterialNum.setText(bean.getMaterialBuyNum());
+        tvPutawayMaterialNmodel.setText(bean.getMaterialStandard());
+        tvPutawayMaterialNum.setText(String.valueOf(bean.getBarcodeQty()));
+        /**
+         * 设置已点总数
+         */
+        tvHaveCountNum.setText(String.valueOf(bean.getTotalScanQty()));
+        /**
+         * 设置已入库总数
+         */
+        tvInStockTotalNum.setText(String.valueOf(bean.getTotalInstockQty()));
+        /**
+         * 设置扫码Id
+         */
+        ScanId=bean.getScanId();
 
     }
 
     private VertifyLocationCodeBean mVertifyLocationCodeBean;
+    private boolean locationCodeIsUse = false;
 
     @Override
     public void vertifyLocationCode(VertifyLocationCodeBean bean) {
-        ToastUtils.showShort("库位码有效！");
+        locationCodeIsUse = true;
+        ToastUtils.showShort(getString(R.string.location_code_is_visible));
         mVertifyLocationCodeBean = bean;
     }
 
     @Override
     public void createInStockOrderno() {
-        ToastUtils.showShort("生成入库单成功");
+        ToastUtils.showShort(getString(R.string.create_instock_bill_success));
         onBackPressed();
     }
 
@@ -323,21 +353,28 @@ public class PutAwayActivity extends BaseActivity<PutAwayView, PutAwayPresenter>
     public void scanSuccess(int requestCode, String result) {
         switch (requestCode) {
             case REQUEST_SCAN_CODE_MATERIIAL:
-                if (requestCode == RESULT_OK) {
-                    LogUitls.d("物料码扫码--->", result);
-                    etPutawayScanMaterial.setText(result);
-                    /**
-                     * 物料扫码并上架的网络请求
-                     */
-                    Map<String, Object> params = new HashMap<>();
-                    params.put("UserId", SpUtils.getInstance().getUserId());
-                    params.put("OrgId", SpUtils.getInstance().getOrgId());
-                    params.put("MAC", PackageUtils.getMac());
-                    params.put("BillNo", locationCode);
-                    getPresenter().materialScanNetWork(params, result);
-                }
+                LogUitls.d("物料码扫码--->", result);
+                etPutawayScanMaterial.setText(result);
+                /**
+                 * 物料扫码并上架的网络请求
+                 */
+                Map<String, Object> params1 = new HashMap<>();
+                params1.put("UserId", SpUtils.getInstance().getUserId());
+                params1.put("OrgId", SpUtils.getInstance().getOrgId());
+                params1.put("MAC", PackageUtils.getMac());
+                params1.put("BillId", mReceiveBean.getReceipId());
+                params1.put("SrcBillType", 13);
+                params1.put("DestBillType", 14);
+                params1.put("ScanId", ScanId);
+                params1.put("BinCode", locationCode);
+                params1.put("BarcodeNo", result);
+                getPresenter().materialScanNetWork(params1, result);
                 break;
             case REQUEST_SCAN_CODE_LIB_LOATION:
+                /**
+                 * 重新扫描库位码的时候 将库位码是否有效的标识更改成false
+                 */
+                locationCodeIsUse = false;
                 LogUitls.d("库位码扫码--->", result);
                 //保存库位码
                 locationCode = result;

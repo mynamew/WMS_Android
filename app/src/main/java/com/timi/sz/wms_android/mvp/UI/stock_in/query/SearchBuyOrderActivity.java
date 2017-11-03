@@ -356,4 +356,5 @@ public class SearchBuyOrderActivity extends BaseActivity<SearchBuyOrderView, Sea
                 break;
         }
     }
+
 }

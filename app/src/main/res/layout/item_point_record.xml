@@ -116,6 +116,7 @@
         android:paddingLeft="40px"
         android:text="@string/point_date"
         android:textColor="#999"
+        android:layout_marginBottom="10px"
         android:textSize="26px"/>
 
     <View

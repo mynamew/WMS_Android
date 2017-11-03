@@ -166,7 +166,7 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<Recycl
                      * （holder.getLayoutPosition() - 1）这儿"-1"的 存在就是包括头部的布局，
                      * 因为在加载当头部存在的时候 holder.getLayoutPosition() 不会计算头部的布局（目前理解还是不太清楚）
                      */
-                        mClickListener.onItemClick(holder.itemView, holder.getLayoutPosition() - 1);
+                        mClickListener.onItemClick(holder.itemView, holder.getLayoutPosition());
                 }
             });
         }

@@ -4,6 +4,7 @@ package com.timi.sz.wms_android.http.api;
 import com.timi.sz.wms_android.bean.LoginBean;
 import com.timi.sz.wms_android.bean.UserInfoBean;
 import com.timi.sz.wms_android.bean.VersionBean;
+import com.timi.sz.wms_android.bean.instock.OrderDetailData;
 import com.timi.sz.wms_android.bean.instock.search.BuyOrdernoBean;
 import com.timi.sz.wms_android.bean.instock.search.FinishGoodsCreateBillBean;
 import com.timi.sz.wms_android.bean.instock.search.FinishGoodsOrdernoBean;
@@ -16,12 +17,13 @@ import com.timi.sz.wms_android.bean.instock.search.SaleGoodsReturnBean;
 import com.timi.sz.wms_android.bean.instock.search.SendOrdernoBean;
 import com.timi.sz.wms_android.bean.instock.VertifyLocationCodeBean;
 import com.timi.sz.wms_android.bean.instock.search.StockinMaterialBean;
-import com.timi.sz.wms_android.bean.outstock.buy.BuyReturnMaterialOrdernoBean;
+import com.timi.sz.wms_android.bean.outstock.buy.BuyReturnMaterialByMaterialCodeData;
 import com.timi.sz.wms_android.bean.outstock.buy.CommitMaterialScanToOredernoBean;
 import com.timi.sz.wms_android.bean.outstock.buy.MaterialBean;
 import com.timi.sz.wms_android.bean.outstock.buy.OrderNoAddMaterial;
 import com.timi.sz.wms_android.bean.outstock.buy.OrderNoBean;
 import com.timi.sz.wms_android.bean.outstock.outsource.OutSourceFeedBean;
+import com.timi.sz.wms_android.bean.outstock.buy.BuyReturnMaterialByOrdernoData;
 import com.timi.sz.wms_android.bean.quality.BarcodeData;
 import com.timi.sz.wms_android.bean.quality.adavance.CommitAdvance1Data;
 import com.timi.sz.wms_android.bean.quality.adavance.CommitAdvanceData;
@@ -295,13 +297,13 @@ public interface ApiService {
 
 
     /**
-     * 物料扫码并入库上架
+     * 提交条码入库
      *
      * @param params
      * @return
      */
     @FormUrlEncoded
-    @POST("api/Account/ClientLogin")
+    @POST("api/services/wpda/common/SubmitBarcodeInstock")
     Observable<CommonResult<MaterialScanPutAwayBean>> materialScanPutAawy(@FieldMap Map<String,Object> params);
 
     /**
@@ -323,6 +325,15 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("api/services/wpda/common/SubmitMakeOrAuditBill")
     Observable<CommonResult<Object>> createInStockOrderno(@FieldMap Map<String,Object> params);
+    /**
+     * 提交制单和审核生成入库单
+     *
+     * @param params
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("api/services/wpda/PurInstock/GetReceiptDetail")
+    Observable<CommonResult<List<OrderDetailData>>> getReceiptDetail(@FieldMap Map<String,Object> params);
 
     /**************************************************************************************************************/
     /**************************************************************************************************************/
@@ -407,16 +418,25 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("api/Account/ClientLogin")
     Observable<CommonResult<OrderNoBean>> searchOtherBill(@Field("orderno") String orderno);
-
+    /*****************************************采购退料******************************************************************/
     /**
      * 采购退料单号扫码 请求
      *
-     * @param orderno
      * @return
      */
     @FormUrlEncoded
-    @POST("api/Account/ClientLogin")
-    Observable<CommonResult<OrderNoBean>> returnMaterialOrderNoScan(@Field("orderno") String orderno);
+    @POST("api/services/wpda/PurReturn/QueryPurReturnDataByInput")
+    Observable<CommonResult<BuyReturnMaterialByOrdernoData>> returnMaterialOrderNoScan(@FieldMap Map<String, Object> params);
+    /**
+     * 通过物料码获取未关闭的采购单 即退料单
+     *
+     * @param params
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("api/services/wpda/PurReturn/QueryAuditPOBillForPurReturn ")
+    Observable<CommonResult<BuyReturnMaterialByMaterialCodeData>> materialScanGetBuyRetrurnOrderNo(@FieldMap Map<String, Object> params);
+
 
     /**
      * 采购退料单 添加物料的方法
@@ -428,17 +448,7 @@ public interface ApiService {
     @POST("api/Account/ClientLogin")
     Observable<CommonResult<OrderNoAddMaterial>> returnMaterialOrderNoAddMaterial(@Field("materialCode") String materialCode);
 
-    /**
-     * 通过物料码获取未关闭的采购单 即退料单
-     *
-     * @param materialCode
-     * @return
-     */
-    @FormUrlEncoded
-    @POST("api/Account/ClientLogin")
-    Observable<CommonResult<BuyReturnMaterialOrdernoBean>> materialScanGetBuyRetrurnOrderNo(@Field("materialCode") String materialCode);
-
-    /**
+   /**
      * 提交物料扫码 结果到采购退料单
      *
      * @param orderno

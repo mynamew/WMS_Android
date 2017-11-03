@@ -10,15 +10,21 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
 import com.timi.sz.wms_android.R;
 import com.timi.sz.wms_android.base.uils.Constants;
 import com.timi.sz.wms_android.base.uils.LogUitls;
+import com.timi.sz.wms_android.base.uils.PackageUtils;
+import com.timi.sz.wms_android.base.uils.SpUtils;
 import com.timi.sz.wms_android.base.uils.ToastUtils;
-import com.timi.sz.wms_android.bean.outstock.buy.BuyReturnMaterialOrdernoBean;
-import com.timi.sz.wms_android.bean.outstock.buy.OrderNoBean;
+import com.timi.sz.wms_android.bean.outstock.buy.BuyReturnMaterialByMaterialCodeData;
+import com.timi.sz.wms_android.bean.outstock.buy.BuyReturnMaterialByOrdernoData;
 import com.timi.sz.wms_android.mvp.UI.stock_out.buy_return_material.material.ScanReturnMaterialActivity;
 import com.timi.sz.wms_android.mvp.UI.stock_out.buy_return_material.orderno.BuyReturnMaterialOrderNoActivity;
 import com.timi.sz.wms_android.mvp.base.BaseActivity;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -36,12 +42,10 @@ public class BuyReturnMaterialActivity extends BaseActivity<BuyReturnMaterialVie
     ImageView ivTitleRight;
     @BindView(R.id.tv_title_right)
     TextView tvTitleRight;
-    @BindView(R.id.tv_buy_return_material_tip)
-    TextView tvBuyReturnMaterialTip;
     @BindView(R.id.tv_putaway_scan_material_tip)
     TextView tvPutawayScanMaterialTip;
-    @BindView(R.id.tv_putaway_scan_material)
-    TextView tvPutawayScanMaterial;
+    @BindView(R.id.et_putaway_scan_material)
+    TextView etPutawayScanMaterial;
     @BindView(R.id.iv_putaway_scan_material)
     ImageView ivPutawayScanMaterial;
     @BindView(R.id.tv_buy_return_material_orderno)
@@ -77,7 +81,37 @@ public class BuyReturnMaterialActivity extends BaseActivity<BuyReturnMaterialVie
                         /**
                          * 退料单号的 网络请求
                          */
-                        getPresenter().returnMaterialScanNetWork(inputStr);
+                        Map<String,Object> params=new HashMap<>();
+                        params.put("UserId", SpUtils.getInstance().getUserId());
+                        params.put("OrgId", SpUtils.getInstance().getOrgId());
+                        params.put("MAC", PackageUtils.getMac());
+                        params.put("BillNo", inputStr);
+                        getPresenter().returnMaterialScanNetWork(params);
+                    }
+                }
+                return false;
+            }
+        });
+        etPutawayScanMaterial.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                    /**
+                     * 输入的内容
+                     */
+                    String inputStr = etPutawayScanMaterial.getText().toString().trim();
+                    if (TextUtils.isEmpty(inputStr)) {
+                        ToastUtils.showShort(getString(R.string.please_input_return_material_orderno_or_scan));
+                    } else {
+                        /**
+                         * 退料单号的 网络请求
+                         */
+                        Map<String,Object> params=new HashMap<>();
+                        params.put("UserId", SpUtils.getInstance().getUserId());
+                        params.put("OrgId", SpUtils.getInstance().getOrgId());
+                        params.put("MAC", PackageUtils.getMac());
+                        params.put("BillNo", inputStr);
+                        getPresenter().materialScanNetWork(params);
                     }
                 }
                 return false;
@@ -100,16 +134,11 @@ public class BuyReturnMaterialActivity extends BaseActivity<BuyReturnMaterialVie
         return this;
     }
 
-    @OnClick({R.id.tv_putaway_scan_material, R.id.iv_putaway_scan_material, R.id.et_buy_return_material_orderno, R.id.iv_buy_return_material_orderno})
+    @OnClick({ R.id.iv_putaway_scan_material,R.id.iv_buy_return_material_orderno})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.tv_putaway_scan_material://扫物料码的点击事件
-                scan(Constants.REQUEST_SCAN_CODE_MATERIIAL, this);
-                break;
             case R.id.iv_putaway_scan_material://扫物料码的点击事件
                 scan(Constants.REQUEST_SCAN_CODE_MATERIIAL, this);
-                break;
-            case R.id.et_buy_return_material_orderno://退料单号
                 break;
             case R.id.iv_buy_return_material_orderno://退料单号
                 scan(REQUEST_SCAN_CODE_RETURN_MATERIAL, this);
@@ -118,16 +147,16 @@ public class BuyReturnMaterialActivity extends BaseActivity<BuyReturnMaterialVie
     }
 
     @Override
-    public void materialScanResult(BuyReturnMaterialOrdernoBean bean) {
+    public void materialScanResult(BuyReturnMaterialByMaterialCodeData bean) {
         Intent intent = new Intent(this, ScanReturnMaterialActivity.class);
-        intent.putExtra(OUT_STOCK_BUY_RETURN_ORDERNO_BEAN, bean);
+        intent.putExtra(OUT_STOCK_BUY_RETURN_ORDERNO_BEAN, new Gson().toJson(bean));
         startActivity(intent);
     }
 
     @Override
-    public void ReturnMaterialOrderNoScanResult(OrderNoBean bean) {
+    public void ReturnMaterialOrderNoScanResult(BuyReturnMaterialByOrdernoData bean) {
         Intent intent = new Intent(this, BuyReturnMaterialOrderNoActivity.class);
-        intent.putExtra(OUT_STOCK_BUY_RETURN_ORDERNO_BEAN, bean);
+        intent.putExtra(OUT_STOCK_BUY_RETURN_ORDERNO_BEAN, new Gson().toJson(bean));
         startActivity(intent);
     }
 
@@ -139,11 +168,16 @@ public class BuyReturnMaterialActivity extends BaseActivity<BuyReturnMaterialVie
                 /**
                  * 设置扫描返回结果
                  */
-                tvPutawayScanMaterial.setText(result);
+                etPutawayScanMaterial.setText(result);
                 /**
                  * 扫物料码的网络请求
                  */
-                getPresenter().materialScanNetWork(result);
+                Map<String,Object> paramsMaterial=new HashMap<>();
+                paramsMaterial.put("UserId", SpUtils.getInstance().getUserId());
+                paramsMaterial.put("OrgId", SpUtils.getInstance().getOrgId());
+                paramsMaterial.put("MAC", PackageUtils.getMac());
+                paramsMaterial.put("BillNo", result);
+                getPresenter().materialScanNetWork(paramsMaterial);
                 break;
             case REQUEST_SCAN_CODE_RETURN_MATERIAL://退料单号
                 LogUitls.e("退了单号--->", result);
@@ -154,7 +188,12 @@ public class BuyReturnMaterialActivity extends BaseActivity<BuyReturnMaterialVie
                 /**
                  * 退料单号的 网络请求
                  */
-                getPresenter().returnMaterialScanNetWork(result);
+                Map<String,Object> params=new HashMap<>();
+                params.put("UserId", SpUtils.getInstance().getUserId());
+                params.put("OrgId", SpUtils.getInstance().getOrgId());
+                params.put("MAC", PackageUtils.getMac());
+                params.put("BillNo", result);
+                getPresenter().returnMaterialScanNetWork(params);
                 break;
         }
     }

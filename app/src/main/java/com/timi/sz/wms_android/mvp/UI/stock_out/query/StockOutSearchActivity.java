@@ -49,7 +49,7 @@ import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_SELL_OUT_BIL
  * author: timi
  * create at: 2017/9/4 8:51
  */
-public class StockOutSearchActivity extends BaseActivity<StockOutSearchView, StockOutSearchPresenter> implements StockOutSearchView {
+public class  StockOutSearchActivity extends BaseActivity<StockOutSearchView, StockOutSearchPresenter> implements StockOutSearchView {
     @BindView(R.id.tv_stockout_tip)
     TextView tvStockoutTip;
     @BindView(R.id.et_stockout_input)

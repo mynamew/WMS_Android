@@ -103,7 +103,7 @@ public class MRPReviewActivity extends BaseActivity<MRPReviewView, MRPReviewPres
                      * 不良率
                      */
                     NumberFormat nFromat = NumberFormat.getPercentInstance();
-                    String rates = nFromat.format(item.getNgQty() / item.getReceiveQty());
+                    String rates = nFromat.format((Double.parseDouble(String.valueOf(item.getNgQty())) / Double.parseDouble(String.valueOf(item.getSampleQty()))));
                     holder.setTextView(R.id.tv_mrp_badness_percen, rates);
                     /**
                      * 物品名称

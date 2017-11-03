@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="#fff"
     android:orientation="vertical"
     tools:context=".mvp.UI.quity.reject.QualityRejectActivity">
 
@@ -53,6 +53,7 @@
             android:layout_toRightOf="@id/tv_min_pack_code"
             android:background="@drawable/selector_et"
             android:hint="@string/please_scan_assign_material_code"
+            android:imeOptions="actionSearch"
             android:paddingLeft="20px"
             android:singleLine="true"
             android:textSize="14sp"/>
@@ -77,9 +78,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="96px"
-        android:paddingLeft="10px"
-        android:paddingRight="10px"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:paddingLeft="30px"
+        android:paddingRight="30px">
 
         <TextView
             android:layout_width="0dp"
@@ -103,9 +104,8 @@
 
         <TextView
             android:layout_width="0dp"
-            android:layout_weight="2"
             android:layout_height="match_parent"
-            android:layout_marginLeft="2px"
+            android:layout_weight="2"
             android:background="#fff"
             android:gravity="center"
             android:text="@string/item_real_pack_num"
@@ -113,9 +113,8 @@
 
         <TextView
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="match_parent"
-            android:layout_marginLeft="2px"
+            android:layout_weight="1"
             android:background="#fff"
             android:gravity="center"
             android:text="@string/reject_num"
@@ -129,11 +128,13 @@
         android:background="#e7e7dd"/>
 
     <LinearLayout
+        android:id="@+id/ll_content"
         android:layout_width="match_parent"
         android:layout_height="96px"
-        android:paddingLeft="10px"
-        android:paddingRight="10px"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:paddingLeft="30px"
+        android:paddingRight="30px"
+        android:visibility="gone">
 
         <TextView
             android:id="@+id/tv_material_code"
@@ -160,9 +161,8 @@
         <TextView
             android:id="@+id/tv_real_pack_num"
             android:layout_width="0dp"
-            android:layout_weight="2"
             android:layout_height="match_parent"
-            android:layout_marginLeft="2px"
+            android:layout_weight="2"
             android:background="#fff"
             android:gravity="center"
             android:text="0"
@@ -171,9 +171,8 @@
         <TextView
             android:id="@+id/tv_reject_num"
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="match_parent"
-            android:layout_marginLeft="2px"
+            android:layout_weight="1"
             android:background="#fff"
             android:gravity="center"
             android:text="0"

@@ -1,15 +1,15 @@
 package com.timi.sz.wms_android.mvp.UI.stock_out.buy_return_material.material;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
 import com.timi.sz.wms_android.R;
 import com.timi.sz.wms_android.base.uils.Constants;
 import com.timi.sz.wms_android.base.uils.LogUitls;
 import com.timi.sz.wms_android.base.uils.ToastUtils;
-import com.timi.sz.wms_android.bean.outstock.buy.BuyReturnMaterialOrdernoBean;
+import com.timi.sz.wms_android.bean.outstock.buy.BuyReturnMaterialByMaterialCodeData;
 import com.timi.sz.wms_android.bean.outstock.buy.CommitMaterialScanToOredernoBean;
 import com.timi.sz.wms_android.bean.outstock.buy.MaterialBean;
 import com.timi.sz.wms_android.mvp.base.BaseActivity;
@@ -18,7 +18,6 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_BUY_RETURN_ORDERNO_BEAN;
-import static com.timi.sz.wms_android.base.uils.Constants.REQUEST_SCAN_CODE_MATERIIAL;
 
 public class ScanReturnMaterialActivity extends BaseActivity<ScanReturnMaterialView, ScanReturnMaterialPresenter> implements ScanReturnMaterialView,BaseActivity.ScanQRCodeResultListener {
     @BindView(R.id.tv_orderno)
@@ -46,7 +45,7 @@ public class ScanReturnMaterialActivity extends BaseActivity<ScanReturnMaterialV
     @BindView(R.id.tv_have_return_num)
     TextView tvHaveReturnNum;
     //退料单的实体
-    private BuyReturnMaterialOrdernoBean ordernoBean;
+    private BuyReturnMaterialByMaterialCodeData ordernoBean;
     //扫到的物料码
     private String  materialCode="";
     @Override
@@ -66,24 +65,23 @@ public class ScanReturnMaterialActivity extends BaseActivity<ScanReturnMaterialV
 
     @Override
     public void initData() {
-        ordernoBean = getIntent().getParcelableExtra(OUT_STOCK_BUY_RETURN_ORDERNO_BEAN);
+        ordernoBean = new Gson().fromJson(getIntent().getStringExtra(OUT_STOCK_BUY_RETURN_ORDERNO_BEAN),BuyReturnMaterialByMaterialCodeData.class);
         /**
          * 上个界面传过来的数据
          */
-        setTextViewText(tvOrderno, R.string.order_no, ordernoBean.orderNo);
-        setTextViewText(tvOrdernoDate, R.string.buy_date, ordernoBean.date);
-        setTextViewText(tvMaterialFrom, R.string.buy_from, ordernoBean.supplier);
-        setTextViewText(tvMaterialBuyer, R.string.buyer, ordernoBean.buyer);
-        setTextViewText(tvBuyNum, R.string.buy_num, ordernoBean.buyNum);
-        setTextViewText(tvInstockNum, R.string.in_stock_num, ordernoBean.instockNum);
-        setTextViewText(tvHaveReturnNum, R.string.have_return_num, ordernoBean.instockNum);
+        setTextViewText(tvOrderno, R.string.order_no, ordernoBean.getBillCode());
+        setTextViewText(tvOrdernoDate, R.string.buy_date, ordernoBean.getBillDate());
+        setTextViewText(tvMaterialFrom, R.string.buy_from, ordernoBean.getSupplierName());
+        setTextViewText(tvMaterialBuyer, R.string.buyer, ordernoBean.getPurEmployeeName());
+        setTextViewText(tvBuyNum, R.string.buy_num, ordernoBean.getPoQty());
+        setTextViewText(tvInstockNum, R.string.item_in_stock_num, ordernoBean.getInStockQty());
+        setTextViewText(tvHaveReturnNum, R.string.have_return_num, ordernoBean.getReturnQty());
         /**
          * 扫码出来的数据
          */
-        MaterialBean materialBean = ordernoBean.bean;
-        setTextViewText(tvMaterialCode, R.string.material_code, materialBean.getMaterialCode());
-        setTextViewText(tvMaterialName, R.string.material_name, materialBean.getMaterialName());
-        setTextViewText(tvMaterialModel, R.string.material_model, materialBean.getMaterialModel());
+        setTextViewText(tvMaterialCode, R.string.material_code, ordernoBean.getMaterialCode());
+        setTextViewText(tvMaterialName, R.string.material_name, ordernoBean.getMaterialName());
+        setTextViewText(tvMaterialModel, R.string.material_model, ordernoBean.getMaterialStandard());
     }
 
     @Override
@@ -118,7 +116,7 @@ public class ScanReturnMaterialActivity extends BaseActivity<ScanReturnMaterialV
         /**
          * 设置已退数量
          */
-        setTextViewText(tvHaveReturnNum, R.string.have_return_num, "(" + bean.getMaterialBuyNum() + ")" + (ordernoBean.instockNum + Integer.parseInt(bean.getMaterialBuyNum())));
+        setTextViewText(tvHaveReturnNum, R.string.have_return_num, "(" + bean.getMaterialBuyNum() + ")" + (ordernoBean.getInStockQty() + Integer.parseInt(bean.getMaterialBuyNum())));
         /**
          * 设置物料信息
          */

@@ -186,7 +186,7 @@
         <activity android:name=".mvp.UI.about.AboutActivity"/>
         <activity
             android:name=".mvp.UI.stock_in.putaway.PutAwayActivity"
-            android:windowSoftInputMode="stateHidden">
+            android:windowSoftInputMode="adjustPan|stateHidden">
         </activity>
         <activity android:name=".mvp.UI.stock_in.detail.StockInDetailActivity">
         </activity>
