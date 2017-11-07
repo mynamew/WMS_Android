@@ -457,4 +457,26 @@
     <string name="finish_goods_in_stock_title">入库上架（产成品）</string>
     <string name="create_instock_bill_success">生成入库单成功</string>
     <string name="location_code_is_visible">库位码有效！</string>
+    <string name="up">顶部</string>
+    <string name="item_wait_count_num">待点数：</string>
+    <string name="item_have_scan_num">已扫数：</string>
+    <string name="item_should_return_num">应退数：</string>
+    <string name="item_line_num">#%1$s</string>
+    <string name="buy_orderno_info">采购单信息</string>
+    <string name="create_orderno_date_tip">制单日期</string>
+    <string name="return_material_total_num_tip">退料总数</string>
+    <string name="have_scan_total_num_tip">已扫总数</string>
+    <string name="wait_scan_total_num_tip">待扫总数</string>
+    <string name="return_material_scan_work">退料扫码操作</string>
+    <string name="please_input_return_matrial_code_or_scan">请输入要退料的条码/扫描物料条码</string>
+    <string name="return_orderno_info">退料单信息</string>
+    <string name="buyer_tip">采购员</string>
+    <string name="return_material_num_format">退料数量</string>
+    <string name="item_material_attr">附加属性</string>
+    <string name="return_divide_work">退料拆分操作</string>
+    <string name="divide_barcode_tip">拆分条码</string>
+    <string name="barcode_contain_total_num">条码包装总量</string>
+    <string name="should_return_num">应退数量</string>
+    <string name="divide_num_tip">拆分数量</string>
+    <string name="please_input_divide_num">请输入拆分数量</string>
 </resources>

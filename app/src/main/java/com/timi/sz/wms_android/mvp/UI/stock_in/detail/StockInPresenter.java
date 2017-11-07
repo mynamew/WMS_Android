@@ -8,6 +8,7 @@ import com.timi.sz.wms_android.http.callback.OnResultCallBack;
 import com.timi.sz.wms_android.http.subscriber.HttpSubscriber;
 import com.timi.sz.wms_android.mvp.base.presenter.impl.MvpBasePresenter;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -32,16 +33,51 @@ public class StockInPresenter extends MvpBasePresenter<StockInDetailView> {
      * @param params
      */
     public void getReceiptDetail(Map<String, Object> params) {
+        getView().showProgressDialog();
         if (null == orderDetailDataHttpSubscriber) {
             orderDetailDataHttpSubscriber = new HttpSubscriber<List<OrderDetailData>>(new OnResultCallBack<List<OrderDetailData>>() {
                 @Override
                 public void onSuccess(List<OrderDetailData> orderDetailDatas) {
                     getView().getReceiptDetail(orderDetailDatas);
+//                    List<OrderDetailData> datas=new ArrayList<>();
+//                    for (int i = 0; i < 100; i++) {
+//                        OrderDetailData orderDetailData = new OrderDetailData();
+//                        orderDetailData.setReceiptLine(i);
+//                        orderDetailData.setScanQty(100);
+//                        orderDetailData.setInStockQty(100);
+//                        orderDetailData.setMaterialAttribute("撒大大苏打撒旦");
+//                        orderDetailData.setMaterialCode("CT234643234532");
+//                        orderDetailData.setMaterialName("2让非官方推广人分的");
+//                        orderDetailData.setMaterialStandard("士大夫士大夫随风倒");
+//                        orderDetailData.setPassQty(200);
+//                        orderDetailData.setQty(100);
+//                        orderDetailData.setWaitQty(i*10);
+//                        datas.add(orderDetailData);
+//                    }
+//                    getView().getReceiptDetail(datas);
+
                 }
 
                 @Override
                 public void onError(String errorMsg) {
                     ToastUtils.showShort(errorMsg);
+//                    List<OrderDetailData> datas=new ArrayList<>();
+//                    for (int i = 0; i < 100; i++) {
+//                        OrderDetailData orderDetailData = new OrderDetailData();
+//                        orderDetailData.setReceiptLine(i);
+//                        orderDetailData.setScanQty(100);
+//                        orderDetailData.setInStockQty(100);
+//                        orderDetailData.setMaterialAttribute("撒大大苏打撒旦");
+//                        orderDetailData.setMaterialCode("CT234643234532");
+//                        orderDetailData.setMaterialName("2让非官方推广人分的");
+//                        orderDetailData.setMaterialStandard("士大夫士大夫随风倒");
+//                        orderDetailData.setPassQty(200);
+//                        orderDetailData.setQty(100);
+//                        orderDetailData.setWaitQty(i*10);
+//                        datas.add(orderDetailData);
+//                    }
+//                    getView().getReceiptDetail(datas);
+
                 }
             });
         }

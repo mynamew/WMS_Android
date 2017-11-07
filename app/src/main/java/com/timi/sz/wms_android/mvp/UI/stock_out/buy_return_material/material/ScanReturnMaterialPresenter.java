@@ -2,11 +2,15 @@ package com.timi.sz.wms_android.mvp.UI.stock_out.buy_return_material.material;
 
 import android.content.Context;
 
+import com.timi.sz.wms_android.base.uils.ToastUtils;
 import com.timi.sz.wms_android.bean.outstock.buy.CommitMaterialScanToOredernoBean;
-import com.timi.sz.wms_android.bean.outstock.buy.MaterialBean;
+import com.timi.sz.wms_android.bean.outstock.buy.SubmitBarcodeOutAuditData;
+import com.timi.sz.wms_android.bean.outstock.buy.SubmitBarcodePurReturnData;
 import com.timi.sz.wms_android.http.callback.OnResultCallBack;
 import com.timi.sz.wms_android.http.subscriber.HttpSubscriber;
 import com.timi.sz.wms_android.mvp.base.presenter.impl.MvpBasePresenter;
+
+import java.util.Map;
 
 /**
  * $dsc
@@ -16,8 +20,8 @@ import com.timi.sz.wms_android.mvp.base.presenter.impl.MvpBasePresenter;
 
 public class ScanReturnMaterialPresenter extends MvpBasePresenter<ScanReturnMaterialView> {
     ScanReturnMaterialMdel model = null;
-    HttpSubscriber<MaterialBean> subscriber = null;
-    HttpSubscriber<CommitMaterialScanToOredernoBean> commitMaterialScanToOredernoBeanHttpSubscriber;
+    HttpSubscriber<SubmitBarcodeOutAuditData> subscriber = null;
+    HttpSubscriber<SubmitBarcodePurReturnData> commitMaterialScanToOredernoBeanHttpSubscriber;
 
     public ScanReturnMaterialPresenter(Context context) {
         super(context);
@@ -27,45 +31,47 @@ public class ScanReturnMaterialPresenter extends MvpBasePresenter<ScanReturnMate
     /**
      * 物料扫码的请求
      *
-     * @param materialCode
+     * @param params
      */
-    public void materialScan(String materialCode) {
+    public void submitBarcodeOutAudit(Map<String, Object> params) {
+        getView().showProgressDialog();
         if (null == subscriber) {
-            subscriber = new HttpSubscriber<>(new OnResultCallBack<MaterialBean>() {
+            subscriber = new HttpSubscriber<>(new OnResultCallBack<SubmitBarcodeOutAuditData>() {
                 @Override
-                public void onSuccess(MaterialBean bean) {
-                    getView().materialScan(bean);
+                public void onSuccess(SubmitBarcodeOutAuditData bean) {
+                    getView().submitBarcodeOutAudit(bean);
                 }
 
                 @Override
                 public void onError(String errorMsg) {
-                    getView().materialScan(new MaterialBean("滑轨双孔梁496-蓝色", "CD7000101", "Slide Beam0824-496铝挤压加工", "50"));
+                    ToastUtils.showShort(errorMsg);
                 }
             });
         }
-        model.materialScan(materialCode, subscriber);
+        model.submitBarcodeOutAudit(params, subscriber);
     }
 
     /**
-     * 物料扫码的请求
+     * 提交退料条码（制单）
      *
-     * @param materialCode
+     * @param params
      */
-    public void commitMaterialScanToOrederno(String materialCode) {
+    public void submitBarcodePurReturn(Map<String, Object> params) {
+        getView().showProgressDialog();
         if (null == commitMaterialScanToOredernoBeanHttpSubscriber) {
-            commitMaterialScanToOredernoBeanHttpSubscriber = new HttpSubscriber<>(new OnResultCallBack<CommitMaterialScanToOredernoBean>() {
+            commitMaterialScanToOredernoBeanHttpSubscriber = new HttpSubscriber<>(new OnResultCallBack<SubmitBarcodePurReturnData>() {
                 @Override
-                public void onSuccess(CommitMaterialScanToOredernoBean bean) {
-                    getView().commitMaterialScanToOrederno(bean);
+                public void onSuccess(SubmitBarcodePurReturnData bean) {
+                    getView().submitBarcodePurReturn(bean);
                 }
 
                 @Override
                 public void onError(String errorMsg) {
-                    getView().commitMaterialScanToOrederno(new CommitMaterialScanToOredernoBean(true));
+                    ToastUtils.showShort(errorMsg);
                 }
             });
         }
-        model.commitMaterialScanToOrederno(materialCode, commitMaterialScanToOredernoBeanHttpSubscriber);
+        model.submitBarcodePurReturn(params, commitMaterialScanToOredernoBeanHttpSubscriber);
     }
 
     @Override

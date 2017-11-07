@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/set_bg"
+    android:background="@color/white"
     android:orientation="vertical"
     tools:context="com.timi.sz.wms_android.mvp.UI.stock_out.buy_return_material.material.ScanReturnMaterialActivity">
 
@@ -21,66 +21,292 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <LinearLayout
-                android:id="@+id/ll_putaway_date"
+            <TextView
                 android:layout_width="match_parent"
-                android:layout_height="80px"
+                android:layout_height="72px"
+                android:gravity="center_vertical"
+                android:paddingLeft="20px"
+                android:paddingTop="10px"
+                android:text="@string/buy_orderno_info"
+                android:textColor="#333"
+                android:textSize="28px"
+                android:textStyle="bold"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="#d7d7dd"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20px"
+                android:gravity="center_vertical"
                 android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="20px"
+                    android:text="@string/order_no_tip"
+                    android:textColor="#333"
+                    android:textSize="26px"/>
 
                 <TextView
                     android:id="@+id/tv_orderno"
-                    style="@style/tv_header"
-                    android:text="@string/order_no"
-                    />
-
-                <TextView
-                    android:id="@+id/tv_orderno_date"
-                    style="@style/tv_header"
-                    android:text="@string/orderno_date"
-                    />
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="60px"
+                    android:text=""
+                    android:textColor="#000"
+                    android:textSize="26px"/>
             </LinearLayout>
 
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="80px"
-                android:id="@+id/tv_material_from"
-                style="@style/tv_header"
-                android:text="@string/buy_from"
-                />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="80px"
-                android:id="@+id/tv_material_buyer"
-                style="@style/tv_header"
-                android:text="@string/buyer"
-                />
-
             <LinearLayout
-                android:id="@+id/ll_putaway_total_num"
                 android:layout_width="match_parent"
-                android:layout_height="80px"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20px"
                 android:orientation="horizontal">
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="20px"
+                    android:text="@string/orderno_date_tip"
+                    android:textColor="#333"
+                    android:textSize="26px"/>
 
                 <TextView
-                    android:id="@+id/tv_instock_num"
-                    style="@style/tv_header"
-                    android:text="@string/in_stock_num"
-                    />
+                    android:id="@+id/tv_create_orderno_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="35px"
+                    android:text=""
+                    android:textColor="#000"
+                    android:textSize="26px"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20px"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="20px"
+                    android:text="@string/item_supplier"
+                    android:textColor="#333"
+                    android:textSize="26px"/>
+
+                <TextView
+                    android:id="@+id/tv_supplier"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="60px"
+                    android:text=""
+                    android:textColor="#000"
+                    android:textSize="26px"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20px"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="20px"
+                    android:text="@string/buyer_tip"
+                    android:textColor="#333"
+                    android:textSize="26px"/>
+
+                <TextView
+                    android:id="@+id/tv_buyer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="60px"
+                    android:text=""
+                    android:textColor="#000"
+                    android:textSize="26px"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20px"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="20px"
+                    android:text="@string/item_buy_num"
+                    android:textColor="#333"
+                    android:textSize="26px"/>
 
                 <TextView
                     android:id="@+id/tv_buy_num"
-                    style="@style/tv_header"
-                    android:text="@string/buy_num"
-                    />
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="60px"
+                    android:text=""
+                    android:textColor="#000"
+                    android:textSize="26px"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20px"
+                android:layout_marginTop="20px"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="20px"
+                    android:text="@string/item_in_stock_num"
+                    android:textColor="#333"
+                    android:textSize="26px"/>
+
+                <TextView
+                    android:id="@+id/tv_instock_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="60px"
+                    android:text=""
+                    android:textColor="#000"
+                    android:textSize="26px"/>
             </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="2px"
+                android:layout_marginLeft="30px"
                 android:background="@color/tab_txt_unselect"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="20px"
+                android:paddingTop="20px">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/item_material_code"
+                    android:textColor="#333"/>
+
+                <TextView
+                    android:id="@+id/tv_material_code"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30px"
+                    android:gravity="center_vertical"
+                    android:text=""
+                    android:textColor="#000"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="20px"
+                android:paddingTop="20px">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/item_material_name"
+                    android:textColor="#333"/>
+
+                <TextView
+                    android:id="@+id/tv_material_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30px"
+                    android:gravity="center_vertical"
+                    android:text=""
+                    android:textColor="#000"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="20px"
+                android:paddingTop="20px">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/item_material_code"
+                    android:textColor="#333"/>
+
+                <TextView
+                    android:id="@+id/tv_material_model"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30px"
+                    android:gravity="center_vertical"
+                    android:text=""
+                    android:textColor="#000"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="20px"
+                android:paddingTop="20px">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/item_material_attr"
+                    android:textColor="#333"/>
+
+                <TextView
+                    android:id="@+id/tv_material_attr"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30px"
+                    android:gravity="center_vertical"
+                    android:text=""
+                    android:textColor="#000"
+                    />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_marginTop="20px"
+                android:layout_height="24px"
+                android:background="@color/divide_color"/>
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="match_parent"
+                android:layout_height="72px"
+                android:gravity="center_vertical"
+                android:paddingLeft="20px"
+                android:paddingTop="10px"
+                android:text="@string/return_material_scan_work"
+                android:textColor="#333"
+                android:textSize="28px"
+                android:textStyle="bold"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="#d7d7dd"
+                />
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -92,21 +318,22 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:paddingLeft="30px"
-                    android:text="@string/scan_material"
+                    android:text="@string/item_material_code"
                     android:textColor="#333"
                     />
 
-                <TextView
-                    android:id="@+id/tv_material_scan"
+                <EditText
+                    android:id="@+id/et_material_scan"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_margin="20px"
                     android:layout_toRightOf="@id/tv_material_scan_tip"
                     android:background="@drawable/bg_rectangle_et_focused"
                     android:ellipsize="end"
+                    android:imeOptions="actionSearch"
                     android:gravity="center_vertical"
-                    android:hint="@string/please_scan_material_code"
-                    android:paddingLeft="20px"
+                    android:hint="@string/please_input_return_matrial_code_or_scan"
+                    android:paddingLeft="40px"
                     android:paddingRight="80px"
                     android:singleLine="true"
                     android:text=""
@@ -125,62 +352,26 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="80px"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="30px"
+                android:paddingTop="20px">
 
                 <TextView
-                    android:id="@+id/tv_material_code"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingLeft="30px"
-                    android:text="@string/material_code"
+                    android:text="@string/return_material_num_format"
                     android:textColor="#333"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="80px"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/tv_material_name"
+                    android:id="@+id/tv_return_num"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingLeft="30px"
-                    android:text="@string/material_name"
-                    android:textColor="#333"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="80px"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/tv_material_model"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingLeft="30px"
-                    android:text="@string/material_model"
-                    android:textColor="#333"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="80px"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/tv_have_return_num"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingLeft="30px"
-                    android:text="@string/have_return_num"
-                    android:textColor="#333"/>
+                    android:layout_marginLeft="30px"
+                    android:gravity="center_vertical"
+                    android:text=""
+                    android:textColor="@color/login_txt_color"
+                    />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
@@ -190,11 +381,8 @@
         android:layout_width="match_parent"
         android:layout_height="100px"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="20px"
-        android:layout_marginLeft="20px"
-        android:layout_marginRight="20px"
         android:background="@drawable/selector_btn_bg_login"
-        android:text="@string/confirm_commit"
+        android:text="@string/commit_check"
         android:textColor="#fff"
         android:textSize="18sp"/>
 

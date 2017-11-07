@@ -8,6 +8,7 @@ package com.timi.sz.wms_android.bean.outstock.buy;
 
 public class BuyReturnMaterialByMaterialCodeData {
 
+
     /**
      * billType : 11
      * billId : 1208
@@ -15,8 +16,8 @@ public class BuyReturnMaterialByMaterialCodeData {
      * billDate : 2014-09-02
      * supplierName : 东莞市建利线材有限公司
      * purEmployeeName : 陈曼维
-     * scanId : 0
-     * poDetailId : 2693
+     * scanId : 77
+     * billDetailId : 2693
      * materialId : 2040
      * materialCode : 10202040007
      * materialName : (33#）
@@ -25,8 +26,8 @@ public class BuyReturnMaterialByMaterialCodeData {
      * poQty : 202
      * inStockQty : 202
      * returnQty : 0
-     * usedQty : 202
-     * scanQty : 0
+     * usedQty : 180
+     * scanQty : 22
      */
 
     private int billType;
@@ -36,7 +37,7 @@ public class BuyReturnMaterialByMaterialCodeData {
     private String supplierName;
     private String purEmployeeName;
     private int scanId;
-    private int poDetailId;
+    private int billDetailId;
     private int materialId;
     private String materialCode;
     private String materialName;
@@ -104,12 +105,12 @@ public class BuyReturnMaterialByMaterialCodeData {
         this.scanId = scanId;
     }
 
-    public int getPoDetailId() {
-        return poDetailId;
+    public int getBillDetailId() {
+        return billDetailId;
     }
 
-    public void setPoDetailId(int poDetailId) {
-        this.poDetailId = poDetailId;
+    public void setBillDetailId(int billDetailId) {
+        this.billDetailId = billDetailId;
     }
 
     public int getMaterialId() {

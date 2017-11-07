@@ -4,6 +4,6 @@
     <size
         android:width="10px"
         android:height="10px"/>
-    <solid android:color="@color/login_txt_color"/>
+    <solid android:color="#febfbfc3"/>
 
 </shape>

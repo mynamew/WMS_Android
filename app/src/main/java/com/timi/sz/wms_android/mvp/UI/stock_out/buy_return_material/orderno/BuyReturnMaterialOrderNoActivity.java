@@ -1,42 +1,56 @@
 package com.timi.sz.wms_android.mvp.UI.stock_out.buy_return_material.orderno;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.timi.sz.wms_android.R;
 import com.timi.sz.wms_android.base.uils.Constants;
 import com.timi.sz.wms_android.base.uils.LogUitls;
+import com.timi.sz.wms_android.base.uils.PackageUtils;
+import com.timi.sz.wms_android.base.uils.SpUtils;
 import com.timi.sz.wms_android.base.uils.ToastUtils;
 import com.timi.sz.wms_android.bean.outstock.buy.MaterialBean;
 import com.timi.sz.wms_android.bean.outstock.buy.OrderNoBean;
+import com.timi.sz.wms_android.bean.outstock.buy.SubmitBarcodeOutAuditData;
+import com.timi.sz.wms_android.bean.outstock.buy.SubmitBarcodePurReturnData;
 import com.timi.sz.wms_android.mvp.base.BaseActivity;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_BUY_RETURN_ORDERNO_BEAN;
-import static com.timi.sz.wms_android.base.uils.Constants.REQUEST_SCAN_CODE_MATERIIAL;
-/** 
-  * 退料单
-  * author: timi    
-  * create at: 2017/9/1 15:40
-  */  
-public class BuyReturnMaterialOrderNoActivity extends BaseActivity<BuyReturnMaterialOrderNoView, BuyReturnMaterialOrderNoPresenter> implements BuyReturnMaterialOrderNoView,BaseActivity.ScanQRCodeResultListener {
 
-    @BindView(R.id.tv_orderno)
-    TextView tvOrderno;
-    @BindView(R.id.tv_orderno_date)
-    TextView tvOrdernoDate;
-    @BindView(R.id.tv_return_material_num)
-    TextView tvReturnMaterialNum;
-    @BindView(R.id.tv_have_scan_num)
-    TextView tvHaveScanNum;
-    @BindView(R.id.tv_wait_scan_num)
-    TextView tvWaitScanNum;
-    @BindView(R.id.tv_material_scan)
-    TextView tvReturnMaterialMaterialScan;
+/**
+ * 退料单
+ * author: timi
+ * create at: 2017/9/1 15:40
+ */
+public class BuyReturnMaterialOrderNoActivity extends BaseActivity<BuyReturnMaterialOrderNoView, BuyReturnMaterialOrderNoPresenter> implements BuyReturnMaterialOrderNoView, BaseActivity.ScanQRCodeResultListener {
+
+    @BindView(R.id.tv_return_orderno)
+    TextView tvReturnOrderno;
+    @BindView(R.id.tv_create_orderno_date)
+    TextView tvCreateOrdernoDate;
+    @BindView(R.id.tv_return_material_total_num)
+    TextView tvReturnMaterialTotalNum;
+    @BindView(R.id.tv_have_scan_total_num)
+    TextView tvHaveScanTotalNum;
+    @BindView(R.id.tv_wait_scan_total_num)
+    TextView tvWaitScanTotalNum;
+    @BindView(R.id.tv_putaway_scan_material_tip)
+    TextView tvPutawayScanMaterialTip;
+    @BindView(R.id.et_material_scan)
+    EditText etMaterialScan;
+    @BindView(R.id.iv_material_scan)
+    ImageView ivMaterialScan;
     @BindView(R.id.tv_material_code)
     TextView tvMaterialCode;
     @BindView(R.id.tv_material_num)
@@ -45,6 +59,10 @@ public class BuyReturnMaterialOrderNoActivity extends BaseActivity<BuyReturnMate
     TextView tvMaterialName;
     @BindView(R.id.tv_material_model)
     TextView tvMaterialModel;
+    @BindView(R.id.tv_material_attr)
+    TextView tvMaterialAttr;
+    @BindView(R.id.btn_commit_check)
+    Button btnCommitCheck;
     private OrderNoBean orderBoBean = null;
 
     @Override
@@ -54,7 +72,7 @@ public class BuyReturnMaterialOrderNoActivity extends BaseActivity<BuyReturnMate
 
     @Override
     public void initBundle(Bundle savedInstanceState) {
-        setActivityTitle(getString(R.string.buy_return_material_orderno_title));
+        setActivityTitle(getString(R.string.buy_return_material_scan));
     }
 
     @Override
@@ -66,10 +84,10 @@ public class BuyReturnMaterialOrderNoActivity extends BaseActivity<BuyReturnMate
     public void initData() {
         orderBoBean = getIntent().getParcelableExtra(OUT_STOCK_BUY_RETURN_ORDERNO_BEAN);
         if (null != orderBoBean) {
-            tvOrderno.setText(String.format(getString(R.string.order_no), orderBoBean.getOrderno()));
-            tvOrdernoDate.setText(String.format(getString(R.string.orderno_date), orderBoBean.getDate()));
-            tvHaveScanNum.setText(String.format(getString(R.string.have_scan_num)+ orderBoBean.getReturnHaveScanNum()));
-            tvWaitScanNum.setText(String.format(getString(R.string.wait_scan_num)+ orderBoBean.getReturnWaitScanlNum()));
+            tvReturnOrderno.setText(String.format(getString(R.string.order_no), orderBoBean.getOrderno()));
+            tvCreateOrdernoDate.setText(String.format(getString(R.string.orderno_date), orderBoBean.getDate()));
+            tvHaveScanTotalNum.setText(String.format(getString(R.string.have_scan_num) + orderBoBean.getReturnHaveScanNum()));
+            tvWaitScanTotalNum.setText(String.format(getString(R.string.wait_scan_num) + orderBoBean.getReturnWaitScanlNum()));
         }
     }
 
@@ -82,34 +100,6 @@ public class BuyReturnMaterialOrderNoActivity extends BaseActivity<BuyReturnMate
     public BuyReturnMaterialOrderNoView createView() {
         return this;
     }
-
-    private MaterialBean currentBean = null;
-
-    @Override
-    public void materialScanResult(MaterialBean bean) {
-        /**
-         * 存储当前扫描的物料信息
-         */
-        currentBean = bean;
-        /**
-         * 扫描物料码 获取的数据
-         */
-        setTextViewText(tvMaterialCode, R.string.material_code, bean.getMaterialCode());
-        setTextViewText(tvMaterialName, R.string.material_name, bean.getMaterialName());
-        setTextViewText(tvMaterialModel, R.string.material_model, bean.getMaterialModel());
-        setTextViewText(tvMaterialNum, R.string.material_num, bean.getMaterialBuyNum());
-
-    }
-    @Override
-    public void orderNoAddMaterial() {
-        /**
-         * 提交审核的返回
-         */
-        orderBoBean.setReturnHaveScanNum(Integer.parseInt(orderBoBean.getReturnHaveScanNum()) + 1 + "");
-        //设置文本
-        setTextViewText(tvHaveScanNum,R.string.have_count_num,orderBoBean.getReturnHaveScanNum());
-
-    }
     @OnClick({R.id.tv_material_scan, R.id.iv_material_scan, R.id.btn_commit_check})
     public void onViewClicked(View view) {
         switch (view.getId()) {
@@ -117,13 +107,13 @@ public class BuyReturnMaterialOrderNoActivity extends BaseActivity<BuyReturnMate
                 /**
                  * 扫码
                  */
-                scan(Constants.REQUEST_SCAN_CODE_MATERIIAL,this);
+                scan(Constants.REQUEST_SCAN_CODE_MATERIIAL, this);
                 break;
             case R.id.iv_material_scan:
                 /**
                  * 扫码
                  */
-                scan(Constants.REQUEST_SCAN_CODE_MATERIIAL,this);
+                scan(Constants.REQUEST_SCAN_CODE_MATERIIAL, this);
                 break;
             case R.id.btn_commit_check:
                 if (Integer.parseInt(orderBoBean.getReturnHaveScanNum()) == Integer.parseInt(orderBoBean.getReturnTotalNum())) {
@@ -134,13 +124,18 @@ public class BuyReturnMaterialOrderNoActivity extends BaseActivity<BuyReturnMate
                 /**
                  * 网络请求 请求审核
                  */
-                getPresenter().orderNoAddmaterialNetWork(currentBean.MaterialCode);
+                Map<String, Object> params = new HashMap<>();
+                params.put("UserId", SpUtils.getInstance().getUserId());
+                params.put("OrgId", SpUtils.getInstance().getOrgId());
+                params.put("MAC", PackageUtils.getMac());
+                getPresenter().submitBarcodePurReturn(params);
                 break;
         }
     }
 
     /**
      * 扫描的返回
+     *
      * @param requestCode
      * @param result
      */
@@ -150,10 +145,25 @@ public class BuyReturnMaterialOrderNoActivity extends BaseActivity<BuyReturnMate
         /**
          * 设置扫描返回结果
          */
-        tvReturnMaterialMaterialScan.setText(result);
+        etMaterialScan.setText(result);
         /**
          * 扫物料码的网络请求
          */
-        getPresenter().materialScanNetWork(result);
+        Map<String, Object> params = new HashMap<>();
+        params.put("UserId", SpUtils.getInstance().getUserId());
+        params.put("OrgId", SpUtils.getInstance().getOrgId());
+        params.put("MAC", PackageUtils.getMac());
+
+        getPresenter().materialScan(params);
+    }
+
+    @Override
+    public void materialScan(SubmitBarcodeOutAuditData bean) {
+
+    }
+
+    @Override
+    public void submitBarcodePurReturn(SubmitBarcodePurReturnData bean) {
+
     }
 }

@@ -192,9 +192,13 @@
         </activity>
         <activity android:name=".mvp.UI.stock_out.buy_return_material.BuyReturnMaterialActivity">
         </activity>
-        <activity android:name=".mvp.UI.stock_out.buy_return_material.material.ScanReturnMaterialActivity">
+        <activity
+            android:name=".mvp.UI.stock_out.buy_return_material.material.ScanReturnMaterialActivity"
+            android:windowSoftInputMode="adjustPan|stateHidden">
         </activity>
-        <activity android:name=".mvp.UI.stock_out.buy_return_material.orderno.BuyReturnMaterialOrderNoActivity">
+        <activity
+            android:name=".mvp.UI.stock_out.buy_return_material.orderno.BuyReturnMaterialOrderNoActivity"
+            android:windowSoftInputMode="adjustPan|stateHidden">
         </activity>
         <activity android:name=".mvp.UI.stock_out.other.scan.OtherOutStockScanActivity">
         </activity>

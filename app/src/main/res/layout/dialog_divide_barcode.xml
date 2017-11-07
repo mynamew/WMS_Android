@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                >
+
+    <LinearLayout
+        android:layout_width="650px"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:background="@drawable/bg_rectangle_login_server"
+        android:orientation="vertical">
+        <!--拆分打码的弹出框-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <View
+                android:layout_width="260px"
+                android:layout_height="2px"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="85px"
+                android:background="#999"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="60px"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="55px"
+                android:background="#fff"
+                android:gravity="center"
+                android:paddingLeft="20px"
+                android:paddingRight="20px"
+                android:text="@string/return_divide_work"
+                android:textColor="#333"
+                android:textSize="32px"/>
+
+            <ImageView
+                android:id="@+id/iv_close"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:padding="30px"
+                android:src="@mipmap/quality_badness_close"/>
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30px"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40px"
+                android:text="@string/divide_barcode_tip"
+                android:textColor="#333"
+                android:textSize="28px"/>
+
+            <TextView
+                android:id="@+id/tv_divide_barcode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="80px"
+                android:text=""
+                android:textColor="#333"
+                android:textSize="28px"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20px"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40px"
+                android:text="@string/barcode_contain_total_num_tip"
+                android:textColor="#333"
+                android:textSize="28px"/>
+
+            <TextView
+                android:id="@+id/tv_barcode_contain_total_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25px"
+                android:text=""
+                android:textColor="#333"
+                android:textSize="28px"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20px"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40px"
+                android:text="@string/should_return_num_tip"
+                android:textColor="#333"
+                android:textSize="28px"/>
+
+            <TextView
+                android:id="@+id/tv_should_return_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="80px"
+                android:text=""
+                android:textColor="#333"
+                android:textSize="28px"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20px"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40px"
+                android:text="@string/divide_num_tip"
+                android:textColor="#333"
+                android:textSize="28px"/>
+
+            <EditText
+                android:id="@+id/et_divide_num"
+                android:layout_width="340px"
+                android:layout_height="64px"
+                android:layout_marginLeft="80px"
+                android:background="@drawable/selector_et"
+                android:paddingLeft="20px"
+                android:hint="@string/please_input_divide_num"
+                android:textColor="#333"
+                android:textSize="28px"/>
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/divide_color"
+            android:layout_marginTop="50px"
+            android:layout_marginBottom="50px"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20px"
+            android:layout_marginLeft="20px"
+            android:layout_marginRight="20px">
+
+            <Button
+                android:id="@+id/btn_cancel"
+                android:layout_width="280px"
+                android:layout_height="72px"
+                android:layout_marginRight="20px"
+                android:layout_weight="1"
+                android:background="@drawable/bg_dialog_badness_cancel"
+                android:gravity="center"
+                android:text="@string/cancel"
+                android:textColor="@color/tab_txt_unselect"
+                android:textSize="16sp"/>
+
+
+            <Button
+                android:id="@+id/btn_confirm"
+                android:layout_width="280px"
+                android:layout_height="72px"
+                android:layout_alignParentRight="true"
+                android:layout_marginLeft="20px"
+                android:layout_weight="1"
+                android:background="@drawable/selector_btn_bg_login"
+                android:gravity="center"
+                android:text="@string/confirm"
+                android:textColor="@color/white"
+                android:textSize="16sp"/>
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

@@ -2,11 +2,15 @@ package com.timi.sz.wms_android.mvp.UI.stock_out.buy_return_material.orderno;
 
 import com.timi.sz.wms_android.bean.outstock.buy.MaterialBean;
 import com.timi.sz.wms_android.bean.outstock.buy.OrderNoAddMaterial;
+import com.timi.sz.wms_android.bean.outstock.buy.SubmitBarcodeOutAuditData;
+import com.timi.sz.wms_android.bean.outstock.buy.SubmitBarcodePurReturnData;
 import com.timi.sz.wms_android.http.HttpManager;
 import com.timi.sz.wms_android.http.api.ApiService;
 import com.timi.sz.wms_android.http.api.CommonResult;
 import com.timi.sz.wms_android.http.callback.ApiServiceMethodCallBack;
 import com.timi.sz.wms_android.mvp.base.model.impl.MvpBaseModel;
+
+import java.util.Map;
 
 import io.reactivex.Observable;
 import io.reactivex.Observer;
@@ -19,29 +23,31 @@ import io.reactivex.Observer;
 
 public class BuyReturnMaterialOrderNoModel extends MvpBaseModel {
     /**
-     * 物料扫码的网络请求
-     * @param scanStr
+     * 物料扫码 获取采购退货单
+     * @param params
      * @param observer
      */
-    public void materialScanNetWork(final String scanStr, final Observer<MaterialBean> observer){
-        HttpManager.getInstance().HttpManagerRequest(observer, new ApiServiceMethodCallBack<MaterialBean>() {
+    public void materialScan(final Map<String,Object> params, Observer<SubmitBarcodeOutAuditData> observer){
+        HttpManager.getInstance().HttpManagerRequest(observer, new ApiServiceMethodCallBack<SubmitBarcodeOutAuditData>() {
             @Override
-            public Observable<CommonResult<MaterialBean>> createObservable(ApiService apiService) {
-                return apiService.materialScan(scanStr);
+            public Observable<CommonResult<SubmitBarcodeOutAuditData>> createObservable(ApiService apiService) {
+                return apiService.submitBarcodeOutAudit(params);
             }
         });
+
     }
     /**
-     * 退料单 提交物料信息
-     * @param scanStr
+     * 提交退料条码（制单）
+     * @param params
      * @param observer
      */
-    public void returnMaterialCommitResultNetWork(final String scanStr, final Observer<OrderNoAddMaterial> observer){
-        HttpManager.getInstance().HttpManagerRequest(observer, new ApiServiceMethodCallBack<OrderNoAddMaterial>() {
+    public void submitBarcodePurReturn(final  Map<String,Object> params, Observer<SubmitBarcodePurReturnData> observer){
+        HttpManager.getInstance().HttpManagerRequest(observer, new ApiServiceMethodCallBack<SubmitBarcodePurReturnData>() {
             @Override
-            public Observable<CommonResult<OrderNoAddMaterial>> createObservable(ApiService apiService) {
-                return apiService.returnMaterialOrderNoAddMaterial(scanStr);
+            public Observable<CommonResult<SubmitBarcodePurReturnData>> createObservable(ApiService apiService) {
+                return apiService.submitBarcodePurReturn(params);
             }
         });
+
     }
 }

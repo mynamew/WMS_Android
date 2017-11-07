@@ -1,6 +1,8 @@
 package com.timi.sz.wms_android.mvp.UI.stock_out.buy_return_material.orderno;
 
 import com.timi.sz.wms_android.bean.outstock.buy.MaterialBean;
+import com.timi.sz.wms_android.bean.outstock.buy.SubmitBarcodeOutAuditData;
+import com.timi.sz.wms_android.bean.outstock.buy.SubmitBarcodePurReturnData;
 import com.timi.sz.wms_android.mvp.base.view.iml.MvpBaseView;
 
 /**
@@ -10,6 +12,6 @@ import com.timi.sz.wms_android.mvp.base.view.iml.MvpBaseView;
  */
 
 public interface BuyReturnMaterialOrderNoView extends MvpBaseView {
-    public void materialScanResult(MaterialBean bean);
-    public void orderNoAddMaterial();
+    void materialScan(SubmitBarcodeOutAuditData bean);
+    void submitBarcodePurReturn(SubmitBarcodePurReturnData bean);
 }

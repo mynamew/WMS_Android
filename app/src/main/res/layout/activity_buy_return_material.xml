@@ -27,73 +27,6 @@
         android:layout_width="match_parent"
         android:layout_height="1px"
         android:background="@color/divide_color"/>
-
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="match_parent"
-        android:layout_height="72px"
-        android:layout_marginLeft="30px"
-        android:gravity="center_vertical"
-        android:text="温馨提示"
-        android:textColor="@color/login_txt_color"
-        android:textSize="28px"
-        android:textStyle="bold"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:paddingLeft="30px">
-
-        <ImageView
-            android:layout_width="15px"
-            android:layout_height="15px"
-            android:src="@drawable/bg_circle_buy_return"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:lineSpacingExtra="5dp"
-            android:paddingBottom="10px"
-            android:paddingLeft="20px"
-            android:paddingRight="20px"
-            android:paddingTop="10px"
-            android:text="扫描物品条码系统自动获取对应供应商的未关闭采购订单，并在ERP自动生成采购退料单；"
-            android:textColor="@color/login_txt_color"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:paddingLeft="30px">
-
-        <ImageView
-            android:layout_width="15px"
-            android:layout_height="15px"
-            android:src="@drawable/bg_circle_buy_return"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:lineSpacingExtra="5dp"
-            android:paddingBottom="10px"
-            android:paddingLeft="20px"
-            android:paddingRight="20px"
-            android:paddingTop="10px"
-            android:text="在ERP中制作采购退料单，然后通过PDA清点审核;"
-            android:textColor="@color/login_txt_color"/>
-
-    </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="24px"
-        android:background="@color/divide_color"/>
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="100px">
@@ -115,7 +48,7 @@
             android:layout_margin="20px"
             android:imeOptions="actionSearch"
             android:layout_toRightOf="@id/tv_putaway_scan_material_tip"
-            android:background="@drawable/bg_rectangle_et_focused"
+            android:background="@drawable/selector_et"
             android:ellipsize="end"
             android:gravity="center_vertical"
             android:hint="@string/please_scan_material_code"
@@ -161,7 +94,7 @@
             android:layout_height="match_parent"
             android:layout_margin="20px"
             android:layout_toRightOf="@id/tv_buy_return_material_orderno"
-            android:background="@drawable/bg_rectangle_et_focused"
+            android:background="@drawable/selector_et"
             android:ellipsize="end"
             android:gravity="center_vertical"
             android:hint="@string/please_input_return_material_orderno_or_scan"

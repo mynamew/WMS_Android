@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                     android:layout_width="88px"
+                                     android:layout_height="88px"
+                                     android:background="@drawable/bg_circle_buy_return"
+                                     android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/ll_up_top"
+        android:layout_width="88px"
+        android:layout_height="88px"
+        android:orientation="vertical"
+        android:visibility="visible">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20px"
+            android:src="@mipmap/buy_return_up_top"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="5px"
+            android:text="@string/up"
+            android:textColor="#666"
+            android:textSize="22px"/>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/ll_current_item"
+        android:layout_width="88px"
+        android:visibility="gone"
+        android:layout_height="88px"
+        android:orientation="vertical">
+
+        <View
+            android:id="@+id/view_divide"
+            android:layout_width="68px"
+            android:layout_height="2px"
+            android:layout_centerInParent="true"
+            android:background="#666"/>
+
+        <TextView
+            android:id="@+id/tv_current_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/view_divide"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="5px"
+            android:text="9"
+            android:textColor="#666"
+            android:textSize="22px"/>
+
+        <TextView
+            android:id="@+id/tv_total_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/view_divide"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5px"
+            android:text="100"
+            android:textColor="#666"
+            android:textSize="22px"/>
+    </RelativeLayout>
+</com.zhy.autolayout.AutoLinearLayout>
