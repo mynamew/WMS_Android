@@ -1,9 +1,7 @@
 package com.timi.sz.wms_android.mvp.UI.stock_out.buy_return_material.orderno;
 
-import com.timi.sz.wms_android.bean.outstock.buy.MaterialBean;
-import com.timi.sz.wms_android.bean.outstock.buy.OrderNoAddMaterial;
 import com.timi.sz.wms_android.bean.outstock.buy.SubmitBarcodeOutAuditData;
-import com.timi.sz.wms_android.bean.outstock.buy.SubmitBarcodePurReturnData;
+import com.timi.sz.wms_android.bean.outstock.buy.SubmitBarcodeOutSplitAuditData;
 import com.timi.sz.wms_android.http.HttpManager;
 import com.timi.sz.wms_android.http.api.ApiService;
 import com.timi.sz.wms_android.http.api.CommonResult;
@@ -22,32 +20,45 @@ import io.reactivex.Observer;
  */
 
 public class BuyReturnMaterialOrderNoModel extends MvpBaseModel {
+
     /**
-     * 物料扫码 获取采购退货单
+     * 提交普通条码出库
+     *
      * @param params
      * @param observer
      */
-    public void materialScan(final Map<String,Object> params, Observer<SubmitBarcodeOutAuditData> observer){
+    public void submitBarcodeOutAudit(final Map<String, Object> params, Observer<SubmitBarcodeOutAuditData> observer) {
         HttpManager.getInstance().HttpManagerRequest(observer, new ApiServiceMethodCallBack<SubmitBarcodeOutAuditData>() {
             @Override
             public Observable<CommonResult<SubmitBarcodeOutAuditData>> createObservable(ApiService apiService) {
                 return apiService.submitBarcodeOutAudit(params);
             }
         });
-
     }
+
     /**
-     * 提交退料条码（制单）
+     * 提交条码拆分出库（普通）
      * @param params
      * @param observer
      */
-    public void submitBarcodePurReturn(final  Map<String,Object> params, Observer<SubmitBarcodePurReturnData> observer){
-        HttpManager.getInstance().HttpManagerRequest(observer, new ApiServiceMethodCallBack<SubmitBarcodePurReturnData>() {
+    public void submitBarcodeOutSplitAudit(final Map<String, Object> params, Observer<SubmitBarcodeOutSplitAuditData> observer) {
+        HttpManager.getInstance().HttpManagerRequest(observer, new ApiServiceMethodCallBack<SubmitBarcodeOutSplitAuditData>() {
             @Override
-            public Observable<CommonResult<SubmitBarcodePurReturnData>> createObservable(ApiService apiService) {
-                return apiService.submitBarcodePurReturn(params);
+            public Observable<CommonResult<SubmitBarcodeOutSplitAuditData>> createObservable(ApiService apiService) {
+                return apiService.submitBarcodeOutSplitAudit(params);
             }
         });
-
+    }
+    /**
+     * 提交制单和审核
+     * @param observer
+     */
+    public  void submitMakeOrAuditBill(final Map<String,Object> params, Observer<Object> observer){
+        HttpManager.getInstance().HttpManagerRequest(observer, new ApiServiceMethodCallBack<Object>() {
+            @Override
+            public Observable<CommonResult<Object>> createObservable(ApiService apiService) {
+                return apiService.submitMakeOrAuditBill(params);
+            }
+        });
     }
 }

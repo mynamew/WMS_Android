@@ -339,6 +339,14 @@
     <string name="goods_num">物品数量：%1$s</string>
     <string name="commit_check">提交审核</string>
     <string name="buy_return_material_orderno_title">单个退料 (采购)</string>
+    <string name="divide_barcode_tip">拆分条码</string>
+    <string name="barcode_contain_total_num_tip">条码包装总量</string>
+    <string name="should_return_num_tip">应退数量</string>
+    <string name="divide_num_tip">拆分数量</string>
+    <string name="please_input_divide_num">请输入拆分数量</string>
+    <string name="commit_check_success">提交审核成功！</string>
+    <string name="commit_success">提交成功</string>
+    <string name="please_inpiut_or_scan_visible_material_code">没有任何条码扫描数据，请扫描后再提交</string>
     /**====== 其他出库 出库扫描 ======**/
     <string name="other_out_stock_scan_title">其他出库—出库扫描</string>
     <string name="create_other_out_stock_orderno">生成其他出库单</string>
@@ -610,9 +618,9 @@
     <string name="item_goods_num">物品数量</string>
     <string name="item_goods_current_status">当前状态</string>
     <string name="allot_orderno_tip">调拨单：</string>
-    <string name="wait_point_num_tip">待点总数：</string>
+    <string name="wait_point_num_tip">待点总数</string>
     <string name="create_date_tip">制单日期：</string>
-    <string name="have_point_num_tip">已点总数：</string>
+    <string name="have_point_num_tip">已点总数</string>
     /******************************************************************************************************************************************************/
     /******************************************************************************************************************************************************/
     /**====== 综合查询 ======**/
@@ -620,11 +628,17 @@
     <string name="query_retrospective">追溯查询</string>
     <string name="query_record_tip">记录查询</string>
     <string name="query_statistical_tip">统计查询</string>
-    <string name="divide_barcode_tip">拆分条码</string>
-    <string name="barcode_contain_total_num_tip">条码包装总量</string>
-    <string name="should_return_num_tip">应退数量</string>
-    <string name="divide_num_tip">拆分数量</string>
-    <string name="please_input_divide_num">请输入拆分数量</string>
+    <string name="have_scan_all_materail">已扫描完所有的物料</string>
+    <string name="barcode_divie_in_stock_success">条码拆分入库成功！</string>
+    <string name="outsource_orderno_tip">委外单号</string>
+    <string name="stock_name_tip">仓库名称</string>
+    <string name="strict_name_tip">区域名称</string>
+    <string name="send_material_total_num_tip">发料总数</string>
+    <string name="have_get_total_num_tip">已领总数</string>
+    <string name="can_get_total_num_tip">可领总数</string>
+    <string name="send_material_num_tip">发料数量</string>
+    <string name="send_material_lib_tip">发料仓库</string>
+    <string name="controll_type_tip">管控方式</string>
 
 
 </resources>

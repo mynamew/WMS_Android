@@ -1,6 +1,7 @@
 package com.timi.sz.wms_android.mvp.UI.stock_out.query;
 
 import com.timi.sz.wms_android.bean.outstock.outsource.OutSourceFeedBean;
+import com.timi.sz.wms_android.bean.outstock.outsource.QueryOutSourceFeedByInputResult;
 import com.timi.sz.wms_android.http.HttpManager;
 import com.timi.sz.wms_android.http.api.ApiService;
 import com.timi.sz.wms_android.http.api.CommonResult;
@@ -24,12 +25,12 @@ public class StockOutSearchModel extends MvpBaseModel {
 
      * @param observer
      */
-    public void searchOutsourceFeed(final Map<String,Object> params, Observer<OutSourceFeedBean> observer) {
+    public void queryOutSourceFeedByInput(final Map<String,Object> params, Observer<QueryOutSourceFeedByInputResult> observer) {
 
-        HttpManager.getInstance().HttpManagerRequest(observer, new ApiServiceMethodCallBack<OutSourceFeedBean>() {
+        HttpManager.getInstance().HttpManagerRequest(observer, new ApiServiceMethodCallBack<QueryOutSourceFeedByInputResult>() {
             @Override
-            public Observable<CommonResult<OutSourceFeedBean>> createObservable(ApiService apiService) {
-                return apiService.searchOutsourceFeed(params);
+            public Observable<CommonResult<QueryOutSourceFeedByInputResult>> createObservable(ApiService apiService) {
+                return apiService.queryOutSourceFeedByInput(params);
             }
         });
     }

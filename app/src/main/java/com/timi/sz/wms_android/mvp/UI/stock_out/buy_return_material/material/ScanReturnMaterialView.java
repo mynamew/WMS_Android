@@ -13,5 +13,8 @@ import com.timi.sz.wms_android.mvp.base.view.iml.MvpBaseView;
 
 public interface ScanReturnMaterialView extends MvpBaseView {
     void submitBarcodeOutAudit(SubmitBarcodeOutAuditData bean);
+
     void submitBarcodePurReturn(SubmitBarcodePurReturnData bean);
+
+    void submitMakeOrAuditBill();
 }

@@ -284,6 +284,10 @@ public class PutAwayActivity extends BaseActivity<PutAwayView, PutAwayPresenter>
                     ToastUtils.showShort(getString(R.string.please_scan_material_code));
                     return;
                 }
+                if(ScanId==0){//scanid 为0  证明未扫过条码或者条码已经入库 或者出库过了
+                    ToastUtils.showShort(getString(R.string.please_inpiut_or_scan_visible_material_code));
+                    return;
+                }
                 /**
                  * 生成入库单
                  */

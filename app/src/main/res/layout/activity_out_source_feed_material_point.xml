@@ -1,33 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="#fff"
     android:orientation="vertical"
-    tools:context="com.timi.sz.wms_android.mvp.UI.stock_out.buy_return_material.material.ScanReturnMaterialActivity">
+    tools:context="com.timi.sz.wms_android.mvp.UI.stock_out.outsource_feeed.OutSourceFeedMaterialPointActivity">
 
     <include layout="@layout/title_head"/>
 
-    <ScrollView
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="100px">
+        android:layout_height="0dp"
+        android:layout_weight="1">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="#fff"
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/tv_head_title"
                 android:layout_width="match_parent"
                 android:layout_height="72px"
                 android:gravity="center_vertical"
-                android:paddingLeft="20px"
+                android:paddingLeft="30px"
                 android:paddingTop="10px"
-                android:text="@string/buy_orderno_info"
+                android:text="@string/material_info"
                 android:textColor="#333"
                 android:textSize="28px"
                 android:textStyle="bold"/>
@@ -35,8 +37,32 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1px"
-                android:background="#d7d7dd"
+                android:background="@color/divide_color"
                 />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20px"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="30px"
+                    android:text="@string/item_material_code"
+                    android:textColor="#333"
+                    android:textSize="26px"/>
+
+                <TextView
+                    android:id="@+id/tv_material_code"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="55px"
+                    android:text=""
+                    android:textColor="#000"
+                    android:textSize="26px"/>
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -48,16 +74,16 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingLeft="20px"
-                    android:text="@string/order_no_tip"
+                    android:paddingLeft="30px"
+                    android:text="@string/item_material_name"
                     android:textColor="#333"
                     android:textSize="26px"/>
 
                 <TextView
-                    android:id="@+id/tv_orderno"
+                    android:id="@+id/tv_material_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingLeft="60px"
+                    android:paddingLeft="55px"
                     android:text=""
                     android:textColor="#000"
                     android:textSize="26px"/>
@@ -73,16 +99,16 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingLeft="20px"
-                    android:text="@string/orderno_date_tip"
+                    android:paddingLeft="30px"
+                    android:text="@string/item_material_model"
                     android:textColor="#333"
                     android:textSize="26px"/>
 
                 <TextView
-                    android:id="@+id/tv_create_orderno_date"
+                    android:id="@+id/tv_material_model"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingLeft="35px"
+                    android:paddingLeft="55px"
                     android:text=""
                     android:textColor="#000"
                     android:textSize="26px"/>
@@ -95,18 +121,19 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/tv_strict_name_tip"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingLeft="20px"
-                    android:text="@string/item_supplier"
+                    android:paddingLeft="30px"
+                    android:text="@string/item_material_attr"
                     android:textColor="#333"
                     android:textSize="26px"/>
 
                 <TextView
-                    android:id="@+id/tv_supplier"
+                    android:id="@+id/tv_material_attr"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingLeft="60px"
+                    android:paddingLeft="55px"
                     android:text=""
                     android:textColor="#000"
                     android:textSize="26px"/>
@@ -119,18 +146,70 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/tv_send_material_total_num_tip"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingLeft="20px"
-                    android:text="@string/buyer_tip"
+                    android:paddingLeft="30px"
+                    android:text="@string/send_material_num_tip"
                     android:textColor="#333"
                     android:textSize="26px"/>
 
                 <TextView
-                    android:id="@+id/tv_buyer"
+                    android:id="@+id/tv_send_material_num"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingLeft="60px"
+                    android:paddingLeft="55px"
+                    android:text=""
+                    android:textColor="@color/login_txt_color"
+                    android:textSize="26px"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20px"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="20px"
+                    android:text="@string/have_get_total_num_tip"
+                    android:textColor="#333"
+                    android:textSize="26px"/>
+
+                <TextView
+                    android:id="@+id/tv_have_get_total_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="55px"
+                    android:text=""
+                    android:textColor="#000"
+                    android:textSize="26px"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20px"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/tv_can_get_total_num_tip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="20px"
+                    android:text="@string/can_get_total_num_tip"
+                    android:textColor="#333"
+                    android:textSize="26px"/>
+
+                <TextView
+                    android:id="@+id/tv_can_get_total_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="55px"
                     android:text=""
                     android:textColor="#000"
                     android:textSize="26px"/>
@@ -143,18 +222,19 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/tv_send_material_lib_tip"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingLeft="20px"
-                    android:text="@string/item_buy_num"
+                    android:paddingLeft="30px"
+                    android:text="@string/send_material_lib_tip"
                     android:textColor="#333"
                     android:textSize="26px"/>
 
                 <TextView
-                    android:id="@+id/tv_buy_num"
+                    android:id="@+id/tv_send_material_lib"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingLeft="60px"
+                    android:paddingLeft="55px"
                     android:text=""
                     android:textColor="#000"
                     android:textSize="26px"/>
@@ -170,18 +250,18 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingLeft="20px"
-                    android:text="@string/item_in_stock_num"
+                    android:paddingLeft="30px"
+                    android:text="@string/controll_type_tip"
                     android:textColor="#333"
                     android:textSize="26px"/>
 
                 <TextView
-                    android:id="@+id/tv_instock_num"
+                    android:id="@+id/tv_controll_type"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingLeft="60px"
+                    android:paddingLeft="55px"
                     android:text=""
-                    android:textColor="#000"
+                    android:textColor="@color/login_txt_color"
                     android:textSize="26px"/>
             </LinearLayout>
 
@@ -189,216 +269,51 @@
                 android:layout_width="match_parent"
                 android:layout_height="2px"
                 android:layout_marginLeft="30px"
-                android:background="@color/tab_txt_unselect"/>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingLeft="20px"
-                android:paddingTop="20px">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/item_material_code"
-                    android:textColor="#333"
-                    android:textSize="26px"/>
-
-                <TextView
-                    android:id="@+id/tv_material_code"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="30px"
-                    android:gravity="center_vertical"
-                    android:text=""
-                    android:textColor="#000"
-                    android:textSize="26px"
-                    />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingLeft="20px"
-                android:paddingTop="20px">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/item_material_name"
-                    android:textColor="#333"
-                    android:textSize="26px"/>
-
-                <TextView
-                    android:id="@+id/tv_material_name"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="30px"
-                    android:gravity="center_vertical"
-                    android:text=""
-                    android:textColor="#000"
-                    android:textSize="26px"
-                    />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingLeft="20px"
-                android:paddingTop="20px">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/item_material_code"
-                    android:textColor="#333"
-                    android:textSize="26px"/>
-
-                <TextView
-                    android:id="@+id/tv_material_model"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="30px"
-                    android:gravity="center_vertical"
-                    android:text=""
-                    android:textColor="#000"
-                    android:textSize="26px"
-                    />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingLeft="20px"
-                android:paddingTop="20px">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/item_material_attr"
-                    android:textColor="#333"
-                    android:textSize="26px"/>
-
-                <TextView
-                    android:id="@+id/tv_material_attr"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="30px"
-                    android:gravity="center_vertical"
-                    android:text=""
-                    android:textColor="#000"
-                    android:textSize="26px"
-                    />
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="24px"
-                android:layout_marginTop="20px"
                 android:background="@color/divide_color"/>
 
-            <TextView
-                android:id="@+id/textView4"
-                android:layout_width="match_parent"
-                android:layout_height="72px"
-                android:gravity="center_vertical"
-                android:paddingLeft="20px"
-                android:paddingTop="10px"
-                android:text="@string/return_material_scan_work"
-                android:textColor="#333"
-                android:textSize="28px"
-                android:textStyle="bold"/>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1px"
-                android:background="#d7d7dd"
-                />
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="100px">
-
-                <TextView
-                    android:id="@+id/tv_material_scan_tip"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:paddingLeft="30px"
-                    android:text="@string/item_material_code"
-                    android:textColor="#333"
-                    android:textSize="26px"
-                    />
-
-                <EditText
-                    android:id="@+id/et_material_scan"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="20px"
-                    android:layout_toRightOf="@id/tv_material_scan_tip"
-                    android:background="@drawable/bg_rectangle_et_focused"
-                    android:ellipsize="end"
-                    android:gravity="center_vertical"
-                    android:hint="@string/please_input_return_matrial_code_or_scan"
-                    android:imeOptions="actionSearch"
-                    android:paddingLeft="40px"
-                    android:paddingRight="80px"
-                    android:singleLine="true"
-                    android:text=""
-                    android:textSize="14sp"/>
-
-                <ImageView
-                    android:id="@+id/iv_material_scan"
-                    android:layout_width="100px"
-                    android:layout_height="match_parent"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="30px"
-                    android:paddingLeft="60px"
-                    android:src="@mipmap/ic_scan"/>
-            </RelativeLayout>
-
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingLeft="30px"
-                android:paddingTop="20px">
+                android:layout_marginTop="20px"
+                android:layout_height="88px"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/return_material_num_format"
-                    android:textColor="#333"
-                    android:textSize="26px"/>
-
-                <TextView
-                    android:id="@+id/tv_return_num"
+                    android:layout_marginLeft="70px"
+                    android:text="@string/bar_code_tip"
+                    android:textColor="#333"/>
+                <EditText
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="30px"
-                    android:gravity="center_vertical"
-                    android:text=""
-                    android:textColor="@color/login_txt_color"
-                    android:textSize="26px"
-                    />
+                    android:layout_height="72px"
+                    android:layout_marginRight="20px"
+                    android:layout_marginLeft="60px"
+                    android:background="@drawable/selector_et"/>
             </LinearLayout>
+
+            <View
+                android:id="@+id/view_divide"
+                android:layout_width="match_parent"
+                android:layout_height="24px"
+                android:layout_below="@id/rl_top_menu"
+                android:background="@color/divide_color"/>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rlv_orderno_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
         </LinearLayout>
-    </ScrollView>
+    </android.support.v4.widget.NestedScrollView>
 
     <Button
-        android:id="@+id/btn_commit"
+        android:id="@+id/btn_close"
         android:layout_width="match_parent"
-        android:layout_height="100px"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:layout_margin="20px"
         android:background="@drawable/selector_btn_bg_login"
-        android:text="@string/commit_check"
+        android:text="@string/close"
         android:textColor="#fff"
         android:textSize="18sp"/>
-
-
-</RelativeLayout>
+</LinearLayout>

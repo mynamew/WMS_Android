@@ -1,28 +1,30 @@
-package com.timi.sz.wms_android.bean.outstock.buy;
+package com.timi.sz.wms_android.bean.outstock.outsource;
 
 /**
- * $dsc  提交条码出库  普通的返回值
+ * $dsc  提交条码拆分出库(批次拣货) 的返回
  * author: timi
- * create at: 2017-11-06 09:53
+ * create at: 2017-11-10 14:47
  */
 
-public class SubmitBarcodeOutAuditData {
-
+public class SubmitBarcodeLotPickOutSplitResult {
 
     /**
-     * scanId : 75
-     * materialId : 3912
-     * materialCode : 20301010017
-     * materialName : 750前壳(带音频)
-     * materialStandard : 烤漆/哑黑/压铸锌合金/69*43*23/钻孔
+     * isNotAllowPickOut : false
+     * scanId : 88
+     * materialId : 776
+     * materialCode : 10104030003
+     * materialName : 贴片场效应管
+     * materialStandard : FDS4141/SOP8/(仙童)
      * materialAttribute :
-     * barcodeQty : 4
-     * lineMustQty : 8
-     * lineScanQty : 4
-     * totalScanQty : 4
+     * barcodeQty : 200
+     * lineMustQty : 2000
+     * lineScanQty : 2000
+     * totalScanQty : 2000
      * exceedQty : 0
+     * newBarcode : CT20171100002
      */
 
+    private boolean isNotAllowPickOut;
     private int scanId;
     private int materialId;
     private String materialCode;
@@ -34,6 +36,15 @@ public class SubmitBarcodeOutAuditData {
     private int lineScanQty;
     private int totalScanQty;
     private int exceedQty;
+    private String newBarcode;
+
+    public boolean isIsNotAllowPickOut() {
+        return isNotAllowPickOut;
+    }
+
+    public void setIsNotAllowPickOut(boolean isNotAllowPickOut) {
+        this.isNotAllowPickOut = isNotAllowPickOut;
+    }
 
     public int getScanId() {
         return scanId;
@@ -121,5 +132,13 @@ public class SubmitBarcodeOutAuditData {
 
     public void setExceedQty(int exceedQty) {
         this.exceedQty = exceedQty;
+    }
+
+    public String getNewBarcode() {
+        return newBarcode;
+    }
+
+    public void setNewBarcode(String newBarcode) {
+        this.newBarcode = newBarcode;
     }
 }

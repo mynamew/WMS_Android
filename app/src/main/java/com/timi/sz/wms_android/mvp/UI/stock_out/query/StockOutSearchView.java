@@ -1,6 +1,7 @@
 package com.timi.sz.wms_android.mvp.UI.stock_out.query;
 
 import com.timi.sz.wms_android.bean.outstock.outsource.OutSourceFeedBean;
+import com.timi.sz.wms_android.bean.outstock.outsource.QueryOutSourceFeedByInputResult;
 import com.timi.sz.wms_android.mvp.base.view.iml.MvpBaseView;
 
 /**
@@ -10,5 +11,5 @@ import com.timi.sz.wms_android.mvp.base.view.iml.MvpBaseView;
  */
 
 public interface StockOutSearchView extends MvpBaseView {
-    void searchOutsourceFeed(OutSourceFeedBean bean);
+    void queryOutSourceFeedByInput(QueryOutSourceFeedByInputResult bean);
 }

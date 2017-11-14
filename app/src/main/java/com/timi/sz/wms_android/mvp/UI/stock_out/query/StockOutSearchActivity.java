@@ -18,8 +18,11 @@ import com.timi.sz.wms_android.R;
 import com.timi.sz.wms_android.base.uils.Constants;
 import com.timi.sz.wms_android.base.uils.InputMethodUtils;
 import com.timi.sz.wms_android.base.uils.PackageUtils;
+import com.timi.sz.wms_android.base.uils.SpUtils;
 import com.timi.sz.wms_android.base.uils.ToastUtils;
 import com.timi.sz.wms_android.bean.outstock.outsource.OutSourceFeedBean;
+import com.timi.sz.wms_android.bean.outstock.outsource.QueryOutSourceFeedByInputResult;
+import com.timi.sz.wms_android.mvp.UI.stock_out.outsource_feeed.OutSourceFeedActivity;
 import com.timi.sz.wms_android.mvp.UI.stock_out.point_list.PointListActivity;
 import com.timi.sz.wms_android.mvp.base.BaseActivity;
 import com.timi.sz.wms_android.qrcode.CommonScanActivity;
@@ -172,22 +175,20 @@ public class  StockOutSearchActivity extends BaseActivity<StockOutSearchView, St
      */
     public void requestManagerMethod(String orderNum) {
         Map<String, Object> params = new HashMap<>();
-        params.put("tenancyName", "Default");
-        params.put("usernameOrEmailAddress", "admin1");
-        params.put("password", "123qwe");
-        params.put("deviceType", "8");
-        params.put("mac", PackageUtils.getMac());
+        params.put("UserId", SpUtils.getInstance().getUserId());
+        params.put("OrgId", SpUtils.getInstance().getOrgId());
+        params.put("MAC", PackageUtils.getMac());
+        params.put("BillNo", orderNum);
         /**
          * 不同的intentcode  请求不同
          */
         switch (intentCode) {
             case Constants.STOCK_OUT_OUTSOURCE_FEED_SUPLLIEMENT://委外退料
-                getPresenter().searchOutsourceFeed(params);
+                getPresenter().queryOutSourceFeedByInput(params);
                 break;
             case Constants.STOCK_OUT_OUTSOURCE_AUDIT://委外发货-审核
                 break;
             case Constants.STOCK_OUT_OUTSOURCE_BILL:////委外发货-生单
-                break;
             case Constants.STOCK_OUT_PRODUCTION_FEEDING://生产补料
                 break;
             case Constants.STOCK_OUT_PRODUCTION_AUDIT://生产领料-审核
@@ -212,8 +213,8 @@ public class  StockOutSearchActivity extends BaseActivity<StockOutSearchView, St
      * @param bean
      */
     @Override
-    public void searchOutsourceFeed(OutSourceFeedBean bean) {
-        Intent intent = new Intent(this, PointListActivity.class);
+    public void queryOutSourceFeedByInput(QueryOutSourceFeedByInputResult bean) {
+        Intent intent = new Intent(this, OutSourceFeedActivity.class);
         intent.putExtra(STOCK_OUT_OUTSOURCE_FEED_BEAN, new Gson().toJson(bean));
         startActivity(intent);
     }

@@ -205,7 +205,7 @@
                     android:layout_height="match_parent"
                     android:layout_margin="20px"
                     android:layout_toRightOf="@id/tv_putaway_scan_material_tip"
-                    android:background="@drawable/bg_rectangle_et_focused"
+                    android:background="@drawable/selector_et"
                     android:ellipsize="end"
                     android:gravity="center_vertical"
                     android:hint="@string/please_input_return_matrial_code_or_scan"

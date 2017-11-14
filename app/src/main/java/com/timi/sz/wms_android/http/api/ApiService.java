@@ -22,9 +22,14 @@ import com.timi.sz.wms_android.bean.outstock.buy.CommitMaterialScanToOredernoBea
 import com.timi.sz.wms_android.bean.outstock.buy.OrderNoAddMaterial;
 import com.timi.sz.wms_android.bean.outstock.buy.OrderNoBean;
 import com.timi.sz.wms_android.bean.outstock.buy.SubmitBarcodeOutAuditData;
+import com.timi.sz.wms_android.bean.outstock.buy.SubmitBarcodeOutSplitAuditData;
 import com.timi.sz.wms_android.bean.outstock.buy.SubmitBarcodePurReturnData;
+import com.timi.sz.wms_android.bean.outstock.outsource.GetMaterialLotData;
 import com.timi.sz.wms_android.bean.outstock.outsource.OutSourceFeedBean;
 import com.timi.sz.wms_android.bean.outstock.buy.BuyReturnMaterialByOrdernoData;
+import com.timi.sz.wms_android.bean.outstock.outsource.QueryOutSourceFeedByInputResult;
+import com.timi.sz.wms_android.bean.outstock.outsource.SubmitBarcodeLotPickOutResult;
+import com.timi.sz.wms_android.bean.outstock.outsource.SubmitBarcodeLotPickOutSplitResult;
 import com.timi.sz.wms_android.bean.quality.BarcodeData;
 import com.timi.sz.wms_android.bean.quality.adavance.CommitAdvance1Data;
 import com.timi.sz.wms_android.bean.quality.adavance.CommitAdvanceData;
@@ -213,7 +218,8 @@ public interface ApiService {
      */
     @FormUrlEncoded
     @POST("api/services/wpda/common/SubmitMakeOrAuditBill")
-    Observable<CommonResult<Object>> commitMaterialPoint(@FieldMap Map<String, Object> params);
+    Observable<CommonResult<Object>> submitMakeOrAuditBill(@FieldMap Map<String, Object> params);
+
     /**
      * 搜索收货单的返回结果（来料入库）
      *
@@ -293,7 +299,7 @@ public interface ApiService {
      */
     @FormUrlEncoded
     @POST("api/services/wpda/common/SubmitBarcodeInstock")
-    Observable<CommonResult<MaterialScanPutAwayBean>> materialScanPutAawy(@FieldMap Map<String,Object> params);
+    Observable<CommonResult<MaterialScanPutAwayBean>> materialScanPutAawy(@FieldMap Map<String, Object> params);
 
     /**
      * 验证库位码是否有效
@@ -303,7 +309,7 @@ public interface ApiService {
      */
     @FormUrlEncoded
     @POST("api/services/wpda/common/VerifyBinCode")
-    Observable<CommonResult<VertifyLocationCodeBean>> vertifyLocationCode(@FieldMap Map<String,Object> params);
+    Observable<CommonResult<VertifyLocationCodeBean>> vertifyLocationCode(@FieldMap Map<String, Object> params);
 
     /**
      * 提交制单和审核生成入库单
@@ -313,7 +319,8 @@ public interface ApiService {
      */
     @FormUrlEncoded
     @POST("api/services/wpda/common/SubmitMakeOrAuditBill")
-    Observable<CommonResult<Object>> createInStockOrderno(@FieldMap Map<String,Object> params);
+    Observable<CommonResult<Object>> createInStockOrderno(@FieldMap Map<String, Object> params);
+
     /**
      * 提交制单和审核生成入库单
      *
@@ -322,7 +329,7 @@ public interface ApiService {
      */
     @FormUrlEncoded
     @POST("api/services/wpda/PurInstock/GetReceiptDetail")
-    Observable<CommonResult<List<OrderDetailData>>> getReceiptDetail(@FieldMap Map<String,Object> params);
+    Observable<CommonResult<List<OrderDetailData>>> getReceiptDetail(@FieldMap Map<String, Object> params);
 
     /**************************************************************************************************************/
     /**************************************************************************************************************/
@@ -331,13 +338,6 @@ public interface ApiService {
     /**
      * 搜索相关的请求
      */
-    /**
-     * 委外退料单号扫码 请求
-     */
-    @FormUrlEncoded
-    @POST("api/Account/ClientLogin")
-    Observable<CommonResult<OutSourceFeedBean>> searchOutsourceFeed(@FieldMap Map<String, Object> params);
-
     /**
      * 委外发货-审核单号扫码 请求
      */
@@ -407,19 +407,73 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("api/Account/ClientLogin")
     Observable<CommonResult<OrderNoBean>> searchOtherBill(@Field("orderno") String orderno);
+    /*****************************************委外补料******************************************************************/
 
-
-       /*****************************************采购退料******************************************************************/
     /**
-     * 采购退料单号扫码 请求
+     * 委外补料单末尾号查询（审核流程）
+     * 根据委外补料单末尾号查询未审核的委外补料单
      *
+     * @param params
      * @return
      */
     @FormUrlEncoded
-    @POST("api/services/wpda/PurReturn/QueryPurReturnDataByInput")
-    Observable<CommonResult<BuyReturnMaterialByOrdernoData>> returnMaterialOrderNoScan(@FieldMap Map<String, Object> params);
+    @POST("api/services/wpda/WWPick/QueryOutSourceFeedByInput")
+    Observable<CommonResult<QueryOutSourceFeedByInputResult>> queryOutSourceFeedByInput(@FieldMap Map<String, Object> params);
+
     /**
-     * 通过物料码获取未关闭的采购单 即退料单
+     * 获得委外补料单的发料明细。
+     *
+     * @param params
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("api/services/wpda/WWPick/GetOutSourceFeedDetail")
+    Observable<CommonResult<QueryOutSourceFeedByInputResult>> getOutSourceFeedDetail(@FieldMap Map<String, Object> params);
+
+    /**
+     * 提交条码出库(批次拣货)。
+     *
+     * @param params
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("api/services/wpda/common/SubmitBarcodeLotPickOut")
+    Observable<CommonResult<SubmitBarcodeLotPickOutResult>> submitBarcodeLotPickOut(@FieldMap Map<String, Object> params);
+
+    /**
+     * 提交条码拆分出库(批次拣货)
+     *
+     * @param params
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("api/services/wpda/common/SubmitBarcodeLotPickOutSplit")
+    Observable<CommonResult<SubmitBarcodeLotPickOutSplitResult>> submitBarcodeLotPickOutSplit(@FieldMap Map<String, Object> params);
+
+    /**
+     * 获得物料批次拣货信息
+     *
+     * @param params
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("api/services/wpda/common/GetMaterialLotData")
+    Observable<CommonResult<GetMaterialLotData>> getMaterialLotData(@FieldMap Map<String, Object> params);
+
+    /**
+     * 指定批次异常
+     *
+     * @param params
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("api/services/wpda/common/GetMaterialLotData")
+    Observable<CommonResult<GetMaterialLotData>> GetMaterialLotData(@FieldMap Map<String, Object> params);
+
+
+    /*****************************************采购退料******************************************************************/
+    /**
+     * 通过物料码获取未关闭的采购单
      *
      * @param params
      * @return
@@ -427,6 +481,7 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("api/services/wpda/PurReturn/QueryAuditPOBillForPurReturn ")
     Observable<CommonResult<BuyReturnMaterialByMaterialCodeData>> materialScanGetBuyRetrurnOrderNo(@FieldMap Map<String, Object> params);
+
     /**
      * 提交条码出库(普通)
      *
@@ -434,9 +489,10 @@ public interface ApiService {
      * @return
      */
     @FormUrlEncoded
-    @POST("api/services/wpda/PurReturn/SubmitBarcodeOutAudit")
-    Observable<CommonResult<SubmitBarcodeOutAuditData>> submitBarcodeOutAudit(@FieldMap Map<String,Object> params);
-   /**
+    @POST("api/services/wpda/common/SubmitBarcodeOutAudit")
+    Observable<CommonResult<SubmitBarcodeOutAuditData>> submitBarcodeOutAudit(@FieldMap Map<String, Object> params);
+
+    /**
      * 提交退料条码（制单）
      *
      * @param params
@@ -444,7 +500,40 @@ public interface ApiService {
      */
     @FormUrlEncoded
     @POST("api/services/wpda/PurReturn/SubmitBarcodePurReturn")
-    Observable<CommonResult<SubmitBarcodePurReturnData>> submitBarcodePurReturn(@FieldMap Map<String,Object> params);
+    Observable<CommonResult<SubmitBarcodePurReturnData>> submitBarcodePurReturn(@FieldMap Map<String, Object> params);
+
+
+    /**
+     * 通过退料单的末尾号查询（审核流程）
+     *
+     * @param params
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("api/services/wpda/PurReturn/QueryPurReturnDataByInput")
+    Observable<CommonResult<BuyReturnMaterialByOrdernoData>> returnMaterialOrderNoScan(@FieldMap Map<String, Object> params);
+
+    /**
+     * 获取采购退料单明细（审核流程）
+     *
+     * @param params
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("api/services/wpda/PurReturn/GetPurReturnDetail")
+    Observable<CommonResult<SubmitBarcodePurReturnData>> getPurReturnDetail(@FieldMap Map<String, Object> params);
+
+    /**
+     * 提交条码拆分出库（普通）
+     *
+     * @param params
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("api/services/wpda/common/SubmitBarcodeOutSplitAudit")
+    Observable<CommonResult<SubmitBarcodeOutSplitAuditData>> submitBarcodeOutSplitAudit(@FieldMap Map<String, Object> params);
+
+
     /**************************************************************************************************************/
     /**************************************************************************************************************/
     /**====== 质量检验 ======**/

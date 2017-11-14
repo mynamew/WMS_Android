@@ -479,4 +479,16 @@
     <string name="should_return_num">应退数量</string>
     <string name="divide_num_tip">拆分数量</string>
     <string name="please_input_divide_num">请输入拆分数量</string>
+    <string name="commit_check_success">提交审核成功！</string>
+    <string name="commit_success">提交成功</string>
+    <string name="please_inpiut_or_scan_visible_material_code">请输入或扫描有效的要退料的条码</string>
+    <string name="have_scan_all_materail">已扫描完所有的物料</string>
+    <string name="barcode_divie_in_stock_success">条码拆分入库成功！</string>
+    <string name="strict_name_tip">区域名称</string>
+    <string name="send_material_total_num_tip">发料总数</string>
+    <string name="have_get_total_num_tip">已领总数</string>
+    <string name="can_get_total_num_tip">可领总数</string>
+    <string name="send_material_num_tip">发料数量</string>
+    <string name="send_material_lib_tip">发料仓库</string>
+    <string name="controll_type_tip">管控方式</string>
 </resources>

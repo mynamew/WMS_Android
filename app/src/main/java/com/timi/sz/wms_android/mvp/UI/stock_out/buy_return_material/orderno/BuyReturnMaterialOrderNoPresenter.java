@@ -6,6 +6,7 @@ import com.timi.sz.wms_android.base.uils.ToastUtils;
 import com.timi.sz.wms_android.bean.outstock.buy.MaterialBean;
 import com.timi.sz.wms_android.bean.outstock.buy.OrderNoAddMaterial;
 import com.timi.sz.wms_android.bean.outstock.buy.SubmitBarcodeOutAuditData;
+import com.timi.sz.wms_android.bean.outstock.buy.SubmitBarcodeOutSplitAuditData;
 import com.timi.sz.wms_android.bean.outstock.buy.SubmitBarcodePurReturnData;
 import com.timi.sz.wms_android.http.callback.OnResultCallBack;
 import com.timi.sz.wms_android.http.subscriber.HttpSubscriber;
@@ -20,35 +21,14 @@ import java.util.Map;
  */
 
 public class BuyReturnMaterialOrderNoPresenter extends MvpBasePresenter<BuyReturnMaterialOrderNoView> {
-    private HttpSubscriber<SubmitBarcodeOutAuditData> subscriber;
-    private HttpSubscriber<SubmitBarcodePurReturnData> commitMaterialScanToOredernoBeanHttpSubscriber;
-    BuyReturnMaterialOrderNoModel model=null;
+    BuyReturnMaterialOrderNoModel model = null;
+    private HttpSubscriber<SubmitBarcodeOutAuditData> submitBarcodeOutAuditDataHttpSubscriber;
+    private HttpSubscriber<SubmitBarcodeOutSplitAuditData> submitBarcodeOutSplitAuditDataHttpSubscriber;
+    private HttpSubscriber<Object> submitMakeOrAuditBillHttpSubscriber;
+
     public BuyReturnMaterialOrderNoPresenter(Context context) {
         super(context);
-        model=new BuyReturnMaterialOrderNoModel();
-    }
-
-
-    /**
-     * 物料扫码的请求
-     *
-     * @param params
-     */
-    public void materialScan(Map<String, Object> params) {
-        if (null == subscriber) {
-            subscriber = new HttpSubscriber<>(new OnResultCallBack<SubmitBarcodeOutAuditData>() {
-                @Override
-                public void onSuccess(SubmitBarcodeOutAuditData bean) {
-                    getView().materialScan(bean);
-                }
-
-                @Override
-                public void onError(String errorMsg) {
-                    ToastUtils.showShort(errorMsg);
-                }
-            });
-        }
-        model.materialScan(params, subscriber);
+        model = new BuyReturnMaterialOrderNoModel();
     }
 
     /**
@@ -56,12 +36,13 @@ public class BuyReturnMaterialOrderNoPresenter extends MvpBasePresenter<BuyRetur
      *
      * @param params
      */
-    public void submitBarcodePurReturn(Map<String, Object> params) {
-        if (null == commitMaterialScanToOredernoBeanHttpSubscriber) {
-            commitMaterialScanToOredernoBeanHttpSubscriber = new HttpSubscriber<>(new OnResultCallBack<SubmitBarcodePurReturnData>() {
+    public void submitBarcodeOutAudit(Map<String, Object> params) {
+        getView().showProgressDialog();
+        if (null == submitBarcodeOutAuditDataHttpSubscriber) {
+            submitBarcodeOutAuditDataHttpSubscriber = new HttpSubscriber<>(new OnResultCallBack<SubmitBarcodeOutAuditData>() {
                 @Override
-                public void onSuccess(SubmitBarcodePurReturnData bean) {
-                    getView().submitBarcodePurReturn(bean);
+                public void onSuccess(SubmitBarcodeOutAuditData bean) {
+                    getView().submitBarcodeOutAudit(bean);
                 }
 
                 @Override
@@ -70,20 +51,70 @@ public class BuyReturnMaterialOrderNoPresenter extends MvpBasePresenter<BuyRetur
                 }
             });
         }
-        model.submitBarcodePurReturn(params, commitMaterialScanToOredernoBeanHttpSubscriber);
+        model.submitBarcodeOutAudit(params, submitBarcodeOutAuditDataHttpSubscriber);
     }
+
+    /**
+     * 提交条码拆分出库（普通）
+     *
+     * @param params
+     */
+    public void submitBarcodeOutSplitAudit(Map<String, Object> params) {
+        getView().showProgressDialog();
+        if (null == submitBarcodeOutSplitAuditDataHttpSubscriber) {
+            submitBarcodeOutSplitAuditDataHttpSubscriber = new HttpSubscriber<>(new OnResultCallBack<SubmitBarcodeOutSplitAuditData>() {
+                @Override
+                public void onSuccess(SubmitBarcodeOutSplitAuditData bean) {
+                    getView().submitBarcodeOutSplitAudit(bean);
+                }
+
+                @Override
+                public void onError(String errorMsg) {
+                    ToastUtils.showShort(errorMsg);
+                }
+            });
+        }
+        model.submitBarcodeOutSplitAudit(params, submitBarcodeOutSplitAuditDataHttpSubscriber);
+    }
+
+    /**
+     * 提交制单和审核
+     *
+     * @param params
+     */
+    public void submitMakeOrAuditBill(Map<String, Object> params) {
+        getView().showProgressDialog();
+        if (null == submitMakeOrAuditBillHttpSubscriber) {
+            submitMakeOrAuditBillHttpSubscriber = new HttpSubscriber<>(new OnResultCallBack<Object>() {
+                @Override
+                public void onSuccess(Object bean) {
+                    getView().submitMakeOrAuditBill();
+                }
+
+                @Override
+                public void onError(String errorMsg) {
+                    ToastUtils.showShort(errorMsg);
+                }
+            });
+        }
+        model.submitMakeOrAuditBill(params, submitMakeOrAuditBillHttpSubscriber);
+    }
+
 
     @Override
     public void dettachView() {
         super.dettachView();
-        //反注册
-        if (null != commitMaterialScanToOredernoBeanHttpSubscriber) {
-            commitMaterialScanToOredernoBeanHttpSubscriber.unSubscribe();
-            commitMaterialScanToOredernoBeanHttpSubscriber = null;
+        if (null != submitMakeOrAuditBillHttpSubscriber) {
+            submitMakeOrAuditBillHttpSubscriber.unSubscribe();
+            submitMakeOrAuditBillHttpSubscriber = null;
         }
-        if (null != subscriber) {
-            subscriber.unSubscribe();
-            subscriber = null;
+        if (null != submitBarcodeOutAuditDataHttpSubscriber) {
+            submitBarcodeOutAuditDataHttpSubscriber.unSubscribe();
+            submitBarcodeOutAuditDataHttpSubscriber = null;
+        }
+        if (null != submitBarcodeOutSplitAuditDataHttpSubscriber) {
+            submitBarcodeOutSplitAuditDataHttpSubscriber.unSubscribe();
+            submitBarcodeOutSplitAuditDataHttpSubscriber = null;
         }
     }
 }

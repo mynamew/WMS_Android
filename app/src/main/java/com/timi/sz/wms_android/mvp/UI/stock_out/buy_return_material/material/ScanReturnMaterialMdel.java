@@ -46,6 +46,17 @@ public class ScanReturnMaterialMdel extends MvpBaseModel {
                 return apiService.submitBarcodePurReturn(params);
             }
         });
-
+    }
+    /**
+     * 提交制单
+     * @param observer
+     */
+    public  void submitMakeOrAuditBill(final Map<String,Object> params, Observer<Object> observer){
+        HttpManager.getInstance().HttpManagerRequest(observer, new ApiServiceMethodCallBack<Object>() {
+            @Override
+            public Observable<CommonResult<Object>> createObservable(ApiService apiService) {
+                return apiService.submitMakeOrAuditBill(params);
+            }
+        });
     }
 }

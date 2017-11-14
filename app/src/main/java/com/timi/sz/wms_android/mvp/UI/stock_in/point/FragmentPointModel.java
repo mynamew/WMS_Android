@@ -78,7 +78,7 @@ public class FragmentPointModel extends MvpBaseModel {
         HttpManager.getInstance().HttpManagerRequest(observer, new ApiServiceMethodCallBack<Object>() {
             @Override
             public Observable<CommonResult<Object>> createObservable(ApiService apiService) {
-                return apiService.commitMaterialPoint(params);
+                return apiService.submitMakeOrAuditBill(params);
             }
         });
     }

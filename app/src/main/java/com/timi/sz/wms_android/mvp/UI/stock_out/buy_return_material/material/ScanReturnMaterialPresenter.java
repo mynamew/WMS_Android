@@ -3,7 +3,6 @@ package com.timi.sz.wms_android.mvp.UI.stock_out.buy_return_material.material;
 import android.content.Context;
 
 import com.timi.sz.wms_android.base.uils.ToastUtils;
-import com.timi.sz.wms_android.bean.outstock.buy.CommitMaterialScanToOredernoBean;
 import com.timi.sz.wms_android.bean.outstock.buy.SubmitBarcodeOutAuditData;
 import com.timi.sz.wms_android.bean.outstock.buy.SubmitBarcodePurReturnData;
 import com.timi.sz.wms_android.http.callback.OnResultCallBack;
@@ -22,6 +21,7 @@ public class ScanReturnMaterialPresenter extends MvpBasePresenter<ScanReturnMate
     ScanReturnMaterialMdel model = null;
     HttpSubscriber<SubmitBarcodeOutAuditData> subscriber = null;
     HttpSubscriber<SubmitBarcodePurReturnData> commitMaterialScanToOredernoBeanHttpSubscriber;
+    HttpSubscriber<Object> submitMakeOrAuditBillHttpSubscriber = null;
 
     public ScanReturnMaterialPresenter(Context context) {
         super(context);
@@ -29,7 +29,7 @@ public class ScanReturnMaterialPresenter extends MvpBasePresenter<ScanReturnMate
     }
 
     /**
-     * 物料扫码的请求
+     * 提交条码出库
      *
      * @param params
      */
@@ -74,12 +74,38 @@ public class ScanReturnMaterialPresenter extends MvpBasePresenter<ScanReturnMate
         model.submitBarcodePurReturn(params, commitMaterialScanToOredernoBeanHttpSubscriber);
     }
 
+    /**
+     * 提交制单
+     * @param params
+     */
+    public void submitMakeOrAuditBill(Map<String, Object> params) {
+        getView().showProgressDialog();
+        if (null == submitMakeOrAuditBillHttpSubscriber) {
+            submitMakeOrAuditBillHttpSubscriber = new HttpSubscriber<>(new OnResultCallBack<Object>() {
+                @Override
+                public void onSuccess(Object bean) {
+                    getView().submitMakeOrAuditBill();
+                }
+
+                @Override
+                public void onError(String errorMsg) {
+                    ToastUtils.showShort(errorMsg);
+                }
+            });
+        }
+        model.submitMakeOrAuditBill(params, submitMakeOrAuditBillHttpSubscriber);
+    }
+
     @Override
     public void dettachView() {
         super.dettachView();
         if (null != subscriber) {
             subscriber.unSubscribe();
             subscriber = null;
+        }
+        if (null != submitMakeOrAuditBillHttpSubscriber) {
+            submitMakeOrAuditBillHttpSubscriber.unSubscribe();
+            submitMakeOrAuditBillHttpSubscriber = null;
         }
         if (null != commitMaterialScanToOredernoBeanHttpSubscriber) {
             commitMaterialScanToOredernoBeanHttpSubscriber.unSubscribe();

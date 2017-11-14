@@ -1,13 +1,12 @@
 package com.timi.sz.wms_android.bean.outstock.buy;
 
 /**
- * $dsc  提交条码出库  普通的返回值
+ * $dsc  提交条码拆分出库（普通） 的返回数据
  * author: timi
- * create at: 2017-11-06 09:53
+ * create at: 2017-11-07 17:28
  */
 
-public class SubmitBarcodeOutAuditData {
-
+public class SubmitBarcodeOutSplitAuditData {
 
     /**
      * scanId : 75
@@ -18,9 +17,10 @@ public class SubmitBarcodeOutAuditData {
      * materialAttribute :
      * barcodeQty : 4
      * lineMustQty : 8
-     * lineScanQty : 4
-     * totalScanQty : 4
+     * lineScanQty : 8
+     * totalScanQty : 8
      * exceedQty : 0
+     * NewBarcode : CT20171000001
      */
 
     private int scanId;
@@ -34,6 +34,7 @@ public class SubmitBarcodeOutAuditData {
     private int lineScanQty;
     private int totalScanQty;
     private int exceedQty;
+    private String NewBarcode;
 
     public int getScanId() {
         return scanId;
@@ -121,5 +122,13 @@ public class SubmitBarcodeOutAuditData {
 
     public void setExceedQty(int exceedQty) {
         this.exceedQty = exceedQty;
+    }
+
+    public String getNewBarcode() {
+        return NewBarcode;
+    }
+
+    public void setNewBarcode(String NewBarcode) {
+        this.NewBarcode = NewBarcode;
     }
 }
