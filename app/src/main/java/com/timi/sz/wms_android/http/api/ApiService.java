@@ -25,9 +25,14 @@ import com.timi.sz.wms_android.bean.outstock.buy.SubmitBarcodeOutAuditData;
 import com.timi.sz.wms_android.bean.outstock.buy.SubmitBarcodeOutSplitAuditData;
 import com.timi.sz.wms_android.bean.outstock.buy.SubmitBarcodePurReturnData;
 import com.timi.sz.wms_android.bean.outstock.outsource.GetMaterialLotData;
+import com.timi.sz.wms_android.bean.outstock.outsource.GetOutSourcePickDetailResult;
+import com.timi.sz.wms_android.bean.outstock.outsource.GetWWDetailPickDataResult;
 import com.timi.sz.wms_android.bean.outstock.outsource.OutSourceFeedBean;
 import com.timi.sz.wms_android.bean.outstock.buy.BuyReturnMaterialByOrdernoData;
 import com.timi.sz.wms_android.bean.outstock.outsource.QueryOutSourceFeedByInputResult;
+import com.timi.sz.wms_android.bean.outstock.outsource.QueryOutSourcePickByInputResult;
+import com.timi.sz.wms_android.bean.outstock.outsource.QueryWWPickDataByOutSourceResult;
+import com.timi.sz.wms_android.bean.outstock.outsource.RequestGetMaterialLotBean;
 import com.timi.sz.wms_android.bean.outstock.outsource.SubmitBarcodeLotPickOutResult;
 import com.timi.sz.wms_android.bean.outstock.outsource.SubmitBarcodeLotPickOutSplitResult;
 import com.timi.sz.wms_android.bean.quality.BarcodeData;
@@ -407,7 +412,52 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("api/Account/ClientLogin")
     Observable<CommonResult<OrderNoBean>> searchOtherBill(@Field("orderno") String orderno);
-    /*****************************************委外补料******************************************************************/
+    /**====== 委外发料-审核 ======**/
+
+    /**
+     * 根据委外发料单末尾号查询未审核的委外发料单
+     *
+     * @param params
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("api/services/wpda/WWPick/QueryOutSourcePickByInput")
+    Observable<CommonResult<QueryOutSourcePickByInputResult>> queryOutSourcePickByInput(@FieldMap Map<String, Object> params);
+
+    /**
+     * 获取委外发料单明细的发料数据（审核流程）
+     *
+     * @param params
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("api/services/wpda/WWPick/GetOutSourcePickDetail")
+    Observable<CommonResult<GetOutSourcePickDetailResult>> getOutSourcePickDetail(@FieldMap Map<String, Object> params);
+
+    /**====== 委外发料-制单 ======**/
+
+    /**
+     * 获取委外发料单明细的发料数据（审核流程）
+     *
+     * @param params
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("api/services/wpda/WWPick/QueryWWPickDataByOutSource")
+    Observable<CommonResult<QueryWWPickDataByOutSourceResult>> queryWWPickDataByOutSource(@FieldMap Map<String, Object> params);
+
+    /**
+     * 获取委外订单明细的发料数据（制单流程）
+     *
+     * @param params
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("api/services/wpda/WWPick/GetWWDetailPickData")
+    Observable<CommonResult<GetWWDetailPickDataResult>> getWWDetailPickData(@FieldMap Map<String, Object> params);
+
+
+    /**====== 委外补料 ======**/
 
     /**
      * 委外补料单末尾号查询（审核流程）
@@ -417,7 +467,7 @@ public interface ApiService {
      * @return
      */
     @FormUrlEncoded
-    @POST("api/services/wpda/WWPick/QueryOutSourceFeedByInput")
+    @POST("api/services/wpda/WWFeed/QueryOutSourceFeedByInput")
     Observable<CommonResult<QueryOutSourceFeedByInputResult>> queryOutSourceFeedByInput(@FieldMap Map<String, Object> params);
 
     /**
@@ -453,12 +503,11 @@ public interface ApiService {
     /**
      * 获得物料批次拣货信息
      *
-     * @param params
+     * @param bean
      * @return
      */
-    @FormUrlEncoded
     @POST("api/services/wpda/common/GetMaterialLotData")
-    Observable<CommonResult<GetMaterialLotData>> getMaterialLotData(@FieldMap Map<String, Object> params);
+    Observable<CommonResult<GetMaterialLotData>> getMaterialLotData(@Body RequestGetMaterialLotBean bean);
 
     /**
      * 指定批次异常
@@ -467,8 +516,8 @@ public interface ApiService {
      * @return
      */
     @FormUrlEncoded
-    @POST("api/services/wpda/common/GetMaterialLotData")
-    Observable<CommonResult<GetMaterialLotData>> GetMaterialLotData(@FieldMap Map<String, Object> params);
+    @POST("api/services/wpda/common/SetMaterialLotData")
+    Observable<CommonResult<GetMaterialLotData>> setMaterialLotData(@FieldMap Map<String, Object> params);
 
 
     /*****************************************采购退料******************************************************************/
@@ -592,14 +641,6 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("api/services/wpda/IQC/IQCGetNormalData")
     Observable<CommonResult<NormalQualityData>> getNormalQualityData(@FieldMap Map<String, Object> params);
-
-    /**
-     * 提交普通质检
-     *
-     * @return
-     */
-    @POST("api/services/wpda/IQC/IQCSetNormalData")
-    Observable<CommonResult<Object>> setNormalQualityData(@Body RequestBody params);
 
     /**
      * 提交普通质检

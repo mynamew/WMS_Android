@@ -7,11 +7,12 @@
     android:layout_height="match_parent"
     android:background="#fff"
     android:orientation="vertical"
-    tools:context="com.timi.sz.wms_android.mvp.UI.stock_out.outsource_feeed.OutSourceFeedActivity">
+    tools:context="com.timi.sz.wms_android.mvp.UI.stock_out.outsource_feed.OutSourceFeedActivity">
 
     <include layout="@layout/title_head"/>
 
     <android.support.v4.widget.NestedScrollView
+        android:id="@+id/nescroll_feed"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
@@ -29,7 +30,7 @@
                 android:gravity="center_vertical"
                 android:paddingLeft="30px"
                 android:paddingTop="10px"
-                android:text="委外发料单信息"
+                android:text="@string/outsource_send_orderno_info"
                 android:textColor="#333"
                 android:textSize="28px"
                 android:textStyle="bold"/>
@@ -313,6 +314,7 @@
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rlv_orderno_info"
                 android:layout_width="match_parent"
+                android:scrollbars="none"
                 android:layout_height="wrap_content"/>
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>

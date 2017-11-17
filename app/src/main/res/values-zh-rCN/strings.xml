@@ -57,11 +57,11 @@
     /**====== 入库 ======**/
     <string name="stock_in_receive_pro">收货</string>
     <string name="stock_in">入库</string>
-    <string name="stock_in_other_iblib_check">其他入库-审核</string>
-    <string name="stock_in_othre_inlib_create_order">其他入库-生单</string>
+    <string name="stock_in_other_iblib_check">其他入库(审核)</string>
+    <string name="stock_in_othre_inlib_create_order">其他入库(生单)</string>
     <string name="stock_in_come_pro_in">来料入库</string>
-    <string name="stock_in_check">产成品审核</string>
-    <string name="stock_in_create_order">产成品-生单</string>
+    <string name="stock_in_check">产成品(审核)</string>
+    <string name="stock_in_create_order">产成品(生单)</string>
     <string name="stock_in_buy_order">采购单</string>
     <string name="stock_in_send_order">送货单</string>
     <string name="stock_in_return_pro">退料</string>
@@ -339,8 +339,16 @@
     <string name="goods_num">物品数量：%1$s</string>
     <string name="commit_check">提交审核</string>
     <string name="buy_return_material_orderno_title">单个退料 (采购)</string>
+    <string name="divide_barcode_tip">拆分条码</string>
+    <string name="barcode_contain_total_num_tip">条码包装总量</string>
+    <string name="should_return_num_tip">应退数量</string>
+    <string name="divide_num_tip">拆分数量</string>
+    <string name="please_input_divide_num">请输入拆分数量</string>
+    <string name="commit_check_success">提交审核成功！</string>
+    <string name="commit_success">提交成功</string>
+    <string name="please_inpiut_or_scan_visible_material_code">没有任何条码扫描数据，请扫描后再提交</string>
     /**====== 其他出库 出库扫描 ======**/
-    <string name="other_out_stock_scan_title">其他出库—出库扫描</string>
+    <string name="other_out_stock_scan_title">其他出库(出库扫描)</string>
     <string name="create_other_out_stock_orderno">生成其他出库单</string>
     /**====== 异常 ======**/
     <string name="exp_network_exception">网络连接异常，请检查您的网络状态</string>
@@ -349,25 +357,25 @@
     <string name="exp_server_timeout">服务器连接超时</string>
     /**====== 出库 搜索 ======**/
     <string name="stock_out_outsource_feed_tip">委外补料单号</string>
-    <string name="stock_out_outsource_feed_title">委外补料—选单</string>
-    <string name="stock_out_outsource_audit_title">委外发料—选单</string>
+    <string name="stock_out_outsource_feed_title">委外补料(选单)</string>
+    <string name="stock_out_outsource_audit_title">委外发料(审核)</string>
     <string name="stock_out_outsource_audit_tip">委外发料单号</string>
     <string name="stock_out_outsource_bill_tip">委外订单号</string>
-    <string name="stock_out_production_feed_title">生产补料—选单</string>
+    <string name="stock_out_production_feed_title">生产补料(选单)</string>
     <string name="stock_out_production_feed_tip">生产补料单号</string>
-    <string name="stock_out_production_audit_title">生产领料—选单</string>
+    <string name="stock_out_production_audit_title">生产领料(选单)</string>
     <string name="stock_out_production_audit_tip">生产领料单号</string>
     <string name="stock_out_production_bill_tip">生产任务单号</string>
-    <string name="stock_out_pick">拣货—选单</string>
+    <string name="stock_out_pick">拣货(选单)</string>
     <string name="stock_out_pick_tip">调拨单</string>
     <string name="stock_out_pick_send_orderno">发货通知单</string>
     <string name="stock_out_pick_sell_outstock_orderno">销售出库单</string>
-    <string name="stock_out_sell_audit_title">销售出库—选单</string>
+    <string name="stock_out_sell_audit_title">销售出库(选单)</string>
     <string name="stock_out_sell_audit_tip">销售出库单</string>
     <string name="stock_out_sell_bill_tip">销售订单</string>
-    <string name="stock_out_other_audit_title">其他出库—选单</string>
+    <string name="stock_out_other_audit_title">其他出库(选单)</string>
     <string name="stock_out_other_audit_tip">其他出库单</string>
-    <string name="stock_out_other_bill_title">其他出库—出库扫描</string>
+    <string name="stock_out_other_bill_title">其他出库(出库扫描)</string>
     /**====== 委外补料 ======**/
     <string name="outsource_orderno">委外单号：%1$s</string>
     <string name="lib_name">仓库名称：%1$s</string>
@@ -375,8 +383,35 @@
     <string name="send_material_num">发料数量：%1$s</string>
     <string name="have_get_num">已领数量：%1$s</string>
     <string name="can_get_num">可领数量：%1$s</string>
+    /**====== 委外发料 ======**/
+    <string name="have_scan_all_materail">已扫描完所有的物料</string>
+    <string name="barcode_divie_in_stock_success">条码拆分入库成功！</string>
+    <string name="outsource_orderno_tip">委外单号</string>
+    <string name="stock_name_tip">仓库名称</string>
+    <string name="strict_name_tip">区域名称</string>
+    <string name="send_material_total_num_tip">发料总数</string>
+    <string name="have_get_total_num_tip">已领总数</string>
+    <string name="can_get_total_num_tip">可领总数</string>
+    <string name="send_material_num_tip">发料数量</string>
+    <string name="send_material_lib_tip">发料仓库</string>
+    <string name="controll_type_tip">管控方式</string>
+    <string name="header_outsource_audit">发料数</string>
+    <string name="header_wait_count_num">待点数</string>
+    <string name="header_scan_num">扫描数</string>
+    <string name="outsource_audit_title">物品清单(委外发料)</string>
+    <string name="oursource_audit_maiterial_point_title">物品清点(委外发料)</string>
+    <string name="out_stock_total_num_tip">出库总数</string>
+    <string name="out_source_title">委外发料</string>
+    <string name="no_controll_tip">非管控</string>
+    <string name="first_in_first_out_dont_constranct">先进先出-非强制(</string>
+    <string name="first_in_first_out_constranct">先进先出-强制(</string>
+    <string name="header_batch_lib_code">库位码</string>
+    <string name="can_user_repertory">库存数</string>
+    <string name="header_have_count_num">已点数</string>
+    <string name="header_can_useful_life">有效期</string>
+    <string name="batch_tip">批次</string>
     /**====== 委外补料 物品清点 ======**/
-    <string name="outsource_feed_point_title">委外补料—物品清单</string>
+    <string name="outsource_feed_point_title">物品清单(委外补料)</string>
     <string name="close">关闭</string>
     <string name="send_material_lib_name">发料仓库：%1$s</string>
     <string name="other_add_attr">附加属性：%1$s</string>
@@ -610,9 +645,9 @@
     <string name="item_goods_num">物品数量</string>
     <string name="item_goods_current_status">当前状态</string>
     <string name="allot_orderno_tip">调拨单：</string>
-    <string name="wait_point_num_tip">待点总数：</string>
+    <string name="wait_point_num_tip">待点总数</string>
     <string name="create_date_tip">制单日期：</string>
-    <string name="have_point_num_tip">已点总数：</string>
+    <string name="have_point_num_tip">已点总数</string>
     /******************************************************************************************************************************************************/
     /******************************************************************************************************************************************************/
     /**====== 综合查询 ======**/
@@ -620,23 +655,11 @@
     <string name="query_retrospective">追溯查询</string>
     <string name="query_record_tip">记录查询</string>
     <string name="query_statistical_tip">统计查询</string>
-    <string name="divide_barcode_tip">拆分条码</string>
-    <string name="barcode_contain_total_num_tip">条码包装总量</string>
-    <string name="should_return_num_tip">应退数量</string>
-    <string name="divide_num_tip">拆分数量</string>
-    <string name="please_input_divide_num">请输入拆分数量</string>
-    <string name="commit_check_success">提交审核成功！</string>
-    <string name="commit_success">提交成功</string>
-    <string name="please_inpiut_or_scan_visible_material_code">请输入或扫描有效的条码</string>
-    <string name="have_scan_all_materail">已扫描完所有的物料</string>
-    <string name="barcode_divie_in_stock_success">条码拆分入库成功！</string>
-    <string name="strict_name_tip">区域名称</string>
-    <string name="send_material_total_num_tip">发料总数</string>
-    <string name="have_get_total_num_tip">已领总数</string>
-    <string name="can_get_total_num_tip">可领总数</string>
-    <string name="send_material_num_tip">发料数量</string>
-    <string name="send_material_lib_tip">发料仓库</string>
-    <string name="controll_type_tip">管控方式</string>
+    <string name="batch_remind_tip">批次提醒</string>
+    <string name="batch_info_title">批次信息</string>
+    <string name="stock_out_outsource_bill_title">委外发料(生单)</string>
+    <string name="commit_create_bill_success">提交制单成功</string>
+    <string name="outsource_send_orderno_info">委外发料单信息</string>
 
 
 </resources>

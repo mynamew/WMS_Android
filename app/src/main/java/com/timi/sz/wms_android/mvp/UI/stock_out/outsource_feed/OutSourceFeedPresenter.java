@@ -1,10 +1,11 @@
-package com.timi.sz.wms_android.mvp.UI.stock_out.outsourcing_audit;
+package com.timi.sz.wms_android.mvp.UI.stock_out.outsource_feed;
 
 import android.content.Context;
 
 import com.timi.sz.wms_android.base.uils.ToastUtils;
 import com.timi.sz.wms_android.http.callback.OnResultCallBack;
 import com.timi.sz.wms_android.http.subscriber.HttpSubscriber;
+import com.timi.sz.wms_android.mvp.UI.stock_out.outsourcing_audit.OursourcingAuditGoodsListModel;
 import com.timi.sz.wms_android.mvp.base.presenter.impl.MvpBasePresenter;
 
 import java.util.Map;
@@ -12,16 +13,17 @@ import java.util.Map;
 /**
  * $dsc
  * author: timi
- * create at: 2017-11-09 09:15
+ * create at: 2017-11-09 10:29
  */
 
-public class OursourcingAuditGoodsListPresenter extends MvpBasePresenter<OursourcingAuditGoodsListView> {
-    private OursourcingAuditGoodsListModel model;
-    HttpSubscriber<Object> submitMakeOrAuditBillHttpSubscriber = null;
-    public OursourcingAuditGoodsListPresenter(Context context) {
+public class OutSourceFeedPresenter extends MvpBasePresenter<OutSourceFeedView> {
+    private OutSourceFeedModel model;
+
+    public OutSourceFeedPresenter(Context context) {
         super(context);
-        model = new OursourcingAuditGoodsListModel();
+        model = new OutSourceFeedModel();
     }
+    HttpSubscriber<Object> submitMakeOrAuditBillHttpSubscriber = null;
     /**
      * 提交制单
      * @param params

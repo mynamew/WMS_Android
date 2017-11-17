@@ -1,11 +1,7 @@
 package com.timi.sz.wms_android.mvp.UI.stock_out.query;
 
-import android.Manifest;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.inputmethod.EditorInfo;
@@ -20,25 +16,30 @@ import com.timi.sz.wms_android.base.uils.InputMethodUtils;
 import com.timi.sz.wms_android.base.uils.PackageUtils;
 import com.timi.sz.wms_android.base.uils.SpUtils;
 import com.timi.sz.wms_android.base.uils.ToastUtils;
-import com.timi.sz.wms_android.bean.outstock.outsource.OutSourceFeedBean;
 import com.timi.sz.wms_android.bean.outstock.outsource.QueryOutSourceFeedByInputResult;
-import com.timi.sz.wms_android.mvp.UI.stock_out.outsource_feeed.OutSourceFeedActivity;
-import com.timi.sz.wms_android.mvp.UI.stock_out.point_list.PointListActivity;
+import com.timi.sz.wms_android.bean.outstock.outsource.QueryOutSourcePickByInputResult;
+import com.timi.sz.wms_android.bean.outstock.outsource.QueryWWPickDataByOutSourceResult;
+import com.timi.sz.wms_android.mvp.UI.stock_out.outsource_bill.OutsourcingBillActivity;
+import com.timi.sz.wms_android.mvp.UI.stock_out.outsource_bill.OutsourcingBillNormalActivity;
+import com.timi.sz.wms_android.mvp.UI.stock_out.outsource_feed.OutSourceFeedActivity;
+import com.timi.sz.wms_android.mvp.UI.stock_out.outsourcing_audit.OursourcingAuditGoodsListActivity;
+import com.timi.sz.wms_android.mvp.UI.stock_out.outsourcing_audit.OutSourceAuditNormalActivity;
 import com.timi.sz.wms_android.mvp.base.BaseActivity;
-import com.timi.sz.wms_android.qrcode.CommonScanActivity;
 import com.timi.sz.wms_android.qrcode.utils.Constant;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-import static com.timi.sz.wms_android.base.uils.Constants.REQUEST_CODE;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_CODE_STR;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_OTHER_OUT_AUDIT;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_OUTSOURCE_AUDIT;
+import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_OUTSOURCE_AUDIT_BEAN;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_OUTSOURCE_BILL;
+import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_OUTSOURCE_BILL_BEAN;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_OUTSOURCE_FEED_BEAN;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_OUTSOURCE_FEED_SUPLLIEMENT;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_PRODUCTION_AUDIT;
@@ -52,13 +53,15 @@ import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_SELL_OUT_BIL
  * author: timi
  * create at: 2017/9/4 8:51
  */
-public class  StockOutSearchActivity extends BaseActivity<StockOutSearchView, StockOutSearchPresenter> implements StockOutSearchView {
+public class StockOutSearchActivity extends BaseActivity<StockOutSearchView, StockOutSearchPresenter> implements StockOutSearchView {
     @BindView(R.id.tv_stockout_tip)
     TextView tvStockoutTip;
     @BindView(R.id.et_stockout_input)
     EditText etStockoutInput;
     @BindView(R.id.iv_sotckout_scan)
     ImageView ivSotckoutScan;
+    @BindView(R.id.tv_query_title)
+    TextView tvQueryTitle;
     private int intentCode = 5020;// code，码 默认是委外退料单
 
     @Override
@@ -79,38 +82,47 @@ public class  StockOutSearchActivity extends BaseActivity<StockOutSearchView, St
         switch (intentCode) {
             case STOCK_OUT_OUTSOURCE_FEED_SUPLLIEMENT://委外补料
                 setActivityTitle(getString(R.string.stock_out_outsource_feed_title));
+                tvQueryTitle.setText(R.string.stock_out_out_add_materail);
                 tvStockoutTip.setText(R.string.stock_out_outsource_feed_tip);
                 break;
             case STOCK_OUT_OUTSOURCE_AUDIT://委外审核
                 setActivityTitle(getString(R.string.stock_out_outsource_audit_title));
+                tvQueryTitle.setText(R.string.out_source_title);
                 tvStockoutTip.setText(R.string.stock_out_outsource_audit_tip);
                 break;
             case STOCK_OUT_OUTSOURCE_BILL://委外 生单
-                setActivityTitle(getString(R.string.stock_out_outsource_audit_title));
+                setActivityTitle(getString(R.string.stock_out_outsource_bill_title));
+                tvQueryTitle.setText(R.string.out_source_title);
                 tvStockoutTip.setText(R.string.stock_out_outsource_bill_tip);
                 break;
             case STOCK_OUT_PRODUCTION_FEEDING://生产 补料
                 setActivityTitle(getString(R.string.stock_out_production_feed_title));
+                tvQueryTitle.setText(R.string.stock_out_create_add_materail);
                 tvStockoutTip.setText(R.string.stock_out_production_feed_tip);
                 break;
             case STOCK_OUT_PRODUCTION_AUDIT://生产 审核
                 setActivityTitle(getString(R.string.stock_out_production_feed_title));
+                tvQueryTitle.setText(R.string.stock_out_create_add_materail);
                 tvStockoutTip.setText(R.string.stock_out_production_feed_tip);
                 break;
             case STOCK_OUT_PRODUCTION_BILL://生产 生单
                 setActivityTitle(getString(R.string.stock_out_production_feed_title));
+                tvQueryTitle.setText(R.string.stock_out_create_add_materail);
                 tvStockoutTip.setText(R.string.stock_out_production_feed_tip);
                 break;
             case STOCK_OUT_SELL_OUT_AUDIT://销售 审核
                 setActivityTitle(getString(R.string.stock_out_production_feed_title));
+                tvQueryTitle.setText(R.string.stock_in_sale_return);
                 tvStockoutTip.setText(R.string.stock_out_production_feed_tip);
                 break;
             case STOCK_OUT_SELL_OUT_BILL://销售 生单
                 setActivityTitle(getString(R.string.stock_out_production_feed_title));
+                tvQueryTitle.setText(R.string.stock_in_sale_return);
                 tvStockoutTip.setText(R.string.stock_out_production_feed_tip);
                 break;
             case STOCK_OUT_OTHER_OUT_AUDIT:// 其他 审核
                 setActivityTitle(getString(R.string.stock_out_production_feed_title));
+                tvQueryTitle.setText(R.string.stock_out_create_add_materail);
                 tvStockoutTip.setText(R.string.stock_out_production_feed_tip);
                 break;
         }
@@ -125,10 +137,10 @@ public class  StockOutSearchActivity extends BaseActivity<StockOutSearchView, St
                     InputMethodUtils.hide(StockOutSearchActivity.this);
                     String orderNum = etStockoutInput.getText().toString().trim();
                     if (TextUtils.isEmpty(orderNum)) {
-                        ToastUtils.showShort("请输入单号");
+                        ToastUtils.showShort(R.string.query_allot_scan_hint);
                     }
-                    if (orderNum.length() <= 4) {
-                        ToastUtils.showShort("输入查询单号位数必须是4位以上");
+                    if (orderNum.length() < 4) {
+                        ToastUtils.showShort(R.string.input_orderno_more_four);
                     } else {
                         /**
                          * 发起请求
@@ -187,8 +199,12 @@ public class  StockOutSearchActivity extends BaseActivity<StockOutSearchView, St
                 getPresenter().queryOutSourceFeedByInput(params);
                 break;
             case Constants.STOCK_OUT_OUTSOURCE_AUDIT://委外发货-审核
+                getPresenter().queryOutSourcePickByInput(params);
+
                 break;
             case Constants.STOCK_OUT_OUTSOURCE_BILL:////委外发货-生单
+                getPresenter().queryWWPickDataByOutSource(params);
+                break;
             case Constants.STOCK_OUT_PRODUCTION_FEEDING://生产补料
                 break;
             case Constants.STOCK_OUT_PRODUCTION_AUDIT://生产领料-审核
@@ -208,7 +224,7 @@ public class  StockOutSearchActivity extends BaseActivity<StockOutSearchView, St
 
     /**
      * 委外补料的请求 回调
-     *  跳转到清点的界面
+     * 跳转到清点的界面
      *
      * @param bean
      */
@@ -218,4 +234,46 @@ public class  StockOutSearchActivity extends BaseActivity<StockOutSearchView, St
         intent.putExtra(STOCK_OUT_OUTSOURCE_FEED_BEAN, new Gson().toJson(bean));
         startActivity(intent);
     }
+
+    /**
+     * 委外发料的请求 回调
+     * 跳转到清点的界面
+     *
+     * @param bean
+     */
+    @Override
+    public void queryOutSourcePickByInput(QueryOutSourcePickByInputResult bean) {
+        Intent intent = new Intent();
+        /**
+         * 是否是批次拣货 ，如果是则跳转到 批次拣货的清单的界面 否则跳转到普通出库的界面
+         */
+        if (bean.getSummaryResults().isIsLotPick()) {
+            intent.setClass(this, OursourcingAuditGoodsListActivity.class);
+        } else {
+            intent.setClass(this, OutSourceAuditNormalActivity.class);
+        }
+        intent.putExtra(STOCK_OUT_OUTSOURCE_AUDIT_BEAN, new Gson().toJson(bean));
+        startActivity(intent);
+    }
+
+    @Override
+    public void queryWWPickDataByOutSource(QueryWWPickDataByOutSourceResult bean) {
+        QueryWWPickDataByOutSourceResult.SummaryResultsBean summaryResults = bean.getSummaryResults();
+        /**
+         * 一共分4 中情况
+         * 1、不合并  非批次  拣货
+         * 2、不合并   批次   拣货
+         * 3、 合并   非批次  拣货
+         * 4   合并    批次   拣货
+         */
+        Intent  intent=new Intent();
+        intent.putExtra(STOCK_OUT_OUTSOURCE_BILL_BEAN, new Gson().toJson(bean));
+        if(summaryResults.isIsLotPick()){//批次拣货
+            intent.setClass(this, OutsourcingBillActivity.class);
+        }else{
+            intent.setClass(this, OutsourcingBillNormalActivity.class);
+        }
+        startActivity(intent);
+    }
+
 }

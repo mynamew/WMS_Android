@@ -552,5 +552,25 @@
     <string name="send_material_num_tip">发料数量</string>
     <string name="send_material_lib_tip">发料仓库</string>
     <string name="controll_type_tip">管控方式</string>
+    <string name="header_outsource_audit">发料数</string>
+    <string name="header_wait_count_num">待点数</string>
+    <string name="header_scan_num">扫描数</string>
+    <string name="outsource_audit_title">物品清单(委外发料)</string>
+    <string name="oursource_audit_maiterial_point_title">物品清点(委外发料)</string>
+    <string name="out_stock_total_num_tip">出库总数</string>
+    <string name="out_source_title">委外发料</string>
+    <string name="no_controll_tip">非管控</string>
+    <string name="first_in_first_out_dont_constranct">先进先出-非强制(</string>
+    <string name="first_in_first_out_constranct">先进先出-强制(</string>
+    <string name="header_batch_lib_code">库位码</string>
+    <string name="can_user_repertory">可用库存</string>
+    <string name="header_have_count_num">已点数量</string>
+    <string name="header_can_useful_life">有效期</string>
+    <string name="batch_tip">批次</string>
+    <string name="batch_remind_tip">批次提醒</string>
+    <string name="batch_info_title">批次信息</string>
+    <string name="stock_out_outsource_bill_title">委外发料(生单)</string>
+    <string name="commit_create_bill_success">提交制单成功</string>
+    <string name="outsource_send_orderno_info">委外发料单信息</string>
 
 </resources>

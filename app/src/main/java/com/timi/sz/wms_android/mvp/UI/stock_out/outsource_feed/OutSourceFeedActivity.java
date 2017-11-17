@@ -1,9 +1,11 @@
-package com.timi.sz.wms_android.mvp.UI.stock_out.outsource_feeed;
+package com.timi.sz.wms_android.mvp.UI.stock_out.outsource_feed;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -15,15 +17,22 @@ import com.timi.sz.wms_android.R;
 import com.timi.sz.wms_android.base.adapter.BaseRecyclerAdapter;
 import com.timi.sz.wms_android.base.adapter.RecyclerViewHolder;
 import com.timi.sz.wms_android.base.divider.DividerItemDecoration;
+import com.timi.sz.wms_android.base.uils.PackageUtils;
+import com.timi.sz.wms_android.base.uils.SpUtils;
+import com.timi.sz.wms_android.base.uils.ToastUtils;
 import com.timi.sz.wms_android.bean.outstock.outsource.QueryOutSourceFeedByInputResult;
 import com.timi.sz.wms_android.mvp.base.BaseActivity;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_OUT_SOURCE_AUDIT_MATERIAL_POINT_SUMMARY_BEAN;
 import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_OUT_SOURCE_FEED_MATERIAL_POINT_BEAN;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_OUTSOURCE_FEED_BEAN;
 
@@ -82,6 +91,8 @@ public class OutSourceFeedActivity extends BaseActivity<OutSourceFeedView, OutSo
     RecyclerView rlvOrdernoInfo;
     @BindView(R.id.btn_point_commit)
     Button btnPointCommit;
+    @BindView(R.id.nescroll_feed)
+    NestedScrollView nescrollFeed;
 
     @Override
     public int setLayoutId() {
@@ -94,6 +105,7 @@ public class OutSourceFeedActivity extends BaseActivity<OutSourceFeedView, OutSo
 
     @Override
     public void initBundle(Bundle savedInstanceState) {
+        setActivityTitle(getString(R.string.outsource_feed_point_title));
         queryOutSourceFeedByInputResult = new Gson().fromJson(getIntent().getStringExtra(STOCK_OUT_OUTSOURCE_FEED_BEAN), QueryOutSourceFeedByInputResult.class);
     }
 
@@ -145,16 +157,20 @@ public class OutSourceFeedActivity extends BaseActivity<OutSourceFeedView, OutSo
             };
             rlvOrdernoInfo.setAdapter(adapter);
             rlvOrdernoInfo.setLayoutManager(new LinearLayoutManager(this));
-            rlvOrdernoInfo.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST, R.drawable.item_badness_divider));
+            rlvOrdernoInfo.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST, R.drawable.item_point_divider));
             adapter.setOnItemClickListener(new BaseRecyclerAdapter.OnItemClickListener() {
                 @Override
                 public void onItemClick(View itemView, int pos) {
                     Intent it = new Intent(OutSourceFeedActivity.this, OutSourceFeedMaterialPointActivity.class);
                     it.putExtra(OUT_STOCK_OUT_SOURCE_FEED_MATERIAL_POINT_BEAN, new Gson().toJson(mDatas.get(pos)));
+                    it.putExtra(OUT_STOCK_OUT_SOURCE_AUDIT_MATERIAL_POINT_SUMMARY_BEAN, new Gson().toJson(queryOutSourceFeedByInputResult.getSummaryResults()));
                     startActivity(it);
                 }
             });
-        } else adapter.notifyDataSetChanged();
+            rlvOrdernoInfo.scrollToPosition(0);
+        } else {
+            adapter.notifyDataSetChanged();
+        }
     }
 
     @Override
@@ -162,8 +178,8 @@ public class OutSourceFeedActivity extends BaseActivity<OutSourceFeedView, OutSo
         QueryOutSourceFeedByInputResult.SummaryResultsBean summaryResults = queryOutSourceFeedByInputResult.getSummaryResults();
         tvOutsourceOrderno.setText(summaryResults.getBillCode());
         tvCreateOrdernoDate.setText(summaryResults.getBillDate());
-        tvStockName.setText(summaryResults.getWarehouseName());
-        tvStrictName.setText(summaryResults.getRegionName());
+        tvStockName.setText(TextUtils.isEmpty(summaryResults.getWarehouseName()) ? getString(R.string.none) : summaryResults.getWarehouseName());
+        tvStrictName.setText(TextUtils.isEmpty(summaryResults.getRegionName()) ? getString(R.string.none) : summaryResults.getRegionName());
         tvBuyNum.setText(String.valueOf(summaryResults.getQty()));
         tvWaitPointNum.setText(String.valueOf(summaryResults.getWaitQty()));
         tvHaveCountNum.setText(String.valueOf(summaryResults.getScanQty()));
@@ -187,7 +203,24 @@ public class OutSourceFeedActivity extends BaseActivity<OutSourceFeedView, OutSo
                 initAdapter();
                 break;
             case R.id.btn_point_commit:
+                if (queryOutSourceFeedByInputResult.getSummaryResults().getScanId() == 0) {
+                    ToastUtils.showShort(getString(R.string.please_inpiut_or_scan_visible_material_code));
+                    return;
+                }
+                Map<String, Object> params = new HashMap<>();
+                params.put("UserId", SpUtils.getInstance().getUserId());
+                params.put("MAC", PackageUtils.getMac());
+                params.put("OrgId", SpUtils.getInstance().getOrgId());
+                params.put("ScanId", queryOutSourceFeedByInputResult.getSummaryResults().getScanId());
+                params.put("SubmitType", 0);
+                getPresenter().submitMakeOrAuditBill(params);
                 break;
         }
+    }
+
+    @Override
+    public void submitMakeOrAuditBill() {
+        ToastUtils.showShort(getString(R.string.commit_check_success));
+        onBackPressed();
     }
 }

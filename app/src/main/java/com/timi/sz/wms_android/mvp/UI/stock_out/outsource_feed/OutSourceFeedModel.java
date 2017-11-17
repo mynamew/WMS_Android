@@ -1,4 +1,4 @@
-package com.timi.sz.wms_android.mvp.UI.stock_out.outsourcing_audit;
+package com.timi.sz.wms_android.mvp.UI.stock_out.outsource_feed;
 
 import com.timi.sz.wms_android.http.HttpManager;
 import com.timi.sz.wms_android.http.api.ApiService;
@@ -14,10 +14,10 @@ import io.reactivex.Observer;
 /**
  * $dsc
  * author: timi
- * create at: 2017-11-09 09:15
+ * create at: 2017-11-09 10:29
  */
 
-public class OursourcingAuditGoodsListModel extends MvpBaseModel {
+public class OutSourceFeedModel  extends MvpBaseModel {
     /**
      * 提交审核
      * @param observer
@@ -30,6 +30,4 @@ public class OursourcingAuditGoodsListModel extends MvpBaseModel {
             }
         });
     }
-
-
 }

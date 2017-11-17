@@ -2,6 +2,8 @@ package com.timi.sz.wms_android.mvp.UI.stock_out.query;
 
 import com.timi.sz.wms_android.bean.outstock.outsource.OutSourceFeedBean;
 import com.timi.sz.wms_android.bean.outstock.outsource.QueryOutSourceFeedByInputResult;
+import com.timi.sz.wms_android.bean.outstock.outsource.QueryOutSourcePickByInputResult;
+import com.timi.sz.wms_android.bean.outstock.outsource.QueryWWPickDataByOutSourceResult;
 import com.timi.sz.wms_android.mvp.base.view.iml.MvpBaseView;
 
 /**
@@ -11,5 +13,21 @@ import com.timi.sz.wms_android.mvp.base.view.iml.MvpBaseView;
  */
 
 public interface StockOutSearchView extends MvpBaseView {
+    /**
+     * 委外补料
+     * @param bean
+     */
     void queryOutSourceFeedByInput(QueryOutSourceFeedByInputResult bean);
+
+    /**
+     * 委外发料（审核）
+     * @param bean
+     */
+    void queryOutSourcePickByInput(QueryOutSourcePickByInputResult bean);
+
+    /**
+     * 委外发料（生单）
+     * @param bean
+     */
+    void queryWWPickDataByOutSource(QueryWWPickDataByOutSourceResult bean);
 }

@@ -13,8 +13,8 @@ import static com.timi.sz.wms_android.base.uils.PackageUtils.isApkDebugable;
 
 public class Constants {
     //base url
-    public static final String BASE_URL = "http://szjuqent.imwork.net:83/";
-//    public static final String BASE_URL = "http://192.168.0.39:8066/";
+//    public static final String BASE_URL = "http://szjuqent.imwork.net:83/";
+    public static final String BASE_URL = "http://192.168.0.39:8066/";
     //超时时间   5s
     public static int DEFAULT_TIMEOUT = 5000;
     /**********
@@ -141,10 +141,6 @@ public class Constants {
     public static final String OUT_STOCK_BUY_RETURN_ORDERNO_BEAN = "out_stock_buy_return_orderno_bean";
 
     /**
-     * 委外补料的key（跳转到物料清点详情）
-     */
-    public static final String OUT_STOCK_OUT_SOURCE_FEED_MATERIAL_POINT_BEAN = "out_stock_out_source_feed_material_point_bean";
-    /**
      * 搜索 跳转的intent code
      */
     public static final String STOCK_OUT_CODE_STR = "stockout_code";//出库的code码的key
@@ -165,7 +161,7 @@ public class Constants {
     public static final int STOCK_OUT_OTHER_OUT_AUDIT = 5030;//其他出库-审核
     public static final int STOCK_OUT_OTHER_OUT_BILL = 5031;//其他出库-生单
     /**
-     * 搜索 跳转的传递对象的key
+     * 出库搜索 跳转的传递对象的key
      */
     //委外补料传递实体的key
     public static final String STOCK_OUT_OUTSOURCE_FEED_BEAN = "stock_out_outsource_feed_bean";//委外补料传递实体的key
@@ -180,6 +176,12 @@ public class Constants {
     public static final String STOCK_OUT_OTHER_AUDIT_BEAN = "stock_out_other_audit_bean";//其他-审核传递实体的key
     public static final String STOCK_OUT_OTHER_BILL_BEAN = "stock_out_other_bill_bean";//其他-生单传递实体的key
     public static final String STOCK_OUT_POINT_DETAIL_BEAN = "stock_out_point_detail_bean";//清点详情传递实体的key
+    /**
+     * 出库-跳转到物料清点详情
+     */
+    public static final String OUT_STOCK_OUT_SOURCE_FEED_MATERIAL_POINT_BEAN = "out_stock_out_source_feed_material_point_bean";//委外补料
+    public static final String OUT_STOCK_OUT_SOURCE_AUDIT_MATERIAL_POINT_BEAN = "out_stock_out_source_audit_material_point_bean";//委外审核-物料
+    public static final String OUT_STOCK_OUT_SOURCE_AUDIT_MATERIAL_POINT_SUMMARY_BEAN = "out_stock_out_source_audit_material_point_summary_bean";//委外审核-summary
 
     /***********
      * 库内作业跳转的key

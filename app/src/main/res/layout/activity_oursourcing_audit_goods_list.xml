@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#fff"
+    android:background="@color/divide_color"
     android:orientation="vertical"
     tools:context="com.timi.sz.wms_android.mvp.UI.stock_out.outsourcing_audit.OursourcingAuditGoodsListActivity">
 
@@ -19,6 +19,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="#fff"
             android:orientation="vertical">
 
             <TextView
@@ -50,7 +51,7 @@
                     android:id="@+id/tv_orderno_tip"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingLeft="20px"
+                    android:paddingLeft="30px"
                     android:text="@string/outsource_orderno_tip"
                     android:textColor="#333"
                     android:textSize="26px"/>
@@ -60,7 +61,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingLeft="60px"
-                    android:text=""
+                    android:text="123213123"
                     android:textColor="#000"
                     android:textSize="26px"/>
             </LinearLayout>
@@ -76,7 +77,7 @@
                     android:id="@+id/tv_create_orderno_date_tip"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingLeft="20px"
+                    android:paddingLeft="30px"
                     android:text="@string/create_orderno_date_tip"
                     android:textColor="#333"
                     android:textSize="26px"/>
@@ -85,8 +86,8 @@
                     android:id="@+id/tv_create_orderno_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingLeft="35px"
-                    android:text=""
+                    android:paddingLeft="60px"
+                    android:text="123213123"
                     android:textColor="#000"
                     android:textSize="26px"/>
             </LinearLayout>
@@ -101,7 +102,7 @@
                     android:id="@+id/tv_stock_name_tip"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingLeft="20px"
+                    android:paddingLeft="30px"
                     android:text="@string/stock_name_tip"
                     android:textColor="#333"
                     android:textSize="26px"/>
@@ -111,7 +112,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingLeft="60px"
-                    android:text=""
+                    android:text="123213123"
                     android:textColor="#000"
                     android:textSize="26px"/>
             </LinearLayout>
@@ -126,7 +127,7 @@
                     android:id="@+id/tv_strict_name_tip"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingLeft="20px"
+                    android:paddingLeft="30px"
                     android:text="@string/strict_name_tip"
                     android:textColor="#333"
                     android:textSize="26px"/>
@@ -136,7 +137,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingLeft="60px"
-                    android:text=""
+                    android:text="123213123"
                     android:textColor="#000"
                     android:textSize="26px"/>
             </LinearLayout>
@@ -151,7 +152,7 @@
                     android:id="@+id/tv_send_material_total_num_tip"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingLeft="20px"
+                    android:paddingLeft="30px"
                     android:text="@string/send_material_total_num_tip"
                     android:textColor="#333"
                     android:textSize="26px"/>
@@ -161,7 +162,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingLeft="60px"
-                    android:text=""
+                    android:text="123213123"
                     android:textColor="#000"
                     android:textSize="26px"/>
             </LinearLayout>
@@ -170,12 +171,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20px"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:visibility="gone">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingLeft="20px"
+                    android:paddingLeft="30px"
                     android:text="@string/have_get_total_num_tip"
                     android:textColor="#333"
                     android:textSize="26px"/>
@@ -194,13 +196,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20px"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:visibility="gone">
 
                 <TextView
                     android:id="@+id/tv_can_get_total_num_tip"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingLeft="20px"
+                    android:paddingLeft="30px"
                     android:text="@string/can_get_total_num_tip"
                     android:textColor="#333"
                     android:textSize="26px"/>
@@ -225,7 +228,7 @@
                     android:id="@+id/tv_wait_count_num_tip"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingLeft="20px"
+                    android:paddingLeft="30px"
                     android:text="@string/wait_point_num_tip"
                     android:textColor="#333"
                     android:textSize="26px"/>
@@ -235,7 +238,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingLeft="60px"
-                    android:text=""
+                    android:text="123213123"
                     android:textColor="#000"
                     android:textSize="26px"/>
             </LinearLayout>
@@ -251,7 +254,7 @@
                     android:id="@+id/tv_have_count_num_tip"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingLeft="20px"
+                    android:paddingLeft="30px"
                     android:text="@string/have_point_num_tip"
                     android:textColor="#333"
                     android:textSize="26px"/>
@@ -261,7 +264,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingLeft="60px"
-                    android:text=""
+                    android:text="123213123"
                     android:textColor="#000"
                     android:textSize="26px"/>
             </LinearLayout>
@@ -299,18 +302,26 @@
                     android:src="@drawable/selector_stockin_detail"/>
 
             </RelativeLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_below="@id/rl_top_menu"
+                android:background="@color/divide_color"
+                android:visibility="visible"/>
 
+            <include layout="@layout/header_outsoure_point"/>
             <View
                 android:id="@+id/view_divide"
                 android:layout_width="match_parent"
                 android:layout_height="24px"
                 android:layout_below="@id/rl_top_menu"
-                android:background="@color/divide_color"/>
-
+                android:background="@color/divide_color"
+                android:visibility="visible"/>
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rlv_orderno_info"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 

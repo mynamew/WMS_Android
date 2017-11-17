@@ -271,9 +271,23 @@
         </activity>
         <activity android:name=".mvp.UI.stock_out.outsourcing_audit.OursourcingAuditGoodsListActivity">
         </activity>
-        <activity android:name=".mvp.UI.stock_out.outsource_feeed.OutSourceFeedActivity">
+        <activity android:name=".mvp.UI.stock_out.outsource_feed.OutSourceFeedActivity">
         </activity>
-        <activity android:name=".mvp.UI.stock_out.outsource_feeed.OutSourceFeedMaterialPointActivity">
+        <activity
+            android:name=".mvp.UI.stock_out.outsource_feed.OutSourceFeedMaterialPointActivity"
+            android:windowSoftInputMode="adjustPan|stateHidden">
+        </activity>
+        <activity
+            android:name=".mvp.UI.stock_out.outsourcing_audit.OutsourcingAuditPointActivity"
+            android:windowSoftInputMode="adjustPan|stateHidden">
+        </activity>
+        <activity android:name=".mvp.UI.stock_out.outsource_bill.OutsourcingBillActivity">
+        </activity>
+        <activity android:name=".mvp.UI.stock_out.outsource_bill.OutsourcingBillPointActivity">
+        </activity>
+        <activity android:name=".mvp.UI.stock_out.outsourcing_audit.OutSourceAuditNormalActivity">
+        </activity>
+        <activity android:name=".mvp.UI.stock_out.outsource_bill.OutsourcingBillNormalActivity">
         </activity>
     </application>
 

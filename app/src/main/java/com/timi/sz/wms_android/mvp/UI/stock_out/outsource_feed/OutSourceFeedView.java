@@ -1,4 +1,4 @@
-package com.timi.sz.wms_android.mvp.UI.stock_out.outsource_feeed;
+package com.timi.sz.wms_android.mvp.UI.stock_out.outsource_feed;
 
 import com.timi.sz.wms_android.mvp.base.view.iml.MvpBaseView;
 
@@ -9,4 +9,5 @@ import com.timi.sz.wms_android.mvp.base.view.iml.MvpBaseView;
  */
 
 public interface OutSourceFeedView extends MvpBaseView {
+    void submitMakeOrAuditBill();
 }
