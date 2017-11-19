@@ -37,7 +37,7 @@ public class RecyclerViewHolder extends RecyclerView.ViewHolder {
      * 通过空间id在SparseArray集合中找出用户View
      * @param viewId  控件的id
      * @param <T>  具体的是那个控件
-     * @return  当然是返回你要找的控件了
+     * @return_material  当然是返回你要找的控件了
      */
     private <T extends View> T findViewById(int viewId) {
         View view = mViews.get(viewId);

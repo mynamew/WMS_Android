@@ -144,7 +144,7 @@ public class Utils {
      * 旋转图片
      * @param angle
      * @param bitmap
-     * @return Bitmap
+     * @return_material Bitmap
      */
     public static Bitmap rotaingImageView(int angle , Bitmap bitmap) {
         //旋转图片 动作

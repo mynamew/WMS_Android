@@ -134,7 +134,7 @@ public class OutsourcingBillActivity extends BaseActivity<OutsourcingBillView, O
 
     @Override
     public void initData() {
-
+        initAdapter();
     }
 
     @Override
@@ -206,8 +206,13 @@ public class OutsourcingBillActivity extends BaseActivity<OutsourcingBillView, O
                 }
             }
         }
-
+        /**
+         * 是否合并发料
+         */
         if(queryWWPickDataByOutSourceResult.getSummaryResults().isIsMerge()){
+            /**
+             * 初始化 adapterDetail
+             */
             if (null == adapterDetail) {
                 adapterDetail = new BaseRecyclerAdapter<QueryWWPickDataByOutSourceResult.DetailResultsBean>(this, mDatasDetail) {
                     @Override
@@ -261,6 +266,9 @@ public class OutsourcingBillActivity extends BaseActivity<OutsourcingBillView, O
                         holder.setTextView(R.id.tv_material_model, item.getMaterialStandard());
                     }
                 };
+                /**
+                 * 初始化  adapter
+                 */
                 rlvOrdernoInfo.setAdapter(adapter);
                 rlvOrdernoInfo.setLayoutManager(new LinearLayoutManager(this));
                 rlvOrdernoInfo.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST, R.drawable.item_point_divider));

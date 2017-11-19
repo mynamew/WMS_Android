@@ -69,7 +69,7 @@ public class Utils {
      */
     /**
     public static int getJulianMondayFromWeeksSinceEpoch(int week) {
-        return MONDAY_BEFORE_JULIAN_EPOCH + week * 7;
+        return_material MONDAY_BEFORE_JULIAN_EPOCH + week * 7;
     }
      */
 
@@ -93,7 +93,7 @@ public class Utils {
             diff += 7;
         }
         int refDay = Time.EPOCH_JULIAN_DAY - diff;
-        return (julianDay - refDay) / 7;
+        return_material (julianDay - refDay) / 7;
     }
      */
 

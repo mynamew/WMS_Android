@@ -611,9 +611,9 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
     }
 
     /**
-     * This is implemented by derived classes to return the created View. If you
+     * This is implemented by derived classes to return_material the created View. If you
      * need to use a custom View (such as a custom ListView), override this
-     * method and return an instance of your custom class.
+     * method and return_material an instance of your custom class.
      * <p/>
      * Be sure to set the ID of the view in this method, especially if you're
      * using a ListActivity or ListFragment.
@@ -668,7 +668,7 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
     }
 
     /**
-     * Implemented by derived class to return whether the View is in a state
+     * Implemented by derived class to return_material whether the View is in a state
      * where the user can Pull to Refresh by scrolling from the end.
      *
      * @return true if the View is currently in the correct state (for example,
@@ -677,7 +677,7 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
     protected abstract boolean isReadyForPullEnd();
 
     /**
-     * Implemented by derived class to return whether the View is in a state
+     * Implemented by derived class to return_material whether the View is in a state
      * where the user can Pull to Refresh by scrolling from the start.
      *
      * @return true if the View is currently the correct state (for example, top
@@ -1397,7 +1397,7 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
                 }
             }
 
-            // If not, return default
+            // If not, return_material default
             return getDefault();
         }
 
@@ -1578,7 +1578,7 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
                 }
             }
 
-            // If not, return default
+            // If not, return_material default
             return RESET;
         }
 

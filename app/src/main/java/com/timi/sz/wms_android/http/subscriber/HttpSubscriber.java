@@ -108,7 +108,7 @@ public class HttpSubscriber<T> implements Observer<T> {
                 
                 ToastUtils.showShort(messageStr);
                 mOnResultListener.onError(messageStr);
-//                LogUitls.e("打印输出错误代码httpResultBean---->", httpResultBean.toString());
+                LogUitls.e("打印输出错误代码httpResultBean---->", httpResultBean.getError().getMessage().toString());
                 //进度条消失
                 MyProgressDialog.hideProgressDialog();
                 return;

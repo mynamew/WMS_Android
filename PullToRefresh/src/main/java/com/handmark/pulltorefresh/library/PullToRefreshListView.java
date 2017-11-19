@@ -129,7 +129,7 @@ public class PullToRefreshListView extends PullToRefreshAdapterViewBase<ListView
 	@Override
 	protected void onReset() {
 		/**
-		 * If the extras are not enabled, just call up to super and return.
+		 * If the extras are not enabled, just call up to super and return_material.
 		 */
 		if (!mListViewExtrasEnabled) {
 			super.onReset();

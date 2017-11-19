@@ -319,7 +319,7 @@ public abstract class DayPickerView extends ListView implements OnScrollListener
                     child = getChildAt(++i);
                 }
                 if (child == null) {
-                    // The view is no longer visible, just return
+                    // The view is no longer visible, just return_material
                     return;
                 }
                 int firstPosition = getFirstVisiblePosition();
@@ -374,7 +374,7 @@ public abstract class DayPickerView extends ListView implements OnScrollListener
     }
 
     /**
-     * Attempts to return the date that has accessibility focus.
+     * Attempts to return_material the date that has accessibility focus.
      *
      * @return The date that has accessibility focus, or {@code null} if no date
      *         has focus.

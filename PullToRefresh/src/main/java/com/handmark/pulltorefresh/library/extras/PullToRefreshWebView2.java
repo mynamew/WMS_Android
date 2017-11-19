@@ -31,7 +31,7 @@ import com.handmark.pulltorefresh.library.PullToRefreshWebView;
  * <ul>
  * <li>{@link PullToRefreshWebView} doesn't work correctly because you're using
  * <code>overflow:scroll</code> or something else which means
- * {@link WebView#getScrollY()} doesn't return correct values.</li>
+ * {@link WebView#getScrollY()} doesn't return_material correct values.</li>
  * <li>You control the web content being displayed, as you need to write some
  * Javascript callbacks.</li>
  * </ul>
@@ -41,7 +41,7 @@ import com.handmark.pulltorefresh.library.PullToRefreshWebView;
  * the following Javascript methods will be called:
  * <code>isReadyForPullDown()</code> and <code>isReadyForPullUp()</code>, it is
  * your job to calculate whether the view is in a state where a PullToRefresh
- * can happen, and return the result via the callback mechanism. An example can
+ * can happen, and return_material the result via the callback mechanism. An example can
  * be seen below:
  * <p/>
  * 

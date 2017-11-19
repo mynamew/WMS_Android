@@ -122,7 +122,7 @@ public class PullToRefreshRecyclerView extends PullToRefreshBase<RecyclerView> {
 
             //赵元海亲自修改
             //没有考虑到    lastItemPosition==-1   的情况
-            //return mRefreshableView.getChildAt(lastItemPosition).getBottom() <= mRefreshableView.getBottom();
+            //return_material mRefreshableView.getChildAt(lastItemPosition).getBottom() <= mRefreshableView.getBottom();
 
             if(lastItemPosition<0){
                 return true;

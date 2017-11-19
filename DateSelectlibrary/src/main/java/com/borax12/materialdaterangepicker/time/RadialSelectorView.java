@@ -220,7 +220,7 @@ public class RadialSelectorView extends View {
             } else {
                 // Otherwise, if we're close enough to either number (with the space between the
                 // two allotted equally), set the isInnerCircle boolean as the closer one.
-                // appropriately, but otherwise return -1.
+                // appropriately, but otherwise return_material -1.
                 int minAllowedHypotenuseForInnerNumber =
                         (int) (mCircleRadius * mInnerNumbersRadiusMultiplier) - mSelectionRadius;
                 int maxAllowedHypotenuseForOuterNumber =
@@ -239,7 +239,7 @@ public class RadialSelectorView extends View {
                 }
             }
         } else {
-            // If there's just one circle, we'll need to return -1 if:
+            // If there's just one circle, we'll need to return_material -1 if:
             // we're not told to force the coordinates to be legal, and
             // the coordinates' distance to the number is within the allowed distance.
             if (!forceLegal) {

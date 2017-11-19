@@ -1,5 +1,6 @@
 package com.timi.sz.wms_android.mvp.UI.stock_in.query;
 
+import com.timi.sz.wms_android.bean.instock.outsource_return_material.QueryOutSourceReturnByInputResult;
 import com.timi.sz.wms_android.bean.instock.search.BuyOrdernoBean;
 import com.timi.sz.wms_android.bean.instock.search.FinishGoodsCreateBillBean;
 import com.timi.sz.wms_android.bean.instock.search.FinishGoodsOrdernoBean;
@@ -121,16 +122,16 @@ public class SearchBuyModel extends MvpBaseModel {
   /**
      * 搜索委外退料—选单的单号
      *
-     * @param orderno
+     * @param params
      * @param observer
      */
-    public void searchOutReturnMaterialOrderno(final String orderno,
-                                                   final Observer<OutReturnMaterialBean> observer) {
+    public void searchOutReturnMaterialOrderno(final Map<String, Object> params,
+                                                   final Observer<QueryOutSourceReturnByInputResult> observer) {
         HttpManager.getInstance().HttpManagerRequest(observer,
-                new ApiServiceMethodCallBack<OutReturnMaterialBean>() {
+                new ApiServiceMethodCallBack<QueryOutSourceReturnByInputResult>() {
                     @Override
-                    public Observable<CommonResult<OutReturnMaterialBean>> createObservable(ApiService apiService) {
-                        return apiService.searchOutReturnMaterialOrderno(orderno);
+                    public Observable<CommonResult<QueryOutSourceReturnByInputResult>> createObservable(ApiService apiService) {
+                        return apiService.queryOutSourceReturnByInput(params);
                     }
                 });
     }

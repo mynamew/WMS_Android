@@ -73,7 +73,7 @@ public class FixedGridLayoutManager extends RecyclerView.LayoutManager {
     }
 
     /*
-     * You must return true from this method if you want your
+     * You must return_material true from this method if you want your
      * LayoutManager to support anything beyond "simple" item
      * animations. Enabling this causes onLayoutChildren() to
      * be called twice on each animated change; once for a

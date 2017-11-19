@@ -109,7 +109,7 @@ public class HttpManager {
 //                                 */
 ////                                BaseActivity currentActivty = (BaseActivity) BaseActivity.getCurrentActivty();
 ////                                currentActivty.jumpToLoginActivity();
-//                                return t.getResult();
+//                                return_material t.getResult();
 //                            }
                         } else {
                             throw new ApiException(t.getError().getMessage());

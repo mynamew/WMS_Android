@@ -18,6 +18,7 @@ import com.timi.sz.wms_android.base.uils.InputMethodUtils;
 import com.timi.sz.wms_android.base.uils.PackageUtils;
 import com.timi.sz.wms_android.base.uils.SpUtils;
 import com.timi.sz.wms_android.base.uils.ToastUtils;
+import com.timi.sz.wms_android.bean.instock.outsource_return_material.QueryOutSourceReturnByInputResult;
 import com.timi.sz.wms_android.bean.instock.search.BuyOrdernoBean;
 import com.timi.sz.wms_android.bean.instock.search.FinishGoodsCreateBillBean;
 import com.timi.sz.wms_android.bean.instock.search.FinishGoodsOrdernoBean;
@@ -273,19 +274,13 @@ public class SearchBuyOrderActivity extends BaseActivity<SearchBuyOrderView, Sea
         startActivity(it);
     }
 
-    /**
-     * 委外
-     *
-     * @param bean
-     */
     @Override
-    public void searchOutReturnMaterialOrderno(OutReturnMaterialBean bean) {
+    public void searchOutReturnMaterialOrderno(QueryOutSourceReturnByInputResult bean) {
         Intent it = new Intent(this, OutMaterialReturnActivity.class);
         it.putExtra(Constants.CODE_STR, intentCode);
         it.putExtra(IN_STOCK_FINISH_OUT_BEAN, new Gson().toJson(bean));
         startActivity(it);
     }
-
     /**
      * 生产
      *
@@ -346,7 +341,7 @@ public class SearchBuyOrderActivity extends BaseActivity<SearchBuyOrderView, Sea
                 getPresenter().searchOtherAuditSelectOrderno(orderNum);
                 break;
             case Constants.OUT_RETURN_MATERAIL://委外退料
-                getPresenter().searchOutReturnMaterialOrderno(orderNum);
+                getPresenter().searchOutReturnMaterialOrderno(params);
                 break;
             case Constants.CREATE_RETURN_MATERAIL://生产退料
                 getPresenter().searchProductionReturnMaterialOrderno(orderNum);

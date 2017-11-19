@@ -4,22 +4,22 @@ package com.timi.sz.wms_android.http.api;
 import com.timi.sz.wms_android.bean.LoginBean;
 import com.timi.sz.wms_android.bean.UserInfoBean;
 import com.timi.sz.wms_android.bean.VersionBean;
+import com.timi.sz.wms_android.bean.instock.MaterialScanPutAwayBean;
 import com.timi.sz.wms_android.bean.instock.OrderDetailData;
+import com.timi.sz.wms_android.bean.instock.VertifyLocationCodeBean;
+import com.timi.sz.wms_android.bean.instock.outsource_return_material.GetOutSourceReturnDetailResult;
+import com.timi.sz.wms_android.bean.instock.outsource_return_material.QueryOutSourceReturnByInputResult;
 import com.timi.sz.wms_android.bean.instock.search.BuyOrdernoBean;
 import com.timi.sz.wms_android.bean.instock.search.FinishGoodsCreateBillBean;
 import com.timi.sz.wms_android.bean.instock.search.FinishGoodsOrdernoBean;
-import com.timi.sz.wms_android.bean.instock.MaterialScanPutAwayBean;
 import com.timi.sz.wms_android.bean.instock.search.OtherAuditSelectOrdernoBean;
-import com.timi.sz.wms_android.bean.instock.search.OutReturnMaterialBean;
 import com.timi.sz.wms_android.bean.instock.search.ProductionReturnMaterialBean;
 import com.timi.sz.wms_android.bean.instock.search.ReceiveOrdernoBean;
 import com.timi.sz.wms_android.bean.instock.search.SaleGoodsReturnBean;
 import com.timi.sz.wms_android.bean.instock.search.SendOrdernoBean;
-import com.timi.sz.wms_android.bean.instock.VertifyLocationCodeBean;
 import com.timi.sz.wms_android.bean.instock.search.StockinMaterialBean;
 import com.timi.sz.wms_android.bean.outstock.buy.BuyReturnMaterialByMaterialCodeData;
-import com.timi.sz.wms_android.bean.outstock.buy.CommitMaterialScanToOredernoBean;
-import com.timi.sz.wms_android.bean.outstock.buy.OrderNoAddMaterial;
+import com.timi.sz.wms_android.bean.outstock.buy.BuyReturnMaterialByOrdernoData;
 import com.timi.sz.wms_android.bean.outstock.buy.OrderNoBean;
 import com.timi.sz.wms_android.bean.outstock.buy.SubmitBarcodeOutAuditData;
 import com.timi.sz.wms_android.bean.outstock.buy.SubmitBarcodeOutSplitAuditData;
@@ -27,8 +27,6 @@ import com.timi.sz.wms_android.bean.outstock.buy.SubmitBarcodePurReturnData;
 import com.timi.sz.wms_android.bean.outstock.outsource.GetMaterialLotData;
 import com.timi.sz.wms_android.bean.outstock.outsource.GetOutSourcePickDetailResult;
 import com.timi.sz.wms_android.bean.outstock.outsource.GetWWDetailPickDataResult;
-import com.timi.sz.wms_android.bean.outstock.outsource.OutSourceFeedBean;
-import com.timi.sz.wms_android.bean.outstock.buy.BuyReturnMaterialByOrdernoData;
 import com.timi.sz.wms_android.bean.outstock.outsource.QueryOutSourceFeedByInputResult;
 import com.timi.sz.wms_android.bean.outstock.outsource.QueryOutSourcePickByInputResult;
 import com.timi.sz.wms_android.bean.outstock.outsource.QueryWWPickDataByOutSourceResult;
@@ -36,14 +34,14 @@ import com.timi.sz.wms_android.bean.outstock.outsource.RequestGetMaterialLotBean
 import com.timi.sz.wms_android.bean.outstock.outsource.SubmitBarcodeLotPickOutResult;
 import com.timi.sz.wms_android.bean.outstock.outsource.SubmitBarcodeLotPickOutSplitResult;
 import com.timi.sz.wms_android.bean.quality.BarcodeData;
-import com.timi.sz.wms_android.bean.quality.adavance.CommitAdvance1Data;
-import com.timi.sz.wms_android.bean.quality.adavance.CommitAdvanceData;
-import com.timi.sz.wms_android.bean.quality.normal.CommitNormalData;
 import com.timi.sz.wms_android.bean.quality.GetAQLList;
 import com.timi.sz.wms_android.bean.quality.QualityListBean;
+import com.timi.sz.wms_android.bean.quality.adavance.CommitAdvance1Data;
+import com.timi.sz.wms_android.bean.quality.adavance.CommitAdvanceData;
 import com.timi.sz.wms_android.bean.quality.adavance.GetAdvance2Data;
 import com.timi.sz.wms_android.bean.quality.adavance.GetAdvanceData;
 import com.timi.sz.wms_android.bean.quality.mrp.MrpReviewData;
+import com.timi.sz.wms_android.bean.quality.normal.CommitNormalData;
 import com.timi.sz.wms_android.bean.quality.normal.NormalQualityData;
 import com.timi.sz.wms_android.bean.quality.update_barcode.BarEditGetUnInstockBarcodeData;
 import com.timi.sz.wms_android.bean.stockin_work.LibraryAdjustResult;
@@ -60,7 +58,6 @@ import java.util.List;
 import java.util.Map;
 
 import io.reactivex.Observable;
-import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
@@ -70,7 +67,6 @@ import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Streaming;
 import retrofit2.http.Url;
-
 /**
  * retrofit 的网络请求api
  * author: timi
@@ -264,17 +260,29 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("api/Account/ClientLogin")
     Observable<CommonResult<OtherAuditSelectOrdernoBean>> searchOtherAuditSelectOrderno(@Field("orderno") String orderno);
-
+    /**====== 委外退料 ======**/
     /**
      * 委外退料—选单
      *
-     * @param orderno
+     * @param params
      * @return
      */
     @FormUrlEncoded
-    @POST("api/Account/ClientLogin")
-    Observable<CommonResult<OutReturnMaterialBean>> searchOutReturnMaterialOrderno(@Field("orderno") String orderno);
+    @POST("api/services/wpda/WWReturn/QueryOutSourceReturnByInput")
+    Observable<CommonResult<QueryOutSourceReturnByInputResult>> queryOutSourceReturnByInput(@FieldMap Map<String, Object> params);
 
+    /**
+     * 委外退料—获取明细数据
+     *
+     * @param params
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("api/services/wpda/WWReturn/GetOutSourceReturnDetail")
+    Observable<CommonResult<List<GetOutSourceReturnDetailResult>>> getOutSourceReturnDetail(@FieldMap Map<String, Object> params);
+
+
+    /**====== 生产退料 ======**/
     /**
      * 生产退料—选单
      *
@@ -581,7 +589,48 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("api/services/wpda/common/SubmitBarcodeOutSplitAudit")
     Observable<CommonResult<SubmitBarcodeOutSplitAuditData>> submitBarcodeOutSplitAudit(@FieldMap Map<String, Object> params);
+    /**====== 生产领料-制单 ======**/
+    /**
+     * 生产订单末尾号查询（制单流程）
+     *
+     * @param params
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("api/services/wpda/PrdPick/QueryPrdPickDataByMO")
+    Observable<CommonResult<QueryWWPickDataByOutSourceResult>> queryPrdPickDataByMO(@FieldMap Map<String, Object> params);
 
+    /**
+     * 生产订单末尾号查询（制单流程）
+     *
+     * @param params
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("api/services/wpda/PrdPick/GetPrdDetailPickData")
+    Observable<CommonResult<QueryWWPickDataByOutSourceResult>> getPrdDetailPickData(@FieldMap Map<String, Object> params);
+
+
+    /**====== 生产领料-审核 ======**/
+    /**
+     * 生产订单末尾号查询（审核流程）
+     *
+     * @param params
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("api/services/wpda/PrdPick/QueryProductPickByInput")
+    Observable<CommonResult<QueryWWPickDataByOutSourceResult>> queryProductPickByInput(@FieldMap Map<String, Object> params);
+
+    /**
+     * 生产订单末尾号查询（审核流程）
+     *
+     * @param params
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("api/services/wpda/PrdPick/GetProductPickDetail")
+    Observable<CommonResult<List<QueryWWPickDataByOutSourceResult>>> getProductPickDetail(@FieldMap Map<String, Object> params);
 
     /**************************************************************************************************************/
     /**************************************************************************************************************/

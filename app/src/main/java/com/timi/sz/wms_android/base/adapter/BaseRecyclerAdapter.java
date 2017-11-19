@@ -136,7 +136,7 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<Recycl
         //同理是没有加载布局，不管是头部 中间和底部都没有加载布局，给出一个运行时异常
         if (layoutId == -1)
 
-            throw new RuntimeException("The method getHeaderLayoutId() return the wrong id, you should override it and return the correct id");
+            throw new RuntimeException("The method getHeaderLayoutId() return_material the wrong id, you should override it and return_material the correct id");
 
 
         //为解决复用而存在的一个类，同时在该类里面可以获得每个item对象， holder里面就包含有item View的对象

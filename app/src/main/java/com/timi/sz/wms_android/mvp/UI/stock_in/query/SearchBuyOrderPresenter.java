@@ -3,6 +3,7 @@ package com.timi.sz.wms_android.mvp.UI.stock_in.query;
 import android.content.Context;
 
 import com.timi.sz.wms_android.base.uils.ToastUtils;
+import com.timi.sz.wms_android.bean.instock.outsource_return_material.QueryOutSourceReturnByInputResult;
 import com.timi.sz.wms_android.bean.instock.search.BuyOrdernoBean;
 import com.timi.sz.wms_android.bean.instock.search.FinishGoodsCreateBillBean;
 import com.timi.sz.wms_android.bean.instock.search.FinishGoodsOrdernoBean;
@@ -35,7 +36,7 @@ public class SearchBuyOrderPresenter extends MvpBasePresenter<SearchBuyOrderView
     private HttpSubscriber<FinishGoodsOrdernoBean> mFinishSubscriber = null;//产成品-审核
     private HttpSubscriber<FinishGoodsCreateBillBean> mFinishCreateSubscriber = null;//产成品-生单
     private HttpSubscriber<OtherAuditSelectOrdernoBean> mOtherSubscriber = null;//其他入库-选单
-    private HttpSubscriber<OutReturnMaterialBean> mOutSubscriber = null;//委外退料-选单
+    private HttpSubscriber<QueryOutSourceReturnByInputResult> mOutSubscriber = null;//委外退料-选单
     private HttpSubscriber<ProductionReturnMaterialBean> mProductionSubscriber = null;//生产退料-选单
     private HttpSubscriber<SaleGoodsReturnBean> mSaleSubscriber = null;//销售退货-选单
 
@@ -185,14 +186,14 @@ public class SearchBuyOrderPresenter extends MvpBasePresenter<SearchBuyOrderView
     /**
      * 搜索委外退料—选单的单号
      *
-     * @param orderno
+     * @param params
      */
-    public void searchOutReturnMaterialOrderno(final String orderno) {
+    public void searchOutReturnMaterialOrderno(final Map<String,Object> params) {
         getView().showProgressDialog();
         if (null == mOutSubscriber) {
-            mOutSubscriber = new HttpSubscriber<>(new OnResultCallBack<OutReturnMaterialBean>() {
+            mOutSubscriber = new HttpSubscriber<>(new OnResultCallBack<QueryOutSourceReturnByInputResult>() {
                 @Override
-                public void onSuccess(OutReturnMaterialBean bean) {
+                public void onSuccess(QueryOutSourceReturnByInputResult bean) {
                     getView().searchOutReturnMaterialOrderno(bean);
                 }
 
@@ -202,7 +203,7 @@ public class SearchBuyOrderPresenter extends MvpBasePresenter<SearchBuyOrderView
                 }
             });
         }
-        model.searchOutReturnMaterialOrderno(orderno, mOutSubscriber);
+        model.searchOutReturnMaterialOrderno(params, mOutSubscriber);
     }
 
     /**

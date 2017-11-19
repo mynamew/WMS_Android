@@ -216,7 +216,7 @@ public final class CameraConfigurationManager {
 			return largestSize;
 		}
 
-		// If there is nothing at shouquan_ic_all suitable, return current preview size
+		// If there is nothing at shouquan_ic_all suitable, return_material current preview size
 		Camera.Size defaultPreview = parameters.getPreviewSize();
 		Point defaultSize = new Point(defaultPreview.width, defaultPreview.height);
 		Log.i(TAG, "No suitable preview sizes, using default: " + defaultSize);

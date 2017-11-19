@@ -286,7 +286,7 @@ public class RadialPickerLayout extends FrameLayout implements OnTouchListener {
     }
 
     /**
-     * If the hours are showing, return the current hour. If the minutes are showing, return the
+     * If the hours are showing, return_material the current hour. If the minutes are showing, return_material the
      * current minute.
      */
     private int getCurrentlyShowingValue() {

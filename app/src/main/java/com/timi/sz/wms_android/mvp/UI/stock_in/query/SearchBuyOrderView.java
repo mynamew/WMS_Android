@@ -1,5 +1,6 @@
 package com.timi.sz.wms_android.mvp.UI.stock_in.query;
 
+import com.timi.sz.wms_android.bean.instock.outsource_return_material.QueryOutSourceReturnByInputResult;
 import com.timi.sz.wms_android.bean.instock.search.BuyOrdernoBean;
 import com.timi.sz.wms_android.bean.instock.search.FinishGoodsCreateBillBean;
 import com.timi.sz.wms_android.bean.instock.search.FinishGoodsOrdernoBean;
@@ -62,7 +63,7 @@ public interface SearchBuyOrderView extends MvpBaseView {
     /**
      * 搜索委外退料—选单的单号
      */
-    void searchOutReturnMaterialOrderno(OutReturnMaterialBean bean);
+    void searchOutReturnMaterialOrderno(QueryOutSourceReturnByInputResult bean);
 
     /**
      * 搜索生产退料—选单的单号
