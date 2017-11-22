@@ -19,7 +19,7 @@ import com.timi.sz.wms_android.base.uils.SpUtils;
 import com.timi.sz.wms_android.base.uils.ToastUtils;
 import com.timi.sz.wms_android.bean.instock.MaterialScanPutAwayBean;
 import com.timi.sz.wms_android.bean.instock.VertifyLocationCodeBean;
-import com.timi.sz.wms_android.bean.instock.search.FinishGoodsOrdernoBean;
+import com.timi.sz.wms_android.bean.instock.search.QueryPrdInstockByInputResult;
 import com.timi.sz.wms_android.mvp.base.BaseActivity;
 
 import java.util.HashMap;
@@ -69,7 +69,7 @@ public class FinishedGoodsAuditPutAwayActivity extends BaseActivity<PutAwayView,
     TextView tvPutawayMaterialName;
     @BindView(R.id.tv_putaway_material_nmodel)
     TextView tvPutawayMaterialNmodel;
-    private FinishGoodsOrdernoBean mFinishBean;
+    private QueryPrdInstockByInputResult mFinishBean;
 
     @Override
     public int setLayoutId() {
@@ -82,7 +82,7 @@ public class FinishedGoodsAuditPutAwayActivity extends BaseActivity<PutAwayView,
          * 标题
          */
         setActivityTitle(getString(R.string.finish_goods_in_stock_title));
-        mFinishBean = new Gson().fromJson(getIntent().getStringExtra(Constants.IN_STOCK_FINISH_BEAN), FinishGoodsOrdernoBean.class);
+        mFinishBean = new Gson().fromJson(getIntent().getStringExtra(Constants.IN_STOCK_FINISH_BEAN), QueryPrdInstockByInputResult.class);
 
     }
 

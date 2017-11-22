@@ -19,11 +19,10 @@ import com.timi.sz.wms_android.base.uils.ToastUtils;
 import com.timi.sz.wms_android.bean.outstock.outsource.QueryOutSourceFeedByInputResult;
 import com.timi.sz.wms_android.bean.outstock.outsource.QueryOutSourcePickByInputResult;
 import com.timi.sz.wms_android.bean.outstock.outsource.QueryWWPickDataByOutSourceResult;
-import com.timi.sz.wms_android.mvp.UI.stock_out.outsource_bill.OutsourcingBillActivity;
-import com.timi.sz.wms_android.mvp.UI.stock_out.outsource_bill.OutsourcingBillNormalActivity;
-import com.timi.sz.wms_android.mvp.UI.stock_out.outsource_feed.OutSourceFeedActivity;
-import com.timi.sz.wms_android.mvp.UI.stock_out.outsourcing_audit.OursourcingAuditGoodsListActivity;
-import com.timi.sz.wms_android.mvp.UI.stock_out.outsourcing_audit.OutSourceAuditNormalActivity;
+import com.timi.sz.wms_android.bean.outstock.product.QueryPrdFeedByInputResult;
+import com.timi.sz.wms_android.bean.outstock.product.QueryProductPickByInputResult;
+import com.timi.sz.wms_android.mvp.UI.stock_out.batch_point_list.BatchPointListActivity;
+import com.timi.sz.wms_android.mvp.UI.stock_out.normal_out_stock.NormalOutStockActivity;
 import com.timi.sz.wms_android.mvp.base.BaseActivity;
 import com.timi.sz.wms_android.qrcode.utils.Constant;
 
@@ -31,17 +30,16 @@ import java.util.HashMap;
 import java.util.Map;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_BEAN;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_CODE_STR;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_OTHER_OUT_AUDIT;
+import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_OUTSOURCE_ALLOT;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_OUTSOURCE_AUDIT;
-import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_OUTSOURCE_AUDIT_BEAN;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_OUTSOURCE_BILL;
-import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_OUTSOURCE_BILL_BEAN;
-import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_OUTSOURCE_FEED_BEAN;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_OUTSOURCE_FEED_SUPLLIEMENT;
+import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_PRODUCTION_ALLOT;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_PRODUCTION_AUDIT;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_PRODUCTION_BILL;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_PRODUCTION_FEEDING;
@@ -95,20 +93,30 @@ public class StockOutSearchActivity extends BaseActivity<StockOutSearchView, Sto
                 tvQueryTitle.setText(R.string.out_source_title);
                 tvStockoutTip.setText(R.string.stock_out_outsource_bill_tip);
                 break;
+            case STOCK_OUT_OUTSOURCE_ALLOT://委外调拨
+                setActivityTitle(getString(R.string.outsource_allot));
+                tvQueryTitle.setText(R.string.outsource_allot);
+                tvStockoutTip.setText(R.string.stock_out_outsource_bill_tip);
+                break;
             case STOCK_OUT_PRODUCTION_FEEDING://生产 补料
                 setActivityTitle(getString(R.string.stock_out_production_feed_title));
                 tvQueryTitle.setText(R.string.stock_out_create_add_materail);
                 tvStockoutTip.setText(R.string.stock_out_production_feed_tip);
                 break;
             case STOCK_OUT_PRODUCTION_AUDIT://生产 审核
-                setActivityTitle(getString(R.string.stock_out_production_feed_title));
-                tvQueryTitle.setText(R.string.stock_out_create_add_materail);
-                tvStockoutTip.setText(R.string.stock_out_production_feed_tip);
+                setActivityTitle(getString(R.string.stock_out_create_check));
+                tvQueryTitle.setText(R.string.production_pick_material_title);
+                tvStockoutTip.setText(R.string.stock_out_production_audit_tip);
                 break;
             case STOCK_OUT_PRODUCTION_BILL://生产 生单
-                setActivityTitle(getString(R.string.stock_out_production_feed_title));
-                tvQueryTitle.setText(R.string.stock_out_create_add_materail);
-                tvStockoutTip.setText(R.string.stock_out_production_feed_tip);
+                setActivityTitle(getString(R.string.stock_out_create_create_order));
+                tvQueryTitle.setText(R.string.production_pick_material_title);
+                tvStockoutTip.setText(R.string.stock_out_production_audit_tip);
+                break;
+            case STOCK_OUT_PRODUCTION_ALLOT://生产调拨
+                setActivityTitle(getString(R.string.production_allot));
+                tvQueryTitle.setText(R.string.production_allot);
+                tvStockoutTip.setText(R.string.production_allot_orderno);
                 break;
             case STOCK_OUT_SELL_OUT_AUDIT://销售 审核
                 setActivityTitle(getString(R.string.stock_out_production_feed_title));
@@ -195,21 +203,34 @@ public class StockOutSearchActivity extends BaseActivity<StockOutSearchView, Sto
          * 不同的intentcode  请求不同
          */
         switch (intentCode) {
-            case Constants.STOCK_OUT_OUTSOURCE_FEED_SUPLLIEMENT://委外退料
+            case Constants.STOCK_OUT_OUTSOURCE_FEED_SUPLLIEMENT://委外补料
                 getPresenter().queryOutSourceFeedByInput(params);
                 break;
-            case Constants.STOCK_OUT_OUTSOURCE_AUDIT://委外发货-审核
+            case Constants.STOCK_OUT_OUTSOURCE_AUDIT://委外发料-审核
+                params.put("DestBillType", 20);
                 getPresenter().queryOutSourcePickByInput(params);
-
                 break;
-            case Constants.STOCK_OUT_OUTSOURCE_BILL:////委外发货-生单
+            case Constants.STOCK_OUT_OUTSOURCE_BILL://委外发料-生单
+                params.put("DestBillType", 20);
+                getPresenter().queryWWPickDataByOutSource(params);
+                break;
+            case Constants.STOCK_OUT_OUTSOURCE_ALLOT://委外调拨
+                params.put("DestBillType", 50);
                 getPresenter().queryWWPickDataByOutSource(params);
                 break;
             case Constants.STOCK_OUT_PRODUCTION_FEEDING://生产补料
+                getPresenter().queryPrdFeedByInput(params);
                 break;
             case Constants.STOCK_OUT_PRODUCTION_AUDIT://生产领料-审核
+                getPresenter().queryProductPickByInput(params);
                 break;
             case Constants.STOCK_OUT_PRODUCTION_BILL://生产领料-生单
+                params.put("DestBillType", 23);
+                getPresenter().queryPrdPickDataByMO(params);
+                break;
+            case Constants.STOCK_OUT_PRODUCTION_ALLOT://生产调拨
+                params.put("DestBillType", 50);
+                getPresenter().queryPrdPickDataByMO(params);
                 break;
             case Constants.STOCK_OUT_SELL_OUT_AUDIT://销售领料-审核
                 break;
@@ -230,8 +251,9 @@ public class StockOutSearchActivity extends BaseActivity<StockOutSearchView, Sto
      */
     @Override
     public void queryOutSourceFeedByInput(QueryOutSourceFeedByInputResult bean) {
-        Intent intent = new Intent(this, OutSourceFeedActivity.class);
-        intent.putExtra(STOCK_OUT_OUTSOURCE_FEED_BEAN, new Gson().toJson(bean));
+        Intent intent = new Intent(this, BatchPointListActivity.class);
+        intent.putExtra(STOCK_OUT_CODE_STR, intentCode);
+        intent.putExtra(STOCK_OUT_BEAN, new Gson().toJson(bean));
         startActivity(intent);
     }
 
@@ -244,15 +266,16 @@ public class StockOutSearchActivity extends BaseActivity<StockOutSearchView, Sto
     @Override
     public void queryOutSourcePickByInput(QueryOutSourcePickByInputResult bean) {
         Intent intent = new Intent();
+        intent.putExtra(STOCK_OUT_CODE_STR, intentCode);
         /**
          * 是否是批次拣货 ，如果是则跳转到 批次拣货的清单的界面 否则跳转到普通出库的界面
          */
         if (bean.getSummaryResults().isIsLotPick()) {
-            intent.setClass(this, OursourcingAuditGoodsListActivity.class);
+            intent.setClass(this, BatchPointListActivity.class);
         } else {
-            intent.setClass(this, OutSourceAuditNormalActivity.class);
+            intent.setClass(this, NormalOutStockActivity.class);
         }
-        intent.putExtra(STOCK_OUT_OUTSOURCE_AUDIT_BEAN, new Gson().toJson(bean));
+        intent.putExtra(STOCK_OUT_BEAN, new Gson().toJson(bean));
         startActivity(intent);
     }
 
@@ -266,13 +289,58 @@ public class StockOutSearchActivity extends BaseActivity<StockOutSearchView, Sto
          * 3、 合并   非批次  拣货
          * 4   合并    批次   拣货
          */
-        Intent  intent=new Intent();
-        intent.putExtra(STOCK_OUT_OUTSOURCE_BILL_BEAN, new Gson().toJson(bean));
-        if(summaryResults.isIsLotPick()){//批次拣货
-            intent.setClass(this, OutsourcingBillActivity.class);
-        }else{
-            intent.setClass(this, OutsourcingBillNormalActivity.class);
+        Intent intent = new Intent();
+        intent.putExtra(STOCK_OUT_BEAN, new Gson().toJson(bean));
+        intent.putExtra(STOCK_OUT_CODE_STR, intentCode);
+        if (summaryResults.isIsLotPick()) {//批次拣货
+            intent.setClass(this, BatchPointListActivity.class);
+        } else {
+            intent.setClass(this, NormalOutStockActivity.class);
         }
+        startActivity(intent);
+    }
+
+    /**
+     * 生产生单
+     *
+     * @param bean
+     */
+    @Override
+    public void queryPrdPickDataByMO(QueryWWPickDataByOutSourceResult bean) {
+        Intent intent = new Intent();
+        intent.putExtra(STOCK_OUT_BEAN, new Gson().toJson(bean));
+        intent.putExtra(STOCK_OUT_CODE_STR, intentCode);
+        if (bean.getSummaryResults().isIsLotPick()) {//批次拣货
+            intent.setClass(this, BatchPointListActivity.class);
+        } else {
+            intent.setClass(this, NormalOutStockActivity.class);
+        }
+        startActivity(intent);
+    }
+
+    /**
+     * 生产审核
+     *
+     * @param bean
+     */
+    @Override
+    public void queryProductPickByInput(QueryProductPickByInputResult bean) {
+        Intent intent = new Intent(this, BatchPointListActivity.class);
+        intent.putExtra(STOCK_OUT_CODE_STR, intentCode);
+        intent.putExtra(STOCK_OUT_BEAN, new Gson().toJson(bean));
+        startActivity(intent);
+    }
+
+    /**
+     * 生产补料
+     *
+     * @param bean
+     */
+    @Override
+    public void queryPrdFeedByInput(QueryPrdFeedByInputResult bean) {
+        Intent intent = new Intent(this, BatchPointListActivity.class);
+        intent.putExtra(STOCK_OUT_CODE_STR, intentCode);
+        intent.putExtra(STOCK_OUT_BEAN, new Gson().toJson(bean));
         startActivity(intent);
     }
 

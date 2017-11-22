@@ -1,7 +1,6 @@
 package com.timi.sz.wms_android.mvp.UI.stock_in.putaway;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.KeyEvent;
@@ -22,9 +21,7 @@ import com.timi.sz.wms_android.base.uils.SpUtils;
 import com.timi.sz.wms_android.base.uils.ToastUtils;
 import com.timi.sz.wms_android.bean.instock.MaterialScanPutAwayBean;
 import com.timi.sz.wms_android.bean.instock.VertifyLocationCodeBean;
-import com.timi.sz.wms_android.bean.instock.search.OtherAuditSelectOrdernoBean;
-import com.timi.sz.wms_android.bean.instock.search.OutReturnMaterialBean;
-import com.timi.sz.wms_android.bean.instock.search.ProductionReturnMaterialBean;
+import com.timi.sz.wms_android.bean.instock.search.QueryPrdReturnByInputResult;
 import com.timi.sz.wms_android.mvp.UI.stock_in.detail.StockInDetailActivity;
 import com.timi.sz.wms_android.mvp.base.BaseActivity;
 
@@ -74,7 +71,7 @@ public class ProductionMaterialReturnActivity extends BaseActivity<PutAwayView, 
     TextView tvPutawayMaterialNmodel;
     @BindView(R.id.btn_login)
     Button btnLogin;
-    private ProductionReturnMaterialBean productionReturnMaterialBean;
+    private QueryPrdReturnByInputResult queryPrdReturnByInputResult;
     /**
      * 默认是 入库来料单
      */
@@ -92,7 +89,7 @@ public class ProductionMaterialReturnActivity extends BaseActivity<PutAwayView, 
          */
         setActivityTitle(getString(R.string.out_return_material_title));
         intentCode = getIntent().getIntExtra(Constants.CODE_STR, Constants.COME_MATERAIL_NUM);
-        productionReturnMaterialBean = new Gson().fromJson(getIntent().getStringExtra(Constants.IN_STOCK_FINISH_PRODUCTION_BEAN), ProductionReturnMaterialBean.class);
+        queryPrdReturnByInputResult = new Gson().fromJson(getIntent().getStringExtra(Constants.IN_STOCK_FINISH_PRODUCTION_BEAN), QueryPrdReturnByInputResult.class);
 
     }
 
@@ -132,7 +129,7 @@ public class ProductionMaterialReturnActivity extends BaseActivity<PutAwayView, 
                     params1.put("MAC", PackageUtils.getMac());
                     params1.put("SrcBillType", 13);
                     params1.put("DestBillType", 14);
-                    params1.put("ScanId", productionReturnMaterialBean.getScanId());
+                    params1.put("ScanId", queryPrdReturnByInputResult.getScanId());
                     params1.put("BinCode", mVertifyLocationCodeBean.getBinId());
                     params1.put("BarcodeNo", orderNum);
                     getPresenter().materialScanNetWork(params1, orderNum);
@@ -173,24 +170,24 @@ public class ProductionMaterialReturnActivity extends BaseActivity<PutAwayView, 
         /**
          * 收货单号
          */
-        tvReceiveProNum.setText(productionReturnMaterialBean.getReceiptCode());
+        tvReceiveProNum.setText(queryPrdReturnByInputResult.getBillCode());
 
         /**
          * 已入库总数
          */
-        tvInStockTotalNum.setText(String.valueOf(productionReturnMaterialBean.getInstockQty()));
+        tvInStockTotalNum.setText(String.valueOf(queryPrdReturnByInputResult.getScanQty()));
         /**
          * 日期
          */
-        tvCreateOrdernoDate.setText(productionReturnMaterialBean.getReceipDate());
+        tvCreateOrdernoDate.setText(queryPrdReturnByInputResult.getBillDate());
         /**
          * 待点总数
          */
-        tvWaitCountNum.setText(String.valueOf(productionReturnMaterialBean.getWaitQty()));
+        tvWaitCountNum.setText(String.valueOf(queryPrdReturnByInputResult.getWaitQty()));
         /**
          * 已点总数
          */
-        tvHaveCountNum.setText(String.valueOf(productionReturnMaterialBean.getScanQty()));
+        tvHaveCountNum.setText(String.valueOf(queryPrdReturnByInputResult.getScanQty()));
     }
 
     @Override
@@ -219,16 +216,17 @@ public class ProductionMaterialReturnActivity extends BaseActivity<PutAwayView, 
     private boolean locationCodeIsUse=false;
     @Override
     public void vertifyLocationCode(VertifyLocationCodeBean bean) {
-        ToastUtils.showShort("库位码有效！");
         locationCodeIsUse=true;
-        mVertifyLocationCodeBean=bean;
+        ToastUtils.showShort(getString(R.string.location_code_is_visible));
+        mVertifyLocationCodeBean = bean;
     }
 
     @Override
     public void createInStockOrderno() {
-        ToastUtils.showShort("生成入库单成功");
+        ToastUtils.showShort(getString(R.string.create_instock_bill_success));
         onBackPressed();
     }
+
 
 
     @Override
@@ -246,7 +244,7 @@ public class ProductionMaterialReturnActivity extends BaseActivity<PutAwayView, 
                 params1.put("MAC", PackageUtils.getMac());
                 params1.put("SrcBillType", 13);
                 params1.put("DestBillType", 14);
-                params1.put("ScanId", productionReturnMaterialBean);
+                params1.put("ScanId", queryPrdReturnByInputResult);
                 params1.put("BinCode", mVertifyLocationCodeBean.getBinId());
                 params1.put("BarcodeNo", result);
                 getPresenter().materialScanNetWork(params1, result);

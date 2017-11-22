@@ -10,10 +10,11 @@ import java.util.List;
 
 public class GetMaterialLotData {
 
+
     /**
-     * controlType : 0
+     * controlType : 1
      * fifoIntervalDays : 0
-     * lotDetail : [{"locationCode":"011021202","dateCode":"2017-08-01","period":"2017-09-15","lotUseQty":146,"lotScanQty":0},{"locationCode":"011021202","dateCode":"2017-08-01","period":"2017-09-20","lotUseQty":14,"lotScanQty":0},{"locationCode":"011021202","dateCode":"2017-08-01","period":"2018-09-01","lotUseQty":455,"lotScanQty":0},{"locationCode":"011021202","dateCode":"2017-08-12","period":"2017-09-20","lotUseQty":3,"lotScanQty":0}]
+     * lotDetail : [{"locationCode":"101","dateCode":"2017-10-08","period":"","lotUseQty":100,"lotScanQty":0},{"locationCode":"101","dateCode":"2017-10-30","period":"","lotUseQty":100,"lotScanQty":0}]
      */
 
     private int controlType;
@@ -46,10 +47,10 @@ public class GetMaterialLotData {
 
     public static class LotDetailBean {
         /**
-         * locationCode : 011021202
-         * dateCode : 2017-08-01
-         * period : 2017-09-15
-         * lotUseQty : 146
+         * locationCode : 101
+         * dateCode : 2017-10-08
+         * period :
+         * lotUseQty : 100
          * lotScanQty : 0
          */
 

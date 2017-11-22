@@ -9,16 +9,9 @@ import com.timi.sz.wms_android.http.message.BaseEvent;
  */
 
 public class OutsourceAuditEvent extends BaseEvent {
-    public int getScanId() {
-        return scanId;
-    }
-
-    public void setScanId(int scanId) {
-        this.scanId = scanId;
-    }
-
-    private int scanId;
-
+    private int scanId;//扫描的id
+    private String materialCode;//物料编码
+    private int barcodeQty;//条码包含物料的数量
     public OutsourceAuditEvent(String event, int scanId) {
         super(event);
         this.scanId = scanId;
@@ -30,4 +23,28 @@ public class OutsourceAuditEvent extends BaseEvent {
     //物料扫码成功
     public static final String OUT_SOURCE_AUDIT_SCAN_MATERIAL_SUCCESS="OUT_SOURCE_AUDIT_SCAN_MATERIAL_SUCCESS";
 
+
+    public int getScanId() {
+        return scanId;
+    }
+
+    public void setScanId(int scanId) {
+        this.scanId = scanId;
+    }
+
+    public String getMaterialCode() {
+        return materialCode;
+    }
+
+    public void setMaterialCode(String materialCode) {
+        this.materialCode = materialCode;
+    }
+
+    public int getBarcodeQty() {
+        return barcodeQty;
+    }
+
+    public void setBarcodeQty(int barcodeQty) {
+        this.barcodeQty = barcodeQty;
+    }
 }

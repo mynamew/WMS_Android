@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/set_bg"
+    android:background="@color/white"
+    android:orientation="vertical"
     tools:context="com.timi.sz.wms_android.mvp.UI.stock_out.divide_print.SplitPrintActivity">
     　　
 
@@ -13,281 +14,366 @@
         android:id="@+id/title"
         layout="@layout/title_head"/>
 
-    <LinearLayout
-        android:id="@+id/ll_print"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:orientation="horizontal"
-        android:paddingLeft="5dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title"
-        >
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="20px"
-            android:text="打印机："/>
-
-        <Spinner
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_weight="1"
-            android:background="@drawable/bg_set_userinfo"/>
-
-        <Button
-            android:id="@+id/btn_search_print"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:layout_gravity="center_vertical"
-            android:layout_marginRight="10dp"
-            android:background="@drawable/selector_btn_bg_login"
-            android:text="搜索"
-            android:textColor="#fff"
-            android:textSize="14sp"/>
-    </LinearLayout>
-    　
-
-    <TextView
-        android:id="@+id/tv_material_num_tip"
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:layout_marginTop="10dp"
-        android:gravity="center_vertical"
-        android:paddingLeft="15dp"
-        android:text="物品条码"
-        app:layout_constraintTop_toBottomOf="@+id/ll_print"
-        tools:layout_editor_absoluteX="0dp"/>
-
-    <TextView
-        android:id="@+id/tv_material_num"
-        android:layout_width="0dp"
-        android:layout_height="40dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/bg_set_userinfo"
-        android:gravity="center_vertical"
-        android:paddingLeft="20px"
-        android:text=""
-        app:layout_constraintLeft_toRightOf="@+id/tv_material_num_tip"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ll_print"/>
-
-    <TextView
-        android:id="@+id/tv_lib_location_tip"
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:layout_marginTop="10dp"
-        android:gravity="center_vertical"
-        android:paddingLeft="15dp"
-        android:text="库位条码"
-        app:layout_constraintTop_toBottomOf="@+id/tv_material_num"
-        tools:layout_editor_absoluteX="0dp"/>
-
-    <TextView
-        android:id="@+id/tv_lib_location"
-        android:layout_width="0dp"
-        android:layout_height="40dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/bg_set_userinfo"
-        android:gravity="center_vertical"
-        android:paddingLeft="20px"
-        android:text=""
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintLeft_toRightOf="@+id/tv_lib_location_tip"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_material_num"/>
-
-    <TextView
-        android:id="@+id/tv_material_code_tip"
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:layout_marginTop="10dp"
-        android:gravity="center_vertical"
-        android:paddingLeft="15dp"
-        android:text="物品编码"
-        app:layout_constraintTop_toBottomOf="@+id/tv_lib_location_tip"
-        tools:layout_editor_absoluteX="0dp"/>
-
-    <TextView
-        android:id="@+id/tv_material_code"
-        android:layout_width="0dp"
-        android:layout_height="40dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/bg_set_userinfo"
-        android:gravity="center_vertical"
-        android:paddingLeft="20px"
-        android:text=""
-        app:layout_constraintLeft_toRightOf="@+id/tv_material_code_tip"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_lib_location"/>
-
-    <TextView
-        android:id="@+id/tv_material_name_tip"
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:layout_marginTop="10dp"
-        android:gravity="center_vertical"
-        android:paddingLeft="15dp"
-        android:text="物品名称"
-        app:layout_constraintTop_toBottomOf="@+id/tv_material_code"
-        tools:layout_editor_absoluteX="0dp"/>
-
-    <TextView
-        android:id="@+id/tv_material_name"
-        android:layout_width="0dp"
-        android:layout_height="40dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/bg_set_userinfo"
-        android:gravity="center_vertical"
-        android:paddingLeft="20px"
-        android:text=""
-        app:layout_constraintLeft_toRightOf="@+id/tv_material_name_tip"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_material_code"/>
-
-    <TextView
-        android:id="@+id/tv_material_batch_tip"
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:layout_marginTop="10dp"
-        android:gravity="center_vertical"
-        android:paddingLeft="15dp"
-        android:text="物品批次"
-        app:layout_constraintTop_toBottomOf="@+id/tv_material_name_tip"
-        tools:layout_editor_absoluteX="0dp"/>
-
-    <TextView
-        android:id="@+id/tv_material_batch"
-        android:layout_width="0dp"
-        android:layout_height="40dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/bg_set_userinfo"
-        android:gravity="center_vertical"
-        android:paddingLeft="20px"
-        android:text=""
-        app:layout_constraintLeft_toRightOf="@+id/tv_material_batch_tip"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_material_name_tip"/>
-
-    <TextView
-        android:id="@+id/tv_current_num_tip"
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:layout_marginTop="10dp"
-        android:gravity="center_vertical"
-        android:paddingLeft="15dp"
-        android:text="当前数量"
-        app:layout_constraintTop_toBottomOf="@+id/tv_material_batch_tip"
-        tools:layout_editor_absoluteX="0dp"/>
-
-    <TextView
-        android:id="@+id/tv_current_num"
-        android:layout_width="0dp"
-        android:layout_height="40dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/bg_set_userinfo"
-        android:gravity="center_vertical"
-        android:paddingLeft="20px"
-        android:text=""
-        app:layout_constraintLeft_toRightOf="@+id/tv_current_num_tip"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_material_batch_tip"/>
-
-    <TextView
-        android:id="@+id/tv_split_num"
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:layout_marginTop="10dp"
-        android:gravity="center_vertical"
-        android:paddingLeft="15dp"
-        android:text="拆分数量"
-        app:layout_constraintTop_toBottomOf="@+id/tv_current_num_tip"
-        tools:layout_editor_absoluteX="0dp"/>
-
-    <EditText
-        android:id="@+id/et_split_num"
-        android:layout_width="0dp"
-        android:layout_height="40dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/bg_set_userinfo"
-        android:gravity="center_vertical"
-        android:hint="请输入拆分数量"
-        android:paddingLeft="20px"
-        android:textSize="14sp"
-        app:layout_constraintLeft_toRightOf="@+id/tv_split_num"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_current_num"/>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/title"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_head_title"
+                android:layout_width="match_parent"
+                android:layout_height="96px"
+                android:gravity="center_vertical"
+                android:paddingLeft="30px"
+                android:paddingTop="10px"
+                android:text="委外发料（审核）数量拆分"
+                android:textColor="#333"
+                android:textSize="28px"
+                android:textStyle="bold"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginBottom="10px"
+                android:layout_marginTop="10px"
+                android:background="#d7d7dd"
+                />
+
+            <RelativeLayout
+                android:id="@+id/rl_show_print"
+                android:layout_width="match_parent"
+                android:layout_height="88px"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="30px"
+                    android:text="打印机"
+                    android:gravity="center_vertical"
+                    android:textColor="#333"
+                    android:textSize="26px"/>
+
+                <ImageView
+                    android:id="@+id/iv_print"
+                    android:layout_centerVertical="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="30px"
+                    android:src="@drawable/selector_divide_print"/>
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginBottom="10px"
+                android:layout_marginTop="10px"
+                android:background="#d7d7dd"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="48px"
+                android:layout_marginLeft="30px"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="100px"
+                    android:layout_height="wrap_content"
+                    android:text="@string/material_barcode_tip"
+                    android:textColor="#666"
+                    android:textSize="24px"/>
+
+                <TextView
+                    android:id="@+id/tv_barcode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30px"
+                    android:text="2134565432"
+                    android:textColor="#000"
+                    android:textSize="24px"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="48px"
+                android:layout_marginLeft="30px"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="100px"
+                    android:layout_height="wrap_content"
+                    android:text="@string/header_batch_lib_code"
+                    android:textColor="#666"
+                    android:textSize="24px"/>
+
+                <TextView
+                    android:id="@+id/tv_lib_code"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30px"
+                    android:text="123453234"
+                    android:textColor="#000"
+                    android:textSize="24px"/>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginBottom="10px"
+                android:layout_marginTop="10px"
+                android:background="#d7d7dd"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="48px"
+                android:layout_marginLeft="30px"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="100px"
+                    android:layout_height="wrap_content"
+                    android:text="@string/item_material_code"
+                    android:textColor="#666"
+                    android:textSize="24px"/>
+
+                <TextView
+                    android:id="@+id/tv_material_code"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30px"
+                    android:text="123453234"
+                    android:textColor="#000"
+                    android:textSize="24px"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="48px"
+                android:layout_marginLeft="30px"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="100px"
+                    android:layout_height="wrap_content"
+                    android:text="@string/item_material_name"
+                    android:textColor="#666"
+                    android:textSize="24px"/>
+
+                <TextView
+                    android:id="@+id/tv_material_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30px"
+                    android:text="123453234"
+                    android:textColor="#000"
+                    android:textSize="24px"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="48px"
+                android:layout_marginLeft="30px"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="100px"
+                    android:layout_height="wrap_content"
+                    android:text="@string/item_material_model"
+                    android:textColor="#666"
+                    android:textSize="24px"/>
+
+                <TextView
+                    android:id="@+id/tv_material_model"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30px"
+                    android:text="123453234"
+                    android:textColor="#000"
+                    android:textSize="24px"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="48px"
+                android:layout_marginLeft="30px"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="100px"
+                    android:layout_height="wrap_content"
+                    android:text="@string/item_material_attr"
+                    android:textColor="#666"
+                    android:textSize="24px"/>
+
+                <TextView
+                    android:id="@+id/tv_material_attr"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30px"
+                    android:text="123453234"
+                    android:textColor="#000"
+                    android:textSize="24px"/>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginBottom="20px"
+                android:layout_marginTop="20px"
+                android:background="@color/divide_color"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="48px"
+                android:layout_marginLeft="30px"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="100px"
+                    android:layout_height="wrap_content"
+                    android:text="@string/stock_query_batch"
+                    android:textColor="#666"
+                    android:textSize="24px"/>
+
+                <TextView
+                    android:id="@+id/tv_batch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30px"
+                    android:text="123453234"
+                    android:textColor="#000"
+                    android:textSize="24px"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="48px"
+                android:layout_marginLeft="30px"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="100px"
+                    android:layout_height="wrap_content"
+                    android:text="@string/current_num_tip"
+                    android:textColor="#666"
+                    android:textSize="24px"/>
+
+                <TextView
+                    android:id="@+id/tv_current_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30px"
+                    android:text="123453234"
+                    android:textColor="#000"
+                    android:textSize="24px"/>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/divide_color"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="88px"
+                android:layout_marginLeft="30px"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="100px"
+                    android:layout_height="wrap_content"
+                    android:text="@string/divide_num_tip"
+                    android:textColor="#666"
+                    android:textSize="24px"/>
+
+                <EditText
+                    android:id="@+id/et_divide_num"
+                    android:layout_width="551px"
+                    android:layout_height="64px"
+                    android:layout_marginLeft="30px"
+                    android:background="@drawable/selector_et"
+                    android:paddingLeft="20px"
+                    android:text="123453234"
+                    android:textColor="#000"
+                    android:textSize="24px"/>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/divide_color"/>
+
+            <LinearLayout
+                android:visibility="gone"
+                android:id="@+id/ll_print_device"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="54px"
+                    android:background="@color/divide_color"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="30px"
+                    android:text="已搜索到的打印机"/>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rlv_print"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+            </LinearLayout>
+
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="96px"
+        android:layout_marginBottom="20px"
+        android:layout_alignParentBottom="true"
         android:orientation="horizontal"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_split_num"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp">
+        android:paddingLeft="30px"
+        android:paddingRight="30px">
 
         <Button
-            android:id="@+id/btn_confirm_print"
-            android:layout_width="150dp"
-            android:layout_height="48dp"
-            android:layout_marginTop="30dp"
+            android:id="@+id/btn_commit"
+            android:layout_width="0dp"
+            android:layout_height="88px"
+            android:layout_margin="3px"
+            android:layout_marginRight="20px"
+            android:layout_weight="1"
             android:background="@drawable/selector_btn_bg_login"
-            android:text="确认打印"
-            android:textColor="#fff"
-            android:textSize="14sp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_split_num"
-            />
+            android:text="@string/confirm"
+            android:textColor="@color/white"
+            android:textSize="36px"/>
 
         <Button
-            android:id="@+id/btn_repeat_print"
-            android:layout_width="150dp"
-            android:layout_height="48dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="30dp"
-            android:background="@drawable/selector_btn_bg_login"
-            android:text="重打"
-            android:textColor="#fff"
-            android:textSize="14sp"
-            app:layout_constraintLeft_toRightOf="@+id/btn_confirm_print"
-            app:layout_constraintTop_toBottomOf="@+id/tv_split_num"/>
+            android:id="@+id/btn_cancel"
+            android:layout_width="0dp"
+            android:layout_height="88px"
+            android:layout_marginLeft="20px"
+            android:layout_weight="1"
+            android:background="@drawable/bg_rectangle_gray"
+            android:text="@string/cancel"/>
     </LinearLayout>
-
-
-</android.support.constraint.ConstraintLayout>
+</RelativeLayout>

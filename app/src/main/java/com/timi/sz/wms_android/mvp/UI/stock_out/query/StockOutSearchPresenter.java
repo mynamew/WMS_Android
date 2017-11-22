@@ -7,6 +7,8 @@ import com.timi.sz.wms_android.bean.outstock.outsource.OutSourceFeedBean;
 import com.timi.sz.wms_android.bean.outstock.outsource.QueryOutSourceFeedByInputResult;
 import com.timi.sz.wms_android.bean.outstock.outsource.QueryOutSourcePickByInputResult;
 import com.timi.sz.wms_android.bean.outstock.outsource.QueryWWPickDataByOutSourceResult;
+import com.timi.sz.wms_android.bean.outstock.product.QueryPrdFeedByInputResult;
+import com.timi.sz.wms_android.bean.outstock.product.QueryProductPickByInputResult;
 import com.timi.sz.wms_android.http.callback.OnResultCallBack;
 import com.timi.sz.wms_android.http.subscriber.HttpSubscriber;
 import com.timi.sz.wms_android.mvp.base.presenter.impl.MvpBasePresenter;
@@ -25,7 +27,11 @@ public class StockOutSearchPresenter extends MvpBasePresenter<StockOutSearchView
     private StockOutSearchModel model;
     private HttpSubscriber<QueryOutSourceFeedByInputResult> outSourceFeedBeanHttpSubscriber;
     private HttpSubscriber<QueryOutSourcePickByInputResult> queryOutSourcePickByInputResultHttpSubscriber;
+
+
     private HttpSubscriber<QueryWWPickDataByOutSourceResult> queryWWPickDataByOutSourceResultHttpSubscriber;
+    private HttpSubscriber<QueryProductPickByInputResult> queryProductPickByInputResultHttpSubscriber;
+    private HttpSubscriber<QueryPrdFeedByInputResult> queryPrdFeedByInputResultHttpSubscriber;
 
     public StockOutSearchPresenter(Context context) {
         super(context);
@@ -94,6 +100,69 @@ public class StockOutSearchPresenter extends MvpBasePresenter<StockOutSearchView
         }
         model.queryWWPickDataByOutSource(params, queryWWPickDataByOutSourceResultHttpSubscriber);
     }
+    /**====== 生产 ======**/
+    /**
+     * 生产领料 （生单）搜索
+     */
+    public void queryPrdPickDataByMO(Map<String, Object> params) {
+        getView().showProgressDialog();
+        if (null == queryWWPickDataByOutSourceResultHttpSubscriber) {
+            queryWWPickDataByOutSourceResultHttpSubscriber = new HttpSubscriber<>(new OnResultCallBack<QueryWWPickDataByOutSourceResult>() {
+                @Override
+                public void onSuccess(QueryWWPickDataByOutSourceResult o) {
+                    getView().queryPrdPickDataByMO(o);
+                }
+
+                @Override
+                public void onError(String errorMsg) {
+                    ToastUtils.showShort(errorMsg);
+                }
+            });
+        }
+        model.queryPrdPickDataByMO(params, queryWWPickDataByOutSourceResultHttpSubscriber);
+    }
+
+    /**
+     * 生产领料 （审核）搜索
+     */
+    public void queryProductPickByInput(Map<String, Object> params) {
+        getView().showProgressDialog();
+        if (null == queryProductPickByInputResultHttpSubscriber) {
+            queryProductPickByInputResultHttpSubscriber = new HttpSubscriber<>(new OnResultCallBack<QueryProductPickByInputResult>() {
+                @Override
+                public void onSuccess(QueryProductPickByInputResult o) {
+                    getView().queryProductPickByInput(o);
+                }
+
+                @Override
+                public void onError(String errorMsg) {
+                    ToastUtils.showShort(errorMsg);
+                }
+            });
+        }
+        model.queryProductPickByInput(params, queryProductPickByInputResultHttpSubscriber);
+    }
+
+    /**
+     * 生产补料搜索
+     */
+    public void queryPrdFeedByInput(Map<String, Object> params) {
+        getView().showProgressDialog();
+        if (null == queryPrdFeedByInputResultHttpSubscriber) {
+            queryPrdFeedByInputResultHttpSubscriber = new HttpSubscriber<>(new OnResultCallBack<QueryPrdFeedByInputResult>() {
+                @Override
+                public void onSuccess(QueryPrdFeedByInputResult o) {
+                    getView().queryPrdFeedByInput(o);
+                }
+
+                @Override
+                public void onError(String errorMsg) {
+                    ToastUtils.showShort(errorMsg);
+                }
+            });
+        }
+        model.queryPrdFeedByInput(params, queryPrdFeedByInputResultHttpSubscriber);
+    }
 
     @Override
     public void dettachView() {
@@ -109,6 +178,18 @@ public class StockOutSearchPresenter extends MvpBasePresenter<StockOutSearchView
         if (null != queryOutSourcePickByInputResultHttpSubscriber) {
             queryOutSourcePickByInputResultHttpSubscriber.unSubscribe();
             queryOutSourcePickByInputResultHttpSubscriber = null;
+        }
+        if (null != queryProductPickByInputResultHttpSubscriber) {
+            queryProductPickByInputResultHttpSubscriber.unSubscribe();
+            queryProductPickByInputResultHttpSubscriber = null;
+        }
+        if (null != queryWWPickDataByOutSourceResultHttpSubscriber) {
+            queryWWPickDataByOutSourceResultHttpSubscriber.unSubscribe();
+            queryWWPickDataByOutSourceResultHttpSubscriber = null;
+        }
+        if (null != queryPrdFeedByInputResultHttpSubscriber) {
+            queryPrdFeedByInputResultHttpSubscriber.unSubscribe();
+            queryPrdFeedByInputResultHttpSubscriber = null;
         }
     }
 }

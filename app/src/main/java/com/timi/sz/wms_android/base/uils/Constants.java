@@ -148,22 +148,27 @@ public class Constants {
     public static final int STOCK_OUT_OUTSOURCE_FEED_SUPLLIEMENT = 5020;//委外补料
     public static final int STOCK_OUT_OUTSOURCE_AUDIT = 5021;//委外发料-委外发料单
     public static final int STOCK_OUT_OUTSOURCE_BILL = 5022;//委外发料-委外订单
+    public static final int STOCK_OUT_OUTSOURCE_ALLOT = 5023;//委外调拨
 
-    public static final int STOCK_OUT_PRODUCTION_FEEDING = 5023;//生产补料
-    public static final int STOCK_OUT_PRODUCTION_AUDIT = 5024;//生产领料-审核
-    public static final int STOCK_OUT_PRODUCTION_BILL = 5025;//生产领料-生单
 
-    public static final int STOCK_OUT_PICK = 5026;//调拨
-    public static final int STOCK_OUT_SELL_OUT_AUDIT = 5027;//销售出库-审核
-    public static final int STOCK_OUT_SELL_OUT_BILL = 5028;//销售出库-生单
+    public static final int STOCK_OUT_PRODUCTION_FEEDING = 5024;//生产补料
+    public static final int STOCK_OUT_PRODUCTION_AUDIT = 5025;//生产领料-审核
+    public static final int STOCK_OUT_PRODUCTION_BILL = 5026;//生产领料-生单
+    public static final int STOCK_OUT_PRODUCTION_ALLOT = 5027;//生产调拨
 
-    public static final int STOCK_OUT_PURCHASE_MATERIAL_RETURN = 5029;//采购退料
-    public static final int STOCK_OUT_OTHER_OUT_AUDIT = 5030;//其他出库-审核
-    public static final int STOCK_OUT_OTHER_OUT_BILL = 5031;//其他出库-生单
+    public static final int STOCK_OUT_PICK = 5028;//调拨
+    public static final int STOCK_OUT_SELL_OUT_AUDIT = 5029;//销售出库-审核
+    public static final int STOCK_OUT_SELL_OUT_BILL = 5030;//销售出库-生单
+
+    public static final int STOCK_OUT_PURCHASE_MATERIAL_RETURN = 5031;//采购退料
+    public static final int STOCK_OUT_OTHER_OUT_AUDIT = 5032;//其他出库-审核
+    public static final int STOCK_OUT_OTHER_OUT_BILL = 5033;//其他出库-生单
     /**
      * 出库搜索 跳转的传递对象的key
      */
     //委外补料传递实体的key
+
+    public static final String STOCK_OUT_BEAN = "stock_out_bean";//委外传递实体的key
     public static final String STOCK_OUT_OUTSOURCE_FEED_BEAN = "stock_out_outsource_feed_bean";//委外补料传递实体的key
     public static final String STOCK_OUT_OUTSOURCE_AUDIT_BEAN = "stock_out_outsource_audit_bean";//委外发料单-审核传递实体的key
     public static final String STOCK_OUT_OUTSOURCE_BILL_BEAN = "stock_out_outsource_bill_bean";//委外发料单-生单传递实体的key
@@ -179,9 +184,24 @@ public class Constants {
     /**
      * 出库-跳转到物料清点详情
      */
-    public static final String OUT_STOCK_OUT_SOURCE_FEED_MATERIAL_POINT_BEAN = "out_stock_out_source_feed_material_point_bean";//委外补料
-    public static final String OUT_STOCK_OUT_SOURCE_AUDIT_MATERIAL_POINT_BEAN = "out_stock_out_source_audit_material_point_bean";//委外审核-物料
-    public static final String OUT_STOCK_OUT_SOURCE_AUDIT_MATERIAL_POINT_SUMMARY_BEAN = "out_stock_out_source_audit_material_point_summary_bean";//委外审核-summary
+    public static final String OUT_STOCK_POINT_DETIAIL_BILLID = "out_stock_out_point_detial_id";//跳转到清点详情的billid
+    public static final String OUT_STOCK_POINT_DETIAILId = "out_stock_out_point_detialid";//清点详情跳转到单据详情的id
+    public static final String OUT_STOCK_POINT_WAREHOUSEID = "out_stock_out_point_warehouseid";//清点详情跳转到单据详情的仓库id
+    public static final String OUT_STOCK_POINT_REGIONID = "out_stock_out_point_regionid";//清点详情跳转到单据详情的区域id
+
+    //拆分打码 界面的传值
+    public static final String OUT_STOCK_PRINT_SRCBILLTYPE = "out_stock_print_srcbilltype";//出库打印 的来源单据
+    public static final String OUT_STOCK_PRINT_BILLID = "out_stock_print_billid";//出库打印 的billid
+    public static final String OUT_STOCK_PRINT_SCANID = "out_stock_print_scanid";//出库打印 的scabid
+    public static final String OUT_STOCK_PRINT_BARCODENO = "out_stock_print_barcode";//出库打印 的barcode
+    public static final String OUT_STOCK_PRINT_DESBILLTYPE = "out_stock_print_desbilltype";//出库打印目的单据
+    public static final String OUT_STOCK_PRINT_DATECODE = "out_stock_print_datecode";//出库打印的批次code
+    public static final String OUT_STOCK_PRINT_MATERIAL_ATTR = "out_stock_print_material_attr";//出库打印的物料附加属性
+    public static final String OUT_STOCK_PRINT_MATERIALID = "out_stock_print_materialid";//出库打印的物料id
+
+    public static final String OUT_STOCK_SCANID = "out_stock_out_point_scan_id";//跳转到清点详情的scanid
+    public static final String OUT_STOCK_MATERIAL_RESULTS_BEAN = "out_stock_material_results_bean";//跳转到物料请点详情的实体(MaterialResultsBean)
+    public static final String OUT_STOCK_DETAIL_RESULTS_BEAN = "out_stock_details_results_bean";//跳转到物料请点详情的实体(DetailResultsBean)
 
     /***********
      * 库内作业跳转的key
@@ -193,11 +213,11 @@ public class Constants {
 
     public static final int STOCK_IN_WORK_LIBRARY_ADJUST = 5201;//库位调整
     public static final int STOCK_IN_WORK_ALLOT_SCAN = 5202;//扫描调入
-    public static final int STOCK_IN_WORK_ALLOT_ONE_STEP= 5203;//一步调入
+    public static final int STOCK_IN_WORK_ALLOT_ONE_STEP = 5203;//一步调入
     public static final int STOCK_IN_WORK_PACK_ADJUST = 5204;//容器调整
 
 
-    public static final int STOCK_IN_WORK_FORM_CHANGE_OUT= 5205;//形态转换-出库
+    public static final int STOCK_IN_WORK_FORM_CHANGE_OUT = 5205;//形态转换-出库
     public static final int STOCK_IN_WORK_FORM_CHANGE_IN = 5206;//形态转换-入库
 
     public static final int STOCK_IN_WORK_STOCK_QUERY = 5207;//库存呢查询

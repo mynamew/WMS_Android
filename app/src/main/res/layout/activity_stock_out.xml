@@ -78,7 +78,11 @@
                             style="@style/stock_in_tab"
                             android:drawableTop="@mipmap/stock_out_out_create_order"
                             android:text="@string/stock_out_out_create_order"/>
-
+                        <TextView
+                            android:id="@+id/tv_stock_out_out_allot"
+                            style="@style/stock_in_tab"
+                            android:drawableTop="@mipmap/stock_out_out_create_order"
+                            android:text="@string/outsource_allot"/>
                         <TextView
                             android:id="@+id/tv_stock_out_out_add_materail"
                             style="@style/stock_in_tab"
@@ -130,7 +134,11 @@
                             style="@style/stock_in_tab"
                             android:drawableTop="@mipmap/stock_out_create_create_order"
                             android:text="@string/stock_out_create_create_order"/>
-
+                        <TextView
+                            android:id="@+id/tv_stock_out_create_allot"
+                            style="@style/stock_in_tab"
+                            android:drawableTop="@mipmap/stock_out_create_create_order"
+                            android:text="@string/production_allot"/>
                         <TextView
                             android:id="@+id/tv_stock_out_create_add_materail"
                             style="@style/stock_in_tab"

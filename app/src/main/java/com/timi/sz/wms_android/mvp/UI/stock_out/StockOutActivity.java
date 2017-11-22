@@ -16,10 +16,12 @@ import butterknife.OnClick;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_CODE_STR;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_OTHER_OUT_AUDIT;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_OTHER_OUT_BILL;
+import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_OUTSOURCE_ALLOT;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_OUTSOURCE_AUDIT;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_OUTSOURCE_BILL;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_OUTSOURCE_FEED_SUPLLIEMENT;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_PICK;
+import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_PRODUCTION_ALLOT;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_PRODUCTION_AUDIT;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_PRODUCTION_BILL;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_PRODUCTION_FEEDING;
@@ -58,7 +60,7 @@ public class StockOutActivity extends BaseNoMvpActivity {
      * author: timi
      * create at: 2017/8/18 13:48
      */
-    @OnClick({R.id.tv_stock_out_out_add_materail, R.id.tv_stock_out_out_check, R.id.tv_stock_out_out_create_order, R.id.tv_stock_out_create_add_materail, R.id.tv_stock_out_create_check, R.id.tv_stock_out_create_create_order, R.id.tv_stock_out_sale_trans, R.id.tv_stock_out_sale_check, R.id.tv_stock_out_sale_create_order, R.id.tv_stock_out_other_buy_return, R.id.tv_stock_out_other_check, R.id.tv_stock_out_other_create_order, R.id.activity_stock_out})
+    @OnClick({R.id.tv_stock_out_out_add_materail, R.id.tv_stock_out_out_check, R.id.tv_stock_out_out_create_order, R.id.tv_stock_out_out_allot, R.id.tv_stock_out_create_add_materail, R.id.tv_stock_out_create_allot, R.id.tv_stock_out_create_check, R.id.tv_stock_out_create_create_order, R.id.tv_stock_out_sale_trans, R.id.tv_stock_out_sale_check, R.id.tv_stock_out_sale_create_order, R.id.tv_stock_out_other_buy_return, R.id.tv_stock_out_other_check, R.id.tv_stock_out_other_create_order, R.id.activity_stock_out})
     public void onViewClicked(View view) {
         Intent intent = new Intent();
         switch (view.getId()) {
@@ -69,6 +71,10 @@ public class StockOutActivity extends BaseNoMvpActivity {
             case R.id.tv_stock_out_out_check://委外审核
                 intent.setClass(StockOutActivity.this, StockOutSearchActivity.class);
                 intent.putExtra(STOCK_OUT_CODE_STR, STOCK_OUT_OUTSOURCE_AUDIT);
+                break;
+            case R.id.tv_stock_out_out_allot://委外调拨
+                intent.setClass(StockOutActivity.this, StockOutSearchActivity.class);
+                intent.putExtra(STOCK_OUT_CODE_STR, STOCK_OUT_OUTSOURCE_ALLOT);
                 break;
             case R.id.tv_stock_out_out_create_order://委外生单
                 intent.setClass(StockOutActivity.this, StockOutSearchActivity.class);
@@ -85,6 +91,10 @@ public class StockOutActivity extends BaseNoMvpActivity {
             case R.id.tv_stock_out_create_create_order://生产生单
                 intent.setClass(StockOutActivity.this, StockOutSearchActivity.class);
                 intent.putExtra(STOCK_OUT_CODE_STR, STOCK_OUT_PRODUCTION_BILL);
+                break;
+            case R.id.tv_stock_out_create_allot://生产调拨
+                intent.setClass(StockOutActivity.this, StockOutSearchActivity.class);
+                intent.putExtra(STOCK_OUT_CODE_STR, STOCK_OUT_PRODUCTION_ALLOT);
                 break;
             case R.id.tv_stock_out_sale_trans://调拨
                 intent.putExtra(STOCK_OUT_CODE_STR, STOCK_OUT_PICK);

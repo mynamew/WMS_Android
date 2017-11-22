@@ -1,8 +1,5 @@
 package com.timi.sz.wms_android.bean.instock.search;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
 /**
  * $dsc 销售退货
  * author: timi
@@ -12,61 +9,57 @@ import android.os.Parcelable;
 public class SaleGoodsReturnBean {
 
     /**
-     * receipId : 10408
-     * receiptCode : DH161018020
-     * receipDate : 2017-10-18
-     * supplierName : 深圳市宝安区大浪恒昶塑胶电子厂
-     * createrName :
+     * billId : 7
+     * billCode : CK150929025
+     * billDate : 2015-09-29
+     * customerName : Rostra Precision Controls
+     * createrName : 方艳冬
      * scanId : 0
-     * receiptQty : 11
-     * passQty : 10
-     * instockQty : 0
-     * waitQty : 10
+     * qty : 150
+     * waitQty : 150
      * scanQty : 0
      */
 
-    private int receipId;
-    private String receiptCode;
-    private String receipDate;
-    private String supplierName;
+    private int billId;
+    private String billCode;
+    private String billDate;
+    private String customerName;
     private String createrName;
     private int scanId;
-    private int receiptQty;
-    private int passQty;
-    private int instockQty;
+    private int qty;
     private int waitQty;
     private int scanQty;
 
-    public int getReceipId() {
-        return receipId;
+    public int getBillId() {
+        return billId;
     }
 
-    public void setReceipId(int receipId) {
-        this.receipId = receipId;
+    public void setBillId(int billId) {
+        this.billId = billId;
     }
 
-    public String getReceiptCode() {
-        return receiptCode;
+    public String getBillCode() {
+        return billCode;
     }
 
-    public void setReceiptCode(String receiptCode) {
-        this.receiptCode = receiptCode;
+    public void setBillCode(String billCode) {
+        this.billCode = billCode;
     }
 
-    public String getReceipDate() {
-        return receipDate;
+    public String getBillDate() {
+        return billDate;
     }
 
-    public void setReceipDate(String receipDate) {
-        this.receipDate = receipDate;
+    public void setBillDate(String billDate) {
+        this.billDate = billDate;
     }
 
-    public String getSupplierName() {
-        return supplierName;
+    public String getCustomerName() {
+        return customerName;
     }
 
-    public void setSupplierName(String supplierName) {
-        this.supplierName = supplierName;
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
     }
 
     public String getCreaterName() {
@@ -85,28 +78,12 @@ public class SaleGoodsReturnBean {
         this.scanId = scanId;
     }
 
-    public int getReceiptQty() {
-        return receiptQty;
+    public int getQty() {
+        return qty;
     }
 
-    public void setReceiptQty(int receiptQty) {
-        this.receiptQty = receiptQty;
-    }
-
-    public int getPassQty() {
-        return passQty;
-    }
-
-    public void setPassQty(int passQty) {
-        this.passQty = passQty;
-    }
-
-    public int getInstockQty() {
-        return instockQty;
-    }
-
-    public void setInstockQty(int instockQty) {
-        this.instockQty = instockQty;
+    public void setQty(int qty) {
+        this.qty = qty;
     }
 
     public int getWaitQty() {

@@ -3,10 +3,9 @@ package com.timi.sz.wms_android.mvp.UI.stock_in.query;
 import com.timi.sz.wms_android.bean.instock.outsource_return_material.QueryOutSourceReturnByInputResult;
 import com.timi.sz.wms_android.bean.instock.search.BuyOrdernoBean;
 import com.timi.sz.wms_android.bean.instock.search.FinishGoodsCreateBillBean;
-import com.timi.sz.wms_android.bean.instock.search.FinishGoodsOrdernoBean;
+import com.timi.sz.wms_android.bean.instock.search.QueryPrdInstockByInputResult;
 import com.timi.sz.wms_android.bean.instock.search.OtherAuditSelectOrdernoBean;
-import com.timi.sz.wms_android.bean.instock.search.OutReturnMaterialBean;
-import com.timi.sz.wms_android.bean.instock.search.ProductionReturnMaterialBean;
+import com.timi.sz.wms_android.bean.instock.search.QueryPrdReturnByInputResult;
 import com.timi.sz.wms_android.bean.instock.search.ReceiveOrdernoBean;
 import com.timi.sz.wms_android.bean.instock.search.SaleGoodsReturnBean;
 import com.timi.sz.wms_android.bean.instock.search.SendOrdernoBean;
@@ -72,16 +71,16 @@ public class SearchBuyModel extends MvpBaseModel {
     /**
      * 搜索产成品-审核的单号
      *
-     * @param orderno
+     * @param params
      * @param observer
      */
-    public void searchFinishGoodsOrderno(final String orderno,
-                                         final Observer<FinishGoodsOrdernoBean> observer) {
+    public void searchFinishGoodsOrderno(final Map<String, Object> params,
+                                         final Observer<QueryPrdInstockByInputResult> observer) {
         HttpManager.getInstance().HttpManagerRequest(observer,
-                new ApiServiceMethodCallBack<FinishGoodsOrdernoBean>() {
+                new ApiServiceMethodCallBack<QueryPrdInstockByInputResult>() {
                     @Override
-                    public Observable<CommonResult<FinishGoodsOrdernoBean>> createObservable(ApiService apiService) {
-                        return apiService.searchFinishGoodsOrderno(orderno);
+                    public Observable<CommonResult<QueryPrdInstockByInputResult>> createObservable(ApiService apiService) {
+                        return apiService.searchFinishGoodsOrderno(params);
                     }
                 });
     }
@@ -138,32 +137,31 @@ public class SearchBuyModel extends MvpBaseModel {
   /**
      * 搜索生产退料—选单的单号
      *
-     * @param orderno
+     * @param params
      * @param observer
      */
-    public void searchProductionReturnMaterialOrderno(final String orderno,
-                                                   final Observer<ProductionReturnMaterialBean> observer) {
+    public void searchProductionReturnMaterialOrderno(final Map<String,Object> params,
+                                                      final Observer<QueryPrdReturnByInputResult> observer) {
         HttpManager.getInstance().HttpManagerRequest(observer,
-                new ApiServiceMethodCallBack<ProductionReturnMaterialBean>() {
+                new ApiServiceMethodCallBack<QueryPrdReturnByInputResult>() {
                     @Override
-                    public Observable<CommonResult<ProductionReturnMaterialBean>> createObservable(ApiService apiService) {
-                        return apiService.searchProductionReturnMaterialOrderno(orderno);
+                    public Observable<CommonResult<QueryPrdReturnByInputResult>> createObservable(ApiService apiService) {
+                        return apiService.queryPrdReturnByInput(params);
                     }
                 });
     }
   /**
      * 搜索销售退货—选单的单号
-     *
-     * @param orderno
+     *  @param orderno
      * @param observer
-     */
-    public void searchSaleGoodsReturnOrderno(final String orderno,
+   */
+    public void searchSaleGoodsReturnOrderno(final Map<String, Object> orderno,
                                                    final Observer<SaleGoodsReturnBean> observer) {
         HttpManager.getInstance().HttpManagerRequest(observer,
                 new ApiServiceMethodCallBack<SaleGoodsReturnBean>() {
                     @Override
                     public Observable<CommonResult<SaleGoodsReturnBean>> createObservable(ApiService apiService) {
-                        return apiService.searchSaleGoodsReturnOrderno(orderno);
+                        return apiService.querySalesReturnByInput(orderno);
                     }
                 });
     }

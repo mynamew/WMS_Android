@@ -1,7 +1,6 @@
 package com.timi.sz.wms_android.mvp.UI.stock_in.putaway;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.KeyEvent;
@@ -22,7 +21,6 @@ import com.timi.sz.wms_android.base.uils.SpUtils;
 import com.timi.sz.wms_android.base.uils.ToastUtils;
 import com.timi.sz.wms_android.bean.instock.MaterialScanPutAwayBean;
 import com.timi.sz.wms_android.bean.instock.VertifyLocationCodeBean;
-import com.timi.sz.wms_android.bean.instock.search.ProductionReturnMaterialBean;
 import com.timi.sz.wms_android.bean.instock.search.SaleGoodsReturnBean;
 import com.timi.sz.wms_android.mvp.UI.stock_in.detail.StockInDetailActivity;
 import com.timi.sz.wms_android.mvp.base.BaseActivity;
@@ -35,7 +33,11 @@ import butterknife.OnClick;
 
 import static com.timi.sz.wms_android.base.uils.Constants.REQUEST_SCAN_CODE_LIB_LOATION;
 import static com.timi.sz.wms_android.base.uils.Constants.REQUEST_SCAN_CODE_MATERIIAL;
-
+/** 
+  * 销售退料
+  * author: timi    
+  * create at: 2017/11/20 11:36
+  */  
 public class SaleGoodsReturnActivity extends BaseActivity<PutAwayView, PutAwayPresenter> implements PutAwayView, BaseActivity.ScanQRCodeResultListener {
     @BindView(R.id.iv_title_right)
     ImageView ivTitleRight;
@@ -89,7 +91,7 @@ public class SaleGoodsReturnActivity extends BaseActivity<PutAwayView, PutAwayPr
         /**
          * 标题
          */
-        setActivityTitle(getString(R.string.out_return_material_title));
+        setActivityTitle(getString(R.string.putaway_sale_return_material_tip));
         intentCode = getIntent().getIntExtra(Constants.CODE_STR, Constants.COME_MATERAIL_NUM);
         saleGoodsReturnBean = new Gson().fromJson(getIntent().getStringExtra(Constants.IN_STOCK_FINISH_SALE_BEAN), SaleGoodsReturnBean.class);
 
@@ -105,6 +107,7 @@ public class SaleGoodsReturnActivity extends BaseActivity<PutAwayView, PutAwayPr
                  */
                 Intent it = new Intent(SaleGoodsReturnActivity.this, StockInDetailActivity.class);
                 it.putExtra(Constants.CODE_STR, intentCode);
+                it.putExtra("BillId", saleGoodsReturnBean.getBillId());
                 startActivity(it);
             }
         });
@@ -125,7 +128,7 @@ public class SaleGoodsReturnActivity extends BaseActivity<PutAwayView, PutAwayPr
                     params1.put("UserId", SpUtils.getInstance().getUserId());
                     params1.put("OrgId", SpUtils.getInstance().getOrgId());
                     params1.put("MAC", PackageUtils.getMac());
-                    params1.put("SrcBillType", 13);
+                    params1.put("SrcBillType", 43);
                     params1.put("DestBillType", 14);
                     params1.put("ScanId", saleGoodsReturnBean);
                     params1.put("BinCode", mVertifyLocationCodeBean.getBinId());
@@ -172,16 +175,16 @@ public class SaleGoodsReturnActivity extends BaseActivity<PutAwayView, PutAwayPr
         /**
          * 收货单号
          */
-        tvReceiveProNum.setText(saleGoodsReturnBean.getReceiptCode());
+        tvReceiveProNum.setText(saleGoodsReturnBean.getBillCode());
 
         /**
          * 已入库总数
          */
-        tvInStockTotalNum.setText(String.valueOf(saleGoodsReturnBean.getInstockQty()));
+        tvInStockTotalNum.setText(String.valueOf(saleGoodsReturnBean.getQty()));
         /**
          * 日期
          */
-        tvCreateOrdernoDate.setText(saleGoodsReturnBean.getReceipDate());
+        tvCreateOrdernoDate.setText(saleGoodsReturnBean.getBillDate());
         /**
          * 待点总数
          */
@@ -269,13 +272,13 @@ public class SaleGoodsReturnActivity extends BaseActivity<PutAwayView, PutAwayPr
     @Override
     public void vertifyLocationCode(VertifyLocationCodeBean bean) {
         locationCodeIsUse=true;
-        ToastUtils.showShort("库位码有效！");
+        ToastUtils.showShort(getString(R.string.location_code_is_visible));
         mVertifyLocationCodeBean = bean;
     }
 
     @Override
     public void createInStockOrderno() {
-        ToastUtils.showShort("生成入库单成功");
+        ToastUtils.showShort(getString(R.string.create_instock_bill_success));
         onBackPressed();
     }
 
@@ -285,6 +288,7 @@ public class SaleGoodsReturnActivity extends BaseActivity<PutAwayView, PutAwayPr
      * @param requestCode
      * @param result
      */
+    private int ScanId=0;
     @Override
     public void scanSuccess(int requestCode, String result) {
         switch (requestCode) {
@@ -298,7 +302,7 @@ public class SaleGoodsReturnActivity extends BaseActivity<PutAwayView, PutAwayPr
                 params1.put("UserId", SpUtils.getInstance().getUserId());
                 params1.put("OrgId", SpUtils.getInstance().getOrgId());
                 params1.put("MAC", PackageUtils.getMac());
-                params1.put("SrcBillType", 13);
+                params1.put("SrcBillType", 43);
                 params1.put("DestBillType", 14);
                 params1.put("ScanId", saleGoodsReturnBean);
                 params1.put("BinCode", mVertifyLocationCodeBean.getBinId());

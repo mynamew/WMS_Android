@@ -15,6 +15,7 @@ import com.timi.sz.wms_android.base.uils.LogUitls;
 import com.timi.sz.wms_android.base.uils.PackageUtils;
 import com.timi.sz.wms_android.base.uils.SpUtils;
 import com.timi.sz.wms_android.bean.instock.OrderDetailData;
+import com.timi.sz.wms_android.bean.instock.outsource_return_material.GetOutSourceReturnDetailResult;
 import com.timi.sz.wms_android.mvp.base.BaseActivity;
 import com.timi.sz.wms_android.view.FloatCircleButtonUpTopView;
 
@@ -59,28 +60,7 @@ public class StockInDetailActivity extends BaseActivity<StockInDetailView, Stock
 
     @Override
     public void initView() {
-        switch (intentCode) {
-            case Constants.BUY_ORDE_NUM://采购单
-                break;
-            case Constants.BUY_SEND_NUM://送货单
-                break;
-            case Constants.COME_MATERAIL_NUM://来料单
-                break;
-            case Constants.CREATE_PRO_CHECK_NUM://产成品 审核
-                break;
-            case Constants.CREATE_PRO_CREATE_ORDER_NUM://产成品 生单
-                break;
-            case Constants.OTHER_IN_STOCK_SELECT_ORDERNO://其他 选单
-                break;
-            case Constants.OTHER_IN_STOCK_SCAN:// 其他扫描 （扫码 不进行单据的查询）
-                break;
-            case Constants.OUT_RETURN_MATERAIL://委外退料
-                break;
-            case Constants.CREATE_RETURN_MATERAIL://生产退料
-                break;
-            case Constants.SALE_RETURN_MATERAIL://销售 退料
-                break;
-        }
+
     }
 
     @Override
@@ -90,7 +70,7 @@ public class StockInDetailActivity extends BaseActivity<StockInDetailView, Stock
         params.put("OrgId", SpUtils.getInstance().getOrgId());
         params.put("MAC", PackageUtils.getMac());
         params.put("BillId", BillId);
-        getPresenter().getReceiptDetail(params);
+        getPresenter().getReceiptDetail(params,intentCode);
     }
 
     @Override
@@ -109,6 +89,14 @@ public class StockInDetailActivity extends BaseActivity<StockInDetailView, Stock
         mOldDatas.clear();
         mOldDatas.addAll(datas);
         dealData();
+        initAdapter();
+    }
+
+    /**
+     * 初始化adapter
+     */
+    private void initAdapter() {
+
         if (null == adapter) {
             /**
              * 初始化adapter
@@ -121,7 +109,14 @@ public class StockInDetailActivity extends BaseActivity<StockInDetailView, Stock
 
                 @Override
                 protected void bindData(RecyclerViewHolder holder, int position, OrderDetailData item) {
-                    setTextViewText(holder.getTextView(R.id.tv_line_name), R.string.item_line_num, item.getReceiptLine());
+                    /**
+                     * 对行数进行判断
+                     */
+                    if (0 == item.getLine()) {
+                        setTextViewText(holder.getTextView(R.id.tv_line_name), R.string.item_line_num, item.getReceiptLine());
+                    } else {
+                        setTextViewText(holder.getTextView(R.id.tv_line_name), R.string.item_line_num, item.getLine());
+                    }
                     holder.setTextView(R.id.tv_wait_count_num, item.getWaitQty());
                     holder.setTextView(R.id.tv_scan_num, item.getScanQty());
                     holder.setTextView(R.id.tv_material_code, item.getMaterialCode() + item.getMaterialName());//合格数？ 应退数
@@ -170,6 +165,15 @@ public class StockInDetailActivity extends BaseActivity<StockInDetailView, Stock
             adapter.notifyDataSetChanged();
     }
 
+    @Override
+    public void getOutSourceReturnDetail(List<OrderDetailData> datas) {
+        mDatas.clear();
+        mOldDatas.clear();
+        mOldDatas.addAll(datas);
+        dealData();
+        initAdapter();
+    }
+
     @OnClick(R.id.iv_show_more)
     public void onViewClicked() {
         ivShowMore.setSelected(!ivShowMore.isSelected());
@@ -184,10 +188,10 @@ public class StockInDetailActivity extends BaseActivity<StockInDetailView, Stock
         mDatas.clear();
         for (int i = 0; i < mOldDatas.size(); i++) {
             if (!ivShowMore.isSelected()) {//如果是选中 则是显示所有的
-                if(mOldDatas.get(i).getWaitQty()>0){
+                if (mOldDatas.get(i).getWaitQty() > 0) {
                     mDatas.add(mOldDatas.get(i));
                 }
-            }else
+            } else
                 mDatas.add(mOldDatas.get(i));
         }
     }

@@ -1,0 +1,359 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.timi.sz.wms_android.mvp.UI.stock_out.batch_point_list.BatchPointListActivity">
+
+    <include layout="@layout/title_head"/>
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#fff"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_head_title"
+                android:layout_width="match_parent"
+                android:layout_height="96px"
+                android:gravity="center_vertical"
+                android:paddingLeft="30px"
+                android:paddingTop="10px"
+                android:text="委外发料（审核）物料清单"
+                android:textColor="#333"
+                android:textSize="28px"
+                android:textStyle="bold"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginBottom="10px"
+                android:layout_marginTop="10px"
+                android:background="#d7d7dd"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:paddingLeft="30px"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="96px"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_orderno_tip"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="left"
+                        android:text="@string/outsource_orderno_tip"
+                        android:textColor="#666"
+                        android:textSize="26px"/>
+
+                    <TextView
+                        android:id="@+id/tv_outsource_orderno"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10px"
+                        android:gravity="left"
+                        android:text="123213123"
+                        android:textColor="#000"
+                        android:textSize="26px"/>
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="96px"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_create_orderno_date_tip"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="left"
+                        android:text="@string/create_orderno_date_tip"
+                        android:textColor="#666"
+                        android:textSize="26px"/>
+
+                    <TextView
+                        android:id="@+id/tv_create_orderno_date"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10px"
+                        android:gravity="left"
+                        android:text="123213123"
+                        android:textColor="#000"
+                        android:textSize="26px"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="96px"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_stock_name_tip"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="left"
+                        android:text="@string/stock_name_tip"
+                        android:textColor="#666"
+                        android:textSize="26px"/>
+
+                    <TextView
+                        android:id="@+id/tv_stock_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10px"
+                        android:gravity="left"
+                        android:text="123213123"
+                        android:textColor="#000"
+                        android:textSize="26px"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="96px"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_strict_name_tip"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="left"
+                        android:text="@string/strict_name_tip"
+                        android:textColor="#666"
+                        android:textSize="26px"/>
+
+                    <TextView
+                        android:id="@+id/tv_strict_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10px"
+                        android:gravity="left"
+                        android:text="123213123"
+                        android:textColor="#000"
+                        android:textSize="26px"/>
+                </LinearLayout>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginBottom="10px"
+                android:layout_marginLeft="30px"
+                android:layout_marginRight="30px"
+                android:layout_marginTop="10px"
+                android:background="@color/divide_color"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="96px"
+                android:paddingLeft="30px"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_send_material_total_num_tip"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="left"
+                        android:text="@string/send_material_total_num_tip"
+                        android:textColor="#666"
+                        android:textSize="26px"/>
+
+                    <TextView
+                        android:id="@+id/tv_buy_num"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10px"
+                        android:gravity="left"
+                        android:text="123213123"
+                        android:textColor="#000"
+                        android:textSize="26px"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_wait_count_num_tip"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="left"
+                        android:text="@string/wait_point_num_tip"
+                        android:textColor="#666"
+                        android:textSize="26px"/>
+
+                    <TextView
+                        android:id="@+id/tv_wait_point_num"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10px"
+                        android:gravity="left"
+                        android:text="123213123"
+                        android:textColor="@color/login_txt_color"
+                        android:textSize="26px"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20px"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_have_count_num_tip"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="left"
+                        android:text="@string/have_point_num_tip"
+                        android:textColor="#666"
+                        android:textSize="26px"/>
+
+                    <TextView
+                        android:id="@+id/tv_have_count_num"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10px"
+                        android:gravity="left"
+                        android:text="123213123"
+                        android:textColor="@color/login_txt_color"
+                        android:textSize="26px"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20px"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:visibility="invisible">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="30px"
+                        android:text="@string/have_point_num_tip"
+                        android:textColor="#333"
+                        android:textSize="26px"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="60px"
+                        android:text="123213123"
+                        android:textColor="#000"
+                        android:textSize="26px"/>
+                </LinearLayout>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="24px"
+                android:background="@color/divide_color"/>
+
+            <RelativeLayout
+                android:id="@+id/rl_top_menu"
+                android:layout_width="match_parent"
+                android:layout_height="96px"
+                android:layout_below="@id/head"
+                android:background="#fff">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="30px"
+                    android:text="@string/orderno_info_point_tip"
+                    android:textColor="#333"
+                    android:textStyle="bold"/>
+
+                <ImageView
+                    android:id="@+id/iv_show_more"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="20px"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/selector_stockin_detail"/>
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_below="@id/rl_top_menu"
+                android:background="@color/divide_color"
+                android:visibility="visible"/>
+
+            <include
+                android:id="@+id/head_detail"
+                layout="@layout/header_outsoure_point"/>
+
+            <include
+                android:id="@+id/head_material"
+                layout="@layout/header_outsoure_point_material"
+                android:visibility="gone"/>
+
+            <View
+                android:id="@+id/view_divide"
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_below="@id/rl_top_menu"
+                android:background="@color/divide_color"
+                android:visibility="visible"/>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rlv_orderno_info"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+
+    <Button
+        android:id="@+id/btn_point_commit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="20px"
+        android:background="@drawable/selector_btn_bg_login"
+        android:text="@string/confirm_commit"
+        android:textColor="#fff"
+        android:textSize="18sp"/>
+</LinearLayout>

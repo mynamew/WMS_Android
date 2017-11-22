@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.timi.sz.wms_android.base.uils.ToastUtils;
 import com.timi.sz.wms_android.bean.instock.OrderDetailData;
+import com.timi.sz.wms_android.bean.instock.outsource_return_material.GetOutSourceReturnDetailResult;
 import com.timi.sz.wms_android.http.callback.OnResultCallBack;
 import com.timi.sz.wms_android.http.subscriber.HttpSubscriber;
 import com.timi.sz.wms_android.mvp.base.presenter.impl.MvpBasePresenter;
@@ -31,58 +32,27 @@ public class StockInPresenter extends MvpBasePresenter<StockInDetailView> {
      * 获取单据详情
      *
      * @param params
+     * @param intentCode
      */
-    public void getReceiptDetail(Map<String, Object> params) {
+    public void getReceiptDetail(Map<String, Object> params, int intentCode) {
         getView().showProgressDialog();
         if (null == orderDetailDataHttpSubscriber) {
             orderDetailDataHttpSubscriber = new HttpSubscriber<List<OrderDetailData>>(new OnResultCallBack<List<OrderDetailData>>() {
                 @Override
                 public void onSuccess(List<OrderDetailData> orderDetailDatas) {
                     getView().getReceiptDetail(orderDetailDatas);
-//                    List<OrderDetailData> datas=new ArrayList<>();
-//                    for (int i = 0; i < 100; i++) {
-//                        OrderDetailData orderDetailData = new OrderDetailData();
-//                        orderDetailData.setReceiptLine(i);
-//                        orderDetailData.setScanQty(100);
-//                        orderDetailData.setInStockQty(100);
-//                        orderDetailData.setMaterialAttribute("撒大大苏打撒旦");
-//                        orderDetailData.setMaterialCode("CT234643234532");
-//                        orderDetailData.setMaterialName("2让非官方推广人分的");
-//                        orderDetailData.setMaterialStandard("士大夫士大夫随风倒");
-//                        orderDetailData.setPassQty(200);
-//                        orderDetailData.setQty(100);
-//                        orderDetailData.setWaitQty(i*10);
-//                        datas.add(orderDetailData);
-//                    }
-//                    getView().getReceiptDetail(datas);
-
                 }
 
                 @Override
                 public void onError(String errorMsg) {
                     ToastUtils.showShort(errorMsg);
-//                    List<OrderDetailData> datas=new ArrayList<>();
-//                    for (int i = 0; i < 100; i++) {
-//                        OrderDetailData orderDetailData = new OrderDetailData();
-//                        orderDetailData.setReceiptLine(i);
-//                        orderDetailData.setScanQty(100);
-//                        orderDetailData.setInStockQty(100);
-//                        orderDetailData.setMaterialAttribute("撒大大苏打撒旦");
-//                        orderDetailData.setMaterialCode("CT234643234532");
-//                        orderDetailData.setMaterialName("2让非官方推广人分的");
-//                        orderDetailData.setMaterialStandard("士大夫士大夫随风倒");
-//                        orderDetailData.setPassQty(200);
-//                        orderDetailData.setQty(100);
-//                        orderDetailData.setWaitQty(i*10);
-//                        datas.add(orderDetailData);
-//                    }
-//                    getView().getReceiptDetail(datas);
-
                 }
             });
         }
-        model.getReceiptDetail(params, orderDetailDataHttpSubscriber);
+        model.getReceiptDetail(params,intentCode, orderDetailDataHttpSubscriber);
     }
+
+
 
     @Override
     public void dettachView() {
@@ -91,5 +61,6 @@ public class StockInPresenter extends MvpBasePresenter<StockInDetailView> {
             orderDetailDataHttpSubscriber.unSubscribe();
             orderDetailDataHttpSubscriber = null;
         }
+
     }
 }

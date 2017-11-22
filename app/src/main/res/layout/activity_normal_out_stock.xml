@@ -28,7 +28,7 @@
                 android:gravity="center_vertical"
                 android:paddingLeft="20px"
                 android:paddingTop="10px"
-                android:text="委外发料单信息"
+                android:text="@string/outsource_send_material_oderno_info"
                 android:textColor="#333"
                 android:textSize="28px"
                 android:textStyle="bold"/>

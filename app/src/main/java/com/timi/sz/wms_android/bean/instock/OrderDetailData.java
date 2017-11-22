@@ -24,7 +24,9 @@ public class OrderDetailData {
      */
 
     private int receiptDetailId;
+    private int detailId;
     private int receiptLine;
+    private int line;
     private int materialId;
     private String materialCode;
     private String materialName;
@@ -130,5 +132,21 @@ public class OrderDetailData {
 
     public void setScanQty(int scanQty) {
         this.scanQty = scanQty;
+    }
+
+    public int getDetailId() {
+        return detailId;
+    }
+
+    public void setDetailId(int detailId) {
+        this.detailId = detailId;
+    }
+
+    public int getLine() {
+        return line;
+    }
+
+    public void setLine(int line) {
+        this.line = line;
     }
 }

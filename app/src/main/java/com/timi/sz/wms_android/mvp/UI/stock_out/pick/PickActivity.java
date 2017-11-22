@@ -15,12 +15,6 @@ import butterknife.ButterKnife;
  * create at: 2017/9/18 15:06
  */
 public class PickActivity extends BaseActivity<PickView, PickPresenter> implements PickView {
-    @BindView(R.id.et_send_order)
-    EditText etSendOrder;
-    @BindView(R.id.et_sell_order)
-    EditText etSellOrder;
-    @BindView(R.id.et_allot_roder)
-    EditText etAllotRoder;
 
     @Override
     public int setLayoutId() {
@@ -52,10 +46,4 @@ public class PickActivity extends BaseActivity<PickView, PickPresenter> implemen
         return this;
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
-    }
 }

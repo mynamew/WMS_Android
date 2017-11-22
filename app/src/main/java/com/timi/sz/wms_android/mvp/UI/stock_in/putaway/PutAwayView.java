@@ -1,8 +1,6 @@
 package com.timi.sz.wms_android.mvp.UI.stock_in.putaway;
 
-import com.timi.sz.wms_android.bean.instock.search.FinishGoodsOrdernoBean;
 import com.timi.sz.wms_android.bean.instock.MaterialScanPutAwayBean;
-import com.timi.sz.wms_android.bean.instock.search.ReceiveOrdernoBean;
 import com.timi.sz.wms_android.bean.instock.VertifyLocationCodeBean;
 import com.timi.sz.wms_android.mvp.base.view.iml.MvpBaseView;
 

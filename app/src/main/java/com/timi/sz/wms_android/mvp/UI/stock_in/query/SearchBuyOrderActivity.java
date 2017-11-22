@@ -21,10 +21,9 @@ import com.timi.sz.wms_android.base.uils.ToastUtils;
 import com.timi.sz.wms_android.bean.instock.outsource_return_material.QueryOutSourceReturnByInputResult;
 import com.timi.sz.wms_android.bean.instock.search.BuyOrdernoBean;
 import com.timi.sz.wms_android.bean.instock.search.FinishGoodsCreateBillBean;
-import com.timi.sz.wms_android.bean.instock.search.FinishGoodsOrdernoBean;
+import com.timi.sz.wms_android.bean.instock.search.QueryPrdInstockByInputResult;
 import com.timi.sz.wms_android.bean.instock.search.OtherAuditSelectOrdernoBean;
-import com.timi.sz.wms_android.bean.instock.search.OutReturnMaterialBean;
-import com.timi.sz.wms_android.bean.instock.search.ProductionReturnMaterialBean;
+import com.timi.sz.wms_android.bean.instock.search.QueryPrdReturnByInputResult;
 import com.timi.sz.wms_android.bean.instock.search.ReceiveOrdernoBean;
 import com.timi.sz.wms_android.bean.instock.search.SaleGoodsReturnBean;
 import com.timi.sz.wms_android.bean.instock.search.SendOrdernoBean;
@@ -34,6 +33,7 @@ import com.timi.sz.wms_android.mvp.UI.stock_in.putaway.FinishedGoodsCreateBillPu
 import com.timi.sz.wms_android.mvp.UI.stock_in.putaway.OtherAuditActivity;
 import com.timi.sz.wms_android.mvp.UI.stock_in.putaway.OutMaterialReturnActivity;
 import com.timi.sz.wms_android.mvp.UI.stock_in.putaway.PutAwayActivity;
+import com.timi.sz.wms_android.mvp.UI.stock_in.putaway.SaleGoodsReturnActivity;
 import com.timi.sz.wms_android.mvp.base.BaseActivity;
 import com.timi.sz.wms_android.qrcode.utils.Constant;
 
@@ -41,7 +41,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 import static com.timi.sz.wms_android.base.uils.Constants.IN_STOCK_BUY_BEAN;
@@ -103,17 +102,19 @@ public class SearchBuyOrderActivity extends BaseActivity<SearchBuyOrderView, Sea
                 etSboInput.setHint(R.string.please_input_orderno_or_scan);
                 break;
             case Constants.CREATE_PRO_CHECK_NUM://产成品 审核
-                tvSboTip.setText(getString(R.string.create_task_orderno));
+                tvSboTip.setText(R.string.product_orderno_tip);
                 tvTitle.setText(R.string.produce_create_order);
                 tvQueryTitle.setText(R.string.finish_goods_in_stock_title);
                 etSboInput.setHint(R.string.please_input_orderno_or_scan);
                 break;
             case Constants.CREATE_PRO_CREATE_ORDER_NUM://产成品 生单
-                tvSboTip.setText(R.string.create_task_orderno_tip);
-                tvTitle.setText(R.string.product_in_stock_create_orderno);
+                tvSboTip.setText(R.string.product_orderno_tip);
+                tvTitle.setText(R.string.finish_goods_in_stock_title);
+                tvQueryTitle.setText(R.string.finish_goods_in_stock_title);
                 etSboInput.setHint(R.string.please_input_orderno_or_scan);
                 break;
             case Constants.OTHER_IN_STOCK_SELECT_ORDERNO://其他 选单
+                tvQueryTitle.setText(R.string.putaway_other_tip);
                 tvSboTip.setText(R.string.other_in_stock_orderno);
                 tvTitle.setText(R.string.other_select_order_title);
                 etSboInput.setHint(R.string.please_input_orderno_or_scan);
@@ -122,16 +123,19 @@ public class SearchBuyOrderActivity extends BaseActivity<SearchBuyOrderView, Sea
                 break;
             case Constants.OUT_RETURN_MATERAIL://委外退料
                 tvSboTip.setText(R.string.out_return_order);
+                tvQueryTitle.setText(R.string.putaway_out_return_material_tip);
                 tvTitle.setText(R.string.out_return_material_select_orderno);
                 etSboInput.setHint(R.string.please_input_orderno_or_scan);
                 break;
             case Constants.CREATE_RETURN_MATERAIL://生产退料
                 tvSboTip.setText(R.string.create_return_orderno);
                 tvTitle.setText(R.string.create_return_orderno_select_orderno);
+                tvQueryTitle.setText(R.string.putaway_production_return_material_tip);
                 etSboInput.setHint(R.string.please_input_orderno_or_scan);
                 break;
             case Constants.SALE_RETURN_MATERAIL://销售 退料
                 tvSboTip.setText(R.string.sale_return_material_tip);
+                tvQueryTitle.setText(R.string.putaway_sale_return_material_tip);
                 tvTitle.setText(R.string.sale_return_material_select_orderno);
                 etSboInput.setHint(R.string.please_input_orderno_or_scan);
                 break;
@@ -241,7 +245,7 @@ public class SearchBuyOrderActivity extends BaseActivity<SearchBuyOrderView, Sea
      * @param bean
      */
     @Override
-    public void searchFinishGoodsOrderno(FinishGoodsOrdernoBean bean) {
+    public void searchFinishGoodsOrderno(QueryPrdInstockByInputResult bean) {
         Intent it = new Intent(this, FinishedGoodsAuditPutAwayActivity.class);
         it.putExtra(Constants.CODE_STR, intentCode);
         it.putExtra(IN_STOCK_FINISH_BEAN, new Gson().toJson(bean));
@@ -281,13 +285,14 @@ public class SearchBuyOrderActivity extends BaseActivity<SearchBuyOrderView, Sea
         it.putExtra(IN_STOCK_FINISH_OUT_BEAN, new Gson().toJson(bean));
         startActivity(it);
     }
+
     /**
      * 生产
      *
      * @param bean
      */
     @Override
-    public void searchProductionReturnMaterialOrderno(ProductionReturnMaterialBean bean) {
+    public void searchProductionReturnMaterialOrderno(QueryPrdReturnByInputResult bean) {
         Intent it = new Intent(this, PutAwayActivity.class);
         it.putExtra(Constants.CODE_STR, intentCode);
         it.putExtra(IN_STOCK_FINISH_PRODUCTION_BEAN, new Gson().toJson(bean));
@@ -301,7 +306,7 @@ public class SearchBuyOrderActivity extends BaseActivity<SearchBuyOrderView, Sea
      */
     @Override
     public void searchSaleGoodsReturnOrderno(SaleGoodsReturnBean bean) {
-        Intent it = new Intent(this, PutAwayActivity.class);
+        Intent it = new Intent(this, SaleGoodsReturnActivity.class);
         it.putExtra(Constants.CODE_STR, intentCode);
         it.putExtra(IN_STOCK_FINISH_SALE_BEAN, new Gson().toJson(bean));
         startActivity(it);
@@ -332,7 +337,7 @@ public class SearchBuyOrderActivity extends BaseActivity<SearchBuyOrderView, Sea
                 getPresenter().searchReceiveGoodOrderno(params);
                 break;
             case Constants.CREATE_PRO_CHECK_NUM://产成品 审核
-                getPresenter().searchFinishGoodsOrderno(orderNum);
+                getPresenter().searchFinishGoodsOrderno(params);
                 break;
             case Constants.CREATE_PRO_CREATE_ORDER_NUM://产成品 生单
                 getPresenter().searchFinishGoodsCreateBillOrderno(orderNum);
@@ -344,10 +349,10 @@ public class SearchBuyOrderActivity extends BaseActivity<SearchBuyOrderView, Sea
                 getPresenter().searchOutReturnMaterialOrderno(params);
                 break;
             case Constants.CREATE_RETURN_MATERAIL://生产退料
-                getPresenter().searchProductionReturnMaterialOrderno(orderNum);
+                getPresenter().searchProductionReturnMaterialOrderno(params);
                 break;
             case Constants.SALE_RETURN_MATERAIL://销售 退料
-                getPresenter().searchSaleGoodsReturnOrderno(orderNum);
+                getPresenter().searchSaleGoodsReturnOrderno(params);
                 break;
         }
     }

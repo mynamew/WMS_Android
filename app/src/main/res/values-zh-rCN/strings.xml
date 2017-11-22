@@ -79,13 +79,13 @@
     <string name="scan_qrcode_title">二维码扫描</string>
     <string name="scan_point_title">此采购订单系统中未找到，请确认后，再进行查询！</string>
     <string name="stock_out_out_add_materail">委外补料</string>
-    <string name="stock_out_out_check">委外发货-审核</string>
-    <string name="stock_out_out_create_order">委外发货-生单</string>
+    <string name="stock_out_out_check">委外审核</string>
+    <string name="stock_out_out_create_order">委外生单</string>
     <string name="stock_out_create">生产</string>
     <string name="stock_out_out">委外</string>
     <string name="stock_out_create_add_materail">生产补料</string>
-    <string name="stock_out_create_check">生产领料-审核</string>
-    <string name="stock_out_create_create_order">生产领料-生单</string>
+    <string name="stock_out_create_check">生产审核</string>
+    <string name="stock_out_create_create_order">生产生单</string>
     <string name="stock_out_sale">销售</string>
     <string name="stock_out_sale_trans">调拨出库</string>
     <string name="stock_out_sale_check">销售出库-审核</string>
@@ -248,6 +248,8 @@
     <string name="item_should_return_num">应退数：</string>
     <string name="item_line_num">#%1$s</string>
     /**====== 产成品入库 ======**/
+    <string name="product_orderno_tip">产成品单号</string>
+    <string name="putaway_other_tip">入库上架（其他）</string>
     <string name="product_warehous_warrent_num">产成品入库单：</string>
     <string name="finish_goods_in_stock_title">入库上架（产成品）</string>
     <string name="warehous_total_num">入库总数：</string>
@@ -262,18 +264,22 @@
     <string name="please_input_create_task_num_or_scan">请输入生产任务单号或扫码查询</string>
 
     /**====== 委外退料 ======**/
+    <string name="putaway_out_return_material_tip">入库上架（委外退料）</string>
     <string name="out_return_material_title">入库上架(委外退料)</string>
     <string name="out_return_order">委外退料单</string>
     <string name="out_return_material_select_orderno">委外退料-选单</string>
     <string name="pealse_out_return_material_select_orderno_or_scan">请输入委外退料单号或扫码查询</string>
     <string name="out_return_material_orderno">委外退料单：</string>
     /**====== 生产退料 ======**/
+    <string name="putaway_production_return_material_tip">入库上架（生产退料）</string>
     <string name="create_return_material_title">入库上架(生产退料)</string>
     <string name="create_return_orderno">生产退料单</string>
     <string name="create_return_orderno_select_orderno">生产退料-选单</string>
     <string name="please_create_return_material_num_or_scan">请输入生产退料单号或扫码查询</string>
     <string name="create_return_material_orderno">生产退料单：%1$s</string>
     /**====== 销售退料 ======**/
+    <string name="putaway_sale_return_material_tip">入库上架（销售退料）</string>
+    <string name="sale_return_material_orderno_tip">销售退货单号：</string>
     <string name="sale_return_material_title">销售退料—入库上架</string>
     <string name="sale_return_material_tip">销售退货单</string>
     <string name="sale_return_material_select_orderno">销售退货-选单</string>
@@ -411,10 +417,26 @@
     <string name="header_can_useful_life">有效期</string>
     <string name="batch_tip">批次</string>
     /**====== 委外补料 物品清点 ======**/
+    <string name="outsource_send_material_oderno_info">委外发料单信息</string>
+    <string name="outsource_feed_orderno_info">委外补料单信息</string>
     <string name="outsource_feed_point_title">物品清单(委外补料)</string>
+    <string name="material_point_outsource_feed_title">物品清点(委外补料)</string>
     <string name="close">关闭</string>
     <string name="send_material_lib_name">发料仓库：%1$s</string>
     <string name="other_add_attr">附加属性：%1$s</string>
+    <string name="batch_remind_tip">批次提醒</string>
+    <string name="batch_info_title">批次信息</string>
+    <string name="stock_out_outsource_bill_title">委外发料(生单)</string>
+    <string name="commit_create_bill_success">提交制单成功</string>
+    <string name="outsource_send_orderno_info">委外发料单信息</string>
+    /**====== 生产补料  ======**/
+    <string name="material_point_production_feed_title">物品清点（生产补料）</string>
+
+    /**====== 生产领料  ======**/
+    <string name="material_list_pro_get_title">物料清单(生产领料)</string>
+    <string name="material_list_pro_feed_title">物料清单(生产补料)</string>
+    <string name="outstock_detail_title">出库详情</string>
+
     /******************************************************************************************************************************************************/
     /******************************************************************************************************************************************************/
     /**====== 质量检验 ======**/
@@ -655,11 +677,32 @@
     <string name="query_retrospective">追溯查询</string>
     <string name="query_record_tip">记录查询</string>
     <string name="query_statistical_tip">统计查询</string>
-    <string name="batch_remind_tip">批次提醒</string>
-    <string name="batch_info_title">批次信息</string>
-    <string name="stock_out_outsource_bill_title">委外发料(生单)</string>
-    <string name="commit_create_bill_success">提交制单成功</string>
-    <string name="outsource_send_orderno_info">委外发料单信息</string>
+    <string name="item_wipqty">齐套数</string>
+    <string name="material_point_production_pick_title">物品清点（生产领料）</string>
+    <string name="production_pick_material_title">生产领料</string>
+    <string name="outsource_allot">委外调拨</string>
+    <string name="oursource_allot_maiterial_point_title">物品清点（委外调拨）</string>
+    <string name="outsource_allot_material_list_title">物品清单（委外调拨）</string>
+    <string name="production_allot">生产调拨</string>
+    <string name="production_allot_orderno">生产调拨单号</string>
+    <string name="material_point_production_allot_title">物品清点（生产调拨）</string>
+    <string name="outsource_send_material_orderno_detial_tip">委外发料(生单)单据详情</string>
+    <string name="should_send_num_tip">应发数：</string>
+    <string name="orderno_detail_outsource_bill_title">单据详情（委外生单）</string>
+    <string name="orderno_detail_outsource_allot_title">单据详情（委外调拨）</string>
+    <string name="orderno_detail_production_bill_title">单据详情（生产生单）</string>
+    <string name="orderno_detail_production_allot_title">单据详情（生产调拨）</string>
+    <string name="orderno_info_point_tip">单据信息清点操作</string>
+    <string name="create_send_material_orderno">生成发料单</string>
+    <string name="foods_list_title">物品清单</string>
+    <string name="outsource_send_material_bill_title">委外发料（生单）物料清单</string>
+    <string name="material_list_pro_bill_title">生产领料（生单）物料清单</string>
+    <string name="material_barcode_tip">物料条码</string>
+    <string name="current_num_tip">当前数量</string>
+    <string name="have_connected_tip">已连接</string>
+    <string name="print_and_commit">打印并提交</string>
+    <string name="btn_commit">提交</string>
+    <string name="submit_barcode_split_outstock_success">批次拣货提交条码拆分出库成功</string>
 
 
 </resources>

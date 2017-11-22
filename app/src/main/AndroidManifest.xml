@@ -206,10 +206,6 @@
         </activity>
         <activity android:name=".mvp.UI.stock_out.query.StockOutSearchActivity">
         </activity>
-        <activity android:name=".mvp.UI.stock_out.point_list.PointListActivity">
-        </activity>
-        <activity android:name=".mvp.UI.stock_out.point_detail.PointDetailActivity">
-        </activity>
         <activity android:name=".mvp.UI.quity.quality.QualityCheckActivity">
         </activity>
         <activity
@@ -269,27 +265,19 @@
         </activity>
         <activity android:name=".mvp.UI.stock_in.putaway.SaleGoodsReturnActivity">
         </activity>
-        <activity android:name=".mvp.UI.stock_out.outsourcing_audit.OursourcingAuditGoodsListActivity">
-        </activity>
-        <activity android:name=".mvp.UI.stock_out.outsource_feed.OutSourceFeedActivity">
-        </activity>
         <activity
-            android:name=".mvp.UI.stock_out.outsource_feed.OutSourceFeedMaterialPointActivity"
+            android:name=".mvp.UI.stock_out.normal_out_stock.NormalOutStockActivity"
             android:windowSoftInputMode="adjustPan|stateHidden">
         </activity>
         <activity
-            android:name=".mvp.UI.stock_out.outsourcing_audit.OutsourcingAuditPointActivity"
+            android:name=".mvp.UI.stock_out.batch_point.BatchPointActivity"
             android:windowSoftInputMode="adjustPan|stateHidden">
         </activity>
-        <activity android:name=".mvp.UI.stock_out.outsource_bill.OutsourcingBillActivity">
+        <activity
+            android:name=".mvp.UI.stock_out.batch_point_list.BatchPointListActivity"
+            android:windowSoftInputMode="adjustPan|stateHidden">
         </activity>
-        <activity android:name=".mvp.UI.stock_out.outsource_bill.OutsourcingBillPointActivity">
-        </activity>
-        <activity android:name=".mvp.UI.stock_out.outsourcing_audit.OutSourceAuditNormalActivity">
-        </activity>
-        <activity android:name=".mvp.UI.stock_out.outsource_bill.OutsourcingBillNormalActivity">
-        </activity>
-        <activity android:name=".mvp.UI.stock_out.normal_out_stock.NormalOutStockActivity">
+        <activity android:name=".mvp.UI.stock_out.detail.outsource_bill_detail.OutsourceBillDetailActivity">
         </activity>
     </application>
 

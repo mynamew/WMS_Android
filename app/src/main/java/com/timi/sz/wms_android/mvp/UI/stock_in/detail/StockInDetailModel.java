@@ -1,6 +1,8 @@
 package com.timi.sz.wms_android.mvp.UI.stock_in.detail;
 
+import com.timi.sz.wms_android.base.uils.Constants;
 import com.timi.sz.wms_android.bean.instock.OrderDetailData;
+import com.timi.sz.wms_android.bean.instock.outsource_return_material.GetOutSourceReturnDetailResult;
 import com.timi.sz.wms_android.http.HttpManager;
 import com.timi.sz.wms_android.http.api.ApiService;
 import com.timi.sz.wms_android.http.api.CommonResult;
@@ -22,17 +24,48 @@ import io.reactivex.Observer;
 public class StockInDetailModel extends MvpBaseModel {
     /**
      * 获取 单据详情的数据
+     *
      * @param params
+     * @param intentCode
      * @param observer
      */
-    public void getReceiptDetail(final Map<String, Object> params, Observer<List<OrderDetailData>> observer) {
+    public void getReceiptDetail(final Map<String, Object> params, final int intentCode, Observer<List<OrderDetailData>> observer) {
         HttpManager.getInstance().HttpManagerRequest(observer, new ApiServiceMethodCallBack<List<OrderDetailData>>() {
             @Override
             public Observable<CommonResult<List<OrderDetailData>>> createObservable(ApiService apiService) {
-                return apiService.getReceiptDetail(params);
+                switch (intentCode) {
+                    case Constants.BUY_ORDE_NUM://采购单
+                    case Constants.BUY_SEND_NUM://送货单
+                    case Constants.COME_MATERAIL_NUM://来料单
+
+                        return apiService.getReceiptDetail(params);
+                    case Constants.CREATE_PRO_CHECK_NUM://产成品 审核
+
+                        return apiService.getReceiptDetail(params);
+                    case Constants.CREATE_PRO_CREATE_ORDER_NUM://产成品 生单
+
+                        return apiService.getReceiptDetail(params);
+                    case Constants.OTHER_IN_STOCK_SELECT_ORDERNO://其他 选单
+
+                        return apiService.getReceiptDetail(params);
+                    case Constants.OTHER_IN_STOCK_SCAN:// 其他扫描 （扫码 不进行单据的查询）
+
+                        return apiService.getReceiptDetail(params);
+                    case Constants.OUT_RETURN_MATERAIL://委外退料
+
+                        return apiService.getOutSourceReturnDetail(params);
+                    case Constants.CREATE_RETURN_MATERAIL://生产退料
+
+                        return apiService.getPrdReturnDetail(params);
+                    case Constants.SALE_RETURN_MATERAIL://销售 退料
+
+                        return apiService.getSalesReturnDetail(params);
+                    default:
+
+                        return apiService.getReceiptDetail(params);
+                }
             }
         });
 
     }
-
 }

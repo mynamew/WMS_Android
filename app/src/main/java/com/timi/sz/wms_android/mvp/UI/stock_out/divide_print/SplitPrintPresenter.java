@@ -2,7 +2,13 @@ package com.timi.sz.wms_android.mvp.UI.stock_out.divide_print;
 
 import android.content.Context;
 
+import com.timi.sz.wms_android.base.uils.ToastUtils;
+import com.timi.sz.wms_android.bean.outstock.outsource.SubmitBarcodeLotPickOutSplitResult;
+import com.timi.sz.wms_android.http.callback.OnResultCallBack;
+import com.timi.sz.wms_android.http.subscriber.HttpSubscriber;
 import com.timi.sz.wms_android.mvp.base.presenter.impl.MvpBasePresenter;
+
+import java.util.Map;
 
 /**
  * $dsc
@@ -11,7 +17,43 @@ import com.timi.sz.wms_android.mvp.base.presenter.impl.MvpBasePresenter;
  */
 
 public class SplitPrintPresenter extends MvpBasePresenter<SplitPrintView> {
+    private HttpSubscriber<SubmitBarcodeLotPickOutSplitResult> submitBarcodeLotPickOutSplitResultHttpSubscriber;
+    private SplitPrintModel model;
+
     public SplitPrintPresenter(Context context) {
         super(context);
+        model = new SplitPrintModel();
+    }
+
+    /**
+     * 提交条码拆分出库(批次拣货)
+     *
+     * @param params
+     */
+    public void submitBarcodeLotPickOutSplit(Map<String, Object> params) {
+        getView().showProgressDialog();
+        if (null == submitBarcodeLotPickOutSplitResultHttpSubscriber) {
+            submitBarcodeLotPickOutSplitResultHttpSubscriber = new HttpSubscriber<>(new OnResultCallBack<SubmitBarcodeLotPickOutSplitResult>() {
+                @Override
+                public void onSuccess(SubmitBarcodeLotPickOutSplitResult bean) {
+                    getView().submitBarcodeLotPickOutSplit(bean);
+                }
+
+                @Override
+                public void onError(String errorMsg) {
+                    ToastUtils.showShort(errorMsg);
+                }
+            });
+        }
+        model.submitBarcodeLotPickOutSplit(params, submitBarcodeLotPickOutSplitResultHttpSubscriber);
+    }
+
+    @Override
+    public void dettachView() {
+        super.dettachView();
+        if (null != submitBarcodeLotPickOutSplitResultHttpSubscriber) {
+            submitBarcodeLotPickOutSplitResultHttpSubscriber.unSubscribe();
+            submitBarcodeLotPickOutSplitResultHttpSubscriber = null;
+        }
     }
 }

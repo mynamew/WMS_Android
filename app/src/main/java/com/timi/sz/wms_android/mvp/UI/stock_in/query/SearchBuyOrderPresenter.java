@@ -6,20 +6,16 @@ import com.timi.sz.wms_android.base.uils.ToastUtils;
 import com.timi.sz.wms_android.bean.instock.outsource_return_material.QueryOutSourceReturnByInputResult;
 import com.timi.sz.wms_android.bean.instock.search.BuyOrdernoBean;
 import com.timi.sz.wms_android.bean.instock.search.FinishGoodsCreateBillBean;
-import com.timi.sz.wms_android.bean.instock.search.FinishGoodsOrdernoBean;
+import com.timi.sz.wms_android.bean.instock.search.QueryPrdInstockByInputResult;
 import com.timi.sz.wms_android.bean.instock.search.OtherAuditSelectOrdernoBean;
-import com.timi.sz.wms_android.bean.instock.search.OutReturnMaterialBean;
-import com.timi.sz.wms_android.bean.instock.search.ProductionReturnMaterialBean;
+import com.timi.sz.wms_android.bean.instock.search.QueryPrdReturnByInputResult;
 import com.timi.sz.wms_android.bean.instock.search.ReceiveOrdernoBean;
 import com.timi.sz.wms_android.bean.instock.search.SaleGoodsReturnBean;
 import com.timi.sz.wms_android.bean.instock.search.SendOrdernoBean;
 import com.timi.sz.wms_android.http.callback.OnResultCallBack;
 import com.timi.sz.wms_android.http.subscriber.HttpSubscriber;
 import com.timi.sz.wms_android.mvp.base.presenter.impl.MvpBasePresenter;
-import com.timi.sz.wms_android.view.MyProgressDialog;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -33,11 +29,11 @@ public class SearchBuyOrderPresenter extends MvpBasePresenter<SearchBuyOrderView
     private HttpSubscriber<BuyOrdernoBean> mBuyHttpSubscriber = null;//采货单
     private HttpSubscriber<SendOrdernoBean> mSendHttpSubscriber = null;//送货单
     private HttpSubscriber<ReceiveOrdernoBean> mReceiveSubscriber = null;//收货上架
-    private HttpSubscriber<FinishGoodsOrdernoBean> mFinishSubscriber = null;//产成品-审核
+    private HttpSubscriber<QueryPrdInstockByInputResult> mFinishSubscriber = null;//产成品-审核
     private HttpSubscriber<FinishGoodsCreateBillBean> mFinishCreateSubscriber = null;//产成品-生单
     private HttpSubscriber<OtherAuditSelectOrdernoBean> mOtherSubscriber = null;//其他入库-选单
     private HttpSubscriber<QueryOutSourceReturnByInputResult> mOutSubscriber = null;//委外退料-选单
-    private HttpSubscriber<ProductionReturnMaterialBean> mProductionSubscriber = null;//生产退料-选单
+    private HttpSubscriber<QueryPrdReturnByInputResult> mProductionSubscriber = null;//生产退料-选单
     private HttpSubscriber<SaleGoodsReturnBean> mSaleSubscriber = null;//销售退货-选单
 
     public SearchBuyOrderPresenter(Context context) {
@@ -115,14 +111,14 @@ public class SearchBuyOrderPresenter extends MvpBasePresenter<SearchBuyOrderView
     /**
      * 搜索产成品-审核的单号
      *
-     * @param orderno
+     * @param params
      */
-    public void searchFinishGoodsOrderno(final String orderno) {
+    public void searchFinishGoodsOrderno(final Map<String, Object> params) {
         getView().showProgressDialog();
         if (null == mFinishSubscriber) {
-            mFinishSubscriber = new HttpSubscriber<>(new OnResultCallBack<FinishGoodsOrdernoBean>() {
+            mFinishSubscriber = new HttpSubscriber<>(new OnResultCallBack<QueryPrdInstockByInputResult>() {
                 @Override
-                public void onSuccess(FinishGoodsOrdernoBean bean) {
+                public void onSuccess(QueryPrdInstockByInputResult bean) {
                     getView().searchFinishGoodsOrderno(bean);
 
                 }
@@ -133,7 +129,7 @@ public class SearchBuyOrderPresenter extends MvpBasePresenter<SearchBuyOrderView
                 }
             });
         }
-        model.searchFinishGoodsOrderno(orderno, mFinishSubscriber);
+        model.searchFinishGoodsOrderno(params, mFinishSubscriber);
     }
 
     /**
@@ -209,14 +205,14 @@ public class SearchBuyOrderPresenter extends MvpBasePresenter<SearchBuyOrderView
     /**
      * 搜索生产退料—选单的单号
      *
-     * @param orderno
+     * @param params
      */
-    public void searchProductionReturnMaterialOrderno(final String orderno) {
+    public void searchProductionReturnMaterialOrderno( Map<String,Object> params) {
         getView().showProgressDialog();
         if (null == mProductionSubscriber) {
-            mProductionSubscriber = new HttpSubscriber<>(new OnResultCallBack<ProductionReturnMaterialBean>() {
+            mProductionSubscriber = new HttpSubscriber<>(new OnResultCallBack<QueryPrdReturnByInputResult>() {
                 @Override
-                public void onSuccess(ProductionReturnMaterialBean bean) {
+                public void onSuccess(QueryPrdReturnByInputResult bean) {
                     getView().searchProductionReturnMaterialOrderno(bean);
                 }
 
@@ -226,7 +222,7 @@ public class SearchBuyOrderPresenter extends MvpBasePresenter<SearchBuyOrderView
                 }
             });
         }
-        model.searchProductionReturnMaterialOrderno(orderno, mProductionSubscriber);
+        model.searchProductionReturnMaterialOrderno(params, mProductionSubscriber);
     }
 
     /**
@@ -234,7 +230,7 @@ public class SearchBuyOrderPresenter extends MvpBasePresenter<SearchBuyOrderView
      *
      * @param orderno
      */
-    public void searchSaleGoodsReturnOrderno(final String orderno) {
+    public void searchSaleGoodsReturnOrderno(final Map<String, Object> orderno) {
         getView().showProgressDialog();
         if (null == mSaleSubscriber) {
             mSaleSubscriber = new HttpSubscriber<>(new OnResultCallBack<SaleGoodsReturnBean>() {

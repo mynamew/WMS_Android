@@ -3,10 +3,9 @@ package com.timi.sz.wms_android.mvp.UI.stock_in.query;
 import com.timi.sz.wms_android.bean.instock.outsource_return_material.QueryOutSourceReturnByInputResult;
 import com.timi.sz.wms_android.bean.instock.search.BuyOrdernoBean;
 import com.timi.sz.wms_android.bean.instock.search.FinishGoodsCreateBillBean;
-import com.timi.sz.wms_android.bean.instock.search.FinishGoodsOrdernoBean;
+import com.timi.sz.wms_android.bean.instock.search.QueryPrdInstockByInputResult;
 import com.timi.sz.wms_android.bean.instock.search.OtherAuditSelectOrdernoBean;
-import com.timi.sz.wms_android.bean.instock.search.OutReturnMaterialBean;
-import com.timi.sz.wms_android.bean.instock.search.ProductionReturnMaterialBean;
+import com.timi.sz.wms_android.bean.instock.search.QueryPrdReturnByInputResult;
 import com.timi.sz.wms_android.bean.instock.search.ReceiveOrdernoBean;
 import com.timi.sz.wms_android.bean.instock.search.SaleGoodsReturnBean;
 import com.timi.sz.wms_android.bean.instock.search.SendOrdernoBean;
@@ -44,7 +43,7 @@ public interface SearchBuyOrderView extends MvpBaseView {
      *
      * @param bean
      */
-    void searchFinishGoodsOrderno(FinishGoodsOrdernoBean bean);
+    void searchFinishGoodsOrderno(QueryPrdInstockByInputResult bean);
 
     /**
      * 产成品-生单
@@ -68,7 +67,7 @@ public interface SearchBuyOrderView extends MvpBaseView {
     /**
      * 搜索生产退料—选单的单号
      */
-    void searchProductionReturnMaterialOrderno(ProductionReturnMaterialBean bean);
+    void searchProductionReturnMaterialOrderno(QueryPrdReturnByInputResult bean);
 
     /**
      * 搜索销售退货—选单的单号
