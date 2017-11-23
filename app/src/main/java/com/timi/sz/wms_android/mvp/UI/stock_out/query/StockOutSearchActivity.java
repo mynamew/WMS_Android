@@ -40,6 +40,7 @@ import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_OUTSOURCE_AU
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_OUTSOURCE_BILL;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_OUTSOURCE_FEED_SUPLLIEMENT;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_PRODUCTION_ALLOT;
+import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_PRODUCTION_APPLY_BILL;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_PRODUCTION_AUDIT;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_PRODUCTION_BILL;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_PRODUCTION_FEEDING;
@@ -133,9 +134,14 @@ public class StockOutSearchActivity extends BaseActivity<StockOutSearchView, Sto
                 tvQueryTitle.setText(R.string.stock_out_create_add_materail);
                 tvStockoutTip.setText(R.string.stock_out_production_feed_tip);
                 break;
+            case STOCK_OUT_PRODUCTION_APPLY_BILL:// 申请审核
+                setActivityTitle(getString(R.string.get_material_apply_audit_title));
+                tvQueryTitle.setText(R.string.get_material_apply_tip);
+                tvStockoutTip.setText(R.string.get_material_apply_orderno_tip);
+                break;
         }
         /**
-         *  输入框
+         *  输入框qqZ
          */
         etStockoutInput.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -240,6 +246,9 @@ public class StockOutSearchActivity extends BaseActivity<StockOutSearchView, Sto
                 break;
             case Constants.STOCK_OUT_OTHER_OUT_BILL://其他出库-生单
                 break;
+            case STOCK_OUT_PRODUCTION_APPLY_BILL:// 申请审核
+                getPresenter().queryPrdPickApplyByInput(params);
+                break;
         }
     }
 
@@ -325,6 +334,14 @@ public class StockOutSearchActivity extends BaseActivity<StockOutSearchView, Sto
      */
     @Override
     public void queryProductPickByInput(QueryProductPickByInputResult bean) {
+        Intent intent = new Intent(this, BatchPointListActivity.class);
+        intent.putExtra(STOCK_OUT_CODE_STR, intentCode);
+        intent.putExtra(STOCK_OUT_BEAN, new Gson().toJson(bean));
+        startActivity(intent);
+    }
+
+    @Override
+    public void queryPrdPickApplyByInput(QueryProductPickByInputResult bean) {
         Intent intent = new Intent(this, BatchPointListActivity.class);
         intent.putExtra(STOCK_OUT_CODE_STR, intentCode);
         intent.putExtra(STOCK_OUT_BEAN, new Gson().toJson(bean));

@@ -549,4 +549,9 @@
     <string name="print_and_commit">打印并提交</string>
     <string name="btn_commit">提交</string>
     <string name="submit_barcode_split_outstock_success">批次拣货提交条码拆分出库成功</string>
+    <string name="stock_out_apply_bill">申请生单</string>
+    <string name="get_material_apply_audit_title">领料申请(审核)</string>
+    <string name="get_material_apply_tip">领料申请</string>
+    <string name="get_material_apply_orderno_tip">领料申请单</string>
+    <string name="get_material_material_list_tip">领料申请(审核)物料清单</string>
 </resources>

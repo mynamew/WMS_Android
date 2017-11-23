@@ -71,6 +71,7 @@ import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_OUTSOURCE_BI
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_OUTSOURCE_FEED_SUPLLIEMENT;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_PICK;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_PRODUCTION_ALLOT;
+import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_PRODUCTION_APPLY_BILL;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_PRODUCTION_AUDIT;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_PRODUCTION_BILL;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_PRODUCTION_FEEDING;
@@ -229,6 +230,11 @@ public class BatchPointActivity extends BaseActivity<BatchPointView, BatchPointP
                 setActivityTitle(getString(R.string.material_point_production_pick_title));
                 srcBillType = 23;
                 destBillType = 23;
+                break;
+            case STOCK_OUT_PRODUCTION_APPLY_BILL://领料申请
+                setActivityTitle(getString(R.string.material_point_production_pick_title));
+                srcBillType = 31;
+                destBillType = 31;
                 break;
             case STOCK_OUT_PRODUCTION_BILL://生产生单
                 setActivityTitle(getString(R.string.material_point_production_pick_title));

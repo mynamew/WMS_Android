@@ -31,6 +31,7 @@ public class StockOutSearchPresenter extends MvpBasePresenter<StockOutSearchView
 
     private HttpSubscriber<QueryWWPickDataByOutSourceResult> queryWWPickDataByOutSourceResultHttpSubscriber;
     private HttpSubscriber<QueryProductPickByInputResult> queryProductPickByInputResultHttpSubscriber;
+    private HttpSubscriber<QueryProductPickByInputResult> queryPrdPickApplyByInputHttpSubscriber;
     private HttpSubscriber<QueryPrdFeedByInputResult> queryPrdFeedByInputResultHttpSubscriber;
 
     public StockOutSearchPresenter(Context context) {
@@ -141,6 +142,25 @@ public class StockOutSearchPresenter extends MvpBasePresenter<StockOutSearchView
             });
         }
         model.queryProductPickByInput(params, queryProductPickByInputResultHttpSubscriber);
+    }   /**
+     * 生产领料 （审核）搜索
+     */
+    public void queryPrdPickApplyByInput(Map<String, Object> params) {
+        getView().showProgressDialog();
+        if (null == queryPrdPickApplyByInputHttpSubscriber) {
+            queryPrdPickApplyByInputHttpSubscriber = new HttpSubscriber<>(new OnResultCallBack<QueryProductPickByInputResult>() {
+                @Override
+                public void onSuccess(QueryProductPickByInputResult o) {
+                    getView().queryPrdPickApplyByInput(o);
+                }
+
+                @Override
+                public void onError(String errorMsg) {
+                    ToastUtils.showShort(errorMsg);
+                }
+            });
+        }
+        model.queryPrdPickApplyByInput(params, queryPrdPickApplyByInputHttpSubscriber);
     }
 
     /**

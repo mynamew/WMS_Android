@@ -88,12 +88,12 @@
     <string name="stock_out_create_create_order">生产生单</string>
     <string name="stock_out_sale">销售</string>
     <string name="stock_out_sale_trans">调拨出库</string>
-    <string name="stock_out_sale_check">销售出库-审核</string>
-    <string name="stock_out_sale_create_order">销售出库-生单</string>
+    <string name="stock_out_sale_check">销售审核</string>
+    <string name="stock_out_sale_create_order">销售生单</string>
     <string name="stock_out_other">其他</string>
     <string name="stock_out_other_buy_return">采购退料</string>
-    <string name="stock_out_other_check">其他出库-审核</string>
-    <string name="stock_out_other_create_order">其他出库-生单</string>
+    <string name="stock_out_other_check">其他审核</string>
+    <string name="stock_out_other_create_order">其他生单</string>
     <string name="query_repertory">库存查询</string>
     <string name="tv_query_todayin">今日入库</string>
     <string name="tv_query_todayout">今日出库</string>
@@ -703,6 +703,11 @@
     <string name="print_and_commit">打印并提交</string>
     <string name="btn_commit">提交</string>
     <string name="submit_barcode_split_outstock_success">批次拣货提交条码拆分出库成功</string>
+    <string name="stock_out_apply_bill">申请生单</string>
+    <string name="get_material_apply_audit_title">领料申请(审核)</string>
+    <string name="get_material_apply_tip">领料申请</string>
+    <string name="get_material_apply_orderno_tip">领料申请单</string>
+    <string name="get_material_material_list_tip">领料申请(审核)物料清单</string>
 
 
 </resources>

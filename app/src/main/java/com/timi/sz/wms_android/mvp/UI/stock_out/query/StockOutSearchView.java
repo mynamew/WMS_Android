@@ -47,6 +47,11 @@ public interface StockOutSearchView extends MvpBaseView {
     void queryProductPickByInput(QueryProductPickByInputResult bean);
 
     /**
+     * 领料申请单 （审核）搜索
+     */
+    void queryPrdPickApplyByInput(QueryProductPickByInputResult bean);
+
+    /**
      * 生产补料 （审核）搜索
      */
     void queryPrdFeedByInput(QueryPrdFeedByInputResult bean);

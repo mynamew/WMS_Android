@@ -59,6 +59,7 @@ import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_OUTSOURCE_BI
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_OUTSOURCE_FEED_SUPLLIEMENT;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_PICK;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_PRODUCTION_ALLOT;
+import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_PRODUCTION_APPLY_BILL;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_PRODUCTION_AUDIT;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_PRODUCTION_BILL;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_PRODUCTION_FEEDING;
@@ -313,6 +314,27 @@ public class BatchPointListActivity extends BaseActivity<BatchPointListView, Bat
                 //billId
                 billId=summaryResultsProductionAudit.getBillId();
                 break;
+            case STOCK_OUT_PRODUCTION_APPLY_BILL:
+                tvHeadTitle.setText(R.string.get_material_material_list_tip);
+                /**
+                 * 生产生单 和委外生单的返回结果是一样的 所以直接一起处理
+                 */
+                queryProductPickByInputResult = new Gson().fromJson(getIntent().getStringExtra(STOCK_OUT_BEAN), QueryProductPickByInputResult.class);
+                //获取 summaryResults
+                QueryProductPickByInputResult.SummaryResultsBean summaryResultsProductionApply= queryProductPickByInputResult.getSummaryResults();
+                //设置内容
+                setHeaderContent(summaryResultsProductionApply.getBillCode(), summaryResultsProductionApply.getBillDate(), summaryResultsProductionApply.getWarehouseName(), summaryResultsProductionApply.getRegionName(), summaryResultsProductionApply.getQty(), summaryResultsProductionApply.getWaitQty(), summaryResultsProductionApply.getScanQty());
+                //设置scanid
+                scanId = summaryResultsProductionApply.getScanId();
+                //设置 submitType
+                submitType = 1;
+                //设置仓库id
+                warehouseId=summaryResultsProductionApply.getWarehouseId();
+                //设置区域id
+                regionId=summaryResultsProductionApply.getRegionId();
+                //billId
+                billId=summaryResultsProductionApply.getBillId();
+                break;
             case STOCK_OUT_PRODUCTION_BILL://生产生单
                 btnPointCommit.setText(R.string.create_send_material_orderno);
                 tvHeadTitle.setText(R.string.material_list_pro_bill_title);
@@ -471,6 +493,7 @@ public class BatchPointListActivity extends BaseActivity<BatchPointListView, Bat
                 detailResults = queryPrdFeedByInputResult.getDetailResults();
                 break;
             case STOCK_OUT_PRODUCTION_AUDIT://生产审核
+            case STOCK_OUT_PRODUCTION_APPLY_BILL://领料申请
                 isIsMerge = true;
                 materialResults = queryProductPickByInputResult.getMaterialResults();
                 break;
@@ -610,6 +633,7 @@ public class BatchPointListActivity extends BaseActivity<BatchPointListView, Bat
                                 holder.setTextView(R.id.tv_line_num, item.getLine());
                                 break;
                             case STOCK_OUT_PRODUCTION_AUDIT://生产审核
+                            case STOCK_OUT_PRODUCTION_APPLY_BILL://领料申请
                                 holder.setTextView(R.id.tv_line_num, item.getPoLine());
                                 break;
                             case STOCK_OUT_PRODUCTION_BILL://生产生单

@@ -33,7 +33,11 @@ import butterknife.OnClick;
 
 import static com.timi.sz.wms_android.base.uils.Constants.REQUEST_SCAN_CODE_LIB_LOATION;
 import static com.timi.sz.wms_android.base.uils.Constants.REQUEST_SCAN_CODE_MATERIIAL;
-
+/** 
+  * 生产退料
+  * author: timi    
+  * create at: 2017/11/22 15:44
+  */  
 public class ProductionMaterialReturnActivity extends BaseActivity<PutAwayView, PutAwayPresenter> implements PutAwayView, BaseActivity.ScanQRCodeResultListener {
     @BindView(R.id.iv_title_right)
     ImageView ivTitleRight;
@@ -127,8 +131,8 @@ public class ProductionMaterialReturnActivity extends BaseActivity<PutAwayView, 
                     params1.put("UserId", SpUtils.getInstance().getUserId());
                     params1.put("OrgId", SpUtils.getInstance().getOrgId());
                     params1.put("MAC", PackageUtils.getMac());
-                    params1.put("SrcBillType", 13);
-                    params1.put("DestBillType", 14);
+                    params1.put("SrcBillType", 25);
+                    params1.put("DestBillType", 25);
                     params1.put("ScanId", queryPrdReturnByInputResult.getScanId());
                     params1.put("BinCode", mVertifyLocationCodeBean.getBinId());
                     params1.put("BarcodeNo", orderNum);
@@ -242,8 +246,8 @@ public class ProductionMaterialReturnActivity extends BaseActivity<PutAwayView, 
                 params1.put("UserId", SpUtils.getInstance().getUserId());
                 params1.put("OrgId", SpUtils.getInstance().getOrgId());
                 params1.put("MAC", PackageUtils.getMac());
-                params1.put("SrcBillType", 13);
-                params1.put("DestBillType", 14);
+                params1.put("SrcBillType", 25);
+                params1.put("DestBillType", 25);
                 params1.put("ScanId", queryPrdReturnByInputResult);
                 params1.put("BinCode", mVertifyLocationCodeBean.getBinId());
                 params1.put("BarcodeNo", result);

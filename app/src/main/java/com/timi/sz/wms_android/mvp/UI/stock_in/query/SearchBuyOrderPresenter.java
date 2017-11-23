@@ -135,9 +135,9 @@ public class SearchBuyOrderPresenter extends MvpBasePresenter<SearchBuyOrderView
     /**
      * 搜索产成品-生单的单号
      *
-     * @param orderno
+     * @param params
      */
-    public void searchFinishGoodsCreateBillOrderno(final String orderno) {
+    public void searchFinishGoodsCreateBillOrderno(final Map<String,Object> params) {
         getView().showProgressDialog();
         if (null == mFinishCreateSubscriber) {
             mFinishCreateSubscriber = new HttpSubscriber<>(new OnResultCallBack<FinishGoodsCreateBillBean>() {
@@ -153,7 +153,7 @@ public class SearchBuyOrderPresenter extends MvpBasePresenter<SearchBuyOrderView
                 }
             });
         }
-        model.searchFinishGoodsCreateBillOrderno(orderno, mFinishCreateSubscriber);
+        model.searchFinishGoodsCreateBillOrderno(params, mFinishCreateSubscriber);
     }
 
     /**

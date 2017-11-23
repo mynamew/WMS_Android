@@ -246,14 +246,33 @@ public interface ApiService {
     Observable<CommonResult<QueryPrdInstockByInputResult>> searchFinishGoodsOrderno(@FieldMap Map<String, Object> params);
 
     /**
-     * 搜索产成品-生单的返回结果
+     * 搜索产成品-审核的返回结果
      *
-     * @param orderno
+     * @param params
      * @return
      */
     @FormUrlEncoded
-    @POST("api/Account/ClientLogin")
-    Observable<CommonResult<FinishGoodsCreateBillBean>> searchFinishGoodsCreateBillOrderno(@Field("orderno") String orderno);
+    @POST("api/services/wpda/PrdInstock/GetPrdInstockDetail")
+    Observable<CommonResult<List<OrderDetailData>>> getPrdInstockDetail(@FieldMap Map<String, Object> params);
+
+    /**
+     * 搜索产成品-生单的返回结果(生产工单单末尾号查询)
+     *
+     * @param params
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("api/services/wpda/PrdInstock/QueryWorkOrderByInput")
+    Observable<CommonResult<FinishGoodsCreateBillBean>> searchFinishGoodsCreateBillOrderno(@FieldMap Map<String, Object> params);
+ /**
+     * 搜索产成品-生单的明细的返回结果(生产工单单末尾号查询)
+     *
+     * @param params
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("api/services/wpda/PrdInstock/GetWorkOrderDetail")
+    Observable<CommonResult<List<OrderDetailData>>> getWorkOrderDetail(@FieldMap Map<String, Object> params);
 
     /**
      * 其他入库—选单
@@ -316,6 +335,7 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("api/services/wpda/SalesReturn/QuerySalesReturnByInput")
     Observable<CommonResult<SaleGoodsReturnBean>> querySalesReturnByInput(@FieldMap Map<String, Object> params);
+
     /**
      * 销售退料—获取明细数据
      *
@@ -596,6 +616,31 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("api/services/wpda/PrdPick/GetProductPickDetail")
     Observable<CommonResult<List<MaterialDetailResult>>> getProductPickDetail(@FieldMap Map<String, Object> params);
+
+
+    /**====== 领料申请 ======**/
+    /**
+     * 领料申请单末尾号查询（审核流程）
+     *
+     * @param params
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("api/services/wpda/PrdPick/QueryPrdPickApplyByInput")
+    Observable<CommonResult<QueryProductPickByInputResult>> queryPrdPickApplyByInput(@FieldMap Map<String, Object> params);
+
+    /**
+     * 获取领料申请单明细的发料数据（领料申请）
+     *
+     * @param params
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("api/services/wpda/PrdPick/GetPrdPickApplyDetail")
+    Observable<CommonResult<List<MaterialDetailResult>>> getPrdPickApplyDetail(@FieldMap Map<String, Object> params);
+
+
+    /**======生产补料 ======**/
 
     /**
      * 生产补料单末尾号查询

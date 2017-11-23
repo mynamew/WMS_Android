@@ -88,16 +88,16 @@ public class SearchBuyModel extends MvpBaseModel {
      /**
      * 搜索产成品-生单的单号
      *
-     * @param orderno
+     * @param params
      * @param observer
      */
-    public void searchFinishGoodsCreateBillOrderno(final String orderno,
+    public void searchFinishGoodsCreateBillOrderno(final Map<String, Object> params,
                                          final Observer<FinishGoodsCreateBillBean> observer) {
         HttpManager.getInstance().HttpManagerRequest(observer,
                 new ApiServiceMethodCallBack<FinishGoodsCreateBillBean>() {
                     @Override
                     public Observable<CommonResult<FinishGoodsCreateBillBean>> createObservable(ApiService apiService) {
-                        return apiService.searchFinishGoodsCreateBillOrderno(orderno);
+                        return apiService.searchFinishGoodsCreateBillOrderno(params);
                     }
                 });
     }

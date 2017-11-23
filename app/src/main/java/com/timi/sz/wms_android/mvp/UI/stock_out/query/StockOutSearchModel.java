@@ -83,6 +83,7 @@ public class StockOutSearchModel extends MvpBaseModel {
             }
         });
     }
+
     /**
      * 生产领料单末尾号查询（审核流程）
      *
@@ -94,6 +95,21 @@ public class StockOutSearchModel extends MvpBaseModel {
             @Override
             public Observable<CommonResult<QueryProductPickByInputResult>> createObservable(ApiService apiService) {
                 return apiService.queryProductPickByInput(params);
+            }
+        });
+    }
+
+    /**
+     * 领料申请单末尾号查询（审核流程）
+     *
+     * @param observer
+     */
+    public void queryPrdPickApplyByInput(final Map<String, Object> params, Observer<QueryProductPickByInputResult> observer) {
+
+        HttpManager.getInstance().HttpManagerRequest(observer, new ApiServiceMethodCallBack<QueryProductPickByInputResult>() {
+            @Override
+            public Observable<CommonResult<QueryProductPickByInputResult>> createObservable(ApiService apiService) {
+                return apiService.queryPrdPickApplyByInput(params);
             }
         });
     }

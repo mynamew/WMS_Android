@@ -163,6 +163,7 @@ public class Constants {
     public static final int STOCK_OUT_PURCHASE_MATERIAL_RETURN = 5031;//采购退料
     public static final int STOCK_OUT_OTHER_OUT_AUDIT = 5032;//其他出库-审核
     public static final int STOCK_OUT_OTHER_OUT_BILL = 5033;//其他出库-生单
+    public static final int STOCK_OUT_PRODUCTION_APPLY_BILL = 5034;//生产领料申请单-生单
     /**
      * 出库搜索 跳转的传递对象的key
      */

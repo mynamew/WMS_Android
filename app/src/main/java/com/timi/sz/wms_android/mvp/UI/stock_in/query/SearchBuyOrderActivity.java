@@ -340,7 +340,7 @@ public class SearchBuyOrderActivity extends BaseActivity<SearchBuyOrderView, Sea
                 getPresenter().searchFinishGoodsOrderno(params);
                 break;
             case Constants.CREATE_PRO_CREATE_ORDER_NUM://产成品 生单
-                getPresenter().searchFinishGoodsCreateBillOrderno(orderNum);
+                getPresenter().searchFinishGoodsCreateBillOrderno(params);
                 break;
             case Constants.OTHER_IN_STOCK_SELECT_ORDERNO://其他 生单
                 getPresenter().searchOtherAuditSelectOrderno(orderNum);
