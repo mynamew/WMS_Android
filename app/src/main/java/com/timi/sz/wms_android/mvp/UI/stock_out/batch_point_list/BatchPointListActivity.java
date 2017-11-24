@@ -215,8 +215,6 @@ public class BatchPointListActivity extends BaseActivity<BatchPointListView, Bat
                 scanId = summaryResults.getScanId();
                 //设置 submitType
                 submitType = 1;
-                //设置仓库id
-                warehouseId = summaryResults.getWarehouseId();
                 //设置区域id
                 regionId = summaryResults.getRegionId();
                 //billId
@@ -233,8 +231,6 @@ public class BatchPointListActivity extends BaseActivity<BatchPointListView, Bat
                 scanId = summaryResultsAudit.getScanId();
                 //设置 submitType
                 submitType = 1;
-                //设置仓库id
-                warehouseId = summaryResultsAudit.getWarehouseId();
                 //设置区域id
                 regionId = summaryResultsAudit.getRegionId();
                 //billId
@@ -252,8 +248,6 @@ public class BatchPointListActivity extends BaseActivity<BatchPointListView, Bat
                 scanId = summaryResultsBill.getScanId();
                 //设置 submitType
                 submitType = 0;
-                //设置仓库id
-                warehouseId = summaryResultsBill.getWarehouseId();
                 //设置区域id
                 regionId = summaryResultsBill.getRegionId();
                 //billId
@@ -271,8 +265,6 @@ public class BatchPointListActivity extends BaseActivity<BatchPointListView, Bat
                 scanId = summaryResultsAllot.getScanId();
                 //设置 submitType
                 submitType = 0;
-                //设置仓库id
-                warehouseId = summaryResultsAllot.getWarehouseId();
                 //设置区域id
                 regionId = summaryResultsAllot.getRegionId();
                 //billId
@@ -292,8 +284,6 @@ public class BatchPointListActivity extends BaseActivity<BatchPointListView, Bat
                 scanId = summaryResultsProductionFeed.getScanId();
                 //设置 submitType
                 submitType = 1;
-                //设置仓库id
-                warehouseId = summaryResultsProductionFeed.getWarehouseId();
                 //设置区域id
                 regionId = summaryResultsProductionFeed.getRegionId();
                 //billId
@@ -313,8 +303,6 @@ public class BatchPointListActivity extends BaseActivity<BatchPointListView, Bat
                 scanId = summaryResultsProductionAudit.getScanId();
                 //设置 submitType
                 submitType = 1;
-                //设置仓库id
-                warehouseId = summaryResultsProductionAudit.getWarehouseId();
                 //设置区域id
                 regionId = summaryResultsProductionAudit.getRegionId();
                 //billId
@@ -334,8 +322,6 @@ public class BatchPointListActivity extends BaseActivity<BatchPointListView, Bat
                 scanId = summaryResultsProductionApply.getScanId();
                 //设置 submitType
                 submitType = 1;
-                //设置仓库id
-                warehouseId = summaryResultsProductionApply.getWarehouseId();
                 //设置区域id
                 regionId = summaryResultsProductionApply.getRegionId();
                 //billId
@@ -356,8 +342,6 @@ public class BatchPointListActivity extends BaseActivity<BatchPointListView, Bat
                 scanId = summaryResultsProductionBill.getScanId();
                 //设置 submitType
                 submitType = 0;
-                //设置仓库id
-                warehouseId = summaryResultsProductionBill.getWarehouseId();
                 //设置区域id
                 regionId = summaryResultsProductionBill.getRegionId();
                 //billId
@@ -378,8 +362,6 @@ public class BatchPointListActivity extends BaseActivity<BatchPointListView, Bat
                 scanId = summaryResultsProductionAllot.getScanId();
                 //设置 submitType
                 submitType = 0;
-                //设置仓库id
-                warehouseId = summaryResultsProductionAllot.getWarehouseId();
                 //设置区域id
                 regionId = summaryResultsProductionAllot.getRegionId();
                 //billId
@@ -412,8 +394,6 @@ public class BatchPointListActivity extends BaseActivity<BatchPointListView, Bat
                 scanId = summaryResultsFinishGoodsPick.getScanId();
                 //设置 submitType
                 submitType = 0;
-                //设置仓库id
-                warehouseId = summaryResultsFinishGoodsPick.getWarehouseId();
                 //设置区域id
                 regionId = summaryResultsFinishGoodsPick.getRegionId();
                 //billId
@@ -621,7 +601,7 @@ public class BatchPointListActivity extends BaseActivity<BatchPointListView, Bat
                         Intent it = new Intent(BatchPointListActivity.this, BatchPointActivity.class);
                         it.putExtra(STOCK_OUT_CODE_STR, intentCode);
                         it.putExtra(OUT_STOCK_POINT_DETIAIL_BILLID, billId);
-                        it.putExtra(OUT_STOCK_POINT_WAREHOUSEID, warehouseId);
+                        it.putExtra(OUT_STOCK_POINT_WAREHOUSEID, mDatas.get(pos).getWarehouseId());
                         it.putExtra(OUT_STOCK_MATERIAL_RESULTS_BEAN, new Gson().toJson(mDatas.get(pos)));
                         it.putExtra(OUT_STOCK_SCANID, scanId);
                         it.putExtra(OUT_STOCK_POINT_REGIONID, regionId);
@@ -712,8 +692,6 @@ public class BatchPointListActivity extends BaseActivity<BatchPointListView, Bat
                         it.putExtra(STOCK_OUT_CODE_STR, intentCode);
                         it.putExtra(OUT_STOCK_DETAIL_RESULTS_BEAN, new Gson().toJson(mDatasDetail.get(pos)));
                         it.putExtra(OUT_STOCK_POINT_DETIAIL_BILLID, billId);
-                        it.putExtra(OUT_STOCK_POINT_WAREHOUSEID, warehouseId);
-                        it.putExtra(OUT_STOCK_POINT_REGIONID, regionId);
                         it.putExtra(OUT_STOCK_SCANID, scanId);
                         startActivity(it);
                     }
@@ -755,6 +733,10 @@ public class BatchPointListActivity extends BaseActivity<BatchPointListView, Bat
                     }
                 }
             }
+            int waitQty=Integer.parseInt(tvWaitPointNum.getText().toString());
+            int scanQty=Integer.parseInt(tvHaveCountNum.getText().toString());
+            tvWaitPointNum.setText(String.valueOf(waitQty-event.getBarcodeQty()));
+            tvHaveCountNum.setText(String.valueOf(scanQty+event.getBarcodeQty()));
         }
     }
 

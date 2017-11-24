@@ -318,8 +318,8 @@ public class BatchPointActivity extends BaseActivity<BatchPointView, BatchPointP
                         params.put("BarcodeNo", inputStr);
                         params.put("DateCode", mData.getLotDetail().get(0).getDateCode());
                         params.put("bCheckMode", true);
-                        params.put("MaterialId", null==detailResultsBean?detailResultsBean.getMaterialId():materialResultsBean.getMaterialId());
-                        params.put("MaterialAttribute", null==detailResultsBean?detailResultsBean.getMaterialAttribute():materialResultsBean.getMaterialAttribute());
+                        params.put("MaterialId", null!=detailResultsBean?detailResultsBean.getMaterialId():materialResultsBean.getMaterialId());
+                        params.put("MaterialAttribute", null!=detailResultsBean?detailResultsBean.getMaterialAttribute():materialResultsBean.getMaterialAttribute());
                         getPresenter().submitBarcodeLotPickOut(params);
                     }
                 }
@@ -381,22 +381,6 @@ public class BatchPointActivity extends BaseActivity<BatchPointView, BatchPointP
             startActivity(intent);
         } else {
             /**
-             * 发送时间  传递 scanid
-             */
-            OutsourceAuditEvent outsourceAuditEvent = new OutsourceAuditEvent(OutsourceAuditEvent.OUT_SOURCE_AUDIT_SCAN_MATERIAL_SUCCESS);
-            outsourceAuditEvent.setScanId(result.getScanId());
-            outsourceAuditEvent.setMaterialCode(result.getMaterialCode());
-            outsourceAuditEvent.setBarcodeQty(result.getBarcodeQty());
-            BaseMessage.post(outsourceAuditEvent);
-            //设置scanid
-            scanId = result.getScanId();
-            /**
-             * 物料返回设置扫描的数量
-             */
-            scanQty = scanQty + result.getBarcodeQty();
-            //设置数量
-            tvSendMaterialNum.setText("(" + result.getBarcodeQty() + ")" + scanQty + "/" + totalQty);
-            /**
              * True:非管控模式，让前端提醒（没有提交动作）
              * False:表示提交成功
              */
@@ -422,6 +406,8 @@ public class BatchPointActivity extends BaseActivity<BatchPointView, BatchPointP
                         params.put("BarcodeNo", etMaterialScan.getText().toString());
                         params.put("DateCode", mData.getLotDetail().get(0).getDateCode());
                         params.put("bCheckMode", false);
+                        params.put("MaterialId", null!=detailResultsBean?detailResultsBean.getMaterialId():materialResultsBean.getMaterialId());
+                        params.put("MaterialAttribute", null!=detailResultsBean?detailResultsBean.getMaterialAttribute():materialResultsBean.getMaterialAttribute());
                         getPresenter().submitBarcodeLotPickOut(params);
                     }
                 }).setButtonListener(R.id.btn_cancel, null, new MyDialog.DialogClickListener() {
@@ -432,6 +418,23 @@ public class BatchPointActivity extends BaseActivity<BatchPointView, BatchPointP
                 }).show();
             } else {//提交成功
                 ToastUtils.showShort(getString(R.string.commit_success));
+                /**
+                 * 发送时间  传递 scanid
+                 */
+                OutsourceAuditEvent outsourceAuditEvent = new OutsourceAuditEvent(OutsourceAuditEvent.OUT_SOURCE_AUDIT_SCAN_MATERIAL_SUCCESS);
+                outsourceAuditEvent.setScanId(result.getScanId());
+                outsourceAuditEvent.setMaterialCode(result.getMaterialCode());
+                outsourceAuditEvent.setBarcodeQty(result.getBarcodeQty());
+                BaseMessage.post(outsourceAuditEvent);
+                //设置scanid
+                scanId = result.getScanId();
+                /**
+                 * 物料返回设置扫描的数量
+                 */
+                scanQty = scanQty + result.getBarcodeQty();
+                //设置数量
+                tvSendMaterialNum.setText("(" + result.getBarcodeQty() + ")" + scanQty + "/" + totalQty);
+
                 /**
                  * 提交成功后 对批次信息进行修改
                  * 1、用于显示批次信息中的已点数是否发生了更改
@@ -476,6 +479,8 @@ public class BatchPointActivity extends BaseActivity<BatchPointView, BatchPointP
                         params.put("BarcodeNo", result);
                         params.put("DateCode", mDatas.isEmpty()?"":mData.getLotDetail().get(0).getDateCode());
                         params.put("bCheckMode", true);
+                        params.put("MaterialId", null!=detailResultsBean?detailResultsBean.getMaterialId():materialResultsBean.getMaterialId());
+                        params.put("MaterialAttribute", null!=detailResultsBean?detailResultsBean.getMaterialAttribute():materialResultsBean.getMaterialAttribute());
                         getPresenter().submitBarcodeLotPickOut(params);
                     }
                 });

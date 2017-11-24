@@ -251,9 +251,13 @@
         </activity>
         <activity android:name=".mvp.UI.quity.update_barcode.UpdateBarcodeActivity">
         </activity>
-        <activity android:name=".mvp.UI.stock_in.putaway.FinishedGoodsAuditPutAwayActivity">
+        <activity
+            android:name=".mvp.UI.stock_in.putaway.FinishedGoodsAuditPutAwayActivity"
+            android:windowSoftInputMode="adjustPan|stateHidden">
         </activity>
-        <activity android:name=".mvp.UI.stock_in.putaway.FinishedGoodsCreateBillPutAwayActivity">
+        <activity
+            android:name=".mvp.UI.stock_in.putaway.FinishedGoodsCreateBillPutAwayActivity"
+            android:windowSoftInputMode="adjustPan|stateHidden">
         </activity>
         <activity
             android:name=".mvp.UI.stock_in.putaway.OtherAuditActivity"
@@ -278,6 +282,8 @@
             android:windowSoftInputMode="adjustPan|stateHidden">
         </activity>
         <activity android:name=".mvp.UI.stock_out.detail.outsource_bill_detail.OutsourceBillDetailActivity">
+        </activity>
+        <activity android:name=".mvp.UI.stock_in_work.lib_adjust_detail.LibAdjustDetailActivity">
         </activity>
     </application>
 

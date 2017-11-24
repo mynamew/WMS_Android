@@ -35,7 +35,7 @@ import static com.timi.sz.wms_android.base.uils.Constants.REQUEST_SCAN_CODE_LIB_
 import static com.timi.sz.wms_android.base.uils.Constants.REQUEST_SCAN_CODE_MATERIIAL;
 
 /**
- * 生单
+ * 产成品生单
  */
 public class FinishedGoodsCreateBillPutAwayActivity extends BaseActivity<PutAwayView, PutAwayPresenter> implements PutAwayView, BaseActivity.ScanQRCodeResultListener {
 
@@ -97,18 +97,19 @@ public class FinishedGoodsCreateBillPutAwayActivity extends BaseActivity<PutAway
     }
 
     private VertifyLocationCodeBean mVertifyLocationCodeBean;
-    private boolean locationCodeIsUse=false;
+    private boolean locationCodeIsUse = false;
+
     @Override
     public void vertifyLocationCode(VertifyLocationCodeBean bean) {
-        locationCodeIsUse=true;
-        ToastUtils.showShort("库位码有效！");
+        locationCodeIsUse = true;
+        ToastUtils.showShort(getString(R.string.location_code_is_visible));
         mVertifyLocationCodeBean = bean;
     }
 
     @Override
-    public void createInStockOrderno( ) {
-            ToastUtils.showShort("生成入库单成功");
-            onBackPressed();
+    public void createInStockOrderno() {
+        ToastUtils.showShort(getString(R.string.create_instock_bill_success));
+        onBackPressed();
     }
 
     @Override
@@ -201,11 +202,11 @@ public class FinishedGoodsCreateBillPutAwayActivity extends BaseActivity<PutAway
 /**
  * 来料单 实体
  */
-        finishGoodsCreateBillBean = new Gson().fromJson(getIntent().getStringExtra(Constants.IN_STOCK_RECEIVE_BEAN), FinishGoodsCreateBillBean.class);
+        finishGoodsCreateBillBean = new Gson().fromJson(getIntent().getStringExtra(Constants.IN_STOCK_FINISH_CREATE_BEAN), FinishGoodsCreateBillBean.class);
         /**
          * 标题
          */
-        setActivityTitle(getString(R.string.in_stock_num_title));
+        setActivityTitle(getString(R.string.putaway_finish_good_instock_title));
         /**
          * 收货单号
          */
@@ -270,7 +271,7 @@ public class FinishedGoodsCreateBillPutAwayActivity extends BaseActivity<PutAway
                 /**
                  * 重新扫描库位码的时候 将库位码是否有效的标识更改成false
                  */
-                locationCodeIsUse=false;
+                locationCodeIsUse = false;
                 LogUitls.d("库位码扫码--->", result);
                 //保存库位码
                 locationCode = result;
@@ -305,7 +306,7 @@ public class FinishedGoodsCreateBillPutAwayActivity extends BaseActivity<PutAway
                     ToastUtils.showShort(getString(R.string.please_scan_lib_location_code));
                     return;
                 }
-                if(!locationCodeIsUse){
+                if (!locationCodeIsUse) {
                     ToastUtils.showShort(getString(R.string.location_code_no_user));
                     return;
                 }
@@ -316,7 +317,7 @@ public class FinishedGoodsCreateBillPutAwayActivity extends BaseActivity<PutAway
                     ToastUtils.showShort(getString(R.string.please_scan_lib_location_code));
                     return;
                 }
-                if(!locationCodeIsUse){
+                if (!locationCodeIsUse) {
                     ToastUtils.showShort(getString(R.string.location_code_no_user));
                     return;
                 }

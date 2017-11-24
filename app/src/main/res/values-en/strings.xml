@@ -622,5 +622,8 @@
     <string name="production_feed_orderno_info_tip">生产补料单信息</string>
     <string name="production_get_orderno_info_tip">生产领料单信息</string>
     <string name="production_allot_info_tip">生产调拨单信息</string>
+    <string name="putaway_finish_good_instock_title">入库上架(产成品入库)</string>
+    <string name="scan_info">扫描信息</string>
+    <string name="item_material_num">物料数量</string>
 
 </resources>
