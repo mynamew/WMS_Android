@@ -52,6 +52,7 @@ public class GetMaterialLotData {
          * period :
          * lotUseQty : 100
          * lotScanQty : 0
+         *
          */
 
         private String locationCode;

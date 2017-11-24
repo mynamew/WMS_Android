@@ -63,6 +63,7 @@ import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_PRINT_SRCBIL
 import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_SCANID;
 import static com.timi.sz.wms_android.base.uils.Constants.REQUEST_SCAN_CODE_MATERIIAL;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_CODE_STR;
+import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_FINISH_GOODS_PICK;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_OTHER_OUT_AUDIT;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_OTHER_OUT_BILL;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_OUTSOURCE_ALLOT;
@@ -257,6 +258,11 @@ public class BatchPointActivity extends BaseActivity<BatchPointView, BatchPointP
             case STOCK_OUT_OTHER_OUT_AUDIT://其他审核
                 break;
             case STOCK_OUT_OTHER_OUT_BILL://其他生单
+                break;
+            case  STOCK_OUT_FINISH_GOODS_PICK://成品拣货
+                setActivityTitle(getString(R.string.material_point_finish_goods_pick_title));
+                srcBillType = 61;
+                destBillType = 61;
                 break;
             default:
                 break;
@@ -468,7 +474,7 @@ public class BatchPointActivity extends BaseActivity<BatchPointView, BatchPointP
                         params.put("DestBillType", destBillType);
                         params.put("ScanId", scanId);
                         params.put("BarcodeNo", result);
-                        params.put("DateCode", mData.getLotDetail().get(0).getDateCode());
+                        params.put("DateCode", mDatas.isEmpty()?"":mData.getLotDetail().get(0).getDateCode());
                         params.put("bCheckMode", true);
                         getPresenter().submitBarcodeLotPickOut(params);
                     }

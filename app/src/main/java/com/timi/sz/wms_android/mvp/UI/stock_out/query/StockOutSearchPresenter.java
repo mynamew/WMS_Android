@@ -7,6 +7,7 @@ import com.timi.sz.wms_android.bean.outstock.outsource.OutSourceFeedBean;
 import com.timi.sz.wms_android.bean.outstock.outsource.QueryOutSourceFeedByInputResult;
 import com.timi.sz.wms_android.bean.outstock.outsource.QueryOutSourcePickByInputResult;
 import com.timi.sz.wms_android.bean.outstock.outsource.QueryWWPickDataByOutSourceResult;
+import com.timi.sz.wms_android.bean.outstock.pick.QueryDNByInputForPickResult;
 import com.timi.sz.wms_android.bean.outstock.product.QueryPrdFeedByInputResult;
 import com.timi.sz.wms_android.bean.outstock.product.QueryProductPickByInputResult;
 import com.timi.sz.wms_android.http.callback.OnResultCallBack;
@@ -33,6 +34,7 @@ public class StockOutSearchPresenter extends MvpBasePresenter<StockOutSearchView
     private HttpSubscriber<QueryProductPickByInputResult> queryProductPickByInputResultHttpSubscriber;
     private HttpSubscriber<QueryProductPickByInputResult> queryPrdPickApplyByInputHttpSubscriber;
     private HttpSubscriber<QueryPrdFeedByInputResult> queryPrdFeedByInputResultHttpSubscriber;
+    private HttpSubscriber<QueryDNByInputForPickResult> queryDNByInputForPickResultHttpSubscriber;
 
     public StockOutSearchPresenter(Context context) {
         super(context);
@@ -142,7 +144,9 @@ public class StockOutSearchPresenter extends MvpBasePresenter<StockOutSearchView
             });
         }
         model.queryProductPickByInput(params, queryProductPickByInputResultHttpSubscriber);
-    }   /**
+    }
+
+    /**
      * 生产领料 （审核）搜索
      */
     public void queryPrdPickApplyByInput(Map<String, Object> params) {
@@ -182,6 +186,26 @@ public class StockOutSearchPresenter extends MvpBasePresenter<StockOutSearchView
             });
         }
         model.queryPrdFeedByInput(params, queryPrdFeedByInputResultHttpSubscriber);
+    }
+    /**
+     * 成品拣货
+     */
+    public void  queryDNByInputForPick(Map<String, Object> params) {
+        getView().showProgressDialog();
+        if (null == queryDNByInputForPickResultHttpSubscriber) {
+            queryDNByInputForPickResultHttpSubscriber = new HttpSubscriber<>(new OnResultCallBack<QueryDNByInputForPickResult>() {
+                @Override
+                public void onSuccess(QueryDNByInputForPickResult o) {
+                    getView().queryDNByInputForPick(o);
+                }
+
+                @Override
+                public void onError(String errorMsg) {
+                    ToastUtils.showShort(errorMsg);
+                }
+            });
+        }
+        model. queryDNByInputForPick(params, queryDNByInputForPickResultHttpSubscriber);
     }
 
     @Override

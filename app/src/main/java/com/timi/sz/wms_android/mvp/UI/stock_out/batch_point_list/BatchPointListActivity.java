@@ -25,6 +25,7 @@ import com.timi.sz.wms_android.bean.outstock.outsource.QueryOutSourcePickByInput
 import com.timi.sz.wms_android.bean.outstock.outsource.QueryWWPickDataByOutSourceResult;
 import com.timi.sz.wms_android.bean.outstock.outsource.common.DetailResultsBean;
 import com.timi.sz.wms_android.bean.outstock.outsource.common.MaterialResultsBean;
+import com.timi.sz.wms_android.bean.outstock.pick.QueryDNByInputForPickResult;
 import com.timi.sz.wms_android.bean.outstock.product.QueryPrdFeedByInputResult;
 import com.timi.sz.wms_android.bean.outstock.product.QueryProductPickByInputResult;
 import com.timi.sz.wms_android.http.message.BaseMessage;
@@ -51,6 +52,7 @@ import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_POINT_WAREHO
 import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_SCANID;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_BEAN;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_CODE_STR;
+import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_FINISH_GOODS_PICK;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_OTHER_OUT_AUDIT;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_OTHER_OUT_BILL;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_OUTSOURCE_ALLOT;
@@ -143,11 +145,11 @@ public class BatchPointListActivity extends BaseActivity<BatchPointListView, Bat
     /**
      * 仓库id
      */
-    private int warehouseId=0;
+    private int warehouseId = 0;
     /**
      * 区域Id
      */
-    private int regionId=0;
+    private int regionId = 0;
     /**====== 委外 ======**/
     /**
      * 委外发料（审核） 搜索的结果
@@ -173,6 +175,10 @@ public class BatchPointListActivity extends BaseActivity<BatchPointListView, Bat
      */
     private QueryPrdFeedByInputResult queryPrdFeedByInputResult;
     /**
+     * ====== 成品拣货======
+     **/
+    private QueryDNByInputForPickResult queryDNByInputForPickResult;
+    /**
      * 适配器
      */
     private BaseRecyclerAdapter<DetailResultsBean> adapterDetail;
@@ -185,7 +191,7 @@ public class BatchPointListActivity extends BaseActivity<BatchPointListView, Bat
 
     @Override
     public int setLayoutId() {
-        return R.layout.activity_batch_point_list  ;
+        return R.layout.activity_batch_point_list;
     }
 
     @Override
@@ -210,11 +216,11 @@ public class BatchPointListActivity extends BaseActivity<BatchPointListView, Bat
                 //设置 submitType
                 submitType = 1;
                 //设置仓库id
-                warehouseId=summaryResults.getWarehouseId();
+                warehouseId = summaryResults.getWarehouseId();
                 //设置区域id
-                regionId=summaryResults.getRegionId();
+                regionId = summaryResults.getRegionId();
                 //billId
-                billId=summaryResults.getBillId();
+                billId = summaryResults.getBillId();
                 break;
             case STOCK_OUT_OUTSOURCE_AUDIT://委外审核
                 tvHeadTitle.setText(R.string.outsource_audit_title);
@@ -228,11 +234,11 @@ public class BatchPointListActivity extends BaseActivity<BatchPointListView, Bat
                 //设置 submitType
                 submitType = 1;
                 //设置仓库id
-                warehouseId=summaryResultsAudit.getWarehouseId();
+                warehouseId = summaryResultsAudit.getWarehouseId();
                 //设置区域id
-                regionId=summaryResultsAudit.getRegionId();
+                regionId = summaryResultsAudit.getRegionId();
                 //billId
-                billId=summaryResultsAudit.getBillId();
+                billId = summaryResultsAudit.getBillId();
                 break;
             case STOCK_OUT_OUTSOURCE_BILL://委外生单
                 btnPointCommit.setText(R.string.create_send_material_orderno);
@@ -247,11 +253,11 @@ public class BatchPointListActivity extends BaseActivity<BatchPointListView, Bat
                 //设置 submitType
                 submitType = 0;
                 //设置仓库id
-                warehouseId=summaryResultsBill.getWarehouseId();
+                warehouseId = summaryResultsBill.getWarehouseId();
                 //设置区域id
-                regionId=summaryResultsBill.getRegionId();
+                regionId = summaryResultsBill.getRegionId();
                 //billId
-                billId=summaryResultsBill.getBillId();
+                billId = summaryResultsBill.getBillId();
                 break;
             case STOCK_OUT_OUTSOURCE_ALLOT://委外调拨
                 btnPointCommit.setText(R.string.create_send_material_orderno);
@@ -266,11 +272,11 @@ public class BatchPointListActivity extends BaseActivity<BatchPointListView, Bat
                 //设置 submitType
                 submitType = 0;
                 //设置仓库id
-                warehouseId=summaryResultsAllot.getWarehouseId();
+                warehouseId = summaryResultsAllot.getWarehouseId();
                 //设置区域id
-                regionId=summaryResultsAllot.getRegionId();
+                regionId = summaryResultsAllot.getRegionId();
                 //billId
-                billId=summaryResultsAllot.getBillId();
+                billId = summaryResultsAllot.getBillId();
                 break;
             case STOCK_OUT_PRODUCTION_FEEDING://生产补料
                 tvHeadTitle.setText(R.string.material_list_pro_feed_title);
@@ -287,11 +293,11 @@ public class BatchPointListActivity extends BaseActivity<BatchPointListView, Bat
                 //设置 submitType
                 submitType = 1;
                 //设置仓库id
-                warehouseId=summaryResultsProductionFeed.getWarehouseId();
+                warehouseId = summaryResultsProductionFeed.getWarehouseId();
                 //设置区域id
-                regionId=summaryResultsProductionFeed.getRegionId();
+                regionId = summaryResultsProductionFeed.getRegionId();
                 //billId
-                billId=summaryResultsProductionFeed.getBillId();
+                billId = summaryResultsProductionFeed.getBillId();
                 break;
             case STOCK_OUT_PRODUCTION_AUDIT://生产审核
                 tvHeadTitle.setText(R.string.material_list_pro_get_title);
@@ -308,11 +314,11 @@ public class BatchPointListActivity extends BaseActivity<BatchPointListView, Bat
                 //设置 submitType
                 submitType = 1;
                 //设置仓库id
-                warehouseId=summaryResultsProductionAudit.getWarehouseId();
+                warehouseId = summaryResultsProductionAudit.getWarehouseId();
                 //设置区域id
-                regionId=summaryResultsProductionAudit.getRegionId();
+                regionId = summaryResultsProductionAudit.getRegionId();
                 //billId
-                billId=summaryResultsProductionAudit.getBillId();
+                billId = summaryResultsProductionAudit.getBillId();
                 break;
             case STOCK_OUT_PRODUCTION_APPLY_BILL:
                 tvHeadTitle.setText(R.string.get_material_material_list_tip);
@@ -321,7 +327,7 @@ public class BatchPointListActivity extends BaseActivity<BatchPointListView, Bat
                  */
                 queryProductPickByInputResult = new Gson().fromJson(getIntent().getStringExtra(STOCK_OUT_BEAN), QueryProductPickByInputResult.class);
                 //获取 summaryResults
-                QueryProductPickByInputResult.SummaryResultsBean summaryResultsProductionApply= queryProductPickByInputResult.getSummaryResults();
+                QueryProductPickByInputResult.SummaryResultsBean summaryResultsProductionApply = queryProductPickByInputResult.getSummaryResults();
                 //设置内容
                 setHeaderContent(summaryResultsProductionApply.getBillCode(), summaryResultsProductionApply.getBillDate(), summaryResultsProductionApply.getWarehouseName(), summaryResultsProductionApply.getRegionName(), summaryResultsProductionApply.getQty(), summaryResultsProductionApply.getWaitQty(), summaryResultsProductionApply.getScanQty());
                 //设置scanid
@@ -329,11 +335,11 @@ public class BatchPointListActivity extends BaseActivity<BatchPointListView, Bat
                 //设置 submitType
                 submitType = 1;
                 //设置仓库id
-                warehouseId=summaryResultsProductionApply.getWarehouseId();
+                warehouseId = summaryResultsProductionApply.getWarehouseId();
                 //设置区域id
-                regionId=summaryResultsProductionApply.getRegionId();
+                regionId = summaryResultsProductionApply.getRegionId();
                 //billId
-                billId=summaryResultsProductionApply.getBillId();
+                billId = summaryResultsProductionApply.getBillId();
                 break;
             case STOCK_OUT_PRODUCTION_BILL://生产生单
                 btnPointCommit.setText(R.string.create_send_material_orderno);
@@ -351,11 +357,11 @@ public class BatchPointListActivity extends BaseActivity<BatchPointListView, Bat
                 //设置 submitType
                 submitType = 0;
                 //设置仓库id
-                warehouseId=summaryResultsProductionBill.getWarehouseId();
+                warehouseId = summaryResultsProductionBill.getWarehouseId();
                 //设置区域id
-                regionId=summaryResultsProductionBill.getRegionId();
+                regionId = summaryResultsProductionBill.getRegionId();
                 //billId
-                billId=summaryResultsProductionBill.getBillId();
+                billId = summaryResultsProductionBill.getBillId();
                 break;
             case STOCK_OUT_PRODUCTION_ALLOT://生产调拨
                 btnPointCommit.setText(R.string.create_send_material_orderno);
@@ -373,11 +379,11 @@ public class BatchPointListActivity extends BaseActivity<BatchPointListView, Bat
                 //设置 submitType
                 submitType = 0;
                 //设置仓库id
-                warehouseId=summaryResultsProductionAllot.getWarehouseId();
+                warehouseId = summaryResultsProductionAllot.getWarehouseId();
                 //设置区域id
-                regionId=summaryResultsProductionAllot.getRegionId();
+                regionId = summaryResultsProductionAllot.getRegionId();
                 //billId
-                billId=summaryResultsProductionAllot.getBillId();
+                billId = summaryResultsProductionAllot.getBillId();
                 break;
             case STOCK_OUT_PICK://拣料
                 break;
@@ -391,6 +397,27 @@ public class BatchPointListActivity extends BaseActivity<BatchPointListView, Bat
                 break;
             case STOCK_OUT_OTHER_OUT_BILL://其他生单
                 break;
+            case STOCK_OUT_FINISH_GOODS_PICK://成品拣货
+                btnPointCommit.setText(R.string.create_send_material_orderno);
+                tvHeadTitle.setText(R.string.material_point_list_finish_goods_pick_title);
+                /**
+                 * 生产生单 和委外生单的返回结果是一样的 所以直接一起处理
+                 */
+                queryDNByInputForPickResult = new Gson().fromJson(getIntent().getStringExtra(STOCK_OUT_BEAN), QueryDNByInputForPickResult.class);
+                //获取 summaryResults
+                QueryDNByInputForPickResult.SummaryResultsBean summaryResultsFinishGoodsPick = queryDNByInputForPickResult.getSummaryResults();
+                //设置内容
+                setHeaderContent(summaryResultsFinishGoodsPick.getBillCode(), summaryResultsFinishGoodsPick.getBillDate(), summaryResultsFinishGoodsPick.getWarehouseName(), summaryResultsFinishGoodsPick.getRegionName(), summaryResultsFinishGoodsPick.getQty(), summaryResultsFinishGoodsPick.getWaitQty(), summaryResultsFinishGoodsPick.getScanQty());
+                //设置scanid
+                scanId = summaryResultsFinishGoodsPick.getScanId();
+                //设置 submitType
+                submitType = 0;
+                //设置仓库id
+                warehouseId = summaryResultsFinishGoodsPick.getWarehouseId();
+                //设置区域id
+                regionId = summaryResultsFinishGoodsPick.getRegionId();
+                //billId
+                billId = summaryResultsFinishGoodsPick.getBillId();
             default:
                 break;
         }
@@ -515,6 +542,10 @@ public class BatchPointListActivity extends BaseActivity<BatchPointListView, Bat
                 break;
             case STOCK_OUT_OTHER_OUT_BILL://其他生单
                 break;
+            case STOCK_OUT_FINISH_GOODS_PICK://成品拣货
+                isIsMerge =false;
+                detailResults = queryDNByInputForPickResult.getDetailResults();
+                break;
             default:
                 break;
         }
@@ -533,7 +564,7 @@ public class BatchPointListActivity extends BaseActivity<BatchPointListView, Bat
             }
         } else {
             for (int i = 0; i < detailResults.size(); i++) {
-                if (!ivShowMore.isSelected()) {
+                if (ivShowMore.isSelected()) {
                     /**
                      * 如果齐套数小于采购数 则显示
                      */
@@ -590,8 +621,10 @@ public class BatchPointListActivity extends BaseActivity<BatchPointListView, Bat
                         Intent it = new Intent(BatchPointListActivity.this, BatchPointActivity.class);
                         it.putExtra(STOCK_OUT_CODE_STR, intentCode);
                         it.putExtra(OUT_STOCK_POINT_DETIAIL_BILLID, billId);
+                        it.putExtra(OUT_STOCK_POINT_WAREHOUSEID, warehouseId);
                         it.putExtra(OUT_STOCK_MATERIAL_RESULTS_BEAN, new Gson().toJson(mDatas.get(pos)));
                         it.putExtra(OUT_STOCK_SCANID, scanId);
+                        it.putExtra(OUT_STOCK_POINT_REGIONID, regionId);
                         startActivity(it);
                     }
                 });
@@ -652,6 +685,9 @@ public class BatchPointListActivity extends BaseActivity<BatchPointListView, Bat
                                 break;
                             case STOCK_OUT_OTHER_OUT_BILL://其他生单
                                 break;
+                            case STOCK_OUT_FINISH_GOODS_PICK://成品拣货
+                                holder.setTextView(R.id.tv_line_num, item.getLine());
+                                break;
                             default:
                                 break;
                         }
@@ -668,7 +704,7 @@ public class BatchPointListActivity extends BaseActivity<BatchPointListView, Bat
                 rlvOrdernoInfo.setLayoutManager(linearLayoutManager);
                 rlvOrdernoInfo.setNestedScrollingEnabled(false);
                 rlvOrdernoInfo.setHasFixedSize(true);
-                rlvOrdernoInfo.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST, R.drawable.item_point_divider));
+                rlvOrdernoInfo.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST, R.drawable.item_badness_divider));
                 adapterDetail.setOnItemClickListener(new BaseRecyclerAdapter.OnItemClickListener() {
                     @Override
                     public void onItemClick(View itemView, int pos) {

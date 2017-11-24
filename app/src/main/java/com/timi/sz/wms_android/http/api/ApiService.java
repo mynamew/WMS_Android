@@ -33,6 +33,7 @@ import com.timi.sz.wms_android.bean.outstock.outsource.QueryWWPickDataByOutSourc
 import com.timi.sz.wms_android.bean.outstock.outsource.RequestGetMaterialLotBean;
 import com.timi.sz.wms_android.bean.outstock.outsource.SubmitBarcodeLotPickOutResult;
 import com.timi.sz.wms_android.bean.outstock.outsource.SubmitBarcodeLotPickOutSplitResult;
+import com.timi.sz.wms_android.bean.outstock.pick.QueryDNByInputForPickResult;
 import com.timi.sz.wms_android.bean.outstock.product.GetPrdFeedDetailResult;
 import com.timi.sz.wms_android.bean.outstock.product.GetProductPickDetailResult;
 import com.timi.sz.wms_android.bean.outstock.product.QueryPrdFeedByInputResult;
@@ -264,7 +265,8 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("api/services/wpda/PrdInstock/QueryWorkOrderByInput")
     Observable<CommonResult<FinishGoodsCreateBillBean>> searchFinishGoodsCreateBillOrderno(@FieldMap Map<String, Object> params);
- /**
+
+    /**
      * 搜索产成品-生单的明细的返回结果(生产工单单末尾号查询)
      *
      * @param params
@@ -283,6 +285,26 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("api/Account/ClientLogin")
     Observable<CommonResult<OtherAuditSelectOrdernoBean>> searchOtherAuditSelectOrderno(@Field("orderno") String orderno);
+    /**====== 成品拣货 ======**/
+    /**
+     * 发货通知单末尾号查询
+     *
+     * @param orderno
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("api/services/wpda/SalesOutStock/QueryDNByInputForPick")
+    Observable<CommonResult<QueryDNByInputForPickResult>> queryDNByInputForPick(@FieldMap Map<String, Object> orderno);
+
+    /**
+     * 获取发货单明细数据
+     *
+     * @param orderno
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("api/services/wpda/SalesOutStock/GetDNDetail")
+    Observable<CommonResult<List<OrderDetailData>>> getDNDetail(@Field("orderno") String orderno);
     /**====== 委外退料 ======**/
     /**
      * 委外退料—选单

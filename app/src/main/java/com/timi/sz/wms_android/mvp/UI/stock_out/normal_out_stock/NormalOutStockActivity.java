@@ -118,7 +118,7 @@ public class NormalOutStockActivity extends BaseActivity<NormalOutStockView, Nor
 
     @Override
     public void initBundle(Bundle savedInstanceState) {
-        intentCode = getIntent().getIntExtra(Constants.CODE_STR, 0);
+        intentCode = getIntent().getIntExtra(Constants.STOCK_OUT_CODE_STR, 0);
         switch (intentCode) {
             case STOCK_OUT_OUTSOURCE_FEED_SUPLLIEMENT://委外补料
                 //设置头部的提示信息
@@ -165,6 +165,8 @@ public class NormalOutStockActivity extends BaseActivity<NormalOutStockView, Nor
                 regionId = summaryResultsBill.getRegionId();
                 break;
             case STOCK_OUT_OUTSOURCE_ALLOT://委外调拨
+                tvHeadTitle.setText(R.string.outsource_allot_info_tip);
+                setActivityTitle(getString(R.string.outsource_allot));
                 QueryWWPickDataByOutSourceResult queryWWPickDataByOutSourceResultAllot = new Gson().fromJson(getIntent().getStringExtra(STOCK_OUT_BEAN), QueryWWPickDataByOutSourceResult.class);
                 //获取 summaryResults
                 QueryWWPickDataByOutSourceResult.SummaryResultsBean summaryResultsAllot = queryWWPickDataByOutSourceResultAllot.getSummaryResults();
@@ -181,7 +183,8 @@ public class NormalOutStockActivity extends BaseActivity<NormalOutStockView, Nor
                 regionId = summaryResultsAllot.getRegionId();
                 break;
             case STOCK_OUT_PRODUCTION_FEEDING://生产补料
-                setActivityTitle(getString(R.string.material_list_pro_feed_title));
+                setActivityTitle(getString(R.string.stock_out_create_add_materail));
+                tvHeadTitle.setText(R.string.production_feed_orderno_info_tip);
                 /**
                  * 生产生单 和委外生单的返回结果是一样的 所以直接一起处理
                  */
@@ -198,6 +201,8 @@ public class NormalOutStockActivity extends BaseActivity<NormalOutStockView, Nor
                 regionId = summaryResultsProductionFeed.getRegionId();
                 break;
             case STOCK_OUT_PRODUCTION_AUDIT://生产审核
+                setActivityTitle(getString(R.string.stock_out_create_check));
+                tvHeadTitle.setText(R.string.production_get_orderno_info_tip);
                 /**
                  * 生产生单 和委外生单的返回结果是一样的 所以直接一起处理
                  */
@@ -214,6 +219,8 @@ public class NormalOutStockActivity extends BaseActivity<NormalOutStockView, Nor
                 regionId = summaryResultsProductionAudit.getRegionId();
                 break;
             case STOCK_OUT_PRODUCTION_BILL://生产生单
+                setActivityTitle(getString(R.string.stock_out_create_create_order));
+                tvHeadTitle.setText(R.string.production_get_orderno_info_tip);
                 /**
                  * 生产生单 和委外生单的返回结果是一样的 所以直接一起处理
                  */
@@ -232,7 +239,8 @@ public class NormalOutStockActivity extends BaseActivity<NormalOutStockView, Nor
                 billId=summaryResultsProductionBill.getBillId();
                 break;
             case STOCK_OUT_PRODUCTION_ALLOT://生产调拨
-                setActivityTitle(getString(R.string.material_point_production_allot_title));
+                setActivityTitle(getString(R.string.production_allot));
+                tvHeadTitle.setText(R.string.production_allot_info_tip);
                 /**
                  * 生产生单 和委外生单的返回结果是一样的 所以直接一起处理
                  */
@@ -363,6 +371,12 @@ public class NormalOutStockActivity extends BaseActivity<NormalOutStockView, Nor
                         break;
                     case Constants.STOCK_OUT_OTHER_OUT_BILL://其他出库-生单
                         break;
+                    case Constants.STOCK_OUT_FINISH_GOODS_PICK://成品拣货
+                        it.setClass(NormalOutStockActivity.this, OutsourceBillDetailActivity.class);
+                        it.setClass(NormalOutStockActivity.this, DetailActivity.class);
+                        it.putExtra(OUT_STOCK_POINT_WAREHOUSEID, warehouseId);
+                        it.putExtra(OUT_STOCK_POINT_REGIONID, regionId);
+                        it.putExtra(OUT_STOCK_POINT_DETIAIL_BILLID, billId);                        break;
                 }
                 /**
                  * 查看详情

@@ -615,5 +615,12 @@
     <string name="get_material_apply_tip">领料申请</string>
     <string name="get_material_apply_orderno_tip">领料申请单</string>
     <string name="get_material_material_list_tip">领料申请(审核)物料清单</string>
+    <string name="finish_goods_pick_tip">成品拣货</string>
+    <string name="material_point_finish_goods_pick_title">物品清点（成品拣货）</string>
+    <string name="material_point_list_finish_goods_pick_title">物料清单(成品拣货)</string>
+    <string name="outsource_allot_info">委外调拨单信息</string>
+    <string name="production_feed_orderno_info_tip">生产补料单信息</string>
+    <string name="production_get_orderno_info_tip">生产领料单信息</string>
+    <string name="production_allot_info_tip">生产调拨单信息</string>
 
 </resources>

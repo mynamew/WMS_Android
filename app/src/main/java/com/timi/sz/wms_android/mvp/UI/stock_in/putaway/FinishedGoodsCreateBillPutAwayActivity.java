@@ -209,19 +209,19 @@ public class FinishedGoodsCreateBillPutAwayActivity extends BaseActivity<PutAway
         /**
          * 收货单号
          */
-        tvReceiveProNum.setText(finishGoodsCreateBillBean.getReceiptCode());
+        tvReceiveProNum.setText(finishGoodsCreateBillBean.getBillCode());
         /**
          * 单据总数
          */
-        tvOrdernoTotalNum.setText(String.valueOf(finishGoodsCreateBillBean.getReceiptQty()));
+        tvOrdernoTotalNum.setText(String.valueOf(finishGoodsCreateBillBean.getQty()));
         /**
          * 已入库总数
          */
-        tvInStockTotalNum.setText(String.valueOf(finishGoodsCreateBillBean.getInstockQty()));
+        tvInStockTotalNum.setText(String.valueOf(finishGoodsCreateBillBean.getScanQty()));
         /**
          * 日期
          */
-        tvCreateOrdernoDate.setText(finishGoodsCreateBillBean.getReceipDate());
+        tvCreateOrdernoDate.setText(finishGoodsCreateBillBean.getBillDate());
         /**
          * 待点总数
          */

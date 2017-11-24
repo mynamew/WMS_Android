@@ -241,12 +241,14 @@
                     android:id="@+id/tv_putaway_scan_material_tip"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
                     android:paddingLeft="38px"
-                    android:text="@string/scan_material"
+                    android:text="@string/material_barcode_tip"
                     android:textColor="#333"
                     android:textSize="13sp"
-                    />
+                    android:layout_alignBaseline="@+id/et_scan_material"
+                    android:layout_alignBottom="@+id/et_scan_material"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"/>
 
                 <EditText
                     android:id="@+id/et_scan_material"

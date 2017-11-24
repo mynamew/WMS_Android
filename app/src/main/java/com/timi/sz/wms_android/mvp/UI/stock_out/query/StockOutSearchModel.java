@@ -3,6 +3,7 @@ package com.timi.sz.wms_android.mvp.UI.stock_out.query;
 import com.timi.sz.wms_android.bean.outstock.outsource.QueryOutSourceFeedByInputResult;
 import com.timi.sz.wms_android.bean.outstock.outsource.QueryOutSourcePickByInputResult;
 import com.timi.sz.wms_android.bean.outstock.outsource.QueryWWPickDataByOutSourceResult;
+import com.timi.sz.wms_android.bean.outstock.pick.QueryDNByInputForPickResult;
 import com.timi.sz.wms_android.bean.outstock.product.QueryPrdFeedByInputResult;
 import com.timi.sz.wms_android.bean.outstock.product.QueryProductPickByInputResult;
 import com.timi.sz.wms_android.http.HttpManager;
@@ -39,7 +40,7 @@ public class StockOutSearchModel extends MvpBaseModel {
     }
 
     /**
-     * 委外发料(生单) 搜索请求
+     * 委外调拨 搜索请求
      *
      * @param observer
      */
@@ -125,6 +126,20 @@ public class StockOutSearchModel extends MvpBaseModel {
             @Override
             public Observable<CommonResult<QueryPrdFeedByInputResult>> createObservable(ApiService apiService) {
                 return apiService.queryPrdFeedByInput(params);
+            }
+        });
+    }
+    /**
+     * 成品拣货
+     *
+     * @param observer
+     */
+    public void queryDNByInputForPick(final Map<String, Object> params, Observer<QueryDNByInputForPickResult> observer) {
+
+        HttpManager.getInstance().HttpManagerRequest(observer, new ApiServiceMethodCallBack<QueryDNByInputForPickResult>() {
+            @Override
+            public Observable<CommonResult<QueryDNByInputForPickResult>> createObservable(ApiService apiService) {
+                return apiService.queryDNByInputForPick(params);
             }
         });
     }

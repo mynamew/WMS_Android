@@ -1,5 +1,8 @@
 package com.timi.sz.wms_android.mvp.UI.stock_out.pick;
 
+import com.timi.sz.wms_android.bean.outstock.outsource.QueryWWPickDataByOutSourceResult;
+import com.timi.sz.wms_android.bean.outstock.pick.QueryDNByInputForPickResult;
+import com.timi.sz.wms_android.bean.outstock.product.QueryProductPickByInputResult;
 import com.timi.sz.wms_android.mvp.base.view.iml.MvpBaseView;
 
 /**
@@ -9,4 +12,9 @@ import com.timi.sz.wms_android.mvp.base.view.iml.MvpBaseView;
  */
 
 public interface PickView extends MvpBaseView {
+    /**
+     * 成品拣货
+     * @param bean
+     */
+    void queryDNByInputForPick(QueryDNByInputForPickResult bean);
 }

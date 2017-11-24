@@ -19,6 +19,7 @@ import com.timi.sz.wms_android.base.uils.ToastUtils;
 import com.timi.sz.wms_android.bean.outstock.outsource.QueryOutSourceFeedByInputResult;
 import com.timi.sz.wms_android.bean.outstock.outsource.QueryOutSourcePickByInputResult;
 import com.timi.sz.wms_android.bean.outstock.outsource.QueryWWPickDataByOutSourceResult;
+import com.timi.sz.wms_android.bean.outstock.pick.QueryDNByInputForPickResult;
 import com.timi.sz.wms_android.bean.outstock.product.QueryPrdFeedByInputResult;
 import com.timi.sz.wms_android.bean.outstock.product.QueryProductPickByInputResult;
 import com.timi.sz.wms_android.mvp.UI.stock_out.batch_point_list.BatchPointListActivity;
@@ -34,6 +35,7 @@ import butterknife.OnClick;
 
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_BEAN;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_CODE_STR;
+import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_FINISH_GOODS_PICK;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_OTHER_OUT_AUDIT;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_OUTSOURCE_ALLOT;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_OUTSOURCE_AUDIT;
@@ -138,6 +140,12 @@ public class StockOutSearchActivity extends BaseActivity<StockOutSearchView, Sto
                 setActivityTitle(getString(R.string.get_material_apply_audit_title));
                 tvQueryTitle.setText(R.string.get_material_apply_tip);
                 tvStockoutTip.setText(R.string.get_material_apply_orderno_tip);
+                break;
+
+            case STOCK_OUT_FINISH_GOODS_PICK:// 产成品拣货
+                setActivityTitle(getString(R.string.finish_goods_pick_tip));
+                tvStockoutTip.setText(R.string.stock_out_pick_send_orderno);
+                tvQueryTitle.setText(R.string.finish_goods_outstock_tip);
                 break;
         }
         /**
@@ -249,6 +257,9 @@ public class StockOutSearchActivity extends BaseActivity<StockOutSearchView, Sto
             case STOCK_OUT_PRODUCTION_APPLY_BILL:// 申请审核
                 getPresenter().queryPrdPickApplyByInput(params);
                 break;
+            case STOCK_OUT_FINISH_GOODS_PICK:// 成品拣货
+                getPresenter().queryDNByInputForPick(params);
+                break;
         }
     }
 
@@ -260,9 +271,14 @@ public class StockOutSearchActivity extends BaseActivity<StockOutSearchView, Sto
      */
     @Override
     public void queryOutSourceFeedByInput(QueryOutSourceFeedByInputResult bean) {
-        Intent intent = new Intent(this, BatchPointListActivity.class);
-        intent.putExtra(STOCK_OUT_CODE_STR, intentCode);
+        Intent intent = new Intent();
         intent.putExtra(STOCK_OUT_BEAN, new Gson().toJson(bean));
+        intent.putExtra(STOCK_OUT_CODE_STR, intentCode);
+        if (bean.getSummaryResults().isIsLotPick()) {//批次拣货
+            intent.setClass(this, BatchPointListActivity.class);
+        } else {
+            intent.setClass(this, NormalOutStockActivity.class);
+        }
         startActivity(intent);
     }
 
@@ -334,17 +350,27 @@ public class StockOutSearchActivity extends BaseActivity<StockOutSearchView, Sto
      */
     @Override
     public void queryProductPickByInput(QueryProductPickByInputResult bean) {
-        Intent intent = new Intent(this, BatchPointListActivity.class);
-        intent.putExtra(STOCK_OUT_CODE_STR, intentCode);
+        Intent intent = new Intent();
         intent.putExtra(STOCK_OUT_BEAN, new Gson().toJson(bean));
+        intent.putExtra(STOCK_OUT_CODE_STR, intentCode);
+        if (bean.getSummaryResults().isIsLotPick()) {//批次拣货
+            intent.setClass(this, BatchPointListActivity.class);
+        } else {
+            intent.setClass(this, NormalOutStockActivity.class);
+        }
         startActivity(intent);
     }
 
     @Override
     public void queryPrdPickApplyByInput(QueryProductPickByInputResult bean) {
-        Intent intent = new Intent(this, BatchPointListActivity.class);
-        intent.putExtra(STOCK_OUT_CODE_STR, intentCode);
+        Intent intent = new Intent();
         intent.putExtra(STOCK_OUT_BEAN, new Gson().toJson(bean));
+        intent.putExtra(STOCK_OUT_CODE_STR, intentCode);
+        if (bean.getSummaryResults().isIsLotPick()) {//批次拣货
+            intent.setClass(this, BatchPointListActivity.class);
+        } else {
+            intent.setClass(this, NormalOutStockActivity.class);
+        }
         startActivity(intent);
     }
 
@@ -355,9 +381,27 @@ public class StockOutSearchActivity extends BaseActivity<StockOutSearchView, Sto
      */
     @Override
     public void queryPrdFeedByInput(QueryPrdFeedByInputResult bean) {
-        Intent intent = new Intent(this, BatchPointListActivity.class);
-        intent.putExtra(STOCK_OUT_CODE_STR, intentCode);
+        Intent intent = new Intent();
         intent.putExtra(STOCK_OUT_BEAN, new Gson().toJson(bean));
+        intent.putExtra(STOCK_OUT_CODE_STR, intentCode);
+        if (bean.getSummaryResults().isIsLotPick()) {//批次拣货
+            intent.setClass(this, BatchPointListActivity.class);
+        } else {
+            intent.setClass(this, NormalOutStockActivity.class);
+        }
+        startActivity(intent);
+    }
+
+    @Override
+    public void queryDNByInputForPick(QueryDNByInputForPickResult bean) {
+        Intent intent = new Intent();
+        intent.putExtra(STOCK_OUT_BEAN, new Gson().toJson(bean));
+        intent.putExtra(STOCK_OUT_CODE_STR, intentCode);
+        if (bean.getSummaryResults().isIsLotPick()) {//批次拣货
+            intent.setClass(this, BatchPointListActivity.class);
+        } else {
+            intent.setClass(this, NormalOutStockActivity.class);
+        }
         startActivity(intent);
     }
 
