@@ -17,6 +17,7 @@ import com.timi.sz.wms_android.base.uils.Constants;
 import com.timi.sz.wms_android.base.uils.PackageUtils;
 import com.timi.sz.wms_android.base.uils.SpUtils;
 import com.timi.sz.wms_android.base.uils.ToastUtils;
+import com.timi.sz.wms_android.bean.instock.search.OtherAuditSelectOrdernoBean;
 import com.timi.sz.wms_android.bean.outstock.buy.SubmitBarcodeOutAuditData;
 import com.timi.sz.wms_android.bean.outstock.buy.SubmitBarcodeOutSplitAuditData;
 import com.timi.sz.wms_android.bean.outstock.outsource.QueryOutSourceFeedByInputResult;
@@ -163,6 +164,8 @@ public class NormalOutStockActivity extends BaseActivity<NormalOutStockView, Nor
                 warehouseId = summaryResultsBill.getWarehouseId();
                 //设置区域id
                 regionId = summaryResultsBill.getRegionId();
+                //设置按钮文字  生成生产领料单
+                btnCommit.setText(R.string.create_production_get_material_list_tip);
                 break;
             case STOCK_OUT_OUTSOURCE_ALLOT://委外调拨
                 tvHeadTitle.setText(R.string.outsource_allot_info_tip);
@@ -237,6 +240,8 @@ public class NormalOutStockActivity extends BaseActivity<NormalOutStockView, Nor
                 regionId=summaryResultsProductionBill.getRegionId();
                 //billId
                 billId=summaryResultsProductionBill.getBillId();
+                //设置按钮文字  生成生产领料单
+                btnCommit.setText(R.string.create_production_get_material_list_tip);
                 break;
             case STOCK_OUT_PRODUCTION_ALLOT://生产调拨
                 setActivityTitle(getString(R.string.production_allot));
@@ -261,12 +266,32 @@ public class NormalOutStockActivity extends BaseActivity<NormalOutStockView, Nor
             case STOCK_OUT_PICK://拣料
                 break;
             case STOCK_OUT_SELL_OUT_AUDIT://销售审核
+                setActivityTitle(getString(R.string.sale_outstock_title));
+                tvHeadTitle.setText(R.string.production_allot_info_tip);
                 break;
             case STOCK_OUT_SELL_OUT_BILL://销售生单
+                setActivityTitle(getString(R.string.sale_outstock_title));
+                tvHeadTitle.setText(R.string.production_allot_info_tip);
+                //设置按钮文字  销售出库单
+                btnCommit.setText(R.string.create_sale_ger_material_list_tip);
                 break;
             case STOCK_OUT_PURCHASE_MATERIAL_RETURN://采购退料
                 break;
             case STOCK_OUT_OTHER_OUT_AUDIT://其他审核
+                tvHeadTitle.setText(R.string.other_outstock_title);
+                setActivityTitle(getString(R.string.other_outstock_info));
+                OtherAuditSelectOrdernoBean otherAuditSelectOrdernoBean = new Gson().fromJson(getIntent().getStringExtra(STOCK_OUT_BEAN), OtherAuditSelectOrdernoBean.class);
+                OtherAuditSelectOrdernoBean.SummaryResultsBean summaryResultsOtherAudit = otherAuditSelectOrdernoBean.getSummaryResults();
+                //设置内容
+                setHeaderContent(summaryResultsOtherAudit.getBillCode(), summaryResultsOtherAudit.getBillDate(), summaryResultsOtherAudit.getQty(), summaryResultsOtherAudit.getWaitQty(), summaryResultsOtherAudit.getScanQty());
+                //设置scanid
+                scanId = summaryResultsOtherAudit.getScanId();
+                //设置仓库id
+                warehouseId=summaryResultsOtherAudit.getWarehouseId();
+                //设置区域id
+                regionId=summaryResultsOtherAudit.getRegionId();
+                //billId
+                billId=summaryResultsOtherAudit.getBillId();
                 break;
             case STOCK_OUT_OTHER_OUT_BILL://其他生单
                 break;

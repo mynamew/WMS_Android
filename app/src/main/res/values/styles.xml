@@ -59,8 +59,8 @@
     <style name="stock_in_tab">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">match_parent</item>
-        <item name="android:paddingBottom">5dp</item>
-        <item name="android:paddingTop">5dp</item>
+        <item name="android:paddingBottom">10px</item>
+        <item name="android:paddingTop">10px</item>
         <item name="android:layout_weight">1</item>
         <item name="android:gravity">center</item>
         <item name="android:background">@drawable/bg_set_tab_check</item>

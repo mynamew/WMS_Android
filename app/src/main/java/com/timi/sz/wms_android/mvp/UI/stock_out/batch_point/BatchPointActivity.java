@@ -256,6 +256,9 @@ public class BatchPointActivity extends BaseActivity<BatchPointView, BatchPointP
             case STOCK_OUT_PURCHASE_MATERIAL_RETURN://采购退料
                 break;
             case STOCK_OUT_OTHER_OUT_AUDIT://其他审核
+                setActivityTitle(getString(R.string.material_point_other_audit_title));
+                srcBillType = 52;
+                destBillType = 52;
                 break;
             case STOCK_OUT_OTHER_OUT_BILL://其他生单
                 break;

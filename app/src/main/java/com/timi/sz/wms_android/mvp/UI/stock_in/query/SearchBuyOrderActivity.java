@@ -278,6 +278,10 @@ public class SearchBuyOrderActivity extends BaseActivity<SearchBuyOrderView, Sea
         startActivity(it);
     }
 
+    /**
+     * 委外退料
+     * @param bean
+     */
     @Override
     public void searchOutReturnMaterialOrderno(QueryOutSourceReturnByInputResult bean) {
         Intent it = new Intent(this, OutMaterialReturnActivity.class);
@@ -342,8 +346,8 @@ public class SearchBuyOrderActivity extends BaseActivity<SearchBuyOrderView, Sea
             case Constants.CREATE_PRO_CREATE_ORDER_NUM://产成品 生单
                 getPresenter().searchFinishGoodsCreateBillOrderno(params);
                 break;
-            case Constants.OTHER_IN_STOCK_SELECT_ORDERNO://其他 生单
-                getPresenter().searchOtherAuditSelectOrderno(orderNum);
+            case Constants.OTHER_IN_STOCK_SELECT_ORDERNO://其他 审核
+                getPresenter().searchOtherAuditSelectOrderno(params);
                 break;
             case Constants.OUT_RETURN_MATERAIL://委外退料
                 getPresenter().searchOutReturnMaterialOrderno(params);

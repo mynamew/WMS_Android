@@ -39,7 +39,7 @@
             <!--收货-->
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="218px"
+                android:layout_height="238px"
                 android:layout_marginLeft="20px"
                 android:layout_marginRight="20px"
                 android:layout_marginTop="20px"
@@ -62,7 +62,7 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="160px"
+                        android:layout_height="match_parent"
                         android:layout_marginTop="2px"
                         android:orientation="horizontal">
 
@@ -163,7 +163,7 @@
             <!--退货-->
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="218px"
+                android:layout_height="238px"
                 android:layout_marginBottom="20px"
                 android:layout_marginLeft="20px"
                 android:layout_marginRight="20px"
@@ -188,7 +188,7 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="160px"
+                        android:layout_height="match_parent"
                         android:background="#fff"
                         android:orientation="horizontal">
 

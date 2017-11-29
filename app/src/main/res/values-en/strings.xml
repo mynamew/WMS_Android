@@ -625,5 +625,17 @@
     <string name="putaway_finish_good_instock_title">入库上架(产成品入库)</string>
     <string name="scan_info">扫描信息</string>
     <string name="item_material_num">物料数量</string>
+    <string name="material_point_other_audit_title">物品清点(其他审核)</string>
+    <string name="other_audit_material_orderno">其他审核物料清单</string>
+    <string name="other_outstock_info">其他出库单信息</string>
+    <string name="create_production_get_material_list_tip">生成生产领料单</string>
+    <string name="create_sale_ger_material_list_tip">生成生产出库单</string>
+    <string name="sale_outstock_title">销售出库</string>
+    <string name="sale_outstock_orderno_tip">销售出库单</string>
+    <string name="sale_orderno_tip">销售订单</string>
+    <string name="sale_outstock_audit_title">销售出库(审核)</string>
+    <string name="sale_outstock_bill_title">销售出库(生单)</string>
+    <string name="other_outstock_audit_title">其他出库(审核)</string>
+    <string name="user_log_tip">用户登录</string>
 
 </resources>

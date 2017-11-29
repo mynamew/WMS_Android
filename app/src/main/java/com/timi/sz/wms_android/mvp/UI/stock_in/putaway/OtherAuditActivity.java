@@ -128,7 +128,7 @@ public class OtherAuditActivity extends BaseActivity<PutAwayView, PutAwayPresent
                     params1.put("MAC", PackageUtils.getMac());
                     params1.put("SrcBillType", 13);
                     params1.put("DestBillType", 14);
-                    params1.put("ScanId", otherBean.getScanId());
+                    params1.put("ScanId", otherBean.getSummaryResults().getScanId());
                     params1.put("BinCode", mVertifyLocationCodeBean.getBinId());
                     params1.put("BarcodeNo", orderNum);
                     getPresenter().materialScanNetWork(params1, orderNum);
@@ -170,27 +170,28 @@ public class OtherAuditActivity extends BaseActivity<PutAwayView, PutAwayPresent
 
     @Override
     public void initData() {
+        OtherAuditSelectOrdernoBean.SummaryResultsBean summaryResults = otherBean.getSummaryResults();
         /**
          * 收货单号
          */
-        tvReceiveProNum.setText(otherBean.getReceiptCode());
+        tvReceiveProNum.setText(summaryResults.getBillCode());
 
         /**
          * 已入库总数
          */
-        tvInStockTotalNum.setText(String.valueOf(otherBean.getInstockQty()));
+        tvInStockTotalNum.setText(String.valueOf(summaryResults.getQty()));
         /**
          * 日期
          */
-        tvCreateOrdernoDate.setText(otherBean.getReceipDate());
+        tvCreateOrdernoDate.setText(summaryResults.getBillDate());
         /**
          * 待点总数
          */
-        tvWaitCountNum.setText(String.valueOf(otherBean.getWaitQty()));
+        tvWaitCountNum.setText(String.valueOf(summaryResults.getWaitQty()));
         /**
          * 已点总数
          */
-        tvHaveCountNum.setText(String.valueOf(otherBean.getScanQty()));
+        tvHaveCountNum.setText(String.valueOf(summaryResults.getScanQty()));
     }
 
     @Override

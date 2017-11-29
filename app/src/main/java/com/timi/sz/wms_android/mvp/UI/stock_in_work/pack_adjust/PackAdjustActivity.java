@@ -29,8 +29,6 @@ public class PackAdjustActivity extends BaseActivity<PackAdjustView,PackAdjustPr
     TextView tvScanLocation;
     @BindView(R.id.tv_material_code)
     TextView tvMaterialCode;
-    @BindView(R.id.tv_code_type)
-    TextView tvCodeType;
     @BindView(R.id.tv_goods_code)
     TextView tvGoodsCode;
     @BindView(R.id.tv_goods_num)
@@ -83,11 +81,9 @@ public class PackAdjustActivity extends BaseActivity<PackAdjustView,PackAdjustPr
     public void libraryAdjust(LibraryAdjustResult result) {
 
     }
-    @OnClick({R.id.iv_title_detail, R.id.iv_can_location,R.id.tv_scan_location,R.id.tv_material_code, R.id.iv_can_material_code, R.id.btn_confirm_commit})
+    @OnClick({R.id.iv_can_location,R.id.tv_scan_location,R.id.tv_material_code, R.id.iv_can_material_code, R.id.btn_commit})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.iv_title_detail://查看库位调整的详情
-                break;
             case R.id.iv_can_location://扫描库位码
             case R.id.tv_scan_location://扫描库位码
                 scan(Constants.REQUEST_SCAN_CODE_LIB_LOATION, new ScanQRCodeResultListener() {
@@ -137,7 +133,7 @@ public class PackAdjustActivity extends BaseActivity<PackAdjustView,PackAdjustPr
                     }
                 });
                 break;
-            case R.id.btn_confirm_commit://确认提交
+            case R.id.btn_commit://确认提交
                 String materialCode = tvMaterialCode.getText().toString();
                 if (TextUtils.isEmpty(materialCode)) {
                     ToastUtils.showShort("请扫描物料条码");

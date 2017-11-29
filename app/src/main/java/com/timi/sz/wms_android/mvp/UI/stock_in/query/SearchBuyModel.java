@@ -103,18 +103,18 @@ public class SearchBuyModel extends MvpBaseModel {
     }
 
     /**
-     * 搜索其他-生单的单号
+     * 搜索其他-审核的单号
      *
-     * @param orderno
+     * @param params
      * @param observer
      */
-    public void searchOtherAuditSelectOrderno(final String orderno,
+    public void searchOtherAuditSelectOrderno(final Map<String, Object> params,
                                                    final Observer<OtherAuditSelectOrdernoBean> observer) {
         HttpManager.getInstance().HttpManagerRequest(observer,
                 new ApiServiceMethodCallBack<OtherAuditSelectOrdernoBean>() {
                     @Override
                     public Observable<CommonResult<OtherAuditSelectOrdernoBean>> createObservable(ApiService apiService) {
-                        return apiService.searchOtherAuditSelectOrderno(orderno);
+                        return apiService.searchOtherAuditSelectOrderno(params);
                     }
                 });
     }

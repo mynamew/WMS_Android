@@ -6,6 +6,7 @@ import android.view.View;
 
 import com.timi.sz.wms_android.R;
 import com.timi.sz.wms_android.mvp.UI.stock_out.buy_return_material.BuyReturnMaterialActivity;
+import com.timi.sz.wms_android.mvp.UI.stock_out.other.scan.OtherOutStockScanActivity;
 import com.timi.sz.wms_android.mvp.UI.stock_out.pick.PickActivity;
 import com.timi.sz.wms_android.mvp.UI.stock_out.query.StockOutSearchActivity;
 import com.timi.sz.wms_android.mvp.base.view.BaseNoMvpActivity;
@@ -44,7 +45,7 @@ public class StockOutActivity extends BaseNoMvpActivity {
 
     @Override
     public void initBundle(Bundle savedInstanceState) {
-        setActivityTitle("出库作业");
+        setActivityTitle(getString(R.string.home_out_lib));
     }
 
     @Override
@@ -119,6 +120,7 @@ public class StockOutActivity extends BaseNoMvpActivity {
                 intent.putExtra(STOCK_OUT_CODE_STR, STOCK_OUT_OTHER_OUT_AUDIT);
                 break;
             case R.id.tv_stock_out_other_create_order://其他生单
+                intent.setClass(StockOutActivity.this, OtherOutStockScanActivity.class);
                 intent.putExtra(STOCK_OUT_CODE_STR, STOCK_OUT_OTHER_OUT_BILL);
                 break;
             case R.id.tv_stock_out_apply_bill://申请生单

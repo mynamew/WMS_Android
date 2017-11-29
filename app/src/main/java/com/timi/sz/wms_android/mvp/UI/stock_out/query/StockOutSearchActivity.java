@@ -16,6 +16,7 @@ import com.timi.sz.wms_android.base.uils.InputMethodUtils;
 import com.timi.sz.wms_android.base.uils.PackageUtils;
 import com.timi.sz.wms_android.base.uils.SpUtils;
 import com.timi.sz.wms_android.base.uils.ToastUtils;
+import com.timi.sz.wms_android.bean.instock.search.OtherAuditSelectOrdernoBean;
 import com.timi.sz.wms_android.bean.outstock.outsource.QueryOutSourceFeedByInputResult;
 import com.timi.sz.wms_android.bean.outstock.outsource.QueryOutSourcePickByInputResult;
 import com.timi.sz.wms_android.bean.outstock.outsource.QueryWWPickDataByOutSourceResult;
@@ -122,19 +123,19 @@ public class StockOutSearchActivity extends BaseActivity<StockOutSearchView, Sto
                 tvStockoutTip.setText(R.string.production_allot_orderno);
                 break;
             case STOCK_OUT_SELL_OUT_AUDIT://销售 审核
-                setActivityTitle(getString(R.string.stock_out_production_feed_title));
-                tvQueryTitle.setText(R.string.stock_in_sale_return);
-                tvStockoutTip.setText(R.string.stock_out_production_feed_tip);
+                setActivityTitle(getString(R.string.sale_outstock_audit_title));
+                tvQueryTitle.setText(R.string.sale_outstock_title);
+                tvStockoutTip.setText(R.string.sale_outstock_orderno_tip);
                 break;
             case STOCK_OUT_SELL_OUT_BILL://销售 生单
-                setActivityTitle(getString(R.string.stock_out_production_feed_title));
-                tvQueryTitle.setText(R.string.stock_in_sale_return);
-                tvStockoutTip.setText(R.string.stock_out_production_feed_tip);
+                setActivityTitle(getString(R.string.sale_outstock_bill_title));
+                tvQueryTitle.setText(R.string.sale_outstock_title);
+                tvStockoutTip.setText(R.string.sale_orderno_tip);
                 break;
             case STOCK_OUT_OTHER_OUT_AUDIT:// 其他 审核
-                setActivityTitle(getString(R.string.stock_out_production_feed_title));
-                tvQueryTitle.setText(R.string.stock_out_create_add_materail);
-                tvStockoutTip.setText(R.string.stock_out_production_feed_tip);
+                setActivityTitle(getString(R.string.other_outstock_audit_title));
+                tvQueryTitle.setText(R.string.stock_out_other_check);
+                tvStockoutTip.setText(R.string.stock_out_other_audit_tip);
                 break;
             case STOCK_OUT_PRODUCTION_APPLY_BILL:// 申请审核
                 setActivityTitle(getString(R.string.get_material_apply_audit_title));
@@ -361,6 +362,10 @@ public class StockOutSearchActivity extends BaseActivity<StockOutSearchView, Sto
         startActivity(intent);
     }
 
+    /**
+     * 生产领料单末尾号查询（审核流程）的返回
+     * @param bean
+     */
     @Override
     public void queryPrdPickApplyByInput(QueryProductPickByInputResult bean) {
         Intent intent = new Intent();
@@ -392,8 +397,31 @@ public class StockOutSearchActivity extends BaseActivity<StockOutSearchView, Sto
         startActivity(intent);
     }
 
+    /**
+     * 成品拣货
+     *
+     * @param bean
+     */
     @Override
     public void queryDNByInputForPick(QueryDNByInputForPickResult bean) {
+        Intent intent = new Intent();
+        intent.putExtra(STOCK_OUT_BEAN, new Gson().toJson(bean));
+        intent.putExtra(STOCK_OUT_CODE_STR, intentCode);
+        if (bean.getSummaryResults().isIsLotPick()) {//批次拣货
+            intent.setClass(this, BatchPointListActivity.class);
+        } else {
+            intent.setClass(this, NormalOutStockActivity.class);
+        }
+        startActivity(intent);
+    }
+
+    /**
+     * 其他审核  返回结果
+     *
+     * @param bean
+     */
+    @Override
+    public void searchOtherAuditSelectOrderno(OtherAuditSelectOrdernoBean bean) {
         Intent intent = new Intent();
         intent.putExtra(STOCK_OUT_BEAN, new Gson().toJson(bean));
         intent.putExtra(STOCK_OUT_CODE_STR, intentCode);

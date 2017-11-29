@@ -24,6 +24,7 @@ import com.timi.sz.wms_android.bean.outstock.buy.SubmitBarcodeOutSplitAuditData;
 import com.timi.sz.wms_android.bean.outstock.buy.SubmitBarcodePurReturnData;
 import com.timi.sz.wms_android.bean.outstock.detail.BillMaterialDetailResult;
 import com.timi.sz.wms_android.bean.outstock.detail.MaterialDetailResult;
+import com.timi.sz.wms_android.bean.outstock.other.QueryOtherOutStockByInputResult;
 import com.timi.sz.wms_android.bean.outstock.outsource.GetMaterialLotData;
 import com.timi.sz.wms_android.bean.outstock.outsource.GetOutSourcePickDetailResult;
 import com.timi.sz.wms_android.bean.outstock.outsource.GetWWDetailPickDataResult;
@@ -38,6 +39,8 @@ import com.timi.sz.wms_android.bean.outstock.product.GetPrdFeedDetailResult;
 import com.timi.sz.wms_android.bean.outstock.product.GetProductPickDetailResult;
 import com.timi.sz.wms_android.bean.outstock.product.QueryPrdFeedByInputResult;
 import com.timi.sz.wms_android.bean.outstock.product.QueryProductPickByInputResult;
+import com.timi.sz.wms_android.bean.outstock.sale.QueryDNByInputForOutStockResult;
+import com.timi.sz.wms_android.bean.outstock.sale.QuerySalesOutSotckByInputForOutStockResult;
 import com.timi.sz.wms_android.bean.quality.BarcodeData;
 import com.timi.sz.wms_android.bean.quality.GetAQLList;
 import com.timi.sz.wms_android.bean.quality.QualityListBean;
@@ -277,14 +280,14 @@ public interface ApiService {
     Observable<CommonResult<List<OrderDetailData>>> getWorkOrderDetail(@FieldMap Map<String, Object> params);
 
     /**
-     * 其他入库—选单
+     * 其他入库—审核
      *
-     * @param orderno
+     * @param params
      * @return
      */
     @FormUrlEncoded
-    @POST("api/Account/ClientLogin")
-    Observable<CommonResult<OtherAuditSelectOrdernoBean>> searchOtherAuditSelectOrderno(@Field("orderno") String orderno);
+    @POST("api/services/wpda/OtherInstock/QueryOtherInstockByInput")
+    Observable<CommonResult<OtherAuditSelectOrdernoBean>> searchOtherAuditSelectOrderno(@FieldMap Map<String, Object> params);
     /**====== 成品拣货 ======**/
     /**
      * 发货通知单末尾号查询
@@ -479,15 +482,7 @@ public interface ApiService {
     @POST("/api/services/wpda/WWFeed/GetOutSourceFeedDetail")
     Observable<CommonResult<List<MaterialDetailResult>>> getOutSourceFeedDetail(@FieldMap Map<String, Object> params);
     /**====== 销售出库-审核 ======**/
-    /**
-     * 成品入库单末尾号查询
-     *
-     * @param params
-     * @return
-     */
-    @FormUrlEncoded
-    @POST("api/services/wpda/PrdInstock/QueryPrdInstockByInput")
-    Observable<CommonResult<List<QueryOutSourceFeedByInputResult>>> queryPrdInstockByInput(@FieldMap Map<String, Object> params);
+
 
     /**====== 销售出库-生单 ======**/
     /**====== 拣货 ======**/
@@ -683,6 +678,70 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("api/services/wpda/PrdFeed/GetPrdFeedDetail")
     Observable<CommonResult<List<MaterialDetailResult>>> getPrdFeedDetail(@FieldMap Map<String, Object> params);
+
+    /**====== 销售出库 ======**/
+    /**
+     * 销售出库 审核
+     *
+     * @param params
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("api/services/wpda/SalesOutStock/QueryDNByInputForOutStock")
+    Observable<CommonResult<QueryDNByInputForOutStockResult>> queryDNByInputForOutStock(@FieldMap Map<String, Object> params);
+
+    /**
+     * 销售出库 审核  详情
+     *
+     * @param params
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("api/services/wpda/SalesOutStock/GetDNDetail")
+    Observable<CommonResult<List<MaterialDetailResult>>> getDNDetail(@FieldMap Map<String, Object> params);
+
+
+    /**====== 销售出库 ======**/
+    /**
+     * 销售出库 生单
+     *
+     * @param params
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("api/services/wpda/SalesOutStock/QuerySalesOutSotckByInputForOutStock")
+    Observable<CommonResult<QuerySalesOutSotckByInputForOutStockResult>> querySalesOutSotckByInputForOutStock(@FieldMap Map<String, Object> params);
+
+    /**
+     * 销售出库 生单  详情
+     *
+     * @param params
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("api/services/wpda/SalesOutStock/GetSalesOutStockDetailForOutStock")
+    Observable<CommonResult<List<MaterialDetailResult>>> getSalesOutStockDetailForOutStock(@FieldMap Map<String, Object> params);
+
+    /**====== 其他出库 ======**/
+    /**
+     * 其他出库 生单
+     *
+     * @param params
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("api/services/wpda/OtherOutStock/QueryOtherOutStockByInput")
+    Observable<CommonResult<QueryOtherOutStockByInputResult>> queryOtherOutStockByInput(@FieldMap Map<String, Object> params);
+
+    /**
+     * 其他出库 生单  详情
+     *
+     * @param params
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("api/services/wpda/OtherOutStock/GetOtherOutStockDetail")
+    Observable<CommonResult<List<MaterialDetailResult>>> getOtherOutStockDetail(@FieldMap Map<String, Object> params);
 
     /**************************************************************************************************************/
     /**************************************************************************************************************/

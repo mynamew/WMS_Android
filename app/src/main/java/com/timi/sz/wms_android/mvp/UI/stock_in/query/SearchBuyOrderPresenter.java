@@ -157,11 +157,11 @@ public class SearchBuyOrderPresenter extends MvpBasePresenter<SearchBuyOrderView
     }
 
     /**
-     * 搜索其他-生单的单号
+     * 搜索其他-审核的单号
      *
-     * @param orderno
+     * @param params
      */
-    public void searchOtherAuditSelectOrderno(final String orderno) {
+    public void searchOtherAuditSelectOrderno(final Map<String,Object> params) {
         getView().showProgressDialog();
         if (null == mOtherSubscriber) {
             mOtherSubscriber = new HttpSubscriber<>(new OnResultCallBack<OtherAuditSelectOrdernoBean>() {
@@ -176,7 +176,7 @@ public class SearchBuyOrderPresenter extends MvpBasePresenter<SearchBuyOrderView
                 }
             });
         }
-        model.searchOtherAuditSelectOrderno(orderno, mOtherSubscriber);
+        model.searchOtherAuditSelectOrderno(params, mOtherSubscriber);
     }
 
     /**

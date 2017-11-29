@@ -112,7 +112,7 @@ public class LibraryAdjustActivity extends BaseActivity<LibraryAdjustView, Libra
         return this;
     }
 
-    @OnClick({ R.id.iv_can_location, R.id.tv_scan_location, R.id.tv_material_code, R.id.iv_can_material_code, R.id.btn_confirm_commit})
+    @OnClick({ R.id.iv_can_location, R.id.tv_scan_location, R.id.tv_material_code, R.id.iv_can_material_code, R.id.btn_commit})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tv_scan_location://扫描库位码
@@ -162,7 +162,7 @@ public class LibraryAdjustActivity extends BaseActivity<LibraryAdjustView, Libra
                     }
                 });
                 break;
-            case R.id.btn_confirm_commit://确认提交
+            case R.id.btn_commit://确认提交
                 String materialCode = tvMaterialCode.getText().toString();
                 if (TextUtils.isEmpty(materialCode)) {
                     ToastUtils.showShort(getString(R.string.please_scan_material_code));

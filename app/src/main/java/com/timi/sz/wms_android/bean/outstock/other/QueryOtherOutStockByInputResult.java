@@ -1,16 +1,16 @@
-package com.timi.sz.wms_android.bean.instock.search;
+package com.timi.sz.wms_android.bean.outstock.other;
 
 import com.timi.sz.wms_android.bean.outstock.outsource.common.DetailResultsBean;
 
 import java.util.List;
 
 /**
- * $dsc 其他审核-选单
+ * $dsc  其他出库
  * author: timi
- * create at: 2017-08-31 13:32
+ * create at: 2017-11-28 15:33
  */
 
-public class OtherAuditSelectOrdernoBean {
+public class QueryOtherOutStockByInputResult {
 
     /**
      * summaryResults : {"rob":0,"billId":169,"billCode":"0000000213","billDate":"2014-12-12","deptName":"","createrName":"方艳冬","scanId":0,"qty":19,"waitQty":19,"scanQty":0,"isLotPick":true,"isRegion":false,"warehouseId":0,"warehouseName":null,"regionId":0,"regionName":null,"isSplitPrint":true}
@@ -70,9 +70,9 @@ public class OtherAuditSelectOrdernoBean {
         private boolean isLotPick;
         private boolean isRegion;
         private int warehouseId;
-        private String warehouseName;
+        private Object warehouseName;
         private int regionId;
-        private String regionName;
+        private Object regionName;
         private boolean isSplitPrint;
 
         public int getRob() {
@@ -179,11 +179,11 @@ public class OtherAuditSelectOrdernoBean {
             this.warehouseId = warehouseId;
         }
 
-        public String getWarehouseName() {
+        public Object getWarehouseName() {
             return warehouseName;
         }
 
-        public void setWarehouseName(String warehouseName) {
+        public void setWarehouseName(Object warehouseName) {
             this.warehouseName = warehouseName;
         }
 
@@ -195,11 +195,11 @@ public class OtherAuditSelectOrdernoBean {
             this.regionId = regionId;
         }
 
-        public String getRegionName() {
+        public Object getRegionName() {
             return regionName;
         }
 
-        public void setRegionName(String regionName) {
+        public void setRegionName(Object regionName) {
             this.regionName = regionName;
         }
 

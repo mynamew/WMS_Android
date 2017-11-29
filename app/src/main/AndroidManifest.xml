@@ -71,7 +71,7 @@
             android:screenOrientation="portrait"/>
         <activity
             android:name=".qrcode.CommonScanActivity"
-            android:launchMode="singleTask"
+            android:launchMode="standard"
             android:screenOrientation="portrait"/>
 
         <meta-data

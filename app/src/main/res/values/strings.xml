@@ -320,6 +320,11 @@
     <string name="stock_out_pick_tab">拣货</string>
     <string name="stock_out_all">综合</string>
     /**====== 出库搜索 ======**/
+    <string name="sale_outstock_orderno_tip">销售出库单</string>
+    <string name="sale_orderno_tip">销售订单</string>
+    <string name="sale_outstock_audit_title">销售出库(审核)</string>
+    <string name="sale_outstock_bill_title">销售出库(生单)</string>
+    <string name="other_outstock_audit_title">其他出库(审核)</string>
     <string name="buy_return_material_orderno">退料单号：</string>
     <string name="out_stock_buy_return_material">出库—采购退料</string>
     <string name="please_input_return_material_orderno_or_scan">输入退料单号或扫码查询</string>
@@ -372,6 +377,12 @@
     /**====== 其他出库 出库扫描 ======**/
     <string name="other_out_stock_scan_title">其他出库(出库扫描)</string>
     <string name="create_other_out_stock_orderno">生成其他出库单</string>
+    /**====== 普通出库 ======**/
+    <string name="other_outstock_title">其他出库</string>
+    <string name="other_outstock_info">其他出库单信息</string>
+    <string name="create_production_get_material_list_tip">生成生产领料单</string>
+    <string name="create_sale_ger_material_list_tip">生成生产出库单</string>
+    <string name="sale_outstock_title">销售出库</string>
     /**====== 异常 ======**/
     <string name="exp_network_exception">网络连接异常，请检查您的网络状态</string>
     <string name="exp_network_timeout">网络连接超时，请检查您的网络状态，稍后重试</string>
@@ -726,6 +737,9 @@
     <string name="putaway_finish_good_instock_title">入库上架(产成品入库)</string>
     <string name="scan_info">扫描信息</string>
     <string name="item_material_num">物料数量</string>
+    <string name="material_point_other_audit_title">物品清点(其他审核)</string>
+    <string name="other_audit_material_orderno">其他审核物料清单</string>
+    <string name="user_log_tip">用户登录</string>
 
 
 </resources>
