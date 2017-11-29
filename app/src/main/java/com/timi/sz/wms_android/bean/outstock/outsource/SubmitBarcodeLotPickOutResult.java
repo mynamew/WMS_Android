@@ -36,8 +36,8 @@ public class SubmitBarcodeLotPickOutResult {
     private int lineScanQty;
     private int totalScanQty;
     private int exceedQty;
-    private Object newBarcode;
-
+    private String newBarcode;
+    private int CartonNo;
     public boolean isIsNotAllowPickOut() {
         return isNotAllowPickOut;
     }
@@ -134,11 +134,27 @@ public class SubmitBarcodeLotPickOutResult {
         this.exceedQty = exceedQty;
     }
 
-    public Object getNewBarcode() {
+    public String getNewBarcode() {
         return newBarcode;
     }
 
-    public void setNewBarcode(Object newBarcode) {
+    public void setNewBarcode(String newBarcode) {
         this.newBarcode = newBarcode;
+    }
+
+    public boolean isNotAllowPickOut() {
+        return isNotAllowPickOut;
+    }
+
+    public void setNotAllowPickOut(boolean notAllowPickOut) {
+        isNotAllowPickOut = notAllowPickOut;
+    }
+
+    public int getCartonNo() {
+        return CartonNo;
+    }
+
+    public void setCartonNo(int cartonNo) {
+        CartonNo = cartonNo;
     }
 }

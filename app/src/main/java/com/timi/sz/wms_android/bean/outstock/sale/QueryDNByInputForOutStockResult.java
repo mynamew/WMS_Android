@@ -70,9 +70,9 @@ public class QueryDNByInputForOutStockResult {
         private int waitQty;
         private int scanQty;
         private int warehouseId;
-        private Object warehouseName;
+        private String warehouseName;
         private int regionId;
-        private Object regionName;
+        private String regionName;
         private boolean isSplitPrint;
         private boolean isCarton;
         private int cartonNo;
@@ -173,11 +173,11 @@ public class QueryDNByInputForOutStockResult {
             this.warehouseId = warehouseId;
         }
 
-        public Object getWarehouseName() {
+        public String getWarehouseName() {
             return warehouseName;
         }
 
-        public void setWarehouseName(Object warehouseName) {
+        public void setWarehouseName(String warehouseName) {
             this.warehouseName = warehouseName;
         }
 
@@ -189,11 +189,11 @@ public class QueryDNByInputForOutStockResult {
             this.regionId = regionId;
         }
 
-        public Object getRegionName() {
+        public String getRegionName() {
             return regionName;
         }
 
-        public void setRegionName(Object regionName) {
+        public void setRegionName(String regionName) {
             this.regionName = regionName;
         }
 

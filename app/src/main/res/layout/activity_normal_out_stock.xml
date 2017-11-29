@@ -217,7 +217,50 @@
                     android:textSize="26px"/>
             </LinearLayout>
 
+            <LinearLayout
+                android:id="@+id/ll_carton"
+                android:layout_width="match_parent"
+                android:layout_height="88px"
+                android:visibility="gone"
+                android:orientation="vertical">
 
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2px"
+                    android:layout_marginLeft="30px"
+                    android:background="@color/divide_color"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingLeft="30px">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/carton_num_tip"
+                        android:textColor="#333"/>
+
+                    <TextView
+                        android:id="@+id/tv_carton_num"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="100px"
+                        android:layout_weight="1"
+                        android:textColor="#333"/>
+
+                    <Button
+                        android:id="@+id/btn_add"
+                        android:layout_width="60px"
+                        android:layout_height="60px"
+                        android:layout_marginRight="30px"
+                        android:background="@drawable/selector_btn_bg_login"
+                        android:text="+"
+                        android:textColor="#fff"/>
+                </LinearLayout>
+            </LinearLayout>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="96px"

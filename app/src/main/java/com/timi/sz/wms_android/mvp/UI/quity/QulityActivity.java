@@ -26,7 +26,7 @@ public class QulityActivity extends BaseNoMvpActivity {
 
     @Override
     public void initBundle(Bundle savedInstanceState) {
-        setActivityTitle("质量作业");
+        setActivityTitle(getString(R.string.home_quilty));
     }
 
     @Override

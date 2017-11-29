@@ -741,6 +741,16 @@
     <string name="sale_outstock_bill_title">销售出库(生单)</string>
     <string name="other_outstock_audit_title">其他出库(审核)</string>
     <string name="user_log_tip">用户登录</string>
+    <string name="material_list_production_allot_title">生产调拨物料清单</string>
+    <string name="material_list_sale_title">销售审核物料清单</string>
+    <string name="other_bill_material_list_title">其他生单物料清单</string>
+    <string name="create_sale_outstock_orderno_tip">生成销售出库单</string>
+    <string name="create_other_outstock_orderno_tip">生成其他出库单</string>
+    <string name="material_point_other_bill_title">物品清点（其他生单）</string>
+    <string name="material_point_sale_bill_title">物品清点（销售生单）</string>
+    <string name="material_point_sale_audit_title">物品清点（销售审核）</string>
+    <string name="carton_num_tip">箱号</string>
+    <string name="sale_outstock_orderno_info">销售出库单信息</string>
 
 
 </resources>

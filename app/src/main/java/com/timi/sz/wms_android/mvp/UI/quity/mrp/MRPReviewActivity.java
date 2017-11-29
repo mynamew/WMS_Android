@@ -27,7 +27,11 @@ import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
-
+/** 
+  *  MRP  评审
+  * author: timi    
+  * create at: 2017/11/29 14:58
+  */  
 public class MRPReviewActivity extends BaseActivity<MRPReviewView, MRPReviewPresenter> implements MRPReviewView {
 
     @BindView(R.id.rlv_mrp)

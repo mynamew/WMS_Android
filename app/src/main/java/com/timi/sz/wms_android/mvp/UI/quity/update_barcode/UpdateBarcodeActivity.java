@@ -26,7 +26,11 @@ import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-
+/** 
+  * 条码更改
+  * author: timi    
+  * create at: 2017/11/29 14:58
+  */  
 public class UpdateBarcodeActivity extends BaseActivity<UpdateBarcodeView, UpdateBarcodePresenter> implements UpdateBarcodeView {
 
 

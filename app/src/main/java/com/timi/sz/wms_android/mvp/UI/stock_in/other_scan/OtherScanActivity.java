@@ -26,7 +26,11 @@ import butterknife.OnClick;
 
 import static com.timi.sz.wms_android.base.uils.Constants.REQUEST_SCAN_CODE_LIB_LOATION;
 import static com.timi.sz.wms_android.base.uils.Constants.REQUEST_SCAN_CODE_MATERIIAL;
-
+/** 
+  * 入库 其他扫描
+  * author: timi    
+  * create at: 2017/11/29 14:57
+  */  
 public class OtherScanActivity extends BaseActivity<OtherScanView, OtherScanPresenter> implements OtherScanView, BaseActivity.ScanQRCodeResultListener {
     @BindView(R.id.tv_have_scan_num)
     TextView tvHaveScanNum;

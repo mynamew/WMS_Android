@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
-    android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.timi.sz.wms_android.mvp.UI.stock_out.batch_point.BatchPointActivity">
+
     <include layout="@layout/title_head"/>
 
     <android.support.v4.widget.NestedScrollView
@@ -264,6 +265,51 @@
                     android:textSize="26px"/>
             </LinearLayout>
 
+            <LinearLayout
+                android:id="@+id/ll_carton"
+                android:layout_width="match_parent"
+                android:layout_height="88px"
+                android:visibility="gone"
+                android:orientation="vertical">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2px"
+                    android:layout_marginLeft="30px"
+                    android:background="@color/divide_color"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingLeft="30px">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/carton_num_tip"
+                        android:textColor="#333"/>
+
+                    <TextView
+                        android:id="@+id/tv_carton_num"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="100px"
+                        android:layout_weight="1"
+                        android:textColor="#333"/>
+
+                    <Button
+                        android:id="@+id/btn_add"
+                        android:layout_width="60px"
+                        android:layout_height="60px"
+                        android:layout_marginRight="30px"
+                        android:background="@drawable/selector_btn_bg_login"
+                        android:text="+"
+                        android:textColor="#fff"/>
+                </LinearLayout>
+            </LinearLayout>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="2px"
@@ -318,6 +364,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="24px"
                 android:background="@color/divide_color"/>
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="72px"
@@ -334,6 +381,7 @@
                 android:layout_height="1px"
                 android:background="@color/divide_color"
                 />
+
             <LinearLayout
                 android:id="@+id/ll_tab"
                 android:layout_width="match_parent"

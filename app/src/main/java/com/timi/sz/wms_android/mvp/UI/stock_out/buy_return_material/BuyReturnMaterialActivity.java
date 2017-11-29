@@ -33,7 +33,11 @@ import butterknife.OnClick;
 import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_BUY_RETURN_ORDERNO_BEAN;
 import static com.timi.sz.wms_android.base.uils.Constants.REQUEST_SCAN_CODE_MATERIIAL;
 import static com.timi.sz.wms_android.base.uils.Constants.REQUEST_SCAN_CODE_RETURN_MATERIAL;
-
+/** 
+  * 采购退料 的界面
+  * author: timi    
+  * create at: 2017/11/29 16:43
+  */  
 public class BuyReturnMaterialActivity extends BaseActivity<BuyReturnMaterialView, BuyReturnMaterialPresenter> implements BuyReturnMaterialView, BaseActivity.ScanQRCodeResultListener {
     @BindView(R.id.iv_title_back)
     ImageView ivTitleBack;

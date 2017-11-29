@@ -1,11 +1,15 @@
 package com.timi.sz.wms_android.mvp.UI.stock_out.query;
 
+import com.timi.sz.wms_android.bean.instock.search.OtherAuditSelectOrdernoBean;
+import com.timi.sz.wms_android.bean.outstock.other.QueryOtherOutStockByInputResult;
 import com.timi.sz.wms_android.bean.outstock.outsource.QueryOutSourceFeedByInputResult;
 import com.timi.sz.wms_android.bean.outstock.outsource.QueryOutSourcePickByInputResult;
 import com.timi.sz.wms_android.bean.outstock.outsource.QueryWWPickDataByOutSourceResult;
 import com.timi.sz.wms_android.bean.outstock.pick.QueryDNByInputForPickResult;
 import com.timi.sz.wms_android.bean.outstock.product.QueryPrdFeedByInputResult;
 import com.timi.sz.wms_android.bean.outstock.product.QueryProductPickByInputResult;
+import com.timi.sz.wms_android.bean.outstock.sale.QueryDNByInputForOutStockResult;
+import com.timi.sz.wms_android.bean.outstock.sale.QuerySalesOutSotckByInputForOutStockResult;
 import com.timi.sz.wms_android.http.HttpManager;
 import com.timi.sz.wms_android.http.api.ApiService;
 import com.timi.sz.wms_android.http.api.CommonResult;
@@ -129,6 +133,7 @@ public class StockOutSearchModel extends MvpBaseModel {
             }
         });
     }
+
     /**
      * 成品拣货
      *
@@ -144,4 +149,67 @@ public class StockOutSearchModel extends MvpBaseModel {
         });
     }
 
+    /**
+     * 销售出库 审核
+     *
+     * @param params
+     * @param observer
+     */
+    public void queryDNByInputForOutStock(final Map<String, Object> params, Observer<QueryDNByInputForOutStockResult> observer) {
+
+        HttpManager.getInstance().HttpManagerRequest(observer, new ApiServiceMethodCallBack<QueryDNByInputForOutStockResult>() {
+            @Override
+            public Observable<CommonResult<QueryDNByInputForOutStockResult>> createObservable(ApiService apiService) {
+                return apiService.queryDNByInputForOutStock(params);
+            }
+        });
+    }
+
+    /**
+     * 销售出库 生单
+     *
+     * @param params
+     * @param observer
+     */
+    public void querySalesOutSotckByInputForOutStock(final Map<String, Object> params, Observer<QuerySalesOutSotckByInputForOutStockResult> observer) {
+
+        HttpManager.getInstance().HttpManagerRequest(observer, new ApiServiceMethodCallBack<QuerySalesOutSotckByInputForOutStockResult>() {
+            @Override
+            public Observable<CommonResult<QuerySalesOutSotckByInputForOutStockResult>> createObservable(ApiService apiService) {
+                return apiService.querySalesOutSotckByInputForOutStock(params);
+            }
+        });
+    }
+
+    /**
+     * 其他出库-审核（红单）
+     *
+     * @param params
+     * @param observer
+     */
+    public void searchOtherAuditSelectOrderno(final Map<String, Object> params, Observer<OtherAuditSelectOrdernoBean> observer) {
+
+        HttpManager.getInstance().HttpManagerRequest(observer, new ApiServiceMethodCallBack<OtherAuditSelectOrdernoBean>() {
+            @Override
+            public Observable<CommonResult<OtherAuditSelectOrdernoBean>> createObservable(ApiService apiService) {
+                return apiService.searchOtherAuditSelectOrderno(params);
+            }
+        });
+    }
+
+    /**
+     * 其他出库-生单（蓝单）
+     *
+     * @param params
+     * @param observer
+     */
+    public void queryOtherOutStockByInput(final Map<String, Object> params, Observer<QueryOtherOutStockByInputResult> observer) {
+
+        HttpManager.getInstance().HttpManagerRequest(observer, new ApiServiceMethodCallBack<QueryOtherOutStockByInputResult>() {
+            @Override
+            public Observable<CommonResult<QueryOtherOutStockByInputResult>> createObservable(ApiService apiService) {
+                return apiService.queryOtherOutStockByInput(params);
+            }
+        });
+    }
 }

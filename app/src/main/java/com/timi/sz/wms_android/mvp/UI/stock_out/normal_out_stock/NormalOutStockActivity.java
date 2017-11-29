@@ -9,6 +9,7 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -25,7 +26,8 @@ import com.timi.sz.wms_android.bean.outstock.outsource.QueryOutSourcePickByInput
 import com.timi.sz.wms_android.bean.outstock.outsource.QueryWWPickDataByOutSourceResult;
 import com.timi.sz.wms_android.bean.outstock.product.QueryPrdFeedByInputResult;
 import com.timi.sz.wms_android.bean.outstock.product.QueryProductPickByInputResult;
-import com.timi.sz.wms_android.mvp.UI.stock_out.batch_point.BatchPointActivity;
+import com.timi.sz.wms_android.bean.outstock.sale.QueryDNByInputForOutStockResult;
+import com.timi.sz.wms_android.bean.outstock.sale.QuerySalesOutSotckByInputForOutStockResult;
 import com.timi.sz.wms_android.mvp.UI.stock_out.detail.DetailActivity;
 import com.timi.sz.wms_android.mvp.UI.stock_out.detail.outsource_bill_detail.OutsourceBillDetailActivity;
 import com.timi.sz.wms_android.mvp.UI.stock_out.divide_print.SplitPrintActivity;
@@ -35,9 +37,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_POINT_DETIAILId;
 import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_POINT_DETIAIL_BILLID;
 import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_POINT_REGIONID;
 import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_POINT_WAREHOUSEID;
@@ -58,6 +60,11 @@ import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_PURCHASE_MAT
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_SELL_OUT_AUDIT;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_SELL_OUT_BILL;
 
+/**
+ * 普通出库
+ * author: timi
+ * create at: 2017/11/29 17:53
+ */
 public class NormalOutStockActivity extends BaseActivity<NormalOutStockView, NormalOutStockPresenter> implements NormalOutStockView {
     @BindView(R.id.tv_head_title)
     TextView tvHeadTitle;
@@ -99,6 +106,12 @@ public class NormalOutStockActivity extends BaseActivity<NormalOutStockView, Nor
     TextView tvMaterialNmodel;
     @BindView(R.id.btn_commit)
     Button btnCommit;
+    @BindView(R.id.tv_carton_num)
+    TextView tvCartonNum;
+    @BindView(R.id.btn_add)
+    Button btnAdd;
+    @BindView(R.id.ll_carton)
+    LinearLayout llCarton;
     /**
      * 跳转的code
      */
@@ -111,6 +124,10 @@ public class NormalOutStockActivity extends BaseActivity<NormalOutStockView, Nor
      * 区域Id
      */
     private int regionId = 0;
+    //是否装箱
+    private boolean isCarton;
+    //箱号
+    private int cartonNum = 0;
 
     @Override
     public int setLayoutId() {
@@ -235,11 +252,11 @@ public class NormalOutStockActivity extends BaseActivity<NormalOutStockView, Nor
                 //设置bundle的数据
                 setBundleData(summaryResultsProductionBill.getBillId(), summaryResultsProductionBill.getScanId(), summaryResultsProductionBill.getQty(), summaryResultsProductionBill.getWaitQty(), summaryResultsProductionBill.getScanQty(), 23, 23);
                 //设置仓库id
-                warehouseId=summaryResultsProductionBill.getWarehouseId();
+                warehouseId = summaryResultsProductionBill.getWarehouseId();
                 //设置区域id
-                regionId=summaryResultsProductionBill.getRegionId();
+                regionId = summaryResultsProductionBill.getRegionId();
                 //billId
-                billId=summaryResultsProductionBill.getBillId();
+                billId = summaryResultsProductionBill.getBillId();
                 //设置按钮文字  生成生产领料单
                 btnCommit.setText(R.string.create_production_get_material_list_tip);
                 break;
@@ -257,23 +274,55 @@ public class NormalOutStockActivity extends BaseActivity<NormalOutStockView, Nor
                 //设置scanid
                 scanId = summaryResultsProductionAllot.getScanId();
                 //设置仓库id
-                warehouseId=summaryResultsProductionAllot.getWarehouseId();
+                warehouseId = summaryResultsProductionAllot.getWarehouseId();
                 //设置区域id
-                regionId=summaryResultsProductionAllot.getRegionId();
+                regionId = summaryResultsProductionAllot.getRegionId();
                 //billId
-                billId=summaryResultsProductionAllot.getBillId();
+                billId = summaryResultsProductionAllot.getBillId();
                 break;
             case STOCK_OUT_PICK://拣料
                 break;
             case STOCK_OUT_SELL_OUT_AUDIT://销售审核
                 setActivityTitle(getString(R.string.sale_outstock_title));
-                tvHeadTitle.setText(R.string.production_allot_info_tip);
+                tvHeadTitle.setText(R.string.sale_outstock_orderno_info);
+                QueryDNByInputForOutStockResult queryDNByInputForOutStockResult = new Gson().fromJson(getIntent().getStringExtra(STOCK_OUT_BEAN), QueryDNByInputForOutStockResult.class);
+                QueryDNByInputForOutStockResult.SummaryResultsBean summaryResultsSaleAudit = queryDNByInputForOutStockResult.getSummaryResults();
+                //设置内容
+                setHeaderContent(summaryResultsSaleAudit.getBillCode(), summaryResultsSaleAudit.getBillDate(), summaryResultsSaleAudit.getQty(), summaryResultsSaleAudit.getWaitQty(), summaryResultsSaleAudit.getScanQty());
+                //设置scanid
+                scanId = summaryResultsSaleAudit.getScanId();
+                //设置仓库id
+                warehouseId = summaryResultsSaleAudit.getWarehouseId();
+                //设置区域id
+                regionId = summaryResultsSaleAudit.getRegionId();
+                //billId
+                billId = summaryResultsSaleAudit.getBillId();
+                //iscarton
+                isCarton = summaryResultsSaleAudit.isIsCarton();
+                //cartonnum
+                cartonNum = summaryResultsSaleAudit.getCartonNo();
                 break;
             case STOCK_OUT_SELL_OUT_BILL://销售生单
                 setActivityTitle(getString(R.string.sale_outstock_title));
                 tvHeadTitle.setText(R.string.production_allot_info_tip);
                 //设置按钮文字  销售出库单
                 btnCommit.setText(R.string.create_sale_ger_material_list_tip);
+                QuerySalesOutSotckByInputForOutStockResult querySalesOutSotckByInputForOutStockResult = new Gson().fromJson(getIntent().getStringExtra(STOCK_OUT_BEAN), QuerySalesOutSotckByInputForOutStockResult.class);
+                QuerySalesOutSotckByInputForOutStockResult.SummaryResultsBean summaryResultsSaleBill = querySalesOutSotckByInputForOutStockResult.getSummaryResults();
+                //设置内容
+                setHeaderContent(summaryResultsSaleBill.getBillCode(), summaryResultsSaleBill.getBillDate(), summaryResultsSaleBill.getQty(), summaryResultsSaleBill.getWaitQty(), summaryResultsSaleBill.getScanQty());
+                //设置scanid
+                scanId = summaryResultsSaleBill.getScanId();
+                //设置仓库id
+                warehouseId = summaryResultsSaleBill.getWarehouseId();
+                //设置区域id
+                regionId = summaryResultsSaleBill.getRegionId();
+                //billId
+                billId = summaryResultsSaleBill.getBillId();
+                //iscarton
+                isCarton = summaryResultsSaleBill.isIsCarton();
+                //cartonnum
+                cartonNum = summaryResultsSaleBill.getCartonNo();
                 break;
             case STOCK_OUT_PURCHASE_MATERIAL_RETURN://采购退料
                 break;
@@ -287,11 +336,11 @@ public class NormalOutStockActivity extends BaseActivity<NormalOutStockView, Nor
                 //设置scanid
                 scanId = summaryResultsOtherAudit.getScanId();
                 //设置仓库id
-                warehouseId=summaryResultsOtherAudit.getWarehouseId();
+                warehouseId = summaryResultsOtherAudit.getWarehouseId();
                 //设置区域id
-                regionId=summaryResultsOtherAudit.getRegionId();
+                regionId = summaryResultsOtherAudit.getRegionId();
                 //billId
-                billId=summaryResultsOtherAudit.getBillId();
+                billId = summaryResultsOtherAudit.getBillId();
                 break;
             case STOCK_OUT_OTHER_OUT_BILL://其他生单
                 break;
@@ -389,19 +438,36 @@ public class NormalOutStockActivity extends BaseActivity<NormalOutStockView, Nor
                         break;
 
                     case Constants.STOCK_OUT_SELL_OUT_AUDIT://销售领料-审核
+                        it.setClass(NormalOutStockActivity.this, DetailActivity.class);
+                        it.putExtra(OUT_STOCK_POINT_WAREHOUSEID, warehouseId);
+                        it.putExtra(OUT_STOCK_POINT_REGIONID, regionId);
+                        it.putExtra(OUT_STOCK_POINT_DETIAIL_BILLID, billId);
                         break;
                     case Constants.STOCK_OUT_SELL_OUT_BILL://销售领料-生单
+                        it.setClass(NormalOutStockActivity.this, DetailActivity.class);
+                        it.putExtra(OUT_STOCK_POINT_WAREHOUSEID, warehouseId);
+                        it.putExtra(OUT_STOCK_POINT_REGIONID, regionId);
+                        it.putExtra(OUT_STOCK_POINT_DETIAIL_BILLID, billId);
                         break;
                     case Constants.STOCK_OUT_OTHER_OUT_AUDIT://其他出库-审核
+                        it.setClass(NormalOutStockActivity.this, DetailActivity.class);
+                        it.putExtra(OUT_STOCK_POINT_WAREHOUSEID, warehouseId);
+                        it.putExtra(OUT_STOCK_POINT_REGIONID, regionId);
+                        it.putExtra(OUT_STOCK_POINT_DETIAIL_BILLID, billId);
                         break;
                     case Constants.STOCK_OUT_OTHER_OUT_BILL://其他出库-生单
+                        it.setClass(NormalOutStockActivity.this, DetailActivity.class);
+                        it.putExtra(OUT_STOCK_POINT_WAREHOUSEID, warehouseId);
+                        it.putExtra(OUT_STOCK_POINT_REGIONID, regionId);
+                        it.putExtra(OUT_STOCK_POINT_DETIAIL_BILLID, billId);
                         break;
                     case Constants.STOCK_OUT_FINISH_GOODS_PICK://成品拣货
                         it.setClass(NormalOutStockActivity.this, OutsourceBillDetailActivity.class);
                         it.setClass(NormalOutStockActivity.this, DetailActivity.class);
                         it.putExtra(OUT_STOCK_POINT_WAREHOUSEID, warehouseId);
                         it.putExtra(OUT_STOCK_POINT_REGIONID, regionId);
-                        it.putExtra(OUT_STOCK_POINT_DETIAIL_BILLID, billId);                        break;
+                        it.putExtra(OUT_STOCK_POINT_DETIAIL_BILLID, billId);
+                        break;
                 }
                 /**
                  * 查看详情
@@ -433,6 +499,9 @@ public class NormalOutStockActivity extends BaseActivity<NormalOutStockView, Nor
                         params.put("DestBillType", destBillType);
                         params.put("ScanId", scanId);
                         params.put("BarcodeNo", inputStr);
+                        if (isCarton) {
+                            params.put("cartonNo", cartonNum);
+                        }
                         getPresenter().submitBarcodeOutAudit(params);
                     }
                 }
@@ -471,6 +540,13 @@ public class NormalOutStockActivity extends BaseActivity<NormalOutStockView, Nor
             scanQty = scanQty + data.getBarcodeQty();
             tvMaterialNum.setText(scanQty + "/" + totalQty);
             scanId = data.getScanId();
+            /***
+             * 是否装箱
+             */
+            if (isCarton) {
+                cartonNum = data.getCartonNo();
+                tvCartonNum.setText(String.valueOf(cartonNum));
+            }
         }
     }
 
@@ -505,6 +581,9 @@ public class NormalOutStockActivity extends BaseActivity<NormalOutStockView, Nor
                         params.put("DestBillType", destBillType);
                         params.put("ScanId", scanId);
                         params.put("BarcodeNo", result);
+                        if (isCarton) {
+                            params.put("cartonNo", cartonNum);
+                        }
                         getPresenter().submitBarcodeOutAudit(params);
                     }
                 });
@@ -527,5 +606,11 @@ public class NormalOutStockActivity extends BaseActivity<NormalOutStockView, Nor
                 getPresenter().submitMakeOrAuditBill(params);
                 break;
         }
+    }
+
+
+    @OnClick(R.id.btn_add)
+    public void onViewClicked() {
+        cartonNum = 0;
     }
 }

@@ -34,7 +34,7 @@ public class SubmitBarcodeOutAuditData {
     private int lineScanQty;
     private int totalScanQty;
     private int exceedQty;
-
+    private int cartonNo;
     public int getScanId() {
         return scanId;
     }
@@ -121,5 +121,13 @@ public class SubmitBarcodeOutAuditData {
 
     public void setExceedQty(int exceedQty) {
         this.exceedQty = exceedQty;
+    }
+
+    public int getCartonNo() {
+        return cartonNo;
+    }
+
+    public void setCartonNo(int cartonNo) {
+        this.cartonNo = cartonNo;
     }
 }

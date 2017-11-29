@@ -12,9 +12,10 @@ import java.util.List;
 
 public class OtherAuditSelectOrdernoBean {
 
+
     /**
-     * summaryResults : {"rob":0,"billId":169,"billCode":"0000000213","billDate":"2014-12-12","deptName":"","createrName":"方艳冬","scanId":0,"qty":19,"waitQty":19,"scanQty":0,"isLotPick":true,"isRegion":false,"warehouseId":0,"warehouseName":null,"regionId":0,"regionName":null,"isSplitPrint":true}
-     * detailResults : [{"detailId":20017,"line":1,"materialId":1484,"materialCode":"10202010036","materialName":"电源线(135M#）","materialStandard":"135M#/6P航空公-6*浸锡/0.6米","materialAttribute":"","warehouseId":1,"warehouseName":"原材料仓","qty":19,"waitQty":19,"scanQty":0}]
+     * summaryResults : {"isLotPick":true,"isRegion":false,"billId":4948,"billCode":"MS1608H717","billDate":"2016-09-07","customerName":"UK0101694","createrName":"赵曼","scanId":0,"qty":2,"waitQty":2,"scanQty":0,"warehouseId":0,"warehouseName":null,"regionId":0,"regionName":null,"isSplitPrint":true,"isCarton":true,"cartonNo":0}
+     * detailResults : [{"detailId":11211,"line":1,"materialId":5237,"materialCode":"30102010263","materialName":"MS-305WF摄像头","materialStandard":"2.4G WF无线，PC309/N制/黑色，带电池/DC头充电","materialAttribute":"","warehouseId":3,"warehouseName":"成品仓","qty":1,"waitQty":1,"scanQty":0},{"detailId":11212,"line":2,"materialId":5499,"materialCode":"30201010144","materialName":"MS-708RSM无线后视系统","materialStandard":"客户：RVS-2CAM/708M显示器(车充#)*1+757M摄像头(225#)*1+配件","materialAttribute":"","warehouseId":3,"warehouseName":"成品仓","qty":1,"waitQty":1,"scanQty":0}]
      */
 
     private SummaryResultsBean summaryResults;
@@ -38,49 +39,59 @@ public class OtherAuditSelectOrdernoBean {
 
     public static class SummaryResultsBean {
         /**
-         * rob : 0
-         * billId : 169
-         * billCode : 0000000213
-         * billDate : 2014-12-12
-         * deptName :
-         * createrName : 方艳冬
-         * scanId : 0
-         * qty : 19
-         * waitQty : 19
-         * scanQty : 0
          * isLotPick : true
          * isRegion : false
+         * billId : 4948
+         * billCode : MS1608H717
+         * billDate : 2016-09-07
+         * customerName : UK0101694
+         * createrName : 赵曼
+         * scanId : 0
+         * qty : 2
+         * waitQty : 2
+         * scanQty : 0
          * warehouseId : 0
          * warehouseName : null
          * regionId : 0
          * regionName : null
          * isSplitPrint : true
+         * isCarton : true
+         * cartonNo : 0
          */
 
-        private int rob;
+        private boolean isLotPick;
+        private boolean isRegion;
         private int billId;
         private String billCode;
         private String billDate;
-        private String deptName;
+        private String customerName;
         private String createrName;
         private int scanId;
         private int qty;
         private int waitQty;
         private int scanQty;
-        private boolean isLotPick;
-        private boolean isRegion;
         private int warehouseId;
         private String warehouseName;
         private int regionId;
         private String regionName;
         private boolean isSplitPrint;
+        private boolean isCarton;
+        private int cartonNo;
 
-        public int getRob() {
-            return rob;
+        public boolean isIsLotPick() {
+            return isLotPick;
         }
 
-        public void setRob(int rob) {
-            this.rob = rob;
+        public void setIsLotPick(boolean isLotPick) {
+            this.isLotPick = isLotPick;
+        }
+
+        public boolean isIsRegion() {
+            return isRegion;
+        }
+
+        public void setIsRegion(boolean isRegion) {
+            this.isRegion = isRegion;
         }
 
         public int getBillId() {
@@ -107,12 +118,12 @@ public class OtherAuditSelectOrdernoBean {
             this.billDate = billDate;
         }
 
-        public String getDeptName() {
-            return deptName;
+        public String getCustomerName() {
+            return customerName;
         }
 
-        public void setDeptName(String deptName) {
-            this.deptName = deptName;
+        public void setCustomerName(String customerName) {
+            this.customerName = customerName;
         }
 
         public String getCreaterName() {
@@ -155,22 +166,6 @@ public class OtherAuditSelectOrdernoBean {
             this.scanQty = scanQty;
         }
 
-        public boolean isIsLotPick() {
-            return isLotPick;
-        }
-
-        public void setIsLotPick(boolean isLotPick) {
-            this.isLotPick = isLotPick;
-        }
-
-        public boolean isIsRegion() {
-            return isRegion;
-        }
-
-        public void setIsRegion(boolean isRegion) {
-            this.isRegion = isRegion;
-        }
-
         public int getWarehouseId() {
             return warehouseId;
         }
@@ -209,6 +204,22 @@ public class OtherAuditSelectOrdernoBean {
 
         public void setIsSplitPrint(boolean isSplitPrint) {
             this.isSplitPrint = isSplitPrint;
+        }
+
+        public boolean isIsCarton() {
+            return isCarton;
+        }
+
+        public void setIsCarton(boolean isCarton) {
+            this.isCarton = isCarton;
+        }
+
+        public int getCartonNo() {
+            return cartonNo;
+        }
+
+        public void setCartonNo(int cartonNo) {
+            this.cartonNo = cartonNo;
         }
     }
 }

@@ -21,6 +21,7 @@ import com.timi.sz.wms_android.base.uils.PackageUtils;
 import com.timi.sz.wms_android.base.uils.SpUtils;
 import com.timi.sz.wms_android.base.uils.ToastUtils;
 import com.timi.sz.wms_android.bean.instock.search.OtherAuditSelectOrdernoBean;
+import com.timi.sz.wms_android.bean.outstock.other.QueryOtherOutStockByInputResult;
 import com.timi.sz.wms_android.bean.outstock.outsource.QueryOutSourceFeedByInputResult;
 import com.timi.sz.wms_android.bean.outstock.outsource.QueryOutSourcePickByInputResult;
 import com.timi.sz.wms_android.bean.outstock.outsource.QueryWWPickDataByOutSourceResult;
@@ -29,6 +30,8 @@ import com.timi.sz.wms_android.bean.outstock.outsource.common.MaterialResultsBea
 import com.timi.sz.wms_android.bean.outstock.pick.QueryDNByInputForPickResult;
 import com.timi.sz.wms_android.bean.outstock.product.QueryPrdFeedByInputResult;
 import com.timi.sz.wms_android.bean.outstock.product.QueryProductPickByInputResult;
+import com.timi.sz.wms_android.bean.outstock.sale.QueryDNByInputForOutStockResult;
+import com.timi.sz.wms_android.bean.outstock.sale.QuerySalesOutSotckByInputForOutStockResult;
 import com.timi.sz.wms_android.http.message.BaseMessage;
 import com.timi.sz.wms_android.http.message.event.OutsourceAuditEvent;
 import com.timi.sz.wms_android.mvp.UI.stock_out.batch_point.BatchPointActivity;
@@ -50,6 +53,8 @@ import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_MATERIAL_RES
 import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_POINT_DETIAIL_BILLID;
 import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_POINT_REGIONID;
 import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_POINT_WAREHOUSEID;
+import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_SALE_CARTON_NUM;
+import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_SALE_IS_CARTON;
 import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_SCANID;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_BEAN;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_CODE_STR;
@@ -180,9 +185,21 @@ public class BatchPointListActivity extends BaseActivity<BatchPointListView, Bat
      **/
     private QueryDNByInputForPickResult queryDNByInputForPickResult;
     /**
-     * 其他出库
+     * 销售出库 审核
+     */
+    private QueryDNByInputForOutStockResult queryDNByInputForOutStockResult;
+    /**
+     * 销售出库 生单
+     */
+    private QuerySalesOutSotckByInputForOutStockResult querySalesOutSotckByInputForOutStockResult;
+    /**
+     * 其他出库 审核
      */
     private OtherAuditSelectOrdernoBean otherAuditSelectOrdernoBean;
+    /**
+     * 其他出库 生单
+     */
+    private QueryOtherOutStockByInputResult queryOtherOutStockByInputResult;
     /**
      * 适配器
      */
@@ -354,7 +371,7 @@ public class BatchPointListActivity extends BaseActivity<BatchPointListView, Bat
                 break;
             case STOCK_OUT_PRODUCTION_ALLOT://生产调拨
                 btnPointCommit.setText(R.string.create_send_material_orderno);
-                tvHeadTitle.setText(R.string.material_point_production_allot_title);
+                tvHeadTitle.setText(R.string.material_list_production_allot_title);
                 /**
                  * 生产生单 和委外生单的返回结果是一样的 所以直接一起处理
                  */
@@ -375,27 +392,68 @@ public class BatchPointListActivity extends BaseActivity<BatchPointListView, Bat
             case STOCK_OUT_PICK://拣料
                 break;
             case STOCK_OUT_SELL_OUT_AUDIT://销售审核
+                tvHeadTitle.setText(R.string.material_list_sale_title);
+                queryDNByInputForOutStockResult = new Gson().fromJson(getIntent().getStringExtra(STOCK_OUT_BEAN), QueryDNByInputForOutStockResult.class);
+                QueryDNByInputForOutStockResult.SummaryResultsBean summaryResultsSaleAudit = queryDNByInputForOutStockResult.getSummaryResults();
+                //设置内容
+                setHeaderContent(summaryResultsSaleAudit.getBillCode(), summaryResultsSaleAudit.getBillDate(), summaryResultsSaleAudit.getWarehouseName(), summaryResultsSaleAudit.getRegionName(), summaryResultsSaleAudit.getQty(), summaryResultsSaleAudit.getWaitQty(), summaryResultsSaleAudit.getScanQty());
+                //设置scanid
+                scanId = summaryResultsSaleAudit.getScanId();
+                //设置 submitType
+                submitType = 1;
+                //设置区域id
+                regionId = summaryResultsSaleAudit.getRegionId();
+                //billId
+                billId = summaryResultsSaleAudit.getBillId();
                 break;
             case STOCK_OUT_SELL_OUT_BILL://销售生单
+                tvHeadTitle.setText(R.string.material_list_sale_title);
+                btnPointCommit.setText(R.string.create_sale_outstock_orderno_tip);
+                querySalesOutSotckByInputForOutStockResult = new Gson().fromJson(getIntent().getStringExtra(STOCK_OUT_BEAN), QuerySalesOutSotckByInputForOutStockResult.class);
+                QuerySalesOutSotckByInputForOutStockResult.SummaryResultsBean summaryResultsSaleBill = querySalesOutSotckByInputForOutStockResult.getSummaryResults();
+                //设置内容
+                setHeaderContent(summaryResultsSaleBill.getBillCode(), summaryResultsSaleBill.getBillDate(), summaryResultsSaleBill.getWarehouseName(), summaryResultsSaleBill.getRegionName(), summaryResultsSaleBill.getQty(), summaryResultsSaleBill.getWaitQty(), summaryResultsSaleBill.getScanQty());
+                //设置scanid
+                scanId = summaryResultsSaleBill.getScanId();
+                //设置 submitType
+                submitType = 0;
+                //设置区域id
+                regionId = summaryResultsSaleBill.getRegionId();
+                //billId
+                billId = summaryResultsSaleBill.getBillId();
                 break;
             case STOCK_OUT_PURCHASE_MATERIAL_RETURN://采购退料
                 break;
             case STOCK_OUT_OTHER_OUT_AUDIT://其他审核
                 tvHeadTitle.setText(R.string.other_audit_material_orderno);
-                otherAuditSelectOrdernoBean= new Gson().fromJson(getIntent().getStringExtra(STOCK_OUT_BEAN), OtherAuditSelectOrdernoBean.class);
+                otherAuditSelectOrdernoBean = new Gson().fromJson(getIntent().getStringExtra(STOCK_OUT_BEAN), OtherAuditSelectOrdernoBean.class);
                 OtherAuditSelectOrdernoBean.SummaryResultsBean summaryResultsOtherAudit = otherAuditSelectOrdernoBean.getSummaryResults();
                 //设置内容
                 setHeaderContent(summaryResultsOtherAudit.getBillCode(), summaryResultsOtherAudit.getBillDate(), summaryResultsOtherAudit.getWarehouseName(), summaryResultsOtherAudit.getRegionName(), summaryResultsOtherAudit.getQty(), summaryResultsOtherAudit.getWaitQty(), summaryResultsOtherAudit.getScanQty());
                 //设置scanid
                 scanId = summaryResultsOtherAudit.getScanId();
                 //设置 submitType
-                submitType = 0;
+                submitType = 1;
                 //设置区域id
                 regionId = summaryResultsOtherAudit.getRegionId();
                 //billId
                 billId = summaryResultsOtherAudit.getBillId();
                 break;
             case STOCK_OUT_OTHER_OUT_BILL://其他生单
+                tvHeadTitle.setText(R.string.other_bill_material_list_title);
+                btnPointCommit.setText(R.string.create_other_outstock_orderno_tip);
+                queryOtherOutStockByInputResult = new Gson().fromJson(getIntent().getStringExtra(STOCK_OUT_BEAN), QueryOtherOutStockByInputResult.class);
+                QueryOtherOutStockByInputResult.SummaryResultsBean summaryResultsOtherBill = queryOtherOutStockByInputResult.getSummaryResults();
+                //设置内容
+                setHeaderContent(summaryResultsOtherBill.getBillCode(), summaryResultsOtherBill.getBillDate(), summaryResultsOtherBill.getWarehouseName(), summaryResultsOtherBill.getRegionName(), summaryResultsOtherBill.getQty(), summaryResultsOtherBill.getWaitQty(), summaryResultsOtherBill.getScanQty());
+                //设置scanid
+                scanId = summaryResultsOtherBill.getScanId();
+                //设置 submitType
+                submitType = 0;
+                //设置区域id
+                regionId = summaryResultsOtherBill.getRegionId();
+                //billId
+                billId = summaryResultsOtherBill.getBillId();
                 break;
             case STOCK_OUT_FINISH_GOODS_PICK://成品拣货
                 btnPointCommit.setText(R.string.create_send_material_orderno);
@@ -531,8 +589,12 @@ public class BatchPointListActivity extends BaseActivity<BatchPointListView, Bat
             case STOCK_OUT_PICK://拣料
                 break;
             case STOCK_OUT_SELL_OUT_AUDIT://销售审核
+                isIsMerge = false;
+                detailResults = queryDNByInputForOutStockResult.getDetailResults();
                 break;
             case STOCK_OUT_SELL_OUT_BILL://销售生单
+                isIsMerge = false;
+                detailResults = querySalesOutSotckByInputForOutStockResult.getDetailResults();
                 break;
             case STOCK_OUT_PURCHASE_MATERIAL_RETURN://采购退料
                 break;
@@ -541,9 +603,11 @@ public class BatchPointListActivity extends BaseActivity<BatchPointListView, Bat
                 detailResults = otherAuditSelectOrdernoBean.getDetailResults();
                 break;
             case STOCK_OUT_OTHER_OUT_BILL://其他生单
+                isIsMerge=false;
+                detailResults=queryOtherOutStockByInputResult.getDetailResults();
                 break;
             case STOCK_OUT_FINISH_GOODS_PICK://成品拣货
-                isIsMerge =false;
+                isIsMerge = false;
                 detailResults = queryDNByInputForPickResult.getDetailResults();
                 break;
             default:
@@ -625,6 +689,17 @@ public class BatchPointListActivity extends BaseActivity<BatchPointListView, Bat
                         it.putExtra(OUT_STOCK_MATERIAL_RESULTS_BEAN, new Gson().toJson(mDatas.get(pos)));
                         it.putExtra(OUT_STOCK_SCANID, scanId);
                         it.putExtra(OUT_STOCK_POINT_REGIONID, regionId);
+                        /**
+                         * 是否是销售 如果是销售出库 还会由箱号这个字段
+                         */
+                        if(intentCode==STOCK_OUT_OTHER_OUT_AUDIT){
+                            it.putExtra(OUT_STOCK_SALE_IS_CARTON, otherAuditSelectOrdernoBean.getSummaryResults().isIsCarton());
+                            it.putExtra(OUT_STOCK_SALE_CARTON_NUM, otherAuditSelectOrdernoBean.getSummaryResults().getCartonNo());
+                        }
+                        if(intentCode==STOCK_OUT_OTHER_OUT_BILL){
+                            it.putExtra(OUT_STOCK_SALE_IS_CARTON, queryOtherOutStockByInputResult.getSummaryResults().isIsCarton());
+                            it.putExtra(OUT_STOCK_SALE_CARTON_NUM, queryOtherOutStockByInputResult.getSummaryResults().getCartonNo());
+                        }
                         startActivity(it);
                     }
                 });
@@ -676,8 +751,9 @@ public class BatchPointListActivity extends BaseActivity<BatchPointListView, Bat
                             case STOCK_OUT_PICK://拣料
                                 break;
                             case STOCK_OUT_SELL_OUT_AUDIT://销售审核
-                                break;
+                                holder.setTextView(R.id.tv_line_num, item.getLine());                                break;
                             case STOCK_OUT_SELL_OUT_BILL://销售生单
+                                holder.setTextView(R.id.tv_line_num, item.getLine());
                                 break;
                             case STOCK_OUT_PURCHASE_MATERIAL_RETURN://采购退料
                                 break;
@@ -685,6 +761,7 @@ public class BatchPointListActivity extends BaseActivity<BatchPointListView, Bat
                                 holder.setTextView(R.id.tv_line_num, item.getLine());
                                 break;
                             case STOCK_OUT_OTHER_OUT_BILL://其他生单
+                                holder.setTextView(R.id.tv_line_num, item.getLine());
                                 break;
                             case STOCK_OUT_FINISH_GOODS_PICK://成品拣货
                                 holder.setTextView(R.id.tv_line_num, item.getLine());
@@ -754,10 +831,10 @@ public class BatchPointListActivity extends BaseActivity<BatchPointListView, Bat
                     }
                 }
             }
-            int waitQty=Integer.parseInt(tvWaitPointNum.getText().toString());
-            int scanQty=Integer.parseInt(tvHaveCountNum.getText().toString());
-            tvWaitPointNum.setText(String.valueOf(waitQty-event.getBarcodeQty()));
-            tvHaveCountNum.setText(String.valueOf(scanQty+event.getBarcodeQty()));
+            int waitQty = Integer.parseInt(tvWaitPointNum.getText().toString());
+            int scanQty = Integer.parseInt(tvHaveCountNum.getText().toString());
+            tvWaitPointNum.setText(String.valueOf(waitQty - event.getBarcodeQty()));
+            tvHaveCountNum.setText(String.valueOf(scanQty + event.getBarcodeQty()));
         }
     }
 

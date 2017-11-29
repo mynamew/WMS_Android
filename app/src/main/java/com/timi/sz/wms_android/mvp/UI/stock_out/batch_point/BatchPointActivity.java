@@ -45,6 +45,7 @@ import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_DETAIL_RESULTS_BEAN;
@@ -60,6 +61,8 @@ import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_PRINT_MATERI
 import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_PRINT_MATERIAL_ATTR;
 import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_PRINT_SCANID;
 import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_PRINT_SRCBILLTYPE;
+import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_SALE_CARTON_NUM;
+import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_SALE_IS_CARTON;
 import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_SCANID;
 import static com.timi.sz.wms_android.base.uils.Constants.REQUEST_SCAN_CODE_MATERIIAL;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_CODE_STR;
@@ -133,6 +136,12 @@ public class BatchPointActivity extends BaseActivity<BatchPointView, BatchPointP
     RecyclerView rlvOrdernoInfo;
     @BindView(R.id.btn_close)
     Button btnClose;
+    @BindView(R.id.tv_carton_num)
+    TextView tvCartonNum;
+    @BindView(R.id.btn_add)
+    Button btnAdd;
+    @BindView(R.id.ll_carton)
+    LinearLayout llCarton;
     /**
      * 传递的code
      */
@@ -191,7 +200,10 @@ public class BatchPointActivity extends BaseActivity<BatchPointView, BatchPointP
     private int materialId;
     private String materialCode;
     private String materialAttribute;
-
+    //是否装箱
+    private boolean isCarton;
+    //箱号
+    private int cartonNum = 0;
 
     @Override
     public int setLayoutId() {
@@ -201,6 +213,8 @@ public class BatchPointActivity extends BaseActivity<BatchPointView, BatchPointP
     @Override
     public void initBundle(Bundle savedInstanceState) {
         intentCode = getIntent().getIntExtra(STOCK_OUT_CODE_STR, STOCK_OUT_OUTSOURCE_FEED_SUPLLIEMENT);
+        isCarton = getIntent().getBooleanExtra(OUT_STOCK_SALE_IS_CARTON, false);
+        cartonNum = getIntent().getIntExtra(OUT_STOCK_SALE_CARTON_NUM, 0);
         switch (intentCode) {
             case STOCK_OUT_OUTSOURCE_FEED_SUPLLIEMENT://委外补料
                 setActivityTitle(getString(R.string.material_point_outsource_feed_title));
@@ -250,19 +264,28 @@ public class BatchPointActivity extends BaseActivity<BatchPointView, BatchPointP
             case STOCK_OUT_PICK://拣料
                 break;
             case STOCK_OUT_SELL_OUT_AUDIT://销售审核
+                setActivityTitle(getString(R.string.material_point_sale_audit_title));
+                srcBillType = 41;
+                destBillType = 42;
                 break;
             case STOCK_OUT_SELL_OUT_BILL://销售生单
+                setActivityTitle(getString(R.string.material_point_sale_bill_title));
+                srcBillType = 42;
+                destBillType = 42;
                 break;
             case STOCK_OUT_PURCHASE_MATERIAL_RETURN://采购退料
                 break;
             case STOCK_OUT_OTHER_OUT_AUDIT://其他审核
                 setActivityTitle(getString(R.string.material_point_other_audit_title));
-                srcBillType = 52;
+                srcBillType = 51;
                 destBillType = 52;
                 break;
             case STOCK_OUT_OTHER_OUT_BILL://其他生单
+                setActivityTitle(getString(R.string.material_point_other_bill_title));
+                srcBillType = 52;
+                destBillType = 52;
                 break;
-            case  STOCK_OUT_FINISH_GOODS_PICK://成品拣货
+            case STOCK_OUT_FINISH_GOODS_PICK://成品拣货
                 setActivityTitle(getString(R.string.material_point_finish_goods_pick_title));
                 srcBillType = 61;
                 destBillType = 61;
@@ -283,6 +306,15 @@ public class BatchPointActivity extends BaseActivity<BatchPointView, BatchPointP
 
     @Override
     public void initView() {
+        /**
+         * 是否装箱
+         */
+        if (isCarton) {
+            findViewById(R.id.ll_carton).setVisibility(View.VISIBLE);
+            tvCartonNum.setText(String.valueOf(cartonNum));
+        } else {
+            findViewById(R.id.ll_carton).setVisibility(View.INVISIBLE);
+        }
         /**
          * 判断materialResultsBean是否未null
          * 1、 为null  则传过来的是 detailResultsBean
@@ -311,6 +343,12 @@ public class BatchPointActivity extends BaseActivity<BatchPointView, BatchPointP
                          *   批次拣料的请求
                          */
                         Map<String, Object> params = new HashMap<>();
+                        /**
+                         * 是否 装箱
+                         */
+                        if(isCarton){
+                            params.put("cartonNo", cartonNum);
+                        }
                         params.put("UserId", SpUtils.getInstance().getUserId());
                         params.put("OrgId", SpUtils.getInstance().getOrgId());
                         params.put("MAC", PackageUtils.getMac());
@@ -321,8 +359,8 @@ public class BatchPointActivity extends BaseActivity<BatchPointView, BatchPointP
                         params.put("BarcodeNo", inputStr);
                         params.put("DateCode", mData.getLotDetail().get(0).getDateCode());
                         params.put("bCheckMode", true);
-                        params.put("MaterialId", null!=detailResultsBean?detailResultsBean.getMaterialId():materialResultsBean.getMaterialId());
-                        params.put("MaterialAttribute", null!=detailResultsBean?detailResultsBean.getMaterialAttribute():materialResultsBean.getMaterialAttribute());
+                        params.put("MaterialId", null != detailResultsBean ? detailResultsBean.getMaterialId() : materialResultsBean.getMaterialId());
+                        params.put("MaterialAttribute", null != detailResultsBean ? detailResultsBean.getMaterialAttribute() : materialResultsBean.getMaterialAttribute());
                         getPresenter().submitBarcodeLotPickOut(params);
                     }
                 }
@@ -372,15 +410,15 @@ public class BatchPointActivity extends BaseActivity<BatchPointView, BatchPointP
          */
         if (result.getExceedQty() > 0) {
             Intent intent = new Intent(this, SplitPrintActivity.class);
-            intent.putExtra(OUT_STOCK_PRINT_BILLID,billId);
-            intent.putExtra(OUT_STOCK_PRINT_SRCBILLTYPE,srcBillType);
-            intent.putExtra(OUT_STOCK_PRINT_BARCODENO,etMaterialScan.getText().toString().trim());
-            intent.putExtra(OUT_STOCK_PRINT_DESBILLTYPE,destBillType);
-            intent.putExtra(OUT_STOCK_PRINT_DATECODE,mData.getLotDetail().get(0).getDateCode());
-            intent.putExtra(OUT_STOCK_PRINT_BILLID,billId);
-            intent.putExtra(OUT_STOCK_PRINT_SCANID,scanId);
-            intent.putExtra(OUT_STOCK_PRINT_MATERIAL_ATTR,materialAttribute);
-            intent.putExtra(OUT_STOCK_PRINT_MATERIALID,materialId);
+            intent.putExtra(OUT_STOCK_PRINT_BILLID, billId);
+            intent.putExtra(OUT_STOCK_PRINT_SRCBILLTYPE, srcBillType);
+            intent.putExtra(OUT_STOCK_PRINT_BARCODENO, etMaterialScan.getText().toString().trim());
+            intent.putExtra(OUT_STOCK_PRINT_DESBILLTYPE, destBillType);
+            intent.putExtra(OUT_STOCK_PRINT_DATECODE, mData.getLotDetail().get(0).getDateCode());
+            intent.putExtra(OUT_STOCK_PRINT_BILLID, billId);
+            intent.putExtra(OUT_STOCK_PRINT_SCANID, scanId);
+            intent.putExtra(OUT_STOCK_PRINT_MATERIAL_ATTR, materialAttribute);
+            intent.putExtra(OUT_STOCK_PRINT_MATERIALID, materialId);
             startActivity(intent);
         } else {
             /**
@@ -399,6 +437,12 @@ public class BatchPointActivity extends BaseActivity<BatchPointView, BatchPointP
                          *   批次拣料的请求
                          */
                         Map<String, Object> params = new HashMap<>();
+                        /**
+                         * 是否 装箱
+                         */
+                        if(isCarton){
+                            params.put("cartonNo", cartonNum);
+                        }
                         params.put("UserId", SpUtils.getInstance().getUserId());
                         params.put("OrgId", SpUtils.getInstance().getOrgId());
                         params.put("MAC", PackageUtils.getMac());
@@ -409,8 +453,8 @@ public class BatchPointActivity extends BaseActivity<BatchPointView, BatchPointP
                         params.put("BarcodeNo", etMaterialScan.getText().toString());
                         params.put("DateCode", mData.getLotDetail().get(0).getDateCode());
                         params.put("bCheckMode", false);
-                        params.put("MaterialId", null!=detailResultsBean?detailResultsBean.getMaterialId():materialResultsBean.getMaterialId());
-                        params.put("MaterialAttribute", null!=detailResultsBean?detailResultsBean.getMaterialAttribute():materialResultsBean.getMaterialAttribute());
+                        params.put("MaterialId", null != detailResultsBean ? detailResultsBean.getMaterialId() : materialResultsBean.getMaterialId());
+                        params.put("MaterialAttribute", null != detailResultsBean ? detailResultsBean.getMaterialAttribute() : materialResultsBean.getMaterialAttribute());
                         getPresenter().submitBarcodeLotPickOut(params);
                     }
                 }).setButtonListener(R.id.btn_cancel, null, new MyDialog.DialogClickListener() {
@@ -431,6 +475,13 @@ public class BatchPointActivity extends BaseActivity<BatchPointView, BatchPointP
                 BaseMessage.post(outsourceAuditEvent);
                 //设置scanid
                 scanId = result.getScanId();
+                /***
+                 * 是否装箱
+                 */
+                if (isCarton) {
+                    cartonNum = result.getCartonNo();
+                    tvCartonNum.setText(String.valueOf(cartonNum));
+                }
                 /**
                  * 物料返回设置扫描的数量
                  */
@@ -472,6 +523,12 @@ public class BatchPointActivity extends BaseActivity<BatchPointView, BatchPointP
                          *   批次拣料的请求
                          */
                         Map<String, Object> params = new HashMap<>();
+                        /**
+                         * 是否 装箱
+                         */
+                        if(isCarton){
+                            params.put("cartonNo", cartonNum);
+                        }
                         params.put("UserId", SpUtils.getInstance().getUserId());
                         params.put("OrgId", SpUtils.getInstance().getOrgId());
                         params.put("MAC", PackageUtils.getMac());
@@ -480,10 +537,10 @@ public class BatchPointActivity extends BaseActivity<BatchPointView, BatchPointP
                         params.put("DestBillType", destBillType);
                         params.put("ScanId", scanId);
                         params.put("BarcodeNo", result);
-                        params.put("DateCode", mDatas.isEmpty()?"":mData.getLotDetail().get(0).getDateCode());
+                        params.put("DateCode", mDatas.isEmpty() ? "" : mData.getLotDetail().get(0).getDateCode());
                         params.put("bCheckMode", true);
-                        params.put("MaterialId", null!=detailResultsBean?detailResultsBean.getMaterialId():materialResultsBean.getMaterialId());
-                        params.put("MaterialAttribute", null!=detailResultsBean?detailResultsBean.getMaterialAttribute():materialResultsBean.getMaterialAttribute());
+                        params.put("MaterialId", null != detailResultsBean ? detailResultsBean.getMaterialId() : materialResultsBean.getMaterialId());
+                        params.put("MaterialAttribute", null != detailResultsBean ? detailResultsBean.getMaterialAttribute() : materialResultsBean.getMaterialAttribute());
                         getPresenter().submitBarcodeLotPickOut(params);
                     }
                 });
@@ -590,8 +647,8 @@ public class BatchPointActivity extends BaseActivity<BatchPointView, BatchPointP
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void submitBarcodeSplitSuccess(SubmitBarcodeLotPickOutSplitEvent event){
-        if(event.getEvent().equals(SubmitBarcodeLotPickOutSplitEvent.SUBMIT_BARCODE_SPLIT_SUCCESS)){
+    public void submitBarcodeSplitSuccess(SubmitBarcodeLotPickOutSplitEvent event) {
+        if (event.getEvent().equals(SubmitBarcodeLotPickOutSplitEvent.SUBMIT_BARCODE_SPLIT_SUCCESS)) {
             SubmitBarcodeLotPickOutSplitResult result = event.getResult();
             /**
              * 发送时间  传递 scanid
@@ -630,9 +687,18 @@ public class BatchPointActivity extends BaseActivity<BatchPointView, BatchPointP
             getPresenter().getMaterialLotData(bean);
         }
     }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
         BaseMessage.unregister(this);
+    }
+
+    /**
+     * 点击  置零
+     */
+    @OnClick(R.id.btn_add)
+    public void onViewClicked() {
+        cartonNum = 0;
     }
 }

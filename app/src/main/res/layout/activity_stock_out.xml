@@ -49,12 +49,12 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="4px"
+                    android:layout_marginTop="2px"
                     android:background="@drawable/inlib_menu_bg"
                     android:orientation="vertical"
-                    android:paddingBottom="4px"
-                    android:paddingLeft="4px"
-                    android:paddingRight="4px">
+                    android:paddingBottom="2px"
+                    android:paddingLeft="2px"
+                    android:paddingRight="2px">
 
                     <TextView
                         style="@style/stock_in_title"
@@ -106,12 +106,12 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="4px"
+                    android:layout_marginTop="2px"
                     android:background="@drawable/inlib_menu_bg"
                     android:orientation="vertical"
-                    android:paddingBottom="4px"
-                    android:paddingLeft="4px"
-                    android:paddingRight="4px"
+                    android:paddingBottom="2px"
+                    android:paddingLeft="2px"
+                    android:paddingRight="2px"
                     >
 
                     <TextView
@@ -165,12 +165,12 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="4px"
+                    android:layout_marginTop="2px"
                     android:background="@drawable/inlib_menu_bg"
                     android:orientation="vertical"
-                    android:paddingBottom="4px"
-                    android:paddingLeft="4px"
-                    android:paddingRight="4px"
+                    android:paddingBottom="2px"
+                    android:paddingLeft="2px"
+                    android:paddingRight="2px"
                     >
 
                     <TextView

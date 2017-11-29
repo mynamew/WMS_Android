@@ -352,7 +352,7 @@ public interface ApiService {
     Observable<CommonResult<List<OrderDetailData>>> getPrdReturnDetail(@FieldMap Map<String, Object> params);
     /**====== 销售退料 ======**/
     /**
-     * 销售退料—选单
+     * 销售退货
      *
      * @param params
      * @return
@@ -362,7 +362,7 @@ public interface ApiService {
     Observable<CommonResult<SaleGoodsReturnBean>> querySalesReturnByInput(@FieldMap Map<String, Object> params);
 
     /**
-     * 销售退料—获取明细数据
+     * 销售退料（审核）—获取明细数据
      *
      * @param params
      * @return
@@ -481,15 +481,6 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("/api/services/wpda/WWFeed/GetOutSourceFeedDetail")
     Observable<CommonResult<List<MaterialDetailResult>>> getOutSourceFeedDetail(@FieldMap Map<String, Object> params);
-    /**====== 销售出库-审核 ======**/
-
-
-    /**====== 销售出库-生单 ======**/
-    /**====== 拣货 ======**/
-    /**====== 其他出库(审核)======**/
-    /**====== 其他出库(生单) ======**/
-
-
     /**
      * 提交条码出库(批次拣货)。
      *
