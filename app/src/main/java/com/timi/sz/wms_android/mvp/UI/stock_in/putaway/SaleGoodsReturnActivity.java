@@ -33,11 +33,11 @@ import butterknife.OnClick;
 
 import static com.timi.sz.wms_android.base.uils.Constants.REQUEST_SCAN_CODE_LIB_LOATION;
 import static com.timi.sz.wms_android.base.uils.Constants.REQUEST_SCAN_CODE_MATERIIAL;
-/** 
+/**
   * 销售退料
-  * author: timi    
+  * author: timi
   * create at: 2017/11/20 11:36
-  */  
+  */
 public class SaleGoodsReturnActivity extends BaseActivity<PutAwayView, PutAwayPresenter> implements PutAwayView, BaseActivity.ScanQRCodeResultListener {
     @BindView(R.id.iv_title_right)
     ImageView ivTitleRight;
@@ -94,7 +94,7 @@ public class SaleGoodsReturnActivity extends BaseActivity<PutAwayView, PutAwayPr
         setActivityTitle(getString(R.string.putaway_sale_return_material_tip));
         intentCode = getIntent().getIntExtra(Constants.CODE_STR, Constants.COME_MATERAIL_NUM);
         saleGoodsReturnBean = new Gson().fromJson(getIntent().getStringExtra(Constants.IN_STOCK_FINISH_SALE_BEAN), SaleGoodsReturnBean.class);
-
+        ScanId=saleGoodsReturnBean.getScanId();
     }
 
     @Override
@@ -130,7 +130,7 @@ public class SaleGoodsReturnActivity extends BaseActivity<PutAwayView, PutAwayPr
                     params1.put("MAC", PackageUtils.getMac());
                     params1.put("SrcBillType", 43);
                     params1.put("DestBillType", 43);
-                    params1.put("ScanId", saleGoodsReturnBean.getScanId());
+                    params1.put("ScanId", ScanId);
                     params1.put("BinCode",locationCode);
                     params1.put("BarcodeNo", orderNum);
                     getPresenter().materialScanNetWork(params1, orderNum);
@@ -243,7 +243,7 @@ public class SaleGoodsReturnActivity extends BaseActivity<PutAwayView, PutAwayPr
                 params.put("UserId", SpUtils.getInstance().getUserId());
                 params.put("OrgId", SpUtils.getInstance().getOrgId());
                 params.put("MAC", PackageUtils.getMac());
-                params.put("ScanId", saleGoodsReturnBean.getScanId());
+                params.put("ScanId", ScanId);
                 params.put("SubmitType", 0);
                 getPresenter().createInSockOrderno(params);
         }
@@ -264,7 +264,18 @@ public class SaleGoodsReturnActivity extends BaseActivity<PutAwayView, PutAwayPr
         tvPutawayMaterialName.setText(bean.getMaterialName());
         tvPutawayMaterialNmodel.setText(bean.getMaterialStandard());
         tvPutawayMaterialNum.setText(String.valueOf(bean.getBarcodeQty()));
-
+        /**
+         * 设置已点总数
+         */
+        tvHaveCountNum.setText(String.valueOf(bean.getTotalScanQty()));
+        /**
+         * 设置已入库总数
+         */
+        tvInStockTotalNum.setText(String.valueOf(bean.getTotalInstockQty()));
+        /**
+         * 设置扫码Id
+         */
+        ScanId = bean.getScanId();
     }
 
     private VertifyLocationCodeBean mVertifyLocationCodeBean;

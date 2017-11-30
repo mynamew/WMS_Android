@@ -81,6 +81,10 @@ public class FinishedGoodsCreateBillPutAwayActivity extends BaseActivity<PutAway
      * 默认是 入库来料单
      */
     private int intentCode = Constants.COME_MATERAIL_NUM;
+    /**
+     * 扫描的Id  默认是0  当提交物料扫码入库后 会返回sanid
+     */
+    private int ScanId = 0;
 
     @Override
     public void materialScanResult(MaterialScanPutAwayBean bean) {
@@ -94,6 +98,18 @@ public class FinishedGoodsCreateBillPutAwayActivity extends BaseActivity<PutAway
         tvPutawayMaterialName.setText(bean.getMaterialName());
         tvPutawayMaterialNmodel.setText(bean.getMaterialStandard());
         tvPutawayMaterialNum.setText(String.valueOf(bean.getBarcodeQty()));
+        /**
+         * 设置已点总数
+         */
+        tvHaveCountNum.setText(String.valueOf(bean.getTotalScanQty()));
+        /**
+         * 设置已入库总数
+         */
+        tvInStockTotalNum.setText(String.valueOf(bean.getTotalInstockQty()));
+        /**
+         * 设置扫码Id
+         */
+        ScanId = bean.getScanId();
     }
 
     private VertifyLocationCodeBean mVertifyLocationCodeBean;
@@ -119,12 +135,16 @@ public class FinishedGoodsCreateBillPutAwayActivity extends BaseActivity<PutAway
 
     @Override
     public void initBundle(Bundle savedInstanceState) {
-
+        /**
+         * 来料单 实体
+         */
+        intentCode = getIntent().getIntExtra(Constants.CODE_STR, Constants.COME_MATERAIL_NUM);
+        finishGoodsCreateBillBean = new Gson().fromJson(getIntent().getStringExtra(Constants.IN_STOCK_FINISH_CREATE_BEAN), FinishGoodsCreateBillBean.class);
+        ScanId = finishGoodsCreateBillBean.getScanId();
     }
 
     @Override
     public void initView() {
-        intentCode = getIntent().getIntExtra(Constants.CODE_STR, Constants.COME_MATERAIL_NUM);
         setRightImg(R.mipmap.stockin_detail, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -154,8 +174,9 @@ public class FinishedGoodsCreateBillPutAwayActivity extends BaseActivity<PutAway
                     params1.put("OrgId", SpUtils.getInstance().getOrgId());
                     params1.put("MAC", PackageUtils.getMac());
                     params1.put("SrcBillType", 40);
+                    params1.put("BillId", finishGoodsCreateBillBean.getBillId());
                     params1.put("DestBillType", 40);
-                    params1.put("ScanId", finishGoodsCreateBillBean.getScanId());
+                    params1.put("ScanId", ScanId);
                     params1.put("BinCode", locationCode);
                     params1.put("BarcodeNo", orderNum);
                     getPresenter().materialScanNetWork(params1, orderNum);
@@ -199,10 +220,7 @@ public class FinishedGoodsCreateBillPutAwayActivity extends BaseActivity<PutAway
 
     @Override
     public void initData() {
-/**
- * 来料单 实体
- */
-        finishGoodsCreateBillBean = new Gson().fromJson(getIntent().getStringExtra(Constants.IN_STOCK_FINISH_CREATE_BEAN), FinishGoodsCreateBillBean.class);
+
         /**
          * 标题
          */
@@ -262,7 +280,8 @@ public class FinishedGoodsCreateBillPutAwayActivity extends BaseActivity<PutAway
                 params1.put("MAC", PackageUtils.getMac());
                 params1.put("SrcBillType", 40);
                 params1.put("DestBillType", 40);
-                params1.put("ScanId", finishGoodsCreateBillBean.getScanId());
+                params1.put("BillId", finishGoodsCreateBillBean.getBillId());
+                params1.put("ScanId", ScanId);
                 params1.put("BinCode", locationCode);
                 params1.put("BarcodeNo", result);
                 getPresenter().materialScanNetWork(params1, result);

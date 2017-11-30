@@ -27,7 +27,7 @@ public class MaterialScanPutAwayBean {
     private String materialCode;
     private String materialName;
     private String materialStandard;
-    private Object materialAttribute;
+    private String materialAttribute;
     private int barcodeQty;
     private int lineMustQty;
     private int lineScanQty;
@@ -74,11 +74,11 @@ public class MaterialScanPutAwayBean {
         this.materialStandard = materialStandard;
     }
 
-    public Object getMaterialAttribute() {
+    public String getMaterialAttribute() {
         return materialAttribute;
     }
 
-    public void setMaterialAttribute(Object materialAttribute) {
+    public void setMaterialAttribute(String materialAttribute) {
         this.materialAttribute = materialAttribute;
     }
 

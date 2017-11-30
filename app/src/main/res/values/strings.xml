@@ -210,7 +210,7 @@
     <string name="can_in_stock_num">可入库数：</string>
     <string name="wait_count_num">待点总数：</string>
     <string name="have_count_num">已点总数：</string>
-    <string name="material_code">物料编码：%1$s</string>
+    <string name="material_code">物料编码：  %1$s</string>
     <string name="scan_material_hint">扫物料条码</string>
     <string name="scan_material">物料条码：</string>
     <string name="scan_location_hint">扫库位码</string>
@@ -465,7 +465,7 @@
     <string name="material_point_outsource_feed_title">物品清点(委外补料)</string>
     <string name="close">关闭</string>
     <string name="send_material_lib_name">发料仓库：%1$s</string>
-    <string name="other_add_attr">附加属性：%1$s</string>
+    <string name="other_add_attr">附加属性：</string>
     <string name="batch_remind_tip">批次提醒</string>
     <string name="batch_info_title">批次信息</string>
     <string name="stock_out_outsource_bill_title">委外发料(生单)</string>

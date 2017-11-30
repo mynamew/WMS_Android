@@ -84,6 +84,10 @@ public class OtherAuditActivity extends BaseActivity<PutAwayView, PutAwayPresent
      * 默认是 入库来料单
      */
     private int intentCode = Constants.COME_MATERAIL_NUM;
+    /**
+     * 扫描的Id  默认是0  当提交物料扫码入库后 会返回sanid
+     */
+    private int ScanId=0;
     @Override
     public int setLayoutId() {
         return R.layout.activity_other_audit;
@@ -97,7 +101,7 @@ public class OtherAuditActivity extends BaseActivity<PutAwayView, PutAwayPresent
         setActivityTitle(getString(R.string.other_instock_orderno_title));
         intentCode = getIntent().getIntExtra(Constants.CODE_STR, Constants.COME_MATERAIL_NUM);
         otherBean = new Gson().fromJson(getIntent().getStringExtra(Constants.IN_STOCK_FINISH_OTHER_BEAN), OtherAuditSelectOrdernoBean.class);
-
+        ScanId=otherBean.getSummaryResults().getScanId();
     }
 
     @Override
@@ -132,7 +136,8 @@ public class OtherAuditActivity extends BaseActivity<PutAwayView, PutAwayPresent
                     params1.put("MAC", PackageUtils.getMac());
                     params1.put("SrcBillType", 51);
                     params1.put("DestBillType", 51);
-                    params1.put("ScanId", otherBean.getSummaryResults().getScanId());
+                    params1.put("BillId", otherBean.getSummaryResults().getBillId());
+                    params1.put("ScanId", ScanId);
                     params1.put("BinCode",locationCode);
                     params1.put("BarcodeNo", orderNum);
                     getPresenter().materialScanNetWork(params1, orderNum);
@@ -220,6 +225,18 @@ public class OtherAuditActivity extends BaseActivity<PutAwayView, PutAwayPresent
         tvPutawayMaterialName.setText(bean.getMaterialName());
         tvPutawayMaterialNmodel.setText(bean.getMaterialStandard());
         tvPutawayMaterialNum.setText(String.valueOf(bean.getBarcodeQty()));
+        /**
+         * 设置已点总数
+         */
+        tvHaveCountNum.setText(String.valueOf(bean.getTotalScanQty()));
+        /**
+         * 设置已入库总数
+         */
+        tvInStockTotalNum.setText(String.valueOf(bean.getTotalInstockQty()));
+        /**
+         * 设置扫码Id
+         */
+        ScanId=bean.getScanId();
     }
 
     private VertifyLocationCodeBean mVertifyLocationCodeBean;
@@ -253,7 +270,8 @@ public class OtherAuditActivity extends BaseActivity<PutAwayView, PutAwayPresent
                 params1.put("MAC", PackageUtils.getMac());
                 params1.put("SrcBillType", 51);
                 params1.put("DestBillType", 51);
-                params1.put("ScanId", otherBean.getSummaryResults().getScanId());
+                params1.put("BillId", otherBean.getSummaryResults().getBillId());
+                params1.put("ScanId", ScanId);
                 params1.put("BinCode",locationCode);
                 params1.put("BarcodeNo", result);
                 getPresenter().materialScanNetWork(params1, result);
