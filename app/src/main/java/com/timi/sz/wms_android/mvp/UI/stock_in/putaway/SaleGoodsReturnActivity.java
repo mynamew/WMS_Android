@@ -130,7 +130,7 @@ public class SaleGoodsReturnActivity extends BaseActivity<PutAwayView, PutAwayPr
                     params1.put("MAC", PackageUtils.getMac());
                     params1.put("SrcBillType", 43);
                     params1.put("DestBillType", 43);
-                    params1.put("ScanId", saleGoodsReturnBean);
+                    params1.put("ScanId", saleGoodsReturnBean.getScanId());
                     params1.put("BinCode",locationCode);
                     params1.put("BarcodeNo", orderNum);
                     getPresenter().materialScanNetWork(params1, orderNum);
@@ -304,7 +304,7 @@ public class SaleGoodsReturnActivity extends BaseActivity<PutAwayView, PutAwayPr
                 params1.put("MAC", PackageUtils.getMac());
                 params1.put("SrcBillType", 43);
                 params1.put("DestBillType", 14);
-                params1.put("ScanId", saleGoodsReturnBean);
+                params1.put("ScanId", saleGoodsReturnBean.getScanId());
                 params1.put("BinCode",locationCode);
                 params1.put("BarcodeNo", result);
                 getPresenter().materialScanNetWork(params1, result);

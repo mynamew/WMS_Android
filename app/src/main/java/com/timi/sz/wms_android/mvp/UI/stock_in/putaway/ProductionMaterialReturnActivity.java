@@ -248,7 +248,7 @@ public class ProductionMaterialReturnActivity extends BaseActivity<PutAwayView, 
                 params1.put("MAC", PackageUtils.getMac());
                 params1.put("SrcBillType", 25);
                 params1.put("DestBillType", 25);
-                params1.put("ScanId", queryPrdReturnByInputResult);
+                params1.put("ScanId", queryPrdReturnByInputResult.getScanId());
                 params1.put("BinCode",etPutawayScanLocation.getText().toString().trim());
                 params1.put("BarcodeNo", result);
                 getPresenter().materialScanNetWork(params1, result);

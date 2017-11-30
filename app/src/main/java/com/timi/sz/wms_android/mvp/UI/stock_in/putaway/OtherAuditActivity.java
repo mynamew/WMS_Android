@@ -253,7 +253,7 @@ public class OtherAuditActivity extends BaseActivity<PutAwayView, PutAwayPresent
                 params1.put("MAC", PackageUtils.getMac());
                 params1.put("SrcBillType", 51);
                 params1.put("DestBillType", 51);
-                params1.put("ScanId", otherBean);
+                params1.put("ScanId", otherBean.getSummaryResults().getScanId());
                 params1.put("BinCode",locationCode);
                 params1.put("BarcodeNo", result);
                 getPresenter().materialScanNetWork(params1, result);

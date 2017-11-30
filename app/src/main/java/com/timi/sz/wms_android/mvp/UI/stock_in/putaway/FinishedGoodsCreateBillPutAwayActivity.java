@@ -262,7 +262,7 @@ public class FinishedGoodsCreateBillPutAwayActivity extends BaseActivity<PutAway
                 params1.put("MAC", PackageUtils.getMac());
                 params1.put("SrcBillType", 40);
                 params1.put("DestBillType", 40);
-                params1.put("ScanId", finishGoodsCreateBillBean);
+                params1.put("ScanId", finishGoodsCreateBillBean.getScanId());
                 params1.put("BinCode", locationCode);
                 params1.put("BarcodeNo", result);
                 getPresenter().materialScanNetWork(params1, result);

@@ -226,7 +226,7 @@ public class FinishedGoodsAuditPutAwayActivity extends BaseActivity<PutAwayView,
                 params1.put("MAC", PackageUtils.getMac());
                 params1.put("SrcBillType", 40);
                 params1.put("DestBillType", 40);
-                params1.put("ScanId", mFinishBean);
+                params1.put("ScanId", mFinishBean.getScanId());
                 params1.put("BinCode", locationCode);
                 params1.put("BarcodeNo", result);
                 getPresenter().materialScanNetWork(params1, result);
