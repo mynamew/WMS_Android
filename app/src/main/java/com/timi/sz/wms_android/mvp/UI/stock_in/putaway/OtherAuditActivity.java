@@ -34,7 +34,11 @@ import butterknife.OnClick;
 
 import static com.timi.sz.wms_android.base.uils.Constants.REQUEST_SCAN_CODE_LIB_LOATION;
 import static com.timi.sz.wms_android.base.uils.Constants.REQUEST_SCAN_CODE_MATERIIAL;
-
+/** 
+  * 其他审核
+  * author: timi    
+  * create at: 2017/11/30 9:26
+  */  
 public class OtherAuditActivity extends BaseActivity<PutAwayView, PutAwayPresenter> implements PutAwayView,BaseActivity.ScanQRCodeResultListener{
 
     @BindView(R.id.iv_title_right)
@@ -126,10 +130,10 @@ public class OtherAuditActivity extends BaseActivity<PutAwayView, PutAwayPresent
                     params1.put("UserId", SpUtils.getInstance().getUserId());
                     params1.put("OrgId", SpUtils.getInstance().getOrgId());
                     params1.put("MAC", PackageUtils.getMac());
-                    params1.put("SrcBillType", 13);
-                    params1.put("DestBillType", 14);
+                    params1.put("SrcBillType", 51);
+                    params1.put("DestBillType", 51);
                     params1.put("ScanId", otherBean.getSummaryResults().getScanId());
-                    params1.put("BinCode", mVertifyLocationCodeBean.getBinId());
+                    params1.put("BinCode",locationCode);
                     params1.put("BarcodeNo", orderNum);
                     getPresenter().materialScanNetWork(params1, orderNum);
                 }
@@ -222,14 +226,14 @@ public class OtherAuditActivity extends BaseActivity<PutAwayView, PutAwayPresent
     private boolean locationCodeIsUse=false;
     @Override
     public void vertifyLocationCode(VertifyLocationCodeBean bean) {
-        ToastUtils.showShort("库位码有效！");
+        ToastUtils.showShort(getString(R.string.location_code_is_visible));
         locationCodeIsUse=true;
         mVertifyLocationCodeBean=bean;
     }
 
     @Override
     public void createInStockOrderno( ) {
-            ToastUtils.showShort("生成入库单成功");
+            ToastUtils.showShort(getString(R.string.create_instock_bill_success));
             onBackPressed();
     }
 
@@ -247,10 +251,10 @@ public class OtherAuditActivity extends BaseActivity<PutAwayView, PutAwayPresent
                 params1.put("UserId", SpUtils.getInstance().getUserId());
                 params1.put("OrgId", SpUtils.getInstance().getOrgId());
                 params1.put("MAC", PackageUtils.getMac());
-                params1.put("SrcBillType", 13);
-                params1.put("DestBillType", 14);
+                params1.put("SrcBillType", 51);
+                params1.put("DestBillType", 51);
                 params1.put("ScanId", otherBean);
-                params1.put("BinCode", mVertifyLocationCodeBean.getBinId());
+                params1.put("BinCode",locationCode);
                 params1.put("BarcodeNo", result);
                 getPresenter().materialScanNetWork(params1, result);
                 break;

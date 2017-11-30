@@ -105,10 +105,10 @@ public class FinishedGoodsAuditPutAwayActivity extends BaseActivity<PutAwayView,
                     params1.put("UserId", SpUtils.getInstance().getUserId());
                     params1.put("OrgId", SpUtils.getInstance().getOrgId());
                     params1.put("MAC", PackageUtils.getMac());
-                    params1.put("SrcBillType", 13);
-                    params1.put("DestBillType", 14);
+                    params1.put("SrcBillType", 40);
+                    params1.put("DestBillType", 40);
                     params1.put("ScanId", mFinishBean.getScanId());
-                    params1.put("BinCode", mVertifyLocationCodeBean.getBinId());
+                    params1.put("BinCode",locationCode);
                     params1.put("BarcodeNo", orderNum);
                     getPresenter().materialScanNetWork(params1, orderNum);
                 }
@@ -224,10 +224,10 @@ public class FinishedGoodsAuditPutAwayActivity extends BaseActivity<PutAwayView,
                 params1.put("UserId", SpUtils.getInstance().getUserId());
                 params1.put("OrgId", SpUtils.getInstance().getOrgId());
                 params1.put("MAC", PackageUtils.getMac());
-                params1.put("SrcBillType", 13);
-                params1.put("DestBillType", 14);
+                params1.put("SrcBillType", 40);
+                params1.put("DestBillType", 40);
                 params1.put("ScanId", mFinishBean);
-                params1.put("BinCode", mVertifyLocationCodeBean.getBinId());
+                params1.put("BinCode", locationCode);
                 params1.put("BarcodeNo", result);
                 getPresenter().materialScanNetWork(params1, result);
                 break;
