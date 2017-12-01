@@ -1,5 +1,6 @@
 package com.timi.sz.wms_android.mvp.UI.stock_in_work.lib_adjust;
 
+import com.timi.sz.wms_android.bean.instock.VertifyLocationCodeBean;
 import com.timi.sz.wms_android.bean.stockin_work.LibraryAdjustResult;
 import com.timi.sz.wms_android.bean.stockin_work.ScanLocationResult;
 import com.timi.sz.wms_android.bean.stockin_work.ScanMaterialResult;
@@ -22,16 +23,16 @@ import io.reactivex.Observer;
 
 public class LibraryAdjustModel extends MvpBaseModel {
     /**
-     * 扫描库位码
+     * 验证库位码是否有效
      *
      * @param params
      * @param observer
      */
-    public void scanLibLocatonCode(final Map<String, Object> params, Observer<ScanLocationResult> observer) {
-        HttpManager.getInstance().HttpManagerRequest(observer, new ApiServiceMethodCallBack<ScanLocationResult>() {
+    public void vertifyLocationCode(final Map<String, Object> params, Observer<VertifyLocationCodeBean> observer) {
+        HttpManager.getInstance().HttpManagerRequest(observer, new ApiServiceMethodCallBack<VertifyLocationCodeBean>() {
             @Override
-            public Observable<CommonResult<ScanLocationResult>> createObservable(ApiService apiService) {
-                return apiService.scanLibLocationCode(params);
+            public Observable<CommonResult<VertifyLocationCodeBean>> createObservable(ApiService apiService) {
+                return apiService.vertifyLocationCode(params);
             }
         });
     }

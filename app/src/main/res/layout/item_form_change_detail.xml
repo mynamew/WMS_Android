@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                     android:layout_width="match_parent"
+                                     android:layout_height="wrap_content"
+                                     android:background="#fff"
+                                     android:orientation="horizontal">
+
+    <View
+        android:layout_width="8px"
+        android:layout_height="match_parent"
+        android:background="@color/login_txt_color"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_line_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10px"
+            android:layout_marginTop="20px"
+            android:text="@string/item_line_num"
+            android:textColor="#333"
+            android:textSize="26px"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10px"
+                android:layout_marginRight="30px"
+                android:layout_marginTop="20px"
+                android:orientation="horizontal">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30px"
+                    android:text="@string/item_wait_count_num"
+                    android:textColor="#666"
+                    android:textSize="26px"/>
+
+                <TextView
+                    android:id="@+id/tv_wait_num"
+                    android:layout_width="120px"
+                    android:layout_height="wrap_content"
+                    android:text="00000000"
+                    android:textColor="@color/color_000"
+                    android:textSize="26px"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30px"
+                    android:text="@string/instock_num_tip"
+                    android:textColor="#666"
+                    android:textSize="26px"/>
+
+                <TextView
+                    android:id="@+id/tv_instock_num"
+                    android:layout_width="120px"
+                    android:layout_height="wrap_content"
+                    android:text="00000000"
+                    android:textColor="@color/color_000"
+                    android:textSize="26px"/>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_material_code"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40px"
+                android:layout_marginTop="20px"
+                android:text=""
+                android:textColor="#666"
+                android:textSize="22px"/>
+
+            <TextView
+                android:id="@+id/tv_material_model"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10px"
+                android:layout_marginLeft="40px"
+                android:layout_marginTop="10px"
+                android:text=""
+                android:textColor="#666"
+                android:textSize="22px"/>
+        </LinearLayout>
+    </LinearLayout>
+</com.zhy.autolayout.AutoLinearLayout>

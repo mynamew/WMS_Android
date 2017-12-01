@@ -1,0 +1,132 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/white"
+              android:orientation="vertical"
+              tools:context="com.timi.sz.wms_android.mvp.UI.stock_in_work.stock_query.pack_repertory.PackRepertoryFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="68px"
+        android:layout_marginLeft="50px"
+        android:layout_marginRight="50px"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/goods_type"
+                android:textColor="@color/color_666"
+                android:textSize="28px"/>
+
+            <TextView
+                android:id="@+id/tv_material_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30px"
+                android:text="30"
+                android:textColor="@color/color_000"
+                android:textSize="30px"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/goods_total_num"
+                android:textColor="@color/color_666"
+                android:textSize="28px"/>
+
+            <TextView
+                android:id="@+id/tv_total_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30px"
+                android:text="3009876543"
+                android:textColor="@color/color_000"
+                android:textSize="30px"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="68px"
+        android:layout_marginLeft="50px"
+        android:layout_marginRight="50px"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/pack_type"
+                android:textColor="@color/color_666"
+                android:textSize="28px"/>
+
+            <TextView
+                android:id="@+id/tv_pack_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30px"
+                android:text="包装箱"
+                android:textColor="@color/color_000"
+                android:textSize="30px"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/pack_code"
+                android:textColor="@color/color_666"
+                android:textSize="28px"/>
+
+            <TextView
+                android:id="@+id/tv_pack_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30px"
+                android:text="3009876543"
+                android:textColor="@color/color_000"
+                android:textSize="30px"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="24px"
+        android:background="@color/divide_color"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rlv_pack_repertory"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+</LinearLayout>

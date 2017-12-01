@@ -5,9 +5,10 @@
               android:orientation="horizontal">
        <LinearLayout
            android:layout_width="match_parent"
-           android:paddingLeft="20px"
-           android:paddingRight="20px"
+           android:paddingLeft="14px"
+           android:paddingRight="14px"
            android:paddingTop="10px"
+           android:background="#d7d7d7"
            android:paddingBottom="10px"
            android:layout_height="100px">
            <TextView
@@ -15,8 +16,7 @@
                android:layout_width="0dp"
                android:layout_height="match_parent"
                android:layout_weight="1"
-               android:background="@drawable/bg_mytab_selected"
-               android:layout_marginRight="10px"
+               android:background="@drawable/bg_mytab_left_selected"
                android:gravity="center"
                android:text="容器存储"
                android:textColor="#fff"/>
@@ -25,11 +25,10 @@
                android:id="@+id/tab2"
                android:layout_width="0dp"
                android:layout_height="match_parent"
-               android:layout_marginLeft="10px"
                android:layout_weight="1"
-               android:background="@drawable/bg_mytab_unselected"
+               android:background="@drawable/bg_mytab_right_unselected"
                android:gravity="center"
                android:text="物品库存"
-               android:textColor="@color/login_txt_color"/>
+               android:textColor="#666"/>
        </LinearLayout>
 </RelativeLayout>

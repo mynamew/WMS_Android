@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/set_bg"
+    android:background="@color/white"
     android:orientation="vertical"
     tools:context="com.timi.sz.wms_android.mvp.UI.stock_in_work.stock_query.StockQueryActivity">
 
@@ -13,71 +13,68 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="88px"
-            android:layout_marginTop="20px">
+            android:background="@color/white">
 
             <EditText
                 android:id="@+id/et_stock_query"
                 android:layout_width="match_parent"
-                android:layout_height="88px"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
                 android:layout_marginLeft="20px"
                 android:layout_marginRight="20px"
-                android:background="@drawable/bg_rectangle_et_focused"
-                android:hint="请输入您要查询的条码"
-                android:paddingLeft="20px"
+                android:background="@drawable/selector_et_stock_query"
+                android:ellipsize="end"
+                android:hint="请输入/扫描要查询的容器条码"
+                android:imeOptions="actionSearch"
+                android:paddingBottom="15px"
+                android:paddingLeft="96px"
+                android:paddingTop="15px"
+                android:singleLine="true"
+                android:textColorHint="#ccc"
                 android:textSize="14sp"/>
 
             <ImageView
-                android:id="@+id/iv_stock_query_del"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:id="@+id/iv_stock_query_scan"
+                android:layout_width="40px"
+                android:layout_height="34px"
                 android:layout_alignParentRight="true"
-                android:layout_gravity="center_vertical"
-                android:layout_marginRight="10dp"
-                android:padding="10dp"
-                android:src="@mipmap/login_clear"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="40px"
+                android:src="@mipmap/ic_scan"
                 android:visibility="visible"/>
+
+            <ImageView
+                android:id="@+id/iv_search"
+                android:layout_width="56px"
+                android:layout_height="34px"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="40px"
+                android:src="@mipmap/stock_query_search"/>
+
+            <View
+                android:layout_width="1px"
+                android:layout_height="34px"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10px"
+                android:layout_toRightOf="@id/iv_search"
+                android:background="#d7d7d7"/>
         </RelativeLayout>
 
-        <LinearLayout
+        <com.timi.sz.wms_android.view.MyTabView
+            android:id="@+id/mytab_stock_query"
             android:layout_width="match_parent"
-            android:layout_height="88px"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:paddingLeft="40px">
-
-            <TextView
-                android:id="@+id/tv_goods_type"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/goods_type"
-                android:textColor="#333"/>
-
-            <TextView
-                android:id="@+id/tv_goods_total_num"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/goods_total_num"
-                android:textColor="#333"/>
-        </LinearLayout>
-
-        <com.timi.sz.wms_android.view.excelview.MyExcelView
-            android:id="@+id/myexcel_stock_query"
-            android:layout_width="match_parent"
-            app:ptrMode="both"
-            android:layout_height="match_parent"/>
+            android:layout_height="wrap_content"/>
     </LinearLayout>
 
-    <com.timi.sz.wms_android.view.MyTabView
-        android:id="@+id/mytab_stock_query"
+    <FrameLayout
+        android:id="@+id/fl_content"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
 </LinearLayout>

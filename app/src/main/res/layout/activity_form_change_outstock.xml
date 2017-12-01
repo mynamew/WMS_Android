@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context="com.timi.sz.wms_android.mvp.UI.stock_in_work.form_change_outstock.FormChangeOutstockActivity">
+
+    <include
+        android:id="@+id/head"
+        layout="@layout/title_head"/>
+
+    <Button
+        android:id="@+id/btn_commit"
+        android:layout_width="match_parent"
+        android:layout_height="88px"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/selector_btn"
+        android:text="@string/confirm_commit"
+        android:textColor="@color/white"
+        />
+
+    <ScrollView
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/head"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <include
+                layout="@layout/header_form_change"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="24px"
+                android:background="@color/divide_color"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="88px">
+
+                <TextView
+                    android:id="@+id/tv_putaway_scan_location_tip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:paddingLeft="10px"
+                    android:text="@string/lib_code"
+                    android:textColor="#333"
+                    android:textSize="26px"
+                    />
+
+                <EditText
+                    android:id="@+id/et_putaway_scan_location"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="20px"
+                    android:layout_toRightOf="@id/tv_putaway_scan_location_tip"
+                    android:background="@drawable/selector_et"
+                    android:ellipsize="end"
+                    android:gravity="center_vertical"
+                    android:hint="@string/please_scan_lib_location_code"
+                    android:imeOptions="actionSearch"
+                    android:paddingLeft="20px"
+                    android:paddingRight="80px"
+                    android:singleLine="true"
+                    android:text=""
+                    android:textSize="26px"/>
+
+                <ImageView
+                    android:id="@+id/iv_putaway_scan_location"
+                    android:layout_width="100px"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="30px"
+                    android:paddingLeft="60px"
+                    android:src="@mipmap/ic_scan"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="88px">
+
+                <TextView
+                    android:id="@+id/tv_putaway_scan_material_tip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:paddingLeft="38px"
+                    android:text="@string/scan_material"
+                    android:textColor="#333"
+                    android:textSize="26px"
+                    />
+
+                <EditText
+                    android:id="@+id/et_putaway_scan_material"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="20px"
+                    android:layout_toRightOf="@id/tv_putaway_scan_material_tip"
+                    android:background="@drawable/selector_et"
+                    android:ellipsize="end"
+                    android:gravity="center_vertical"
+                    android:hint="@string/please_scan_material_code"
+                    android:imeOptions="actionSearch"
+                    android:paddingLeft="20px"
+                    android:paddingRight="80px"
+                    android:singleLine="true"
+                    android:text=""
+                    android:textSize="26px"/>
+
+                <ImageView
+                    android:id="@+id/iv_putaway_scan_material"
+                    android:layout_width="100px"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="30px"
+                    android:paddingLeft="60px"
+                    android:src="@mipmap/ic_scan"/>
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="54px"
+                android:background="@color/divide_color"
+                android:gravity="center_vertical"
+                android:paddingLeft="40px"
+                android:text="@string/scan_info"
+                android:textColor="@color/color_666"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingBottom="5px"
+                android:paddingTop="10px">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="40px"
+                    android:text="@string/item_material_code"
+                    android:textColor="#333"
+                    android:textSize="26px"/>
+
+                <TextView
+                    android:id="@+id/tv_putaway_material_code"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="40px"
+                    android:text=""
+                    android:textColor="#000"
+                    android:textSize="26px"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingBottom="5px"
+                android:paddingTop="10px">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="40px"
+                    android:text="@string/item_material_num"
+                    android:textColor="#333"
+                    android:textSize="26px"/>
+
+                <TextView
+                    android:id="@+id/tv_putaway_material_num"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="40px"
+                    android:text=""
+                    android:textColor="#000"
+                    android:textSize="26px"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingBottom="5px"
+                android:paddingTop="10px">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="40px"
+                    android:text="@string/item_material_name"
+                    android:textColor="#333"
+                    android:textSize="26px"/>
+
+                <TextView
+                    android:id="@+id/tv_putaway_material_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="40px"
+                    android:text=""
+                    android:textColor="#000"
+                    android:textSize="26px"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="10px">
+
+                <TextView
+                    android:id="@+id/textView6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="40px"
+                    android:text="@string/item_material_model"
+                    android:textColor="#333"
+                    android:textSize="26px"/>
+
+                <TextView
+                    android:id="@+id/tv_putaway_material_nmodel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="40px"
+                    android:text=""
+                    android:textColor="#000"
+                    android:textSize="26px"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10px"
+                android:layout_marginTop="10px"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="40px">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/item_material_attr"
+                    android:textColor="#333"
+                    android:textSize="26px"/>
+
+                <TextView
+                    android:id="@+id/tv_material_attr"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="40px"
+                    android:textColor="#000"
+                    android:textSize="26px"/>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+
+</RelativeLayout>

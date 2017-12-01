@@ -13,12 +13,12 @@
         layout="@layout/title_head"/>
 
     <RelativeLayout
-        android:visibility="gone"
         android:id="@+id/rl_top_menu"
         android:layout_width="match_parent"
         android:layout_height="96px"
         android:layout_below="@id/head"
-        android:background="#fff">
+        android:background="#fff"
+        android:visibility="gone">
 
         <TextView
             android:layout_width="match_parent"
@@ -46,8 +46,8 @@
         android:layout_width="match_parent"
         android:layout_height="24px"
         android:layout_below="@id/rl_top_menu"
-        android:visibility="gone"
-        android:background="@color/divide_color"/>
+        android:background="@color/divide_color"
+        android:visibility="gone"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rlv_un_instock"
@@ -57,10 +57,11 @@
 
     <com.timi.sz.wms_android.view.FloatCircleButtonUpTopView
         android:id="@+id/fbtn_detail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="88px"
+        android:layout_height="88px"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_marginBottom="30px"
-        android:layout_marginRight="30px"/>
+        android:layout_marginRight="30px"
+        android:background="@drawable/bg_circle_buy_return"/>
 </RelativeLayout>

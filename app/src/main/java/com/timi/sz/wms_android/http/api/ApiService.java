@@ -55,6 +55,7 @@ import com.timi.sz.wms_android.bean.quality.update_barcode.BarEditGetUnInstockBa
 import com.timi.sz.wms_android.bean.stockin_work.LibraryAdjustResult;
 import com.timi.sz.wms_android.bean.stockin_work.ScanLocationResult;
 import com.timi.sz.wms_android.bean.stockin_work.ScanMaterialResult;
+import com.timi.sz.wms_android.bean.stockin_work.lib_adjust.LibAdjustDetail;
 import com.timi.sz.wms_android.bean.stockin_work.query.AllotOneSetpResult;
 import com.timi.sz.wms_android.bean.stockin_work.query.AllotScanResult;
 import com.timi.sz.wms_android.bean.stockin_work.query.FormChangeInResult;
@@ -900,17 +901,7 @@ public interface ApiService {
 
     /**======库内--库位移动======**/
     /**
-     * 扫描库位码的返回
-     *
-     * @param params
-     * @return
-     */
-    @FormUrlEncoded
-    @POST("api/Account/ClientLogin")
-    Observable<CommonResult<ScanLocationResult>> scanLibLocationCode(@FieldMap Map<String, Object> params);
-
-    /**
-     * 扫描库位码的返回
+     * 扫描物料码 的返回
      *
      * @param params
      * @return
@@ -920,7 +911,7 @@ public interface ApiService {
     Observable<CommonResult<ScanMaterialResult>> scanMaterialCode(@FieldMap Map<String, Object> params);
 
     /**
-     * 扫描库位码的返回
+     * 提交库内调整
      *
      * @param params
      * @return
@@ -928,6 +919,15 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("api/Account/ClientLogin")
     Observable<CommonResult<LibraryAdjustResult>> libraryAdjustResult(@FieldMap Map<String, Object> params);
+    /**
+     * 库内调整详情的请求
+     *
+     * @param params
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("api/Account/ClientLogin")
+    Observable<CommonResult<List<LibAdjustDetail>>> libraryAdjustDetail(@FieldMap Map<String, Object> params);
     /**************************************************************************************************************/
     /**************************************************************************************************************/
     /**======库内--搜索======**/

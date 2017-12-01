@@ -89,8 +89,11 @@ public class StockInWorkQueryActivity extends BaseActivity<StockInWorkQueryView,
                 tvQueryTip.setText(R.string.query_allot_scan_tip);
                 break;
             case Constants.STOCK_IN_WORK_FORM_CHANGE_OUT://形态转换-出库
+                setActivityTitle(getString(R.string.query_out_stock_form_change_title));
+                tvQueryTip.setText(R.string.query_form_change_tip);
+                break;
             case Constants.STOCK_IN_WORK_FORM_CHANGE_IN://形态转换-入库
-                setActivityTitle(getString(R.string.query_form_change_title));
+                setActivityTitle(getString(R.string.query_in_stock_form_change_title));
                 tvQueryTip.setText(R.string.query_form_change_tip);
                 break;
             case Constants.STOCK_IN_WORK_POINT://盘点

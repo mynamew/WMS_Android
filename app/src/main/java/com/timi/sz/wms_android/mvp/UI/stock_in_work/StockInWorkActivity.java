@@ -6,6 +6,8 @@ import android.view.View;
 
 import com.timi.sz.wms_android.R;
 import com.timi.sz.wms_android.base.uils.Constants;
+import com.timi.sz.wms_android.mvp.UI.stock_in_work.form_change_instock.FormChangeInstockActivity;
+import com.timi.sz.wms_android.mvp.UI.stock_in_work.form_change_outstock.FormChangeOutstockActivity;
 import com.timi.sz.wms_android.mvp.UI.stock_in_work.lib_adjust.LibraryAdjustActivity;
 import com.timi.sz.wms_android.mvp.UI.stock_in_work.query.StockInWorkQueryActivity;
 import com.timi.sz.wms_android.mvp.UI.stock_in_work.stock_query.StockQueryActivity;
@@ -65,11 +67,11 @@ public class StockInWorkActivity extends BaseNoMvpActivity {
                 intent.putExtra(Constants.STOCK_IN_WORK_CODE_STR,Constants.STOCK_IN_WORK_PACK_ADJUST);
                 break;
             case R.id.tv_stockin_work_out_stock://形态转换 出库
-                intent.setClass(StockInWorkActivity.this, StockInWorkQueryActivity.class);
+                intent.setClass(StockInWorkActivity.this, FormChangeOutstockActivity.class);
                 intent.putExtra(Constants.STOCK_IN_WORK_CODE_STR,Constants.STOCK_IN_WORK_FORM_CHANGE_OUT);
                 break;
             case R.id.tv_stockin_work_in_stock://形态转换入库
-                intent.setClass(StockInWorkActivity.this, StockInWorkQueryActivity.class);
+                intent.setClass(StockInWorkActivity.this, FormChangeInstockActivity.class);
                 intent.putExtra(Constants.STOCK_IN_WORK_CODE_STR,Constants.STOCK_IN_WORK_FORM_CHANGE_IN);
                 break;
             case R.id.tv_stockin_work_query_repertory://库存查询

@@ -52,18 +52,18 @@ public class MyTabView extends LinearLayout {
         tab1.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                tab1.setBackgroundResource(R.drawable.bg_mytab_selected);
-                tab2.setBackgroundResource(R.drawable.bg_mytab_unselected);
+                tab1.setBackgroundResource(R.drawable.bg_mytab_left_selected);
+                tab2.setBackgroundResource(R.drawable.bg_mytab_right_unselected);
                 tab1.setTextColor(getResources().getColor(R.color.white));
-                tab2.setTextColor(getResources().getColor(R.color.login_txt_color));
+                tab2.setTextColor(getResources().getColor(R.color.color_666));
                 clickListener.tab1Click(view);
             }
         });
         tab2.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                tab1.setBackgroundResource(R.drawable.bg_mytab_unselected);
-                tab2.setBackgroundResource(R.drawable.bg_mytab_selected);
+                tab1.setBackgroundResource(R.drawable.bg_mytab_left_unselected);
+                tab2.setBackgroundResource(R.drawable.bg_mytab_right_selected);
                 tab1.setTextColor(getResources().getColor(R.color.login_txt_color));
                 tab2.setTextColor(getResources().getColor(R.color.white));
                 clickListener.tab2Click(view);

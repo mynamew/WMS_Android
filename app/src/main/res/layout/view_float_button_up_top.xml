@@ -2,7 +2,6 @@
 <com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                                      android:layout_width="88px"
                                      android:layout_height="88px"
-                                     android:background="@drawable/bg_circle_buy_return"
                                      android:orientation="vertical">
 
     <LinearLayout
@@ -13,8 +12,8 @@
         android:visibility="visible">
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="20px"
+            android:layout_height="20px"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="20px"
             android:src="@mipmap/buy_return_up_top"/>

@@ -104,6 +104,18 @@ public class OtherScanActivity extends BaseActivity<OtherScanView, OtherScanPres
                     String orderNum = etScanMaterial.getText().toString().trim();
                     if (TextUtils.isEmpty(orderNum)) {
                         ToastUtils.showShort(getString(R.string.please_scan_material_code));
+                        return false;
+                    }
+                    /**
+                     * 对库位码进行判断
+                     */
+                    if (TextUtils.isEmpty(locationCode)) {
+                        ToastUtils.showShort(getString(R.string.please_scan_lib_location_code));
+                        return false;
+                    }
+                    if (!locationCodeIsUse) {
+                        ToastUtils.showShort(getString(R.string.location_code_no_user));
+                        return false;
                     }
                     /**
                      * 物料扫码并上架的网络请求
@@ -132,6 +144,7 @@ public class OtherScanActivity extends BaseActivity<OtherScanView, OtherScanPres
                     String orderNum = etScanLocation.getText().toString().trim();
                     if (TextUtils.isEmpty(orderNum)) {
                         ToastUtils.showShort(getString(R.string.please_scan_lib_location_code));
+                        return false;
                     }
                     /**
                      * 保存库位码

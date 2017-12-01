@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.timi.sz.wms_android.mvp.UI.stock_in_work.form_change_detail.FormChangeDetailActivity">
+    <include
+        android:id="@+id/head"
+        layout="@layout/title_head"/>
+
+    <RelativeLayout
+        android:id="@+id/rl_top_menu"
+        android:layout_width="match_parent"
+        android:layout_height="96px"
+        android:layout_below="@id/head"
+        android:background="#fff">
+
+        <TextView
+            android:id="@+id/tv_tip"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="30px"
+            android:text="@string/form_change_instock_detial_info_tip"
+            android:textColor="#333"
+            android:textStyle="bold"/>
+
+        <ImageView
+            android:id="@+id/iv_show_more"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="20px"
+            android:scaleType="centerCrop"
+            android:src="@drawable/selector_stockin_detail"/>
+
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/view_divide"
+        android:layout_width="match_parent"
+        android:layout_height="24px"
+        android:layout_below="@id/rl_top_menu"
+        android:background="@color/divide_color"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rlv_from_change"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/view_divide"/>
+
+    <com.timi.sz.wms_android.view.FloatCircleButtonUpTopView
+        android:id="@+id/fbtn_detail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="30px"
+        android:layout_marginRight="30px"/>
+</RelativeLayout>

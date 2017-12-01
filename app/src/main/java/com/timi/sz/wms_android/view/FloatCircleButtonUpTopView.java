@@ -10,6 +10,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.timi.sz.wms_android.R;
+import com.zhy.autolayout.AutoLinearLayout;
 import com.zhy.autolayout.AutoRelativeLayout;
 
 /**
@@ -20,7 +21,7 @@ import com.zhy.autolayout.AutoRelativeLayout;
  * create at: 2017-11-05 08:59
  */
 
-public class FloatCircleButtonUpTopView extends AutoRelativeLayout {
+public class FloatCircleButtonUpTopView extends AutoLinearLayout {
     private LinearLayout llUpTop;
     private AutoRelativeLayout llCurrentItem;
     private TextView tvCurrentPosition;

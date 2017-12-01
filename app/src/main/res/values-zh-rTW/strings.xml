@@ -751,6 +751,17 @@
     <string name="item_material_num">物料数量</string>
     <string name="carton_num_tip">箱号</string>
     <string name="sale_outstock_orderno_info">销售出库单信息</string>
+    <string name="lib_shift_tip">库位转移</string>
+    <string name="scan_in_lib_code">扫描所要移入的库位码</string>
+    <string name="scan_material_code">扫描物料条码</string>
+    <string name="lib_adjust_detail_title">库位调整详情</string>
+    <string name="coding">编码：</string>
+    <string name="repertory_total_num">库存总数</string>
+    <string name="location_code">库位号</string>
+    <string name="instock_putaway_form_change">入库上架(形态转换)</string>
+    <string name="outstock_scan_form_change">出库扫描(形态转换)</string>
+    <string name="form_change_instock_detial_info_tip">形态转换单(入库)信息详情</string>
+    <string name="instock_num_tip">入库数：</string>
 
 
 </resources>

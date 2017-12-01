@@ -10,6 +10,7 @@ import com.timi.sz.wms_android.base.uils.Constants;
 import com.timi.sz.wms_android.base.uils.PackageUtils;
 import com.timi.sz.wms_android.base.uils.SpUtils;
 import com.timi.sz.wms_android.base.uils.ToastUtils;
+import com.timi.sz.wms_android.bean.instock.VertifyLocationCodeBean;
 import com.timi.sz.wms_android.bean.stockin_work.LibraryAdjustResult;
 import com.timi.sz.wms_android.bean.stockin_work.ScanLocationResult;
 import com.timi.sz.wms_android.bean.stockin_work.ScanMaterialResult;
@@ -67,8 +68,9 @@ public class PackAdjustActivity extends BaseActivity<PackAdjustView,PackAdjustPr
         return this;
     }
 
+
     @Override
-    public void scanLibLocatonCode(ScanLocationResult result) {
+    public void vertifyLocationCode(VertifyLocationCodeBean bean) {
 
     }
 
@@ -105,7 +107,7 @@ public class PackAdjustActivity extends BaseActivity<PackAdjustView,PackAdjustPr
                         params.put("MAC", PackageUtils.getMac());
                         params.put("OrgId", SpUtils.getInstance().getOrgId());
                         params.put("libcode", result);
-                        getPresenter().scanLibLocationCode(params);
+                        getPresenter().vertifyLocationCode(params);
                     }
                 });
                 break;

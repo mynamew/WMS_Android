@@ -221,7 +221,9 @@
         </activity>
         <activity android:name=".mvp.UI.stock_in_work.lib_adjust.LibraryAdjustActivity">
         </activity>
-        <activity android:name=".mvp.UI.stock_in_work.query.StockInWorkQueryActivity">
+        <activity
+            android:name=".mvp.UI.stock_in_work.query.StockInWorkQueryActivity"
+            android:configChanges="orientation|keyboardHidden">
         </activity>
         <activity android:name=".mvp.UI.stock_in_work.pack_adjust.PackAdjustActivity">
         </activity>
@@ -283,7 +285,19 @@
         </activity>
         <activity android:name=".mvp.UI.stock_out.detail.outsource_bill_detail.OutsourceBillDetailActivity">
         </activity>
-        <activity android:name=".mvp.UI.stock_in_work.lib_adjust_detail.LibAdjustDetailActivity">
+        <activity
+            android:name=".mvp.UI.stock_in_work.lib_adjust_detail.LibAdjustDetailActivity"
+            android:configChanges="orientation|keyboardHidden">
+        </activity>
+        <activity
+            android:name=".mvp.UI.stock_in_work.form_change_outstock.FormChangeOutstockActivity"
+            android:windowSoftInputMode="adjustPan|stateHidden">
+        </activity>
+        <activity
+            android:name=".mvp.UI.stock_in_work.form_change_instock.FormChangeInstockActivity"
+            android:windowSoftInputMode="adjustPan|stateHidden">
+        </activity>
+        <activity android:name=".mvp.UI.stock_in_work.form_change_detail.FormChangeDetailActivity">
         </activity>
     </application>
 

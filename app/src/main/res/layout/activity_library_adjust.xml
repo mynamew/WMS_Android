@@ -11,7 +11,6 @@
 
     <include layout="@layout/title_head"/>
 
-
     <RelativeLayout
         android:id="@+id/rl_location_code"
         android:layout_width="match_parent"
@@ -33,7 +32,7 @@
             />
         <!--条码-->
         <EditText
-            android:id="@+id/tv_scan_location"
+            android:id="@+id/et_scan_location"
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:layout_centerVertical="true"
@@ -42,14 +41,15 @@
             android:background="@drawable/selector_et"
             android:ellipsize="end"
             android:gravity="center_vertical"
-            android:hint="@string/please_scan_lib_location_code"
+            android:hint="@string/scan_in_lib_code"
+            android:imeOptions="actionSearch"
             android:paddingLeft="10dp"
             android:singleLine="true"
             android:text=""
             android:textSize="14sp"/>
 
         <ImageView
-            android:id="@+id/iv_can_location"
+            android:id="@+id/iv_scan_location"
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_alignParentRight="true"
@@ -59,6 +59,7 @@
             android:src="@mipmap/ic_scan"
             />
     </RelativeLayout>
+
 
     <View
         android:layout_width="match_parent"
@@ -95,7 +96,8 @@
             android:background="@drawable/selector_et"
             android:ellipsize="end"
             android:gravity="center_vertical"
-            android:hint="@string/please_scan_material_code"
+            android:hint="@string/scan_material_code"
+            android:imeOptions="actionSearch"
             android:paddingLeft="10dp"
             android:singleLine="true"
             android:text=""
@@ -112,6 +114,7 @@
             android:src="@mipmap/ic_scan"
             />
     </RelativeLayout>
+
 
     <LinearLayout
         android:id="@+id/ll_scan_info"
@@ -277,9 +280,9 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="30px"
             android:layout_marginTop="30px"
             android:gravity="center_vertical"
-            android:layout_marginBottom="30px"
             android:orientation="horizontal"
             android:paddingLeft="30px">
 
@@ -301,10 +304,12 @@
 
 
     </LinearLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1px"
         android:background="@color/divide_color"/>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -314,7 +319,7 @@
         android:id="@+id/btn_commit"
         android:layout_width="match_parent"
         android:layout_height="98px"
-        android:background="@drawable/selector_btn_bg_login"
+        android:background="@drawable/selector_btn"
         android:text="@string/confirm_commit"
         android:textColor="@color/white"
         android:textSize="36px"/>
