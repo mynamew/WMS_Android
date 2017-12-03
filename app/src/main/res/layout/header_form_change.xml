@@ -13,7 +13,6 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/tv_orderno_tip"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="30px"
@@ -39,7 +38,6 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/tv_create_orderno_date_tip"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="30px"
@@ -63,7 +61,6 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/tv_can_get_total_num_tip"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="30px"
@@ -88,7 +85,6 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/tv_wait_count_num_tip"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="30px"
@@ -114,7 +110,6 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/tv_have_count_num_tip"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="30px"

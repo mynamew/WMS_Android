@@ -19,6 +19,7 @@ import com.timi.sz.wms_android.base.uils.ToastUtils;
 import com.timi.sz.wms_android.bean.outstock.outsource.QueryWWPickDataByOutSourceResult;
 import com.timi.sz.wms_android.bean.outstock.pick.QueryDNByInputForPickResult;
 import com.timi.sz.wms_android.bean.outstock.product.QueryProductPickByInputResult;
+import com.timi.sz.wms_android.bean.stockin_work.allot_out.QueryAllotOutResult;
 import com.timi.sz.wms_android.mvp.UI.stock_out.batch_point_list.BatchPointListActivity;
 import com.timi.sz.wms_android.mvp.UI.stock_out.query.StockOutSearchActivity;
 import com.timi.sz.wms_android.mvp.base.BaseActivity;
@@ -31,6 +32,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_ALLOT_OUT_PICK;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_BEAN;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_CODE_STR;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_FINISH_GOODS_PICK;
@@ -90,17 +92,8 @@ public class PickActivity extends BaseActivity<PickView, PickPresenter> implemen
                         /**
                          * 发起请求
                          */
-                        //默认是 生产申请单
-                        intentCode = STOCK_OUT_PRODUCTION_APPLY_BILL;
-                        if (orderNum.contains("SC")) {//生产调拨
-                            etAllotOrderno.setText(orderNum);
-                            intentCode = Constants.STOCK_OUT_PRODUCTION_ALLOT;
-                        } else if (orderNum.contains("WX")) {//委外调拨
-                            intentCode = Constants.STOCK_OUT_OUTSOURCE_ALLOT;
-                            etAllotOrderno.setText(orderNum);
-                        } else {
-                            etAllotOrderno.setText(orderNum);
-                        }
+                        //调拨调出
+                        intentCode = STOCK_OUT_ALLOT_OUT_PICK;
                         requestManagerMethod(orderNum);
                     }
                 }
@@ -158,7 +151,7 @@ public class PickActivity extends BaseActivity<PickView, PickPresenter> implemen
             public void scanSuccess(int requestCode, String result) {
                 //默认是 生产申请单
                 intentCode = STOCK_OUT_PRODUCTION_APPLY_BILL;
-                if(result.contains("MS")) {//成品拣货
+                if (result.contains("MS")) {//成品拣货
                     intentCode = Constants.STOCK_OUT_FINISH_GOODS_PICK;
                     etSendMaterialOrderno.setText(result);
                 } else {
@@ -187,11 +180,22 @@ public class PickActivity extends BaseActivity<PickView, PickPresenter> implemen
             case STOCK_OUT_FINISH_GOODS_PICK:// 成品拣货
                 getPresenter().queryDNByInputForPick(params);
                 break;
+            case STOCK_OUT_ALLOT_OUT_PICK:// 调拨调出
+                getPresenter().queryDNByInputForPick(params);
+                break;
         }
     }
 
     @Override
     public void queryDNByInputForPick(QueryDNByInputForPickResult bean) {
+        Intent intent = new Intent(this, BatchPointListActivity.class);
+        intent.putExtra(STOCK_OUT_CODE_STR, intentCode);
+        intent.putExtra(STOCK_OUT_BEAN, new Gson().toJson(bean));
+        startActivity(intent);
+    }
+
+    @Override
+    public void queryTransferByInputForOutStock(QueryAllotOutResult bean) {
         Intent intent = new Intent(this, BatchPointListActivity.class);
         intent.putExtra(STOCK_OUT_CODE_STR, intentCode);
         intent.putExtra(STOCK_OUT_BEAN, new Gson().toJson(bean));

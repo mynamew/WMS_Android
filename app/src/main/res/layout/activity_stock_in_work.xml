@@ -18,6 +18,7 @@
             android:layout_height="wrap_content"
             android:scaleType="centerCrop"
             android:src="@mipmap/stock_in_work_bg"/>
+
         <include layout="@layout/title_head"/>
     </RelativeLayout>
 
@@ -97,9 +98,10 @@
                             android:text="@string/stockin_work_group_change"/>
 
                         <TextView
+                            android:id="@+id/tv_allot_outstock"
                             style="@style/stock_in_tab"
                             android:drawableTop="@mipmap/stockin_work_group_change"
-                            android:text="@string/stock_in_othre_inlib_create_order"
+                            android:text="@string/allot_outstock_tip"
                             android:visibility="invisible"/>
 
                         <TextView
@@ -181,8 +183,8 @@
                     >
 
                     <TextView
-                        android:layout_width="148px"
                         style="@style/stock_in_title"
+                        android:layout_width="148px"
                         android:text="@string/stockin_work_query_and_count"/>
 
                     <LinearLayout

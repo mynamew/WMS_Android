@@ -58,7 +58,8 @@
         <activity
             android:name=".mvp.UI.home.MainActivity"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:theme="@style/AppBaseThemeMain"/>
         <activity android:name=".mvp.UI.splash.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -231,7 +232,9 @@
         </activity>
         <activity android:name=".mvp.UI.quity.mrp.MRPReviewActivity">
         </activity>
-        <activity android:name=".mvp.UI.stock_in_work.allot_scan.AllotScanActivity">
+        <activity
+            android:name=".mvp.UI.stock_in_work.allot_scan.AllotScanActivity"
+            android:windowSoftInputMode="adjustPan|stateHidden">
         </activity>
         <activity
             android:name=".mvp.UI.quity.quality.advance_quality.AdvanceQualityActivity"
@@ -297,7 +300,13 @@
             android:name=".mvp.UI.stock_in_work.form_change_instock.FormChangeInstockActivity"
             android:windowSoftInputMode="adjustPan|stateHidden">
         </activity>
-        <activity android:name=".mvp.UI.stock_in_work.form_change_detail.FormChangeDetailActivity">
+        <activity
+            android:name=".mvp.UI.stock_in_work.form_change_detail.FormChangeDetailActivity"
+            android:configChanges="orientation|keyboardHidden">
+        </activity>
+        <activity
+            android:name=".mvp.UI.stock_in_work.allot_one_step.OneStepAllotActivity"
+            android:windowSoftInputMode="adjustPan|stateHidden">
         </activity>
     </application>
 

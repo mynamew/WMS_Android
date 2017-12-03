@@ -55,6 +55,7 @@ import com.timi.sz.wms_android.bean.quality.update_barcode.BarEditGetUnInstockBa
 import com.timi.sz.wms_android.bean.stockin_work.LibraryAdjustResult;
 import com.timi.sz.wms_android.bean.stockin_work.ScanLocationResult;
 import com.timi.sz.wms_android.bean.stockin_work.ScanMaterialResult;
+import com.timi.sz.wms_android.bean.stockin_work.allot_out.QueryAllotOutResult;
 import com.timi.sz.wms_android.bean.stockin_work.lib_adjust.LibAdjustDetail;
 import com.timi.sz.wms_android.bean.stockin_work.query.AllotOneSetpResult;
 import com.timi.sz.wms_android.bean.stockin_work.query.AllotScanResult;
@@ -258,7 +259,7 @@ public interface ApiService {
      */
     @FormUrlEncoded
     @POST("api/services/wpda/PrdInstock/GetPrdInstockDetail")
-    Observable<CommonResult<List<OrderDetailData>>> getPrdInstockDetail(@FieldMap Map<String, Object> params);
+    Observable<CommonResult<List<MaterialDetailResult>>> getPrdInstockDetail(@FieldMap Map<String, Object> params);
 
     /**
      * 搜索产成品-生单的返回结果(生产工单单末尾号查询)
@@ -278,7 +279,7 @@ public interface ApiService {
      */
     @FormUrlEncoded
     @POST("api/services/wpda/PrdInstock/GetWorkOrderDetail")
-    Observable<CommonResult<List<OrderDetailData>>> getWorkOrderDetail(@FieldMap Map<String, Object> params);
+    Observable<CommonResult<List<MaterialDetailResult>>> getWorkOrderDetail(@FieldMap Map<String, Object> params);
 
     /**
      * 其他入库—审核
@@ -289,6 +290,16 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("api/services/wpda/OtherInstock/QueryOtherInstockByInput")
     Observable<CommonResult<OtherAuditSelectOrdernoBean>> searchOtherAuditSelectOrderno(@FieldMap Map<String, Object> params);
+    /**
+     * 其他入库—审核 明细
+     *
+     * @param params
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("api/services/wpda/OtherInstock/GetOtherInstockDetail")
+    Observable<CommonResult<List<MaterialDetailResult>>> getOtherInstockDetail(@FieldMap Map<String, Object> params);
+
     /**====== 成品拣货 ======**/
     /**
      * 发货通知单末尾号查询
@@ -303,12 +314,13 @@ public interface ApiService {
     /**
      * 获取发货单明细数据
      *
-     * @param orderno
+     * @param params
      * @return
      */
     @FormUrlEncoded
     @POST("api/services/wpda/SalesOutStock/GetDNDetail")
-    Observable<CommonResult<List<OrderDetailData>>> getDNDetail(@Field("orderno") String orderno);
+    Observable<CommonResult<List<MaterialDetailResult>>> getDNDetail(@FieldMap Map<String, Object> params);
+
     /**====== 委外退料 ======**/
     /**
      * 委外退料—选单
@@ -681,18 +693,6 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("api/services/wpda/SalesOutStock/QueryDNByInputForOutStock")
     Observable<CommonResult<QueryDNByInputForOutStockResult>> queryDNByInputForOutStock(@FieldMap Map<String, Object> params);
-
-    /**
-     * 销售出库 审核  详情
-     *
-     * @param params
-     * @return
-     */
-    @FormUrlEncoded
-    @POST("api/services/wpda/SalesOutStock/GetDNDetail")
-    Observable<CommonResult<List<MaterialDetailResult>>> getDNDetail(@FieldMap Map<String, Object> params);
-
-
     /**====== 销售出库 ======**/
     /**
      * 销售出库 生单
@@ -734,6 +734,24 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("api/services/wpda/OtherOutStock/GetOtherOutStockDetail")
     Observable<CommonResult<List<MaterialDetailResult>>> getOtherOutStockDetail(@FieldMap Map<String, Object> params);
+    /**
+     * 调拨调出
+     *
+     * @param params
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("api/services/wpda/Transfer/QueryTransferByInputForOutStock")
+    Observable<CommonResult<QueryAllotOutResult>> queryTransferByInputForOutStock(@FieldMap Map<String, Object> params);
+    /**
+     * 调拨调出详情
+     *
+     * @param params
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("api/services/wpda/Transfer/GetTransferDetailForOutStock")
+    Observable<CommonResult<List<MaterialDetailResult>>> getTransferDetailForOutStock(@FieldMap Map<String, Object> params);
 
     /**************************************************************************************************************/
     /**************************************************************************************************************/
@@ -919,7 +937,7 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("api/Account/ClientLogin")
     Observable<CommonResult<LibraryAdjustResult>> libraryAdjustResult(@FieldMap Map<String, Object> params);
-    /**
+     /**
      * 库内调整详情的请求
      *
      * @param params
@@ -938,9 +956,17 @@ public interface ApiService {
      * @return
      */
     @FormUrlEncoded
-    @POST("api/Account/ClientLogin")
+    @POST("api/services/wpda/Transfer/QueryTransferForStepBy")
     Observable<CommonResult<AllotScanResult>> queryAllotScan(@FieldMap Map<String, Object> params);
-
+     /**
+     * 扫描调入 明细
+     *
+     * @param params
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("api/services/wpda/Transfer/GetTransferDetailForInStock")
+    Observable<CommonResult<List<OrderDetailData>>> queryAllotScanDetail(@FieldMap Map<String, Object> params);
     /**
      * 一步调入查询
      *
@@ -948,8 +974,17 @@ public interface ApiService {
      * @return
      */
     @FormUrlEncoded
-    @POST("api/Account/ClientLogin")
+    @POST("api/services/wpda/Transfer/QueryTransferForOneStep")
     Observable<CommonResult<AllotOneSetpResult>> queryAllotOneStep(@FieldMap Map<String, Object> params);
+     /**
+     * 一步调入 提交
+     *
+     * @param params
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("api/services/wpda/common/SubmitTransferOneStep")
+    Observable<CommonResult<Object>> submitTransferOneStep(@FieldMap Map<String, Object> params);
 
     /**
      * 形态转换-出库 查询

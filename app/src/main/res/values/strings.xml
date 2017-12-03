@@ -108,8 +108,8 @@
     <string name="qulity_mrp_inspection">MRP评审</string>
     <string name="qulity_update_qr">条码修改</string>
     <string name="siw_storage_location_change">库位调整</string>
-    <string name="siw_scan_in">调拨-扫描调入</string>
-    <string name="siw_one_step_in">调拨-一步掉入</string>
+    <string name="siw_scan_in">扫描调入</string>
+    <string name="siw_one_step_in">一步调入</string>
     <string name="siw_group_change">容器调整</string>
     <string name="siw_form_change_stock_in">形态转换-入库</string>
     <string name="siw_form_change_stock_out">形态转换-出库</string>
@@ -365,9 +365,13 @@
     <string name="get_material_material_list_tip">领料申请(审核)物料清单</string>
     <string name="stock_out_apply_bill">申请生单</string>
 
+    /**====== 调拨调出======**/
+    <string name="create_allot_out_orderno">生成调出单</string>
+    <string name="material_point_list_allot_out">物品清单(调拨调出)</string>
+    <string name="material_point_allot_out">物品清点(调拨调出)</string>
     /**====== 成品拣货======**/
     <string name="finish_goods_pick_tip">成品拣货</string>
-
+    <string name="finish_goods_orderno_info">成品拣货单信息</string>
     <string name="material_point_finish_goods_pick_title">物品清点（成品拣货）</string>
     <string name="material_point_list_finish_goods_pick_title">物料清单(成品拣货)</string>
     <string name="finish_goods_outstock_tip">产成品出库</string>
@@ -705,6 +709,7 @@
     <string name="stockin_work_query_repertory">库存查询</string>
     <string name="stockin_work_count">盘点</string>
     /**====== 库内搜索 ======**/
+    <string name="allot_outstock_tip">调拨调出</string>
     <string name="item_send_num">送货数</string>
     <string name="item_have_receive_num">已收数</string>
     <string name="item_point_num">请点数</string>
@@ -740,6 +745,18 @@
     <string name="instock_putaway_form_change">入库上架(形态转换)</string>
     <string name="form_change_instock_detial_info_tip">形态转换单(入库)信息详情</string>
     <string name="form_change_instock_detial_title">形态转换单详情</string>
+    /**====== 一步调入 ======**/
+    <string name="allot_out_total_num">调出总数</string>
+    <string name="allot_total_num">调拨总数</string>
+    <string name="please_input_scan_lib_code">请输入/扫描货架号</string>
+    <string name="goal_storege">目的货架</string>
+    <string name="allot_orderno_info">调拨单据信息</string>
+    <string name="allot">调波</string>
+    <string name="allot_out">调出</string>
+    /**====== 扫描调入 ======**/
+    <string name="location_code">库位号</string>
+    <string name="instock_num_tip">入库数：</string>
+    <string name="allot_orderno">调拨单号</string>
     /**====== 容器调整 ======**/
     /**====== 库存查询======**/
     <string name="query_repertory_tip">库存查询</string>
@@ -768,8 +785,7 @@
     <string name="carton_num_tip">箱号</string>
     <string name="sale_outstock_orderno_info">销售出库单信息</string>
     <string name="repertory_total_num">库存总数</string>
-    <string name="location_code">库位号</string>
-    <string name="instock_num_tip">入库数：</string>
+    <string name="one_step_success">一步调出成功</string>
 
 
 </resources>

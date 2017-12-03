@@ -24,10 +24,12 @@ import com.timi.sz.wms_android.bean.outstock.buy.SubmitBarcodeOutSplitAuditData;
 import com.timi.sz.wms_android.bean.outstock.outsource.QueryOutSourceFeedByInputResult;
 import com.timi.sz.wms_android.bean.outstock.outsource.QueryOutSourcePickByInputResult;
 import com.timi.sz.wms_android.bean.outstock.outsource.QueryWWPickDataByOutSourceResult;
+import com.timi.sz.wms_android.bean.outstock.pick.QueryDNByInputForPickResult;
 import com.timi.sz.wms_android.bean.outstock.product.QueryPrdFeedByInputResult;
 import com.timi.sz.wms_android.bean.outstock.product.QueryProductPickByInputResult;
 import com.timi.sz.wms_android.bean.outstock.sale.QueryDNByInputForOutStockResult;
 import com.timi.sz.wms_android.bean.outstock.sale.QuerySalesOutSotckByInputForOutStockResult;
+import com.timi.sz.wms_android.bean.stockin_work.allot_out.QueryAllotOutResult;
 import com.timi.sz.wms_android.mvp.UI.stock_out.detail.DetailActivity;
 import com.timi.sz.wms_android.mvp.UI.stock_out.detail.outsource_bill_detail.OutsourceBillDetailActivity;
 import com.timi.sz.wms_android.mvp.UI.stock_out.divide_print.SplitPrintActivity;
@@ -44,7 +46,9 @@ import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_POINT_DETIAI
 import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_POINT_REGIONID;
 import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_POINT_WAREHOUSEID;
 import static com.timi.sz.wms_android.base.uils.Constants.REQUEST_SCAN_CODE_MATERIIAL;
+import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_ALLOT_OUT_PICK;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_BEAN;
+import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_FINISH_GOODS_PICK;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_OTHER_OUT_AUDIT;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_OTHER_OUT_BILL;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_OUTSOURCE_ALLOT;
@@ -327,8 +331,8 @@ public class NormalOutStockActivity extends BaseActivity<NormalOutStockView, Nor
             case STOCK_OUT_PURCHASE_MATERIAL_RETURN://采购退料
                 break;
             case STOCK_OUT_OTHER_OUT_AUDIT://其他审核
-                tvHeadTitle.setText(R.string.other_outstock_title);
-                setActivityTitle(getString(R.string.other_outstock_info));
+                tvHeadTitle.setText(R.string.other_outstock_info);
+                setActivityTitle(getString(R.string.other_outstock_title));
                 OtherAuditSelectOrdernoBean otherAuditSelectOrdernoBean = new Gson().fromJson(getIntent().getStringExtra(STOCK_OUT_BEAN), OtherAuditSelectOrdernoBean.class);
                 OtherAuditSelectOrdernoBean.SummaryResultsBean summaryResultsOtherAudit = otherAuditSelectOrdernoBean.getSummaryResults();
                 //设置内容
@@ -343,6 +347,39 @@ public class NormalOutStockActivity extends BaseActivity<NormalOutStockView, Nor
                 billId = summaryResultsOtherAudit.getBillId();
                 break;
             case STOCK_OUT_OTHER_OUT_BILL://其他生单
+                break;
+            case  STOCK_OUT_FINISH_GOODS_PICK://成品拣货
+                tvHeadTitle.setText(R.string.finish_goods_orderno_info);
+                setActivityTitle(getString(R.string.finish_goods_pick_tip));
+                /**
+                 * 生产生单 和委外生单的返回结果是一样的 所以直接一起处理
+                 */
+                QueryDNByInputForPickResult queryDNByInputForPickResult = new Gson().fromJson(getIntent().getStringExtra(STOCK_OUT_BEAN), QueryDNByInputForPickResult.class);
+                //获取 summaryResults
+                QueryDNByInputForPickResult.SummaryResultsBean summaryResultsFinishGoodsPick = queryDNByInputForPickResult.getSummaryResults();
+                setHeaderContent(summaryResultsFinishGoodsPick.getBillCode(), summaryResultsFinishGoodsPick.getBillDate(), summaryResultsFinishGoodsPick.getQty(), summaryResultsFinishGoodsPick.getWaitQty(), summaryResultsFinishGoodsPick.getScanQty());
+                //设置scanid
+                scanId = summaryResultsFinishGoodsPick.getScanId();
+                //设置仓库id
+                warehouseId = summaryResultsFinishGoodsPick.getWarehouseId();
+                //设置区域id
+                regionId = summaryResultsFinishGoodsPick.getRegionId();
+                //billId
+                billId = summaryResultsFinishGoodsPick.getBillId();
+                break;
+            case STOCK_OUT_ALLOT_OUT_PICK://调拨调出
+                QueryAllotOutResult queryAllotOutResult = new Gson().fromJson(getIntent().getStringExtra(STOCK_OUT_BEAN), QueryAllotOutResult.class);
+                QueryAllotOutResult.SummaryResultsBean summaryResultsAllotOut = queryAllotOutResult.getSummaryResults();
+
+                setHeaderContent(summaryResultsAllotOut.getBillCode(), summaryResultsAllotOut.getBillDate(), summaryResultsAllotOut.getQty(), summaryResultsAllotOut.getWaitQty(), summaryResultsAllotOut.getScanQty());
+                //设置scanid
+                scanId = summaryResultsAllotOut.getScanId();
+                //设置仓库id
+                warehouseId = summaryResultsAllotOut.getWarehouseId();
+                //设置区域id
+                regionId = summaryResultsAllotOut.getRegionId();
+                //billId
+                billId = summaryResultsAllotOut.getBillId();
                 break;
             default:
                 break;
@@ -461,13 +498,21 @@ public class NormalOutStockActivity extends BaseActivity<NormalOutStockView, Nor
                         it.putExtra(OUT_STOCK_POINT_REGIONID, regionId);
                         it.putExtra(OUT_STOCK_POINT_DETIAIL_BILLID, billId);
                         break;
-                    case Constants.STOCK_OUT_FINISH_GOODS_PICK://成品拣货
+                    case STOCK_OUT_FINISH_GOODS_PICK://成品拣货
                         it.setClass(NormalOutStockActivity.this, OutsourceBillDetailActivity.class);
                         it.setClass(NormalOutStockActivity.this, DetailActivity.class);
                         it.putExtra(OUT_STOCK_POINT_WAREHOUSEID, warehouseId);
                         it.putExtra(OUT_STOCK_POINT_REGIONID, regionId);
                         it.putExtra(OUT_STOCK_POINT_DETIAIL_BILLID, billId);
                         break;
+                    case STOCK_OUT_ALLOT_OUT_PICK://调拨出库
+                        it.setClass(NormalOutStockActivity.this, OutsourceBillDetailActivity.class);
+                        it.setClass(NormalOutStockActivity.this, DetailActivity.class);
+                        it.putExtra(OUT_STOCK_POINT_WAREHOUSEID, warehouseId);
+                        it.putExtra(OUT_STOCK_POINT_REGIONID, regionId);
+                        it.putExtra(OUT_STOCK_POINT_DETIAIL_BILLID, billId);
+                        break;
+
                 }
                 /**
                  * 查看详情

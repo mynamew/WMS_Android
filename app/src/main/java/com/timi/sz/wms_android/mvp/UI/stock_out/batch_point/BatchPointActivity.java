@@ -65,6 +65,7 @@ import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_SALE_CARTON_
 import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_SALE_IS_CARTON;
 import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_SCANID;
 import static com.timi.sz.wms_android.base.uils.Constants.REQUEST_SCAN_CODE_MATERIIAL;
+import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_ALLOT_OUT_PICK;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_CODE_STR;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_FINISH_GOODS_PICK;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_OTHER_OUT_AUDIT;
@@ -289,6 +290,11 @@ public class BatchPointActivity extends BaseActivity<BatchPointView, BatchPointP
                 setActivityTitle(getString(R.string.material_point_finish_goods_pick_title));
                 srcBillType = 61;
                 destBillType = 61;
+                break;
+            case STOCK_OUT_ALLOT_OUT_PICK://调拨调出
+                setActivityTitle(getString(R.string.material_point_allot_out));
+                srcBillType = 50;
+                destBillType = 50;
                 break;
             default:
                 break;

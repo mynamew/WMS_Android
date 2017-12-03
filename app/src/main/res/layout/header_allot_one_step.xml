@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:background="@color/white"
+              android:orientation="vertical"
+    >
+
+    <LinearLayout
+        android:id="@+id/ll_tab"
+        android:layout_width="match_parent"
+        android:layout_height="88px"
+        android:layout_below="@id/head"
+        android:orientation="horizontal"
+        android:paddingLeft="10px"
+
+        android:paddingRight="10px">
+
+        <TextView
+            android:id="@+id/tv_line_num"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:text="@string/line_name"
+            android:textColor="#333"
+            android:textSize="26px"
+            />
+
+        <TextView
+            android:id="@+id/tv_material_code"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:gravity="center"
+            android:text="@string/item_material_code"
+            android:textColor="#333"
+            android:textSize="24px"/>
+
+        <TextView
+            android:id="@+id/tv_material_name"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="4"
+            android:gravity="center"
+            android:text="@string/item_material_name"
+
+            android:textColor="#333"
+            android:textSize="24px"/>
+
+        <TextView
+            android:id="@+id/tv_allot_total_num"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:text="@string/allot"
+
+            android:textColor="#333"
+            android:textSize="24px"/>
+
+
+        <TextView
+            android:id="@+id/tv_allot_out"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:text="@string/allot_out"
+            android:textColor="#333"
+            android:textSize="24px"/>
+
+        <TextView
+            android:id="@+id/tv_arrive_good_num"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:text="@string/header_scan_num"
+            android:textColor="#333"
+            android:textSize="24px"
+            android:visibility="gone"/>
+    </LinearLayout>
+
+</LinearLayout>

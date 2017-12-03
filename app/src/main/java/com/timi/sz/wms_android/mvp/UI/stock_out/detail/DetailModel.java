@@ -16,6 +16,9 @@ import java.util.Map;
 import io.reactivex.Observable;
 import io.reactivex.Observer;
 
+import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_ALLOT_OUT_PICK;
+import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_FINISH_GOODS_PICK;
+
 /**
  * $dsc
  * author: timi
@@ -58,13 +61,28 @@ public class DetailModel extends MvpBaseModel {
                         return apiService.getProductPickDetail(params);
 
                     case Constants.STOCK_OUT_SELL_OUT_AUDIT://销售领料-审核
-                        return apiService.getOutSourceFeedDetail(params);
+
+                        return apiService.getDNDetail(params);
+
                     case Constants.STOCK_OUT_SELL_OUT_BILL://销售领料-生单
-                        return apiService.getOutSourceFeedDetail(params);
+
+                        return apiService.getSalesOutStockDetailForOutStock(params);
+
                     case Constants.STOCK_OUT_OTHER_OUT_AUDIT://其他出库-审核
-                        return apiService.getOutSourceFeedDetail(params);
+
+                        return apiService.getOtherInstockDetail(params);
                     case Constants.STOCK_OUT_OTHER_OUT_BILL://其他出库-生单
-                        return apiService.getOutSourceFeedDetail(params);
+
+                        return apiService.getOtherOutStockDetail(params);
+
+                    case STOCK_OUT_FINISH_GOODS_PICK://成品拣货
+
+                        return apiService.getDNDetail(params);
+
+                    case STOCK_OUT_ALLOT_OUT_PICK://调拨调出
+
+                        return apiService.getTransferDetailForOutStock(params);
+
                     default:
                         return apiService.getOutSourceFeedDetail(params);
                 }

@@ -165,6 +165,7 @@ public class Constants {
     public static final int STOCK_OUT_OTHER_OUT_BILL = 5033;//其他出库-生单
     public static final int STOCK_OUT_PRODUCTION_APPLY_BILL = 5034;//生产领料申请单-生单
     public static final int STOCK_OUT_FINISH_GOODS_PICK = 5035;//产成品拣货
+    public static final int STOCK_OUT_ALLOT_OUT_PICK = 5036;//调拨调出
     /**
      * 出库搜索 跳转的传递对象的key
      */
@@ -214,6 +215,7 @@ public class Constants {
      * 搜索 跳转的intent code
      */
     public static final String STOCK_IN_WORK_CODE_STR = "stockin_work_code";//库内作业的code码的key
+    public static final String STOCK_IN_WORK_BEAN = "stockin_work_bean";//库内传递实体的key
 
     public static final int STOCK_IN_WORK_LIBRARY_ADJUST = 5201;//库位调整
     public static final int STOCK_IN_WORK_ALLOT_SCAN = 5202;//扫描调入

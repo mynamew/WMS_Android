@@ -1,19 +1,19 @@
-package com.timi.sz.wms_android.bean.stockin_work.query;
+package com.timi.sz.wms_android.bean.stockin_work.allot_out;
 
 import com.timi.sz.wms_android.bean.outstock.outsource.common.DetailResultsBean;
 
 import java.util.List;
 
 /**
- * $dsc 一步调入 结果
+ * $dsc
  * author: timi
- * create at: 2017-10-10 10:12
+ * create at: 2017-12-03 08:30
  */
 
-public class AllotOneSetpResult {
+public class QueryAllotOutResult {
 
     /**
-     * summaryResults : {"isLotPick":false,"isRegion":false,"billId":176,"billCode":"0000000218","billDate":"2015-05-19","outOwner":"","inOwner":"","createrName":"方艳冬","scanId":0,"qty":50,"waitQty":50,"scanQty":0,"warehouseId":0,"warehouseName":null,"regionId":0,"regionName":null,"isSplitPrint":false}
+     * summaryResults : {"isLotPick":true,"isRegion":false,"billId":176,"billCode":"0000000218","billDate":"2015-05-19","outOwner":"","inOwner":"","createrName":"方艳冬","scanId":0,"qty":50,"waitQty":50,"scanQty":0,"warehouseId":0,"warehouseName":null,"regionId":0,"regionName":null,"isSplitPrint":true}
      * detailResults : [{"detailId":3240,"line":1,"materialId":69,"materialCode":"10101010069","materialName":"贴片电阻","materialStandard":"24K/0603/±5%","materialAttribute":"","warehouseId":1,"warehouseName":"原材料仓","qty":38,"waitQty":38,"scanQty":0},{"detailId":3241,"line":2,"materialId":155,"materialCode":"10101010155","materialName":"贴片电阻","materialStandard":"9.1K/0805/±5%","materialAttribute":"","warehouseId":1,"warehouseName":"原材料仓","qty":12,"waitQty":12,"scanQty":0}]
      */
 
@@ -38,7 +38,7 @@ public class AllotOneSetpResult {
 
     public static class SummaryResultsBean {
         /**
-         * isLotPick : false
+         * isLotPick : true
          * isRegion : false
          * billId : 176
          * billCode : 0000000218
@@ -54,7 +54,7 @@ public class AllotOneSetpResult {
          * warehouseName : null
          * regionId : 0
          * regionName : null
-         * isSplitPrint : false
+         * isSplitPrint : true
          */
 
         private boolean isLotPick;

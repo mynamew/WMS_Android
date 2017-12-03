@@ -6,6 +6,8 @@ import android.view.View;
 
 import com.timi.sz.wms_android.R;
 import com.timi.sz.wms_android.base.uils.Constants;
+import com.timi.sz.wms_android.mvp.UI.stock_in_work.allot_one_step.OneStepAllotActivity;
+import com.timi.sz.wms_android.mvp.UI.stock_in_work.allot_scan.AllotScanActivity;
 import com.timi.sz.wms_android.mvp.UI.stock_in_work.form_change_instock.FormChangeInstockActivity;
 import com.timi.sz.wms_android.mvp.UI.stock_in_work.form_change_outstock.FormChangeOutstockActivity;
 import com.timi.sz.wms_android.mvp.UI.stock_in_work.lib_adjust.LibraryAdjustActivity;
@@ -54,11 +56,11 @@ public class StockInWorkActivity extends BaseNoMvpActivity {
                 intent.putExtra(Constants.STOCK_IN_WORK_CODE_STR,Constants.STOCK_IN_WORK_LIBRARY_ADJUST);
                 break;
             case R.id.tv_stockin_work_scan_in://扫描调入
-                intent.setClass(StockInWorkActivity.this, StockInWorkQueryActivity.class);
+                intent.setClass(StockInWorkActivity.this, AllotScanActivity.class);
                 intent.putExtra(Constants.STOCK_IN_WORK_CODE_STR,Constants.STOCK_IN_WORK_ALLOT_SCAN);
                 break;
             case R.id.tv_stockin_work_one_step_in://一步调入
-                intent.setClass(StockInWorkActivity.this, StockInWorkQueryActivity.class);
+                intent.setClass(StockInWorkActivity.this, OneStepAllotActivity.class);
                 intent.putExtra(Constants.STOCK_IN_WORK_CODE_STR,Constants.STOCK_IN_WORK_ALLOT_ONE_STEP);
 
                 break;

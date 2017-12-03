@@ -9,6 +9,7 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
 import com.timi.sz.wms_android.R;
 import com.timi.sz.wms_android.base.uils.Constants;
 import com.timi.sz.wms_android.base.uils.InputMethodUtils;
@@ -21,6 +22,7 @@ import com.timi.sz.wms_android.bean.stockin_work.query.FormChangeInResult;
 import com.timi.sz.wms_android.bean.stockin_work.query.FormChangeOutResult;
 import com.timi.sz.wms_android.bean.stockin_work.query.PointResult;
 import com.timi.sz.wms_android.bean.stockin_work.query.StockQueryResult;
+import com.timi.sz.wms_android.mvp.UI.stock_in_work.allot_one_step.OneStepAllotActivity;
 import com.timi.sz.wms_android.mvp.UI.stock_in_work.allot_scan.AllotScanActivity;
 import com.timi.sz.wms_android.mvp.base.BaseActivity;
 import com.timi.sz.wms_android.qrcode.utils.Constant;
@@ -115,27 +117,42 @@ public class StockInWorkQueryActivity extends BaseActivity<StockInWorkQueryView,
 
     @Override
     public void queryAllotScan(AllotScanResult result) {
-        startActivity(new Intent(this, AllotScanActivity.class));
+        Intent intent = new Intent(this, AllotScanActivity.class);
+        intent.putExtra(Constants.STOCK_IN_WORK_BEAN, new Gson().toJson(result));
+        intent.putExtra(Constants.STOCK_IN_WORK_CODE_STR, intentCode);
+        startActivity(intent);
     }
 
     @Override
     public void queryAllotOneStep(AllotOneSetpResult result) {
-
+        Intent intent = new Intent(this, OneStepAllotActivity.class);
+        intent.putExtra(Constants.STOCK_IN_WORK_BEAN, new Gson().toJson(result));
+        intent.putExtra(Constants.STOCK_IN_WORK_CODE_STR, intentCode);
+        startActivity(intent);
     }
 
     @Override
     public void queryFormChangeOut(FormChangeOutResult result) {
-
+        Intent intent = new Intent(this, AllotScanActivity.class);
+        intent.putExtra(Constants.STOCK_IN_WORK_BEAN, new Gson().toJson(result));
+        intent.putExtra(Constants.STOCK_IN_WORK_CODE_STR, intentCode);
+        startActivity(intent);
     }
 
     @Override
     public void queryFormChangeIn(FormChangeInResult result) {
-
+        Intent intent = new Intent(this, AllotScanActivity.class);
+        intent.putExtra(Constants.STOCK_IN_WORK_BEAN, new Gson().toJson(result));
+        intent.putExtra(Constants.STOCK_IN_WORK_CODE_STR, intentCode);
+        startActivity(intent);
     }
 
     @Override
     public void queryPoint(PointResult result) {
-
+        Intent intent = new Intent(this, AllotScanActivity.class);
+        intent.putExtra(Constants.STOCK_IN_WORK_BEAN, new Gson().toJson(result));
+        intent.putExtra(Constants.STOCK_IN_WORK_CODE_STR, intentCode);
+        startActivity(intent);
     }
 
     @OnClick({R.id.iv_sbo_scan})

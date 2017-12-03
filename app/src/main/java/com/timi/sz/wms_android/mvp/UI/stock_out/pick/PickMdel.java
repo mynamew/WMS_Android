@@ -3,6 +3,7 @@ package com.timi.sz.wms_android.mvp.UI.stock_out.pick;
 import com.timi.sz.wms_android.bean.outstock.outsource.QueryWWPickDataByOutSourceResult;
 import com.timi.sz.wms_android.bean.outstock.pick.QueryDNByInputForPickResult;
 import com.timi.sz.wms_android.bean.outstock.product.QueryProductPickByInputResult;
+import com.timi.sz.wms_android.bean.stockin_work.allot_out.QueryAllotOutResult;
 import com.timi.sz.wms_android.http.HttpManager;
 import com.timi.sz.wms_android.http.api.ApiService;
 import com.timi.sz.wms_android.http.api.CommonResult;
@@ -33,6 +34,20 @@ public class PickMdel extends MvpBaseModel {
             @Override
             public Observable<CommonResult<QueryDNByInputForPickResult>> createObservable(ApiService apiService) {
                 return apiService.queryDNByInputForPick(params);
+            }
+        });
+    }
+    /**
+     * 调拨调出
+     *
+     * @param observer
+     */
+    public void queryTransferByInputForOutStock(final Map<String, Object> params, Observer<QueryAllotOutResult> observer) {
+
+        HttpManager.getInstance().HttpManagerRequest(observer, new ApiServiceMethodCallBack<QueryAllotOutResult>() {
+            @Override
+            public Observable<CommonResult<QueryAllotOutResult>> createObservable(ApiService apiService) {
+                return apiService.queryTransferByInputForOutStock(params);
             }
         });
     }

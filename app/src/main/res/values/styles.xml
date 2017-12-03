@@ -9,9 +9,20 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:windowIsTranslucent">true</item>
-        <!--<item name="android:windowBackground">@android:color/transparent</item>-->
+        <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:windowAnimationStyle">@style/MyInterludeStyle</item>
 
+    </style>
+
+    <style name="AppBaseThemeMain" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorPrimary</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowIsTranslucent">false</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowAnimationStyle">@style/MyInterludeStyle</item>
     </style>
 
     <style name="MyInterludeStyle">
@@ -145,6 +156,7 @@
         <item name="android:layout_marginRight">20px</item>
         <item name="android:background">#e5e5e5</item>
     </style>
+
     <style name="MyCheckBox" parent="Theme.AppCompat.Light">
         <item name="colorControlNormal">@color/login_txt_color</item>
         <item name="colorControlActivated">@color/login_txt_color</item>

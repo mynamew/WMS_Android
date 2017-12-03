@@ -7,6 +7,7 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     tools:context="com.timi.sz.wms_android.mvp.UI.stock_in_work.form_change_instock.FormChangeInstockActivity">
+
     <include
         android:id="@+id/head"
         layout="@layout/title_head"/>
@@ -24,9 +25,9 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/head"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/head">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -42,9 +43,54 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
+                android:layout_height="88px"
+                android:layout_marginRight="30px">
+
+                <TextView
+                    android:id="@+id/tv_putaway_scan_location_tip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:paddingLeft="10px"
+                    android:text="@string/in_lib_location_code"
+                    android:textColor="#333"
+                    android:textSize="13sp"
+                    />
+
+                <EditText
+                    android:id="@+id/et_scan_location"
+                    android:layout_width="match_parent"
+                    android:layout_height="60px"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="50px"
+                    android:layout_toRightOf="@id/tv_putaway_scan_location_tip"
+                    android:background="@drawable/selector_et"
+                    android:ellipsize="end"
+                    android:gravity="center_vertical"
+                    android:hint="@string/please_scan_lib_location_code"
+                    android:imeOptions="actionSearch"
+                    android:paddingLeft="20px"
+                    android:paddingRight="80px"
+                    android:singleLine="true"
+                    android:text=""
+                    android:textSize="26px"/>
+
+                <ImageView
+                    android:id="@+id/iv_scan_location"
+                    android:layout_width="40px"
+                    android:layout_height="40px"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="20px"
+                    android:layout_marginRight="20px"
+                    android:src="@mipmap/ic_scan"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="96px"
-                android:background="@color/white"
                 android:layout_marginRight="30px"
+                android:background="@color/white"
                 >
                 <!--条码-->
                 <TextView
@@ -62,7 +108,7 @@
                 <EditText
                     android:id="@+id/et_material_code"
                     android:layout_width="match_parent"
-                    android:layout_height="30dp"
+                    android:layout_height="60px"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="50px"
                     android:layout_toRightOf="@id/tv_material_code_tip"
@@ -78,18 +124,25 @@
 
                 <ImageView
                     android:id="@+id/iv_can_material_code"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="40px"
+                    android:layout_height="40px"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:layout_marginEnd="10dp"
-                    android:layout_marginRight="10dp"
+                    android:layout_marginEnd="20px"
+                    android:layout_marginRight="20px"
                     android:src="@mipmap/ic_scan"
                     />
             </RelativeLayout>
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/divide_color"/>
 
-            <include layout="@layout/footer_form_change"/>
+            <include
+                android:id="@+id/layout_material_info"
+                layout="@layout/footer_form_change"
+                android:visibility="gone"/>
         </LinearLayout>
     </ScrollView>
 

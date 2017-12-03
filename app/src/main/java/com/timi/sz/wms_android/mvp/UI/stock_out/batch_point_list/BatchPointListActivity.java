@@ -32,6 +32,7 @@ import com.timi.sz.wms_android.bean.outstock.product.QueryPrdFeedByInputResult;
 import com.timi.sz.wms_android.bean.outstock.product.QueryProductPickByInputResult;
 import com.timi.sz.wms_android.bean.outstock.sale.QueryDNByInputForOutStockResult;
 import com.timi.sz.wms_android.bean.outstock.sale.QuerySalesOutSotckByInputForOutStockResult;
+import com.timi.sz.wms_android.bean.stockin_work.allot_out.QueryAllotOutResult;
 import com.timi.sz.wms_android.http.message.BaseMessage;
 import com.timi.sz.wms_android.http.message.event.OutsourceAuditEvent;
 import com.timi.sz.wms_android.mvp.UI.stock_out.batch_point.BatchPointActivity;
@@ -56,6 +57,7 @@ import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_POINT_WAREHO
 import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_SALE_CARTON_NUM;
 import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_SALE_IS_CARTON;
 import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_SCANID;
+import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_ALLOT_OUT_PICK;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_BEAN;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_CODE_STR;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_FINISH_GOODS_PICK;
@@ -199,7 +201,10 @@ public class BatchPointListActivity extends BaseActivity<BatchPointListView, Bat
     /**
      * 其他出库 生单
      */
-    private QueryOtherOutStockByInputResult queryOtherOutStockByInputResult;
+    private QueryOtherOutStockByInputResult queryOtherOutStockByInputResult;   /**
+     * 调拨出库
+     */
+    private QueryAllotOutResult queryAllotOutResult;
     /**
      * 适配器
      */
@@ -474,6 +479,22 @@ public class BatchPointListActivity extends BaseActivity<BatchPointListView, Bat
                 regionId = summaryResultsFinishGoodsPick.getRegionId();
                 //billId
                 billId = summaryResultsFinishGoodsPick.getBillId();
+            case STOCK_OUT_ALLOT_OUT_PICK://调拨调出
+                btnPointCommit.setText(R.string.create_allot_out_orderno);
+                tvHeadTitle.setText(R.string.material_point_list_allot_out);
+                queryAllotOutResult=new Gson().fromJson(getIntent().getStringExtra(STOCK_OUT_BEAN), QueryAllotOutResult.class);
+                QueryAllotOutResult.SummaryResultsBean summaryResultsAllotOut = queryAllotOutResult.getSummaryResults();
+                //设置内容
+                setHeaderContent(summaryResultsAllotOut.getBillCode(), summaryResultsAllotOut.getBillDate(), summaryResultsAllotOut.getWarehouseName(), summaryResultsAllotOut.getRegionName(), summaryResultsAllotOut.getQty(), summaryResultsAllotOut.getWaitQty(), summaryResultsAllotOut.getScanQty());
+                //设置scanid
+                scanId = summaryResultsAllotOut.getScanId();
+                //设置 submitType
+                submitType = 1;
+                //设置区域id
+                regionId = summaryResultsAllotOut.getRegionId();
+                //billId
+                billId = summaryResultsAllotOut.getBillId();
+                break;
             default:
                 break;
         }
@@ -609,6 +630,10 @@ public class BatchPointListActivity extends BaseActivity<BatchPointListView, Bat
             case STOCK_OUT_FINISH_GOODS_PICK://成品拣货
                 isIsMerge = false;
                 detailResults = queryDNByInputForPickResult.getDetailResults();
+                break;
+            case STOCK_OUT_ALLOT_OUT_PICK:
+                isIsMerge = false;
+                detailResults = queryAllotOutResult.getDetailResults();
                 break;
             default:
                 break;
@@ -764,6 +789,9 @@ public class BatchPointListActivity extends BaseActivity<BatchPointListView, Bat
                                 holder.setTextView(R.id.tv_line_num, item.getLine());
                                 break;
                             case STOCK_OUT_FINISH_GOODS_PICK://成品拣货
+                                holder.setTextView(R.id.tv_line_num, item.getLine());
+                                break;
+                            case STOCK_OUT_ALLOT_OUT_PICK://调拨调出
                                 holder.setTextView(R.id.tv_line_num, item.getLine());
                                 break;
                             default:

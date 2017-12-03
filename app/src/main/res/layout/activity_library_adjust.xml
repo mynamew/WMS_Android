@@ -12,6 +12,7 @@
     <include layout="@layout/title_head"/>
 
     <RelativeLayout
+        android:background="@color/white"
         android:id="@+id/rl_location_code"
         android:layout_width="match_parent"
         android:layout_height="96px"
@@ -69,6 +70,7 @@
         android:background="@color/divide_color"/>
 
     <RelativeLayout
+        android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="96px"
         android:layout_marginRight="30px"

@@ -762,6 +762,20 @@
     <string name="outstock_scan_form_change">出库扫描(形态转换)</string>
     <string name="form_change_instock_detial_info_tip">形态转换单(入库)信息详情</string>
     <string name="instock_num_tip">入库数：</string>
+    <string name="allot_orderno">调拨单号</string>
+    <string name="allot_out_total_num">调出总数</string>
+    <string name="allot_total_num">调拨总数</string>
+    <string name="please_input_scan_lib_code">请输入/扫描货架号</string>
+    <string name="goal_storege">目的货架</string>
+    <string name="allot_orderno_info">调拨单据信息</string>
+    <string name="allot">调波</string>
+    <string name="allot_out">调出</string>
+    <string name="allot_outstock_tip">调拨调出</string>
+    <string name="create_allot_out_orderno">生成调出单</string>
+    <string name="material_point_list_allot_out">物品清单(调拨调出)</string>
+    <string name="material_point_allot_out">物品清点(调拨调出)</string>
+    <string name="finish_goods_orderno_info">成品拣货单信息</string>
+    <string name="one_step_success">一步调出成功</string>
 
 
 </resources>
