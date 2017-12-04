@@ -63,6 +63,8 @@ import com.timi.sz.wms_android.bean.stockin_work.query.FormChangeInResult;
 import com.timi.sz.wms_android.bean.stockin_work.query.FormChangeOutResult;
 import com.timi.sz.wms_android.bean.stockin_work.query.PointResult;
 import com.timi.sz.wms_android.bean.stockin_work.query.StockQueryResult;
+import com.timi.sz.wms_android.bean.stockin_work.stock_query.MaterialQueryResult;
+import com.timi.sz.wms_android.bean.stockin_work.stock_query.QueryStockContainerResult;
 
 import java.util.List;
 import java.util.Map;
@@ -1013,8 +1015,17 @@ public interface ApiService {
      * @return
      */
     @FormUrlEncoded
-    @POST("api/Account/ClientLogin")
-    Observable<CommonResult<StockQueryResult>> queryStockQuery(@FieldMap Map<String, Object> params);
+    @POST("api/services/wpda/QueryStock/QueryStockContainer")
+    Observable<CommonResult<QueryStockContainerResult>> queryStockContainer(@FieldMap Map<String, Object> params);
+/**
+     * 物品查询
+     *
+     * @param params
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("api/services/wpda/QueryStock/QueryStockMaterial")
+    Observable<CommonResult<MaterialQueryResult>> queryStockMaterial(@FieldMap Map<String, Object> params);
 
     /**
      * 盘点查询
