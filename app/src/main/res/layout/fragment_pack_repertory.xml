@@ -33,7 +33,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30px"
-                android:text="30"
+                android:text="0"
                 android:textColor="@color/color_000"
                 android:textSize="30px"/>
         </LinearLayout>
@@ -57,7 +57,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30px"
-                android:text="3009876543"
+                android:text="0"
                 android:textColor="@color/color_000"
                 android:textSize="30px"/>
         </LinearLayout>
@@ -90,7 +90,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30px"
-                android:text="包装箱"
+                android:text=""
                 android:textColor="@color/color_000"
                 android:textSize="30px"/>
         </LinearLayout>
@@ -114,7 +114,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30px"
-                android:text="3009876543"
+                android:text=""
                 android:textColor="@color/color_000"
                 android:textSize="30px"/>
         </LinearLayout>

@@ -77,7 +77,13 @@
                         android:textColor="@color/color_000"
                         android:textSize="26px"/>
                 </LinearLayout>
-
+                <TextView
+                    android:id="@+id/tv_qty"
+                    android:textColor="@color/login_txt_color"
+                    android:layout_width="wrap_content"
+                    android:textSize="26px"
+                    android:text="320"
+                    android:layout_height="wrap_content"/>
             </LinearLayout>
 
             <TextView

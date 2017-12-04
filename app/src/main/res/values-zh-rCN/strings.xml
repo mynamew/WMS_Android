@@ -786,6 +786,8 @@
     <string name="material_point_allot_out">物品清点(调拨调出)</string>
     <string name="finish_goods_orderno_info">成品拣货单信息</string>
     <string name="one_step_success">一步调出成功</string>
+    <string name="please_input_query_pack_code">请输入/扫描要查询的容器条码</string>
+    <string name="please_input_scan_query_material_code">请输入/扫描要查询的物料条码</string>
 
 
 </resources>

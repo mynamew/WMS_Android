@@ -56,6 +56,7 @@ public abstract  class BaseFragment <V extends MvpView, P extends MvpPresenter<V
         if (this.presenter != null && this.view != null) {
             this.presenter.attachView(view);
         }
+        initBundle();
         return itemView;
     }
 
@@ -89,6 +90,8 @@ public abstract  class BaseFragment <V extends MvpView, P extends MvpPresenter<V
     public abstract V createView();
     //初始化数据
     public abstract void initData();
+    //初始化数据
+    public abstract void initBundle();
     //设置布局id
     public abstract int setLayoutId();
     @Override
@@ -129,5 +132,14 @@ public abstract  class BaseFragment <V extends MvpView, P extends MvpPresenter<V
      */
     public void setTextViewText(TextView tv, @StringRes int fomat, String content) {
         tv.setText(String.format(getString(fomat), content));
+    }
+    /**
+     *设置 文本
+     * @param tv
+     * @param fomat
+     * @param content
+     */
+    public void setTextViewText(TextView tv, @StringRes int fomat, Object content) {
+        tv.setText(String.format(getString(fomat), String.valueOf(content)));
     }
 }

@@ -91,7 +91,6 @@ public class FragmentPoint extends BaseFragment<FragmentPointView, FragmentPoint
 
     @Override
     public void initData() {
-        BaseMessage.register(this);
         //判断code  是送货单还是采购单
         Intent it = ((StockInPointActivity) getActivity()).getIntentCode();
         intentCode = it.getIntExtra(Constants.CODE_STR, Constants.COME_MATERAIL_NUM);
@@ -170,6 +169,12 @@ public class FragmentPoint extends BaseFragment<FragmentPointView, FragmentPoint
                 showGoodsPointDialog(pos);
             }
         });
+    }
+
+    @Override
+    public void initBundle() {
+        BaseMessage.register(this);
+
     }
 
     @Override

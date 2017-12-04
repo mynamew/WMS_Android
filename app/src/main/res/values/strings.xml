@@ -786,6 +786,8 @@
     <string name="sale_outstock_orderno_info">销售出库单信息</string>
     <string name="repertory_total_num">库存总数</string>
     <string name="one_step_success">一步调出成功</string>
+    <string name="please_input_query_pack_code">请输入/扫描要查询的容器条码</string>
+    <string name="please_input_scan_query_material_code">请输入/扫描要查询的物料条码</string>
 
 
 </resources>

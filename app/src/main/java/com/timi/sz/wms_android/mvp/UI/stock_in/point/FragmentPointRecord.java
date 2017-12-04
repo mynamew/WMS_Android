@@ -80,7 +80,6 @@ public class FragmentPointRecord extends BaseFragment<FragmentPointRecordView, F
     @Override
     public void initData() {
 
-        BaseMessage.register(this);
         int receiveId = ((StockInPointActivity) getActivity()).getReceiveId();
         intentCode = ((StockInPointActivity) getActivity()).getIntentCode().getIntExtra(Constants.CODE_STR, Constants.COME_MATERAIL_NUM);
         Map<String, Object> params = new HashMap<>();
@@ -89,6 +88,12 @@ public class FragmentPointRecord extends BaseFragment<FragmentPointRecordView, F
         params.put("ReceiveId", receiveId);
         params.put("MAC", PackageUtils.getMac());
         getPresenter().getPointRecord(params);
+    }
+
+    @Override
+    public void initBundle() {
+        BaseMessage.register(this);
+
     }
 
     @Override

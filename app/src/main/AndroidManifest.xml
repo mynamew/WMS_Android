@@ -228,7 +228,9 @@
         </activity>
         <activity android:name=".mvp.UI.stock_in_work.pack_adjust.PackAdjustActivity">
         </activity>
-        <activity android:name=".mvp.UI.stock_in_work.stock_query.StockQueryActivity">
+        <activity
+            android:name=".mvp.UI.stock_in_work.stock_query.StockQueryActivity"
+            android:windowSoftInputMode="adjustPan|stateHidden">
         </activity>
         <activity android:name=".mvp.UI.quity.mrp.MRPReviewActivity">
         </activity>

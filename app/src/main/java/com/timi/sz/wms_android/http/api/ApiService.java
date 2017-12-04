@@ -281,7 +281,7 @@ public interface ApiService {
      */
     @FormUrlEncoded
     @POST("api/services/wpda/PrdInstock/GetWorkOrderDetail")
-    Observable<CommonResult<List<MaterialDetailResult>>> getWorkOrderDetail(@FieldMap Map<String, Object> params);
+    Observable<CommonResult<List<OrderDetailData>>> getWorkOrderDetail(@FieldMap Map<String, Object> params);
 
     /**
      * 其他入库—审核

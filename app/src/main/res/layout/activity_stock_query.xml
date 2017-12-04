@@ -30,7 +30,7 @@
                 android:layout_marginRight="20px"
                 android:background="@drawable/selector_et_stock_query"
                 android:ellipsize="end"
-                android:hint="请输入/扫描要查询的容器条码"
+                android:hint="@string/please_input_query_pack_code"
                 android:imeOptions="actionSearch"
                 android:paddingBottom="15px"
                 android:paddingLeft="96px"
