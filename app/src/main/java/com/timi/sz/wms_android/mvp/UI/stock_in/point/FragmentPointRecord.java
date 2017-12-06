@@ -151,6 +151,10 @@ public class FragmentPointRecord extends BaseFragment<FragmentPointRecordView, F
 
                         }
                     }).setAnimation(R.style.popWindow_animation_push);
+            /**
+             * PDA无备品 则隐藏
+             */
+            setSpareGoodsStatus(mPointRecordDialog.getView(R.id.ll_spare_num));
         }
         mPointRecordDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
             @Override
@@ -181,13 +185,16 @@ public class FragmentPointRecord extends BaseFragment<FragmentPointRecordView, F
 
                 @Override
                 protected void bindData(RecyclerViewHolder holder, int position, StockinMaterialBean item) {
-                    holder.setTextView(R.id.tv_line_name,position+1);
-                    setTextViewText(holder.getTextView(R.id.tv_material_code),R.string.material_code,item.getMaterialCode());
-                    setTextViewText(holder.getTextView(R.id.tv_material_name),R.string.material_name,item.getMaterialName());
-                    holder.setTextView(R.id.tv_point_num,item.getCountQty());
-                    holder.setTextView(R.id.tv_spare_num,item.getGiveQty());
-                    setTextViewText(holder.getTextView(R.id.tv_point_date),R.string.item_point_date,item.getCreateDateTime());
-
+                    holder.setTextView(R.id.tv_line_name, position + 1);
+                    setTextViewText(holder.getTextView(R.id.tv_material_code), R.string.material_code, item.getMaterialCode());
+                    setTextViewText(holder.getTextView(R.id.tv_material_name), R.string.material_name, item.getMaterialName());
+                    holder.setTextView(R.id.tv_point_num, item.getCountQty());
+                    holder.setTextView(R.id.tv_spare_num, item.getGiveQty());
+                    setTextViewText(holder.getTextView(R.id.tv_point_date), R.string.item_point_date, item.getCreateDateTime());
+                    /**
+                     * 是否有备品
+                     */
+                    setSpareGoodsStatus(holder.getView(R.id.ll_spare_num));
                 }
             };
             rlvPointRecord.setAdapter(adapter);
@@ -198,7 +205,7 @@ public class FragmentPointRecord extends BaseFragment<FragmentPointRecordView, F
                     showGoodsPointRecordDialog(pos);
                 }
             });
-        }else {
+        } else {
             adapter.notifyDataSetChanged();
         }
 

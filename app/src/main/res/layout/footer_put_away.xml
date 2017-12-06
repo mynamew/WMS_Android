@@ -211,7 +211,31 @@
             android:textColor="#000"
             android:textSize="13sp"/>
     </LinearLayout>
+    <LinearLayout
+        android:id="@+id/ll_material_attr"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingBottom="5px"
+        android:paddingTop="10px">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40px"
+            android:text="@string/item_material_attr"
+            android:textColor="#333"
+            android:textSize="13sp"/>
+
+        <TextView
+            android:id="@+id/tv_putaway_material_attr"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40px"
+            android:text=""
+            android:textColor="#000"
+            android:textSize="13sp"/>
+    </LinearLayout>
     <View
         android:layout_width="match_parent"
         android:layout_height="108px"/>

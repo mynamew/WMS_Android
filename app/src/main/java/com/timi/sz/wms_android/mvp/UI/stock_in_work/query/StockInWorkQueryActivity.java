@@ -24,6 +24,7 @@ import com.timi.sz.wms_android.bean.stockin_work.query.PointResult;
 import com.timi.sz.wms_android.bean.stockin_work.query.StockQueryResult;
 import com.timi.sz.wms_android.mvp.UI.stock_in_work.allot_one_step.OneStepAllotActivity;
 import com.timi.sz.wms_android.mvp.UI.stock_in_work.allot_scan.AllotScanActivity;
+import com.timi.sz.wms_android.mvp.UI.stock_in_work.form_change_outstock.FormChangeOutstockActivity;
 import com.timi.sz.wms_android.mvp.base.BaseActivity;
 import com.timi.sz.wms_android.qrcode.utils.Constant;
 
@@ -133,7 +134,7 @@ public class StockInWorkQueryActivity extends BaseActivity<StockInWorkQueryView,
 
     @Override
     public void queryFormChangeOut(FormChangeOutResult result) {
-        Intent intent = new Intent(this, AllotScanActivity.class);
+        Intent intent = new Intent(this, FormChangeOutstockActivity.class);
         intent.putExtra(Constants.STOCK_IN_WORK_BEAN, new Gson().toJson(result));
         intent.putExtra(Constants.STOCK_IN_WORK_CODE_STR, intentCode);
         startActivity(intent);

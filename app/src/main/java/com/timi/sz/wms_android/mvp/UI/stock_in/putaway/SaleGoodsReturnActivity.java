@@ -53,6 +53,8 @@ public class SaleGoodsReturnActivity extends BaseActivity<PutAwayView, PutAwayPr
     TextView tvInStockTotalNum;
     @BindView(R.id.view_line)
     View viewLine;
+    @BindView(R.id.tv_putaway_material_attr)
+    TextView tvPutawayMaterialAttr;
     @BindView(R.id.tv_putaway_scan_location_tip)
     TextView tvPutawayScanLocationTip;
     @BindView(R.id.et_putaway_scan_location)

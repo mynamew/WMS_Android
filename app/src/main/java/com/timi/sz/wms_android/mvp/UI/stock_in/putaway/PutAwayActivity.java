@@ -78,6 +78,8 @@ public class PutAwayActivity extends BaseActivity<PutAwayView, PutAwayPresenter>
     TextView tvPutawayMaterialName;
     @BindView(R.id.tv_putaway_material_nmodel)
     TextView tvPutawayMaterialNmodel;
+    @BindView(R.id.tv_putaway_material_attr)
+    TextView tvPutawayMaterialAttr;
     @BindView(R.id.btn_login)
     Button btnLogin;
     /**
@@ -129,7 +131,7 @@ public class PutAwayActivity extends BaseActivity<PutAwayView, PutAwayPresenter>
                     params1.put("SrcBillType", 13);
                     params1.put("DestBillType", 14);
                     params1.put("ScanId", mReceiveBean.getScanId());
-                    params1.put("BinCode",locationCode);
+                    params1.put("BinCode", locationCode);
                     params1.put("BarcodeNo", orderNum);
                     getPresenter().materialScanNetWork(params1, orderNum);
                 }
@@ -242,7 +244,8 @@ public class PutAwayActivity extends BaseActivity<PutAwayView, PutAwayPresenter>
     /**
      * 扫描的Id  默认是0  当提交物料扫码入库后 会返回sanid
      */
-    private int ScanId=0;
+    private int ScanId = 0;
+
     @OnClick({R.id.iv_putaway_scan_location, R.id.iv_putaway_scan_material, R.id.btn_login})
     public void onViewClicked(View view) {
         switch (view.getId()) {
@@ -274,7 +277,7 @@ public class PutAwayActivity extends BaseActivity<PutAwayView, PutAwayPresenter>
                     ToastUtils.showShort(getString(R.string.please_scan_material_code));
                     return;
                 }
-                if(ScanId==0){//scanid 为0  证明未扫过条码或者条码已经入库 或者出库过了
+                if (ScanId == 0) {//scanid 为0  证明未扫过条码或者条码已经入库 或者出库过了
                     ToastUtils.showShort(getString(R.string.please_inpiut_or_scan_visible_material_code));
                     return;
                 }
@@ -285,7 +288,7 @@ public class PutAwayActivity extends BaseActivity<PutAwayView, PutAwayPresenter>
                 params.put("UserId", SpUtils.getInstance().getUserId());
                 params.put("OrgId", SpUtils.getInstance().getOrgId());
                 params.put("MAC", PackageUtils.getMac());
-                params.put("ScanId",ScanId);
+                params.put("ScanId", ScanId);
                 params.put("SubmitType", 0);
                 getPresenter().createInSockOrderno(params);
         }
@@ -307,6 +310,11 @@ public class PutAwayActivity extends BaseActivity<PutAwayView, PutAwayPresenter>
         tvPutawayMaterialNmodel.setText(bean.getMaterialStandard());
         tvPutawayMaterialNum.setText(String.valueOf(bean.getBarcodeQty()));
         /**
+         * 设置附加属性
+         */
+        tvPutawayMaterialAttr.setText(bean.getMaterialAttribute());
+        setMaterialAttrStatus(tvPutawayMaterialAttr);
+        /**
          * 设置已点总数
          */
         tvHaveCountNum.setText(String.valueOf(bean.getTotalScanQty()));
@@ -317,7 +325,7 @@ public class PutAwayActivity extends BaseActivity<PutAwayView, PutAwayPresenter>
         /**
          * 设置扫码Id
          */
-        ScanId=bean.getScanId();
+        ScanId = bean.getScanId();
 
     }
 

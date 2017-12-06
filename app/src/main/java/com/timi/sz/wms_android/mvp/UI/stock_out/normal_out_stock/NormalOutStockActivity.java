@@ -106,6 +106,8 @@ public class NormalOutStockActivity extends BaseActivity<NormalOutStockView, Nor
     TextView tvMaterialNum;
     @BindView(R.id.tv_material_name)
     TextView tvMaterialName;
+    @BindView(R.id.tv_material_attr)
+    TextView tvMaterialAttr;
     @BindView(R.id.tv_material_nmodel)
     TextView tvMaterialNmodel;
     @BindView(R.id.btn_commit)
@@ -116,6 +118,8 @@ public class NormalOutStockActivity extends BaseActivity<NormalOutStockView, Nor
     Button btnAdd;
     @BindView(R.id.ll_carton)
     LinearLayout llCarton;
+    @BindView(R.id.ll_material_attr)
+    LinearLayout llMaterialAttr;
     /**
      * 跳转的code
      */
@@ -348,7 +352,7 @@ public class NormalOutStockActivity extends BaseActivity<NormalOutStockView, Nor
                 break;
             case STOCK_OUT_OTHER_OUT_BILL://其他生单
                 break;
-            case  STOCK_OUT_FINISH_GOODS_PICK://成品拣货
+            case STOCK_OUT_FINISH_GOODS_PICK://成品拣货
                 tvHeadTitle.setText(R.string.finish_goods_orderno_info);
                 setActivityTitle(getString(R.string.finish_goods_pick_tip));
                 /**
@@ -574,6 +578,22 @@ public class NormalOutStockActivity extends BaseActivity<NormalOutStockView, Nor
     public void submitBarcodeOutAudit(SubmitBarcodeOutAuditData data) {
         ToastUtils.showShort(getString(R.string.commit_success));
         /**
+         * 设置物料的信息
+         */
+        tvMaterialName.setText(data.getMaterialName());
+        tvMaterialCode.setText(data.getMaterialCode());
+        tvMaterialAttr.setText(TextUtils.isEmpty(data.getMaterialAttribute()) ? getString(R.string.none) : data.getMaterialAttribute());
+        tvMaterialNmodel.setText(TextUtils.isEmpty(data.getMaterialStandard()) ? getString(R.string.none) : data.getMaterialStandard());
+        /**
+         * 设置物料数量
+         */
+        scanQty = scanQty + data.getBarcodeQty();
+        tvMaterialNum.setText("(" + data.getBarcodeQty() + ")" + scanQty + "/" + totalQty);
+        /**
+         * 设置 是否显示附加属性
+         */
+        setMaterialAttrStatus(findViewById(R.id.ll_material_attr));
+        /**
          * 超出数量  跳转到拆分条吗界面
          */
         if (data.getExceedQty() > 0) {
@@ -657,5 +677,12 @@ public class NormalOutStockActivity extends BaseActivity<NormalOutStockView, Nor
     @OnClick(R.id.btn_add)
     public void onViewClicked() {
         cartonNum = 0;
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
     }
 }

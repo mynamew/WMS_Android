@@ -55,6 +55,8 @@ public class FinishedGoodsCreateBillPutAwayActivity extends BaseActivity<PutAway
     TextView tvInStockTotalNum;
     @BindView(R.id.view_line)
     View viewLine;
+    @BindView(R.id.tv_putaway_material_attr)
+    TextView tvPutawayMaterialAttr;
     @BindView(R.id.tv_putaway_scan_location_tip)
     TextView tvPutawayScanLocationTip;
     @BindView(R.id.et_putaway_scan_location)
@@ -98,6 +100,11 @@ public class FinishedGoodsCreateBillPutAwayActivity extends BaseActivity<PutAway
         tvPutawayMaterialName.setText(bean.getMaterialName());
         tvPutawayMaterialNmodel.setText(bean.getMaterialStandard());
         tvPutawayMaterialNum.setText(String.valueOf(bean.getBarcodeQty()));
+        /**
+         * 设置附加属性
+         */
+        tvPutawayMaterialAttr.setText(bean.getMaterialAttribute());
+        setMaterialAttrStatus(tvPutawayMaterialAttr);
         /**
          * 设置已点总数
          */

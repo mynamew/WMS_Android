@@ -9,18 +9,24 @@ import android.support.annotation.Nullable;
 import com.timi.sz.wms_android.R;
 import com.timi.sz.wms_android.base.uils.Constants;
 import com.timi.sz.wms_android.base.uils.LogUitls;
+import com.timi.sz.wms_android.base.uils.PackageUtils;
 import com.timi.sz.wms_android.base.uils.SpUtils;
 import com.timi.sz.wms_android.base.uils.statusutils.StatusBarUtil;
+import com.timi.sz.wms_android.bean.GetPDA_ParameterResult;
 import com.timi.sz.wms_android.mvp.UI.home.MainActivity;
 import com.timi.sz.wms_android.mvp.UI.login.LoginActivity;
+import com.timi.sz.wms_android.mvp.base.BaseActivity;
 import com.zhy.autolayout.AutoLayoutActivity;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
-  * splash activity
-  * author: timi
-  * create at: 2017/8/16 9:51
-  */
-public class SplashActivity extends AutoLayoutActivity {
+ * splash activity
+ * author: timi
+ * create at: 2017/8/16 9:51
+ */
+public class SplashActivity extends BaseActivity<SplashView, SplashPresenter> implements SplashView {
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -40,10 +46,14 @@ public class SplashActivity extends AutoLayoutActivity {
         }
     };
 
+
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_splash);
+    public int setLayoutId() {
+        return R.layout.activity_splash;
+    }
+
+    @Override
+    public void initBundle(Bundle savedInstanceState) {
         StatusBarUtil.setTranslucentBackground(this);
         SpUtils.getInstance().putBaseUrl(Constants.BASE_URL);
         SpUtils.getInstance().puttenancyName("Default");
@@ -51,5 +61,36 @@ public class SplashActivity extends AutoLayoutActivity {
         SpUtils.getInstance().putUserName("admin");
         SpUtils.getInstance().putPassword("123qwe");
         handler.sendEmptyMessageDelayed(0, 2000);
+    }
+
+    @Override
+    public void initView() {
+
+    }
+
+    @Override
+    public void initData() {
+//        Map<String, Object> params = new HashMap<>();
+//        params.put("UserId", SpUtils.getInstance().getUserId());
+//        params.put("OrgId", SpUtils.getInstance().getOrgId());
+//        params.put("mac", PackageUtils.getMac());
+//        getPresenter().getPDAParams(params);
+    }
+
+    @Override
+    public SplashPresenter createPresenter() {
+        return new SplashPresenter(this);
+    }
+
+    @Override
+    public SplashView createView() {
+        return this;
+    }
+
+    @Override
+    public void getPDAParams(GetPDA_ParameterResult o) {
+        SpUtils.getInstance().putIsGiveGoods(o.isIsGiveGoods());
+        SpUtils.getInstance().putIsMaterialAttribute(o.isIsMaterialAttribute());
+        SpUtils.getInstance().putIsBillList(o.isIsBillList());
     }
 }

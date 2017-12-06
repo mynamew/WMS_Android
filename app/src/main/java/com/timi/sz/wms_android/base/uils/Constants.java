@@ -17,6 +17,13 @@ public class Constants {
     public static final String BASE_URL = "http://192.168.0.39:8066/";
     //超时时间   5s
     public static int DEFAULT_TIMEOUT = 5000;
+
+    /***********
+     * PDA  配置
+     *********************************************************************************************/
+    public  static  final  String IS_GIVE_GOOD="is_give_goods";//是否有备品
+    public  static  final  String IS_MATERAIL_ATTR="is_material_attr";//是否有附加属性
+    public  static  final  String IS_BILL_LIST="is_bill_list";//是否无纸化作业（即无条码，直接通过单据列表找到单号等数据）
     /**********
      * 状态栏颜色
      *********************************************************************************************/
@@ -217,6 +224,7 @@ public class Constants {
      */
     public static final String STOCK_IN_WORK_CODE_STR = "stockin_work_code";//库内作业的code码的key
     public static final String STOCK_IN_WORK_BEAN = "stockin_work_bean";//库内传递实体的key
+    public static final String STOCK_IN_WORK_BILLID = "stockin_work_billid";//库内传递 billid
 
     public static final int STOCK_IN_WORK_LIBRARY_ADJUST = 5201;//库位调整
     public static final int STOCK_IN_WORK_ALLOT_SCAN = 5202;//扫描调入

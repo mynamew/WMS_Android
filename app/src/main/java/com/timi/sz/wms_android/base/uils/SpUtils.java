@@ -309,4 +309,64 @@ public class SpUtils {
         getSharedPreferences();
         return mPreference.getString(Constants.USER_PSW, "");
     }
+    /**
+     * 存入是否有备品
+     *
+     * @param value
+     */
+    public SpUtils putIsGiveGoods(boolean value) {
+        getSharedPreferences();
+        editor.putBoolean(Constants.IS_GIVE_GOOD, value).commit();
+        return this;
+    }
+
+    /**
+     * 获取是否有斌品
+     *
+     * @return
+     */
+    public boolean getIsGiveGoods() {
+        getSharedPreferences();
+        return mPreference.getBoolean(Constants.IS_GIVE_GOOD, false);
+    }
+    /**
+     * 存入是否有附加属性
+     *
+     * @param value
+     */
+    public SpUtils putIsMaterialAttribute(boolean value) {
+        getSharedPreferences();
+        editor.putBoolean(Constants.IS_MATERAIL_ATTR, value).commit();
+        return this;
+    }
+
+    /**
+     * 获取是否有附加属性
+     *
+     * @return
+     */
+    public boolean getIsMaterialAttribute() {
+        getSharedPreferences();
+        return mPreference.getBoolean(Constants.IS_MATERAIL_ATTR, false);
+    }
+    /**
+     * 存入是否无纸化作业
+     *
+     * @param value
+     */
+    public SpUtils putIsBillList(boolean value) {
+        getSharedPreferences();
+        editor.putBoolean(Constants.IS_BILL_LIST, value).commit();
+        return this;
+    }
+
+    /**
+     * 获取是否无纸化作业
+     *
+     * @return
+     */
+    public boolean getIsBillList() {
+        getSharedPreferences();
+        return mPreference.getBoolean(Constants.IS_BILL_LIST, false);
+    }
 }

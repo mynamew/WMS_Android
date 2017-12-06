@@ -59,10 +59,16 @@ public class StockQueryActivity extends BaseActivity<StockQueryView, StockQueryP
             public void tab1Click(View view) {
                 isPackQuery = true;
                 etStockQuery.setHint(R.string.please_input_query_pack_code);
+
                 /**
                  * 设置物品种类是否可见
                  */
                 changeFragment(0);
+
+                if (TextUtils.isEmpty(etStockQuery.getText().toString().trim())) {
+                    return;
+                }
+
                 StockQueryEvent stockQueryEvent = new StockQueryEvent(StockQueryEvent.STOCK_QUERY_PACK_REPERTORY);
                 stockQueryEvent.inputContent = etStockQuery.getText().toString().trim();
                 BaseMessage.post(stockQueryEvent);
@@ -77,6 +83,9 @@ public class StockQueryActivity extends BaseActivity<StockQueryView, StockQueryP
                  */
                 changeFragment(1);
 
+                if (TextUtils.isEmpty(etStockQuery.getText().toString().trim())) {
+                    return;
+                }
                 StockQueryEvent stockQueryEvent = new StockQueryEvent(StockQueryEvent.STOCK_QUERY_MATERIAL_REPERTORY);
                 stockQueryEvent.inputContent = etStockQuery.getText().toString().trim();
                 BaseMessage.post(stockQueryEvent);
@@ -185,7 +194,7 @@ public class StockQueryActivity extends BaseActivity<StockQueryView, StockQueryP
                 @Override
                 public void scanSuccess(int requestCode, String result) {
                     StockQueryEvent stockQueryEvent = new StockQueryEvent(StockQueryEvent.STOCK_QUERY_MATERIAL_REPERTORY);
-                    stockQueryEvent.inputContent =result;
+                    stockQueryEvent.inputContent = result;
                     BaseMessage.post(stockQueryEvent);
                 }
             });

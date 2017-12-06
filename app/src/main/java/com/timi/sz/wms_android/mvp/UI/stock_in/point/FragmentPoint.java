@@ -155,8 +155,12 @@ public class FragmentPoint extends BaseFragment<FragmentPointView, FragmentPoint
                     holder.setTextView(R.id.tv_buy_num, item.getPoQty());
                     holder.setTextView(R.id.tv_instock_num, item.getInStockQty());
                     holder.setTextView(R.id.tv_point_num, item.getCountQty());
-                    holder.setTextView(R.id.tv_spare_num, item.getGiveQty());
 
+                    holder.setTextView(R.id.tv_spare_num, item.getGiveQty());
+                    /**
+                     * 设置备品的状态
+                     */
+                    setSpareGoodsStatus(holder.getTextView(R.id.tv_spare_num));
                 }
             };
         }
@@ -214,12 +218,24 @@ public class FragmentPoint extends BaseFragment<FragmentPointView, FragmentPoint
                             pointNum = TextUtils.isEmpty(pointNumStr) ? 0 : Integer.parseInt(pointNumStr);
                             spareNum = TextUtils.isEmpty(spareNumStr) ? 0 : Integer.parseInt(spareNumStr);
                             /**
-                             * 备品数和清点数同时为0 的时候
+                             * 是否有备品 如果没有则直接判断 请点数
+                             * 否则判断是否备品数和请点数都为0
                              */
-                            if (pointNum == 0 && spareNum == 0) {
-                                ToastUtils.showShort(getActivity(), getString(R.string.point_num_and_spare_num_no_zero));
-                                return;
+                            if (!SpUtils.getInstance().getIsGiveGoods()) {
+                                if (pointNum == 0) {
+                                    ToastUtils.showShort(getActivity(), getString(R.string.point_num_no_zero));
+                                    return;
+                                }
+                            } else {
+                                /**
+                                 * 备品数和清点数同时为0 的时候
+                                 */
+                                if (pointNum == 0 && spareNum == 0) {
+                                    ToastUtils.showShort(getActivity(), getString(R.string.point_num_and_spare_num_no_zero));
+                                    return;
+                                }
                             }
+
                             int receiveNum = intentCode == BUY_ORDE_NUM ? mBuyBean.getDetailResults().get(position).getPoQty() : mSendBean.getDetailResults().get(position).getPoQty();
                             if (pointNum > receiveNum) {
                                 ToastUtils.showShort(getActivity(), getString(R.string.point_num_no_more_buy_num));
@@ -281,6 +297,11 @@ public class FragmentPoint extends BaseFragment<FragmentPointView, FragmentPoint
                     .setTextViewContent(R.id.tv_buy_num, detailResultsBean.getPoQty())
                     .setTextViewContent(R.id.tv_arrive_goods_num, detailResultsBean.getArrivalQty());
         }
+        /**
+         * 是否有备品 通过PDA 参数获取到
+         * 如果无备品 则直接隐藏被备品
+         */
+        setSpareGoodsStatus(mPointDialog.getEdittext(R.id.et_stockin_point_sparenum));
         mPointDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
             @Override
             public void onDismiss(DialogInterface dialog) {

@@ -52,7 +52,6 @@ public class StockInWorkQueryPresenter extends MvpBasePresenter<StockInWorkQuery
                 @Override
                 public void onError(String errorMsg) {
                     ToastUtils.showShort(errorMsg);
-                    getView().queryAllotScan(new AllotScanResult());
                 }
             });
         }

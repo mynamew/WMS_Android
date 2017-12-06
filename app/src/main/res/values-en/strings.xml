@@ -778,6 +778,10 @@
     <string name="one_step_success">一步调出成功</string>
     <string name="please_input_query_pack_code">请输入/扫描要查询的容器条码</string>
     <string name="please_input_scan_query_material_code">请输入/扫描要查询的物料条码</string>
+    <string name="scan_allot_in_orderno_detail">扫描调入单据详情</string>
+    <string name="please_input_supplier">请输入供应商</string>
+    <string name="search">搜索</string>
+    <string name="buy_list_title">采购单列表</string>
 
 
 </resources>

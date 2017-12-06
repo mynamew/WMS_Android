@@ -14,12 +14,14 @@ public interface PutAwayView extends MvpBaseView {
 
     /**
      * 物料扫码
+     *
      * @param bean
      */
     void materialScanResult(MaterialScanPutAwayBean bean);
 
     /**
      * 库位码是否有效
+     *
      * @param bean
      */
     void vertifyLocationCode(VertifyLocationCodeBean bean);

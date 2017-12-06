@@ -368,6 +368,11 @@ public class SettingFragment extends BaseFragment<SetFragmentView, SetFragmentPr
     }
 
     @Override
+    public void initBundle() {
+
+    }
+
+    @Override
     public SetFragmentPresenter createPresenter() {
         return new SetFragmentPresenter(getActivity());
     }

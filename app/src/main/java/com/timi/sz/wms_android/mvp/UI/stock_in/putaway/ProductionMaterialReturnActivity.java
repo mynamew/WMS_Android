@@ -51,6 +51,8 @@ public class ProductionMaterialReturnActivity extends BaseActivity<PutAwayView, 
     TextView tvHaveCountNum;
     @BindView(R.id.tv_in_stock_total_num)
     TextView tvInStockTotalNum;
+    @BindView(R.id.tv_putaway_material_attr)
+    TextView tvPutawayMaterialAttr;
     @BindView(R.id.view_line)
     View viewLine;
     @BindView(R.id.tv_putaway_scan_location_tip)
@@ -94,7 +96,7 @@ public class ProductionMaterialReturnActivity extends BaseActivity<PutAwayView, 
         setActivityTitle(getString(R.string.out_return_material_title));
         intentCode = getIntent().getIntExtra(Constants.CODE_STR, Constants.COME_MATERAIL_NUM);
         queryPrdReturnByInputResult = new Gson().fromJson(getIntent().getStringExtra(Constants.IN_STOCK_FINISH_PRODUCTION_BEAN), QueryPrdReturnByInputResult.class);
-
+        ScanId=queryPrdReturnByInputResult.getScanId();
     }
 
     @Override
@@ -133,7 +135,7 @@ public class ProductionMaterialReturnActivity extends BaseActivity<PutAwayView, 
                     params1.put("MAC", PackageUtils.getMac());
                     params1.put("SrcBillType", 25);
                     params1.put("DestBillType", 25);
-                    params1.put("ScanId", queryPrdReturnByInputResult.getScanId());
+                    params1.put("ScanId", ScanId);
                     params1.put("BinCode", etPutawayScanLocation.getText().toString().trim());
                     params1.put("BarcodeNo", orderNum);
                     getPresenter().materialScanNetWork(params1, orderNum);
@@ -214,8 +216,28 @@ public class ProductionMaterialReturnActivity extends BaseActivity<PutAwayView, 
         tvPutawayMaterialName.setText(bean.getMaterialName());
         tvPutawayMaterialNmodel.setText(bean.getMaterialStandard());
         tvPutawayMaterialNum.setText(String.valueOf(bean.getBarcodeQty()));
+        /**
+         * 设置附加属性
+         */
+        tvPutawayMaterialAttr.setText(bean.getMaterialAttribute());
+        setMaterialAttrStatus(tvPutawayMaterialAttr);
+        /**
+         * 设置已点总数
+         */
+        tvHaveCountNum.setText(String.valueOf(bean.getTotalScanQty()));
+        /**
+         * 设置已入库总数
+         */
+        tvInStockTotalNum.setText(String.valueOf(bean.getTotalInstockQty()));
+        /**
+         * 设置扫码Id
+         */
+        ScanId = bean.getScanId();
     }
-
+    /**
+     * 扫描的Id  默认是0  当提交物料扫码入库后 会返回sanid
+     */
+    private int ScanId=0;
     private VertifyLocationCodeBean mVertifyLocationCodeBean;
     private boolean locationCodeIsUse=false;
     @Override
@@ -248,7 +270,7 @@ public class ProductionMaterialReturnActivity extends BaseActivity<PutAwayView, 
                 params1.put("MAC", PackageUtils.getMac());
                 params1.put("SrcBillType", 25);
                 params1.put("DestBillType", 25);
-                params1.put("ScanId", queryPrdReturnByInputResult.getScanId());
+                params1.put("ScanId", ScanId);
                 params1.put("BinCode",etPutawayScanLocation.getText().toString().trim());
                 params1.put("BarcodeNo", result);
                 getPresenter().materialScanNetWork(params1, result);

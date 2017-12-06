@@ -2,6 +2,7 @@ package com.timi.sz.wms_android.mvp.UI.home;
 
 import com.timi.sz.wms_android.base.uils.Constants;
 import com.timi.sz.wms_android.base.uils.SpUtils;
+import com.timi.sz.wms_android.bean.GetPDA_ParameterResult;
 import com.timi.sz.wms_android.bean.UserInfoBean;
 import com.timi.sz.wms_android.bean.VersionBean;
 import com.timi.sz.wms_android.http.HttpManager;
@@ -11,6 +12,7 @@ import com.timi.sz.wms_android.http.callback.ApiServiceMethodCallBack;
 import com.timi.sz.wms_android.mvp.base.model.impl.MvpBaseModel;
 
 import java.io.File;
+import java.util.Map;
 
 import io.reactivex.Observable;
 import io.reactivex.Observer;
@@ -62,6 +64,19 @@ public class MainModel extends MvpBaseModel {
             @Override
             public Observable<CommonResult<VersionBean>> createObservable(ApiService apiService) {
                 return apiService.getAppVersion(tenancyName, usernameOrEmailAddress, password, 8, mac);
+            }
+        });
+    }
+    /**
+     * 获取PDA参数
+     * @param params
+     * @param observer
+     */
+    public void  getPDAParams(final Map<String,Object> params, Observer<GetPDA_ParameterResult> observer){
+        HttpManager.getInstance().HttpManagerRequest(observer, new ApiServiceMethodCallBack<GetPDA_ParameterResult>() {
+            @Override
+            public Observable<CommonResult<GetPDA_ParameterResult>> createObservable(ApiService apiService) {
+                return apiService.getPDA_Parameter(params);
             }
         });
     }

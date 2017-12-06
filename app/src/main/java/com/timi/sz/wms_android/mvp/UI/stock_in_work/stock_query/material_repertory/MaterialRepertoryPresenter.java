@@ -45,8 +45,8 @@ public class MaterialRepertoryPresenter extends MvpBasePresenter<MaterialReperto
                     ToastUtils.showShort(errorMsg);
                 }
             });
-            model.queryStockMaterial(params, queryResultHttpSubscriber);
         }
+        model.queryStockMaterial(params, queryResultHttpSubscriber);
     }
 
     @Override

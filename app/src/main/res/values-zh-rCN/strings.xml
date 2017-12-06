@@ -200,6 +200,7 @@
     <string name="item_point_spare_num">备品</string>
     <string name="point_num_and_spare_num_no_zero">请点数和备品数不能同时为0</string>
     <string name="point_num_no_more_buy_num">清点数量不能大于采购数,重新输入！</string>
+    <string name="point_num_no_zero">清点数量不能为0！</string>
     /**====== 来料入库 ======**/
     <string name="in_stock_num_title">入库上架(来料入库)</string>
     <string name="receive_pro_num">到货单号：</string>
@@ -365,9 +366,13 @@
     <string name="get_material_material_list_tip">领料申请(审核)物料清单</string>
     <string name="stock_out_apply_bill">申请生单</string>
 
+    /**====== 调拨调出======**/
+    <string name="create_allot_out_orderno">生成调出单</string>
+    <string name="material_point_list_allot_out">物品清单(调拨调出)</string>
+    <string name="material_point_allot_out">物品清点(调拨调出)</string>
     /**====== 成品拣货======**/
     <string name="finish_goods_pick_tip">成品拣货</string>
-
+    <string name="finish_goods_orderno_info">成品拣货单信息</string>
     <string name="material_point_finish_goods_pick_title">物品清点（成品拣货）</string>
     <string name="material_point_list_finish_goods_pick_title">物料清单(成品拣货)</string>
     <string name="finish_goods_outstock_tip">产成品出库</string>
@@ -712,7 +717,7 @@
     <string name="item_form_orderno">来源单据</string>
     <string name="item_goods_code">物品编码</string>
     <string name="pack_adjust">容器调整</string>
-    <string name="query_allot_scan_title">调拨—选单</string>
+    <string name="query_allot_scan_title">扫描调入</string>
     <string name="query_allot_scan_tip">调拨单：</string>
     <string name="query_allot_scan_hint">请输入单号进行查询</string>
     <string name="query_in_stock_form_change_title">入库(形态转换)</string>
@@ -733,6 +738,8 @@
     <string name="scan_material_code">请输入或扫描物料条码</string>
     <string name="coding">编码：</string>
     <string name="batch">批次：</string>
+    <string name="please_input_query_pack_code">请输入/扫描要查询的容器条码</string>
+    <string name="please_input_scan_query_material_code">请输入/扫描要查询的物料条码</string>
     /**====== 库位调整详情 ======**/
     <string name="lib_adjust_detail_title">库位调整详情</string>
 
@@ -749,9 +756,13 @@
     <string name="allot_orderno_info">调拨单据信息</string>
     <string name="allot">调波</string>
     <string name="allot_out">调出</string>
+    <string name="one_step_success">一步调出成功</string>
+
     /**====== 扫描调入 ======**/
     <string name="location_code">库位号</string>
+    <string name="stock_in_work_detial">库内详情</string>
     <string name="instock_num_tip">入库数：</string>
+    <string name="scan_allot_in_orderno_detail">扫描调入单据详情</string>
     <string name="allot_orderno">调拨单号</string>
     /**====== 容器调整 ======**/
     /**====== 库存查询======**/
@@ -781,13 +792,9 @@
     <string name="carton_num_tip">箱号</string>
     <string name="sale_outstock_orderno_info">销售出库单信息</string>
     <string name="repertory_total_num">库存总数</string>
-    <string name="create_allot_out_orderno">生成调出单</string>
-    <string name="material_point_list_allot_out">物品清单(调拨调出)</string>
-    <string name="material_point_allot_out">物品清点(调拨调出)</string>
-    <string name="finish_goods_orderno_info">成品拣货单信息</string>
-    <string name="one_step_success">一步调出成功</string>
-    <string name="please_input_query_pack_code">请输入/扫描要查询的容器条码</string>
-    <string name="please_input_scan_query_material_code">请输入/扫描要查询的物料条码</string>
+    <string name="please_input_supplier">请输入供应商</string>
+    <string name="search">搜索</string>
+    <string name="buy_list_title">采购单列表</string>
 
 
 </resources>

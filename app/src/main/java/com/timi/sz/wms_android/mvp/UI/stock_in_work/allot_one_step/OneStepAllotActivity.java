@@ -28,6 +28,7 @@ import com.timi.sz.wms_android.base.uils.ToastUtils;
 import com.timi.sz.wms_android.bean.instock.VertifyLocationCodeBean;
 import com.timi.sz.wms_android.bean.outstock.outsource.common.DetailResultsBean;
 import com.timi.sz.wms_android.bean.stockin_work.query.AllotOneSetpResult;
+import com.timi.sz.wms_android.mvp.UI.stock_in_work.allot_scan.AllotScanActivity;
 import com.timi.sz.wms_android.mvp.UI.stock_in_work.form_change_detail.FormChangeDetailActivity;
 import com.timi.sz.wms_android.mvp.base.BaseActivity;
 import com.timi.sz.wms_android.qrcode.utils.Constant;
@@ -98,16 +99,6 @@ public class OneStepAllotActivity extends BaseActivity<OneStepAllotView, OneStep
 
     @Override
     public void initView() {
-        /**
-         * 设置查看详情的点击事件
-         */
-        setRightImg(R.mipmap.stockin_detail, new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent it = new Intent(OneStepAllotActivity.this, FormChangeDetailActivity.class);
-                startActivity(it);
-            }
-        });
         etGoalStorage.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {

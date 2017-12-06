@@ -630,6 +630,10 @@ public class BatchPointActivity extends BaseActivity<BatchPointView, BatchPointP
         tvSendMaterialLib.setText(TextUtils.isEmpty(wareHouseName) ? getString(R.string.none) : wareHouseName);
         tvSendMaterialNum.setText("(0)" + scanQty + "/" + qty);
         /**
+         * 设置 是否显示附加属性
+         */
+        setMaterialAttrStatus(findViewById(R.id.ll_material_attr));
+        /**
          * 设置扫描数和总数
          */
         this.scanQty = scanQty;

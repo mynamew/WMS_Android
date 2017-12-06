@@ -1,6 +1,9 @@
 package com.timi.sz.wms_android.mvp.UI.stock_in_work.form_change_detail;
 
+import com.timi.sz.wms_android.bean.stockin_work.StockInWorkDetailResult;
 import com.timi.sz.wms_android.mvp.base.view.iml.MvpBaseView;
+
+import java.util.List;
 
 /**
  * $dsc
@@ -9,4 +12,9 @@ import com.timi.sz.wms_android.mvp.base.view.iml.MvpBaseView;
  */
 
 public interface FormChangeDetailView extends MvpBaseView {
+    /**
+     * 获取库内作业详情
+     * @param datas
+     */
+    void getStockInWorkDetail(List<StockInWorkDetailResult> datas);
 }

@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context="com.timi.sz.wms_android.mvp.UI.stock_in.list.BuyInStockListActivity">
+
+    <include layout="@layout/title_head"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="88px"
+        android:layout_marginRight="30px"
+        android:layout_marginTop="10px">
+
+        <TextView
+            android:id="@+id/tv_putaway_scan_location_tip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:paddingLeft="30px"
+            android:text="@string/orderno"
+            android:textColor="#333"
+            android:textSize="13sp"
+            />
+
+        <EditText
+            android:id="@+id/et_putaway_scan_location"
+            android:layout_width="match_parent"
+            android:layout_height="64px"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="50px"
+            android:layout_toRightOf="@id/tv_putaway_scan_location_tip"
+            android:background="@drawable/selector_et"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:hint="@string/please_input_orderno_or_scan"
+            android:imeOptions="actionSearch"
+            android:paddingLeft="20px"
+            android:paddingRight="80px"
+            android:singleLine="true"
+            android:text=""
+            android:textSize="14sp"/>
+
+        <ImageView
+            android:id="@+id/iv_putaway_scan_location"
+            android:layout_width="100px"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="30px"
+            android:paddingLeft="60px"
+            android:src="@mipmap/ic_scan"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="88px"
+        android:layout_marginRight="30px"
+        android:layout_marginTop="10px">
+
+        <TextView
+            android:id="@+id/tv_putaway_scan_material_tip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:paddingLeft="30px"
+            android:text="@string/item_supplier"
+            android:textColor="#333"
+            android:textSize="13sp"
+            />
+
+        <EditText
+            android:id="@+id/et_putaway_scan_material"
+            android:layout_width="match_parent"
+            android:layout_height="64px"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20px"
+            android:layout_toRightOf="@id/tv_putaway_scan_material_tip"
+            android:background="@drawable/selector_et"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:hint="@string/please_input_supplier"
+            android:imeOptions="actionSearch"
+            android:paddingLeft="20px"
+            android:paddingRight="80px"
+            android:singleLine="true"
+            android:text=""
+            android:textSize="14sp"/>
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/btn_search"
+        android:layout_width="match_parent"
+        android:layout_height="64px"
+        android:layout_marginLeft="30px"
+        android:layout_marginRight="30px"
+        android:layout_marginTop="10px"
+        android:background="@drawable/selector_btn_bg_login"
+        android:text="@string/search"
+        android:textColor="@color/white"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rlv_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10px"/>
+    <View
+        android:layout_width="match_parent"
+        android:background="@color/white"
+        android:layout_height="match_parent"/>
+</LinearLayout>

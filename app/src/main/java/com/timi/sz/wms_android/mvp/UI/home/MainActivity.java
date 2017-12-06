@@ -20,6 +20,7 @@ import com.timi.sz.wms_android.base.uils.PackageUtils;
 import com.timi.sz.wms_android.base.uils.SDCardUtils;
 import com.timi.sz.wms_android.base.uils.SpUtils;
 import com.timi.sz.wms_android.base.uils.ToastUtils;
+import com.timi.sz.wms_android.bean.GetPDA_ParameterResult;
 import com.timi.sz.wms_android.bean.UserInfoBean;
 import com.timi.sz.wms_android.bean.VersionBean;
 import com.timi.sz.wms_android.http.message.BaseMessage;
@@ -30,6 +31,8 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -77,6 +80,14 @@ public class MainActivity extends BaseActivity<MainView, MainPresenter> implemen
          * 获取版本
          */
         getPresenter().getVersion(tenacyName, userName, password, mac);
+        /**
+         * 获取PDA信息
+         */
+        Map<String, Object> params = new HashMap<>();
+        params.put("UserId", SpUtils.getInstance().getUserId());
+        params.put("OrgId", SpUtils.getInstance().getOrgId());
+        params.put("mac", PackageUtils.getMac());
+        getPresenter().getPDAParams(params);
     }
 
     @Override
@@ -261,6 +272,16 @@ public class MainActivity extends BaseActivity<MainView, MainPresenter> implemen
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void getPDAParams(GetPDA_ParameterResult o) {
+        SpUtils.getInstance().putIsGiveGoods(o.isIsGiveGoods());
+        SpUtils.getInstance().putIsMaterialAttribute(o.isIsMaterialAttribute());
+        SpUtils.getInstance().putIsBillList(o.isIsBillList());
+        LogUitls.d("isIsGiveGoods----->",SpUtils.getInstance().getIsGiveGoods());
+        LogUitls.d("IsMaterialAttribute---->",SpUtils.getInstance().getIsMaterialAttribute());
+        LogUitls.d("IsBillLis----->t",SpUtils.getInstance().getIsBillList());
     }
 
     @OnClick({R.id.rl_home, R.id.rl_mine})

@@ -46,8 +46,8 @@ public class PackRepertoryPresenter extends MvpBasePresenter<PackRepertoryView> 
                     ToastUtils.showShort(errorMsg);
                 }
             });
-            model.queryStockContainer(params, queryStockContainerResultHttpSubscriber);
         }
+        model.queryStockContainer(params, queryStockContainerResultHttpSubscriber);
     }
 
     @Override

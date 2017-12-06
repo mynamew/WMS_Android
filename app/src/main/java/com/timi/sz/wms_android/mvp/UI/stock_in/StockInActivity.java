@@ -8,6 +8,8 @@ import android.widget.ImageView;
 
 import com.timi.sz.wms_android.R;
 import com.timi.sz.wms_android.base.uils.Constants;
+import com.timi.sz.wms_android.base.uils.SpUtils;
+import com.timi.sz.wms_android.mvp.UI.stock_in.list.BuyInStockListActivity;
 import com.timi.sz.wms_android.mvp.UI.stock_in.other_scan.OtherScanActivity;
 import com.timi.sz.wms_android.mvp.UI.stock_in.putaway.FinishedGoodsAuditPutAwayActivity;
 import com.timi.sz.wms_android.mvp.UI.stock_in.putaway.OtherAuditActivity;
@@ -54,10 +56,15 @@ public class StockInActivity extends BaseNoMvpActivity {
     public void onViewClicked(View view) {
         Intent it = new Intent();
         it.setClass(StockInActivity.this, SearchBuyOrderActivity.class);
-
         switch (view.getId()) {
             case R.id.tv_stockin_buy_order://采购单
                 it.putExtra(CODE_STR, Constants.BUY_ORDE_NUM);
+                /**
+                 * 如果是无纸化作业
+                 */
+                if(!SpUtils.getInstance().getIsBillList()){
+                    it.setClass(StockInActivity.this, BuyInStockListActivity.class);
+                }
                 break;
             case R.id.tv_stock_in_send_order://送货单
                 it.putExtra(CODE_STR, Constants.BUY_SEND_NUM);

@@ -22,7 +22,9 @@ import com.timi.sz.wms_android.base.uils.ToastUtils;
 import com.timi.sz.wms_android.bean.instock.MaterialScanPutAwayBean;
 import com.timi.sz.wms_android.bean.instock.VertifyLocationCodeBean;
 import com.timi.sz.wms_android.bean.stockin_work.query.AllotScanResult;
+import com.timi.sz.wms_android.mvp.UI.stock_in_work.detail.StockInWorkDetailActivity;
 import com.timi.sz.wms_android.mvp.UI.stock_in_work.form_change_detail.FormChangeDetailActivity;
+import com.timi.sz.wms_android.mvp.UI.stock_out.detail.DetailActivity;
 import com.timi.sz.wms_android.mvp.base.BaseActivity;
 
 import java.util.HashMap;
@@ -40,7 +42,7 @@ import static com.timi.sz.wms_android.base.uils.Constants.REQUEST_SCAN_CODE_MATE
  * author: timi
  * create at: 2017/12/1 15:34
  */
-public class AllotScanActivity extends BaseActivity<AllotScanView, AllotScanPresenter> implements AllotScanView ,BaseActivity.ScanQRCodeResultListener{
+public class AllotScanActivity extends BaseActivity<AllotScanView, AllotScanPresenter> implements AllotScanView, BaseActivity.ScanQRCodeResultListener {
     @BindView(R.id.btn_commit)
     Button btnCommit;
     @BindView(R.id.tv_orderno)
@@ -76,6 +78,7 @@ public class AllotScanActivity extends BaseActivity<AllotScanView, AllotScanPres
     @BindView(R.id.tv_material_code)
     TextView tvMaterialCode;
     private AllotScanResult allotScanResult;
+    private int intentCode;
 
     @Override
     public int setLayoutId() {
@@ -86,6 +89,7 @@ public class AllotScanActivity extends BaseActivity<AllotScanView, AllotScanPres
     public void initBundle(Bundle savedInstanceState) {
         setActivityTitle(getString(R.string.siw_scan_in));
         allotScanResult = new Gson().fromJson(getIntent().getStringExtra(Constants.STOCK_IN_WORK_BEAN), AllotScanResult.class);
+        intentCode = getIntent().getIntExtra(Constants.STOCK_IN_WORK_CODE_STR, 0);
 
     }
 
@@ -103,7 +107,9 @@ public class AllotScanActivity extends BaseActivity<AllotScanView, AllotScanPres
         setRightImg(R.mipmap.stockin_detail, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent it = new Intent(AllotScanActivity.this, FormChangeDetailActivity.class);
+                Intent it = new Intent(AllotScanActivity.this, StockInWorkDetailActivity.class);
+                it.putExtra(Constants.STOCK_IN_WORK_CODE_STR, intentCode);
+                it.putExtra(Constants.STOCK_IN_WORK_BILLID, allotScanResult.getSummaryResults().getBillId());
                 startActivity(it);
             }
         });
@@ -253,12 +259,22 @@ public class AllotScanActivity extends BaseActivity<AllotScanView, AllotScanPres
     public void materialScanResult(MaterialScanPutAwayBean bean) {
         ToastUtils.showShort(getString(R.string.material_scan_putaway_success));
         /**
-         * 扫码出来的数据
+         * 设置物料的信息
          */
-        tvMaterialCode.setText(bean.getMaterialCode());
         tvMaterialName.setText(bean.getMaterialName());
-        tvMaterialModel.setText(bean.getMaterialStandard());
-        tvMaterialNum.setText(String.valueOf(bean.getBarcodeQty()));
+        tvMaterialCode.setText(bean.getMaterialCode());
+        tvMaterialAttr.setText(TextUtils.isEmpty(bean.getMaterialAttribute()) ? getString(R.string.none) : bean.getMaterialAttribute());
+        tvMaterialModel.setText(TextUtils.isEmpty(bean.getMaterialStandard()) ? getString(R.string.none) : bean.getMaterialStandard());
+        AllotScanResult.SummaryResultsBean summaryResults = allotScanResult.getSummaryResults();
+        /**
+         * 设置扫描数量
+         */
+        summaryResults.setScanQty(summaryResults.getScanQty()+bean.getBarcodeQty());
+        tvHaveCountNum.setText("("+bean.getBarcodeQty()+")"+summaryResults.getScanQty()+"/"+summaryResults.getQty());
+        /**
+         * 设置 是否显示附加属性
+         */
+        setMaterialAttrStatus(findViewById(R.id.ll_material_attr));
         /**
          * 设置已点总数
          */
@@ -288,6 +304,7 @@ public class AllotScanActivity extends BaseActivity<AllotScanView, AllotScanPres
         ToastUtils.showShort(getString(R.string.create_instock_bill_success));
         onBackPressed();
     }
+
     /**
      * 扫码的返回方法
      *
@@ -307,9 +324,9 @@ public class AllotScanActivity extends BaseActivity<AllotScanView, AllotScanPres
                 params1.put("UserId", SpUtils.getInstance().getUserId());
                 params1.put("OrgId", SpUtils.getInstance().getOrgId());
                 params1.put("MAC", PackageUtils.getMac());
-                params1.put("BillId",allotScanResult.getSummaryResults().getBillId());
-                params1.put("SrcBillType", 50 );
-                params1.put("DestBillType", 50 );
+                params1.put("BillId", allotScanResult.getSummaryResults().getBillId());
+                params1.put("SrcBillType", 50);
+                params1.put("DestBillType", 50);
                 params1.put("ScanId", scanId);
                 params1.put("BinCode", locationCode);
                 params1.put("BarcodeNo", result);

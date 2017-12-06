@@ -1,6 +1,16 @@
 package com.timi.sz.wms_android.mvp.UI.stock_in_work.form_change_outstock;
 
+import com.timi.sz.wms_android.bean.instock.MaterialScanPutAwayBean;
+import com.timi.sz.wms_android.http.HttpManager;
+import com.timi.sz.wms_android.http.api.ApiService;
+import com.timi.sz.wms_android.http.api.CommonResult;
+import com.timi.sz.wms_android.http.callback.ApiServiceMethodCallBack;
 import com.timi.sz.wms_android.mvp.base.model.impl.MvpBaseModel;
+
+import java.util.Map;
+
+import io.reactivex.Observable;
+import io.reactivex.Observer;
 
 /**
  * $dsc
@@ -9,4 +19,35 @@ import com.timi.sz.wms_android.mvp.base.model.impl.MvpBaseModel;
  */
 
 public class FormChangeOutstockModel extends MvpBaseModel {
+    /**
+     * 物料扫码上架的网络请求
+     * @param params
+     * @param observer
+     */
+    public void materialScanPutAawy(final Map<String,Object> params,
+                                    final Observer<MaterialScanPutAwayBean> observer){
+        HttpManager.getInstance().HttpManagerRequest(observer,
+                new ApiServiceMethodCallBack<MaterialScanPutAwayBean>() {
+                    @Override
+                    public Observable<CommonResult<MaterialScanPutAwayBean>> createObservable(ApiService apiService) {
+                        return apiService.materialScanPutAawy(params);
+                    }
+                });
+    }
+    /**
+     * 生成入库单
+     * @param params
+     * @param observer
+     */
+    public void createInStockOrderno(final Map<String,Object> params,
+                                     final Observer<Object> observer){
+        HttpManager.getInstance().HttpManagerRequest(observer,
+                new ApiServiceMethodCallBack<Object>() {
+                    @Override
+                    public Observable<CommonResult<Object>>
+                    createObservable(ApiService apiService) {
+                        return apiService.createInStockOrderno(params);
+                    }
+                });
+    }
 }

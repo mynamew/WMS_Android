@@ -1,12 +1,14 @@
 package com.timi.sz.wms_android.http.api;
 
 
+import com.timi.sz.wms_android.bean.GetPDA_ParameterResult;
 import com.timi.sz.wms_android.bean.LoginBean;
 import com.timi.sz.wms_android.bean.UserInfoBean;
 import com.timi.sz.wms_android.bean.VersionBean;
 import com.timi.sz.wms_android.bean.instock.MaterialScanPutAwayBean;
 import com.timi.sz.wms_android.bean.instock.OrderDetailData;
 import com.timi.sz.wms_android.bean.instock.VertifyLocationCodeBean;
+import com.timi.sz.wms_android.bean.instock.list.QueryPoListBean;
 import com.timi.sz.wms_android.bean.instock.outsource_return_material.QueryOutSourceReturnByInputResult;
 import com.timi.sz.wms_android.bean.instock.search.BuyOrdernoBean;
 import com.timi.sz.wms_android.bean.instock.search.FinishGoodsCreateBillBean;
@@ -17,6 +19,7 @@ import com.timi.sz.wms_android.bean.instock.search.ReceiveOrdernoBean;
 import com.timi.sz.wms_android.bean.instock.search.SaleGoodsReturnBean;
 import com.timi.sz.wms_android.bean.instock.search.SendOrdernoBean;
 import com.timi.sz.wms_android.bean.instock.search.StockinMaterialBean;
+import com.timi.sz.wms_android.bean.list.RequestBuyInStockListBean;
 import com.timi.sz.wms_android.bean.outstock.buy.BuyReturnMaterialByMaterialCodeData;
 import com.timi.sz.wms_android.bean.outstock.buy.BuyReturnMaterialByOrdernoData;
 import com.timi.sz.wms_android.bean.outstock.buy.SubmitBarcodeOutAuditData;
@@ -55,6 +58,7 @@ import com.timi.sz.wms_android.bean.quality.update_barcode.BarEditGetUnInstockBa
 import com.timi.sz.wms_android.bean.stockin_work.LibraryAdjustResult;
 import com.timi.sz.wms_android.bean.stockin_work.ScanLocationResult;
 import com.timi.sz.wms_android.bean.stockin_work.ScanMaterialResult;
+import com.timi.sz.wms_android.bean.stockin_work.StockInWorkDetailResult;
 import com.timi.sz.wms_android.bean.stockin_work.allot_out.QueryAllotOutResult;
 import com.timi.sz.wms_android.bean.stockin_work.lib_adjust.LibAdjustDetail;
 import com.timi.sz.wms_android.bean.stockin_work.query.AllotOneSetpResult;
@@ -126,6 +130,13 @@ public interface ApiService {
     @POST("api/authority/GetUserInfo")
     Observable<CommonResult<UserInfoBean>> getUserInfo(@Field("userId") int userid, @Field("deviceType") int deviceType, @Field("mac") String mac);
 
+    /**
+     * 获得PDA参数
+     */
+    @FormUrlEncoded
+    @POST("api/services/wpda/AMain/GetPDA_Parameter")
+    Observable<CommonResult<GetPDA_ParameterResult>> getPDA_Parameter(@FieldMap Map<String,Object> params);
+
     /********************入库 请求************************************************************/
 
     /**
@@ -136,6 +147,22 @@ public interface ApiService {
     Observable<CommonResult<BuyOrdernoBean>> buyOrderNoQuery(@FieldMap Map<String, Object> params);
 
     /**
+     * 采购单列表
+     *
+     * @return
+     */
+    @POST("api/services/wpda/po/QueryPOList")
+    Observable<CommonResult<List<QueryPoListBean>>> queryPOList(@Body RequestBuyInStockListBean params);
+     /**
+     * 采购单表头 表体数据
+     *
+     * @return
+     */
+     @FormUrlEncoded
+     @POST("api/services/wpda/po/GetPODataByCode")
+    Observable<CommonResult<BuyOrdernoBean>> getPODataByCode(@FieldMap Map<String, Object> params);
+
+     /**
      * 采购单请点记录
      *
      * @return
@@ -143,6 +170,7 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("api/services/wpda/po/POGetReceiveRecord")
     Observable<CommonResult<List<StockinMaterialBean>>> buyOrderNoPointRecord(@FieldMap Map<String, Object> params);
+
 
     /**
      * 送货单查询
@@ -292,6 +320,7 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("api/services/wpda/OtherInstock/QueryOtherInstockByInput")
     Observable<CommonResult<OtherAuditSelectOrdernoBean>> searchOtherAuditSelectOrderno(@FieldMap Map<String, Object> params);
+
     /**
      * 其他入库—审核 明细
      *
@@ -496,6 +525,7 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("/api/services/wpda/WWFeed/GetOutSourceFeedDetail")
     Observable<CommonResult<List<MaterialDetailResult>>> getOutSourceFeedDetail(@FieldMap Map<String, Object> params);
+
     /**
      * 提交条码出库(批次拣货)。
      *
@@ -736,6 +766,7 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("api/services/wpda/OtherOutStock/GetOtherOutStockDetail")
     Observable<CommonResult<List<MaterialDetailResult>>> getOtherOutStockDetail(@FieldMap Map<String, Object> params);
+
     /**
      * 调拨调出
      *
@@ -745,6 +776,7 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("api/services/wpda/Transfer/QueryTransferByInputForOutStock")
     Observable<CommonResult<QueryAllotOutResult>> queryTransferByInputForOutStock(@FieldMap Map<String, Object> params);
+
     /**
      * 调拨调出详情
      *
@@ -939,7 +971,8 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("api/Account/ClientLogin")
     Observable<CommonResult<LibraryAdjustResult>> libraryAdjustResult(@FieldMap Map<String, Object> params);
-     /**
+
+    /**
      * 库内调整详情的请求
      *
      * @param params
@@ -960,7 +993,8 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("api/services/wpda/Transfer/QueryTransferForStepBy")
     Observable<CommonResult<AllotScanResult>> queryAllotScan(@FieldMap Map<String, Object> params);
-     /**
+
+    /**
      * 扫描调入 明细
      *
      * @param params
@@ -968,7 +1002,8 @@ public interface ApiService {
      */
     @FormUrlEncoded
     @POST("api/services/wpda/Transfer/GetTransferDetailForInStock")
-    Observable<CommonResult<List<OrderDetailData>>> queryAllotScanDetail(@FieldMap Map<String, Object> params);
+    Observable<CommonResult<List<StockInWorkDetailResult>>> queryAllotScanDetail(@FieldMap Map<String, Object> params);
+
     /**
      * 一步调入查询
      *
@@ -978,7 +1013,8 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("api/services/wpda/Transfer/QueryTransferForOneStep")
     Observable<CommonResult<AllotOneSetpResult>> queryAllotOneStep(@FieldMap Map<String, Object> params);
-     /**
+
+    /**
      * 一步调入 提交
      *
      * @param params
@@ -995,11 +1031,11 @@ public interface ApiService {
      * @return
      */
     @FormUrlEncoded
-    @POST("api/Account/ClientLogin")
+    @POST("api/services/wpda/MatConvert/QueryConvertOutByInput")
     Observable<CommonResult<FormChangeOutResult>> queryFormChangeOut(@FieldMap Map<String, Object> params);
 
     /**
-     * 形态转换-出库 查询
+     * 形态转换-入库 查询
      *
      * @param params
      * @return
@@ -1017,7 +1053,8 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("api/services/wpda/QueryStock/QueryStockContainer")
     Observable<CommonResult<QueryStockContainerResult>> queryStockContainer(@FieldMap Map<String, Object> params);
-/**
+
+    /**
      * 物品查询
      *
      * @param params

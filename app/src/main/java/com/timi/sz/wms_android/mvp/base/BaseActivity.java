@@ -25,6 +25,7 @@ import com.orhanobut.logger.Logger;
 import com.timi.sz.wms_android.R;
 import com.timi.sz.wms_android.base.uils.Constants;
 import com.timi.sz.wms_android.base.uils.InputMethodUtils;
+import com.timi.sz.wms_android.base.uils.SpUtils;
 import com.timi.sz.wms_android.base.uils.TypefaceUtil;
 import com.timi.sz.wms_android.base.uils.statusutils.StatusBarUtil;
 import com.timi.sz.wms_android.mvp.UI.login.LoginActivity;
@@ -430,9 +431,29 @@ public abstract class BaseActivity<V extends MvpView, P extends MvpPresenter<V>>
     }
 
     /**
+     * 设置备品的状态 （是否显示备品）
+     *
+     * @param view
+     */
+    public void setSpareGoodsStatus(View view) {
+        if (!SpUtils.getInstance().getIsGiveGoods())
+            view.setVisibility(View.GONE);
+    }
+    /**
+     * 设置附加属性的状态 （是否显示附加属性）
+     *
+     * @param view
+     */
+    public void setMaterialAttrStatus(View view) {
+        if (!SpUtils.getInstance().getIsMaterialAttribute())
+            view.setVisibility(View.GONE);
+    }
+
+    /**
      * zxing 扫码的回调接口
      */
     public interface ScanQRCodeResultListener {
         void scanSuccess(int requestCode, String result);
     }
+
 }
