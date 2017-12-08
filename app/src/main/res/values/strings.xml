@@ -206,6 +206,8 @@
     <string name="please_input_supplier">请输入供应商</string>
     <string name="search">搜索</string>
     <string name="stock_in_out_source">委外单</string>
+    <string name="material_point_success">物料请点保存成功</string>
+
     /**====== 采购单 列表======**/
     <string name="buy_list_title">采购单列表</string>
     /**====== 委外但 列表======**/
@@ -802,7 +804,6 @@
     <string name="carton_num_tip">箱号</string>
     <string name="sale_outstock_orderno_info">销售出库单信息</string>
     <string name="repertory_total_num">库存总数</string>
-
 
 
 </resources>

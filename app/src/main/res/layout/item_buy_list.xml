@@ -9,7 +9,7 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:gravity="center"
+        android:gravity="left|center_vertical"
         android:text="单号"
         android:textColor="@color/color_333"
         android:textSize="26px"/>
@@ -29,7 +29,7 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:gravity="center"
+        android:gravity="right|center_vertical"
         android:text="日期"
         android:textColor="@color/color_333"
         android:textSize="26px"/>

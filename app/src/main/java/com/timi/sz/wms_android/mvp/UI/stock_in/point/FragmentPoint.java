@@ -97,7 +97,7 @@ public class FragmentPoint extends BaseFragment<FragmentPointView, FragmentPoint
 
     @Override
     public void initData() {
-        mDatas=new ArrayList<>();
+        mDatas = new ArrayList<>();
         //判断code  是送货单还是采购单
         Intent it = ((StockInPointActivity) getActivity()).getIntentCode();
         intentCode = it.getIntExtra(Constants.CODE_STR, Constants.COME_MATERAIL_NUM);
@@ -342,27 +342,32 @@ public class FragmentPoint extends BaseFragment<FragmentPointView, FragmentPoint
         stockInPointEvent.receiveId = result;
         BaseMessage.post(stockInPointEvent);
 
-        ToastUtils.showShort("物料请点保存成功");
+        ToastUtils.showShort(getString(R.string.material_point_success));
         /**
-         * 第一次设置接受id
+         * 获取表体数据
          */
-        mBuyBean.getSummaryResults().setReceiveId(result);
-        BuyOrdernoBean.DetailResultsBean detailResultsBean =mDatas.get(curretnPosition);
-        /**
-         * 设置清点的数量
-         */
-        int lastCountNum = detailResultsBean.getCountQty();
-        if (pointNum > 0) {
-            detailResultsBean.setCountQty(lastCountNum + pointNum);
+        requestTableDetail();
+    }
+
+    /**
+     * 获取表体数据
+     */
+    private void requestTableDetail() {
+        Map<String, Object> params = new HashMap<>();
+        params.put("UserId", SpUtils.getInstance().getUserId());
+        params.put("MAC", PackageUtils.getMac());
+        params.put("OrgId", SpUtils.getInstance().getOrgId());
+        if (intentCode == BUY_ORDE_NUM || intentCode == OUT_SOURCE) {
+            params.put("BillCode", mBuyBean.getSummaryResults().getPoCode());
+            params.put("BizType", mBuyBean.getSummaryResults().getBizType());
+            params.put("ScanId", mBuyBean.getSummaryResults().getReceiveId());
+            getPresenter().getPODetailsByCode(params);
+        } else {
+            params.put("BillCode", mSendBean.getSummaryResults().getAsnCode());
+            params.put("BizType", mSendBean.getSummaryResults().getBizType());
+            params.put("ScanId", mSendBean.getSummaryResults().getReceiveId());
+            getPresenter().getASNDetailsByCode(params);
         }
-        /**
-         * 设置备品的数量
-         */
-        int lastSpareNum = detailResultsBean.getGiveQty();
-        if (spareNum > 0) {
-            detailResultsBean.setGiveQty(lastSpareNum + spareNum);
-        }
-        adapter.notifyDataSetChanged();
     }
 
     @Override
@@ -374,26 +379,10 @@ public class FragmentPoint extends BaseFragment<FragmentPointView, FragmentPoint
         stockInPointEvent.receiveId = result;
         BaseMessage.post(stockInPointEvent);
 
-        ToastUtils.showShort("物料清点保存成功");
-        /**
-         * 第一次设置接受id
+        ToastUtils.showShort(getString(R.string.material_point_success));        /**
+         * 获取表体数据
          */
-        mSendBean.getSummaryResults().setReceiveId(result);
-        BuyOrdernoBean.DetailResultsBean detailResultsBean = mDatas.get(curretnPosition);
-        /**
-         * 设置清点的数量
-         */
-        int lastCountNum = detailResultsBean.getCountQty();
-        if (pointNum > 0) {
-            detailResultsBean.setCountQty(lastCountNum + pointNum);
-        }
-        /**
-         * 设置备品的数量
-         */
-        int lastSpareNum = detailResultsBean.getGiveQty();
-        if (spareNum > 0) {
-            detailResultsBean.setGiveQty(lastSpareNum + spareNum);
-        }
+        requestTableDetail();
     }
 
     /**
@@ -447,21 +436,7 @@ public class FragmentPoint extends BaseFragment<FragmentPointView, FragmentPoint
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void refreshPointMaterialPoDetails(StockInPointEvent event) {
         if (event.getEvent().equals(StockInPointEvent.MATERIAL_POINT_UPDATE)) {
-            Map<String, Object> params = new HashMap<>();
-            params.put("UserId", SpUtils.getInstance().getUserId());
-            params.put("MAC", PackageUtils.getMac());
-            params.put("OrgId", SpUtils.getInstance().getOrgId());
-            if (intentCode == BUY_ORDE_NUM || intentCode == OUT_SOURCE) {
-                params.put("BillCode", mBuyBean.getSummaryResults().getPoCode());
-                params.put("BizType", mBuyBean.getSummaryResults().getBizType());
-                params.put("ScanId", mBuyBean.getSummaryResults().getReceiveId());
-                getPresenter().getPODetailsByCode(params);
-            } else {
-                params.put("BillCode", mSendBean.getSummaryResults().getAsnCode());
-                params.put("BizType", mSendBean.getSummaryResults().getBizType());
-                params.put("ScanId", mSendBean.getSummaryResults().getReceiveId());
-                getPresenter().getASNDetailsByCode(params);
-            }
+            requestTableDetail();
         }
     }
 
@@ -470,6 +445,7 @@ public class FragmentPoint extends BaseFragment<FragmentPointView, FragmentPoint
         super.onDestroy();
         BaseMessage.unregister(this);
     }
+
     @OnClick(R.id.btn_point_commit)
     public void onViewClicked() {
         Map<String, Object> params = new HashMap<>();

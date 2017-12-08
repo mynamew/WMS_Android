@@ -787,6 +787,7 @@
     <string name="header_point_date">清点时间</string>
     <string name="stock_in_out_source">委外单</string>
     <string name="out_source_list_title">委外单列表</string>
+    <string name="material_point_success">物料请点保存成功</string>
 
 
 </resources>

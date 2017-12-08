@@ -108,9 +108,12 @@
         android:id="@+id/rlv_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginLeft="30px"
+        android:layout_marginRight="30px"
         android:layout_marginTop="10px"/>
+
     <View
         android:layout_width="match_parent"
-        android:background="@color/white"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:background="@color/white"/>
 </LinearLayout>

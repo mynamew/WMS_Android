@@ -37,6 +37,7 @@ public class BuyInStockListPresenter extends MvpBasePresenter<BuyInStockListView
      * @param params
      */
     public void queryPOList(RequestBuyInStockListBean params, int intentCode) {
+        getView().showProgressDialog();
         if (null == httpSubscriber) {
             httpSubscriber = new HttpSubscriber<>(new OnResultCallBack<List<QueryPoListBean>>() {
                 @Override

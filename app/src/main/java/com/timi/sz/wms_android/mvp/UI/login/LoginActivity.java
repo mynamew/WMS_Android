@@ -242,17 +242,12 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
      * 跳转到主页的方法
      */
     private void jumpToMainActivity() {
-        //是否第一次登录
-        boolean isFirstLog = SpUtils.getInstance().getBoolean(Constants.IS_FIRST_LOG);
-        //设置 第一次登录为 false
-        SpUtils.getInstance().putBoolean(Constants.IS_FIRST_LOG, true);
+//        //是否第一次登录
+//        boolean isFirstLog = SpUtils.getInstance().getBoolean(Constants.IS_FIRST_LOG);
+//        //设置 第一次登录为 false
+//        SpUtils.getInstance().putBoolean(Constants.IS_FIRST_LOG, true);
 //        判断跳转到不同界面
-        if (unAuthorizedRequest) {
-//            Intent intent = new Intent(LoginActivity.this, LoginSuccessActivity.class);
-//            intent.putExtra("unAuthorizedRequest", unAuthorizedRequest);
-//            startActivity(intent);
-            onBackPressed();
-        } else {
+        if (!unAuthorizedRequest) {
             startActivity(new Intent(LoginActivity.this, MainActivity.class));
         }
         finish();

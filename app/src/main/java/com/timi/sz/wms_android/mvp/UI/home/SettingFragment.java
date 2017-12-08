@@ -26,6 +26,7 @@ import com.timi.sz.wms_android.http.message.BaseMessage;
 import com.timi.sz.wms_android.http.message.event.HomeEvent;
 import com.timi.sz.wms_android.mvp.UI.about.AboutActivity;
 import com.timi.sz.wms_android.mvp.UI.deviceinfo.DeviceInfoActivity;
+import com.timi.sz.wms_android.mvp.UI.login.LoginActivity;
 import com.timi.sz.wms_android.mvp.UI.update_password.UpdatePasswordActivity;
 import com.timi.sz.wms_android.mvp.UI.userinfo.UserInfoActivity;
 import com.timi.sz.wms_android.mvp.base.BaseFragment;
@@ -155,10 +156,9 @@ public class SettingFragment extends BaseFragment<SetFragmentView, SetFragmentPr
                     .setButtonListener(R.id.tv_logout_confirm, getString(R.string.confirm), new MyDialog.DialogClickListener() {
                         @Override
                         public void dialogClick(MyDialog dialog) {
-                            // TODO: 2017/8/25 做登录的数据的清除工作   并且登录退出要退出整个程序
-                            getActivity().onBackPressed();
                             dialog.dismiss();
-                            ((MainActivity) getActivity()).jumpToLoginActivity();
+                            startActivity(new Intent(getActivity(), LoginActivity.class));
+                            getActivity().onBackPressed();
                         }
                     }).setAnimation(R.style.popWindow_animation_push);
         }

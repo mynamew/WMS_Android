@@ -96,7 +96,7 @@ public class BuyInStockListActivity extends BaseActivity<BuyInStockListView, Buy
         setEdittextListener(etPutawayScanLocation, EDITTEXT_ORDERNO, R.string.please_input_orderno_or_scan, R.string.input_orderno_more_four, new EdittextInputListener() {
             @Override
             public void verticalSuccess(String result) {
-
+                requestOrdernoData();
             }
         });
         /**
@@ -105,7 +105,7 @@ public class BuyInStockListActivity extends BaseActivity<BuyInStockListView, Buy
         setEdittextListener(etPutawayScanMaterial, EDITTEXT_SUPPLIER, R.string.please_input_supplier, 0, new EdittextInputListener() {
             @Override
             public void verticalSuccess(String result) {
-
+                requestOrdernoData();
             }
         });
     }
@@ -137,31 +137,25 @@ public class BuyInStockListActivity extends BaseActivity<BuyInStockListView, Buy
                 });
                 break;
             case R.id.btn_search:
-                InputMethodUtils.hide(this);
-                String orderno = etPutawayScanLocation.getText().toString().trim();
-                String supplier = etPutawayScanMaterial.getText().toString().trim();
-                /**
-                 * 增加判断  点击搜索的时候不能 供应商和单号都为空
-                 */
-                if (TextUtils.isEmpty(supplier) && TextUtils.isEmpty(orderno)) {
-                    if (TextUtils.isEmpty(orderno)) {
-                        ToastUtils.showShort(getString(R.string.please_input_orderno_or_scan));
-                        return;
-                    }
-                    if (TextUtils.isEmpty(supplier)) {
-                        ToastUtils.showShort(getString(R.string.please_input_supplier));
-                        return;
-                    }
-                }
-                RequestBuyInStockListBean requestBuyInStockListBean = new RequestBuyInStockListBean();
-                requestBuyInStockListBean.setBillNo(orderno);
-                requestBuyInStockListBean.setSupplierName(supplier);
-                requestBuyInStockListBean.setUserId(SpUtils.getInstance().getUserId());
-                requestBuyInStockListBean.setOrgId(SpUtils.getInstance().getOrgId());
-                requestBuyInStockListBean.setMAC(PackageUtils.getMac());
-                getPresenter().queryPOList(requestBuyInStockListBean,intentCode);
+                requestOrdernoData();
                 break;
         }
+    }
+
+    /**
+     * 发送请求
+     */
+    private void requestOrdernoData() {
+        InputMethodUtils.hide(this);
+        String orderno = etPutawayScanLocation.getText().toString().trim();
+        String supplier = etPutawayScanMaterial.getText().toString().trim();
+        RequestBuyInStockListBean requestBuyInStockListBean = new RequestBuyInStockListBean();
+        requestBuyInStockListBean.setBillNo(orderno);
+        requestBuyInStockListBean.setSupplierName(supplier);
+        requestBuyInStockListBean.setUserId(SpUtils.getInstance().getUserId());
+        requestBuyInStockListBean.setOrgId(SpUtils.getInstance().getOrgId());
+        requestBuyInStockListBean.setMAC(PackageUtils.getMac());
+        getPresenter().queryPOList(requestBuyInStockListBean,intentCode);
     }
 
     @Override

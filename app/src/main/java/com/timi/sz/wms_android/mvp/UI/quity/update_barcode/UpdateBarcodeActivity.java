@@ -26,7 +26,10 @@ import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-/** 
+
+import static com.timi.sz.wms_android.base.uils.Constants.EDITTEXT_ORDERNO;
+
+/**
   * 条码更改
   * author: timi    
   * create at: 2017/11/29 14:58
@@ -70,31 +73,21 @@ public class UpdateBarcodeActivity extends BaseActivity<UpdateBarcodeView, Updat
 
     @Override
     public void initView() {
-        etMinPackCode.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+        /**
+         * 设置输入框的监听
+         */
+        setEdittextListener(etMinPackCode, EDITTEXT_ORDERNO, R.string.please_input_or_scan_need_update_barcode, R.string.input_orderno_more_four, new EdittextInputListener() {
             @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-
-                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                    InputMethodUtils.hide(UpdateBarcodeActivity.this);
-                    String minPackCode = etMinPackCode.getText().toString().trim();
-                    if (TextUtils.isEmpty(minPackCode)) {
-                        ToastUtils.showShort(getString(R.string.please_input_or_scan_need_update_barcode));
-                    }
-                    if (minPackCode.length() < 4) {
-                        ToastUtils.showShort(getString(R.string.input_orderno_more_four));
-                    } else {
-                        /**
-                         * 发起请求
-                         */
-                        Map<String, Object> params = new HashMap<>();
-                        params.put("UserId", SpUtils.getInstance().getUserId());
-                        params.put("OrgId", SpUtils.getInstance().getOrgId());
-                        params.put("MAC", PackageUtils.getMac());
-                        params.put("BarcodeNo", minPackCode);
-                        getPresenter().barEditGetUnInstockBarcodeData(params, minPackCode);
-                    }
-                }
-                return false;
+            public void verticalSuccess(String result) {
+                /**
+                 * 发起请求
+                 */
+                Map<String, Object> params = new HashMap<>();
+                params.put("UserId", SpUtils.getInstance().getUserId());
+                params.put("OrgId", SpUtils.getInstance().getOrgId());
+                params.put("MAC", PackageUtils.getMac());
+                params.put("BarcodeNo", result);
+                getPresenter().barEditGetUnInstockBarcodeData(params, result);
             }
         });
     }

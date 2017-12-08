@@ -469,40 +469,43 @@ public abstract class BaseActivity<V extends MvpView, P extends MvpPresenter<V>>
 
     /**
      * 设置 输入框  将输入框传进来
+     *
      * @param editText
-     * @param editCode 输入框标识的code
-     * @param tipPleaseInputId  输入框输入内容为空 的提示
-     * @param tipLengthId       输入位数小于4 的提示
-     * @param listener          监听事件
+     * @param editCode         输入框标识的code
+     * @param tipPleaseInputId 输入框输入内容为空 的提示
+     * @param tipLengthId      输入位数小于4 的提示
+     * @param listener         监听事件
      */
-    public void setEdittextListener(final EditText editText, int editCode, @StringRes final int  tipPleaseInputId, @StringRes final int tipLengthId, final EdittextInputListener listener) {
+    public void setEdittextListener(final EditText editText, int editCode, @StringRes final int tipPleaseInputId, @StringRes final int tipLengthId, final EdittextInputListener listener) {
         //存储输入框
         edits.put(editCode, editText);
         editText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (actionId ==6|| actionId == 0) {
+                if (actionId == 6 || actionId == 0) {
                     InputMethodUtils.hide(BaseActivity.this);
                     String content = editText.getText().toString().trim();
 
                     if (TextUtils.isEmpty(content)) {
                         ToastUtils.showShort(getString(tipPleaseInputId));
                         Selection.selectAll(editText.getText());
+                        return true;
                     }
                     /**
                      * 长度的判定
                      */
-                    if (content.length() < 4&&tipLengthId!=0) {
+                    if (content.length() < 4 && tipLengthId != 0) {
                         ToastUtils.showShort(getString(tipLengthId));
                         Selection.selectAll(editText.getText());
-                    } else {
-                        /**
-                         * 验证通过，进行下一步
-                         */
-                        if (null != listener) {
-                            listener.verticalSuccess(content);
-                        }
+                        return true;
                     }
+                    /**
+                     * 验证通过，进行下一步
+                     */
+                    if (null != listener) {
+                        listener.verticalSuccess(content);
+                    }
+
                 }
                 return false;
             }

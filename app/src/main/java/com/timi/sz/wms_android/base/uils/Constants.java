@@ -248,5 +248,6 @@ public class Constants {
     public static final int EDITTEXT_LIB = 5303;//库位码
     public static final int EDITTEXT_MATERIAL = 5304;//物料码
     public static final int EDITTEXT_CONTAINER = 5305;//容器码
+    public static final int EDITTEXT_BARCODE = 5306;//最小包装码
 
 }
