@@ -21,9 +21,9 @@ public class Constants {
     /***********
      * PDA  配置
      *********************************************************************************************/
-    public  static  final  String IS_GIVE_GOOD="is_give_goods";//是否有备品
-    public  static  final  String IS_MATERAIL_ATTR="is_material_attr";//是否有附加属性
-    public  static  final  String IS_BILL_LIST="is_bill_list";//是否无纸化作业（即无条码，直接通过单据列表找到单号等数据）
+    public static final String IS_GIVE_GOOD = "is_give_goods";//是否有备品
+    public static final String IS_MATERAIL_ATTR = "is_material_attr";//是否有附加属性
+    public static final String IS_BILL_LIST = "is_bill_list";//是否无纸化作业（即无条码，直接通过单据列表找到单号等数据）
     /**********
      * 状态栏颜色
      *********************************************************************************************/
@@ -239,4 +239,14 @@ public class Constants {
 
     public static final int STOCK_IN_WORK_STOCK_QUERY = 5207;//库存呢查询
     public static final int STOCK_IN_WORK_POINT = 5208;//盘点
+
+    /***********
+     * Edittext 的code码
+     *********************************************************************************************/
+    public static final int EDITTEXT_ORDERNO = 5301;//单号
+    public static final int EDITTEXT_SUPPLIER = 5302;//供应商
+    public static final int EDITTEXT_LIB = 5303;//库位码
+    public static final int EDITTEXT_MATERIAL = 5304;//物料码
+    public static final int EDITTEXT_CONTAINER = 5305;//容器码
+
 }

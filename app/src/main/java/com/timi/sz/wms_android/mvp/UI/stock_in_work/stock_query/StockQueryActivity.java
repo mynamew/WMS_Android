@@ -24,6 +24,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static com.timi.sz.wms_android.base.uils.Constants.EDITTEXT_ORDERNO;
+
 /**
  * 库存查询
  */
@@ -95,35 +97,24 @@ public class StockQueryActivity extends BaseActivity<StockQueryView, StockQueryP
          * 初始化
          */
         changeFragment(0);
-        etStockQuery.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+        /**
+         * 设置输入框的监听
+         */
+        setEdittextListener(etStockQuery, EDITTEXT_ORDERNO,isPackQuery?R.string.please_input_scan_query_material_code: 0, R.string.input_orderno_more_four, new EdittextInputListener() {
             @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-
-                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                    InputMethodUtils.hide(StockQueryActivity.this);
-                    String orderNum = etStockQuery.getText().toString().trim();
-                    if (TextUtils.isEmpty(orderNum)) {
-                        if (isPackQuery) {
-                            ToastUtils.showShort(R.string.please_input_query_pack_code);
-                        } else {
-                            ToastUtils.showShort(R.string.please_input_scan_query_material_code);
-                        }
-                        return false;
-                    }
-                    /**
-                     * 发送事件获取数据
-                     */
-                    if (isPackQuery) {
-                        StockQueryEvent stockQueryEvent = new StockQueryEvent(StockQueryEvent.STOCK_QUERY_PACK_REPERTORY);
-                        stockQueryEvent.inputContent = orderNum;
-                        BaseMessage.post(stockQueryEvent);
-                    } else {
-                        StockQueryEvent stockQueryEvent = new StockQueryEvent(StockQueryEvent.STOCK_QUERY_MATERIAL_REPERTORY);
-                        stockQueryEvent.inputContent = orderNum;
-                        BaseMessage.post(stockQueryEvent);
-                    }
+            public void verticalSuccess(String result) {
+                /**
+                 * 发送事件获取数据
+                 */
+                if (isPackQuery) {
+                    StockQueryEvent stockQueryEvent = new StockQueryEvent(StockQueryEvent.STOCK_QUERY_PACK_REPERTORY);
+                    stockQueryEvent.inputContent = result;
+                    BaseMessage.post(stockQueryEvent);
+                } else {
+                    StockQueryEvent stockQueryEvent = new StockQueryEvent(StockQueryEvent.STOCK_QUERY_MATERIAL_REPERTORY);
+                    stockQueryEvent.inputContent = result;
+                    BaseMessage.post(stockQueryEvent);
                 }
-                return false;
             }
         });
     }

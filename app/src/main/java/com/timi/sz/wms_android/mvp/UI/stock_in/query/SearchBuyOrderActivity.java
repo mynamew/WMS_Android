@@ -46,6 +46,8 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.OnClick;
 
+import static com.timi.sz.wms_android.base.uils.Constants.EDITTEXT_ORDERNO;
+import static com.timi.sz.wms_android.base.uils.Constants.EDITTEXT_SUPPLIER;
 import static com.timi.sz.wms_android.base.uils.Constants.IN_STOCK_BUY_BEAN;
 import static com.timi.sz.wms_android.base.uils.Constants.IN_STOCK_FINISH_BEAN;
 import static com.timi.sz.wms_android.base.uils.Constants.IN_STOCK_FINISH_CREATE_BEAN;
@@ -150,7 +152,7 @@ public class SearchBuyOrderActivity extends BaseActivity<SearchBuyOrderView, Sea
         /**
          * 设置输入框的监听
          */
-        setEdittextListener(etSboInput, intentCode, R.string.please_input_orderno_or_scan, R.string.input_orderno_more_four, new EdittextInputListener() {
+        setEdittextListener(etSboInput, EDITTEXT_ORDERNO, R.string.please_input_orderno_or_scan, R.string.input_orderno_more_four, new EdittextInputListener() {
             @Override
             public void verticalSuccess(String result) {
                 requestManagerMethod(result);

@@ -38,6 +38,8 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 import static com.timi.sz.wms_android.base.uils.Constants.BUY_ORDE_NUM;
+import static com.timi.sz.wms_android.base.uils.Constants.EDITTEXT_ORDERNO;
+import static com.timi.sz.wms_android.base.uils.Constants.EDITTEXT_SUPPLIER;
 import static com.timi.sz.wms_android.base.uils.Constants.IN_STOCK_BUY_BEAN;
 import static com.timi.sz.wms_android.base.uils.Constants.OUT_SOURCE;
 
@@ -88,7 +90,19 @@ public class BuyInStockListActivity extends BaseActivity<BuyInStockListView, Buy
                 setActivityTitle(getString(R.string.out_source_list_title));
                 break;
         }
-        setEdittextListener(etPutawayScanLocation, intentCode, R.string.please_input_orderno_or_scan, R.string.input_orderno_more_four, new EdittextInputListener() {
+        /**
+         * 输入单号
+         */
+        setEdittextListener(etPutawayScanLocation, EDITTEXT_ORDERNO, R.string.please_input_orderno_or_scan, R.string.input_orderno_more_four, new EdittextInputListener() {
+            @Override
+            public void verticalSuccess(String result) {
+
+            }
+        });
+        /**
+         * 输入供应商
+         */
+        setEdittextListener(etPutawayScanMaterial, EDITTEXT_SUPPLIER, R.string.please_input_supplier, 0, new EdittextInputListener() {
             @Override
             public void verticalSuccess(String result) {
 

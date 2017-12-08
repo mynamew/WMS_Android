@@ -34,6 +34,8 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.OnClick;
 
+import static com.timi.sz.wms_android.base.uils.Constants.EDITTEXT_ORDERNO;
+
 /**
  * 库内作业 查询的界面
  * author: timi
@@ -59,26 +61,13 @@ public class StockInWorkQueryActivity extends BaseActivity<StockInWorkQueryView,
 
     @Override
     public void initView() {
-        etQueryInput.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+        /**
+         * 设置输入框的监听
+         */
+        setEdittextListener(etQueryInput, EDITTEXT_ORDERNO, R.string.please_input_orderno_or_scan, R.string.input_orderno_more_four, new EdittextInputListener() {
             @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-
-                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                    InputMethodUtils.hide(StockInWorkQueryActivity.this);
-                    String orderNum = etQueryInput.getText().toString().trim();
-                    if (TextUtils.isEmpty(orderNum)) {
-                        ToastUtils.showShort("请输入单号");
-                    }
-                    if (orderNum.length() < 4) {
-                        ToastUtils.showShort("输入查询单号位数必须是4位以上");
-                    } else {
-                        /**
-                         * 发起请求
-                         */
-                        requestManagerMethod(orderNum);
-                    }
-                }
-                return false;
+            public void verticalSuccess(String result) {
+                requestManagerMethod(result);
             }
         });
     }

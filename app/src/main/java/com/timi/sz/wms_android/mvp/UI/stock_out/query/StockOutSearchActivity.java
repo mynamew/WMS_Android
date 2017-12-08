@@ -37,6 +37,7 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.OnClick;
 
+import static com.timi.sz.wms_android.base.uils.Constants.EDITTEXT_ORDERNO;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_BEAN;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_CODE_STR;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_FINISH_GOODS_PICK;
@@ -153,28 +154,12 @@ public class StockOutSearchActivity extends BaseActivity<StockOutSearchView, Sto
                 break;
         }
         /**
-         *  输入框qqZ
+         * 设置输入框的监听
          */
-        etStockoutInput.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+        setEdittextListener(etStockoutInput, EDITTEXT_ORDERNO, R.string.please_input_orderno_or_scan, R.string.input_orderno_more_four, new EdittextInputListener() {
             @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-
-                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                    InputMethodUtils.hide(StockOutSearchActivity.this);
-                    String orderNum = etStockoutInput.getText().toString().trim();
-                    if (TextUtils.isEmpty(orderNum)) {
-                        ToastUtils.showShort(R.string.query_allot_scan_hint);
-                    }
-                    if (orderNum.length() < 4) {
-                        ToastUtils.showShort(R.string.input_orderno_more_four);
-                    } else {
-                        /**
-                         * 发起请求
-                         */
-                        requestManagerMethod(orderNum);
-                    }
-                }
-                return false;
+            public void verticalSuccess(String result) {
+                requestManagerMethod(result);
             }
         });
     }

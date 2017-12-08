@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Selection;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -159,6 +160,10 @@ public class FragmentPointRecord extends BaseFragment<FragmentPointRecordView, F
                         }
                     })
                     .setAnimation(R.style.popWindow_animation_push);
+            /**
+             * 设置选中状态
+             */
+            Selection.selectAll(mPointRecordDialog.getEdittext(R.id.et_stockin_point_pro_point_num).getText());
             /**
              * PDA无备品 则隐藏
              */

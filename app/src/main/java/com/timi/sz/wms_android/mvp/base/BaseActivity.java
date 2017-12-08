@@ -469,9 +469,11 @@ public abstract class BaseActivity<V extends MvpView, P extends MvpPresenter<V>>
 
     /**
      * 设置 输入框  将输入框传进来
-     *
      * @param editText
-     * @param editCode 输入框的code
+     * @param editCode 输入框标识的code
+     * @param tipPleaseInputId  输入框输入内容为空 的提示
+     * @param tipLengthId       输入位数小于4 的提示
+     * @param listener          监听事件
      */
     public void setEdittextListener(final EditText editText, int editCode, @StringRes final int  tipPleaseInputId, @StringRes final int tipLengthId, final EdittextInputListener listener) {
         //存储输入框
@@ -490,7 +492,7 @@ public abstract class BaseActivity<V extends MvpView, P extends MvpPresenter<V>>
                     /**
                      * 长度的判定
                      */
-                    if (content.length() < 4) {
+                    if (content.length() < 4&&tipLengthId!=0) {
                         ToastUtils.showShort(getString(tipLengthId));
                         Selection.selectAll(editText.getText());
                     } else {
