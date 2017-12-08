@@ -114,6 +114,7 @@ public class Constants {
     public static final int OUT_RETURN_MATERAIL = 5008;//委外退料-选单
     public static final int CREATE_RETURN_MATERAIL = 5009;//生产退料-选单
     public static final int SALE_RETURN_MATERAIL = 5010;//销售退料-扫描
+    public static final int OUT_SOURCE = 5011;//委外订单
     /***********
      * 入库跳转到查询界面的不同实体的key
      *********************************************************************************************/
@@ -225,6 +226,7 @@ public class Constants {
     public static final String STOCK_IN_WORK_CODE_STR = "stockin_work_code";//库内作业的code码的key
     public static final String STOCK_IN_WORK_BEAN = "stockin_work_bean";//库内传递实体的key
     public static final String STOCK_IN_WORK_BILLID = "stockin_work_billid";//库内传递 billid
+    public static final String STOCK_IN_WORK_BILLCODE = "stockin_work_billcode";//库内传递 billcode
 
     public static final int STOCK_IN_WORK_LIBRARY_ADJUST = 5201;//库位调整
     public static final int STOCK_IN_WORK_ALLOT_SCAN = 5202;//扫描调入

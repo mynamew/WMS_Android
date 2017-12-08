@@ -16,6 +16,7 @@ import com.timi.sz.wms_android.base.uils.Constants;
 import com.timi.sz.wms_android.base.uils.PackageUtils;
 import com.timi.sz.wms_android.base.uils.SpUtils;
 import com.timi.sz.wms_android.bean.instock.OrderDetailData;
+import com.timi.sz.wms_android.bean.stockin_work.FormChangeDetailResult;
 import com.timi.sz.wms_android.bean.stockin_work.StockInWorkDetailResult;
 import com.timi.sz.wms_android.mvp.base.BaseActivity;
 import com.timi.sz.wms_android.view.FloatCircleButtonUpTopView;
@@ -50,7 +51,8 @@ public class FormChangeDetailActivity extends BaseActivity<FormChangeDetailView,
     @BindView(R.id.fbtn_detail)
     FloatCircleButtonUpTopView fbtnDetail;
     private int intentCode;
-    private String billId;
+    private String billCode;
+    private List<FormChangeDetailResult> mDatas;
 
     @Override
     public int setLayoutId() {
@@ -59,9 +61,18 @@ public class FormChangeDetailActivity extends BaseActivity<FormChangeDetailView,
 
     @Override
     public void initBundle(Bundle savedInstanceState) {
-        setActivityTitle(getString(R.string.form_change_instock_detial_title));
-        billId = getIntent().getStringExtra(Constants.STOCK_IN_WORK_BILLID);
+
+        billCode = getIntent().getStringExtra(Constants.STOCK_IN_WORK_BILLID);
         intentCode = getIntent().getIntExtra(Constants.STOCK_IN_WORK_CODE_STR, 0);
+        /**
+         * 不同的intentcode  显示不同的标题
+         */
+        setActivityTitle(getString(R.string.form_change_instock_detial_title));
+        if (intentCode == Constants.STOCK_IN_WORK_FORM_CHANGE_IN) {
+            tvTip.setText(R.string.form_change_instock_detial_info_tip);
+        } else {
+            tvTip.setText(R.string.form_change_outstock_detial_info_tip);
+        }
     }
 
     @Override
@@ -71,6 +82,17 @@ public class FormChangeDetailActivity extends BaseActivity<FormChangeDetailView,
 
     @Override
     public void initData() {
+        mDatas = new ArrayList<>();
+        Map<String, Object> params = new HashMap<>();
+        params.put("UserId", SpUtils.getInstance().getUserId());
+        params.put("OrgId", SpUtils.getInstance().getOrgId());
+        params.put("MAC", PackageUtils.getMac());
+        params.put("BillNo", 53);
+        if (intentCode == Constants.STOCK_IN_WORK_FORM_CHANGE_IN) {
+            getPresenter().getConvertInDetail(params);
+        } else {
+            getPresenter().getConvertOutDetail(params);
+        }
     }
 
     @Override
@@ -84,7 +106,15 @@ public class FormChangeDetailActivity extends BaseActivity<FormChangeDetailView,
     }
 
     @Override
-    public void getStockInWorkDetail(List<StockInWorkDetailResult> datas) {
+    public void getStockInWorkDetail(List<FormChangeDetailResult> datas) {
+        mDatas.clear();
+        mDatas.addAll(datas);
+    }
+
+    @Override
+    public void getConvertOutDetail(List<FormChangeDetailResult> datas) {
+        mDatas.clear();
+        mDatas.addAll(datas);
     }
 
 

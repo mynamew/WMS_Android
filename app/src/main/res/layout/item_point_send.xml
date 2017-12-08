@@ -9,7 +9,7 @@
     <LinearLayout
         android:id="@+id/ll_tab"
         android:layout_width="match_parent"
-        android:layout_height="88px"
+        android:layout_height="wrap_content"
         android:layout_below="@id/head"
         android:orientation="horizontal"
         android:paddingLeft="10px"
@@ -17,25 +17,24 @@
 
         <TextView
             android:id="@+id/tv_line_num"
-            android:layout_width="0dp"
+            android:layout_width="110px"
             android:layout_height="match_parent"
             android:layout_gravity="center_vertical"
-            android:layout_weight="2"
             android:gravity="center"
             android:text="@string/line_name"
             android:textColor="#333"
-            android:textSize="26px"
+            android:textSize="13sp"
             />
 
         <TextView
             android:id="@+id/tv_material_code"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="4"
-            android:gravity="center"
+            android:layout_weight="5"
+            android:gravity="left"
             android:text="@string/item_material_code"
             android:textColor="#333"
-            android:textSize="24px"/>
+            android:textSize="13sp"/>
 
         <TextView
             android:id="@+id/tv_point_num"
@@ -46,7 +45,7 @@
             android:text="@string/item_point_point_num"
 
             android:textColor="#333"
-            android:textSize="24px"/>
+            android:textSize="13sp"/>
 
 
         <TextView
@@ -58,7 +57,7 @@
             android:gravity="center"
             android:text="@string/item_point_spare_num"
             android:textColor="#333"
-            android:textSize="24px"/>
+            android:textSize="13sp"/>
 
         <TextView
             android:id="@+id/tv_arrive_good_num"
@@ -68,7 +67,7 @@
             android:gravity="center"
             android:text="@string/item_point_buy_num"
             android:textColor="#333"
-            android:textSize="24px"/>
+            android:textSize="12sp"/>
 
         <TextView
             android:id="@+id/tv_buy_num"
@@ -78,7 +77,7 @@
             android:gravity="center"
             android:text="@string/item_point_arrive_num"
             android:textColor="#333"
-            android:textSize="24px"/>
+            android:textSize="13sp"/>
 
         <TextView
             android:id="@+id/tv_instock_num"
@@ -88,7 +87,7 @@
             android:gravity="center"
             android:text="@string/item_point_instock_num"
             android:textColor="#333"
-            android:textSize="24px"/>
+            android:textSize="13sp"/>
 
 
     </LinearLayout>

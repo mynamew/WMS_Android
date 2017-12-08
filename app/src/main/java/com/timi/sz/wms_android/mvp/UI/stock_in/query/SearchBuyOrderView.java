@@ -73,4 +73,9 @@ public interface SearchBuyOrderView extends MvpBaseView {
      * 搜索销售退货—选单的单号
      */
     void searchSaleGoodsReturnOrderno(SaleGoodsReturnBean bean);
+
+    /**
+     * 设置
+     */
+    void errorSetEdittextSelect();
 }

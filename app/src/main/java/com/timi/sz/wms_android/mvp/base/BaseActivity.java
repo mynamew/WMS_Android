@@ -12,10 +12,14 @@ import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.text.Selection;
 import android.text.TextUtils;
+import android.util.SparseArray;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -26,9 +30,11 @@ import com.timi.sz.wms_android.R;
 import com.timi.sz.wms_android.base.uils.Constants;
 import com.timi.sz.wms_android.base.uils.InputMethodUtils;
 import com.timi.sz.wms_android.base.uils.SpUtils;
+import com.timi.sz.wms_android.base.uils.ToastUtils;
 import com.timi.sz.wms_android.base.uils.TypefaceUtil;
 import com.timi.sz.wms_android.base.uils.statusutils.StatusBarUtil;
 import com.timi.sz.wms_android.mvp.UI.login.LoginActivity;
+import com.timi.sz.wms_android.mvp.UI.stock_in.query.SearchBuyOrderActivity;
 import com.timi.sz.wms_android.mvp.base.presenter.MvpPresenter;
 import com.timi.sz.wms_android.mvp.base.view.MvpView;
 import com.timi.sz.wms_android.mvp.base.view.iml.MvpBaseView;
@@ -37,6 +43,8 @@ import com.timi.sz.wms_android.qrcode.utils.Constant;
 import com.timi.sz.wms_android.view.MyProgressDialog;
 import com.timi.sz.wms_android.view.SwipeBackLayout;
 import com.zhy.autolayout.AutoLayoutActivity;
+
+import java.util.Iterator;
 
 import butterknife.ButterKnife;
 
@@ -72,14 +80,14 @@ public abstract class BaseActivity<V extends MvpView, P extends MvpPresenter<V>>
         int layoutResID = setLayoutId();
         //设置布局id
         // 不需要侧滑的布局id  进行过滤
-        if (layoutResID == R.layout.activity_main) {
-            setContentView(layoutResID);
-        } else {
-            setContentView(getContainer());
-            View view = LayoutInflater.from(this).inflate(layoutResID, null);
-            view.setBackgroundColor(getResources().getColor(R.color.app_background));
-            swipeBackLayout.addView(view);
-        }
+//        if (layoutResID == R.layout.activity_main) {
+        setContentView(layoutResID);
+//        } else {
+//            setContentView(getContainer());
+//            View view = LayoutInflater.from(this).inflate(layoutResID, null);
+//            view.setBackgroundColor(getResources().getColor(R.color.app_background));
+//            swipeBackLayout.addView(view);
+//        }
         /**
          * 更改字体
          */
@@ -439,6 +447,7 @@ public abstract class BaseActivity<V extends MvpView, P extends MvpPresenter<V>>
         if (!SpUtils.getInstance().getIsGiveGoods())
             view.setVisibility(View.GONE);
     }
+
     /**
      * 设置附加属性的状态 （是否显示附加属性）
      *
@@ -454,6 +463,85 @@ public abstract class BaseActivity<V extends MvpView, P extends MvpPresenter<V>>
      */
     public interface ScanQRCodeResultListener {
         void scanSuccess(int requestCode, String result);
+    }
+
+    private SparseArray<EditText> edits = new SparseArray<>();
+
+    /**
+     * 设置 输入框  将输入框传进来
+     *
+     * @param editText
+     * @param editCode 输入框的code
+     */
+    public void setEdittextListener(final EditText editText, int editCode, @StringRes final int  tipPleaseInputId, @StringRes final int tipLengthId, final EdittextInputListener listener) {
+        //存储输入框
+        edits.put(editCode, editText);
+        editText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId ==6|| actionId == 0) {
+                    InputMethodUtils.hide(BaseActivity.this);
+                    String content = editText.getText().toString().trim();
+
+                    if (TextUtils.isEmpty(content)) {
+                        ToastUtils.showShort(getString(tipPleaseInputId));
+                        Selection.selectAll(editText.getText());
+                    }
+                    /**
+                     * 长度的判定
+                     */
+                    if (content.length() < 4) {
+                        ToastUtils.showShort(getString(tipLengthId));
+                        Selection.selectAll(editText.getText());
+                    } else {
+                        /**
+                         * 验证通过，进行下一步
+                         */
+                        if (null != listener) {
+                            listener.verticalSuccess(content);
+                        }
+                    }
+                }
+                return false;
+            }
+        });
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        /**
+         * 按下扫描件
+         */
+        if (keyCode == 0) {
+            setEdittextSelect();
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
+    /**
+     * 设置 输入框内容选中的方法
+     */
+    public void setEdittextSelect() {
+        /**
+         * 遍历sparsearray  找到正在获取焦点的edittext 设置全部选中
+         */
+        for (int i = 0; i < edits.size(); i++) {
+            EditText et = edits.valueAt(i);
+            if (et.isFocused()) {
+                Selection.selectAll(et.getText());
+                break;
+            }
+        }
+    }
+
+    /**
+     * 所有的输入框的输入监听方法  验证全部通过则调用 verticalSuccess方法
+     * 1、为了统一处理 输入错误设置内容选中
+     * 2、为了监听回车键
+     * 3、为了监听扫描键
+     */
+    public interface EdittextInputListener {
+        void verticalSuccess(String result);
     }
 
 }

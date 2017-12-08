@@ -2,20 +2,18 @@ package com.timi.sz.wms_android.mvp.UI.stock_in.point;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
-import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.timi.sz.wms_android.R;
 import com.timi.sz.wms_android.base.adapter.BaseRecyclerAdapter;
-import com.timi.sz.wms_android.base.adapter.CommonSimpleHeaderAndFooterTypeAdapter;
-import com.timi.sz.wms_android.base.adapter.CommonViewHolder;
 import com.timi.sz.wms_android.base.adapter.RecyclerViewHolder;
 import com.timi.sz.wms_android.base.divider.DividerItemDecoration;
 import com.timi.sz.wms_android.base.uils.Constants;
@@ -27,11 +25,8 @@ import com.timi.sz.wms_android.bean.instock.search.BuyOrdernoBean;
 import com.timi.sz.wms_android.bean.instock.search.SendOrdernoBean;
 import com.timi.sz.wms_android.http.message.BaseMessage;
 import com.timi.sz.wms_android.http.message.event.StockInPointEvent;
-import com.timi.sz.wms_android.mvp.UI.quity.quality.QualityCheckActivity;
 import com.timi.sz.wms_android.mvp.base.BaseFragment;
 import com.timi.sz.wms_android.view.MyDialog;
-import com.timi.sz.wms_android.view.excelview.DisplayUtil;
-import com.timi.sz.wms_android.view.excelview.MyExcelView;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -42,10 +37,12 @@ import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 
 import static com.timi.sz.wms_android.base.uils.Constants.BUY_ORDE_NUM;
+import static com.timi.sz.wms_android.base.uils.Constants.OUT_SOURCE;
 
 /**
  * $dsc  物料清点
@@ -64,6 +61,14 @@ public class FragmentPoint extends BaseFragment<FragmentPointView, FragmentPoint
     TextView tvSipBuyDate;
     @BindView(R.id.rlv_point)
     RecyclerView rlvPoint;
+    @BindView(R.id.header_buy)
+    View headerBuy;
+    @BindView(R.id.header_send)
+    View headerSend;
+    @BindView(R.id.tv_buy_spare_num)
+    TextView tvBuySpareNum;
+    @BindView(R.id.tv_send_spare_num)
+    TextView tvSendSpareNum;
 
     private BuyOrdernoBean mBuyBean;
     private SendOrdernoBean mSendBean;
@@ -77,6 +82,7 @@ public class FragmentPoint extends BaseFragment<FragmentPointView, FragmentPoint
      * adapter
      */
     BaseRecyclerAdapter<BuyOrdernoBean.DetailResultsBean> adapter;
+    private List<BuyOrdernoBean.DetailResultsBean> mDatas;
     private int intentCode;
 
     @Override
@@ -91,19 +97,43 @@ public class FragmentPoint extends BaseFragment<FragmentPointView, FragmentPoint
 
     @Override
     public void initData() {
+        mDatas=new ArrayList<>();
         //判断code  是送货单还是采购单
         Intent it = ((StockInPointActivity) getActivity()).getIntentCode();
         intentCode = it.getIntExtra(Constants.CODE_STR, Constants.COME_MATERAIL_NUM);
-        if (intentCode == BUY_ORDE_NUM) {
+        if (intentCode == BUY_ORDE_NUM || intentCode == OUT_SOURCE) {
             mBuyBean = new Gson().fromJson(it.getStringExtra(Constants.IN_STOCK_BUY_BEAN), BuyOrdernoBean.class);
+            /**
+             * 设置头部
+             */
+            headerBuy.setVisibility(View.VISIBLE);
+            headerSend.setVisibility(View.GONE);
+            /**
+             * 设置数据源
+             */
+            mDatas.addAll(mBuyBean.getDetailResults());
+
         } else {//送货单
             mSendBean = new Gson().fromJson(it.getStringExtra(Constants.IN_STOCK_SEND_BEAN), SendOrdernoBean.class);
+            /**
+             * 设置头部
+             */
+            headerBuy.setVisibility(View.GONE);
+            headerSend.setVisibility(View.VISIBLE);
+            /**
+             * 设置数据源
+             */
+            mDatas.addAll(mSendBean.getDetailResults());
         }
-
+        /**
+         * 设置备品状态
+         */
+        setSpareGoodsStatus(tvBuySpareNum);
+        setSpareGoodsStatus(tvSendSpareNum);
         /**
          * 标题的数据
          */
-        if (intentCode == BUY_ORDE_NUM) {
+        if (intentCode == BUY_ORDE_NUM || intentCode == OUT_SOURCE) {
             BuyOrdernoBean.SummaryResultsBean summaryResults = mBuyBean.getSummaryResults();
             /**
              * 设置初始数据
@@ -127,24 +157,14 @@ public class FragmentPoint extends BaseFragment<FragmentPointView, FragmentPoint
             }
         }
         if (null == adapter) {
-            adapter = new BaseRecyclerAdapter<BuyOrdernoBean.DetailResultsBean>(getActivity(), intentCode == BUY_ORDE_NUM ? mBuyBean.getDetailResults() : mSendBean.getDetailResults()) {
+            adapter = new BaseRecyclerAdapter<BuyOrdernoBean.DetailResultsBean>(getActivity(), mDatas) {
                 @Override
                 protected int getItemLayoutId(int viewType) {
-                    if (intentCode == BUY_ORDE_NUM) {
+                    if (intentCode == BUY_ORDE_NUM || intentCode == OUT_SOURCE) {
                         return R.layout.item_point;
                     } else {
                         return R.layout.item_point_send;
                     }
-                }
-
-                @Override
-                protected int getHeaderLayoutId() {
-                    if (intentCode == BUY_ORDE_NUM) {
-                        return R.layout.header_point_buy;
-                    } else {
-                        return R.layout.header_point_send;
-                    }
-
                 }
 
                 @Override
@@ -157,6 +177,7 @@ public class FragmentPoint extends BaseFragment<FragmentPointView, FragmentPoint
                     holder.setTextView(R.id.tv_point_num, item.getCountQty());
 
                     holder.setTextView(R.id.tv_spare_num, item.getGiveQty());
+                    holder.setTextView(R.id.tv_material_attr, item.getMaterialName() + (TextUtils.isEmpty(item.getMaterialAttribute()) ? "" : item.getMaterialAttribute()));
                     /**
                      * 设置备品的状态
                      */
@@ -236,7 +257,7 @@ public class FragmentPoint extends BaseFragment<FragmentPointView, FragmentPoint
                                 }
                             }
 
-                            int receiveNum = intentCode == BUY_ORDE_NUM ? mBuyBean.getDetailResults().get(position).getPoQty() : mSendBean.getDetailResults().get(position).getPoQty();
+                            int receiveNum = intentCode == BUY_ORDE_NUM || intentCode == OUT_SOURCE ? mBuyBean.getDetailResults().get(position).getPoQty() : mSendBean.getDetailResults().get(position).getPoQty();
                             if (pointNum > receiveNum) {
                                 ToastUtils.showShort(getActivity(), getString(R.string.point_num_no_more_buy_num));
                                 return;
@@ -247,7 +268,7 @@ public class FragmentPoint extends BaseFragment<FragmentPointView, FragmentPoint
                             params.put("OrgId", SpUtils.getInstance().getOrgId());
                             params.put("CountQty", pointNum);
                             params.put("GiveQty", spareNum);
-                            if (intentCode == BUY_ORDE_NUM) {//采购单
+                            if (intentCode == BUY_ORDE_NUM || intentCode == OUT_SOURCE) {//采购单
                                 //获取数据 显示dialog
                                 BuyOrdernoBean.SummaryResultsBean summaryResults = mBuyBean.getSummaryResults();
                                 List<BuyOrdernoBean.DetailResultsBean> detailResults = mBuyBean.getDetailResults();
@@ -280,12 +301,10 @@ public class FragmentPoint extends BaseFragment<FragmentPointView, FragmentPoint
                 }
             });
             BuyOrdernoBean.DetailResultsBean detailResultsBean = null;
-            if (intentCode == BUY_ORDE_NUM) {//采购单
+            if (intentCode == BUY_ORDE_NUM || intentCode == OUT_SOURCE) {//采购单
                 //获取数据 显示dialog
                 List<BuyOrdernoBean.DetailResultsBean> detailResults = mBuyBean.getDetailResults();
                 detailResultsBean = detailResults.get(position);
-
-
             } else {//送货单
                 //获取数据 显示dialog
                 List<BuyOrdernoBean.DetailResultsBean> detailResults = mSendBean.getDetailResults();
@@ -301,7 +320,7 @@ public class FragmentPoint extends BaseFragment<FragmentPointView, FragmentPoint
          * 是否有备品 通过PDA 参数获取到
          * 如果无备品 则直接隐藏被备品
          */
-        setSpareGoodsStatus(mPointDialog.getEdittext(R.id.et_stockin_point_sparenum));
+        setSpareGoodsStatus(mPointDialog.getView(R.id.ll_spare_num));
         mPointDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
             @Override
             public void onDismiss(DialogInterface dialog) {
@@ -328,7 +347,7 @@ public class FragmentPoint extends BaseFragment<FragmentPointView, FragmentPoint
          * 第一次设置接受id
          */
         mBuyBean.getSummaryResults().setReceiveId(result);
-        BuyOrdernoBean.DetailResultsBean detailResultsBean = mBuyBean.getDetailResults().get(curretnPosition);
+        BuyOrdernoBean.DetailResultsBean detailResultsBean =mDatas.get(curretnPosition);
         /**
          * 设置清点的数量
          */
@@ -360,7 +379,7 @@ public class FragmentPoint extends BaseFragment<FragmentPointView, FragmentPoint
          * 第一次设置接受id
          */
         mSendBean.getSummaryResults().setReceiveId(result);
-        BuyOrdernoBean.DetailResultsBean detailResultsBean = mSendBean.getDetailResults().get(curretnPosition);
+        BuyOrdernoBean.DetailResultsBean detailResultsBean = mDatas.get(curretnPosition);
         /**
          * 设置清点的数量
          */
@@ -394,14 +413,16 @@ public class FragmentPoint extends BaseFragment<FragmentPointView, FragmentPoint
     @Override
     public void getPODetailsByCode(BuyOrdernoBean bean) {
         LogUitls.e("更新了清点的表体");
-        mBuyBean.setDetailResults(bean.getDetailResults());
+        mDatas.clear();
+        mDatas.addAll(bean.getDetailResults());
         adapter.notifyDataSetChanged();
     }
 
     @Override
     public void getSendPODetailsByCode(SendOrdernoBean bean) {
         LogUitls.e("更新了送货单清点的表体");
-        mSendBean.setDetailResults(bean.getDetailResults());
+        mDatas.clear();
+        mDatas.addAll(bean.getDetailResults());
         adapter.notifyDataSetChanged();
     }
 
@@ -411,7 +432,7 @@ public class FragmentPoint extends BaseFragment<FragmentPointView, FragmentPoint
      * @return
      */
     public int getReceiveId() {
-        if (intentCode == BUY_ORDE_NUM) {
+        if (intentCode == BUY_ORDE_NUM || intentCode == OUT_SOURCE) {
             return mBuyBean.getSummaryResults().getReceiveId();
         } else {
             return mSendBean.getSummaryResults().getReceiveId();
@@ -430,7 +451,7 @@ public class FragmentPoint extends BaseFragment<FragmentPointView, FragmentPoint
             params.put("UserId", SpUtils.getInstance().getUserId());
             params.put("MAC", PackageUtils.getMac());
             params.put("OrgId", SpUtils.getInstance().getOrgId());
-            if (intentCode == BUY_ORDE_NUM) {
+            if (intentCode == BUY_ORDE_NUM || intentCode == OUT_SOURCE) {
                 params.put("BillCode", mBuyBean.getSummaryResults().getPoCode());
                 params.put("BizType", mBuyBean.getSummaryResults().getBizType());
                 params.put("ScanId", mBuyBean.getSummaryResults().getReceiveId());
@@ -449,19 +470,13 @@ public class FragmentPoint extends BaseFragment<FragmentPointView, FragmentPoint
         super.onDestroy();
         BaseMessage.unregister(this);
     }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-    }
-
     @OnClick(R.id.btn_point_commit)
     public void onViewClicked() {
         Map<String, Object> params = new HashMap<>();
         params.put("UserId", SpUtils.getInstance().getUserId());
         params.put("MAC", PackageUtils.getMac());
         params.put("OrgId", SpUtils.getInstance().getOrgId());
-        if (intentCode == BUY_ORDE_NUM) {
+        if (intentCode == BUY_ORDE_NUM || intentCode == OUT_SOURCE) {
             params.put("ScanId", mBuyBean.getSummaryResults().getReceiveId());
         } else {
             params.put("ScanId", mSendBean.getSummaryResults().getReceiveId());

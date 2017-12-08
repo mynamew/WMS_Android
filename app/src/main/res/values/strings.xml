@@ -147,6 +147,7 @@
     <string name="server_set">服务设置</string>
     <string name="set_team">组织切换</string>
     /**====== 清点 ======**/
+    <string name="dialog_update_material_point">修改清点</string>
     <string name="order_no">\t订单号：%1$s</string>
     <string name="buy_date">采购日期：%1$s</string>
     <string name="buy_from">\t供应商：%1$s</string>
@@ -201,6 +202,14 @@
     <string name="point_num_and_spare_num_no_zero">请点数和备品数不能同时为0</string>
     <string name="point_num_no_more_buy_num">清点数量不能大于采购数,重新输入！</string>
     <string name="point_num_no_zero">清点数量不能为0！</string>
+    <string name="header_point_date">清点时间</string>
+    <string name="please_input_supplier">请输入供应商</string>
+    <string name="search">搜索</string>
+    <string name="stock_in_out_source">委外单</string>
+    /**====== 采购单 列表======**/
+    <string name="buy_list_title">采购单列表</string>
+    /**====== 委外但 列表======**/
+    <string name="out_source_list_title">委外单列表</string>
     /**====== 来料入库 ======**/
     <string name="in_stock_num_title">入库上架(来料入库)</string>
     <string name="receive_pro_num">到货单号：</string>
@@ -747,6 +756,7 @@
     <string name="outstock_scan_form_change">出库扫描(形态转换)</string>
     <string name="instock_putaway_form_change">入库上架(形态转换)</string>
     <string name="form_change_instock_detial_info_tip">形态转换单(入库)信息详情</string>
+    <string name="form_change_outstock_detial_info_tip">形态转换单(出库)信息详情</string>
     <string name="form_change_instock_detial_title">形态转换单详情</string>
     /**====== 一步调入 ======**/
     <string name="allot_out_total_num">调出总数</string>
@@ -792,9 +802,7 @@
     <string name="carton_num_tip">箱号</string>
     <string name="sale_outstock_orderno_info">销售出库单信息</string>
     <string name="repertory_total_num">库存总数</string>
-    <string name="please_input_supplier">请输入供应商</string>
-    <string name="search">搜索</string>
-    <string name="buy_list_title">采购单列表</string>
+
 
 
 </resources>

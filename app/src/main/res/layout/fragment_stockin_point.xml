@@ -10,51 +10,53 @@
         android:id="@+id/ll_top"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="10px"
         android:layout_marginLeft="30px"
+        android:layout_marginTop="10px"
         android:orientation="vertical">
 
 
         <TextView
             android:id="@+id/tv_sip_buy_num"
             android:layout_width="match_parent"
-            android:layout_height="64px"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="20px"
             android:gravity="center_vertical"
             android:text="@string/order_no"
             android:textColor="#333"
-            android:textSize="26px"/>
+            android:textSize="14sp"/>
 
         <TextView
             android:id="@+id/tv_sip_buy_date"
             android:layout_width="match_parent"
-            android:layout_height="64px"
-            android:layout_marginLeft="10px"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15px"
             android:gravity="center_vertical"
             android:text="@string/buy_date"
             android:textColor="#333"
-            android:textSize="26px"
+            android:textSize="14sp"
             />
 
         <TextView
             android:id="@+id/tv_sip_buyer"
             android:layout_width="match_parent"
-            android:layout_height="64px"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="20px"
             android:gravity="center_vertical"
             android:text="@string/buyer"
             android:textColor="#333"
-            android:textSize="26px"/>
+            android:textSize="14sp"/>
 
 
         <TextView
             android:id="@+id/tv_sip_buy_from"
             android:layout_width="match_parent"
-            android:layout_height="64px"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="20px"
             android:gravity="center_vertical"
             android:text="@string/buy_from"
             android:textColor="#333"
-            android:textSize="26px"/>
+            android:textSize="14sp"/>
 
     </LinearLayout>
 
@@ -62,6 +64,15 @@
         android:layout_width="match_parent"
         android:layout_height="24px"
         android:background="#e7e7ed"/>
+
+    <include
+        android:id="@+id/header_buy"
+        layout="@layout/header_point_buy"/>
+
+    <include
+        android:id="@+id/header_send"
+        layout="@layout/header_point_send"/>
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rlv_point"
         android:layout_width="match_parent"

@@ -32,11 +32,11 @@ public class SplashActivity extends BaseActivity<SplashView, SplashPresenter> im
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             //是否是第一次登录  跳转登录还是主页
-            if (!SpUtils.getInstance().getBoolean(Constants.IS_FIRST_LOG)) {
-                startActivity(new Intent(SplashActivity.this, LoginActivity.class));
-            } else {
-                startActivity(new Intent(SplashActivity.this, MainActivity.class));
-            }
+//            if (!SpUtils.getInstance().getBoolean(Constants.IS_FIRST_LOG)) {
+            startActivity(new Intent(SplashActivity.this, LoginActivity.class));
+//            } else {
+//                startActivity(new Intent(SplashActivity.this, MainActivity.class));
+//            }
 //            if (SpUtils.getInstance().getBoolean(Constants.IS_FIRST_LOG)) {
 //                startActivity(new Intent(SplashActivity.this, LoginActivity.class));
 //            } else {
@@ -58,7 +58,7 @@ public class SplashActivity extends BaseActivity<SplashView, SplashPresenter> im
         SpUtils.getInstance().putBaseUrl(Constants.BASE_URL);
         SpUtils.getInstance().puttenancyName("Default");
         SpUtils.getInstance().putLocaleLanguage("zh-CN");
-        SpUtils.getInstance().putUserName("admin");
+        SpUtils.getInstance().putUserName("mes");
         SpUtils.getInstance().putPassword("123qwe");
         handler.sendEmptyMessageDelayed(0, 2000);
     }

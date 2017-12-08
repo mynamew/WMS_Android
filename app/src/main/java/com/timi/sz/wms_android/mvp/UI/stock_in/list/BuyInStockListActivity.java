@@ -37,8 +37,15 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static com.timi.sz.wms_android.base.uils.Constants.BUY_ORDE_NUM;
 import static com.timi.sz.wms_android.base.uils.Constants.IN_STOCK_BUY_BEAN;
+import static com.timi.sz.wms_android.base.uils.Constants.OUT_SOURCE;
 
+/**
+  * 采购单 委外单 列表
+  * author: timi    
+  * create at: 2017/12/7 17:21
+  */  
 public class BuyInStockListActivity extends BaseActivity<BuyInStockListView, BuyInStockListPresenter> implements BuyInStockListView {
     @BindView(R.id.tv_putaway_scan_location_tip)
     TextView tvPutawayScanLocationTip;
@@ -67,14 +74,26 @@ public class BuyInStockListActivity extends BaseActivity<BuyInStockListView, Buy
 
     @Override
     public void initBundle(Bundle savedInstanceState) {
-        setActivityTitle(getString(R.string.buy_list_title));
         //获取跳转的code 值 用来显示不同的提示
         intentCode = getIntent().getIntExtra(Constants.CODE_STR, Constants.BUY_ORDE_NUM);
     }
 
     @Override
     public void initView() {
+        switch (intentCode){
+            case BUY_ORDE_NUM:
+                setActivityTitle(getString(R.string.buy_list_title));
+                break;
+            case  OUT_SOURCE:
+                setActivityTitle(getString(R.string.out_source_list_title));
+                break;
+        }
+        setEdittextListener(etPutawayScanLocation, intentCode, R.string.please_input_orderno_or_scan, R.string.input_orderno_more_four, new EdittextInputListener() {
+            @Override
+            public void verticalSuccess(String result) {
 
+            }
+        });
     }
 
     @Override
@@ -126,7 +145,7 @@ public class BuyInStockListActivity extends BaseActivity<BuyInStockListView, Buy
                 requestBuyInStockListBean.setUserId(SpUtils.getInstance().getUserId());
                 requestBuyInStockListBean.setOrgId(SpUtils.getInstance().getOrgId());
                 requestBuyInStockListBean.setMAC(PackageUtils.getMac());
-                getPresenter().queryPOList(requestBuyInStockListBean);
+                getPresenter().queryPOList(requestBuyInStockListBean,intentCode);
                 break;
         }
     }
@@ -161,7 +180,14 @@ public class BuyInStockListActivity extends BaseActivity<BuyInStockListView, Buy
                     params.put("OrgId", SpUtils.getInstance().getOrgId());
                     params.put("MAC", PackageUtils.getMac());
                     params.put("BillCode", mDatas.get(pos).getBillCode());
-                    params.put("BizType",11);
+                    /**
+                     * 设置 BizType  采购单 11  委外单 12
+                     */
+                    if(intentCode==BUY_ORDE_NUM){
+                        params.put("BizType",11);
+                    }else {
+                        params.put("BizType",12);
+                    }
                     params.put("ScanId",0);
                     getPresenter().getPODataByCode(params);
 

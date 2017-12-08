@@ -24,7 +24,7 @@ public class StockinMaterialBean {
     private String materialCode;
     private String materialName;
     private String materialStandard;
-    private Object materialAttribute;
+    private String materialAttribute;
     private int countQty;
     private int giveQty;
     private String createDateTime;
@@ -62,11 +62,11 @@ public class StockinMaterialBean {
         this.materialStandard = materialStandard;
     }
 
-    public Object getMaterialAttribute() {
+    public String getMaterialAttribute() {
         return materialAttribute;
     }
 
-    public void setMaterialAttribute(Object materialAttribute) {
+    public void setMaterialAttribute(String materialAttribute) {
         this.materialAttribute = materialAttribute;
     }
 

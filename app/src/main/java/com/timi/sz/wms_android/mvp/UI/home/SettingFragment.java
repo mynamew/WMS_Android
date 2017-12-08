@@ -155,7 +155,8 @@ public class SettingFragment extends BaseFragment<SetFragmentView, SetFragmentPr
                     .setButtonListener(R.id.tv_logout_confirm, getString(R.string.confirm), new MyDialog.DialogClickListener() {
                         @Override
                         public void dialogClick(MyDialog dialog) {
-                            // TODO: 2017/8/25 做登录的数据的清除工作
+                            // TODO: 2017/8/25 做登录的数据的清除工作   并且登录退出要退出整个程序
+                            getActivity().onBackPressed();
                             dialog.dismiss();
                             ((MainActivity) getActivity()).jumpToLoginActivity();
                         }

@@ -2,9 +2,11 @@ package com.timi.sz.wms_android.mvp.UI.stock_in.query;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Selection;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -15,6 +17,7 @@ import com.google.gson.Gson;
 import com.timi.sz.wms_android.R;
 import com.timi.sz.wms_android.base.uils.Constants;
 import com.timi.sz.wms_android.base.uils.InputMethodUtils;
+import com.timi.sz.wms_android.base.uils.LogUitls;
 import com.timi.sz.wms_android.base.uils.PackageUtils;
 import com.timi.sz.wms_android.base.uils.SpUtils;
 import com.timi.sz.wms_android.base.uils.ToastUtils;
@@ -144,30 +147,16 @@ public class SearchBuyOrderActivity extends BaseActivity<SearchBuyOrderView, Sea
 
     @Override
     public void initView() {
-        etSboInput.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+        /**
+         * 设置输入框的监听
+         */
+        setEdittextListener(etSboInput, intentCode, R.string.please_input_orderno_or_scan, R.string.input_orderno_more_four, new EdittextInputListener() {
             @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-
-                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                    InputMethodUtils.hide(SearchBuyOrderActivity.this);
-                    String orderNum = etSboInput.getText().toString().trim();
-                    if (TextUtils.isEmpty(orderNum)) {
-                        ToastUtils.showShort(getString(R.string.please_input_orderno_or_scan));
-                    }
-                    if (orderNum.length() < 4) {
-                        ToastUtils.showShort(getString(R.string.input_orderno_more_four));
-                    } else {
-                        /**
-                         * 发起请求
-                         */
-                        requestManagerMethod(orderNum);
-                    }
-                }
-                return false;
+            public void verticalSuccess(String result) {
+                requestManagerMethod(result);
             }
         });
     }
-
     @Override
     public void initData() {
 
@@ -280,6 +269,7 @@ public class SearchBuyOrderActivity extends BaseActivity<SearchBuyOrderView, Sea
 
     /**
      * 委外退料
+     *
      * @param bean
      */
     @Override
@@ -314,6 +304,14 @@ public class SearchBuyOrderActivity extends BaseActivity<SearchBuyOrderView, Sea
         it.putExtra(Constants.CODE_STR, intentCode);
         it.putExtra(IN_STOCK_FINISH_SALE_BEAN, new Gson().toJson(bean));
         startActivity(it);
+    }
+
+    /**
+     * 当输入的单号 查询有误的时候，直接将edittext内容选中
+     */
+    @Override
+    public void errorSetEdittextSelect() {
+        Selection.selectAll(etSboInput.getText());
     }
 
     /**

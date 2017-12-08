@@ -55,6 +55,7 @@ import com.timi.sz.wms_android.bean.quality.mrp.MrpReviewData;
 import com.timi.sz.wms_android.bean.quality.normal.CommitNormalData;
 import com.timi.sz.wms_android.bean.quality.normal.NormalQualityData;
 import com.timi.sz.wms_android.bean.quality.update_barcode.BarEditGetUnInstockBarcodeData;
+import com.timi.sz.wms_android.bean.stockin_work.FormChangeDetailResult;
 import com.timi.sz.wms_android.bean.stockin_work.LibraryAdjustResult;
 import com.timi.sz.wms_android.bean.stockin_work.ScanLocationResult;
 import com.timi.sz.wms_android.bean.stockin_work.ScanMaterialResult;
@@ -135,7 +136,7 @@ public interface ApiService {
      */
     @FormUrlEncoded
     @POST("api/services/wpda/AMain/GetPDA_Parameter")
-    Observable<CommonResult<GetPDA_ParameterResult>> getPDA_Parameter(@FieldMap Map<String,Object> params);
+    Observable<CommonResult<GetPDA_ParameterResult>> getPDA_Parameter(@FieldMap Map<String, Object> params);
 
     /********************入库 请求************************************************************/
 
@@ -153,16 +154,25 @@ public interface ApiService {
      */
     @POST("api/services/wpda/po/QueryPOList")
     Observable<CommonResult<List<QueryPoListBean>>> queryPOList(@Body RequestBuyInStockListBean params);
-     /**
+
+    /**
+     * 委外单列表
+     *
+     * @return
+     */
+    @POST("api/services/wpda/po/QueryWWPOList")
+    Observable<CommonResult<List<QueryPoListBean>>> queryWWPOList(@Body RequestBuyInStockListBean params);
+
+    /**
      * 采购单表头 表体数据
      *
      * @return
      */
-     @FormUrlEncoded
-     @POST("api/services/wpda/po/GetPODataByCode")
+    @FormUrlEncoded
+    @POST("api/services/wpda/po/GetPODataByCode")
     Observable<CommonResult<BuyOrdernoBean>> getPODataByCode(@FieldMap Map<String, Object> params);
 
-     /**
+    /**
      * 采购单请点记录
      *
      * @return
@@ -1035,14 +1045,34 @@ public interface ApiService {
     Observable<CommonResult<FormChangeOutResult>> queryFormChangeOut(@FieldMap Map<String, Object> params);
 
     /**
+     * 形态转换-出库 明细
+     *
+     * @param params
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("api/services/wpda/MatConvert/GetConvertOutDetail")
+    Observable<CommonResult<List<FormChangeDetailResult>>> getConvertOutDetail(@FieldMap Map<String, Object> params);
+
+    /**
      * 形态转换-入库 查询
      *
      * @param params
      * @return
      */
     @FormUrlEncoded
-    @POST("api/Account/ClientLogin")
+    @POST("api/services/wpda/MatConvert/QueryConvertInByInput")
     Observable<CommonResult<FormChangeInResult>> queryFormChangeIn(@FieldMap Map<String, Object> params);
+
+    /**
+     * 形态转换-入库 明细
+     *
+     * @param params
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("api/services/wpda/MatConvert/GetConvertInDetail")
+    Observable<CommonResult<List<FormChangeDetailResult>>> getConvertInDetail(@FieldMap Map<String, Object> params);
 
     /**
      * 库存查询 查询

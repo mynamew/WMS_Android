@@ -20,8 +20,11 @@ import com.timi.sz.wms_android.base.uils.PackageUtils;
 import com.timi.sz.wms_android.base.uils.SpUtils;
 import com.timi.sz.wms_android.base.uils.ToastUtils;
 import com.timi.sz.wms_android.bean.instock.MaterialScanPutAwayBean;
+import com.timi.sz.wms_android.bean.outstock.buy.SubmitBarcodeOutAuditData;
+import com.timi.sz.wms_android.bean.outstock.buy.SubmitBarcodeOutSplitAuditData;
 import com.timi.sz.wms_android.bean.stockin_work.query.FormChangeOutResult;
 import com.timi.sz.wms_android.mvp.UI.stock_in_work.form_change_detail.FormChangeDetailActivity;
+import com.timi.sz.wms_android.mvp.UI.stock_out.divide_print.SplitPrintActivity;
 import com.timi.sz.wms_android.mvp.base.BaseActivity;
 
 import java.util.HashMap;
@@ -70,7 +73,8 @@ public class FormChangeOutstockActivity extends BaseActivity<FormChangeOutstockV
 
     private FormChangeOutResult formChangeOutResult;
     private int intentCode;
-    private int ScanId;
+    private int scanId;
+    private int billId;
     @Override
     public int setLayoutId() {
         return R.layout.activity_form_change_outstock;
@@ -81,7 +85,8 @@ public class FormChangeOutstockActivity extends BaseActivity<FormChangeOutstockV
         setActivityTitle(getString(R.string.outstock_scan_form_change));
         formChangeOutResult=new Gson().fromJson(getIntent().getStringExtra(Constants.STOCK_IN_WORK_BEAN),FormChangeOutResult.class);
         intentCode=getIntent().getIntExtra(Constants.STOCK_IN_WORK_CODE_STR,0);
-        ScanId=formChangeOutResult.getScanId();
+        scanId=formChangeOutResult.getScanId();
+        billId=formChangeOutResult.getBillId();
     }
 
     @Override
@@ -109,16 +114,19 @@ public class FormChangeOutstockActivity extends BaseActivity<FormChangeOutstockV
                     /**
                      * 物料扫码并上架的网络请求
                      */
-                    Map<String, Object> params1 = new HashMap<>();
-                    params1.put("UserId", SpUtils.getInstance().getUserId());
-                    params1.put("OrgId", SpUtils.getInstance().getOrgId());
-                    params1.put("MAC", PackageUtils.getMac());
-                    params1.put("MAC", PackageUtils.getMac());
-                    params1.put("MAC", PackageUtils.getMac());
-                    params1.put("MAC", PackageUtils.getMac());
-                    params1.put("MAC", PackageUtils.getMac());
-                    params1.put("BillNo", result);
-                    getPresenter().materialScanPutAawy(params1);
+                    /**
+                     * 物料扫码并上架的网络请求
+                     */
+                    Map<String, Object> params = new HashMap<>();
+                    params.put("UserId", SpUtils.getInstance().getUserId());
+                    params.put("OrgId", SpUtils.getInstance().getOrgId());
+                    params.put("MAC", PackageUtils.getMac());
+                    params.put("BillId", billId);
+                    params.put("SrcBillType", 53);
+                    params.put("DestBillType", 53);
+                    params.put("ScanId", scanId);
+                    params.put("BarcodeNo", result);
+                    getPresenter().submitBarcodeOutAudit(params);
                 }
                 return false;
             }
@@ -170,25 +178,60 @@ public class FormChangeOutstockActivity extends BaseActivity<FormChangeOutstockV
                         /**
                          * 物料扫码并上架的网络请求
                          */
-                        Map<String, Object> params1 = new HashMap<>();
-                        params1.put("UserId", SpUtils.getInstance().getUserId());
-                        params1.put("OrgId", SpUtils.getInstance().getOrgId());
-                        params1.put("MAC", PackageUtils.getMac());
-                        params1.put("BillId", formChangeOutResult.getBillId());
+                        Map<String, Object> params = new HashMap<>();
+                        params.put("UserId", SpUtils.getInstance().getUserId());
+                        params.put("OrgId", SpUtils.getInstance().getOrgId());
+                        params.put("MAC", PackageUtils.getMac());
+                        params.put("BillId", billId);
+                        params.put("SrcBillType", 53);
+                        params.put("DestBillType", 53);
+                        params.put("ScanId", scanId);
+                        params.put("BarcodeNo", result);
+                        getPresenter().submitBarcodeOutAudit(params);
                     }
                 });
                 break;
         }
     }
 
+    @Override
+    public void submitBarcodeOutAudit(SubmitBarcodeOutAuditData data) {
+        ToastUtils.showShort(getString(R.string.commit_success));
+        /**
+         * 设置物料的信息
+         */
+        tvMaterialName.setText(data.getMaterialName());
+        tvMaterialCode.setText(data.getMaterialCode());
+        tvMaterialAttr.setText(TextUtils.isEmpty(data.getMaterialAttribute()) ? getString(R.string.none) : data.getMaterialAttribute());
+        tvMaterialNmodel.setText(TextUtils.isEmpty(data.getMaterialStandard()) ? getString(R.string.none) : data.getMaterialStandard());
+         /**
+         * 设置 是否显示附加属性
+         */
+        setMaterialAttrStatus(findViewById(R.id.ll_material_attr));
+        /**
+         * 超出数量  跳转到拆分条吗界面
+         */
+        if (data.getExceedQty() > 0) {
+            startActivity(new Intent(this, SplitPrintActivity.class));
+        } else {
+            scanId = data.getScanId();
+            /**
+             * 设置物料数量
+             */
+            formChangeOutResult.setScanQty(formChangeOutResult.getScanQty()+ data.getBarcodeQty());
+            tvMaterialNum.setText("(" + data.getBarcodeQty() + ")" + formChangeOutResult.getScanQty() + "/" + formChangeOutResult.getQty());
+
+        }
+    }
 
     @Override
-    public void materialScanPutAawy(MaterialScanPutAwayBean bean) {
+    public void submitBarcodeOutSplitAudit(SubmitBarcodeOutSplitAuditData data) {
 
     }
 
     @Override
-    public void createInStockOrderno() {
-
+    public void submitMakeOrAuditBill() {
+        ToastUtils.showShort(getString(R.string.commit_check_success));
+        onBackPressed();
     }
 }

@@ -7,6 +7,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
+        android:layout_marginLeft="30px"
+        android:layout_marginRight="30px"
         android:background="@drawable/bg_rectangle_login_server"
         android:orientation="vertical"
         >
@@ -222,6 +224,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/ll_spare_num"
             android:layout_width="match_parent"
             android:layout_height="80px"
             android:orientation="horizontal"

@@ -782,6 +782,11 @@
     <string name="please_input_supplier">请输入供应商</string>
     <string name="search">搜索</string>
     <string name="buy_list_title">采购单列表</string>
+    <string name="item_instock_total_num_tip">入库总数</string>
+    <string name="dialog_update_material_point">修改清点</string>
+    <string name="header_point_date">清点时间</string>
+    <string name="stock_in_out_source">委外单</string>
+    <string name="out_source_list_title">委外单列表</string>
 
 
 </resources>

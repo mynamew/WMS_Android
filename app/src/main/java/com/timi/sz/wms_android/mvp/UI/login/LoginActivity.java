@@ -247,14 +247,14 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
         //设置 第一次登录为 false
         SpUtils.getInstance().putBoolean(Constants.IS_FIRST_LOG, true);
 //        判断跳转到不同界面
-//        if (!isFirstLog) {
-
-            Intent intent = new Intent(LoginActivity.this, LoginSuccessActivity.class);
-            intent.putExtra("unAuthorizedRequest", unAuthorizedRequest);
-            startActivity(intent);
-//        } else {
-//            startActivity(new Intent(LoginActivity.this, MainActivity.class));
-//        }
+        if (unAuthorizedRequest) {
+//            Intent intent = new Intent(LoginActivity.this, LoginSuccessActivity.class);
+//            intent.putExtra("unAuthorizedRequest", unAuthorizedRequest);
+//            startActivity(intent);
+            onBackPressed();
+        } else {
+            startActivity(new Intent(LoginActivity.this, MainActivity.class));
+        }
         finish();
 
     }

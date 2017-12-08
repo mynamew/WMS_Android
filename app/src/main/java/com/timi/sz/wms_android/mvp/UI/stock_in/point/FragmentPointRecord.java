@@ -1,17 +1,17 @@
 package com.timi.sz.wms_android.mvp.UI.stock_in.point;
 
 import android.content.DialogInterface;
+import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.timi.sz.wms_android.R;
 import com.timi.sz.wms_android.base.adapter.BaseRecyclerAdapter;
-import com.timi.sz.wms_android.base.adapter.CommonSimpleHeaderAndFooterTypeAdapter;
-import com.timi.sz.wms_android.base.adapter.CommonViewHolder;
 import com.timi.sz.wms_android.base.adapter.RecyclerViewHolder;
 import com.timi.sz.wms_android.base.divider.DividerItemDecoration;
 import com.timi.sz.wms_android.base.uils.Constants;
@@ -23,8 +23,6 @@ import com.timi.sz.wms_android.http.message.BaseMessage;
 import com.timi.sz.wms_android.http.message.event.StockInPointEvent;
 import com.timi.sz.wms_android.mvp.base.BaseFragment;
 import com.timi.sz.wms_android.view.MyDialog;
-import com.timi.sz.wms_android.view.excelview.DisplayUtil;
-import com.timi.sz.wms_android.view.excelview.MyExcelView;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -35,8 +33,10 @@ import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
-import static com.timi.sz.wms_android.base.uils.Constants.BUY_ORDE_NUM;
+import static com.timi.sz.wms_android.base.uils.Constants.OUT_SOURCE;
 
 /**
  * $dsc  清点记录
@@ -93,7 +93,6 @@ public class FragmentPointRecord extends BaseFragment<FragmentPointRecordView, F
     @Override
     public void initBundle() {
         BaseMessage.register(this);
-
     }
 
     @Override
@@ -116,9 +115,9 @@ public class FragmentPointRecord extends BaseFragment<FragmentPointRecordView, F
         if (null == mPointRecordDialog) {
             final StockinMaterialBean stockinMaterialBean = mDatas.get(position);
             mPointRecordDialog = new MyDialog(getActivity(), R.layout.dialog_stockin_record)
-                    .setTextViewContent(R.id.tv_stockin_point_record_pronum, String.format(getString(R.string.material_code), stockinMaterialBean.getMaterialCode()))
-                    .setTextViewContent(R.id.tv_stockin_point_record_proname, String.format(getString(R.string.material_name), stockinMaterialBean.getMaterialName()))
-                    .setTextViewContent(R.id.tv_stockin_point_record_promodel, String.format(getString(R.string.material_model), stockinMaterialBean.getMaterialStandard()))
+                    .setTextViewContent(R.id.tv_material_code, mDatas.get(position).getMaterialCode())
+                    .setTextViewContent(R.id.tv_material_name, mDatas.get(position).getMaterialName())
+                    .setTextViewContent(R.id.tv_material_model, mDatas.get(position).getMaterialStandard())
                     .setButtonListener(R.id.btn_stockin_point_record_delete, getString(R.string.delete), new MyDialog.DialogClickListener() {
                         @Override
                         public void dialogClick(MyDialog dialog) {
@@ -128,15 +127,15 @@ public class FragmentPointRecord extends BaseFragment<FragmentPointRecordView, F
                             params.put("MAC", PackageUtils.getMac());
                             params.put("OrgId", SpUtils.getInstance().getOrgId());
                             params.put("ReceiveRecordId", stockinMaterialBean.getId());
-                            getPresenter().deleteMaterialPoint(params, intentCode == Constants.BUY_ORDE_NUM);
+                            getPresenter().deleteMaterialPoint(params, intentCode == Constants.BUY_ORDE_NUM || intentCode == OUT_SOURCE);
                         }
                     })
                     .setButtonListener(R.id.btn_stockin_point_record_update, getString(R.string.update), new MyDialog.DialogClickListener() {
                         @Override
                         public void dialogClick(MyDialog dialog) {
                             dialog.dismiss();
-                            String pointNumStr = dialog.getEdittext(R.id.et_stockin_point_record_pro_point_num).getText().toString();
-                            String spareNumStr = dialog.getEdittext(R.id.et_stockin_poin_recordt_sparenum).getText().toString();
+                            String pointNumStr = dialog.getEdittext(R.id.et_stockin_point_pro_point_num).getText().toString();
+                            String spareNumStr = dialog.getEdittext(R.id.et_stockin_point_sparenum).getText().toString();
                             pointNum = TextUtils.isEmpty(pointNumStr) ? stockinMaterialBean.getCountQty() : Integer.parseInt(pointNumStr);
                             spareNum = TextUtils.isEmpty(spareNumStr) ? stockinMaterialBean.getGiveQty() : Integer.parseInt(spareNumStr);
                             Map<String, Object> params = new HashMap<>();
@@ -146,11 +145,20 @@ public class FragmentPointRecord extends BaseFragment<FragmentPointRecordView, F
                             params.put("ReceiveRecordId", stockinMaterialBean.getId());
                             params.put("CountQty", pointNum);
                             params.put("GiveQty", spareNum);
-                            getPresenter().updateMaterialPoint(params, intentCode == Constants.BUY_ORDE_NUM);
+                            getPresenter().updateMaterialPoint(params, intentCode == Constants.BUY_ORDE_NUM || intentCode == OUT_SOURCE);
 
 
                         }
-                    }).setAnimation(R.style.popWindow_animation_push);
+                    })
+                    .setEdittextContent(R.id.et_stockin_point_pro_point_num, String.valueOf(stockinMaterialBean.getCountQty()))
+                    .setEdittextContent(R.id.et_stockin_point_sparenum, String.valueOf(stockinMaterialBean.getGiveQty()))
+                    .setImageViewListener(R.id.iv_close, new MyDialog.DialogClickListener() {
+                        @Override
+                        public void dialogClick(MyDialog dialog) {
+                            dialog.dismiss();
+                        }
+                    })
+                    .setAnimation(R.style.popWindow_animation_push);
             /**
              * PDA无备品 则隐藏
              */
@@ -186,11 +194,15 @@ public class FragmentPointRecord extends BaseFragment<FragmentPointRecordView, F
                 @Override
                 protected void bindData(RecyclerViewHolder holder, int position, StockinMaterialBean item) {
                     holder.setTextView(R.id.tv_line_name, position + 1);
-                    setTextViewText(holder.getTextView(R.id.tv_material_code), R.string.material_code, item.getMaterialCode());
-                    setTextViewText(holder.getTextView(R.id.tv_material_name), R.string.material_name, item.getMaterialName());
-                    holder.setTextView(R.id.tv_point_num, item.getCountQty());
                     holder.setTextView(R.id.tv_spare_num, item.getGiveQty());
-                    setTextViewText(holder.getTextView(R.id.tv_point_date), R.string.item_point_date, item.getCreateDateTime());
+                    holder.setTextView(R.id.tv_quality_date, item.getCreateDateTime());
+                    holder.setTextView(R.id.tv_point_num, item.getCountQty());
+                    holder.setTextView(R.id.tv_material_code, item.getMaterialCode());
+                    /**
+                     * 设置名字和附加属性
+                     */
+                    holder.setTextView(R.id.tv_material_name, item.getMaterialName() + (TextUtils.isEmpty(item.getMaterialAttribute()) ? "" : item.getMaterialAttribute()));
+
                     /**
                      * 是否有备品
                      */
@@ -199,6 +211,7 @@ public class FragmentPointRecord extends BaseFragment<FragmentPointRecordView, F
             };
             rlvPointRecord.setAdapter(adapter);
             rlvPointRecord.setLayoutManager(new LinearLayoutManager(getActivity()));
+            rlvPointRecord.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST, R.drawable.item_badness_divider));
             adapter.setOnItemClickListener(new BaseRecyclerAdapter.OnItemClickListener() {
                 @Override
                 public void onItemClick(View itemView, int pos) {
@@ -224,7 +237,7 @@ public class FragmentPointRecord extends BaseFragment<FragmentPointRecordView, F
         StockinMaterialBean stockinMaterialBean = mDatas.get(currentPostion);
         stockinMaterialBean.setCountQty(pointNum);
         stockinMaterialBean.setGiveQty(spareNum);
-
+        adapter.notifyDataSetChanged();
     }
 
     @Override

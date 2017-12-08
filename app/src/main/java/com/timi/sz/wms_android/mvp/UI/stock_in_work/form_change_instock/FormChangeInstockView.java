@@ -1,5 +1,7 @@
 package com.timi.sz.wms_android.mvp.UI.stock_in_work.form_change_instock;
 
+import com.timi.sz.wms_android.bean.instock.MaterialScanPutAwayBean;
+import com.timi.sz.wms_android.bean.instock.VertifyLocationCodeBean;
 import com.timi.sz.wms_android.mvp.base.view.iml.MvpBaseView;
 
 /**
@@ -9,4 +11,22 @@ import com.timi.sz.wms_android.mvp.base.view.iml.MvpBaseView;
  */
 
 public interface FormChangeInstockView extends MvpBaseView {
+    /**
+     * 物料扫码
+     *
+     * @param bean
+     */
+    void materialScanResult(MaterialScanPutAwayBean bean);
+
+    /**
+     * 库位码是否有效
+     *
+     * @param bean
+     */
+    void vertifyLocationCode(VertifyLocationCodeBean bean);
+
+    /**
+     * 创建入库单
+     */
+    void createInStockOrderno();
 }

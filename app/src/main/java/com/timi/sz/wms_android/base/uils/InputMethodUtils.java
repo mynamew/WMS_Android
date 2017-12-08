@@ -3,6 +3,7 @@ package com.timi.sz.wms_android.base.uils;
 import android.app.Activity;
 import android.content.ClipboardManager;
 import android.content.Context;
+import android.graphics.Rect;
 import android.os.IBinder;
 import android.view.MotionEvent;
 import android.view.View;
@@ -67,12 +68,33 @@ public class InputMethodUtils {
     /**
      * 隐藏软键盘
      *
-     * @param context
+     * @param activity
      */
-    public static void hide(Context context) {
+    public static void hide(Activity activity) {
         //隐藏软键盘
-        InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
+        InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
+        /**
+         * 软键盘是否隐藏
+         */
+        if (isSoftShowing(activity)) {
+            imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
+        }
+    }
+
+    /**
+     * 判断软键盘是否显示
+     *
+     * @param activity
+     * @return
+     */
+    private static boolean isSoftShowing(Activity activity) {
+        //获取当前屏幕内容的高度
+        int screenHeight = activity.getWindow().getDecorView().getHeight();
+        //获取View可见区域的bottom
+        Rect rect = new Rect();
+        activity.getWindow().getDecorView().getWindowVisibleDisplayFrame(rect);
+
+        return screenHeight - rect.bottom != 0;
     }
 
     /**
@@ -85,7 +107,10 @@ public class InputMethodUtils {
         imm.toggleSoftInput(0, InputMethodManager.SHOW_FORCED);
     }
 
-    // 判定是否需要隐藏
+    /**
+     * 判定是否需要隐藏
+     */
+
     private static boolean isHideInput(View v, MotionEvent ev) {
         if (v != null && (v instanceof EditText)) {
             int[] l = {0, 0};

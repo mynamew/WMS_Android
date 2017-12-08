@@ -295,5 +295,13 @@ public class MainActivity extends BaseActivity<MainView, MainPresenter> implemen
                 break;
         }
     }
+
+    /**
+     * 2次退出
+     */
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
 }
 

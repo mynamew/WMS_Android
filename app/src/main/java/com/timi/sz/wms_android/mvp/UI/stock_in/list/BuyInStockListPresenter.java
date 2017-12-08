@@ -13,6 +13,8 @@ import com.timi.sz.wms_android.mvp.base.presenter.impl.MvpBasePresenter;
 import java.util.List;
 import java.util.Map;
 
+import static com.timi.sz.wms_android.base.uils.Constants.BUY_ORDE_NUM;
+
 /**
  * $dsc
  * author: timi
@@ -34,7 +36,7 @@ public class BuyInStockListPresenter extends MvpBasePresenter<BuyInStockListView
      *
      * @param params
      */
-    public void queryPOList(RequestBuyInStockListBean params) {
+    public void queryPOList(RequestBuyInStockListBean params, int intentCode) {
         if (null == httpSubscriber) {
             httpSubscriber = new HttpSubscriber<>(new OnResultCallBack<List<QueryPoListBean>>() {
                 @Override
@@ -48,7 +50,12 @@ public class BuyInStockListPresenter extends MvpBasePresenter<BuyInStockListView
                 }
             });
         }
-        model.queryPOList(params, httpSubscriber);
+        if (intentCode == BUY_ORDE_NUM) {
+            model.queryPOList(params, httpSubscriber);
+        } else {
+            model.queryWWPOList(params, httpSubscriber);
+        }
+
     }
 
     /**

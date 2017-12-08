@@ -9,8 +9,8 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rlv_point_record"
         android:layout_width="match_parent"
-        android:layout_weight="1"
         android:layout_height="0dp"
+        android:layout_weight="1"
         />
 
     <LinearLayout
@@ -23,7 +23,7 @@
         android:orientation="horizontal"
         android:paddingLeft="30px"
         android:paddingRight="30px"
-        android:visibility="visible">
+        android:visibility="gone">
 
         <Button
             android:id="@+id/btn_check"

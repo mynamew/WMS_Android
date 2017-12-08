@@ -78,6 +78,7 @@ public class SearchBuyOrderPresenter extends MvpBasePresenter<SearchBuyOrderView
                 @Override
                 public void onError(String errorMsg) {
                     ToastUtils.showShort(errorMsg);
+                    getView().errorSetEdittextSelect();
                 }
             });
         }
@@ -102,6 +103,7 @@ public class SearchBuyOrderPresenter extends MvpBasePresenter<SearchBuyOrderView
                 @Override
                 public void onError(String errorMsg) {
                     ToastUtils.showShort(errorMsg);
+                    getView().errorSetEdittextSelect();
                 }
             });
         }
@@ -126,6 +128,7 @@ public class SearchBuyOrderPresenter extends MvpBasePresenter<SearchBuyOrderView
                 @Override
                 public void onError(String errorMsg) {
                     ToastUtils.showShort(errorMsg);
+                    getView().errorSetEdittextSelect();
                 }
             });
         }
@@ -150,6 +153,7 @@ public class SearchBuyOrderPresenter extends MvpBasePresenter<SearchBuyOrderView
                 @Override
                 public void onError(String errorMsg) {
                     ToastUtils.showShort(errorMsg);
+                    getView().errorSetEdittextSelect();
                 }
             });
         }
@@ -173,6 +177,7 @@ public class SearchBuyOrderPresenter extends MvpBasePresenter<SearchBuyOrderView
                 @Override
                 public void onError(String errorMsg) {
                     ToastUtils.showShort(errorMsg);
+                    getView().errorSetEdittextSelect();
                 }
             });
         }
@@ -196,6 +201,7 @@ public class SearchBuyOrderPresenter extends MvpBasePresenter<SearchBuyOrderView
                 @Override
                 public void onError(String errorMsg) {
                     ToastUtils.showShort(errorMsg);
+                    getView().errorSetEdittextSelect();
                 }
             });
         }
@@ -219,6 +225,7 @@ public class SearchBuyOrderPresenter extends MvpBasePresenter<SearchBuyOrderView
                 @Override
                 public void onError(String errorMsg) {
                     ToastUtils.showShort(errorMsg);
+                    getView().errorSetEdittextSelect();
                 }
             });
         }
@@ -242,6 +249,7 @@ public class SearchBuyOrderPresenter extends MvpBasePresenter<SearchBuyOrderView
                 @Override
                 public void onError(String errorMsg) {
                     ToastUtils.showShort(errorMsg);
+                    getView().errorSetEdittextSelect();
                 }
             });
         }

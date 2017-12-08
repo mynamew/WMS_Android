@@ -37,6 +37,20 @@ public class BuyInStockListModel extends MvpBaseModel {
         });
     }
     /**
+     * 获取委外单列表
+     * @param params
+     * @param observer
+     */
+    public void queryWWPOList(final RequestBuyInStockListBean params, Observer<List<QueryPoListBean>> observer) {
+        HttpManager.getInstance().HttpManagerRequest(observer, new ApiServiceMethodCallBack<List<QueryPoListBean>>() {
+            @Override
+            public Observable<CommonResult<List<QueryPoListBean>>> createObservable(ApiService apiService) {
+
+                return apiService.queryWWPOList(params);
+            }
+        });
+    }
+    /**
      * 获取采购单表头表体数据
      * @param params
      * @param observer

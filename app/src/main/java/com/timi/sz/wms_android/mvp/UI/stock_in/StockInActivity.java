@@ -4,17 +4,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.NestedScrollView;
 import android.view.View;
-import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.timi.sz.wms_android.R;
 import com.timi.sz.wms_android.base.uils.Constants;
 import com.timi.sz.wms_android.base.uils.SpUtils;
 import com.timi.sz.wms_android.mvp.UI.stock_in.list.BuyInStockListActivity;
 import com.timi.sz.wms_android.mvp.UI.stock_in.other_scan.OtherScanActivity;
-import com.timi.sz.wms_android.mvp.UI.stock_in.putaway.FinishedGoodsAuditPutAwayActivity;
-import com.timi.sz.wms_android.mvp.UI.stock_in.putaway.OtherAuditActivity;
 import com.timi.sz.wms_android.mvp.UI.stock_in.query.SearchBuyOrderActivity;
-import com.timi.sz.wms_android.mvp.UI.stock_in_work.StockInWorkActivity;
 import com.timi.sz.wms_android.mvp.base.view.BaseNoMvpActivity;
 
 import butterknife.BindView;
@@ -32,6 +29,8 @@ public class StockInActivity extends BaseNoMvpActivity {
 
     @BindView(R.id.nescroll_stock_in)
     NestedScrollView nescrollStockIn;
+    @BindView(R.id.tv_stock_in_outsource)
+    TextView tvStockInOutsource;
 
     @Override
     public int setLayoutId() {
@@ -45,6 +44,9 @@ public class StockInActivity extends BaseNoMvpActivity {
 
     @Override
     public void initView() {
+        if (SpUtils.getInstance().getIsBillList()) {
+           tvStockInOutsource.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
@@ -52,7 +54,7 @@ public class StockInActivity extends BaseNoMvpActivity {
 
     }
 
-    @OnClick({R.id.tv_stockin_buy_order, R.id.tv_stock_in_send_order, R.id.tv_stockin_inlib, R.id.tv_stock_in_check, R.id.tv_stock_in_create_order, R.id.tv_stockin_other_inlib_check, R.id.tv_stockin_other_inlib_create_order, R.id.tv_stockin_out_return, R.id.tv_stock_in_produce_return, R.id.tv_stock_in_sale_return})
+    @OnClick({R.id.tv_stockin_buy_order, R.id.tv_stock_in_outsource, R.id.tv_stock_in_send_order, R.id.tv_stockin_inlib, R.id.tv_stock_in_check, R.id.tv_stock_in_create_order, R.id.tv_stockin_other_inlib_check, R.id.tv_stockin_other_inlib_create_order, R.id.tv_stockin_out_return, R.id.tv_stock_in_produce_return, R.id.tv_stock_in_sale_return})
     public void onViewClicked(View view) {
         Intent it = new Intent();
         it.setClass(StockInActivity.this, SearchBuyOrderActivity.class);
@@ -62,7 +64,16 @@ public class StockInActivity extends BaseNoMvpActivity {
                 /**
                  * 如果是无纸化作业
                  */
-                if(!SpUtils.getInstance().getIsBillList()){
+                if (SpUtils.getInstance().getIsBillList()) {
+                    it.setClass(StockInActivity.this, BuyInStockListActivity.class);
+                }
+                break;
+            case R.id.tv_stock_in_outsource://委外订单
+                it.putExtra(CODE_STR, Constants.OUT_SOURCE);
+                /**
+                 * 如果是无纸化作业
+                 */
+                if (SpUtils.getInstance().getIsBillList()) {
                     it.setClass(StockInActivity.this, BuyInStockListActivity.class);
                 }
                 break;
@@ -96,5 +107,12 @@ public class StockInActivity extends BaseNoMvpActivity {
                 break;
         }
         startActivity(it);
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
     }
 }

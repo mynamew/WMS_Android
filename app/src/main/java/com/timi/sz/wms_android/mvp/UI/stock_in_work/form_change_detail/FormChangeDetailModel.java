@@ -1,6 +1,8 @@
 package com.timi.sz.wms_android.mvp.UI.stock_in_work.form_change_detail;
 
+import com.timi.sz.wms_android.bean.stockin_work.FormChangeDetailResult;
 import com.timi.sz.wms_android.bean.stockin_work.StockInWorkDetailResult;
+import com.timi.sz.wms_android.bean.stockin_work.query.FormChangeInResult;
 import com.timi.sz.wms_android.http.HttpManager;
 import com.timi.sz.wms_android.http.api.ApiService;
 import com.timi.sz.wms_android.http.api.CommonResult;
@@ -20,5 +22,32 @@ import io.reactivex.Observer;
  */
 
 public class FormChangeDetailModel extends MvpBaseModel {
+    /**
+     * 形态转换 出库 明细
+     * @param params
+     * @param observer
+     */
+    public void getConvertOutDetail(final Map<String,Object> params, Observer<List<FormChangeDetailResult>> observer){
 
+        HttpManager.getInstance().HttpManagerRequest(observer, new ApiServiceMethodCallBack<List<FormChangeDetailResult>>() {
+            @Override
+            public Observable<CommonResult<List<FormChangeDetailResult>>> createObservable(ApiService apiService) {
+                return apiService.getConvertOutDetail(params);
+            }
+        });
+    }
+    /**
+     * 形态转换 入库 明细
+     * @param params
+     * @param observer
+     */
+    public void getConvertInDetail(final Map<String,Object> params, Observer<List<FormChangeDetailResult>> observer){
+
+        HttpManager.getInstance().HttpManagerRequest(observer, new ApiServiceMethodCallBack<List<FormChangeDetailResult>>() {
+            @Override
+            public Observable<CommonResult<List<FormChangeDetailResult>>> createObservable(ApiService apiService) {
+                return apiService.getConvertInDetail(params);
+            }
+        });
+    }
 }

@@ -678,11 +678,4 @@ public class NormalOutStockActivity extends BaseActivity<NormalOutStockView, Nor
     public void onViewClicked() {
         cartonNum = 0;
     }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
-    }
 }
