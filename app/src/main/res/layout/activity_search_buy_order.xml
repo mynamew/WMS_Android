@@ -18,7 +18,7 @@
         android:layout_height="72px"
         android:gravity="center_vertical"
         android:textColor="#333"
-        android:textSize="28px"
+        android:textSize="14sp"
         android:text=""
         android:textStyle="bold"
         />

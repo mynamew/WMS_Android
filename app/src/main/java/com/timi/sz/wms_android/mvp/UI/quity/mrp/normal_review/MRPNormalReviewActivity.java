@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.timi.sz.wms_android.R;
+import com.timi.sz.wms_android.base.uils.InputMethodUtils;
 import com.timi.sz.wms_android.base.uils.PackageUtils;
 import com.timi.sz.wms_android.base.uils.SpUtils;
 import com.timi.sz.wms_android.base.uils.ToastUtils;
@@ -239,6 +240,7 @@ public class MRPNormalReviewActivity extends BaseActivity<MRPNormalReviewView, M
 
     @OnClick({R.id.tv_confirm_review,})
     public void onViewClicked(View view) {
+        InputMethodUtils.hide(this);
         switch (view.getId()) {
             case R.id.tv_confirm_review://确认评审结果
                 /**

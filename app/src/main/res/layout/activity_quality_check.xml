@@ -12,10 +12,11 @@
 
     <RelativeLayout
         android:id="@+id/head"
-        android:background="@color/login_txt_color"
-        android:layout_height="88px"
         android:layout_width="match_parent"
-       >
+        android:layout_height="88px"
+        android:background="@color/login_txt_color"
+        >
+
         <ImageView
             android:id="@+id/iv_title_back"
             android:layout_width="wrap_content"
@@ -34,16 +35,17 @@
         <ImageView
             android:id="@+id/iv_title_right"
             android:layout_width="80px"
-            android:padding="20px"
             android:layout_height="match_parent"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:scaleType="centerCrop"
-            android:paddingRight="20px"
+            android:padding="20px"
             android:paddingLeft="20px"
+            android:paddingRight="20px"
+            android:scaleType="centerCrop"
             android:src="@mipmap/quality_infilter"
             android:visibility="visible"/>
     </RelativeLayout>
+
     <LinearLayout
         android:id="@+id/ll_tab"
         android:layout_width="match_parent"
@@ -60,15 +62,17 @@
             android:layout_height="match_parent"
             android:layout_weight="2"
             android:gravity="center"
-            android:text="@string/item_quality_status"/>
+            android:text="@string/item_quality_status"
+            android:textSize="13sp"/>
 
         <TextView
             android:id="@+id/tv_material_code"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="3"
+            android:layout_weight="5"
             android:gravity="center"
-            android:text="@string/item_material_code"/>
+            android:text="@string/item_material_code"
+            android:textSize="13sp"/>
 
         <TextView
             android:id="@+id/tv_receive_num"
@@ -76,7 +80,8 @@
             android:layout_height="match_parent"
             android:layout_weight="2"
             android:gravity="center"
-            android:text="@string/excel_head_real_receive_num"/>
+            android:text="@string/excel_head_real_receive_num"
+            android:textSize="13sp"/>
 
         <TextView
             android:id="@+id/tv_send_quality_num"
@@ -84,7 +89,8 @@
             android:layout_height="match_parent"
             android:layout_weight="2"
             android:gravity="center"
-            android:text="@string/excel_head_send_quality_num"/>
+            android:text="@string/excel_head_send_quality_num"
+            android:textSize="13sp"/>
 
         <TextView
             android:id="@+id/tv_quality_num"
@@ -92,7 +98,8 @@
             android:layout_height="match_parent"
             android:layout_weight="2"
             android:gravity="center"
-            android:text="@string/excel_head_quality_num"/>
+            android:text="@string/excel_head_quality_num"
+            android:textSize="13sp"/>
 
         <TextView
             android:id="@+id/tv_quality_result"
@@ -100,7 +107,8 @@
             android:layout_height="match_parent"
             android:layout_weight="3"
             android:gravity="center"
-            android:text="@string/excel_head_quality_result"/>
+            android:text="@string/excel_head_quality_result"
+            android:textSize="13sp"/>
     </LinearLayout>
 
     <android.support.v7.widget.RecyclerView

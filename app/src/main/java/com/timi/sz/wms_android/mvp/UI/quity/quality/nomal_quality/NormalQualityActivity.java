@@ -76,6 +76,8 @@ public class NormalQualityActivity extends BaseActivity<NormalQualityView, Norma
     TextView tvBadnessTotalNum;
     @BindView(R.id.et_badness_percent)
     TextView tvBadnessPercent;
+    @BindView(R.id.tv_material_attr)
+    TextView tvMaterialAttr;
     @BindView(R.id.rlv_quality)
     RecyclerView rlvQuality;
     @BindView(R.id.rd_qualified)
@@ -121,6 +123,7 @@ public class NormalQualityActivity extends BaseActivity<NormalQualityView, Norma
         setTextViewText(tvMaterialName, R.string.material_name, "");
         setTextViewText(tvMaterialModel, R.string.material_model, "");
         setTextViewText(tvReceiveNum, R.string.receive_num, "");
+
     }
 
     @Override
@@ -358,10 +361,10 @@ public class NormalQualityActivity extends BaseActivity<NormalQualityView, Norma
         commitNormalData.setCommonlyQty(CommonlyQty);
         commitNormalData.setSlightQty(SlightQty);
 
-    getPresenter().
+        getPresenter().
 
-    setNormalQualityData(commitNormalData, isQualified, Integer.parseInt(refuseReceiveNum));
-}
+                setNormalQualityData(commitNormalData, isQualified, Integer.parseInt(refuseReceiveNum));
+    }
 
     @Override
     public void getNormalQualityData(NormalQualityData result) {
@@ -374,14 +377,16 @@ public class NormalQualityActivity extends BaseActivity<NormalQualityView, Norma
             /**
              * 保存实体数据
              */
-            setTextViewText(tvOrderno, R.string.item_arrive_orderno, normalSummary.getReceiptCode());
-            setTextViewText(tvReceiveMaterialDate, R.string.receive_material_date, normalSummary.getReceiptDate());
-            setTextViewText(tvOrderNum, R.string.order_no, normalSummary.getSourceBillCode());
-            setTextViewText(tvSupplier, R.string.buy_from, normalSummary.getSupplierName());
-            setTextViewText(tvMaterialCode, R.string.material_code, normalSummary.getMaterialCode());
-            setTextViewText(tvMaterialName, R.string.material_name, normalSummary.getMaterialName());
-            setTextViewText(tvMaterialModel, R.string.material_model, normalSummary.getMaterialStandard());
-            setTextViewText(tvReceiveNum, R.string.receive_num, normalSummary.getReceiveQty());
+            setTextViewContent(tvOrderno, normalSummary.getReceiptCode());
+            setTextViewContent(tvReceiveMaterialDate, normalSummary.getReceiptDate());
+            setTextViewContent(tvOrderNum, normalSummary.getSourceBillCode());
+            setTextViewContent(tvSupplier, normalSummary.getSupplierName());
+            setTextViewContent(tvMaterialCode, normalSummary.getMaterialCode());
+            setTextViewContent(tvMaterialName, normalSummary.getMaterialName());
+            setTextViewContent(tvMaterialModel, normalSummary.getMaterialStandard());
+            setTextViewContent(tvReceiveNum, normalSummary.getReceiveQty());
+            setTextViewContent(tvMaterialAttr, normalSummary.getMaterialAttribute());
+            setMaterialAttrStatus(tvMaterialAttr);
         }
         /**
          * 不良原因
@@ -391,11 +396,36 @@ public class NormalQualityActivity extends BaseActivity<NormalQualityView, Norma
          * 设置提交的数据的不良原因的数据
          */
         commitNormalData.setFaultData(new ArrayList<CommitNormalData.FaultDataBean>());
+        int totalBadnessQty = 0;
         for (int i = 0; i < faultData.size(); i++) {
             CommitNormalData.FaultDataBean faultDataBean = new CommitNormalData.FaultDataBean();
             faultDataBean.setFaultId(faultData.get(i).getFaultId());
             faultDataBean.setFaultQty(faultData.get(i).getFaultQty());
+            totalBadnessQty = totalBadnessQty + faultData.get(i).getFaultQty();
             commitNormalData.getFaultData().add(faultDataBean);
+        }
+        /**
+         * 不良数
+         */
+        tvBadnessTotalNum.setText(String.valueOf(totalBadnessQty));
+        //抽样数  不良率
+        if (normalSummary.getSampleQty() > 0) {
+            etSpotCheckNum.setText(String.valueOf(normalSummary.getSampleQty()));
+            /**
+             * 计算文本的不良率
+             */
+            //不良总数
+            double dTotalBadnessNum = (double) totalBadnessQty;
+            //抽样数
+            double dReceiveNum = Double.parseDouble(etSpotCheckNum.getText().toString().trim());
+            //转换成百分比
+            NumberFormat nFromat = NumberFormat.getPercentInstance();
+            String rates = nFromat.format(dTotalBadnessNum / dReceiveNum);
+            tvBadnessPercent.setText(rates);
+        }
+        //拒收数
+        if (normalSummary.getNgQty() > 0) {
+            etRefuseReceiveNum.setText(String.valueOf(normalSummary.getNgQty()));
         }
         /**
          * adapter初始化
@@ -475,8 +505,8 @@ public class NormalQualityActivity extends BaseActivity<NormalQualityView, Norma
                              * 输入的抽样数
                              */
                             String inputSampleNumStr = etSpotCheckNum.getText().toString();
-                            if (totalBadnessNum + Integer.parseInt(badnessNumStr) > Integer.parseInt(inputSampleNumStr)) {
-                                ToastUtils.showShort("不良总数不能大于抽样数，请重新输入");
+                            if (totalBadnessNum > Integer.parseInt(inputSampleNumStr)) {
+                                ToastUtils.showShort(getString(R.string.badness_num_no_more_sample_qty));
                                 return;
                             }
                             adapter.notifyDataSetChanged();
@@ -493,7 +523,7 @@ public class NormalQualityActivity extends BaseActivity<NormalQualityView, Norma
                             //不良总数
                             double dTotalBadnessNum = (double) totalBadnessNum;
                             //抽样数
-                            double dReceiveNum =Double.parseDouble(etSpotCheckNum.getText().toString().trim());
+                            double dReceiveNum = Double.parseDouble(etSpotCheckNum.getText().toString().trim());
                             //转换成百分比
                             NumberFormat nFromat = NumberFormat.getPercentInstance();
                             String rates = nFromat.format(dTotalBadnessNum / dReceiveNum);

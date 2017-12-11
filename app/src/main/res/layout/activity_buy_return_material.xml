@@ -39,6 +39,7 @@
             android:paddingLeft="20px"
             android:text="@string/scan_material"
             android:textColor="#333"
+            android:textSize="13sp"
             />
 
         <EditText
@@ -56,7 +57,7 @@
             android:paddingRight="80px"
             android:singleLine="true"
             android:text=""
-            android:textSize="14sp"/>
+            android:textSize="13sp"/>
 
         <ImageView
             android:id="@+id/iv_putaway_scan_material"
@@ -86,6 +87,7 @@
             android:paddingLeft="20px"
             android:text="@string/buy_return_material_orderno"
             android:textColor="#333"
+            android:textSize="13sp"
             />
 
         <EditText
@@ -103,7 +105,7 @@
             android:paddingRight="80px"
             android:singleLine="true"
             android:text=""
-            android:textSize="14sp"/>
+            android:textSize="13sp"/>
 
         <ImageView
             android:id="@+id/iv_buy_return_material_orderno"

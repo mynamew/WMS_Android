@@ -35,10 +35,10 @@
                 android:id="@+id/tv_material_code"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="3"
+                android:layout_weight="5"
                 android:gravity="center"
                 android:text=""
-                android:textSize="24px"/>
+                android:textSize="12sp"/>
 
             <TextView
                 android:id="@+id/tv_receive_num"
@@ -47,7 +47,7 @@
                 android:layout_weight="2"
                 android:gravity="center"
                 android:text="0"
-                android:textSize="24px"/>
+                android:textSize="12sp"/>
 
             <TextView
                 android:id="@+id/tv_send_quality_num"
@@ -56,7 +56,7 @@
                 android:layout_weight="2"
                 android:gravity="center"
                 android:text="0"
-                android:textSize="24px"/>
+                android:textSize="12sp"/>
 
             <TextView
                 android:id="@+id/tv_quality_num"
@@ -66,7 +66,7 @@
                 android:gravity="center"
 
                 android:text="0"
-                android:textSize="24px"/>
+                android:textSize="12sp"/>
 
             <RelativeLayout
                 android:id="@+id/rl_quality_result"
@@ -82,7 +82,7 @@
                     android:layout_centerHorizontal="true"
                     android:gravity="center"
                     android:text="待检"
-                    android:textSize="24px"/>
+                    android:textSize="12sp"/>
 
                 <ImageView
                     android:id="@+id/iv_next_page"
@@ -118,7 +118,7 @@
                     android:layout_weight="1"
                     android:text="滑轨双孔梁496-蓝色"
                     android:textColor="#666"
-                    android:textSize="22px"/>
+                    android:textSize="11sp"/>
 
                 <TextView
                     android:id="@+id/tv_arrive_date"
@@ -127,7 +127,7 @@
                     android:layout_weight="1"
                     android:text="@string/item_arrive_date"
                     android:textColor="#666"
-                    android:textSize="22px"/>
+                    android:textSize="11sp"/>
             </LinearLayout>
 
             <LinearLayout
@@ -142,7 +142,7 @@
                     android:layout_weight="1"
                     android:text="深圳超然科技股份有限公司"
                     android:textColor="#666"
-                    android:textSize="22px"/>
+                    android:textSize="11sp"/>
 
                 <TextView
                     android:id="@+id/tv_arrive_orderno"
@@ -151,7 +151,7 @@
                     android:layout_weight="1"
                     android:text="@string/item_arrive_orderno"
                     android:textColor="#666"
-                    android:textSize="22px"/>
+                    android:textSize="11sp"/>
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

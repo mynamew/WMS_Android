@@ -31,6 +31,7 @@
             android:layout_height="match_parent"
             android:gravity="center_vertical"
             android:hint="@string/please_input_device_num"
+
             android:textColorHint="#999"
             android:textColor="#333"
             android:textSize="14sp"

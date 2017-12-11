@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:text="@string/item_material_code"
             android:textColor="#333"
-            android:textSize="26px"/>
+            android:textSize="13sp"/>
 
         <TextView
             android:id="@+id/tv_material_code"
@@ -32,7 +32,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="60px"
             android:textColor="@color/login_txt_color"
-            android:textSize="26px"/>
+            android:textSize="13sp"/>
     </LinearLayout>
 
     <LinearLayout
@@ -48,7 +48,7 @@
             android:layout_height="wrap_content"
             android:text="@string/item_material_num"
             android:textColor="#333"
-            android:textSize="26px"/>
+            android:textSize="13sp"/>
 
         <TextView
             android:id="@+id/tv_material_num"
@@ -56,7 +56,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="60px"
             android:textColor="@color/login_txt_color"
-            android:textSize="26px"/>
+            android:textSize="13sp"/>
     </LinearLayout>
 
     <LinearLayout
@@ -72,7 +72,7 @@
             android:layout_height="wrap_content"
             android:text="@string/item_material_name"
             android:textColor="#333"
-            android:textSize="26px"/>
+            android:textSize="13sp"/>
 
         <TextView
             android:id="@+id/tv_material_name"
@@ -80,7 +80,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="60px"
             android:textColor="#000"
-            android:textSize="26px"/>
+            android:textSize="13sp"/>
     </LinearLayout>
 
     <LinearLayout
@@ -96,7 +96,7 @@
             android:layout_height="wrap_content"
             android:text="@string/item_material_model"
             android:textColor="#333"
-            android:textSize="26px"/>
+            android:textSize="13sp"/>
 
         <TextView
             android:id="@+id/tv_material_model"
@@ -104,7 +104,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="60px"
             android:textColor="#000"
-            android:textSize="26px"/>
+            android:textSize="13sp"/>
     </LinearLayout>
 
     <LinearLayout
@@ -121,7 +121,7 @@
             android:layout_height="wrap_content"
             android:text="@string/item_material_attr"
             android:textColor="#333"
-            android:textSize="26px"/>
+            android:textSize="13sp"/>
 
         <TextView
             android:id="@+id/tv_material_attr"
@@ -129,6 +129,6 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="60px"
             android:textColor="#000"
-            android:textSize="26px"/>
+            android:textSize="13sp"/>
     </LinearLayout>
 </LinearLayout>

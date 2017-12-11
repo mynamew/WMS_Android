@@ -31,7 +31,7 @@
             android:paddingTop="10px"
             android:text="@string/material_info"
             android:textColor="#333"
-            android:textSize="28px"
+            android:textSize="14sp"
             android:textStyle="bold"
             />
 
@@ -58,7 +58,7 @@
             android:paddingLeft="34px"
             android:text="@string/arrive_orderno_tip"
             android:textColor="#666"
-            android:textSize="26px"
+            android:textSize="13sp"
             />
 
         <TextView
@@ -69,7 +69,7 @@
             android:gravity="center_vertical"
             android:text="213457872345654323454"
             android:textColor="#333"
-            android:textSize="26px"
+            android:textSize="13sp"
             />
     </LinearLayout>
 
@@ -87,7 +87,7 @@
             android:paddingLeft="34px"
             android:text="@string/arrive_date_tip"
             android:textColor="#666"
-            android:textSize="26px"
+            android:textSize="13sp"
             />
 
         <TextView
@@ -98,7 +98,7 @@
             android:gravity="center_vertical"
             android:text=""
             android:textColor="#333"
-            android:textSize="26px"
+            android:textSize="13sp"
             />
     </LinearLayout>
 
@@ -116,7 +116,7 @@
             android:paddingLeft="34px"
             android:text="@string/order_no_tip"
             android:textColor="#666"
-            android:textSize="26px"
+            android:textSize="13sp"
             />
 
         <TextView
@@ -127,7 +127,7 @@
             android:gravity="center_vertical"
             android:text=""
             android:textColor="#333"
-            android:textSize="26px"
+            android:textSize="13sp"
             />
     </LinearLayout>
 
@@ -146,7 +146,7 @@
             android:paddingLeft="34px"
             android:text="@string/item_supplier"
             android:textColor="#666"
-            android:textSize="26px"
+            android:textSize="13sp"
             />
 
         <TextView
@@ -158,7 +158,7 @@
             android:lineSpacingExtra="10px"
             android:text=""
             android:textColor="#333"
-            android:textSize="26px"
+            android:textSize="13sp"
             />
     </LinearLayout>
 
@@ -184,7 +184,7 @@
             android:paddingLeft="34px"
             android:text="@string/checker"
             android:textColor="#666"
-            android:textSize="26px"
+            android:textSize="13sp"
             />
 
         <TextView
@@ -195,7 +195,7 @@
             android:gravity="center_vertical"
             android:text=""
             android:textColor="#333"
-            android:textSize="26px"
+            android:textSize="13sp"
             />
     </LinearLayout>
 
@@ -213,7 +213,7 @@
             android:paddingLeft="34px"
             android:text="@string/check_date"
             android:textColor="#666"
-            android:textSize="26px"
+            android:textSize="13sp"
             />
 
         <TextView
@@ -224,7 +224,7 @@
             android:gravity="center_vertical"
             android:text=""
             android:textColor="#333"
-            android:textSize="26px"
+            android:textSize="13sp"
             />
     </LinearLayout>
 
@@ -250,7 +250,7 @@
             android:paddingLeft="34px"
             android:text="@string/item_material_code"
             android:textColor="#666"
-            android:textSize="26px"
+            android:textSize="13sp"
             />
 
         <TextView
@@ -261,7 +261,7 @@
             android:gravity="center_vertical"
             android:text=""
             android:textColor="#333"
-            android:textSize="26px"
+            android:textSize="13sp"
             />
     </LinearLayout>
 
@@ -279,7 +279,7 @@
             android:paddingLeft="34px"
             android:text="@string/item_goods_name"
             android:textColor="#666"
-            android:textSize="26px"
+            android:textSize="13sp"
             />
 
         <TextView
@@ -290,7 +290,7 @@
             android:gravity="center_vertical"
             android:text=""
             android:textColor="#333"
-            android:textSize="26px"
+            android:textSize="13sp"
             />
     </LinearLayout>
 
@@ -309,7 +309,7 @@
             android:paddingLeft="34px"
             android:text="@string/item_goods_model"
             android:textColor="#666"
-            android:textSize="26px"
+            android:textSize="13sp"
             />
 
         <TextView
@@ -320,7 +320,7 @@
             android:gravity="center_vertical"
             android:text=""
             android:textColor="#333"
-            android:textSize="26px"
+            android:textSize="13sp"
             />
     </LinearLayout>
 </LinearLayout>

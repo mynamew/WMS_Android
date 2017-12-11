@@ -192,6 +192,7 @@ public class CheckActivity extends BaseActivity<CheckView, CheckPresenter> imple
                 scan(Constants.REQUEST_SCAN_CODE_MATERIIAL, new ScanQRCodeResultListener() {
                     @Override
                     public void scanSuccess(int requestCode, String result) {
+                        etMaterialCode.setText(result);
                         Map<String, Object> params = new HashMap<>();
                         params.put("UserId", SpUtils.getInstance().getUserId());
                         params.put("OrgId", SpUtils.getInstance().getOrgId());

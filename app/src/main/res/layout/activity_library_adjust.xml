@@ -28,6 +28,7 @@
             android:layout_marginTop="10dp"
             android:gravity="center_vertical"
             android:paddingLeft="15dp"
+            android:textSize="13sp"
             android:text="@string/in_lib_location_code"
             android:textColor="#333"
             />

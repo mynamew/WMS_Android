@@ -25,6 +25,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="30px"
+            android:textSize="13sp"
             android:text="@string/form_change_instock_detial_info_tip"
             android:textColor="#333"
             android:textStyle="bold"/>

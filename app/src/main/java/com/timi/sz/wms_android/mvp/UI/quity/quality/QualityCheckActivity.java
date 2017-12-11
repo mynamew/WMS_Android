@@ -16,6 +16,7 @@ import com.timi.sz.wms_android.base.adapter.BaseRecyclerAdapter;
 import com.timi.sz.wms_android.base.adapter.RecyclerViewHolder;
 import com.timi.sz.wms_android.base.uils.Constants;
 import com.timi.sz.wms_android.base.uils.DateUtils;
+import com.timi.sz.wms_android.base.uils.InputMethodUtils;
 import com.timi.sz.wms_android.base.uils.LogUitls;
 import com.timi.sz.wms_android.base.uils.PackageUtils;
 import com.timi.sz.wms_android.base.uils.SpUtils;
@@ -255,6 +256,12 @@ public class QualityCheckActivity extends BaseActivity<QualityCheckView, Quality
                             });
                         }
                     });
+                    myDialog.setViewListener(R.id.ll_content, new MyDialog.DialogClickListener() {
+                        @Override
+                        public void dialogClick(MyDialog dialog) {
+                            InputMethodUtils.hide(QualityCheckActivity.this);
+                        }
+                    });
                     /**
                      * 点击半透明图层的点击事件
                      */
@@ -414,16 +421,16 @@ public class QualityCheckActivity extends BaseActivity<QualityCheckView, Quality
                     } else {
                         switch (qualityListBean.getQcResult()) {
                             case 1://合格
-                                holder.setTextView(R.id.tv_quality_result, qualityListBean.getQcStatus()==3?R.color.tab_txt_unselect:R.color.wait_quality, getString(R.string.excel_head_quality_num));
+                                holder.setTextView(R.id.tv_quality_result, qualityListBean.getQcStatus() == 3 ? R.color.tab_txt_unselect : R.color.wait_quality, getString(R.string.excel_head_quality_num));
                                 break;
                             case 2://待定
-                                holder.setTextView(R.id.tv_quality_result, qualityListBean.getQcStatus()==3?R.color.tab_txt_unselect:R.color.wait_quality, getString(R.string.wait_deal));
+                                holder.setTextView(R.id.tv_quality_result, qualityListBean.getQcStatus() == 3 ? R.color.tab_txt_unselect : R.color.wait_quality, getString(R.string.wait_deal));
                                 break;
                             case 3://不合格
                                 holder.setTextView(R.id.tv_quality_result, R.color.unquality, getString(R.string.unquality));
                                 break;
                             case 4://挑选
-                                holder.setTextView(R.id.tv_quality_result,  R.color.unquality, getString(R.string.quality_pick));
+                                holder.setTextView(R.id.tv_quality_result, R.color.unquality, getString(R.string.quality_pick));
                                 break;
                             case 5://特采
                                 holder.setTextView(R.id.tv_quality_result, R.color.unquality, getString(R.string.quality_special_get));
@@ -467,7 +474,7 @@ public class QualityCheckActivity extends BaseActivity<QualityCheckView, Quality
                 @Override
                 public void onItemClick(View itemView, int position) {
                     QualityListBean qualityListBean = mDatas.get(position);
-                    if (qualityListBean.getQcStatus()==3) {
+                    if (qualityListBean.getQcStatus() == 3) {
                         return;
                     }
 
@@ -672,7 +679,7 @@ public class QualityCheckActivity extends BaseActivity<QualityCheckView, Quality
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void refresgQualityList(QualityEvent event) {
-        if (event.getEvent().equals(QualityEvent.QUALITY_SUCCESS)||event.getEvent().equals(QualityEvent.QUALITY_CONFRIM)) {
+        if (event.getEvent().equals(QualityEvent.QUALITY_SUCCESS) || event.getEvent().equals(QualityEvent.QUALITY_CONFRIM)) {
             /**
              * 清除数据 并且重新加载数据
              */

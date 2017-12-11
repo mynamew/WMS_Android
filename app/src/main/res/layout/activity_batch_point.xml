@@ -30,7 +30,7 @@
                 android:paddingTop="10px"
                 android:text="@string/material_info"
                 android:textColor="#333"
-                android:textSize="28px"
+                android:textSize="14sp"
                 android:textStyle="bold"/>
 
             <View
@@ -51,7 +51,7 @@
                     android:paddingLeft="30px"
                     android:text="@string/item_material_code"
                     android:textColor="#333"
-                    android:textSize="26px"/>
+                    android:textSize="13sp"/>
 
                 <TextView
                     android:id="@+id/tv_material_code"

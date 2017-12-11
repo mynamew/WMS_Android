@@ -35,7 +35,7 @@
                 android:paddingRight="20px"
                 android:text="设置AQL"
                 android:textColor="#333"
-                android:textSize="32px"/>
+                android:textSize="16sp"/>
 
             <ImageView
                 android:id="@+id/iv_close"
@@ -59,7 +59,7 @@
                 android:layout_marginLeft="30px"
                 android:text="@string/dialog_standard_level"
                 android:textColor="#333"
-                android:textSize="28px"/>
+                android:textSize="14sp"/>
 
             <RelativeLayout
                 android:layout_width="406px"
@@ -90,7 +90,7 @@
                 android:layout_marginLeft="90px"
                 android:text="@string/dialog_aql"
                 android:textColor="#333"
-                android:textSize="28px"/>
+                android:textSize="14sp"/>
 
             <RelativeLayout
                 android:layout_width="406px"

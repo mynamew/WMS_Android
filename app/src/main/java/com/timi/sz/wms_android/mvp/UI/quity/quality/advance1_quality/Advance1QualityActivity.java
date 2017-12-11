@@ -25,6 +25,7 @@ import com.timi.sz.wms_android.base.uils.SpUtils;
 import com.timi.sz.wms_android.base.uils.ToastUtils;
 import com.timi.sz.wms_android.bean.quality.adavance.CommitAdvance1Data;
 import com.timi.sz.wms_android.bean.quality.adavance.GetAdvanceData;
+import com.timi.sz.wms_android.bean.quality.normal.CommitNormalData;
 import com.timi.sz.wms_android.http.message.BaseMessage;
 import com.timi.sz.wms_android.http.message.event.QualityEvent;
 import com.timi.sz.wms_android.mvp.UI.quity.reject.QualityRejectActivity;
@@ -62,6 +63,8 @@ public class Advance1QualityActivity extends BaseActivity<Advance1QualityView, A
     TextView tvMaterialCode;
     @BindView(R.id.tv_material_name)
     TextView tvMaterialName;
+    @BindView(R.id.tv_material_attr)
+    TextView tvMaterialAttr;
     @BindView(R.id.tv_material_model)
     TextView tvMaterialModel;
     @BindView(R.id.tv_receive_num)
@@ -126,9 +129,11 @@ public class Advance1QualityActivity extends BaseActivity<Advance1QualityView, A
      * 不良原因
      */
     private List<CommitAdvance1Data.FaultDataBean> mSelectFaultData = new ArrayList<>();
-    private  CommitAdvance1Data commitAdvance1Data;
+    private CommitAdvance1Data commitAdvance1Data;
+
     /**
      * 提交高级质检1 的实体
+     *
      * @return
      */
     @Override
@@ -145,17 +150,7 @@ public class Advance1QualityActivity extends BaseActivity<Advance1QualityView, A
 
     @Override
     public void initView() {
-        /**
-         * 设置从质检清单获取到的数据，设置到当前界面
-         */
-        setTextViewText(tvOrderno, R.string.receive_pro_num, "");
-        setTextViewText(tvReceiveMaterialDate, R.string.receive_material_date, "");
-        setTextViewText(tvOrderNum, R.string.order_no, "");
-        setTextViewText(tvSupplier, R.string.buy_from, "");
-        setTextViewText(tvMaterialCode, R.string.material_code, "");
-        setTextViewText(tvMaterialName, R.string.material_name, "");
-        setTextViewText(tvMaterialModel, R.string.material_model, "");
-        setTextViewText(tvReceiveNum, R.string.receive_num, "");
+
 
         etRefuseReceiveNum.addTextChangedListener(new TextWatcher() {
             @Override
@@ -181,18 +176,18 @@ public class Advance1QualityActivity extends BaseActivity<Advance1QualityView, A
                     return;
                 }
                 int totalBadnessNum = Integer.parseInt(totalBadnessNumStr);
-                String rejectNumStr=editable.toString();
+                String rejectNumStr = editable.toString();
                 /**
                  * 拒收数的空判断
                  */
                 if (TextUtils.isEmpty(rejectNumStr)) {
                     return;
                 }
-                int rejectNum=Integer.parseInt(rejectNumStr);
+                int rejectNum = Integer.parseInt(rejectNumStr);
                 /**
                  *当 拒收数大于不良总数的时候提示
                  */
-                if (rejectNum>totalBadnessNum) {
+                if (rejectNum > totalBadnessNum) {
                     ToastUtils.showShort(getString(R.string.refusenum_no_more_badness_num_repeat_input));
                     /**
                      * 设置文本 设置光标
@@ -363,14 +358,16 @@ public class Advance1QualityActivity extends BaseActivity<Advance1QualityView, A
             /**
              * 设置相应的物料信息
              */
-            setTextViewText(tvOrderno, R.string.receive_pro_num, normalSummary.getReceiptCode());
-            setTextViewText(tvReceiveMaterialDate, R.string.receive_material_date, normalSummary.getReceiptDate());
-            setTextViewText(tvOrderNum, R.string.order_no, normalSummary.getSourceBillCode());
-            setTextViewText(tvSupplier, R.string.buy_from, normalSummary.getSupplierName());
-            setTextViewText(tvMaterialCode, R.string.material_code, normalSummary.getMaterialCode());
-            setTextViewText(tvMaterialName, R.string.material_name, normalSummary.getMaterialName());
-            setTextViewText(tvMaterialModel, R.string.material_model, normalSummary.getMaterialStandard());
-            setTextViewText(tvReceiveNum, R.string.receive_num, normalSummary.getReceiveQty());
+            setTextViewContent(tvOrderno, normalSummary.getReceiptCode());
+            setTextViewContent(tvReceiveMaterialDate, normalSummary.getReceiptDate());
+            setTextViewContent(tvOrderNum, normalSummary.getSourceBillCode());
+            setTextViewContent(tvSupplier, normalSummary.getSupplierName());
+            setTextViewContent(tvMaterialCode, normalSummary.getMaterialCode());
+            setTextViewContent(tvMaterialName, normalSummary.getMaterialName());
+            setTextViewContent(tvMaterialModel, normalSummary.getMaterialStandard());
+            setTextViewContent(tvReceiveNum, normalSummary.getReceiveQty());
+            setTextViewContent(tvMaterialAttr, normalSummary.getMaterialAttribute());
+            setMaterialAttrStatus(tvMaterialAttr);
             /**
              * 不良原因
              */
@@ -379,12 +376,37 @@ public class Advance1QualityActivity extends BaseActivity<Advance1QualityView, A
              * 设置提交的数据的不良原因的数据
              */
             commitAdvance1Data.setFaultData(new ArrayList<CommitAdvance1Data.FaultDataBean>());
+            int totalBadnessQty = 0;
             for (int i = 0; i < faultData.size(); i++) {
                 CommitAdvance1Data.FaultDataBean faultDataBean = new CommitAdvance1Data.FaultDataBean();
                 faultDataBean.setFaultId(faultData.get(i).getFaultId());
                 faultDataBean.setFaultQty(faultData.get(i).getFaultQty());
+                totalBadnessQty = totalBadnessQty + faultData.get(i).getFaultQty();
                 commitAdvance1Data.getFaultData().add(faultDataBean);
             }
+            /**
+             * 不良数
+             */
+            tvBadnessTotalNum.setText(String.valueOf(totalBadnessQty));
+            //抽样数
+            if (normalSummary.getSampleQty() > 0) {
+                tvSpotCheckNum.setText(String.valueOf(normalSummary.getSampleQty()));
+            }
+            //拒收数
+            if (normalSummary.getNgQty() > 0) {
+                etRefuseReceiveNum.setText(String.valueOf(normalSummary.getNgQty()));
+            }
+            /**
+             * 计算文本的不良率
+             */
+            //不良总数
+            double dTotalBadnessNum = (double) totalBadnessQty;
+            //抽样数
+            double dReceiveNum = Double.parseDouble(tvSpotCheckNum.getText().toString().trim());
+            //转换成百分比
+            NumberFormat nFromat = NumberFormat.getPercentInstance();
+            String rates = nFromat.format(dTotalBadnessNum / dReceiveNum);
+            tvBadnessPercent.setText(rates);
             if (null != faultData) {
                 mFaultData = faultData;
                 final BaseRecyclerAdapter<GetAdvanceData.FaultDataBean> adapter = new BaseRecyclerAdapter<GetAdvanceData.FaultDataBean>(this, faultData) {
@@ -454,6 +476,11 @@ public class Advance1QualityActivity extends BaseActivity<Advance1QualityView, A
                                 /**
                                  * 当不良总数大于实收数 时提示用户
                                  */
+                                String inputSampleNumStr = tvSpotCheckNum.getText().toString();
+                                if (totalBadnessNum > Integer.parseInt(inputSampleNumStr)) {
+                                    ToastUtils.showShort(getString(R.string.badness_num_no_more_sample_qty));
+                                    return;
+                                }
                                 /**
                                  * 设置文本的不良总数
                                  */
@@ -464,7 +491,7 @@ public class Advance1QualityActivity extends BaseActivity<Advance1QualityView, A
                                 //不良总数
                                 double dTotalBadnessNum = (double) totalBadnessNum;
                                 //实收数
-                                double dReceiveNum =(double) mData.getNormalSummary().getSampleQty();
+                                double dReceiveNum = (double) mData.getNormalSummary().getSampleQty();
                                 //转换成百分比
                                 NumberFormat nFromat = NumberFormat.getPercentInstance();
                                 String rates = nFromat.format(dTotalBadnessNum / dReceiveNum);

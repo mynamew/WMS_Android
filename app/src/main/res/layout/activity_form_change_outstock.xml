@@ -58,7 +58,7 @@
                     android:paddingLeft="38px"
                     android:text="@string/scan_material"
                     android:textColor="#333"
-                    android:textSize="26px"
+                    android:textSize="13sp"
                     />
 
                 <EditText
@@ -76,7 +76,7 @@
                     android:paddingRight="80px"
                     android:singleLine="true"
                     android:text=""
-                    android:textSize="26px"/>
+                    android:textSize="13sp"/>
 
                 <ImageView
                     android:id="@+id/iv_scan_material"
@@ -123,7 +123,7 @@
                         android:layout_marginLeft="40px"
                         android:text="@string/item_material_code"
                         android:textColor="#333"
-                        android:textSize="26px"/>
+                        android:textSize="13sp"/>
 
                     <TextView
                         android:id="@+id/tv_material_code"
@@ -132,7 +132,7 @@
                         android:layout_marginLeft="40px"
                         android:text=""
                         android:textColor="#000"
-                        android:textSize="26px"/>
+                        android:textSize="13sp"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -148,7 +148,7 @@
                         android:layout_marginLeft="40px"
                         android:text="@string/item_material_num"
                         android:textColor="#333"
-                        android:textSize="26px"/>
+                        android:textSize="13sp"/>
 
                     <TextView
                         android:id="@+id/tv_material_num"
@@ -157,7 +157,7 @@
                         android:layout_marginLeft="40px"
                         android:text=""
                         android:textColor="#000"
-                        android:textSize="26px"/>
+                        android:textSize="13sp"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -173,7 +173,7 @@
                         android:layout_marginLeft="40px"
                         android:text="@string/item_material_name"
                         android:textColor="#333"
-                        android:textSize="26px"/>
+                        android:textSize="13sp"/>
 
                     <TextView
                         android:id="@+id/tv_material_name"
@@ -182,7 +182,7 @@
                         android:layout_marginLeft="40px"
                         android:text=""
                         android:textColor="#000"
-                        android:textSize="26px"/>
+                        android:textSize="13sp"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -197,7 +197,7 @@
                         android:layout_marginLeft="40px"
                         android:text="@string/item_material_model"
                         android:textColor="#333"
-                        android:textSize="26px"/>
+                        android:textSize="13sp"/>
 
                     <TextView
                         android:id="@+id/tv_material_nmodel"
@@ -206,7 +206,7 @@
                         android:layout_marginLeft="40px"
                         android:text=""
                         android:textColor="#000"
-                        android:textSize="26px"/>
+                        android:textSize="13sp"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -223,7 +223,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/item_material_attr"
                         android:textColor="#333"
-                        android:textSize="26px"/>
+                        android:textSize="13sp"/>
 
                     <TextView
                         android:id="@+id/tv_material_attr"
@@ -231,7 +231,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="40px"
                         android:textColor="#000"
-                        android:textSize="26px"/>
+                        android:textSize="13sp"/>
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>

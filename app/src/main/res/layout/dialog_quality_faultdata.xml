@@ -54,7 +54,7 @@
                 android:paddingRight="20px"
                 android:text="@string/badness_num"
                 android:textColor="#333"
-                android:textSize="32px"/>
+                android:textSize="16sp"/>
         </RelativeLayout>
 
         <TextView
@@ -67,6 +67,7 @@
             android:background="@drawable/bg_quality_badness_reason"
             android:gravity="center"
             android:paddingLeft="20px"
+            android:textSize="13sp"
             android:text="@string/badness_reason_tip"/>
 
         <EditText
@@ -79,7 +80,7 @@
             android:gravity="center"
             android:hint="@string/please_input_badness_num"
             android:inputType="number"
-            android:textSize="14sp"
+            android:textSize="13sp"
             />
 
         <LinearLayout

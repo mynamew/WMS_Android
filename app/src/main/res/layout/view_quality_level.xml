@@ -19,7 +19,7 @@
             android:background="@drawable/bg_standard_level"
             android:gravity="center"
             android:text="检验水平"
-            android:textSize="26px"/>
+            android:textSize="13sp"/>
 
         <TextView
             android:id="@+id/tv_content"
@@ -27,6 +27,6 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:textColor="@color/login_txt_color"
-            android:textSize="26px"/>
+            android:textSize="13sp"/>
     </LinearLayout>
 </LinearLayout>

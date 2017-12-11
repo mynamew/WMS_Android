@@ -18,7 +18,7 @@
         android:paddingTop="10px"
         android:text="@string/material_info"
         android:textColor="#333"
-        android:textSize="28px"
+        android:textSize="14sp"
         android:textStyle="bold"
         />
 
@@ -28,56 +28,117 @@
         android:background="#d7d7dd"
         />
 
-    <TextView
-        android:id="@+id/tv_orderno"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_vertical"
+        android:orientation="horizontal"
         android:paddingLeft="20px"
-        android:paddingTop="20px"
-        android:text="@string/item_arrive_orderno"
-        android:textColor="#333"
-        android:textSize="26px"
-        />
+        android:paddingTop="20px">
 
+        <TextView
+            android:layout_width="140px"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:text="@string/arrive_orderno_tip"
+            android:textColor="#333"
+            android:textSize="13sp"
+            />
 
-    <TextView
-        android:id="@+id/tv_receive_material_date"
+        <TextView
+            android:id="@+id/tv_orderno"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30px"
+            android:gravity="center_vertical"
+            android:text=""
+            android:textColor="#000"
+            android:textSize="13sp"
+            />
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_vertical"
+        android:orientation="horizontal"
         android:paddingLeft="20px"
-        android:paddingTop="20px"
-        android:text="@string/receive_material_date"
-        android:textColor="#333"
-        android:textSize="26px"
-        />
+        android:paddingTop="20px">
 
-    <TextView
-        android:id="@+id/tv_order_num"
+        <TextView
+            android:layout_width="140px"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:text="@string/item_receive_material_date"
+            android:textColor="#333"
+            android:textSize="13sp"
+            />
+
+        <TextView
+            android:id="@+id/tv_receive_material_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30px"
+            android:gravity="center_vertical"
+            android:text=""
+            android:textColor="#000"
+            android:textSize="13sp"
+            />
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:paddingLeft="30px"
-        android:paddingTop="20px"
-        android:text="@string/order_no"
-        android:textColor="#333"
-        android:textSize="26px"
-        />
+        android:orientation="horizontal"
+        android:paddingLeft="20px"
+        android:paddingTop="20px">
 
-    <TextView
-        android:id="@+id/tv_supplier"
+        <TextView
+            android:layout_width="140px"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:text="@string/order_no_tip"
+            android:textColor="#333"
+            android:textSize="13sp"
+            />
+
+        <TextView
+            android:id="@+id/tv_order_num"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30px"
+            android:gravity="center_vertical"
+            android:text=""
+            android:textColor="#000"
+            android:textSize="13sp"
+            />
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10px"
-        android:gravity="center_vertical"
-        android:lineSpacingExtra="5px"
-        android:paddingLeft="30px"
-        android:paddingTop="20px"
-        android:text="@string/buy_from"
-        android:textColor="#333"
-        android:textSize="26px"
-        />
+        android:orientation="horizontal"
+        android:paddingLeft="20px"
+        android:paddingTop="20px">
+
+        <TextView
+            android:layout_width="140px"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:text="@string/item_supplier"
+            android:textColor="#333"
+            android:textSize="13sp"
+            />
+
+        <TextView
+            android:id="@+id/tv_supplier"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30px"
+            android:gravity="center_vertical"
+            android:text=""
+            android:textColor="#000"
+            android:textSize="13sp"
+            />
+    </LinearLayout>
 
     <View
         android:layout_width="match_parent"
@@ -87,42 +148,116 @@
         android:background="@drawable/bg_quality_normal_divider"
         />
 
-    <TextView
-        android:id="@+id/tv_material_code"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10px"
-        android:gravity="center_vertical"
+        android:orientation="horizontal"
         android:paddingLeft="20px"
-        android:text="@string/material_code"
-        android:textColor="#333"
-        android:textSize="26px"
-        />
+        android:paddingTop="20px">
 
-    <TextView
-        android:id="@+id/tv_material_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:lineSpacingExtra="5px"
-        android:paddingLeft="20px"
-        android:paddingTop="20px"
-        android:text="@string/material_name"
-        android:textColor="#333"
-        android:textSize="26px"
-        />
+        <TextView
+            android:layout_width="140px"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:text="@string/item_material_code"
+            android:textColor="#333"
+            android:textSize="13sp"
+            />
 
-    <TextView
-        android:id="@+id/tv_material_model"
+        <TextView
+            android:id="@+id/tv_material_code"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30px"
+            android:gravity="center_vertical"
+            android:text=""
+            android:textColor="#000"
+            android:textSize="13sp"
+            />
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:lineSpacingExtra="5px"
+        android:orientation="horizontal"
         android:paddingLeft="20px"
-        android:paddingTop="20px"
-        android:text="@string/material_model"
-        android:textColor="#333"
-        android:textSize="26px"
-        />
+        android:paddingTop="20px">
+
+        <TextView
+            android:layout_width="140px"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:text="@string/item_material_name"
+            android:textColor="#333"
+            android:textSize="13sp"
+            />
+
+        <TextView
+            android:id="@+id/tv_material_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30px"
+            android:gravity="center_vertical"
+            android:text=""
+            android:textColor="#000"
+            android:textSize="13sp"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="20px"
+        android:paddingTop="20px">
+
+        <TextView
+            android:layout_width="140px"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:text="@string/item_material_model"
+            android:textColor="#333"
+            android:textSize="13sp"
+            />
+
+        <TextView
+            android:id="@+id/tv_material_model"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30px"
+            android:gravity="center_vertical"
+            android:text=""
+            android:textColor="#000"
+            android:textSize="13sp"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="20px"
+        android:paddingTop="20px">
+
+        <TextView
+            android:layout_width="140px"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:text="@string/item_material_attr"
+            android:textColor="#333"
+            android:textSize="13sp"
+            />
+
+        <TextView
+            android:id="@+id/tv_material_attr"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30px"
+            android:gravity="center_vertical"
+            android:text=""
+            android:textColor="#000"
+            android:textSize="13sp"
+            />
+    </LinearLayout>
 </LinearLayout>
 

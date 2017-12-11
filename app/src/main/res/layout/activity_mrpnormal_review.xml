@@ -56,7 +56,7 @@
                         android:paddingTop="10px"
                         android:text="@string/mrp_normal_review_work_tip"
                         android:textColor="#333"
-                        android:textSize="28px"
+                        android:textSize="14sp"
                         android:textStyle="bold"
                         />
 
@@ -80,7 +80,7 @@
                             android:layout_height="wrap_content"
                             android:text="@string/receive_num_tip"
                             android:textColor="#666"
-                            android:textSize="26px"/>
+                            android:textSize="13sp"/>
 
                         <TextView
                             android:id="@+id/tv_receive_num"
@@ -90,7 +90,7 @@
                             android:layout_weight="1"
                             android:text="0"
                             android:textColor="#333"
-                            android:textSize="26px"/>
+                            android:textSize="13sp"/>
                     </LinearLayout>
 
                     <LinearLayout
@@ -105,7 +105,7 @@
                             android:layout_height="wrap_content"
                             android:text="@string/send_check_tip"
                             android:textColor="#666"
-                            android:textSize="26px"/>
+                            android:textSize="13sp"/>
 
                         <TextView
                             android:id="@+id/tv_send_check_num"
@@ -115,7 +115,7 @@
                             android:layout_weight="1"
                             android:text="0"
                             android:textColor="#333"
-                            android:textSize="26px"/>
+                            android:textSize="13sp"/>
                     </LinearLayout>
                 </LinearLayout>
 
@@ -137,7 +137,7 @@
                             android:layout_height="wrap_content"
                             android:text="@string/pass_num_tip"
                             android:textColor="#666"
-                            android:textSize="26px"/>
+                            android:textSize="13sp"/>
 
                         <TextView
                             android:id="@+id/tv_pass_num"
@@ -147,7 +147,7 @@
                             android:layout_weight="1"
                             android:text="0"
                             android:textColor="#333"
-                            android:textSize="26px"/>
+                            android:textSize="13sp"/>
                     </LinearLayout>
 
                     <LinearLayout
@@ -162,7 +162,7 @@
                             android:layout_height="wrap_content"
                             android:text="@string/badness_total_num_tip"
                             android:textColor="#666"
-                            android:textSize="26px"/>
+                            android:textSize="13sp"/>
 
                         <TextView
                             android:id="@+id/tv_badness_total_num"
@@ -172,7 +172,7 @@
                             android:layout_weight="1"
                             android:text="0"
                             android:textColor="#333"
-                            android:textSize="26px"/>
+                            android:textSize="13sp"/>
                     </LinearLayout>
                 </LinearLayout>
 
@@ -195,7 +195,7 @@
                             android:layout_height="wrap_content"
                             android:text="@string/badness_percent_tip"
                             android:textColor="#666"
-                            android:textSize="26px"/>
+                            android:textSize="13sp"/>
 
                         <TextView
                             android:id="@+id/tv_badness_percent"
@@ -205,7 +205,7 @@
                             android:layout_weight="1"
                             android:text=""
                             android:textColor="#333"
-                            android:textSize="26px"/>
+                            android:textSize="13sp"/>
                     </LinearLayout>
 
                     <LinearLayout
@@ -220,14 +220,14 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/send_check_tip"
-                            android:textSize="26px"/>
+                            android:textSize="13sp"/>
 
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text=""
-                            android:textSize="26px"/>
+                            android:textSize="13sp"/>
                     </LinearLayout>
                 </LinearLayout>
 
@@ -256,7 +256,7 @@
                         android:paddingLeft="30px"
                         android:text="评审结果"
                         android:textColor="#666"
-                        android:textSize="26px"/>
+                        android:textSize="13sp"/>
 
                     <RadioGroup
                         android:id="@+id/rg_qualified"
@@ -280,7 +280,7 @@
                             android:gravity="center"
                             android:text="@string/quality_pick"
                             android:textColor="#666"
-                            android:textSize="26px"/>
+                            android:textSize="13sp"/>
 
                         <RadioButton
                             android:id="@+id/rd_quality_special_get"
@@ -293,7 +293,7 @@
                             android:gravity="center"
                             android:text="@string/quality_special_get"
                             android:textColor="#666"
-                            android:textSize="26px"/>
+                            android:textSize="13sp"/>
 
                         <RadioButton
                             android:id="@+id/rd_quality_all_return"
@@ -306,7 +306,7 @@
                             android:gravity="center"
                             android:text="@string/quality_all_return"
                             android:textColor="#666"
-                            android:textSize="26px"/>
+                            android:textSize="13sp"/>
 
                         <RadioButton
                             android:id="@+id/rd_quality_right_get"
@@ -319,7 +319,7 @@
                             android:gravity="center"
                             android:text="@string/quality_right_get"
                             android:textColor="#666"
-                            android:textSize="26px"/>
+                            android:textSize="13sp"/>
                     </RadioGroup>
                 </LinearLayout>
 
@@ -344,7 +344,7 @@
                         android:paddingLeft="30px"
                         android:text="@string/mrp_normal_pick_tip"
                         android:textColor="#666"
-                        android:textSize="26px"/>
+                        android:textSize="13sp"/>
 
                     <EditText
                         android:id="@+id/et_pick_num"

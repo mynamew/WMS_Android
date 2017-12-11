@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
-              android:layout_height="88px"
+              android:layout_height="64px"
               android:orientation="horizontal">
 
     <LinearLayout
@@ -16,7 +16,8 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="不良代码"
-            android:textColor="#333"/>
+            android:textColor="#333"
+            android:textSize="13sp"/>
 
         <TextView
             android:id="@+id/tv_badness_reason"
@@ -25,7 +26,8 @@
             android:layout_weight="2"
             android:gravity="center"
             android:text="不良原因"
-            android:textColor="#333"/>
+            android:textColor="#333"
+            android:textSize="13sp"/>
 
 
         <TextView
@@ -35,6 +37,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="不良数"
-            android:textColor="#333"/>
+            android:textColor="#333"
+            android:textSize="13sp"/>
     </LinearLayout>
 </LinearLayout>

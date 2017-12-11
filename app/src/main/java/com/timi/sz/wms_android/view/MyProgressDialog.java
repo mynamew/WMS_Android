@@ -1,9 +1,11 @@
 package com.timi.sz.wms_android.view;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 
 import com.timi.sz.wms_android.R;
+import com.timi.sz.wms_android.base.uils.LogUitls;
 import com.timi.sz.wms_android.http.HttpManager;
 
 /**
@@ -34,7 +36,7 @@ public class MyProgressDialog  extends MyDialog {
     /**
      * 显示进度条
      */
-    public static void showProgressDialog(Context context) {
+    public static void showProgressDialog(Activity context) {
         if (null == instance) {
             getInstance(context);
         }
@@ -47,6 +49,7 @@ public class MyProgressDialog  extends MyDialog {
         }
         if(!instance.isShowing()){
             instance.show();
+            LogUitls.e("显示Dialog--->",context.getPackageName());
         }
     }
 
@@ -55,6 +58,7 @@ public class MyProgressDialog  extends MyDialog {
      */
     public static void hideProgressDialog() {
         if(null!=instance&&instance.isShowing()){
+            LogUitls.e("隐藏Dialog--->",instance.getContext().getPackageName());
             instance.dismiss();
             instance=null;
         }

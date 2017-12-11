@@ -1,21 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                                       xmlns:app="http://schemas.android.com/apk/res-auto"
-                                       xmlns:tools="http://schemas.android.com/tools"
-                                       android:layout_width="match_parent"
-                                       android:layout_height="match_parent"
-                                       android:orientation="horizontal"
+                                     xmlns:app="http://schemas.android.com/apk/res-auto"
+                                     xmlns:tools="http://schemas.android.com/tools"
+                                     android:layout_width="match_parent"
+                                     android:layout_height="match_parent"
+                                     android:orientation="horizontal"
     >
 
-          <View
-              android:id="@+id/view_left"
-              android:layout_width="0dp"
-              android:layout_weight="1"
-              android:layout_height="match_parent"/>
-    <LinearLayout
-        android:layout_width="654px"
-        android:layout_alignParentRight="true"
+    <View
+        android:id="@+id/view_left"
+        android:layout_width="0dp"
         android:layout_height="match_parent"
+        android:layout_weight="1"/>
+
+    <LinearLayout
+        android:id="@+id/ll_content"
+        android:layout_width="654px"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
         android:background="#fff"
         android:orientation="vertical">
 
@@ -26,7 +28,7 @@
             android:layout_marginTop="50px"
             android:text="时间段选择"
             android:textColor="#333"
-            android:textSize="24px"
+            android:textSize="12sp"
             android:textStyle="bold"/>
 
         <LinearLayout
@@ -42,7 +44,7 @@
                 android:layout_marginLeft="40px"
                 android:text="@string/start_time_tip"
                 android:textColor="#333"
-                android:textSize="24px"
+                android:textSize="12sp"
                 android:textStyle="normal"/>
 
             <TextView
@@ -52,9 +54,9 @@
                 android:layout_marginLeft="20px"
                 android:background="@drawable/bg_rectangle_gray"
                 android:gravity="center"
-                android:text="请选择"
+                android:text="@string/please_choose"
                 android:textColor="#333"
-                android:textSize="26px"/>
+                android:textSize="13sp"/>
         </LinearLayout>
 
         <LinearLayout
@@ -70,7 +72,7 @@
                 android:layout_marginLeft="40px"
                 android:text="@string/end_time_tip"
                 android:textColor="#333"
-                android:textSize="24px"
+                android:textSize="12sp"
                 android:textStyle="normal"/>
 
             <TextView
@@ -80,9 +82,9 @@
                 android:layout_marginLeft="20px"
                 android:background="@drawable/bg_rectangle_gray"
                 android:gravity="center"
-                android:text="请选择"
+                android:text="@string/please_choose"
                 android:textColor="#333"
-                android:textSize="26px"/>
+                android:textSize="13sp"/>
         </LinearLayout>
 
         <View
@@ -115,7 +117,7 @@
                 android:layout_marginLeft="40px"
                 android:text="@string/arrive_orderno_tip"
                 android:textColor="#333"
-                android:textSize="24px"
+                android:textSize="12sp"
                 android:textStyle="normal"/>
 
             <EditText
@@ -127,7 +129,7 @@
                 android:hint="@string/please_input_arrive_orderno"
                 android:paddingLeft="20px"
                 android:textColor="#333"
-                android:textSize="26px"/>
+                android:textSize="13sp"/>
         </LinearLayout>
 
         <LinearLayout
@@ -143,7 +145,7 @@
                 android:layout_marginLeft="40px"
                 android:text="@string/item_material_code"
                 android:textColor="#333"
-                android:textSize="24px"
+                android:textSize="12sp"
                 android:textStyle="normal"/>
 
             <EditText
@@ -155,7 +157,7 @@
                 android:hint="@string/please_input_material_code"
                 android:paddingLeft="20px"
                 android:textColor="#333"
-                android:textSize="26px"/>
+                android:textSize="13sp"/>
         </LinearLayout>
 
         <LinearLayout
@@ -171,7 +173,7 @@
                 android:layout_marginLeft="40px"
                 android:text="@string/item_material_name"
                 android:textColor="#333"
-                android:textSize="24px"
+                android:textSize="12sp"
                 android:textStyle="normal"/>
 
             <EditText
@@ -183,7 +185,7 @@
                 android:hint="@string/please_input_material_name"
                 android:paddingLeft="20px"
                 android:textColor="#333"
-                android:textSize="26px"/>
+                android:textSize="13sp"/>
         </LinearLayout>
 
         <LinearLayout
@@ -200,7 +202,7 @@
                 android:paddingLeft="24px"
                 android:text="@string/item_supplier"
                 android:textColor="#333"
-                android:textSize="24px"
+                android:textSize="12sp"
                 android:textStyle="normal"/>
 
             <EditText
@@ -212,7 +214,7 @@
                 android:hint="@string/please_input_supplier_name"
                 android:paddingLeft="20px"
                 android:textColor="#333"
-                android:textSize="26px"/>
+                android:textSize="13sp"/>
         </LinearLayout>
 
         <View
@@ -229,7 +231,7 @@
             android:layout_marginTop="30px"
             android:text="@string/scan_code"
             android:textColor="#333"
-            android:textSize="24px"
+            android:textSize="12sp"
             android:textStyle="bold"/>
 
         <RelativeLayout
@@ -247,7 +249,7 @@
                 android:gravity="center"
                 android:text="包装条码"
                 android:textColor="#333"
-                android:textSize="24px"
+                android:textSize="12sp"
                 />
 
             <EditText
@@ -256,20 +258,20 @@
                 android:layout_height="58px"
                 android:layout_marginLeft="10dp"
                 android:layout_marginStart="10dp"
+                android:layout_toRightOf="@id/tv_pack_code"
                 android:background="@drawable/bg_rectangle_gray"
                 android:hint="@string/please_input_supplier_name"
                 android:paddingLeft="20px"
                 android:textColor="#333"
-                android:textSize="26px"
-                android:layout_toRightOf="@id/tv_pack_code"
+                android:textSize="13sp"
                 />
 
             <ImageView
                 android:id="@+id/iv_pack_scan"
                 android:layout_width="40px"
                 android:layout_height="40px"
-                android:layout_centerVertical="true"
                 android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
                 android:layout_marginRight="40px"
                 android:scaleType="center"
                 android:src="@mipmap/quality_scan"

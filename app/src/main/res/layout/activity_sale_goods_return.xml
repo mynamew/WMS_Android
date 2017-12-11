@@ -26,7 +26,7 @@
             android:gravity="center_vertical"
             android:text="@string/instock_info"
             android:textColor="#333"
-            android:textSize="28px"
+            android:textSize="14sp"
             android:textStyle="bold"/>
 
         <View

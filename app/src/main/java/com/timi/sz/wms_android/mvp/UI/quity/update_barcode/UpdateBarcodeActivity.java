@@ -27,6 +27,7 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.OnClick;
 
+import static com.timi.sz.wms_android.base.uils.Constants.EDITTEXT_BARCODE;
 import static com.timi.sz.wms_android.base.uils.Constants.EDITTEXT_ORDERNO;
 
 /**
@@ -76,7 +77,7 @@ public class UpdateBarcodeActivity extends BaseActivity<UpdateBarcodeView, Updat
         /**
          * 设置输入框的监听
          */
-        setEdittextListener(etMinPackCode, EDITTEXT_ORDERNO, R.string.please_input_or_scan_need_update_barcode, R.string.input_orderno_more_four, new EdittextInputListener() {
+        setEdittextListener(etMinPackCode, EDITTEXT_BARCODE, R.string.please_input_or_scan_need_update_barcode, 0, new EdittextInputListener() {
             @Override
             public void verticalSuccess(String result) {
                 /**

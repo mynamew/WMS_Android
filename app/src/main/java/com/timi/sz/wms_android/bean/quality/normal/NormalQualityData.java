@@ -11,14 +11,14 @@ import java.util.List;
 public class NormalQualityData {
 
     /**
-     * normalSummary : {"receiptId":10356,"receiptDetailId":25131,"receiptCode":"DH161201001","receiptDate":"2017-09-11","sourceBillCode":"CG161130225","supplierName":"乐清市柯创电子有限公司","creater":null,"materialId":1286,"materialCode":"10111020063","materialName":"2P针座","materialStandard":"ZH-1.5间距/2P/卧式贴片","materialAttribute":null,"receiveQty":4000,"sampleQty":20,"ngQty":0,"rejectQty":0,"qcStatus":1,"qcResult":1,"isBarCode":false,"barcodeSource":1}
-     * faultData : [{"faultId":2,"faultCode":"002","faultName":"外观不良","faultDesc":"外观不良","faultQty":2,"qC_DefectGrade":"B"}]
-     * barcodeData : null
+     * normalSummary : {"receiptId":10395,"receiptDetailId":25188,"receiptCode":"DH171207008","receiptDate":"2017-12-07","sourceBillCode":"CG161204008","supplierName":"深圳市慧视电子有限公司","creater":null,"materialId":2,"materialCode":"10101010002","materialName":"贴片电阻","materialStandard":"10R/0402/±5%","materialAttribute":"","receiveQty":16,"sampleQty":10,"ngQty":1,"rejectQty":1,"qcStatus":2,"qcResult":1,"isBarCode":true,"barcodeSource":1}
+     * faultData : [{"faultId":3,"faultCode":"P001","faultName":"外观不良","faultDesc":"","faultQty":1,"qC_DefectGrade":"B"},{"faultId":4,"faultCode":"P002","faultName":"性能不良","faultDesc":"","faultQty":0,"qC_DefectGrade":"B"},{"faultId":5,"faultCode":"P003","faultName":"功能不良","faultDesc":"","faultQty":0,"qC_DefectGrade":"B"},{"faultId":6,"faultCode":"P004","faultName":"尺寸不良","faultDesc":"","faultQty":0,"qC_DefectGrade":"B"}]
+     * barcodeData : [{"barcodeNo":"CT2017121100037","packQty":2,"currentQty":1,"rejectQty":1}]
      */
 
     private NormalSummaryBean normalSummary;
-    private Object barcodeData;
     private List<FaultDataBean> faultData;
+    private List<BarcodeDataBean> barcodeData;
 
     public NormalSummaryBean getNormalSummary() {
         return normalSummary;
@@ -26,14 +26,6 @@ public class NormalQualityData {
 
     public void setNormalSummary(NormalSummaryBean normalSummary) {
         this.normalSummary = normalSummary;
-    }
-
-    public Object getBarcodeData() {
-        return barcodeData;
-    }
-
-    public void setBarcodeData(Object barcodeData) {
-        this.barcodeData = barcodeData;
     }
 
     public List<FaultDataBean> getFaultData() {
@@ -44,27 +36,35 @@ public class NormalQualityData {
         this.faultData = faultData;
     }
 
+    public List<BarcodeDataBean> getBarcodeData() {
+        return barcodeData;
+    }
+
+    public void setBarcodeData(List<BarcodeDataBean> barcodeData) {
+        this.barcodeData = barcodeData;
+    }
+
     public static class NormalSummaryBean {
         /**
-         * receiptId : 10356
-         * receiptDetailId : 25131
-         * receiptCode : DH161201001
-         * receiptDate : 2017-09-11
-         * sourceBillCode : CG161130225
-         * supplierName : 乐清市柯创电子有限公司
+         * receiptId : 10395
+         * receiptDetailId : 25188
+         * receiptCode : DH171207008
+         * receiptDate : 2017-12-07
+         * sourceBillCode : CG161204008
+         * supplierName : 深圳市慧视电子有限公司
          * creater : null
-         * materialId : 1286
-         * materialCode : 10111020063
-         * materialName : 2P针座
-         * materialStandard : ZH-1.5间距/2P/卧式贴片
-         * materialAttribute : null
-         * receiveQty : 4000
-         * sampleQty : 20
-         * ngQty : 0
-         * rejectQty : 0
-         * qcStatus : 1
+         * materialId : 2
+         * materialCode : 10101010002
+         * materialName : 贴片电阻
+         * materialStandard : 10R/0402/±5%
+         * materialAttribute :
+         * receiveQty : 16
+         * sampleQty : 10
+         * ngQty : 1
+         * rejectQty : 1
+         * qcStatus : 2
          * qcResult : 1
-         * isBarCode : false
+         * isBarCode : true
          * barcodeSource : 1
          */
 
@@ -79,7 +79,7 @@ public class NormalQualityData {
         private String materialCode;
         private String materialName;
         private String materialStandard;
-        private Object materialAttribute;
+        private String materialAttribute;
         private int receiveQty;
         private int sampleQty;
         private int ngQty;
@@ -177,11 +177,11 @@ public class NormalQualityData {
             this.materialStandard = materialStandard;
         }
 
-        public Object getMaterialAttribute() {
+        public String getMaterialAttribute() {
             return materialAttribute;
         }
 
-        public void setMaterialAttribute(Object materialAttribute) {
+        public void setMaterialAttribute(String materialAttribute) {
             this.materialAttribute = materialAttribute;
         }
 
@@ -252,11 +252,11 @@ public class NormalQualityData {
 
     public static class FaultDataBean {
         /**
-         * faultId : 2
-         * faultCode : 002
+         * faultId : 3
+         * faultCode : P001
          * faultName : 外观不良
-         * faultDesc : 外观不良
-         * faultQty : 2
+         * faultDesc :
+         * faultQty : 1
          * qC_DefectGrade : B
          */
 
@@ -313,6 +313,52 @@ public class NormalQualityData {
 
         public void setQC_DefectGrade(String qC_DefectGrade) {
             this.qC_DefectGrade = qC_DefectGrade;
+        }
+    }
+
+    public static class BarcodeDataBean {
+        /**
+         * barcodeNo : CT2017121100037
+         * packQty : 2
+         * currentQty : 1
+         * rejectQty : 1
+         */
+
+        private String barcodeNo;
+        private int packQty;
+        private int currentQty;
+        private int rejectQty;
+
+        public String getBarcodeNo() {
+            return barcodeNo;
+        }
+
+        public void setBarcodeNo(String barcodeNo) {
+            this.barcodeNo = barcodeNo;
+        }
+
+        public int getPackQty() {
+            return packQty;
+        }
+
+        public void setPackQty(int packQty) {
+            this.packQty = packQty;
+        }
+
+        public int getCurrentQty() {
+            return currentQty;
+        }
+
+        public void setCurrentQty(int currentQty) {
+            this.currentQty = currentQty;
+        }
+
+        public int getRejectQty() {
+            return rejectQty;
+        }
+
+        public void setRejectQty(int rejectQty) {
+            this.rejectQty = rejectQty;
         }
     }
 }

@@ -208,10 +208,18 @@
     <string name="stock_in_out_source">委外单</string>
     <string name="material_point_success">物料请点保存成功</string>
 
-    /**====== 采购单 列表======**/
+    /**======无纸化作业 列表======**/
     <string name="buy_list_title">采购单列表</string>
-    /**====== 委外单 列表======**/
     <string name="out_source_list_title">委外单列表</string>
+    <string name="outsource_send_material_list">委外发料单(生单)列表</string>
+    <string name="outsource_send_material_audit_list">委外发料单(审核)列表</string>
+    <string name="outsource_allot_list">委外调拨单列表</string>
+    <string name="outsource_feed_list">委外补料单列表</string>
+    <string name="outsource_return_list">委外退料单列表</string>
+    <string name="production_bill_list">生产领料单列表(生单)</string>
+    <string name="production_audit_list">生产领料单列表(审核)</string>
+    <string name="get_material_apply_list">领料申请单列表</string>
+    <string name="production_allot_list">生产调拨单列表</string>
     /**====== 来料入库 ======**/
     <string name="in_stock_num_title">入库上架(来料入库)</string>
     <string name="receive_pro_num">到货单号：</string>
@@ -527,6 +535,7 @@
     /******************************************************************************************************************************************************/
     /******************************************************************************************************************************************************/
     /**====== 质量检验 ======**/
+    <string name="please_choose">请选择</string>
     <string name="quality_check_title">来料—品质检验</string>
     <string name="quality_material_quality">物料质检</string>
     <string name="start_time_tip">开始日期</string>
@@ -563,7 +572,7 @@
     /**====== 普通质检 ======**/
     <string name="receive_material_date">收料日期：%1$s</string>
     <string name="instock_total_num_tip">入库总数：</string>
-    <string name="receive_num">\t实收数：%1$s</string>
+    <string name="receive_num">实收数：%1$s</string>
     <string name="please_input_spot_check_num">请输入抽检数</string>
     <string name="refuse_receive_num">拒收数</string>
     <string name="spot_check_num">抽检数</string>
@@ -593,6 +602,7 @@
     <string name="refusenum_no_more_badness_num_repeat_input">拒收数不能大于不良总数，请重新输入</string>
     <string name="quality_wait_deal_tip">此物品质检操作流程未完成，其质检结果为待定！</string>
     /**====== 高级质检 ======**/
+    <string name="quality_result">质检结果：</string>
     <string name="standard_level">标准水平：%1$s</string>
     <string name="sample_half_yard">试样半码：%1$s</string>
     <string name="check_method">检验方法：%1$s</string>
@@ -654,6 +664,7 @@
     /**====== 质检拒收 ======**/
     <string name="start_pack_num">初始包装数：%1$s</string>
     <string name="real_pack_num">实际包装数：%1$s</string>
+    <string name="min_pack_code_tip">最小包装码：</string>
     <string name="quality_reject_title">质检拒收</string>
     /**====== MRP ======**/
     <string name="mrp_badness_percent">不良率</string>
@@ -700,8 +711,8 @@
     /**======条码修改 ======**/
     <string name="min_pack_code">最小包装码</string>
     <string name="bar_code_tip">条码</string>
-    <string name="first_pack_num">初始包装数</string>
-    <string name="item_real_pack_num">实际包装数</string>
+    <string name="first_pack_num">初始包装</string>
+    <string name="item_real_pack_num">实际包装</string>
     <string name="reject_num">拒收数</string>
     <string name="please_input_or_scan_need_update_barcode">请输入或扫描要修改的条码</string>
     <string name="dialog_update_barcode">修改条码</string>
@@ -761,6 +772,8 @@
     <string name="form_change_instock_detial_info_tip">形态转换单(入库)信息详情</string>
     <string name="form_change_outstock_detial_info_tip">形态转换单(出库)信息详情</string>
     <string name="form_change_instock_detial_title">形态转换单详情</string>
+    <string name="check_orderno_info">盘点单信息详情</string>
+    <string name="item_instock_total_num_tip">入库总数</string>
     /**====== 一步调入 ======**/
     <string name="allot_out_total_num">调出总数</string>
     <string name="allot_total_num">调拨总数</string>
@@ -813,18 +826,11 @@
     <string name="repertory_total_num">库存总数</string>
     <string name="please_input_check_num">请输入盘点数量</string>
     <string name="confirm_qty">确认数量</string>
-    <string name="outsource_send_material_list">委外发料单(生单)列表</string>
-    <string name="outsource_send_material_audit_list">委外发料单(审核)列表</string>
-    <string name="outsource_allot_list">委外调拨单列表</string>
-    <string name="outsource_feed_list">委外补料单列表</string>
-    <string name="outsource_return_list">委外退料单列表</string>
-    <string name="production_bill_list">生产领料单列表(生单)</string>
-    <string name="production_audit_list">生产领料单列表(审核)</string>
-    <string name="get_material_apply_list">领料申请单列表</string>
-    <string name="production_allot_list">生产调拨单列表</string>
-    <string name="check_orderno_info">盘点单信息详情</string>
     <string name="get_material_info_success">获取物料信息成功</string>
     <string name="commit_check_data_success">提交盘点数据成功</string>
+    <string name="badness_num_no_more_sample_qty">不良总数不能大于抽样数，请重新输入</string>
+    <string name="item_receive_material_date">收料日期</string>
+    <string name="item_real_receive_qty">实收数</string>
 
 
 </resources>

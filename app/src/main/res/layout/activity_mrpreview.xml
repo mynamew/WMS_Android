@@ -8,7 +8,9 @@
     android:background="@color/set_bg"
     android:orientation="vertical"
     tools:context="com.timi.sz.wms_android.mvp.UI.quity.mrp.MRPReviewActivity">
+
     <include layout="@layout/title_head"/>
+
     <LinearLayout
         android:id="@+id/ll_tab"
         android:layout_width="match_parent"
@@ -18,18 +20,22 @@
         android:orientation="horizontal"
         android:paddingLeft="24px"
         android:paddingRight="24px">
+
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="2"
             android:gravity="center"
-            android:text="@string/line_name"/>
+            android:text="@string/line_name"
+            android:textSize="13sp"/>
+
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="3"
             android:gravity="center"
-            android:text="@string/item_material_code"/>
+            android:text="@string/item_material_code"
+            android:textSize="13sp"/>
 
         <TextView
             android:id="@+id/tv_receive_num"
@@ -37,7 +43,8 @@
             android:layout_height="match_parent"
             android:layout_weight="2"
             android:gravity="center"
-            android:text="@string/excel_head_real_receive_num"/>
+            android:text="@string/excel_head_real_receive_num"
+            android:textSize="13sp"/>
 
         <TextView
             android:id="@+id/tv_send_quality_num"
@@ -45,7 +52,8 @@
             android:layout_height="match_parent"
             android:layout_weight="2"
             android:gravity="center"
-            android:text="@string/mrp_sample_num"/>
+            android:text="@string/mrp_sample_num"
+            android:textSize="13sp"/>
 
         <TextView
             android:id="@+id/tv_quality_num"
@@ -53,7 +61,8 @@
             android:layout_height="match_parent"
             android:layout_weight="2"
             android:gravity="center"
-            android:text="@string/excel_head_quality_num"/>
+            android:text="@string/excel_head_quality_num"
+            android:textSize="13sp"/>
 
         <TextView
             android:id="@+id/tv_quality_result"
@@ -61,8 +70,10 @@
             android:layout_height="match_parent"
             android:layout_weight="2"
             android:gravity="center"
-            android:text="@string/mrp_badness_percent"/>
+            android:text="@string/mrp_badness_percent"
+            android:textSize="13sp"/>
     </LinearLayout>
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rlv_mrp"
         android:layout_width="match_parent"

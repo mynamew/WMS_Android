@@ -30,11 +30,11 @@ public class LoginSuccessPresenter extends MvpBasePresenter<LoginSuccessView> {
      * @param userId
      * @param mac
      */
-    public void getUserInfo( int userId,String mac) {
+    public void getUserInfo(int userId, String mac) {
         /**
          * 显示进度条
          */
-        MyProgressDialog.showProgressDialog(getContext());
+        getView().showProgressDialog();
         /**
          * 初始化观察者
          */
@@ -47,15 +47,15 @@ public class LoginSuccessPresenter extends MvpBasePresenter<LoginSuccessView> {
 
                 @Override
                 public void onError(String errorMsg) {
-//                    ToastUtils.showShort(errorMsg);
-                    getView().getUserinfo(new UserInfoBean("研发部","啊实打实的","邢力丰","234321","啊飞洒发生的","男","15995844889"));
+                    ToastUtils.showShort(errorMsg);
+//                    getView().getUserinfo(new UserInfoBean("研发部", "啊实打实的", "邢力丰", "234321", "啊飞洒发生的", "男", "15995844889"));
                 }
             });
         }
         /**
          * 调用请求的方法
          */
-        mLoginModel.getUserInfo(userId,mac,mLoginBeanHttpSubscriber);
+        mLoginModel.getUserInfo(userId, mac, mLoginBeanHttpSubscriber);
     }
 
     @Override

@@ -35,7 +35,7 @@
                 android:paddingRight="20px"
                 android:text="设置AQL"
                 android:textColor="#333"
-                android:textSize="32px"/>
+                android:textSize="16sp"/>
 
             <ImageView
                 android:id="@+id/iv_close"
@@ -58,7 +58,7 @@
                 android:layout_marginLeft="30px"
                 android:text="@string/dialog_sample_code_tip"
                 android:textColor="#333"
-                android:textSize="28px"/>
+                android:textSize="14sp"/>
 
             <TextView
                 android:id="@+id/tv_sample_code"
@@ -66,7 +66,7 @@
                 android:layout_height="wrap_content"
                 android:text="1"
                 android:textColor="#000"
-                android:textSize="28px"/>
+                android:textSize="14sp"/>
         </LinearLayout>
 
         <LinearLayout
@@ -81,7 +81,7 @@
                 android:layout_marginLeft="30px"
                 android:text="@string/dialog_check_item_tip"
                 android:textColor="#333"
-                android:textSize="28px"/>
+                android:textSize="14sp"/>
 
             <TextView
                 android:id="@+id/tv_check_item"
@@ -89,7 +89,7 @@
                 android:layout_height="wrap_content"
                 android:text="1"
                 android:textColor="#000"
-                android:textSize="28px"/>
+                android:textSize="14sp"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -97,7 +97,7 @@
                 android:layout_marginLeft="20px"
                 android:text="@string/dialog_check_model"
                 android:textColor="#333"
-                android:textSize="28px"/>
+                android:textSize="14sp"/>
 
             <TextView
                 android:id="@+id/tv_check_model"
@@ -105,7 +105,7 @@
                 android:layout_height="wrap_content"
                 android:text="1"
                 android:textColor="#000"
-                android:textSize="28px"/>
+                android:textSize="14sp"/>
         </LinearLayout>
 
         <LinearLayout
@@ -121,7 +121,7 @@
                 android:layout_marginLeft="60px"
                 android:text="@string/dialog_measure_value_tip"
                 android:textColor="#333"
-                android:textSize="28px"/>
+                android:textSize="14sp"/>
 
             <EditText
                 android:id="@+id/et_measure_value"
@@ -131,7 +131,7 @@
                 android:gravity="center"
                 android:hint="@string/please_input_measure_value"
                 android:inputType="numberDecimal"
-                android:textSize="24px"/>
+                android:textSize="12sp"/>
 
             <Button
                 android:id="@+id/btn_confirm"
@@ -155,7 +155,7 @@
                 android:layout_marginLeft="50px"
                 android:text="@string/dialog_measure_value_tip"
                 android:textColor="#333"
-                android:textSize="28px"
+                android:textSize="14sp"
                 android:visibility="invisible"/>
 
             <LinearLayout
@@ -170,7 +170,7 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/login_txt_color"
 
-                    android:textSize="24px"/>
+                    android:textSize="12sp"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -179,14 +179,14 @@
                     android:layout_marginRight="10px"
                     android:text="≤ ok ≤ "
                     android:textColor="@color/login_txt_color"
-                    android:textSize="24px"/>
+                    android:textSize="12sp"/>
 
                 <TextView
                     android:id="@+id/tv_limit_hight"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/login_txt_color"
-                    android:textSize="24px"/>
+                    android:textSize="12sp"/>
             </LinearLayout>
 
         </LinearLayout>
@@ -215,7 +215,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/quality_result_tip"
                 android:textColor="#333"
-                android:textSize="28px"/>
+                android:textSize="14sp"/>
 
             <RadioGroup
                 android:id="@+id/rg_qualified"
@@ -263,7 +263,7 @@
                 android:layout_marginLeft="30px"
                 android:text="@string/dialog_badness_reason"
                 android:textColor="#333"
-                android:textSize="28px"/>
+                android:textSize="14sp"/>
 
             <RelativeLayout
                 android:id="@+id/rl_select_badness_reason"

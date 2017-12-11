@@ -44,7 +44,7 @@
             android:paddingRight="80px"
             android:singleLine="true"
             android:text=""
-            android:textSize="14sp"/>
+            android:textSize="13sp"/>
 
         <ImageView
             android:id="@+id/iv_putaway_scan_location"
@@ -90,7 +90,7 @@
             android:paddingRight="80px"
             android:singleLine="true"
             android:text=""
-            android:textSize="14sp"/>
+            android:textSize="13sp"/>
     </RelativeLayout>
 
     <Button

@@ -18,7 +18,7 @@
             android:paddingLeft="30px"
             android:text="@string/query_form_change_tip"
             android:textColor="#333"
-            android:textSize="26px"/>
+            android:textSize="13sp"/>
 
         <TextView
             android:id="@+id/tv_orderno"
@@ -27,7 +27,7 @@
             android:paddingLeft="35px"
             android:text=""
             android:textColor="#000"
-            android:textSize="26px"/>
+            android:textSize="13sp"/>
     </LinearLayout>
 
 
@@ -43,7 +43,7 @@
             android:paddingLeft="30px"
             android:text="@string/create_orderno_date_tip"
             android:textColor="#333"
-            android:textSize="26px"/>
+            android:textSize="13sp"/>
 
         <TextView
             android:id="@+id/tv_date"
@@ -52,7 +52,7 @@
             android:paddingLeft="60px"
             android:text=""
             android:textColor="#000"
-            android:textSize="26px"/>
+            android:textSize="13sp"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -66,7 +66,7 @@
             android:paddingLeft="30px"
             android:text="@string/item_instock_total_num_tip"
             android:textColor="#333"
-            android:textSize="26px"/>
+            android:textSize="13sp"/>
 
         <TextView
             android:id="@+id/tv_outstock_total_num"
@@ -75,7 +75,7 @@
             android:paddingLeft="60px"
             android:text=""
             android:textColor="#000"
-            android:textSize="26px"/>
+            android:textSize="13sp"/>
     </LinearLayout>
 
     <LinearLayout
@@ -90,7 +90,7 @@
             android:paddingLeft="30px"
             android:text="@string/wait_point_num_tip"
             android:textColor="#333"
-            android:textSize="26px"/>
+            android:textSize="13sp"/>
 
         <TextView
             android:id="@+id/tv_wait_point_num"
@@ -99,7 +99,7 @@
             android:paddingLeft="60px"
             android:text=""
             android:textColor="#000"
-            android:textSize="26px"/>
+            android:textSize="13sp"/>
     </LinearLayout>
 
     <LinearLayout
@@ -115,7 +115,7 @@
             android:paddingLeft="30px"
             android:text="@string/have_point_num_tip"
             android:textColor="#333"
-            android:textSize="26px"/>
+            android:textSize="13sp"/>
 
         <TextView
             android:id="@+id/tv_have_count_num"
@@ -124,6 +124,6 @@
             android:paddingLeft="60px"
             android:text=""
             android:textColor="#000"
-            android:textSize="26px"/>
+            android:textSize="13sp"/>
     </LinearLayout>
 </LinearLayout>

@@ -101,7 +101,6 @@ public class FragmentPointPresenter extends MvpBasePresenter<FragmentPointView> 
      * 获取采购单物料清点的表体
      */
     public void getPODetailsByCode(Map<String, Object> params) {
-        getView().showProgressDialog();
         if (null == getPointMaterialHttpSubscriber) {
             getPointMaterialHttpSubscriber = new HttpSubscriber<>(new OnResultCallBack<BuyOrdernoBean>() {
                 @Override
@@ -122,7 +121,6 @@ public class FragmentPointPresenter extends MvpBasePresenter<FragmentPointView> 
      * 获取送货单物料清点的表体
      */
     public void getASNDetailsByCode(Map<String, Object> params) {
-        getView().showProgressDialog();
         if (null == getPointMaterialHttpSubscriber) {
             getASNDetailsByCodeHttpSubscriber = new HttpSubscriber<>(new OnResultCallBack<SendOrdernoBean>() {
                 @Override

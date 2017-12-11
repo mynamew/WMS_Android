@@ -22,6 +22,7 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import java.text.NumberFormat;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -38,6 +39,7 @@ public class MRPReviewActivity extends BaseActivity<MRPReviewView, MRPReviewPres
     RecyclerView rlvMrp;
     private BaseRecyclerAdapter<MrpReviewData> adapter;
 
+    List<MrpReviewData> mDatas ;
     @Override
     public int setLayoutId() {
         return R.layout.activity_mrpreview;
@@ -56,6 +58,7 @@ public class MRPReviewActivity extends BaseActivity<MRPReviewView, MRPReviewPres
 
     @Override
     public void initData() {
+        mDatas=new ArrayList<>();
         Map<String, Object> params = new HashMap<>();
         params.put("UserId", SpUtils.getInstance().getUserId());
         params.put("OrgId", SpUtils.getInstance().getOrgId());
@@ -74,9 +77,11 @@ public class MRPReviewActivity extends BaseActivity<MRPReviewView, MRPReviewPres
     }
 
     @Override
-    public void getMrpReviewData(final List<MrpReviewData> datas) {
+    public void getMrpReviewData( List<MrpReviewData> datas) {
+        mDatas.clear();
+        mDatas.addAll(datas);
         if (null == adapter) {
-            adapter = new BaseRecyclerAdapter<MrpReviewData>(this, datas) {
+            adapter = new BaseRecyclerAdapter<MrpReviewData>(this, mDatas) {
                 @Override
                 protected int getItemLayoutId(int viewType) {
                     return R.layout.item_mrp;
@@ -128,7 +133,7 @@ public class MRPReviewActivity extends BaseActivity<MRPReviewView, MRPReviewPres
                     /**
                      * 底部的分割线
                      */
-                    if (position == datas.size() - 1) {
+                    if (position == mDatas.size() - 1) {
                         holder.getView(R.id.view_divide_bottom).setVisibility(View.VISIBLE);
                     } else {
                         holder.getView(R.id.view_divide_bottom).setVisibility(View.GONE);
@@ -143,12 +148,14 @@ public class MRPReviewActivity extends BaseActivity<MRPReviewView, MRPReviewPres
                 public void onItemClick(View itemView, int pos) {
                     Intent intent = new Intent();
                     intent.setClass(MRPReviewActivity.this, MRPNormalReviewActivity.class);
-                    intent.putExtra("ReviewDetail", new Gson().toJson(datas.get(pos)));
-                    intent.putExtra("QcType", datas.get(pos).getQcType());
+                    intent.putExtra("ReviewDetail", new Gson().toJson(mDatas.get(pos)));
+                    intent.putExtra("QcType", mDatas.get(pos).getQcType());
                     startActivity(intent);
 
                 }
             });
+        }else {
+            adapter.notifyDataSetChanged();
         }
     }
 

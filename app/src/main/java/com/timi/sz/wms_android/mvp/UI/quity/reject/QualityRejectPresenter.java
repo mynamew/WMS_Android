@@ -45,7 +45,11 @@ public class QualityRejectPresenter extends MvpBasePresenter<QualityRejectView> 
 
                 @Override
                 public void onError(String errorMsg) {
+                    /**
+                     * 显示错误信息 并且将输入框的内容选中
+                     */
                     ToastUtils.showShort(errorMsg);
+                    getView().setEdittextSelect();
                 }
             });
         }
@@ -53,7 +57,7 @@ public class QualityRejectPresenter extends MvpBasePresenter<QualityRejectView> 
     }
 
     /**
-     * 通过条码获取质检条码的数据
+     * 设置质检条码的数据
      *
      * @param params
      */

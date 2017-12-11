@@ -62,7 +62,7 @@
         <item name="android:layout_marginLeft">12px</item>
         <item name="android:gravity">center</item>
         <item name="android:textColor">#333</item>
-        <item name="android:textSize">26px</item>
+        <item name="android:textSize">13sp</item>
         <item name="android:layout_centerInParent">true</item>
         <item name="android:background">@drawable/inlib_tip_bg</item>
     </style>
@@ -78,7 +78,7 @@
         <item name="android:drawablePadding">3dp</item>
         <item name="android:textColor">#333</item>
         <item name="android:drawableTop">@mipmap/stock_in_buy_order</item>
-        <item name="android:textSize">28px</item>
+        <item name="android:textSize">14sp</item>
     </style>
     <!--Dialog的样式-->
     <style name="Dialog" parent="android:style/Theme.Dialog">

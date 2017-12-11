@@ -21,7 +21,7 @@
             android:paddingTop="10px"
             android:text="@string/quality_standard"
             android:textColor="#333"
-            android:textSize="28px"
+            android:textSize="14sp"
             android:textStyle="bold"
             />
 
@@ -79,6 +79,7 @@
                 android:layout_width="160px"
                 android:layout_height="120px"
                 android:layout_marginLeft="80px"
+                android:visibility="invisible"
                 app:standardLevelTitle="@string/quality_method"/>
 
             <com.timi.sz.wms_android.view.StandardLevelView

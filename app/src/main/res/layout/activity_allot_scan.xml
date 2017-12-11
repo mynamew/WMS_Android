@@ -48,7 +48,7 @@
                     android:paddingLeft="30px"
                     android:text="@string/allot_orderno"
                     android:textColor="#333"
-                    android:textSize="26px"/>
+                    android:textSize="13sp"/>
 
                 <TextView
                     android:id="@+id/tv_orderno"
@@ -57,7 +57,7 @@
                     android:paddingLeft="60px"
                     android:text=""
                     android:textColor="#000"
-                    android:textSize="26px"/>
+                    android:textSize="13sp"/>
             </LinearLayout>
 
 
@@ -73,7 +73,7 @@
                     android:paddingLeft="30px"
                     android:text="@string/create_orderno_date_tip"
                     android:textColor="#333"
-                    android:textSize="26px"/>
+                    android:textSize="13sp"/>
 
                 <TextView
                     android:id="@+id/tv_date"
@@ -82,7 +82,7 @@
                     android:paddingLeft="60px"
                     android:text=""
                     android:textColor="#000"
-                    android:textSize="26px"/>
+                    android:textSize="13sp"/>
             </LinearLayout>
 
             <LinearLayout
@@ -97,7 +97,7 @@
                     android:paddingLeft="30px"
                     android:text="@string/out_stock_total_num_tip"
                     android:textColor="#333"
-                    android:textSize="26px"/>
+                    android:textSize="13sp"/>
 
                 <TextView
                     android:id="@+id/tv_outstock_total_num"
@@ -106,7 +106,7 @@
                     android:paddingLeft="60px"
                     android:text=""
                     android:textColor="#000"
-                    android:textSize="26px"/>
+                    android:textSize="13sp"/>
             </LinearLayout>
 
             <LinearLayout
@@ -121,7 +121,7 @@
                     android:paddingLeft="30px"
                     android:text="@string/wait_point_num_tip"
                     android:textColor="#333"
-                    android:textSize="26px"/>
+                    android:textSize="13sp"/>
 
                 <TextView
                     android:id="@+id/tv_wait_point_num"
@@ -130,7 +130,7 @@
                     android:paddingLeft="60px"
                     android:text=""
                     android:textColor="#000"
-                    android:textSize="26px"/>
+                    android:textSize="13sp"/>
             </LinearLayout>
 
             <LinearLayout
@@ -146,7 +146,7 @@
                     android:paddingLeft="30px"
                     android:text="@string/have_point_num_tip"
                     android:textColor="#333"
-                    android:textSize="26px"/>
+                    android:textSize="13sp"/>
 
                 <TextView
                     android:id="@+id/tv_have_count_num"
@@ -155,7 +155,7 @@
                     android:paddingLeft="60px"
                     android:text=""
                     android:textColor="#000"
-                    android:textSize="26px"/>
+                    android:textSize="13sp"/>
             </LinearLayout>
 
             <View
@@ -195,7 +195,7 @@
                     android:paddingRight="80px"
                     android:singleLine="true"
                     android:text=""
-                    android:textSize="26px"/>
+                    android:textSize="13sp"/>
 
                 <ImageView
                     android:id="@+id/iv_putaway_scan_location"
@@ -228,6 +228,7 @@
                     android:layout_marginTop="10dp"
                     android:gravity="center_vertical"
                     android:paddingLeft="15dp"
+                    android:textSize="13sp"
                     android:text="@string/material_code_tip"
                     android:textColor="#333"/>
 
@@ -247,7 +248,7 @@
                     android:paddingLeft="20px"
                     android:singleLine="true"
                     android:text=""
-                    android:textSize="26px"/>
+                    android:textSize="13sp"/>
 
                 <ImageView
                     android:id="@+id/iv_can_material_code"

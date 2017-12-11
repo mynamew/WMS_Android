@@ -59,6 +59,8 @@ public class StandardLevelView extends LinearLayout {
     public void setTextViewContent(Object content) {
         if (null != content) {
             tvContent.setText(String.valueOf(content));
+        }else {
+            tvContent.setText(R.string.none);
         }
     }
 }

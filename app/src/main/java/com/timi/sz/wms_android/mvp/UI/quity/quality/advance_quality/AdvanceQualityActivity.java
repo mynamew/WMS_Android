@@ -81,6 +81,8 @@ public class AdvanceQualityActivity extends BaseActivity<AdvanceQualityView, Adv
     TextView tvMaterialName;
     @BindView(R.id.tv_material_model)
     TextView tvMaterialModel;
+    @BindView(R.id.tv_material_attr)
+    TextView tvMaterialAttr;
     @BindView(R.id.tv_receive_num)
     TextView tvReceiveNum;
     @BindView(R.id.tv_sample_num)
@@ -227,15 +229,19 @@ public class AdvanceQualityActivity extends BaseActivity<AdvanceQualityView, Adv
         /**
          * 设置相应的物料信息
          */
-        setTextViewText(tvOrderno, R.string.item_arrive_orderno, normalSummary.getReceiptCode());
-        setTextViewText(tvReceiveMaterialDate, R.string.receive_material_date, normalSummary.getReceiptDate());
-        setTextViewText(tvOrderno, R.string.receive_pro_num, normalSummary.getReceiptCode());
-        setTextViewText(tvSupplier, R.string.buy_from, normalSummary.getSupplierName());
-        setTextViewText(tvMaterialCode, R.string.material_code, normalSummary.getMaterialCode());
-        setTextViewText(tvMaterialName, R.string.material_name, normalSummary.getMaterialName());
-        setTextViewText(tvMaterialModel, R.string.material_model, normalSummary.getMaterialStandard());
-        setTextViewText(tvOrderNum, R.string.order_no, normalSummary.getSourceBillCode());
-        setTextViewText(tvRefuseReceiveNum, R.string.reject_num_format, String.valueOf(0));
+        /**
+         * 保存实体数据
+         */
+        setTextViewContent(tvOrderno, normalSummary.getReceiptCode());
+        setTextViewContent(tvReceiveMaterialDate, normalSummary.getReceiptDate());
+        setTextViewContent(tvOrderNum, normalSummary.getSourceBillCode());
+        setTextViewContent(tvSupplier, normalSummary.getSupplierName());
+        setTextViewContent(tvMaterialCode, normalSummary.getMaterialCode());
+        setTextViewContent(tvMaterialName, normalSummary.getMaterialName());
+        setTextViewContent(tvMaterialModel, normalSummary.getMaterialStandard());
+        setTextViewContent(tvReceiveNum, normalSummary.getReceiveQty());
+        setTextViewContent(tvMaterialAttr, normalSummary.getMaterialAttribute());
+        setMaterialAttrStatus(tvMaterialAttr);
         /**
          * 设置质检操作的数据
          */
@@ -276,7 +282,7 @@ public class AdvanceQualityActivity extends BaseActivity<AdvanceQualityView, Adv
          * 设置样品编码
          */
         if (null != mData.getCheckItemData() && !mData.getCheckItemData().isEmpty()) {
-            sampleCode = mData.getCheckItemData().get(0).getSampleSeq()+1;
+            sampleCode = mData.getCheckItemData().get(0).getSampleSeq() + 1;
         }
         setTextViewText(tvSampleCode2, R.string.sample_code_format, String.valueOf(sampleCode));
         tvSampleCode.setText(String.valueOf(sampleCode));
@@ -532,13 +538,13 @@ public class AdvanceQualityActivity extends BaseActivity<AdvanceQualityView, Adv
             checkItemDialog.setViewListener(R.id.rl_select_badness_reason, new MyDialog.DialogClickListener() {
                 @Override
                 public void dialogClick(MyDialog dialog) {
-                   if(rdCheckUnQualitied.isChecked()){
-                       if (null != selectReviewResultPopWindow && selectReviewResultPopWindow.isShowing()) {
-                           selectReviewResultPopWindow.dismiss();
-                       } else {
-                           showSelectReviewResultPopWindow(checkItemDialog.getView(R.id.rl_select_badness_reason), isUpdateResult, position);
-                       }
-                   }
+                    if (rdCheckUnQualitied.isChecked()) {
+                        if (null != selectReviewResultPopWindow && selectReviewResultPopWindow.isShowing()) {
+                            selectReviewResultPopWindow.dismiss();
+                        } else {
+                            showSelectReviewResultPopWindow(checkItemDialog.getView(R.id.rl_select_badness_reason), isUpdateResult, position);
+                        }
+                    }
                 }
             });
             /**
@@ -659,8 +665,8 @@ public class AdvanceQualityActivity extends BaseActivity<AdvanceQualityView, Adv
                         /**
                          * 选择了不合格 但是没选择不良原因 则提示用户选择不良原因，并且返回
                          */
-                        if(faultId==0){
-                             ToastUtils.showShort("请选择不良原因！");
+                        if (faultId == 0) {
+                            ToastUtils.showShort("请选择不良原因！");
                             return;
                         }
                         itemDataBean.setFaultId(faultId);
@@ -950,7 +956,7 @@ public class AdvanceQualityActivity extends BaseActivity<AdvanceQualityView, Adv
     private BaseRecyclerAdapter<GetAdvance2Data.CheckItemBean.FaultDataBean> baseRecyclerAdapter;
 
     private void showSelectReviewResultPopWindow(View view, final boolean isUpdateResult, final int checkItemposition) {
-        selectReviewResultPopWindow=null;
+        selectReviewResultPopWindow = null;
         if (null == selectReviewResultPopWindow) {
             selectReviewResultPopWindow = new PopupWindow(this);
             View inflate = LayoutInflater.from(this).inflate(R.layout.popwindow_select_badness_reason, null);

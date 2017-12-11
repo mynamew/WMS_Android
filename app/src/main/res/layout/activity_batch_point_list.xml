@@ -63,7 +63,7 @@
                         android:gravity="left"
                         android:text="@string/outsource_orderno_tip"
                         android:textColor="#666"
-                        android:textSize="26px"/>
+                        android:textSize="13sp"/>
 
                     <TextView
                         android:id="@+id/tv_outsource_orderno"
@@ -73,7 +73,7 @@
                         android:gravity="left"
                         android:text="123213123"
                         android:textColor="#000"
-                        android:textSize="26px"/>
+                        android:textSize="13sp"/>
                 </LinearLayout>
 
 
@@ -91,7 +91,7 @@
                         android:gravity="left"
                         android:text="@string/create_orderno_date_tip"
                         android:textColor="#666"
-                        android:textSize="26px"/>
+                        android:textSize="13sp"/>
 
                     <TextView
                         android:id="@+id/tv_create_orderno_date"
@@ -101,7 +101,7 @@
                         android:gravity="left"
                         android:text="123213123"
                         android:textColor="#000"
-                        android:textSize="26px"/>
+                        android:textSize="13sp"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -118,7 +118,7 @@
                         android:gravity="left"
                         android:text="@string/stock_name_tip"
                         android:textColor="#666"
-                        android:textSize="26px"/>
+                        android:textSize="13sp"/>
 
                     <TextView
                         android:id="@+id/tv_stock_name"
@@ -128,7 +128,7 @@
                         android:gravity="left"
                         android:text="123213123"
                         android:textColor="#000"
-                        android:textSize="26px"/>
+                        android:textSize="13sp"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -145,7 +145,7 @@
                         android:gravity="left"
                         android:text="@string/strict_name_tip"
                         android:textColor="#666"
-                        android:textSize="26px"/>
+                        android:textSize="13sp"/>
 
                     <TextView
                         android:id="@+id/tv_strict_name"
@@ -155,7 +155,7 @@
                         android:gravity="left"
                         android:text="123213123"
                         android:textColor="#000"
-                        android:textSize="26px"/>
+                        android:textSize="13sp"/>
                 </LinearLayout>
             </LinearLayout>
 
@@ -188,7 +188,7 @@
                         android:gravity="left"
                         android:text="@string/send_material_total_num_tip"
                         android:textColor="#666"
-                        android:textSize="26px"/>
+                        android:textSize="13sp"/>
 
                     <TextView
                         android:id="@+id/tv_buy_num"
@@ -198,7 +198,7 @@
                         android:gravity="left"
                         android:text="123213123"
                         android:textColor="#000"
-                        android:textSize="26px"/>
+                        android:textSize="13sp"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -215,7 +215,7 @@
                         android:gravity="left"
                         android:text="@string/wait_point_num_tip"
                         android:textColor="#666"
-                        android:textSize="26px"/>
+                        android:textSize="13sp"/>
 
                     <TextView
                         android:id="@+id/tv_wait_point_num"
@@ -225,7 +225,7 @@
                         android:gravity="left"
                         android:text="123213123"
                         android:textColor="@color/login_txt_color"
-                        android:textSize="26px"/>
+                        android:textSize="13sp"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -242,7 +242,7 @@
                         android:gravity="left"
                         android:text="@string/have_point_num_tip"
                         android:textColor="#666"
-                        android:textSize="26px"/>
+                        android:textSize="13sp"/>
 
                     <TextView
                         android:id="@+id/tv_have_count_num"
@@ -252,7 +252,7 @@
                         android:gravity="left"
                         android:text="123213123"
                         android:textColor="@color/login_txt_color"
-                        android:textSize="26px"/>
+                        android:textSize="13sp"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -269,7 +269,7 @@
                         android:paddingLeft="30px"
                         android:text="@string/have_point_num_tip"
                         android:textColor="#333"
-                        android:textSize="26px"/>
+                        android:textSize="13sp"/>
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -277,7 +277,7 @@
                         android:paddingLeft="60px"
                         android:text="123213123"
                         android:textColor="#000"
-                        android:textSize="26px"/>
+                        android:textSize="13sp"/>
                 </LinearLayout>
             </LinearLayout>
 

@@ -1,5 +1,7 @@
 package com.timi.sz.wms_android.bean.quality.adavance;
 
+import com.timi.sz.wms_android.bean.quality.normal.NormalQualityData;
+
 import java.util.List;
 
 /**
@@ -23,7 +25,7 @@ public class GetAdvanceData {
     private AdvanceSummaryBean advanceSummary;
     private Object checkItem;
     private Object checkItemData;
-    private Object barcodeData;
+    private List<NormalQualityData.BarcodeDataBean> barcodeData;
     private List<FaultDataBean> faultData;
 
     public NormalSummaryBean getNormalSummary() {
@@ -58,11 +60,11 @@ public class GetAdvanceData {
         this.checkItemData = checkItemData;
     }
 
-    public Object getBarcodeData() {
+    public List<NormalQualityData.BarcodeDataBean> getBarcodeData() {
         return barcodeData;
     }
 
-    public void setBarcodeData(Object barcodeData) {
+    public void setBarcodeData(List<NormalQualityData.BarcodeDataBean> barcodeData) {
         this.barcodeData = barcodeData;
     }
 

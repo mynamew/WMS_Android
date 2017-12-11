@@ -28,6 +28,7 @@
             android:layout_marginLeft="30px"
             android:text="@string/outsource_send_material_orderno_detial_tip"
             android:textColor="#333"
+            android:textSize="13sp"
             android:textStyle="bold"/>
 
         <ImageView

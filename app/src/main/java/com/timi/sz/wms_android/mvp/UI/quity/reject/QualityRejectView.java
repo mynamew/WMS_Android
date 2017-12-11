@@ -14,4 +14,6 @@ public interface QualityRejectView extends MvpBaseView {
     void setBarcodeData(BarcodeData data);
 
     void submitFinish();
+    //设置输入框 选中
+    void setEdittextSelect();
 }

@@ -33,8 +33,8 @@ public class LoginPresenter extends MvpBasePresenter<LoginView> {
         /**
          * 显示进度条
          */
-        MyProgressDialog.showProgressDialog(getContext());
-        /**
+          getView().showProgressDialog();
+            /**
          * 初始化观察者
          */
         if (null == mLoginBeanHttpSubscriber) {

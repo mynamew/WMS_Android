@@ -73,7 +73,7 @@
                     android:paddingRight="80px"
                     android:singleLine="true"
                     android:text=""
-                    android:textSize="26px"/>
+                    android:textSize="13sp"/>
 
                 <ImageView
                     android:id="@+id/iv_scan_location"
@@ -102,6 +102,7 @@
                     android:gravity="center_vertical"
                     android:paddingLeft="15dp"
                     android:text="@string/material_code_tip"
+                    android:textSize="13sp"
                     android:textColor="#333"/>
 
                 <!--条码-->
@@ -120,7 +121,7 @@
                     android:paddingLeft="10dp"
                     android:singleLine="true"
                     android:text=""
-                    android:textSize="26px"/>
+                    android:textSize="13sp"/>
 
                 <ImageView
                     android:id="@+id/iv_can_material_code"

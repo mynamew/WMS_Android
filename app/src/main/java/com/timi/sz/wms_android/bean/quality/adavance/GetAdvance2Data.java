@@ -1,5 +1,7 @@
 package com.timi.sz.wms_android.bean.quality.adavance;
 
+import com.timi.sz.wms_android.bean.quality.normal.NormalQualityData;
+
 import java.util.List;
 
 /**
@@ -23,7 +25,7 @@ public class GetAdvance2Data {
     private AdvanceSummaryBean advanceSummary;
     private List<CheckItemBean> checkItem;
     private List<CheckItemDataBean> checkItemData;
-    private List<BarcodeDataBean> barcodeData;
+    private List<NormalQualityData.BarcodeDataBean> barcodeData;
     private List<FaultDataBeanX> faultData;
 
     public NormalSummaryBean getNormalSummary() {
@@ -58,11 +60,11 @@ public class GetAdvance2Data {
         this.checkItemData = checkItemData;
     }
 
-    public List<BarcodeDataBean> getBarcodeData() {
+    public List<NormalQualityData.BarcodeDataBean> getBarcodeData() {
         return barcodeData;
     }
 
-    public void setBarcodeData(List<BarcodeDataBean> barcodeData) {
+    public void setBarcodeData(List<NormalQualityData.BarcodeDataBean> barcodeData) {
         this.barcodeData = barcodeData;
     }
 
@@ -104,12 +106,12 @@ public class GetAdvance2Data {
         private String receiptDate;
         private String sourceBillCode;
         private String supplierName;
-        private Object creater;
+        private String creater;
         private int materialId;
         private String materialCode;
         private String materialName;
         private String materialStandard;
-        private Object materialAttribute;
+        private String materialAttribute;
         private int receiveQty;
         private int sampleQty;
         private int ngQty;
@@ -167,11 +169,11 @@ public class GetAdvance2Data {
             this.supplierName = supplierName;
         }
 
-        public Object getCreater() {
+        public String getCreater() {
             return creater;
         }
 
-        public void setCreater(Object creater) {
+        public void setCreater(String creater) {
             this.creater = creater;
         }
 
@@ -207,11 +209,11 @@ public class GetAdvance2Data {
             this.materialStandard = materialStandard;
         }
 
-        public Object getMaterialAttribute() {
+        public String getMaterialAttribute() {
             return materialAttribute;
         }
 
-        public void setMaterialAttribute(Object materialAttribute) {
+        public void setMaterialAttribute(String materialAttribute) {
             this.materialAttribute = materialAttribute;
         }
 
@@ -445,9 +447,9 @@ public class GetAdvance2Data {
         private String checkItemName;
         private int judgeType;
         private String unit;
-        private int limitLow;
-        private int limitHigh;
-        private int stardard;
+        private float limitLow;
+        private float limitHigh;
+        private float stardard;
         private String remark;
         private List<FaultDataBean> faultData;
 
@@ -491,27 +493,27 @@ public class GetAdvance2Data {
             this.unit = unit;
         }
 
-        public int getLimitLow() {
+        public float getLimitLow() {
             return limitLow;
         }
 
-        public void setLimitLow(int limitLow) {
+        public void setLimitLow(float limitLow) {
             this.limitLow = limitLow;
         }
 
-        public int getLimitHigh() {
+        public float getLimitHigh() {
             return limitHigh;
         }
 
-        public void setLimitHigh(int limitHigh) {
+        public void setLimitHigh(float limitHigh) {
             this.limitHigh = limitHigh;
         }
 
-        public int getStardard() {
+        public float getStardard() {
             return stardard;
         }
 
-        public void setStardard(int stardard) {
+        public void setStardard(float stardard) {
             this.stardard = stardard;
         }
 
@@ -664,51 +666,6 @@ public class GetAdvance2Data {
         }
     }
 
-    public static class BarcodeDataBean {
-        /**
-         * BarcodeNo : 实收数
-         * PackQty : 44
-         * CurrentQty : 0
-         * RejectQty : 0
-         */
-
-        private String BarcodeNo;
-        private int PackQty;
-        private String CurrentQty;
-        private int RejectQty;
-
-        public String getBarcodeNo() {
-            return BarcodeNo;
-        }
-
-        public void setBarcodeNo(String BarcodeNo) {
-            this.BarcodeNo = BarcodeNo;
-        }
-
-        public int getPackQty() {
-            return PackQty;
-        }
-
-        public void setPackQty(int PackQty) {
-            this.PackQty = PackQty;
-        }
-
-        public String getCurrentQty() {
-            return CurrentQty;
-        }
-
-        public void setCurrentQty(String CurrentQty) {
-            this.CurrentQty = CurrentQty;
-        }
-
-        public int getRejectQty() {
-            return RejectQty;
-        }
-
-        public void setRejectQty(int RejectQty) {
-            this.RejectQty = RejectQty;
-        }
-    }
 
     public static class FaultDataBeanX {
         /**
