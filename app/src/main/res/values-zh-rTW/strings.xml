@@ -788,6 +788,25 @@
     <string name="stock_in_out_source">委外单</string>
     <string name="out_source_list_title">委外单列表</string>
     <string name="material_point_success">物料请点保存成功</string>
+    <string name="buy_return_orderno_list_title">采购退料单列表</string>
+    <string name="check_orderno">盘点单号</string>
+    <string name="check_type">盘点类型</string>
+    <string name="create_orderno_person">制单人</string>
+    <string name="item_total_num">物项总数</string>
+    <string name="check_num_tip">盘点数量</string>
+    <string name="please_input_check_num">请输入盘点数量</string>
+    <string name="confirm_qty">确认数量</string>
+    <string name="outsource_send_material_list">委外发料单列表</string>
+    <string name="outsource_allot_list">委外调拨单列表</string>
+    <string name="outsource_feed_list">委外补料单列表</string>
+    <string name="outsource_return_list">委外退料单列表</string>
+    <string name="production_bill_list">生产领料单列表(生单)</string>
+    <string name="production_audit_list">生产领料单列表(审核)</string>
+    <string name="get_material_apply_list">领料申请单列表</string>
+    <string name="production_allot_list">生产调拨单列表</string>
+    <string name="check_orderno_info">盘点单信息详情</string>
+    <string name="get_material_info_success">获取物料信息成功</string>
+    <string name="commit_check_data_success">提交盘点数据成功</string>
 
 
 </resources>

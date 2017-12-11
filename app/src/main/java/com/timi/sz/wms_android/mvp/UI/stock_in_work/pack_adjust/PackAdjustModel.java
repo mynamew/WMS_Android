@@ -4,6 +4,7 @@ import com.timi.sz.wms_android.bean.instock.VertifyLocationCodeBean;
 import com.timi.sz.wms_android.bean.stockin_work.LibraryAdjustResult;
 import com.timi.sz.wms_android.bean.stockin_work.ScanLocationResult;
 import com.timi.sz.wms_android.bean.stockin_work.ScanMaterialResult;
+import com.timi.sz.wms_android.bean.stockin_work.lib_adjust.StockAdjustResult;
 import com.timi.sz.wms_android.http.HttpManager;
 import com.timi.sz.wms_android.http.api.ApiService;
 import com.timi.sz.wms_android.http.api.CommonResult;
@@ -44,10 +45,10 @@ public class PackAdjustModel extends MvpBaseModel {
      * @param params
      * @param observer
      */
-    public void scanMaterialCode(final Map<String, Object> params, Observer<ScanMaterialResult> observer) {
-        HttpManager.getInstance().HttpManagerRequest(observer, new ApiServiceMethodCallBack<ScanMaterialResult>() {
+    public void scanMaterialCode(final Map<String, Object> params, Observer<StockAdjustResult> observer) {
+        HttpManager.getInstance().HttpManagerRequest(observer, new ApiServiceMethodCallBack<StockAdjustResult>() {
             @Override
-            public Observable<CommonResult<ScanMaterialResult>> createObservable(ApiService apiService) {
+            public Observable<CommonResult<StockAdjustResult>> createObservable(ApiService apiService) {
                 return apiService.scanMaterialCode(params);
             }
         });

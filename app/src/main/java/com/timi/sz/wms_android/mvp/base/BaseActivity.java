@@ -191,6 +191,19 @@ public abstract class BaseActivity<V extends MvpView, P extends MvpPresenter<V>>
     }
 
     /**
+     * 设置 title
+     *
+     * @param titleId
+     */
+    public void setActivityTitle(@StringRes int titleId) {
+        if (null != findViewById(R.id.tv_title)) {
+            //设置标题  如果titlebar存在的话
+            TextView tvActivityTitle = (TextView) findViewById(R.id.tv_title);
+            tvActivityTitle.setText(getString(titleId));
+        }
+    }
+
+    /**
      * 设置右侧的文字
      *
      * @param rightText
@@ -436,6 +449,21 @@ public abstract class BaseActivity<V extends MvpView, P extends MvpPresenter<V>>
      */
     public void setTextViewText(TextView tv, @StringRes int fomat, int content) {
         tv.setText(String.format(getString(fomat), String.valueOf(content)));
+    }
+
+    /**
+     * 设置 文本
+     *
+     * @param tv
+     */
+    public void setTextViewContent(TextView tv, Object object) {
+        String content = "";
+        if (object instanceof String) {
+            content = TextUtils.isEmpty(String.valueOf(object)) ? getString(R.string.none) : String.valueOf(object);
+        } else {
+            content = String.valueOf(object);
+        }
+        tv.setText(content);
     }
 
     /**

@@ -9,7 +9,7 @@ import android.widget.TextView;
 import com.timi.sz.wms_android.R;
 import com.timi.sz.wms_android.base.uils.Constants;
 import com.timi.sz.wms_android.base.uils.SpUtils;
-import com.timi.sz.wms_android.mvp.UI.stock_in.list.BuyInStockListActivity;
+import com.timi.sz.wms_android.mvp.UI.list.BuyInStockListActivity;
 import com.timi.sz.wms_android.mvp.UI.stock_in.other_scan.OtherScanActivity;
 import com.timi.sz.wms_android.mvp.UI.stock_in.query.SearchBuyOrderActivity;
 import com.timi.sz.wms_android.mvp.base.view.BaseNoMvpActivity;
@@ -79,6 +79,7 @@ public class StockInActivity extends BaseNoMvpActivity {
                 break;
             case R.id.tv_stock_in_send_order://送货单
                 it.putExtra(CODE_STR, Constants.BUY_SEND_NUM);
+
                 break;
             case R.id.tv_stockin_inlib://来料入库
                 it.putExtra(CODE_STR, Constants.COME_MATERAIL_NUM);
@@ -98,12 +99,30 @@ public class StockInActivity extends BaseNoMvpActivity {
                 break;
             case R.id.tv_stockin_out_return://委外退料
                 it.putExtra(CODE_STR, Constants.OUT_RETURN_MATERAIL);
+                /**
+                 * 如果是无纸化作业
+                 */
+                if (SpUtils.getInstance().getIsBillList()) {
+                    it.setClass(StockInActivity.this, BuyInStockListActivity.class);
+                }
                 break;
             case R.id.tv_stock_in_produce_return://生产退料
                 it.putExtra(CODE_STR, Constants.CREATE_RETURN_MATERAIL);
+                /**
+                 * 如果是无纸化作业
+                 */
+                if (SpUtils.getInstance().getIsBillList()) {
+                    it.setClass(StockInActivity.this, BuyInStockListActivity.class);
+                }
                 break;
             case R.id.tv_stock_in_sale_return://销售退料
                 it.putExtra(CODE_STR, Constants.SALE_RETURN_MATERAIL);
+                /**
+                 * 如果是无纸化作业
+                 */
+                if (SpUtils.getInstance().getIsBillList()) {
+                    it.setClass(StockInActivity.this, BuyInStockListActivity.class);
+                }
                 break;
         }
         startActivity(it);

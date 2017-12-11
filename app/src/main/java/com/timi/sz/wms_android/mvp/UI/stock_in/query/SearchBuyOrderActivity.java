@@ -283,7 +283,7 @@ public class SearchBuyOrderActivity extends BaseActivity<SearchBuyOrderView, Sea
     }
 
     /**
-     * 生产
+     * 生产退料
      *
      * @param bean
      */

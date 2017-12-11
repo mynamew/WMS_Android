@@ -96,7 +96,7 @@ public class FormChangeInstockActivity extends BaseActivity<FormChangeInstockVie
     public void initBundle(Bundle savedInstanceState) {
         setActivityTitle(getString(R.string.instock_putaway_form_change));
         intentCode = getIntent().getIntExtra(Constants.CODE_STR, Constants.COME_MATERAIL_NUM);
-        formChangeInResult = new Gson().fromJson(getIntent().getStringExtra(Constants.IN_STOCK_RECEIVE_BEAN), FormChangeInResult.class);
+        formChangeInResult = new Gson().fromJson(getIntent().getStringExtra(Constants.STOCK_IN_WORK_BEAN), FormChangeInResult.class);
         scanId = formChangeInResult.getScanId();
         billId = formChangeInResult.getBillId();
     }
@@ -110,8 +110,8 @@ public class FormChangeInstockActivity extends BaseActivity<FormChangeInstockVie
                  * 查看详情
                  */
                 Intent it = new Intent(FormChangeInstockActivity.this, FormChangeDetailActivity.class);
-                it.putExtra(Constants.CODE_STR, intentCode);
-                it.putExtra("BillId",formChangeInResult.getBillCode());
+                it.putExtra(Constants.STOCK_IN_WORK_CODE_STR, intentCode);
+                it.putExtra(Constants.STOCK_IN_WORK_BILLID,formChangeInResult.getBillId());
                 startActivity(it);
             }
         });

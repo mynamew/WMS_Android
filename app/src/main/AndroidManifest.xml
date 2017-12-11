@@ -313,8 +313,10 @@
         <activity android:name=".mvp.UI.stock_in_work.detail.StockInWorkDetailActivity">
         </activity>
         <activity
-            android:name=".mvp.UI.stock_in.list.BuyInStockListActivity"
+            android:name=".mvp.UI.list.BuyInStockListActivity"
             android:windowSoftInputMode="adjustPan|stateHidden">
+        </activity>
+        <activity android:name=".mvp.UI.stock_in_work.check.CheckActivity">
         </activity>
     </application>
 

@@ -29,6 +29,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 import static com.timi.sz.wms_android.base.uils.Constants.REQUEST_SCAN_CODE_LIB_LOATION;
@@ -40,8 +41,7 @@ import static com.timi.sz.wms_android.base.uils.Constants.REQUEST_SCAN_CODE_MATE
  * create at: 2017/8/31 9:14
  */
 public class PutAwayActivity extends BaseActivity<PutAwayView, PutAwayPresenter> implements PutAwayView, BaseActivity.ScanQRCodeResultListener {
-    @BindView(R.id.iv_title_back)
-    ImageView ivTitleBack;
+
     @BindView(R.id.tv_receive_pro_num)
     TextView tvReceiveProNum;
     @BindView(R.id.tv_create_orderno_date)
@@ -70,16 +70,16 @@ public class PutAwayActivity extends BaseActivity<PutAwayView, PutAwayPresenter>
     EditText etPutawayScanMaterial;
     @BindView(R.id.iv_putaway_scan_material)
     ImageView ivPutawayScanMaterial;
-    @BindView(R.id.tv_putaway_material_code)
-    TextView tvPutawayMaterialCode;
-    @BindView(R.id.tv_putaway_material_num)
-    TextView tvPutawayMaterialNum;
-    @BindView(R.id.tv_putaway_material_name)
-    TextView tvPutawayMaterialName;
-    @BindView(R.id.tv_putaway_material_nmodel)
-    TextView tvPutawayMaterialNmodel;
-    @BindView(R.id.tv_putaway_material_attr)
-    TextView tvPutawayMaterialAttr;
+    @BindView(R.id.tv_material_code)
+    TextView tvMaterialCode;
+    @BindView(R.id.tv_material_num)
+    TextView tvMaterialNum;
+    @BindView(R.id.tv_material_name)
+    TextView tvMaterialName;
+    @BindView(R.id.tv_material_model)
+    TextView tvMaterialModel;
+    @BindView(R.id.tv_material_attr)
+    TextView tvMaterialAttr;
     @BindView(R.id.btn_login)
     Button btnLogin;
     /**
@@ -302,18 +302,20 @@ public class PutAwayActivity extends BaseActivity<PutAwayView, PutAwayPresenter>
     @Override
     public void materialScanResult(MaterialScanPutAwayBean bean) {
         ToastUtils.showShort(getString(R.string.material_scan_putaway_success));
+        findViewById(R.id.layout_material_info).setVisibility(View.VISIBLE);
         /**
          * 扫码出来的数据
          */
-        tvPutawayMaterialCode.setText(bean.getMaterialCode());
-        tvPutawayMaterialName.setText(bean.getMaterialName());
-        tvPutawayMaterialNmodel.setText(bean.getMaterialStandard());
-        tvPutawayMaterialNum.setText(String.valueOf(bean.getBarcodeQty()));
+        setTextViewContent(tvMaterialCode,bean.getMaterialCode());
+        setTextViewContent(tvMaterialName,bean.getMaterialName());
+        setTextViewContent(tvMaterialModel,bean.getMaterialStandard());
+        setTextViewContent(tvMaterialAttr,bean.getMaterialAttribute());
+        setTextViewContent(tvMaterialCode,bean.getMaterialCode());
+        setTextViewContent(tvMaterialNum,bean.getBarcodeQty());
         /**
          * 设置附加属性
          */
-        tvPutawayMaterialAttr.setText(bean.getMaterialAttribute());
-        setMaterialAttrStatus(tvPutawayMaterialAttr);
+        setMaterialAttrStatus(tvMaterialAttr);
         /**
          * 设置已点总数
          */

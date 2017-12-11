@@ -23,7 +23,7 @@ public class FormChangeDetailPresenter extends MvpBasePresenter<FormChangeDetail
     private FormChangeDetailModel model;
     private HttpSubscriber<List<FormChangeDetailResult>> httpSubscriberIn;
     private HttpSubscriber<List<FormChangeDetailResult>> httpSubscriberOut;
-    private BaseRecyclerAdapter<FormChangeDetailResult> adapter;
+    private HttpSubscriber<List<FormChangeDetailResult>> httpSubscriberCheck;
 
     public FormChangeDetailPresenter(Context context) {
         super(context);
@@ -36,6 +36,7 @@ public class FormChangeDetailPresenter extends MvpBasePresenter<FormChangeDetail
      * @param params
      */
     public void getConvertOutDetail(Map<String, Object> params) {
+        getView().showProgressDialog();
         if (null == httpSubscriberOut) {
 
             httpSubscriberOut = new HttpSubscriber<>(new OnResultCallBack<List<FormChangeDetailResult>>() {
@@ -46,12 +47,11 @@ public class FormChangeDetailPresenter extends MvpBasePresenter<FormChangeDetail
 
                 @Override
                 public void onError(String errorMsg) {
-
+                    ToastUtils.showShort(errorMsg);
                 }
             });
-        } else {
-            adapter.notifyDataSetChanged();
         }
+        model.getConvertOutDetail(params, httpSubscriberOut);
     }
 
     /**
@@ -60,6 +60,7 @@ public class FormChangeDetailPresenter extends MvpBasePresenter<FormChangeDetail
      * @param params
      */
     public void getConvertInDetail(Map<String, Object> params) {
+        getView().showProgressDialog();
         if (null == httpSubscriberOut) {
 
             httpSubscriberOut = new HttpSubscriber<>(new OnResultCallBack<List<FormChangeDetailResult>>() {
@@ -78,6 +79,31 @@ public class FormChangeDetailPresenter extends MvpBasePresenter<FormChangeDetail
         model.getConvertInDetail(params, httpSubscriberOut);
     }
 
+    /**
+     * 形态转换 出库  明细
+     *
+     * @param params
+     */
+    public void getCheckStockDetail(Map<String, Object> params) {
+        getView().showProgressDialog();
+        if (null == httpSubscriberCheck) {
+
+            httpSubscriberCheck = new HttpSubscriber<>(new OnResultCallBack<List<FormChangeDetailResult>>() {
+                @Override
+                public void onSuccess(List<FormChangeDetailResult> datas) {
+                    getView().getCheckStockDetail(datas);
+                }
+
+                @Override
+                public void onError(String errorMsg) {
+                    ToastUtils.showShort(errorMsg);
+                }
+            });
+
+        }
+        model.getCheckStockDetail(params, httpSubscriberCheck);
+    }
+
     @Override
     public void dettachView() {
         super.dettachView();
@@ -88,6 +114,10 @@ public class FormChangeDetailPresenter extends MvpBasePresenter<FormChangeDetail
         if (null != httpSubscriberOut) {
             httpSubscriberOut.unSubscribe();
             httpSubscriberOut = null;
+        }
+        if (null != httpSubscriberCheck) {
+            httpSubscriberCheck.unSubscribe();
+            httpSubscriberCheck = null;
         }
     }
 }

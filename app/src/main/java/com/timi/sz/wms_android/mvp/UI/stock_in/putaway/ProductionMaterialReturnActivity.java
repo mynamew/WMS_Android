@@ -29,18 +29,18 @@ import java.util.HashMap;
 import java.util.Map;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 import static com.timi.sz.wms_android.base.uils.Constants.REQUEST_SCAN_CODE_LIB_LOATION;
 import static com.timi.sz.wms_android.base.uils.Constants.REQUEST_SCAN_CODE_MATERIIAL;
-/** 
-  * 生产退料
-  * author: timi    
-  * create at: 2017/11/22 15:44
-  */  
+
+/**
+ * 生产退料
+ * author: timi
+ * create at: 2017/11/22 15:44
+ */
 public class ProductionMaterialReturnActivity extends BaseActivity<PutAwayView, PutAwayPresenter> implements PutAwayView, BaseActivity.ScanQRCodeResultListener {
-    @BindView(R.id.iv_title_right)
-    ImageView ivTitleRight;
     @BindView(R.id.tv_receive_pro_num)
     TextView tvReceiveProNum;
     @BindView(R.id.tv_create_orderno_date)
@@ -51,8 +51,6 @@ public class ProductionMaterialReturnActivity extends BaseActivity<PutAwayView, 
     TextView tvHaveCountNum;
     @BindView(R.id.tv_in_stock_total_num)
     TextView tvInStockTotalNum;
-    @BindView(R.id.tv_putaway_material_attr)
-    TextView tvPutawayMaterialAttr;
     @BindView(R.id.view_line)
     View viewLine;
     @BindView(R.id.tv_putaway_scan_location_tip)
@@ -67,14 +65,16 @@ public class ProductionMaterialReturnActivity extends BaseActivity<PutAwayView, 
     EditText etPutawayScanMaterial;
     @BindView(R.id.iv_putaway_scan_material)
     ImageView ivPutawayScanMaterial;
-    @BindView(R.id.tv_putaway_material_code)
-    TextView tvPutawayMaterialCode;
-    @BindView(R.id.tv_putaway_material_num)
-    TextView tvPutawayMaterialNum;
-    @BindView(R.id.tv_putaway_material_name)
-    TextView tvPutawayMaterialName;
-    @BindView(R.id.tv_putaway_material_nmodel)
-    TextView tvPutawayMaterialNmodel;
+    @BindView(R.id.tv_material_code)
+    TextView tvMaterialCode;
+    @BindView(R.id.tv_material_num)
+    TextView tvMaterialNum;
+    @BindView(R.id.tv_material_name)
+    TextView tvMaterialName;
+    @BindView(R.id.tv_material_model)
+    TextView tvMaterialModel;
+    @BindView(R.id.tv_material_attr)
+    TextView tvMaterialAttr;
     @BindView(R.id.btn_login)
     Button btnLogin;
     private QueryPrdReturnByInputResult queryPrdReturnByInputResult;
@@ -96,7 +96,7 @@ public class ProductionMaterialReturnActivity extends BaseActivity<PutAwayView, 
         setActivityTitle(getString(R.string.out_return_material_title));
         intentCode = getIntent().getIntExtra(Constants.CODE_STR, Constants.COME_MATERAIL_NUM);
         queryPrdReturnByInputResult = new Gson().fromJson(getIntent().getStringExtra(Constants.IN_STOCK_FINISH_PRODUCTION_BEAN), QueryPrdReturnByInputResult.class);
-        ScanId=queryPrdReturnByInputResult.getScanId();
+        ScanId = queryPrdReturnByInputResult.getScanId();
     }
 
     @Override
@@ -209,18 +209,20 @@ public class ProductionMaterialReturnActivity extends BaseActivity<PutAwayView, 
     @Override
     public void materialScanResult(MaterialScanPutAwayBean bean) {
         ToastUtils.showShort(getString(R.string.material_scan_putaway_success));
+        findViewById(R.id.layout_material_info).setVisibility(View.VISIBLE);
         /**
          * 扫码出来的数据
          */
-        tvPutawayMaterialCode.setText(bean.getMaterialCode());
-        tvPutawayMaterialName.setText(bean.getMaterialName());
-        tvPutawayMaterialNmodel.setText(bean.getMaterialStandard());
-        tvPutawayMaterialNum.setText(String.valueOf(bean.getBarcodeQty()));
+        setTextViewContent(tvMaterialCode,bean.getMaterialCode());
+        setTextViewContent(tvMaterialName,bean.getMaterialName());
+        setTextViewContent(tvMaterialModel,bean.getMaterialStandard());
+        setTextViewContent(tvMaterialAttr,bean.getMaterialAttribute());
+        setTextViewContent(tvMaterialCode,bean.getMaterialCode());
+        setTextViewContent(tvMaterialNum,bean.getBarcodeQty());
         /**
          * 设置附加属性
          */
-        tvPutawayMaterialAttr.setText(bean.getMaterialAttribute());
-        setMaterialAttrStatus(tvPutawayMaterialAttr);
+        setMaterialAttrStatus(tvMaterialAttr);
         /**
          * 设置已点总数
          */
@@ -234,15 +236,17 @@ public class ProductionMaterialReturnActivity extends BaseActivity<PutAwayView, 
          */
         ScanId = bean.getScanId();
     }
+
     /**
      * 扫描的Id  默认是0  当提交物料扫码入库后 会返回sanid
      */
-    private int ScanId=0;
+    private int ScanId = 0;
     private VertifyLocationCodeBean mVertifyLocationCodeBean;
-    private boolean locationCodeIsUse=false;
+    private boolean locationCodeIsUse = false;
+
     @Override
     public void vertifyLocationCode(VertifyLocationCodeBean bean) {
-        locationCodeIsUse=true;
+        locationCodeIsUse = true;
         ToastUtils.showShort(getString(R.string.location_code_is_visible));
         mVertifyLocationCodeBean = bean;
     }
@@ -252,7 +256,6 @@ public class ProductionMaterialReturnActivity extends BaseActivity<PutAwayView, 
         ToastUtils.showShort(getString(R.string.create_instock_bill_success));
         onBackPressed();
     }
-
 
 
     @Override
@@ -271,7 +274,7 @@ public class ProductionMaterialReturnActivity extends BaseActivity<PutAwayView, 
                 params1.put("SrcBillType", 25);
                 params1.put("DestBillType", 25);
                 params1.put("ScanId", ScanId);
-                params1.put("BinCode",etPutawayScanLocation.getText().toString().trim());
+                params1.put("BinCode", etPutawayScanLocation.getText().toString().trim());
                 params1.put("BarcodeNo", result);
                 getPresenter().materialScanNetWork(params1, result);
                 break;
@@ -279,7 +282,7 @@ public class ProductionMaterialReturnActivity extends BaseActivity<PutAwayView, 
                 /**
                  * 重新扫描库位码的时候 将库位码是否有效的标识更改成false
                  */
-                locationCodeIsUse=false;
+                locationCodeIsUse = false;
                 LogUitls.d("库位码扫码--->", result);
                 //保存库位码
                 locationCode = result;
@@ -314,7 +317,7 @@ public class ProductionMaterialReturnActivity extends BaseActivity<PutAwayView, 
                     ToastUtils.showShort(getString(R.string.please_scan_lib_location_code));
                     return;
                 }
-                if(!locationCodeIsUse){
+                if (!locationCodeIsUse) {
                     ToastUtils.showShort(getString(R.string.location_code_no_user));
                     return;
                 }
@@ -325,7 +328,7 @@ public class ProductionMaterialReturnActivity extends BaseActivity<PutAwayView, 
                     ToastUtils.showShort(getString(R.string.please_scan_lib_location_code));
                     return;
                 }
-                if(!locationCodeIsUse){
+                if (!locationCodeIsUse) {
                     ToastUtils.showShort(getString(R.string.location_code_no_user));
                     return;
                 }

@@ -4,6 +4,7 @@ import com.timi.sz.wms_android.bean.instock.VertifyLocationCodeBean;
 import com.timi.sz.wms_android.bean.stockin_work.LibraryAdjustResult;
 import com.timi.sz.wms_android.bean.stockin_work.ScanLocationResult;
 import com.timi.sz.wms_android.bean.stockin_work.ScanMaterialResult;
+import com.timi.sz.wms_android.bean.stockin_work.lib_adjust.StockAdjustResult;
 import com.timi.sz.wms_android.mvp.base.view.iml.MvpBaseView;
 
 /**
@@ -23,7 +24,7 @@ public interface LibraryAdjustView extends MvpBaseView {
      * 扫物料码
      * @param result
      */
-    void scanMaterialCode(ScanMaterialResult result);
+    void scanMaterialCode(StockAdjustResult result);
 
     /**
      * 库位调整

@@ -5,7 +5,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context="com.timi.sz.wms_android.mvp.UI.stock_in_work.form_change_detail.FormChangeDetailActivity">
+
     <include
         android:id="@+id/head"
         layout="@layout/title_head"/>
@@ -46,16 +48,20 @@
         android:layout_below="@id/rl_top_menu"
         android:background="@color/divide_color"/>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rlv_from_change"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/view_divide"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rlv_from_change"
+            android:layout_width="match_parent"
+            android:layout_below="@id/view_divide"
+            android:layout_height="match_parent"
+            />
+
 
     <com.timi.sz.wms_android.view.FloatCircleButtonUpTopView
         android:id="@+id/fbtn_detail"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:background="@drawable/bg_circle_buy_return"
+         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_marginBottom="30px"

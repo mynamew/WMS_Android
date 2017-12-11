@@ -23,4 +23,10 @@ public interface FormChangeDetailView extends MvpBaseView {
      * @param datas
      */
     void getConvertOutDetail(List<FormChangeDetailResult> datas);
+
+    /**
+     * 盘点单明细
+     * @param datas
+     */
+    void getCheckStockDetail(List<FormChangeDetailResult> datas);
 }

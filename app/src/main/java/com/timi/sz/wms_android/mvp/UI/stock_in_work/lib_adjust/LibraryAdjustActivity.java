@@ -19,6 +19,7 @@ import com.timi.sz.wms_android.base.uils.ToastUtils;
 import com.timi.sz.wms_android.bean.instock.VertifyLocationCodeBean;
 import com.timi.sz.wms_android.bean.stockin_work.LibraryAdjustResult;
 import com.timi.sz.wms_android.bean.stockin_work.ScanMaterialResult;
+import com.timi.sz.wms_android.bean.stockin_work.lib_adjust.StockAdjustResult;
 import com.timi.sz.wms_android.mvp.UI.stock_in.other_scan.OtherScanActivity;
 import com.timi.sz.wms_android.mvp.UI.stock_in_work.lib_adjust_detail.LibAdjustDetailActivity;
 import com.timi.sz.wms_android.mvp.base.BaseActivity;
@@ -186,6 +187,7 @@ public class LibraryAdjustActivity extends BaseActivity<LibraryAdjustView, Libra
                          *  设置物料码
                          */
                         etScanLocation.setText(result);
+                        locationCode=result;
                         /**
                          * 请求库位信息
                          */
@@ -223,6 +225,7 @@ public class LibraryAdjustActivity extends BaseActivity<LibraryAdjustView, Libra
                          *  设置物料码
                          */
                         tvMaterialCode.setText(result);
+                        locationCode=result;
                         /**
                          * 请求物料信息
                          */
@@ -286,8 +289,20 @@ public class LibraryAdjustActivity extends BaseActivity<LibraryAdjustView, Libra
     }
 
     @Override
-    public void scanMaterialCode(ScanMaterialResult result) {
-
+    public void scanMaterialCode(StockAdjustResult bean) {
+        ToastUtils.showShort(getString(R.string.material_scan_putaway_success));
+        /**
+         * 扫码出来的数据
+         */
+        tvMaterialCode.setText(bean.getMaterialCode());
+        tvMaterialName.setText(bean.getMaterialName());
+        tvMaterialModel.setText(bean.getMaterialStandard());
+        tvMaterialNum.setText(String.valueOf(bean.getQty()));
+        /**
+         * 设置附加属性
+         */
+        tvMaterialAttr.setText(bean.getMaterialAttribute());
+        setMaterialAttrStatus(tvMaterialAttr);
     }
 
     @Override

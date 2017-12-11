@@ -38,6 +38,7 @@ import com.timi.sz.wms_android.bean.outstock.outsource.RequestGetMaterialLotBean
 import com.timi.sz.wms_android.bean.outstock.outsource.SubmitBarcodeLotPickOutResult;
 import com.timi.sz.wms_android.bean.outstock.outsource.SubmitBarcodeLotPickOutSplitResult;
 import com.timi.sz.wms_android.bean.outstock.pick.QueryDNByInputForPickResult;
+import com.timi.sz.wms_android.bean.outstock.product.GetPrdDetailPickDataResult;
 import com.timi.sz.wms_android.bean.outstock.product.GetPrdFeedDetailResult;
 import com.timi.sz.wms_android.bean.outstock.product.GetProductPickDetailResult;
 import com.timi.sz.wms_android.bean.outstock.product.QueryPrdFeedByInputResult;
@@ -57,11 +58,15 @@ import com.timi.sz.wms_android.bean.quality.normal.NormalQualityData;
 import com.timi.sz.wms_android.bean.quality.update_barcode.BarEditGetUnInstockBarcodeData;
 import com.timi.sz.wms_android.bean.stockin_work.FormChangeDetailResult;
 import com.timi.sz.wms_android.bean.stockin_work.LibraryAdjustResult;
+import com.timi.sz.wms_android.bean.stockin_work.MaterialDataBean;
 import com.timi.sz.wms_android.bean.stockin_work.ScanLocationResult;
 import com.timi.sz.wms_android.bean.stockin_work.ScanMaterialResult;
 import com.timi.sz.wms_android.bean.stockin_work.StockInWorkDetailResult;
 import com.timi.sz.wms_android.bean.stockin_work.allot_out.QueryAllotOutResult;
+import com.timi.sz.wms_android.bean.stockin_work.check.RequestSubmitCheckDataBean;
+import com.timi.sz.wms_android.bean.stockin_work.check.SubmitCheckDataResult;
 import com.timi.sz.wms_android.bean.stockin_work.lib_adjust.LibAdjustDetail;
+import com.timi.sz.wms_android.bean.stockin_work.lib_adjust.StockAdjustResult;
 import com.timi.sz.wms_android.bean.stockin_work.query.AllotOneSetpResult;
 import com.timi.sz.wms_android.bean.stockin_work.query.AllotScanResult;
 import com.timi.sz.wms_android.bean.stockin_work.query.FormChangeInResult;
@@ -383,6 +388,24 @@ public interface ApiService {
     @POST("api/services/wpda/WWReturn/GetOutSourceReturnDetail")
     Observable<CommonResult<List<OrderDetailData>>> getOutSourceReturnDetail(@FieldMap Map<String, Object> params);
 
+    /**
+     * 委外退料单列表
+     *
+     * @param params
+     * @return
+     */
+    @POST("api/services/wpda/WWReturn/QueryWWReturnList")
+    Observable<CommonResult<List<QueryPoListBean>>> queryWWReturnList(@Body RequestBuyInStockListBean params);
+
+    /**
+     * 委外退料单列表获取 委外退料单数据
+     *
+     * @param params
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("api/services/wpda/WWReturn/GetOutSourceReturnData")
+    Observable<CommonResult<QueryOutSourceReturnByInputResult>> getOutSourceReturnData(@FieldMap Map<String, Object> params);
 
     /**====== 生产退料 ======**/
     /**
@@ -490,6 +513,26 @@ public interface ApiService {
     @POST("api/services/wpda/WWPick/GetOutSourcePickDetail")
     Observable<CommonResult<List<MaterialDetailResult>>> getOutSourcePickDetail(@FieldMap Map<String, Object> params);
 
+    /**
+     * 委外调拨单列表
+     *
+     * @param params
+     * @return
+     */
+    @POST("api/services/wpda/WWPick/QueryWWPickList")
+    Observable<CommonResult<List<QueryPoListBean>>> queryWWPickList(@Body RequestBuyInStockListBean params);
+
+    /**
+     * 委外调拨单列表获取 委外退料单数据
+     *
+     * @param params
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("api/services/wpda/WWPick/GetOutSourcePickData")
+    Observable<CommonResult<QueryOutSourcePickByInputResult>> getOutSourcePickData(@FieldMap Map<String, Object> params);
+
+
     /**====== 委外发料-制单 ======**/
 
     /**
@@ -512,6 +555,25 @@ public interface ApiService {
     @POST("api/services/wpda/WWPick/GetWWDetailPickData")
     Observable<CommonResult<BillMaterialDetailResult>> getWWDetailPickData(@FieldMap Map<String, Object> params);
 
+    /**
+     * 委外调拨单列表
+     *
+     * @param params
+     * @return
+     */
+    @POST("api/services/wpda/WWPick/QueryWWPOListForPick")
+    Observable<CommonResult<List<QueryPoListBean>>> queryWWPOListForPick(@Body RequestBuyInStockListBean params);
+
+    /**
+     * 委外调拨单列表获取 委外退料单数据
+     *
+     * @param params
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("api/services/wpda/WWPick/GetWWPickDataByOutSource")
+    Observable<CommonResult<QueryWWPickDataByOutSourceResult>> getWWPickDataByOutSource(@FieldMap Map<String, Object> params);
+
 
     /**====== 委外补料 ======**/
 
@@ -533,9 +595,31 @@ public interface ApiService {
      * @return
      */
     @FormUrlEncoded
-    @POST("/api/services/wpda/WWFeed/GetOutSourceFeedDetail")
+    @POST("api/services/wpda/WWFeed/GetOutSourceFeedDetail")
     Observable<CommonResult<List<MaterialDetailResult>>> getOutSourceFeedDetail(@FieldMap Map<String, Object> params);
 
+    /**
+     * 委外补料单列表
+     *
+     * @param params
+     * @return
+     */
+    @POST("api/services/wpda/WWFeed/QueryWWFeedList")
+    Observable<CommonResult<List<QueryPoListBean>>> queryWWFeedList(@Body RequestBuyInStockListBean params);
+
+    /**
+     * 委外补料单列表获取数据
+     * 根据委外补料单末尾号查询未审核的委外补料单
+     *
+     * @param params
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("api/services/wpda/WWFeed/GetOutSourceFeedData")
+    Observable<CommonResult<QueryOutSourceFeedByInputResult>> getOutSourceFeedData(@FieldMap Map<String, Object> params);
+
+
+    /**====== 提交操作 ======**/
     /**
      * 提交条码出库(批次拣货)。
      *
@@ -626,7 +710,27 @@ public interface ApiService {
      */
     @FormUrlEncoded
     @POST("api/services/wpda/PurReturn/GetPurReturnDetail")
-    Observable<CommonResult<SubmitBarcodePurReturnData>> getPurReturnDetail(@FieldMap Map<String, Object> params);
+    Observable<CommonResult<BuyReturnMaterialByOrdernoData>> getPurReturnDetail(@FieldMap Map<String, Object> params);
+
+    /**
+     * 获取采购退料单列表
+     *
+     * @param params
+     * @return
+     */
+    @POST("api/services/wpda/PurReturn/QueryPurReturnList")
+    Observable<CommonResult<List<QueryPoListBean>>> queryPurReturnList(@Body RequestBuyInStockListBean params);
+
+    /**
+     * 从采购单列表单号获取采购单数据
+     *
+     * @param params
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("api/services/wpda/PurReturn/GetPurReturnData")
+    Observable<CommonResult<BuyReturnMaterialByOrdernoData>> getPurReturnData(@FieldMap Map<String, Object> params);
+
 
     /**
      * 提交条码拆分出库（普通）
@@ -659,6 +763,26 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("api/services/wpda/PrdPick/GetPrdDetailPickData")
     Observable<CommonResult<BillMaterialDetailResult>> getPrdDetailPickData(@FieldMap Map<String, Object> params);
+
+    /**
+     * 查询生产工单列表
+     *
+     * @param params
+     * @return
+     */
+    @POST("api/services/wpda/PrdPick/QueryPrdList")
+    Observable<CommonResult<List<QueryPoListBean>>> queryPrdList(@Body RequestBuyInStockListBean params);
+
+    /**
+     * 生产工单数据
+     *
+     * @param params
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("api/services/wpda/PrdPick/GetPrdPickData")
+    Observable<CommonResult<QueryWWPickDataByOutSourceResult>> getPrdPickData(@FieldMap Map<String, Object> params);
+
     /**====== 生产领料-审核 ======**/
     /**
      * 生产订单末尾号查询（审核流程）
@@ -680,6 +804,24 @@ public interface ApiService {
     @POST("api/services/wpda/PrdPick/GetProductPickDetail")
     Observable<CommonResult<List<MaterialDetailResult>>> getProductPickDetail(@FieldMap Map<String, Object> params);
 
+    /**
+     * 查询生产领料单列表
+     *
+     * @param params
+     * @return
+     */
+    @POST("api/services/wpda/PrdPick/QueryPrdPickList")
+    Observable<CommonResult<List<QueryPoListBean>>> queryPrdPickList(@Body RequestBuyInStockListBean params);
+
+    /**
+     * 生产领料单数据
+     *
+     * @param params
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("api/services/wpda/PrdPick/GetProductPickData")
+    Observable<CommonResult<QueryProductPickByInputResult>> getProductPickData(@FieldMap Map<String, Object> params);
 
     /**====== 领料申请 ======**/
     /**
@@ -693,7 +835,7 @@ public interface ApiService {
     Observable<CommonResult<QueryProductPickByInputResult>> queryPrdPickApplyByInput(@FieldMap Map<String, Object> params);
 
     /**
-     * 获取领料申请单明细的发料数据（领料申请）
+     * 领料申请单数据
      *
      * @param params
      * @return
@@ -702,6 +844,24 @@ public interface ApiService {
     @POST("api/services/wpda/PrdPick/GetPrdPickApplyDetail")
     Observable<CommonResult<List<MaterialDetailResult>>> getPrdPickApplyDetail(@FieldMap Map<String, Object> params);
 
+    /**
+     * 领料申请单列表
+     *
+     * @param params
+     * @return
+     */
+    @POST("api/services/wpda/PrdPick/GetPickApplyList")
+    Observable<CommonResult<List<QueryPoListBean>>> getPickApplyList(@Body RequestBuyInStockListBean params);
+
+    /**
+     * 领料申请单数据
+     *
+     * @param params
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("api/services/wpda/PrdPick/GetPrdPickApplyData")
+    Observable<CommonResult<QueryProductPickByInputResult>> getPrdPickApplyData(@FieldMap Map<String, Object> params);
 
     /**======生产补料 ======**/
 
@@ -969,8 +1129,8 @@ public interface ApiService {
      * @return
      */
     @FormUrlEncoded
-    @POST("api/Account/ClientLogin")
-    Observable<CommonResult<ScanMaterialResult>> scanMaterialCode(@FieldMap Map<String, Object> params);
+    @POST("api/services/wpda/StockAdjust/StockAdjust")
+    Observable<CommonResult<StockAdjustResult>> scanMaterialCode(@FieldMap Map<String, Object> params);
 
     /**
      * 提交库内调整
@@ -1101,8 +1261,37 @@ public interface ApiService {
      * @return
      */
     @FormUrlEncoded
-    @POST("api/Account/ClientLogin")
+    @POST("api/services/wpda/StockCheck/QueryCheckStockByInput")
     Observable<CommonResult<PointResult>> queryPoint(@FieldMap Map<String, Object> params);
+
+    /**
+     * 盘点明细
+     *
+     * @param params
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("api/services/wpda/StockCheck/GetCheckStockDetail")
+    Observable<CommonResult<List<FormChangeDetailResult>>> getCheckStockDetail(@FieldMap Map<String, Object> params);
+
+    /**
+     * 获取物料的信息
+     *
+     * @param params
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("api/services/wpda/StockCheck/GetMaterialData")
+    Observable<CommonResult<MaterialDataBean>>getMaterialData(@FieldMap Map<String, Object> params);
+   /**
+     * 获取物料的信息
+     *
+     * @param params
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("api/services/wpda/StockCheck/SubmitCheckData")
+    Observable<CommonResult<SubmitCheckDataResult>>submitCheckData(@Body RequestSubmitCheckDataBean params);
     /************************************************************************************************************/
     /**************************************************************************************************************/
 

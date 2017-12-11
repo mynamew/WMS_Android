@@ -91,5 +91,18 @@
 
 
     </LinearLayout>
-
+    <TextView
+        android:id="@+id/tv_material_attr"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/color_666"
+        android:layout_marginLeft="120px"
+        android:gravity="left"
+        android:layout_marginBottom="10px"
+        android:layout_marginTop="5px"
+        android:textSize="13sp"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="#e7e7ed"/>
 </LinearLayout>

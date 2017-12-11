@@ -7,6 +7,7 @@ import com.timi.sz.wms_android.bean.instock.VertifyLocationCodeBean;
 import com.timi.sz.wms_android.bean.stockin_work.LibraryAdjustResult;
 import com.timi.sz.wms_android.bean.stockin_work.ScanLocationResult;
 import com.timi.sz.wms_android.bean.stockin_work.ScanMaterialResult;
+import com.timi.sz.wms_android.bean.stockin_work.lib_adjust.StockAdjustResult;
 import com.timi.sz.wms_android.http.callback.OnResultCallBack;
 import com.timi.sz.wms_android.http.subscriber.HttpSubscriber;
 import com.timi.sz.wms_android.mvp.UI.stock_in_work.lib_adjust.LibraryAdjustModel;
@@ -24,7 +25,7 @@ import java.util.Map;
 public class PackAdjustPresenter extends MvpBasePresenter<PackAdjustView> {
     private PackAdjustModel model;
     private HttpSubscriber<VertifyLocationCodeBean> vertifyLocationCodeBeanHttpSubscriber = null;
-    private HttpSubscriber<ScanMaterialResult> scanMaterialResultHttpSubscriber = null;
+    private HttpSubscriber<StockAdjustResult> scanMaterialResultHttpSubscriber = null;
     private HttpSubscriber<LibraryAdjustResult> libraryAdjustResultHttpSubscriber = null;
 
     public PackAdjustPresenter(Context context) {
@@ -60,9 +61,9 @@ public class PackAdjustPresenter extends MvpBasePresenter<PackAdjustView> {
      */
     public void  scanMaterialCode(Map<String, Object> params){
         if (null == scanMaterialResultHttpSubscriber) {
-            scanMaterialResultHttpSubscriber = new HttpSubscriber<>(new OnResultCallBack<ScanMaterialResult>() {
+            scanMaterialResultHttpSubscriber = new HttpSubscriber<>(new OnResultCallBack<StockAdjustResult>() {
                 @Override
-                public void onSuccess(ScanMaterialResult o) {
+                public void onSuccess(StockAdjustResult o) {
 
                 }
 

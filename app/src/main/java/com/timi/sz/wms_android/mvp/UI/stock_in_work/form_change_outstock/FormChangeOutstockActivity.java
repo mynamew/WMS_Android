@@ -24,6 +24,7 @@ import com.timi.sz.wms_android.bean.outstock.buy.SubmitBarcodeOutAuditData;
 import com.timi.sz.wms_android.bean.outstock.buy.SubmitBarcodeOutSplitAuditData;
 import com.timi.sz.wms_android.bean.stockin_work.query.FormChangeOutResult;
 import com.timi.sz.wms_android.mvp.UI.stock_in_work.form_change_detail.FormChangeDetailActivity;
+import com.timi.sz.wms_android.mvp.UI.stock_in_work.form_change_instock.FormChangeInstockActivity;
 import com.timi.sz.wms_android.mvp.UI.stock_out.divide_print.SplitPrintActivity;
 import com.timi.sz.wms_android.mvp.base.BaseActivity;
 
@@ -75,6 +76,7 @@ public class FormChangeOutstockActivity extends BaseActivity<FormChangeOutstockV
     private int intentCode;
     private int scanId;
     private int billId;
+
     @Override
     public int setLayoutId() {
         return R.layout.activity_form_change_outstock;
@@ -83,10 +85,10 @@ public class FormChangeOutstockActivity extends BaseActivity<FormChangeOutstockV
     @Override
     public void initBundle(Bundle savedInstanceState) {
         setActivityTitle(getString(R.string.outstock_scan_form_change));
-        formChangeOutResult=new Gson().fromJson(getIntent().getStringExtra(Constants.STOCK_IN_WORK_BEAN),FormChangeOutResult.class);
-        intentCode=getIntent().getIntExtra(Constants.STOCK_IN_WORK_CODE_STR,0);
-        scanId=formChangeOutResult.getScanId();
-        billId=formChangeOutResult.getBillId();
+        formChangeOutResult = new Gson().fromJson(getIntent().getStringExtra(Constants.STOCK_IN_WORK_BEAN), FormChangeOutResult.class);
+        intentCode = getIntent().getIntExtra(Constants.STOCK_IN_WORK_CODE_STR, 0);
+        scanId = formChangeOutResult.getScanId();
+        billId = formChangeOutResult.getBillId();
     }
 
     @Override
@@ -97,7 +99,12 @@ public class FormChangeOutstockActivity extends BaseActivity<FormChangeOutstockV
         setRightImg(R.mipmap.stockin_detail, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                /**
+                 * 查看详情
+                 */
                 Intent it = new Intent(FormChangeOutstockActivity.this, FormChangeDetailActivity.class);
+                it.putExtra(Constants.STOCK_IN_WORK_CODE_STR, intentCode);
+                it.putExtra(Constants.STOCK_IN_WORK_BILLID,formChangeOutResult.getBillId());
                 startActivity(it);
             }
         });
@@ -135,7 +142,7 @@ public class FormChangeOutstockActivity extends BaseActivity<FormChangeOutstockV
 
     @Override
     public void initData() {
-
+        setHeadContent(formChangeOutResult.getBillCode(), formChangeOutResult.getBillDate(), formChangeOutResult.getQty(), formChangeOutResult.getWaitQty(), formChangeOutResult.getScanQty());
     }
 
     @Override
@@ -204,7 +211,7 @@ public class FormChangeOutstockActivity extends BaseActivity<FormChangeOutstockV
         tvMaterialCode.setText(data.getMaterialCode());
         tvMaterialAttr.setText(TextUtils.isEmpty(data.getMaterialAttribute()) ? getString(R.string.none) : data.getMaterialAttribute());
         tvMaterialNmodel.setText(TextUtils.isEmpty(data.getMaterialStandard()) ? getString(R.string.none) : data.getMaterialStandard());
-         /**
+        /**
          * 设置 是否显示附加属性
          */
         setMaterialAttrStatus(findViewById(R.id.ll_material_attr));
@@ -218,7 +225,7 @@ public class FormChangeOutstockActivity extends BaseActivity<FormChangeOutstockV
             /**
              * 设置物料数量
              */
-            formChangeOutResult.setScanQty(formChangeOutResult.getScanQty()+ data.getBarcodeQty());
+            formChangeOutResult.setScanQty(formChangeOutResult.getScanQty() + data.getBarcodeQty());
             tvMaterialNum.setText("(" + data.getBarcodeQty() + ")" + formChangeOutResult.getScanQty() + "/" + formChangeOutResult.getQty());
 
         }

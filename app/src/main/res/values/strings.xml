@@ -208,10 +208,18 @@
     <string name="stock_in_out_source">委外单</string>
     <string name="material_point_success">物料请点保存成功</string>
 
-    /**====== 采购单 列表======**/
+    /**======无纸化作业 列表======**/
     <string name="buy_list_title">采购单列表</string>
-    /**====== 委外但 列表======**/
     <string name="out_source_list_title">委外单列表</string>
+    <string name="outsource_send_material_list">委外发料单(生单)列表</string>
+    <string name="outsource_send_material_audit_list">委外发料单(审核)列表</string>
+    <string name="outsource_allot_list">委外调拨单列表</string>
+    <string name="outsource_feed_list">委外补料单列表</string>
+    <string name="outsource_return_list">委外退料单列表</string>
+    <string name="production_bill_list">生产领料单列表(生单)</string>
+    <string name="production_audit_list">生产领料单列表(审核)</string>
+    <string name="get_material_apply_list">领料申请单列表</string>
+    <string name="production_allot_list">生产调拨单列表</string>
     /**====== 来料入库 ======**/
     <string name="in_stock_num_title">入库上架(来料入库)</string>
     <string name="receive_pro_num">到货单号：</string>
@@ -354,6 +362,7 @@
     <string name="return_material_num_format">退料数量</string>
     <string name="item_material_attr">附加属性</string>
     <string name="return_divide_work">退料拆分操作</string>
+    <string name="buy_return_orderno_list_title">采购退料单列表</string>
 
     /**====== 采购退料 退料单号 ======**/
     <string name="return_material_orderno">退料单号：%1$s</string>
@@ -734,7 +743,7 @@
     <string name="query_in_stock_form_change_title">入库(形态转换)</string>
     <string name="query_out_stock_form_change_title">出库(形态转换)</string>
     <string name="query_form_change_tip">形态转换单</string>
-    <string name="query_point_title">盘点—选单</string>
+    <string name="query_point_title">盘点</string>
     <string name="query_point_tip">盘点单</string>
     /**====== 库位调整 ======**/
     <string name="lib_shift_tip">库位转移</string>
@@ -760,6 +769,7 @@
     <string name="form_change_instock_detial_info_tip">形态转换单(入库)信息详情</string>
     <string name="form_change_outstock_detial_info_tip">形态转换单(出库)信息详情</string>
     <string name="form_change_instock_detial_title">形态转换单详情</string>
+    <string name="check_orderno_info">盘点单信息详情</string>
     /**====== 一步调入 ======**/
     <string name="allot_out_total_num">调出总数</string>
     <string name="allot_total_num">调拨总数</string>
@@ -792,6 +802,12 @@
     <string name="wait_point_num_tip">待点总数</string>
     <string name="create_date_tip">制单日期：</string>
     <string name="have_point_num_tip">已点总数</string>
+    /**====== 盘点======**/
+    <string name="check_orderno">盘点单号</string>
+    <string name="check_type">盘点类型</string>
+    <string name="create_orderno_person">制单人</string>
+    <string name="item_total_num">物项总数</string>
+    <string name="check_num_tip">盘点数量</string>
     /******************************************************************************************************************************************************/
     /******************************************************************************************************************************************************/
     /**====== 综合查询 ======**/
@@ -804,6 +820,10 @@
     <string name="carton_num_tip">箱号</string>
     <string name="sale_outstock_orderno_info">销售出库单信息</string>
     <string name="repertory_total_num">库存总数</string>
+    <string name="please_input_check_num">请输入盘点数量</string>
+    <string name="confirm_qty">确认数量</string>
+    <string name="get_material_info_success">获取物料信息成功</string>
+    <string name="commit_check_data_success">提交盘点数据成功</string>
 
 
 </resources>

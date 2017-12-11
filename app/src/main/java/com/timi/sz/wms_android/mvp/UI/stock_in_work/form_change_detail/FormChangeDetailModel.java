@@ -50,4 +50,18 @@ public class FormChangeDetailModel extends MvpBaseModel {
             }
         });
     }
+    /**
+     * 获取盘点单明细
+     * @param params
+     * @param observer
+     */
+    public void getCheckStockDetail(final Map<String,Object> params, Observer<List<FormChangeDetailResult>> observer){
+
+        HttpManager.getInstance().HttpManagerRequest(observer, new ApiServiceMethodCallBack<List<FormChangeDetailResult>>() {
+            @Override
+            public Observable<CommonResult<List<FormChangeDetailResult>>> createObservable(ApiService apiService) {
+                return apiService.getCheckStockDetail(params);
+            }
+        });
+    }
 }

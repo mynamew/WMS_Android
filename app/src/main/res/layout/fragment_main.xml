@@ -27,21 +27,21 @@
         <ImageView
             android:id="@+id/iv_home_banner_bg"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="222px"
             android:scaleType="centerCrop"
             android:src="@mipmap/home_banner"
             />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="153px"
-            android:background="@mipmap/home_today_bg"
+            android:layout_height="180px"
+            android:background="#fffef4"
             android:orientation="vertical"
             >
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="52px"
+                android:layout_height="74px"
                 android:orientation="horizontal">
 
                 <LinearLayout
@@ -49,6 +49,7 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:gravity="center_vertical"
                     android:orientation="horizontal">
 
                     <TextView
@@ -66,7 +67,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="10px"
+                        android:layout_marginLeft="20px"
                         android:src="@mipmap/home_today_out_stock"/>
 
                 </LinearLayout>
@@ -74,15 +75,17 @@
                 <View
                     android:id="@+id/divider_vertical1"
                     android:layout_width="1px"
-                    android:layout_height="42px"
-                    android:layout_marginTop="10px"
-                    android:background="#fdf4d5"/>
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="20px"
+                    android:layout_gravity="bottom"
+                    android:background="@color/divide_color"/>
 
                 <LinearLayout
                     android:id="@+id/ll_today_outstock"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:gravity="center_vertical"
                     android:orientation="horizontal">
 
                     <TextView
@@ -100,7 +103,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="10px"
+                        android:layout_marginLeft="20px"
                         android:src="@mipmap/home_today_in_stock"/>
 
                 </LinearLayout>
@@ -115,16 +118,14 @@
                 android:layout_marginLeft="20px"
                 android:layout_marginRight="20px"
                 android:layout_marginStart="20px"
-                android:background="#fdf4d5"
+                android:background="@color/divide_color"
                 />
 
             <LinearLayout
                 android:id="@+id/ll_today_num"
                 android:layout_width="match_parent"
-                android:layout_height="100px"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/divider_horizontal">
+                android:layout_height="match_parent"
+                >
 
                 <RelativeLayout
                     android:id="@+id/rl_today_in"
@@ -150,18 +151,16 @@
                         android:layout_marginRight="20dp"
                         android:text="笔"
                         android:textColor="#333"
-                        android:textSize="13sp"
+                        android:textSize="14sp"
                         />
                 </RelativeLayout>
 
                 <View
-                    android:layout_width="1dp"
+                    android:layout_width="1px"
                     android:layout_height="match_parent"
-                    android:layout_marginBottom="5dp"
-                    android:background="#fdf4d5"
-                    app:layout_constraintLeft_toRightOf="parent"
-                    app:layout_constraintRight_toLeftOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/iv_today_bg"/>
+                    android:layout_marginBottom="10px"
+                    android:background="@color/divide_color"
+                    />
 
                 <RelativeLayout
                     android:id="@+id/rl_today_out"
@@ -182,13 +181,14 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginRight="20dp"
+                        android:layout_marginRight="22dp"
                         android:text="笔"
                         android:textColor="#333"
-                        android:textSize="13sp"
-                        />
+                        android:textSize="14sp"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="22dp"/>
                 </RelativeLayout>
             </LinearLayout>
 
@@ -198,10 +198,6 @@
             android:id="@+id/ll_menu_bg"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginEnd="33px"
-            android:layout_marginLeft="33px"
-            android:layout_marginRight="33px"
-            android:layout_marginStart="33px"
             android:background="@drawable/bg_rectangle_login_server"
             android:orientation="vertical"
             >
@@ -238,18 +234,6 @@
                     android:textColor="#333"
                     android:textSize="16sp"/>
 
-                <TextView
-                    android:id="@+id/tv_home_query"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="@drawable/bg_set_tab_check"
-                    android:drawableTop="@mipmap/home_query"
-                    android:gravity="center"
-                    android:paddingTop="20dp"
-                    android:text="@string/home_query"
-                    android:textColor="#333"
-                    android:textSize="16sp"/>
             </LinearLayout>
 
             <LinearLayout
@@ -286,7 +270,17 @@
                     android:textColor="#333"
                     android:textSize="16sp"/>
 
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="visible"
+                >
+
                 <TextView
+                    android:id="@+id/tv_home_query"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -296,23 +290,13 @@
                     android:paddingTop="20dp"
                     android:text="@string/home_query"
                     android:textColor="#333"
-                    android:textSize="16sp"
-                    android:visibility="invisible"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/ll3"
-                android:layout_width="match_parent"
-                android:layout_height="140px"
-                android:visibility="gone"
-                app:layout_constraintLeft_toLeftOf="@+id/ll_menu_bg"
-                app:layout_constraintRight_toRightOf="@+id/ll_menu_bg"
-                app:layout_constraintTop_toBottomOf="@+id/ll2">
+                    android:textSize="16sp"/>
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:background="@drawable/bg_set_tab_check"
                     android:drawableTop="@mipmap/home_query"
                     android:gravity="center"
                     android:paddingTop="20dp"

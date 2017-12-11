@@ -63,7 +63,7 @@ public class StockInWorkQueryPresenter extends MvpBasePresenter<StockInWorkQuery
      * @param params
      */
     public void queryAllotOneStep(Map<String, Object> params) {
-
+        getView().showProgressDialog();
         if (null == allotOneSetpResultHttpSubscriber) {
             allotOneSetpResultHttpSubscriber = new HttpSubscriber<>(new OnResultCallBack<AllotOneSetpResult>() {
                 @Override
@@ -84,7 +84,7 @@ public class StockInWorkQueryPresenter extends MvpBasePresenter<StockInWorkQuery
      * @param params
      */
     public void queryFormChangeOut(Map<String, Object> params) {
-
+        getView().showProgressDialog();
         if (null == formChangeOutResultHttpSubscriber) {
             formChangeOutResultHttpSubscriber = new HttpSubscriber<>(new OnResultCallBack<FormChangeOutResult>() {
                 @Override
@@ -105,7 +105,7 @@ public class StockInWorkQueryPresenter extends MvpBasePresenter<StockInWorkQuery
      * @param params
      */
     public void queryFormChangeIn(Map<String, Object> params) {
-
+        getView().showProgressDialog();
         if (null == formChangeInResultHttpSubscriber) {
             formChangeInResultHttpSubscriber = new HttpSubscriber<>(new OnResultCallBack<FormChangeInResult>() {
                 @Override
@@ -126,7 +126,7 @@ public class StockInWorkQueryPresenter extends MvpBasePresenter<StockInWorkQuery
      * @param params
      */
     public void queryPoint(Map<String, Object> params) {
-
+        getView().showProgressDialog();
         if (null == pointResultHttpSubscriber) {
             pointResultHttpSubscriber = new HttpSubscriber<>(new OnResultCallBack<PointResult>() {
                 @Override

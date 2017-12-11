@@ -14,7 +14,8 @@ import static com.timi.sz.wms_android.base.uils.PackageUtils.isApkDebugable;
 public class Constants {
     //base url
 //    public static final String BASE_URL = "http://szjuqent.imwork.net:83/";
-    public static final String BASE_URL = "http://192.168.0.39:8066/";
+//    public static final String BASE_URL = "http://192.168.0.39:8066/";
+    public static final String BASE_URL = "http://192.168.18.117:8066/";
     //超时时间   5s
     public static int DEFAULT_TIMEOUT = 5000;
 
