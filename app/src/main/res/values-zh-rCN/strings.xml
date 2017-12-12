@@ -834,6 +834,9 @@
     <string name="the_good_no_quality">此物品为免检物品，请确认免检！</string>
     <string name="container_repertory">容器存储</string>
     <string name="goods_repertory">物品库存</string>
+    <string name="quality_confirm_complete">质检确认完成！</string>
+    <string name="please_confirm_quality_complete">请确认质检已完成？</string>
+    <string name="number">数量</string>
 
 
 </resources>

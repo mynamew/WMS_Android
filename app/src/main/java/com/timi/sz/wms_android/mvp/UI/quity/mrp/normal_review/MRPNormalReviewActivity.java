@@ -141,6 +141,9 @@ public class MRPNormalReviewActivity extends BaseActivity<MRPNormalReviewView, M
             /**
              * 订单号
              */
+            tvOrderno.setText(mrpReviewData.getReceiptCode());   /**
+             * 订单号
+             */
             tvOrderNum.setText(mrpReviewData.getSourceBillCode());
             /**
              * 到货日期
@@ -219,6 +222,30 @@ public class MRPNormalReviewActivity extends BaseActivity<MRPNormalReviewView, M
                 default:
                     break;
             }
+            rdQualityAllReturn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    findViewById(R.id.ll_input_qty).setVisibility(View.GONE);
+                }
+            });
+            rdQualityRightGet.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    findViewById(R.id.ll_input_qty).setVisibility(View.GONE);
+                }
+            });
+            rdPick.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    findViewById(R.id.ll_input_qty).setVisibility(View.VISIBLE);
+                }
+            });
+            rdQualitySpecialGet.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    findViewById(R.id.ll_input_qty).setVisibility(View.VISIBLE);
+                }
+            });
         }
     }
 
@@ -267,8 +294,11 @@ public class MRPNormalReviewActivity extends BaseActivity<MRPNormalReviewView, M
                     ToastUtils.showShort(getString(R.string.please_input_pick_num));
                     return;
                 }
+                /**
+                 * 挑选 特采 能输入数量
+                 */
                 int pickNum = Integer.parseInt(pickNumStr);
-                if (pickNum > mrpReviewData.getReceiveQty()) {//挑选或特采数量大于实收数
+                if (qcReviewResult < 3 && pickNum > mrpReviewData.getReceiveQty()) {//挑选或特采数量大于实收数
                     ToastUtils.showShort(getString(R.string.mrp_more_receive_num_tip));
                     return;
                 }
@@ -284,7 +314,12 @@ public class MRPNormalReviewActivity extends BaseActivity<MRPNormalReviewView, M
                 params.put("OrgId", SpUtils.getInstance().getOrgId());
                 params.put("mac", PackageUtils.getMac());
                 params.put("Remark", mark);
-                params.put("ReviewQty", pickNum);
+                /**
+                 * 特采 挑选 传入数量 否则不传
+                 */
+                if(qcReviewResult<3){
+                    params.put("ReviewQty", pickNum);
+                }
                 params.put("QCReview", qcReviewResult);
                 params.put("QCId", mrpReviewData.getQcId());
                 getPresenter().setMRPReviewData(params);

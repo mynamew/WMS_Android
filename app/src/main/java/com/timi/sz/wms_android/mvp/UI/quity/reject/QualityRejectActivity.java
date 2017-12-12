@@ -18,6 +18,7 @@ import com.timi.sz.wms_android.base.adapter.BaseRecyclerAdapter;
 import com.timi.sz.wms_android.base.adapter.RecyclerViewHolder;
 import com.timi.sz.wms_android.base.divider.DividerItemDecoration;
 import com.timi.sz.wms_android.base.uils.Constants;
+import com.timi.sz.wms_android.base.uils.InputMethodUtils;
 import com.timi.sz.wms_android.base.uils.PackageUtils;
 import com.timi.sz.wms_android.base.uils.SpUtils;
 import com.timi.sz.wms_android.base.uils.ToastUtils;
@@ -138,6 +139,10 @@ public class QualityRejectActivity extends BaseActivity<QualityRejectView, Quali
                 getPresenter().getBarcodeData(params, result);
             }
         });
+        //如果 barcodeData 为空则进行初始化(为了处理 没有条码信息)
+        if (null == barcodeData) {
+            barcodeData = new ArrayList<>();
+        }
         /**
          * 初始化 adapter
          */
@@ -185,40 +190,11 @@ public class QualityRejectActivity extends BaseActivity<QualityRejectView, Quali
         /**
          * 设置数据
          */
-        boolean isHaveBarcode = false;//是否有条码重复
         //如果为空 则初始化
         if (null == barcodeData) {
             barcodeData = new ArrayList<>();
         }
-        /**
-         * 获取是否 条码重复（
-         */
-        for (int i = 0; i < barcodeData.size(); i++) {
-            if (barcodeStr.equals(barcodeData.get(i).getBarcodeNo())) {
-                isHaveBarcode = true;
-                break;
-            }
-        }
-        /**
-         * 如果有重复条码提示用户修改
-         */
-        if (isHaveBarcode) {
-            showBarcodeUpdateDialog(data);
-        } else {
-            /**
-             *提交质检拒收
-             */
-            Map<String, Object> params = new HashMap<>();
-            params.put("UserId", SpUtils.getInstance().getUserId());
-            params.put("OrgId", SpUtils.getInstance().getOrgId());
-            params.put("mac", PackageUtils.getMac());
-            params.put("ReceiptId", receiptId);
-            params.put("RejectQty", data.getRejectQty());
-            params.put("BarcodeNo", barcodeStr);
-            params.put("ReceiptDetailId", receiptDetailId);
-            getPresenter().setBarcodeData(params);
-        }
-
+        showBarcodeUpdateDialog(data);
     }
 
     @Override
@@ -226,18 +202,6 @@ public class QualityRejectActivity extends BaseActivity<QualityRejectView, Quali
         mBarData = data;
         //当前扫描的barcode是否包含在链表中
         boolean isContainCurrentBarcode = false;
-        /**
-         * 如果链表为空 则插入数据即可
-         */
-        if (barcodeData.isEmpty()) {
-            NormalQualityData.BarcodeDataBean barcodeDataBean = new NormalQualityData.BarcodeDataBean();
-            barcodeDataBean.setBarcodeNo(barcodeStr);
-            barcodeDataBean.setRejectQty(data.getRejectQty());
-            barcodeDataBean.setCurrentQty(data.getCurrentQty());
-            barcodeDataBean.setPackQty(data.getInitialQty());
-            barcodeData.add(barcodeDataBean);
-        }
-
         /**
          * 设置数据
          */
@@ -251,14 +215,20 @@ public class QualityRejectActivity extends BaseActivity<QualityRejectView, Quali
             }
         }
         /**
+         * 发送  质检拒收成功 的广播 ，更新前面的数据
+         */
+        QualityEvent qualityEvent = new QualityEvent(QualityEvent.QUALITY_REJECT_SUCCESS);
+        NormalQualityData.BarcodeDataBean barcodeDataBean = new NormalQualityData.BarcodeDataBean();
+        barcodeDataBean.setBarcodeNo(barcodeStr);
+        barcodeDataBean.setPackQty(data.getInitialQty());
+        barcodeDataBean.setCurrentQty(data.getCurrentQty());
+        barcodeDataBean.setRejectQty(data.getRejectQty());
+        qualityEvent.setNewBarDataBean(barcodeDataBean);
+        BaseMessage.post(qualityEvent);
+        /**
          * 如果不包含则加入链表并刷新adapter
          */
         if (!isContainCurrentBarcode) {
-            NormalQualityData.BarcodeDataBean barcodeDataBean = new NormalQualityData.BarcodeDataBean();
-            barcodeDataBean.setBarcodeNo(barcodeStr);
-            barcodeDataBean.setPackQty(data.getInitialQty());
-            barcodeDataBean.setCurrentQty(data.getCurrentQty());
-            barcodeDataBean.setRejectQty(data.getRejectQty());
             barcodeData.add(barcodeDataBean);
         }
         if (null != adapter) {
@@ -292,21 +262,38 @@ public class QualityRejectActivity extends BaseActivity<QualityRejectView, Quali
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tv_quality_complete://质检完成
-                String barCode = etMinPackCode.getText().toString();
-                if (TextUtils.isEmpty(barCode)) {
-                    ToastUtils.showShort(getString(R.string.please_scan_assign_material_code));
-                    return;
-                }
-                /**
-                 * 质检确认
-                 */
-                Map<String, Object> params = new HashMap<>();
-                params.put("UserId", SpUtils.getInstance().getUserId());
-                params.put("OrgId", SpUtils.getInstance().getOrgId());
-                params.put("mac", PackageUtils.getMac());
-                params.put("ReceiptId", mData.getNormalSummary().getReceiptId());
-                params.put("ReceiptDetailId", mData.getNormalSummary().getReceiptDetailId());
-                getPresenter().submitFinish(params);
+                new MyDialog(QualityRejectActivity.this, R.layout.dialog_logout)
+                        .setImageViewListener(R.id.iv_close, new MyDialog.DialogClickListener() {
+                            @Override
+                            public void dialogClick(MyDialog dialog) {
+                                dialog.dismiss();
+                            }
+                        }).setTextViewContent(R.id.tv_title, getString(R.string.quality_complete))
+                        .setTextViewContent(R.id.tv_content, getString(R.string.please_confirm_quality_complete))
+                        .setButtonListener(R.id.tv_logout_confirm, null, new MyDialog.DialogClickListener() {
+                            @Override
+                            public void dialogClick(MyDialog dialog) {
+                                dialog.dismiss();
+                                /**
+                                 * 质检确认
+                                 */
+                                Map<String, Object> params = new HashMap<>();
+                                params.put("UserId", SpUtils.getInstance().getUserId());
+                                params.put("OrgId", SpUtils.getInstance().getOrgId());
+                                params.put("mac", PackageUtils.getMac());
+                                params.put("ReceiptId", mData.getNormalSummary().getReceiptId());
+                                params.put("ReceiptDetailId", mData.getNormalSummary().getReceiptDetailId());
+                                getPresenter().submitFinish(params);
+                            }
+                        })
+                        .setButtonListener(R.id.tv_logout_cancel, null, new MyDialog.DialogClickListener() {
+                            @Override
+                            public void dialogClick(MyDialog dialog) {
+                                dialog.dismiss();
+                            }
+                        })
+                        .show();
+
                 break;
             case R.id.iv_scan://扫描包装码
                 scan(Constants.REQUEST_SCAN_CODE_BARCODE, new ScanQRCodeResultListener() {
@@ -343,7 +330,7 @@ public class QualityRejectActivity extends BaseActivity<QualityRejectView, Quali
      *
      * @param data
      */
-    public void showBarcodeUpdateDialog(BarcodeData data) {
+    public void showBarcodeUpdateDialog(final BarcodeData data) {
         if (null == myDialog) {
             /**
              * 弹出设置拒收数量的dialog
@@ -363,10 +350,11 @@ public class QualityRejectActivity extends BaseActivity<QualityRejectView, Quali
             setTextViewText(myDialog.getTextView(R.id.tv_start_pack_num), R.string.start_pack_num, data.getInitialQty());
             setTextViewText(myDialog.getTextView(R.id.tv_real_pack_num), R.string.real_pack_num, data.getCurrentQty());
 
-            myDialog.getEdittext(R.id.et_reject_num).setText(String.valueOf(data.getRejectQty()));
+            myDialog.getEdittext(R.id.et_reject_num).setText(String.valueOf(rejectNum));
             myDialog.setButtonListener(R.id.btn_commit, null, new MyDialog.DialogClickListener() {
                 @Override
                 public void dialogClick(MyDialog dialog) {
+                    InputMethodUtils.hide(QualityRejectActivity.this);
                     String rejectNumStr = myDialog.getEdittext(R.id.et_reject_num).getText().toString();
                     if (TextUtils.isEmpty(rejectNumStr)) {
                         ToastUtils.showShort(getString(R.string.please_input_reject_num));
@@ -390,10 +378,19 @@ public class QualityRejectActivity extends BaseActivity<QualityRejectView, Quali
             myDialog.setButtonListener(R.id.btn_cancel, null, new MyDialog.DialogClickListener() {
                 @Override
                 public void dialogClick(MyDialog dialog) {
+                    InputMethodUtils.hide(QualityRejectActivity.this);
+                    dialog.dismiss();
+                }
+            }).setImageViewListener(R.id.iv_close, new MyDialog.DialogClickListener() {
+                @Override
+                public void dialogClick(MyDialog dialog) {
+                    InputMethodUtils.hide(QualityRejectActivity.this);
                     dialog.dismiss();
                 }
             });
         }
+        setTextViewText(myDialog.getTextView(R.id.tv_start_pack_num), R.string.start_pack_num, data.getInitialQty());
+        setTextViewText(myDialog.getTextView(R.id.tv_real_pack_num), R.string.real_pack_num, data.getCurrentQty());
         /**
          * 设置拒收数选中
          */

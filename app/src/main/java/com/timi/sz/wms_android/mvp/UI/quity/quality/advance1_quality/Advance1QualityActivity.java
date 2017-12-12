@@ -26,11 +26,15 @@ import com.timi.sz.wms_android.base.uils.ToastUtils;
 import com.timi.sz.wms_android.bean.quality.adavance.CommitAdvance1Data;
 import com.timi.sz.wms_android.bean.quality.adavance.GetAdvanceData;
 import com.timi.sz.wms_android.bean.quality.normal.CommitNormalData;
+import com.timi.sz.wms_android.bean.quality.normal.NormalQualityData;
 import com.timi.sz.wms_android.http.message.BaseMessage;
 import com.timi.sz.wms_android.http.message.event.QualityEvent;
 import com.timi.sz.wms_android.mvp.UI.quity.reject.QualityRejectActivity;
 import com.timi.sz.wms_android.mvp.base.BaseActivity;
 import com.timi.sz.wms_android.view.MyDialog;
+
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -146,6 +150,7 @@ public class Advance1QualityActivity extends BaseActivity<Advance1QualityView, A
         setActivityTitle(getString(R.string.quality_advance1_title));
         receiptId = getIntent().getIntExtra("ReceiptId", -1);
         receiptDetailId = getIntent().getIntExtra("ReceiptDetailId", -1);
+        BaseMessage.register(this);
     }
 
     @Override
@@ -369,6 +374,22 @@ public class Advance1QualityActivity extends BaseActivity<Advance1QualityView, A
             setTextViewContent(tvMaterialAttr, normalSummary.getMaterialAttribute());
             setMaterialAttrStatus(tvMaterialAttr);
             /**
+             * 对质检结果进行判断  设置是否合格，通过 质检状态和质检结果共同判断
+             */
+            //质检未完成
+            if (normalSummary.getQcStatus() == 2) {
+                //质检合格
+                if (normalSummary.getQcResult() == 1) {
+                    rdQualified.setChecked(true);
+                } else if (normalSummary.getQcResult() == 3) {
+                    //质检不合格
+                    rdUnqualified.setChecked(true);
+                } else {
+                    //质检不合格
+                    rdWaitDeal.setChecked(true);
+                }
+            }
+            /**
              * 不良原因
              */
             final List<GetAdvanceData.FaultDataBean> faultData = data.getFaultData();
@@ -576,12 +597,18 @@ public class Advance1QualityActivity extends BaseActivity<Advance1QualityView, A
     }
 
     @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        BaseMessage.unregister(this);
+    }
+
+    @Override
     public void submitFinish() {
         ToastUtils.showShort("质检确认完成！");
         /**
          * 关闭当前界面
          */
-        onBackPressed();
+        BaseMessage.post(new QualityEvent(QualityEvent.QUALITY_CONFRIM));
     }
 
 
@@ -595,6 +622,50 @@ public class Advance1QualityActivity extends BaseActivity<Advance1QualityView, A
         public FaultData(int faultId, int faultQty) {
             FaultId = faultId;
             FaultQty = faultQty;
+        }
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void closNormalQuality(QualityEvent event) {
+        if (event.getEvent().equals(QualityEvent.QUALITY_CONFRIM)) {
+            onBackPressed();
+        }/**
+         * 用于 更改了质检结果 更新质检来源数据
+         */
+        else if (event.getEvent().equals(QualityEvent.QUALITY_REJECT_SUCCESS)) {
+            NormalQualityData.BarcodeDataBean newBarDataBean = event.getNewBarDataBean();
+            if (null != newBarDataBean) {
+                List<NormalQualityData.BarcodeDataBean> barcodeData = mData.getBarcodeData();
+                //是否为空的怕地暖
+                if (null == barcodeData) {
+                    barcodeData = new ArrayList<>();
+                }
+                //当前扫描的barcode是否包含在链表中
+                boolean isContainCurrentBarcode = false;
+                /**
+                 * 设置数据
+                 */
+                for (int i = 0; i < barcodeData.size(); i++) {
+                    if (newBarDataBean.getBarcodeNo().equals(barcodeData.get(i).getBarcodeNo())) {
+                        barcodeData.get(i).setBarcodeNo(newBarDataBean.getBarcodeNo());
+                        barcodeData.get(i).setCurrentQty(newBarDataBean.getCurrentQty());
+                        barcodeData.get(i).setPackQty(newBarDataBean.getCurrentQty());
+                        barcodeData.get(i).setRejectQty(newBarDataBean.getRejectQty());
+                        isContainCurrentBarcode = true;
+                    }
+                }
+                /**
+                 * 是否插入数据
+                 */
+                /**
+                 * 如果不包含则加入链表并刷新adapter
+                 */
+                if (!isContainCurrentBarcode) {
+                    barcodeData.add(newBarDataBean);
+                }
+                //设置barcodedata
+                mData.setBarcodeData(barcodeData);
+            }
         }
     }
 }

@@ -570,7 +570,7 @@
     <string name="unquality">不合格</string>
     <string name="quality_query_result_nodata">未查询到您所搜索的质检信息，请重新输入！</string>
     <string name="the_good_no_quality">此物品为免检物品，请确认免检！</string>
-
+    <string name="quality_confirm_complete">质检确认完成！</string>
     /**====== 普通质检 ======**/
     <string name="receive_material_date">收料日期：%1$s</string>
     <string name="instock_total_num_tip">入库总数：</string>
@@ -665,6 +665,7 @@
     <string name="please_select_badness_reason">请选择不良原因</string>
 
     /**====== 质检拒收 ======**/
+    <string name="please_confirm_quality_complete">请确认质检已完成？</string>
     <string name="start_pack_num">初始包装数：%1$s</string>
     <string name="real_pack_num">实际包装数：%1$s</string>
     <string name="min_pack_code_tip">最小包装码：</string>
@@ -687,7 +688,7 @@
     <string name="pass_num_tip">合格数：</string>
     <string name="badness_percent_tip">不良率：</string>
     <string name="mrp_normal_review_work_tip">质检操作(普检)</string>
-    <string name="mrp_more_receive_num_tip">挑选/特采/正采的数量不能大于实收数，请重新输入</string>
+    <string name="mrp_more_receive_num_tip">挑选/特采的数量不能大于实收数，请重新输入</string>
     <string name="mrp_normal_checker">质检人：%1$s</string>
     <string name="please_select_mrp_review_result">请选择评审结果</string>
     <string name="mrp_normal_pick_tip">挑选/特采</string>
@@ -835,7 +836,7 @@
     <string name="commit_check_data_success">提交盘点数据成功</string>
     <string name="item_receive_material_date">收料日期</string>
     <string name="item_real_receive_qty">实收数</string>
-
+    <string name="number">数量</string>
 
 
 </resources>

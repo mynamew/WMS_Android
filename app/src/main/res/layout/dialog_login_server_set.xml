@@ -30,6 +30,7 @@
                     android:background="#999"/>
 
                 <TextView
+                    android:id="@+id/login_server_set"
                     android:layout_width="wrap_content"
                     android:layout_height="60px"
                     android:layout_centerHorizontal="true"

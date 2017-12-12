@@ -170,6 +170,5 @@ public class MRPReviewActivity extends BaseActivity<MRPReviewView, MRPReviewPres
         if (event.getEvent().equals(MrpEvent.MRP_REVIEW_SUCCESS)) {
             initData();
         }
-
     }
 }
