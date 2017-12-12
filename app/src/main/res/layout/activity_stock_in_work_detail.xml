@@ -28,6 +28,7 @@
             android:layout_marginLeft="30px"
             android:text="@string/scan_allot_in_orderno_detail"
             android:textColor="#333"
+            android:textSize="13sp"
             android:textStyle="bold"/>
 
         <ImageView

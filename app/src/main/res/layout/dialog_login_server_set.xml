@@ -18,20 +18,39 @@
             android:layout_centerInParent="true"
             android:background="@drawable/bg_rectangle_login_server"
             android:orientation="vertical">
-
-            <TextView
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="100px"
-                android:gravity="center"
-                android:text="@string/server_set"
-                android:textColor="#333"
-                android:textSize="18sp"
-                android:id="@+id/login_server_set"/>
+                android:layout_height="wrap_content">
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="2px"
-                android:background="#333"/>
+                <View
+                    android:layout_width="260px"
+                    android:layout_height="2px"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="85px"
+                    android:background="#999"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="60px"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="55px"
+                    android:background="#fff"
+                    android:gravity="center"
+                    android:paddingLeft="20px"
+                    android:paddingRight="20px"
+                    android:text="@string/server_set"
+                    android:textColor="#333"
+                    android:textSize="16sp"/>
+
+                <ImageView
+                    android:id="@+id/iv_close"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:padding="30px"
+                    android:src="@mipmap/quality_badness_close"/>
+            </RelativeLayout>
+
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -123,15 +142,45 @@
                     android:layout_height="wrap_content"
                     android:src="@mipmap/login_language_down"/>
             </LinearLayout>
-
-            <Button
-                android:id="@+id/bt_login__confirm"
+            <View
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:background="@drawable/selector_login_serverset_confirm"
-                android:gravity="center"
-                android:text="@string/login_confirm_set"
-                android:textColor="#fff"/>
+                android:layout_height="1px"
+                android:background="@color/divide_color"
+                android:layout_marginTop="50px"
+                android:layout_marginBottom="50px"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20px"
+                android:layout_marginLeft="20px"
+                android:layout_marginRight="20px">
+
+                <Button
+                    android:id="@+id/btn_cancel"
+                    android:layout_width="280px"
+                    android:layout_height="72px"
+                    android:layout_marginRight="20px"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_dialog_badness_cancel"
+                    android:gravity="center"
+                    android:text="@string/cancel"
+                    android:textColor="@color/tab_txt_unselect"
+                    android:textSize="16sp"/>
+
+
+                <Button
+                    android:id="@+id/bt_login__confirm"
+                    android:layout_width="280px"
+                    android:layout_height="72px"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginLeft="20px"
+                    android:layout_weight="1"
+                    android:background="@drawable/selector_btn_bg_login"
+                    android:gravity="center"
+                    android:text="@string/confirm"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"/>
+            </LinearLayout>
         </LinearLayout>
     </RelativeLayout>
 </RelativeLayout>

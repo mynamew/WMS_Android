@@ -160,7 +160,14 @@ public class SettingFragment extends BaseFragment<SetFragmentView, SetFragmentPr
                             startActivity(new Intent(getActivity(), LoginActivity.class));
                             getActivity().onBackPressed();
                         }
-                    }).setAnimation(R.style.popWindow_animation_push);
+                    })
+                    .setAnimation(R.style.popWindow_animation_push)
+                    .setImageViewListener(R.id.iv_close, new MyDialog.DialogClickListener() {
+                        @Override
+                        public void dialogClick(MyDialog dialog) {
+                            dialog.dismiss();
+                        }
+                    });
         }
         mLogoutDialog.show();
     }

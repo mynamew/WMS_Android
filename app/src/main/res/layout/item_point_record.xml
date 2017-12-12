@@ -21,7 +21,8 @@
             android:layout_height="match_parent"
             android:gravity="left"
             android:text="@string/line_name"
-            android:textColor="@color/color_333"/>
+            android:textColor="@color/color_333"
+            android:textSize="13sp"/>
 
         <TextView
             android:id="@+id/tv_material_code"
@@ -30,7 +31,8 @@
             android:layout_weight="4"
             android:gravity="left"
             android:text="@string/item_material_code"
-            android:textColor="@color/color_333"/>
+            android:textColor="@color/color_333"
+            android:textSize="13sp"/>
 
         <TextView
             android:id="@+id/tv_quality_date"
@@ -54,15 +56,16 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:paddingLeft="110px"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:paddingLeft="110px">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="24px"
                 android:text="@string/point_num"
-                android:textColor="@color/color_333"/>
+                android:textColor="@color/color_333"
+                android:textSize="13sp"/>
 
             <TextView
                 android:id="@+id/tv_point_num"
@@ -70,7 +73,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10px"
                 android:text="0"
-                android:textColor="@color/color_000"/>
+                android:textColor="@color/color_000"
+                android:textSize="13sp"/>
 
         </LinearLayout>
 
@@ -86,7 +90,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="24px"
                 android:text="@string/spare_num"
-                android:textColor="@color/color_333"/>
+                android:textColor="@color/color_333"
+                android:textSize="13sp"/>
 
             <TextView
                 android:id="@+id/tv_spare_num"
@@ -94,7 +99,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10px"
                 android:text="0"
-                android:textColor="@color/color_000"/>
+                android:textColor="@color/color_000"
+                android:textSize="13sp"/>
 
         </LinearLayout>
     </LinearLayout>
@@ -104,8 +110,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="24px"
-        android:paddingLeft="110px"
         android:layout_marginTop="10px"
+        android:paddingLeft="110px"
         android:textColor="@color/color_666"
         android:textSize="13sp"/>
 </LinearLayout>

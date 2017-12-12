@@ -363,7 +363,7 @@
             <View
                 android:id="@+id/view_divide"
                 android:layout_width="match_parent"
-                android:layout_height="24px"
+                android:layout_height="13sp"
                 android:background="@color/divide_color"/>
 
             <TextView
@@ -396,7 +396,7 @@
                     android:layout_weight="2"
                     android:gravity="center"
                     android:text="@string/line_name"
-                    android:textSize="24px"/>
+                    android:textSize="13sp"/>
 
                 <TextView
                     android:layout_width="0dp"
@@ -404,7 +404,7 @@
                     android:layout_weight="4"
                     android:gravity="center"
                     android:text="@string/header_batch_lib_code"
-                    android:textSize="24px"/>
+                    android:textSize="13sp"/>
 
                 <TextView
                     android:id="@+id/tv_bathch_num"
@@ -413,7 +413,7 @@
                     android:layout_weight="4"
                     android:gravity="center"
                     android:text="@string/batch_tip"
-                    android:textSize="24px"/>
+                    android:textSize="13sp"/>
 
                 <TextView
                     android:layout_width="0dp"
@@ -421,7 +421,7 @@
                     android:layout_weight="2"
                     android:gravity="center"
                     android:text="@string/can_user_repertory"
-                    android:textSize="24px"/>
+                    android:textSize="13sp"/>
 
                 <TextView
                     android:layout_width="0dp"
@@ -429,7 +429,7 @@
                     android:layout_weight="2"
                     android:gravity="center"
                     android:text="@string/header_have_count_num"
-                    android:textSize="24px"/>
+                    android:textSize="13sp"/>
 
                 <TextView
                     android:layout_width="0dp"
@@ -437,7 +437,7 @@
                     android:layout_weight="2"
                     android:gravity="center"
                     android:text="@string/header_can_useful_life"
-                    android:textSize="24px"/>
+                    android:textSize="13sp"/>
 
             </LinearLayout>
 

@@ -26,14 +26,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="HP SADASDSA"
-            android:textSize="26px"
+            android:textSize="13sp"
             android:textColor="#333"/>
 
         <TextView
             android:id="@+id/tv_states"
             android:layout_width="wrap_content"
             android:text="已连接"
-            android:textSize="22px"
+            android:textSize="11sp"
             android:layout_marginTop="10px"
             android:textColor="#999"
             android:layout_height="wrap_content"/>

@@ -569,6 +569,8 @@
     <string name="wait_deal">待定</string>
     <string name="unquality">不合格</string>
     <string name="quality_query_result_nodata">未查询到您所搜索的质检信息，请重新输入！</string>
+    <string name="the_good_no_quality">此物品为免检物品，请确认免检！</string>
+
     /**====== 普通质检 ======**/
     <string name="receive_material_date">收料日期：%1$s</string>
     <string name="instock_total_num_tip">入库总数：</string>
@@ -793,6 +795,8 @@
     <string name="allot_orderno">调拨单号</string>
     /**====== 容器调整 ======**/
     /**====== 库存查询======**/
+    <string name="container_repertory">容器存储</string>
+    <string name="goods_repertory">物品库存</string>
     <string name="query_repertory_tip">库存查询</string>
     <string name="goods_type">物品种类</string>
     <string name="goods_total_num">总数量</string>
@@ -831,6 +835,7 @@
     <string name="commit_check_data_success">提交盘点数据成功</string>
     <string name="item_receive_material_date">收料日期</string>
     <string name="item_real_receive_qty">实收数</string>
+
 
 
 </resources>

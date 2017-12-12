@@ -33,7 +33,7 @@
                 android:paddingRight="20px"
                 android:text="@string/return_divide_work"
                 android:textColor="#333"
-                android:textSize="32px"/>
+                android:textSize="16sp"/>
 
             <ImageView
                 android:id="@+id/iv_close"
@@ -56,7 +56,7 @@
                 android:layout_marginLeft="40px"
                 android:text="@string/divide_barcode_tip"
                 android:textColor="#333"
-                android:textSize="28px"/>
+                android:textSize="14sp"/>
 
             <TextView
                 android:id="@+id/tv_divide_barcode"
@@ -65,7 +65,7 @@
                 android:layout_marginLeft="80px"
                 android:text=""
                 android:textColor="#333"
-                android:textSize="28px"/>
+                android:textSize="14sp"/>
         </LinearLayout>
 
         <LinearLayout
@@ -80,7 +80,7 @@
                 android:layout_marginLeft="40px"
                 android:text="@string/barcode_contain_total_num_tip"
                 android:textColor="#333"
-                android:textSize="28px"/>
+                android:textSize="14sp"/>
 
             <TextView
                 android:id="@+id/tv_barcode_contain_total_num"
@@ -89,7 +89,7 @@
                 android:layout_marginLeft="25px"
                 android:text=""
                 android:textColor="#333"
-                android:textSize="28px"/>
+                android:textSize="14sp"/>
         </LinearLayout>
 
         <LinearLayout
@@ -104,7 +104,7 @@
                 android:layout_marginLeft="40px"
                 android:text="@string/should_return_num_tip"
                 android:textColor="#333"
-                android:textSize="28px"/>
+                android:textSize="14sp"/>
 
             <TextView
                 android:id="@+id/tv_should_return_num"
@@ -113,7 +113,7 @@
                 android:layout_marginLeft="80px"
                 android:text=""
                 android:textColor="#333"
-                android:textSize="28px"/>
+                android:textSize="14sp"/>
         </LinearLayout>
 
         <LinearLayout
@@ -128,7 +128,7 @@
                 android:layout_marginLeft="40px"
                 android:text="@string/divide_num_tip"
                 android:textColor="#333"
-                android:textSize="28px"/>
+                android:textSize="14sp"/>
 
             <EditText
                 android:id="@+id/et_divide_num"
@@ -139,7 +139,7 @@
                 android:paddingLeft="20px"
                 android:hint="@string/please_input_divide_num"
                 android:textColor="#333"
-                android:textSize="28px"/>
+                android:textSize="14sp"/>
         </LinearLayout>
         <View
             android:layout_width="match_parent"

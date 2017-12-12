@@ -17,7 +17,7 @@
             android:layout_marginLeft="30px"
             android:text="@string/batch"
             android:textColor="@color/color_666"
-            android:textSize="28px"/>
+            android:textSize="14sp"/>
 
         <TextView
             android:id="@+id/tv_batch"
@@ -25,7 +25,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/color_000"
-            android:textSize="26px"/>
+            android:textSize="13sp"/>
     </LinearLayout>
 
     <LinearLayout

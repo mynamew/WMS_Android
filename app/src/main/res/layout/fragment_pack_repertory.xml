@@ -26,7 +26,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/goods_type"
                 android:textColor="@color/color_666"
-                android:textSize="28px"/>
+                android:textSize="14sp"/>
 
             <TextView
                 android:id="@+id/tv_material_type"
@@ -35,7 +35,7 @@
                 android:layout_marginLeft="30px"
                 android:text="0"
                 android:textColor="@color/color_000"
-                android:textSize="30px"/>
+                android:textSize="15sp"/>
         </LinearLayout>
 
         <LinearLayout
@@ -50,7 +50,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/goods_total_num"
                 android:textColor="@color/color_666"
-                android:textSize="28px"/>
+                android:textSize="14sp"/>
 
             <TextView
                 android:id="@+id/tv_total_num"
@@ -59,7 +59,7 @@
                 android:layout_marginLeft="30px"
                 android:text="0"
                 android:textColor="@color/color_000"
-                android:textSize="30px"/>
+                android:textSize="15sp"/>
         </LinearLayout>
     </LinearLayout>
 
@@ -83,7 +83,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/pack_type"
                 android:textColor="@color/color_666"
-                android:textSize="28px"/>
+                android:textSize="14sp"/>
 
             <TextView
                 android:id="@+id/tv_pack_type"
@@ -92,7 +92,7 @@
                 android:layout_marginLeft="30px"
                 android:text=""
                 android:textColor="@color/color_000"
-                android:textSize="30px"/>
+                android:textSize="15sp"/>
         </LinearLayout>
 
         <LinearLayout
@@ -107,7 +107,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/pack_code"
                 android:textColor="@color/color_666"
-                android:textSize="28px"/>
+                android:textSize="14sp"/>
 
             <TextView
                 android:id="@+id/tv_pack_num"
@@ -116,7 +116,7 @@
                 android:layout_marginLeft="30px"
                 android:text=""
                 android:textColor="@color/color_000"
-                android:textSize="30px"/>
+                android:textSize="15sp"/>
         </LinearLayout>
     </LinearLayout>
 

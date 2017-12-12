@@ -443,6 +443,16 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
                                 showSelectLanguagePopwindow(myDialog.getTextView(R.id.tv_login_language));
                             }
                         }
+                    }).setImageViewListener(R.id.iv_close, new MyDialog.DialogClickListener() {
+                        @Override
+                        public void dialogClick(MyDialog dialog) {
+                            dialog.dismiss();
+                        }
+                    }).setButtonListener(R.id.btn_cancel, null, new MyDialog.DialogClickListener() {
+                        @Override
+                        public void dialogClick(MyDialog dialog) {
+                            dialog.dismiss();
+                        }
                     });
             ivLoginDown = (ImageView) myDialog.getView(R.id.iv_login_down);
         }

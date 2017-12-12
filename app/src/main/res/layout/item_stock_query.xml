@@ -9,8 +9,8 @@
         android:id="@+id/divide_bottom"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:visibility="visible"
-        android:background="#999"/>
+        android:background="#999"
+        android:visibility="visible"/>
 
     <LinearLayout
         android:id="@+id/ll_content"
@@ -30,7 +30,8 @@
             android:gravity="center"
             android:paddingLeft="20px"
             android:paddingRight="20px"
-            android:text="@string/stock_query_batch"/>
+            android:text="@string/stock_query_batch"
+            android:textSize="13sp"/>
 
         <View
             android:layout_width="1dp"
@@ -44,7 +45,8 @@
             android:gravity="center"
             android:paddingLeft="20px"
             android:paddingRight="20px"
-            android:text="@string/item_goods_name"/>
+            android:text="@string/item_goods_name"
+            android:textSize="13sp"/>
 
         <View
             android:layout_width="1dp"
@@ -58,7 +60,8 @@
             android:gravity="center"
             android:paddingLeft="20px"
             android:paddingRight="20px"
-            android:text="@string/item_goods_code"/>
+            android:text="@string/item_goods_code"
+            android:textSize="13sp"/>
 
         <View
             android:layout_width="1dp"
@@ -72,7 +75,8 @@
             android:gravity="center"
             android:paddingLeft="20px"
             android:paddingRight="20px"
-            android:text="@string/item_goods_model"/>
+            android:text="@string/item_goods_model"
+            android:textSize="13sp"/>
 
         <View
             android:layout_width="1dp"
@@ -86,7 +90,8 @@
             android:gravity="center"
             android:paddingLeft="20px"
             android:paddingRight="20px"
-            android:text="@string/item_goods_num"/>
+            android:text="@string/item_goods_num"
+            android:textSize="13sp"/>
 
         <View
             android:layout_width="1dp"
@@ -100,7 +105,8 @@
             android:gravity="center"
             android:paddingLeft="20px"
             android:paddingRight="20px"
-            android:text="@string/item_goods_current_status"/>
+            android:text="@string/item_goods_current_status"
+            android:textSize="13sp"/>
 
         <View
             android:layout_width="1dp"

@@ -30,7 +30,7 @@
                 android:layout_weight="1"
                 android:text="@string/item_line_num"
                 android:textColor="#333"
-                android:textSize="26px"/>
+                android:textSize="13sp"/>
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -43,7 +43,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/item_wait_count_num"
                     android:textColor="#666"
-                    android:textSize="26px"/>
+                    android:textSize="13sp"/>
 
                 <TextView
                     android:id="@+id/tv_wait_count_num"
@@ -51,7 +51,7 @@
                     android:layout_height="wrap_content"
                     android:text="0"
                     android:textColor="#000"
-                    android:textSize="26px"/>
+                    android:textSize="13sp"/>
             </LinearLayout>
 
             <LinearLayout
@@ -65,7 +65,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/item_have_scan_num"
                     android:textColor="#666"
-                    android:textSize="26px"/>
+                    android:textSize="13sp"/>
 
                 <TextView
                     android:id="@+id/tv_scan_num"
@@ -73,7 +73,7 @@
                     android:layout_height="wrap_content"
                     android:text="0"
                     android:textColor="#000"
-                    android:textSize="26px"/>
+                    android:textSize="13sp"/>
             </LinearLayout>
 
             <LinearLayout
@@ -87,7 +87,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/item_should_return_num"
                     android:textColor="#666"
-                    android:textSize="26px"/>
+                    android:textSize="13sp"/>
 
                 <TextView
                     android:id="@+id/tv_should_return_num"
@@ -95,7 +95,7 @@
                     android:layout_height="wrap_content"
                     android:text="0"
                     android:textColor="#000"
-                    android:textSize="26px"/>
+                    android:textSize="13sp"/>
             </LinearLayout>
         </LinearLayout>
 
@@ -107,7 +107,7 @@
             android:paddingLeft="20px"
             android:textColor="#666"
             android:text=""
-            android:textSize="22px"/>
+            android:textSize="11sp"/>
 
         <TextView
             android:id="@+id/tv_material_model"
@@ -117,6 +117,6 @@
             android:paddingLeft="20px"
             android:layout_marginTop="10px"
             android:textColor="#666"
-            android:textSize="22px"/>
+            android:textSize="11sp"/>
     </LinearLayout>
 </com.zhy.autolayout.AutoLinearLayout>

@@ -35,7 +35,7 @@
                 android:paddingTop="10px"
                 android:text="委外发料（审核）数量拆分"
                 android:textColor="#333"
-                android:textSize="28px"
+                android:textSize="14sp"
                 android:textStyle="bold"/>
 
             <View
@@ -59,7 +59,7 @@
                     android:text="打印机"
                     android:gravity="center_vertical"
                     android:textColor="#333"
-                    android:textSize="26px"/>
+                    android:textSize="13sp"/>
 
                 <ImageView
                     android:id="@+id/iv_print"
@@ -91,7 +91,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/material_barcode_tip"
                     android:textColor="#666"
-                    android:textSize="24px"/>
+                    android:textSize="12sp"/>
 
                 <TextView
                     android:id="@+id/tv_barcode"
@@ -100,7 +100,7 @@
                     android:layout_marginLeft="30px"
                     android:text="2134565432"
                     android:textColor="#000"
-                    android:textSize="24px"/>
+                    android:textSize="12sp"/>
             </LinearLayout>
 
             <LinearLayout
@@ -115,7 +115,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/header_batch_lib_code"
                     android:textColor="#666"
-                    android:textSize="24px"/>
+                    android:textSize="12sp"/>
 
                 <TextView
                     android:id="@+id/tv_lib_code"
@@ -124,7 +124,7 @@
                     android:layout_marginLeft="30px"
                     android:text="123453234"
                     android:textColor="#000"
-                    android:textSize="24px"/>
+                    android:textSize="12sp"/>
             </LinearLayout>
 
             <View
@@ -147,7 +147,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/item_material_code"
                     android:textColor="#666"
-                    android:textSize="24px"/>
+                    android:textSize="12sp"/>
 
                 <TextView
                     android:id="@+id/tv_material_code"
@@ -156,7 +156,7 @@
                     android:layout_marginLeft="30px"
                     android:text="123453234"
                     android:textColor="#000"
-                    android:textSize="24px"/>
+                    android:textSize="12sp"/>
             </LinearLayout>
 
             <LinearLayout
@@ -171,7 +171,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/item_material_name"
                     android:textColor="#666"
-                    android:textSize="24px"/>
+                    android:textSize="12sp"/>
 
                 <TextView
                     android:id="@+id/tv_material_name"
@@ -180,7 +180,7 @@
                     android:layout_marginLeft="30px"
                     android:text="123453234"
                     android:textColor="#000"
-                    android:textSize="24px"/>
+                    android:textSize="12sp"/>
             </LinearLayout>
 
             <LinearLayout
@@ -195,7 +195,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/item_material_model"
                     android:textColor="#666"
-                    android:textSize="24px"/>
+                    android:textSize="12sp"/>
 
                 <TextView
                     android:id="@+id/tv_material_model"
@@ -204,7 +204,7 @@
                     android:layout_marginLeft="30px"
                     android:text="123453234"
                     android:textColor="#000"
-                    android:textSize="24px"/>
+                    android:textSize="12sp"/>
             </LinearLayout>
 
             <LinearLayout
@@ -219,7 +219,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/item_material_attr"
                     android:textColor="#666"
-                    android:textSize="24px"/>
+                    android:textSize="12sp"/>
 
                 <TextView
                     android:id="@+id/tv_material_attr"
@@ -228,7 +228,7 @@
                     android:layout_marginLeft="30px"
                     android:text="123453234"
                     android:textColor="#000"
-                    android:textSize="24px"/>
+                    android:textSize="12sp"/>
             </LinearLayout>
 
             <View
@@ -250,7 +250,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/stock_query_batch"
                     android:textColor="#666"
-                    android:textSize="24px"/>
+                    android:textSize="12sp"/>
 
                 <TextView
                     android:id="@+id/tv_batch"
@@ -259,7 +259,7 @@
                     android:layout_marginLeft="30px"
                     android:text="123453234"
                     android:textColor="#000"
-                    android:textSize="24px"/>
+                    android:textSize="12sp"/>
             </LinearLayout>
 
             <LinearLayout
@@ -274,7 +274,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/current_num_tip"
                     android:textColor="#666"
-                    android:textSize="24px"/>
+                    android:textSize="12sp"/>
 
                 <TextView
                     android:id="@+id/tv_current_num"
@@ -283,7 +283,7 @@
                     android:layout_marginLeft="30px"
                     android:text="123453234"
                     android:textColor="#000"
-                    android:textSize="24px"/>
+                    android:textSize="12sp"/>
             </LinearLayout>
 
             <View
@@ -303,7 +303,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/divide_num_tip"
                     android:textColor="#666"
-                    android:textSize="24px"/>
+                    android:textSize="12sp"/>
 
                 <EditText
                     android:id="@+id/et_divide_num"
@@ -314,7 +314,7 @@
                     android:paddingLeft="20px"
                     android:text="123453234"
                     android:textColor="#000"
-                    android:textSize="24px"/>
+                    android:textSize="12sp"/>
             </LinearLayout>
 
             <View
@@ -365,7 +365,7 @@
             android:background="@drawable/selector_btn_bg_login"
             android:text="@string/confirm"
             android:textColor="@color/white"
-            android:textSize="36px"/>
+            android:textSize="18sp"/>
 
         <Button
             android:id="@+id/btn_cancel"

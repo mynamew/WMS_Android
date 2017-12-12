@@ -29,7 +29,7 @@
                 android:paddingTop="10px"
                 android:text="@string/buy_orderno_info"
                 android:textColor="#333"
-                android:textSize="28px"
+                android:textSize="14sp"
                 android:textStyle="bold"/>
 
             <View
@@ -51,7 +51,7 @@
                     android:paddingLeft="20px"
                     android:text="@string/order_no_tip"
                     android:textColor="#333"
-                    android:textSize="26px"/>
+                    android:textSize="13sp"/>
 
                 <TextView
                     android:id="@+id/tv_orderno"
@@ -60,7 +60,7 @@
                     android:paddingLeft="60px"
                     android:text=""
                     android:textColor="#000"
-                    android:textSize="26px"/>
+                    android:textSize="13sp"/>
             </LinearLayout>
 
 
@@ -76,7 +76,7 @@
                     android:paddingLeft="20px"
                     android:text="@string/orderno_date_tip"
                     android:textColor="#333"
-                    android:textSize="26px"/>
+                    android:textSize="13sp"/>
 
                 <TextView
                     android:id="@+id/tv_create_orderno_date"
@@ -85,7 +85,7 @@
                     android:paddingLeft="35px"
                     android:text=""
                     android:textColor="#000"
-                    android:textSize="26px"/>
+                    android:textSize="13sp"/>
             </LinearLayout>
 
             <LinearLayout
@@ -100,7 +100,7 @@
                     android:paddingLeft="20px"
                     android:text="@string/item_supplier"
                     android:textColor="#333"
-                    android:textSize="26px"/>
+                    android:textSize="13sp"/>
 
                 <TextView
                     android:id="@+id/tv_supplier"
@@ -109,7 +109,7 @@
                     android:paddingLeft="60px"
                     android:text=""
                     android:textColor="#000"
-                    android:textSize="26px"/>
+                    android:textSize="13sp"/>
             </LinearLayout>
 
             <LinearLayout
@@ -124,7 +124,7 @@
                     android:paddingLeft="20px"
                     android:text="@string/buyer_tip"
                     android:textColor="#333"
-                    android:textSize="26px"/>
+                    android:textSize="13sp"/>
 
                 <TextView
                     android:id="@+id/tv_buyer"
@@ -133,7 +133,7 @@
                     android:paddingLeft="60px"
                     android:text=""
                     android:textColor="#000"
-                    android:textSize="26px"/>
+                    android:textSize="13sp"/>
             </LinearLayout>
 
             <LinearLayout
@@ -148,7 +148,7 @@
                     android:paddingLeft="20px"
                     android:text="@string/item_buy_num"
                     android:textColor="#333"
-                    android:textSize="26px"/>
+                    android:textSize="13sp"/>
 
                 <TextView
                     android:id="@+id/tv_buy_num"
@@ -157,7 +157,7 @@
                     android:paddingLeft="60px"
                     android:text=""
                     android:textColor="#000"
-                    android:textSize="26px"/>
+                    android:textSize="13sp"/>
             </LinearLayout>
 
             <LinearLayout
@@ -173,7 +173,7 @@
                     android:paddingLeft="20px"
                     android:text="@string/item_in_stock_num"
                     android:textColor="#333"
-                    android:textSize="26px"/>
+                    android:textSize="13sp"/>
 
                 <TextView
                     android:id="@+id/tv_instock_num"
@@ -182,7 +182,7 @@
                     android:paddingLeft="60px"
                     android:text=""
                     android:textColor="#000"
-                    android:textSize="26px"/>
+                    android:textSize="13sp"/>
             </LinearLayout>
 
             <View
@@ -203,7 +203,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/item_material_code"
                     android:textColor="#333"
-                    android:textSize="26px"/>
+                    android:textSize="13sp"/>
 
                 <TextView
                     android:id="@+id/tv_material_code"
@@ -213,7 +213,7 @@
                     android:gravity="center_vertical"
                     android:text=""
                     android:textColor="#000"
-                    android:textSize="26px"
+                    android:textSize="13sp"
                     />
             </LinearLayout>
 
@@ -229,7 +229,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/item_material_name"
                     android:textColor="#333"
-                    android:textSize="26px"/>
+                    android:textSize="13sp"/>
 
                 <TextView
                     android:id="@+id/tv_material_name"
@@ -239,7 +239,7 @@
                     android:gravity="center_vertical"
                     android:text=""
                     android:textColor="#000"
-                    android:textSize="26px"
+                    android:textSize="13sp"
                     />
             </LinearLayout>
 
@@ -255,7 +255,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/item_material_code"
                     android:textColor="#333"
-                    android:textSize="26px"/>
+                    android:textSize="13sp"/>
 
                 <TextView
                     android:id="@+id/tv_material_model"
@@ -265,7 +265,7 @@
                     android:gravity="center_vertical"
                     android:text=""
                     android:textColor="#000"
-                    android:textSize="26px"
+                    android:textSize="13sp"
                     />
             </LinearLayout>
 
@@ -281,7 +281,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/item_material_attr"
                     android:textColor="#333"
-                    android:textSize="26px"/>
+                    android:textSize="13sp"/>
 
                 <TextView
                     android:id="@+id/tv_material_attr"
@@ -291,7 +291,7 @@
                     android:gravity="center_vertical"
                     android:text=""
                     android:textColor="#000"
-                    android:textSize="26px"
+                    android:textSize="13sp"
                     />
             </LinearLayout>
 
@@ -310,7 +310,7 @@
                 android:paddingTop="10px"
                 android:text="@string/return_material_scan_work"
                 android:textColor="#333"
-                android:textSize="28px"
+                android:textSize="14sp"
                 android:textStyle="bold"/>
 
             <View
@@ -331,7 +331,7 @@
                     android:paddingLeft="30px"
                     android:text="@string/item_material_code"
                     android:textColor="#333"
-                    android:textSize="26px"
+                    android:textSize="13sp"
                     />
 
                 <EditText
@@ -374,7 +374,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/return_material_num_format"
                     android:textColor="#333"
-                    android:textSize="26px"/>
+                    android:textSize="13sp"/>
 
                 <TextView
                     android:id="@+id/tv_return_num"
@@ -384,7 +384,7 @@
                     android:gravity="center_vertical"
                     android:text=""
                     android:textColor="@color/login_txt_color"
-                    android:textSize="26px"
+                    android:textSize="13sp"
                     />
             </LinearLayout>
         </LinearLayout>

@@ -35,7 +35,7 @@
                 android:paddingRight="20px"
                 android:text="@string/dialog_material_point"
                 android:textColor="#333"
-                android:textSize="32px"/>
+                android:textSize="16sp"/>
 
             <ImageView
                 android:id="@+id/iv_close"
@@ -61,7 +61,8 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="@string/item_material_code"
-                android:textColor="#333"/>
+                android:textColor="#333"
+                android:textSize="13sp"/>
 
             <TextView
                 android:id="@+id/tv_material_code"
@@ -70,7 +71,8 @@
                 android:gravity="center_vertical"
                 android:paddingLeft="60px"
                 android:text=""
-                android:textColor="#000"/>
+                android:textColor="#000"
+                android:textSize="13sp"/>
         </LinearLayout>
 
         <LinearLayout
@@ -88,7 +90,8 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="@string/item_material_name"
-                android:textColor="#333"/>
+                android:textColor="#333"
+                android:textSize="13sp"/>
 
             <TextView
                 android:id="@+id/tv_material_name"
@@ -97,7 +100,8 @@
                 android:gravity="center_vertical"
                 android:paddingLeft="60px"
                 android:text=""
-                android:textColor="#000"/>
+                android:textColor="#000"
+                android:textSize="13sp"/>
         </LinearLayout>
 
         <LinearLayout
@@ -114,7 +118,8 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="@string/item_material_model"
-                android:textColor="#333"/>
+                android:textColor="#333"
+                android:textSize="13sp"/>
 
             <TextView
                 android:id="@+id/tv_material_model"
@@ -123,7 +128,8 @@
                 android:gravity="center_vertical"
                 android:paddingLeft="60px"
                 android:text=""
-                android:textColor="#000"/>
+                android:textColor="#000"
+                android:textSize="13sp"/>
         </LinearLayout>
 
         <LinearLayout
@@ -142,7 +148,8 @@
                 android:layout_marginLeft="30px"
                 android:gravity="center"
                 android:text="@string/item_buy_num"
-                android:textColor="#333"/>
+                android:textColor="#333"
+                android:textSize="13sp"/>
 
             <TextView
                 android:id="@+id/tv_buy_num"
@@ -151,7 +158,8 @@
                 android:layout_marginLeft="60px"
                 android:gravity="center_vertical"
                 android:text=""
-                android:textColor="#000"/>
+                android:textColor="#000"
+                android:textSize="13sp"/>
         </LinearLayout>
 
         <LinearLayout
@@ -170,7 +178,8 @@
                 android:layout_marginLeft="30px"
                 android:gravity="center"
                 android:text="@string/item_arrive_goods_num"
-                android:textColor="#333"/>
+                android:textColor="#333"
+                android:textSize="13sp"/>
 
             <TextView
                 android:id="@+id/tv_arrive_goods_num"
@@ -179,7 +188,8 @@
                 android:layout_marginLeft="60px"
                 android:gravity="center_vertical"
                 android:text=""
-                android:textColor="#000"/>
+                android:textColor="#000"
+                android:textSize="13sp"/>
         </LinearLayout>
 
         <View
@@ -280,7 +290,8 @@
                 android:layout_weight="1"
                 android:background="@drawable/bg_rectangle_gray"
                 android:text="@string/cancel"
-                android:textColor="#999"/>
+                android:textColor="#999"
+                android:textSize="16sp"/>
 
             <Button
                 android:id="@+id/btn_commit"
@@ -293,7 +304,8 @@
                 android:layout_weight="1"
                 android:background="@drawable/selector_btn_bg_login"
                 android:text="@string/confirm"
-                android:textColor="#fff"/>
+                android:textColor="#fff"
+                android:textSize="16sp"/>
         </LinearLayout>
     </LinearLayout>
 </com.zhy.autolayout.AutoRelativeLayout>

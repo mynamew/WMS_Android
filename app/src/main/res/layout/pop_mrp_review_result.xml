@@ -9,37 +9,43 @@
 
     <LinearLayout
         android:layout_width="538px"
-        android:layout_marginLeft="1dp"
-        android:layout_marginBottom="1dp"
-        android:layout_marginRight="1dp"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="1dp"
+
+        android:layout_marginLeft="1dp"
+        android:layout_marginRight="1dp"
         android:background="#fff"
-        android:paddingLeft="10px"
         android:orientation="vertical"
-       >
+        android:paddingLeft="10px"
+        >
 
         <TextView
             android:id="@+id/tv_pick"
             android:layout_width="match_parent"
             android:layout_height="40px"
             android:gravity="center_vertical"
-            android:text="@string/quality_pick"/>
+            android:text="@string/quality_pick"
+            android:textSize="13sp"/>
 
         <TextView
             android:id="@+id/tv_special_get"
             android:layout_width="match_parent"
             android:layout_height="40px"
-            android:text="@string/quality_special_get"/>
+            android:text="@string/quality_special_get"
+            android:textSize="13sp"/>
 
         <TextView
             android:id="@+id/tv_all_return"
             android:layout_width="match_parent"
             android:layout_height="40px"
-            android:text="@string/quality_all_return"/>
+            android:text="@string/quality_all_return"
+            android:textSize="13sp"/>
+
         <TextView
             android:id="@+id/tv_right_get"
             android:layout_width="match_parent"
             android:layout_height="40px"
-            android:text="@string/quality_right_get"/>
+            android:text="@string/quality_right_get"
+            android:textSize="13sp"/>
     </LinearLayout>
 </LinearLayout>

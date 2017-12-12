@@ -36,7 +36,7 @@
                 android:paddingRight="20px"
                 android:text="质检拒收"
                 android:textColor="#333"
-                android:textSize="32px"/>
+                android:textSize="16sp"/>
 
             <ImageView
                 android:id="@+id/iv_close"

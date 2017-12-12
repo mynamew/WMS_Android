@@ -831,6 +831,9 @@
     <string name="badness_num_no_more_sample_qty">不良总数不能大于抽样数，请重新输入</string>
     <string name="item_receive_material_date">收料日期</string>
     <string name="item_real_receive_qty">实收数</string>
+    <string name="the_good_no_quality">此物品为免检物品，请确认免检！</string>
+    <string name="container_repertory">容器存储</string>
+    <string name="goods_repertory">物品库存</string>
 
 
 </resources>

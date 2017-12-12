@@ -234,7 +234,7 @@
                     android:gravity="center"
                     android:text="@string/rd_qualified_tip"
                     android:textColor="#666"
-                    android:textSize="26px"/>
+                    android:textSize="13sp"/>
 
                 <RadioButton
                     android:id="@+id/rd_unqualified"
@@ -246,7 +246,7 @@
                     android:gravity="center"
                     android:text="@string/unquality"
                     android:textColor="#666"
-                    android:textSize="26px"/>
+                    android:textSize="13sp"/>
             </RadioGroup>
         </LinearLayout>
 

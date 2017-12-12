@@ -25,7 +25,7 @@
             android:gravity="center"
             android:text="@string/line_name"
             android:textColor="#333"
-            android:textSize="26px"
+            android:textSize="13sp"
             />
 
         <TextView
@@ -36,7 +36,7 @@
             android:gravity="center"
             android:text="@string/item_material_code"
             android:textColor="#333"
-            android:textSize="24px"/>
+            android:textSize="13sp"/>
 
         <TextView
             android:id="@+id/tv_material_name"
@@ -47,7 +47,7 @@
             android:text="@string/item_material_name"
 
             android:textColor="#333"
-            android:textSize="24px"/>
+            android:textSize="13sp"/>
 
         <TextView
             android:id="@+id/tv_allot_total_num"
@@ -58,7 +58,7 @@
             android:text="@string/allot"
 
             android:textColor="#333"
-            android:textSize="24px"/>
+            android:textSize="13sp"/>
 
 
         <TextView
@@ -70,7 +70,7 @@
             android:gravity="center"
             android:text="@string/allot_out"
             android:textColor="#333"
-            android:textSize="24px"/>
+            android:textSize="13sp"/>
 
         <TextView
             android:id="@+id/tv_arrive_good_num"
@@ -80,7 +80,7 @@
             android:gravity="center"
             android:text="@string/header_scan_num"
             android:textColor="#333"
-            android:textSize="24px"
+            android:textSize="13sp"
             android:visibility="gone"/>
     </LinearLayout>
 

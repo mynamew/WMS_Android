@@ -25,7 +25,7 @@
             android:layout_width="match_parent"
             android:layout_height="100px"
             android:gravity="center"
-            android:text="此物品为免检物品，请确认免检！"
+            android:text="@string/the_good_no_quality"
             android:textSize="16sp"/>
 
         <View

@@ -26,6 +26,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="30px"
             android:text="@string/come_material_in_stock_info"
+            android:textSize="13sp"
             android:textColor="#333"
             android:textStyle="bold"/>
 

@@ -28,7 +28,7 @@
                 android:gravity="center_vertical"
                 android:text="@string/repertory_total_num"
                 android:textColor="@color/color_666"
-                android:textSize="28px"/>
+                android:textSize="14sp"/>
 
             <TextView
                 android:id="@+id/tv_repertort_total_num"
@@ -37,7 +37,7 @@
                 android:layout_marginLeft="30px"
                 android:text=""
                 android:textColor="@color/color_000"
-                android:textSize="28px"/>
+                android:textSize="14sp"/>
         </LinearLayout>
 
         <View
@@ -57,7 +57,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/item_material_code"
                 android:textColor="#333"
-                android:textSize="26px"/>
+                android:textSize="13sp"/>
 
             <TextView
                 android:id="@+id/tv_putaway_material_code"
@@ -67,7 +67,7 @@
                 android:text=""
 
                 android:textColor="#000"
-                android:textSize="26px"/>
+                android:textSize="13sp"/>
         </LinearLayout>
 
 
@@ -84,7 +84,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/item_material_name"
                 android:textColor="#333"
-                android:textSize="26px"/>
+                android:textSize="13sp"/>
 
             <TextView
                 android:id="@+id/tv_putaway_material_name"
@@ -94,7 +94,7 @@
                 android:text=""
 
                 android:textColor="#000"
-                android:textSize="26px"/>
+                android:textSize="13sp"/>
         </LinearLayout>
 
         <LinearLayout
@@ -109,7 +109,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/item_material_model"
                 android:textColor="#333"
-                android:textSize="26px"/>
+                android:textSize="13sp"/>
 
             <TextView
                 android:id="@+id/tv_putaway_material_nmodel"
@@ -119,7 +119,7 @@
                 android:text=""
 
                 android:textColor="#000"
-                android:textSize="26px"/>
+                android:textSize="13sp"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -133,7 +133,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/item_material_attr"
                 android:textColor="#333"
-                android:textSize="26px"/>
+                android:textSize="13sp"/>
 
             <TextView
                 android:id="@+id/tv_putaway_material_attr"
@@ -142,7 +142,7 @@
                 android:layout_marginLeft="30px"
                 android:text=""
                 android:textColor="#000"
-                android:textSize="26px"/>
+                android:textSize="13sp"/>
         </LinearLayout>
     </LinearLayout>
 

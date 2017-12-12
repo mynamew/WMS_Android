@@ -18,7 +18,7 @@
                android:layout_weight="1"
                android:background="@drawable/bg_mytab_left_selected"
                android:gravity="center"
-               android:text="容器存储"
+               android:text="@string/container_repertory"
                android:textColor="#fff"/>
 
            <TextView
@@ -28,7 +28,7 @@
                android:layout_weight="1"
                android:background="@drawable/bg_mytab_right_unselected"
                android:gravity="center"
-               android:text="物品库存"
+               android:text="@string/goods_repertory"
                android:textColor="#666"/>
        </LinearLayout>
 </RelativeLayout>
