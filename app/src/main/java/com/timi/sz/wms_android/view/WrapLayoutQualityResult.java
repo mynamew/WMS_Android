@@ -29,7 +29,7 @@ public class WrapLayoutQualityResult extends ViewGroup {
     public int BUTTON_STYLE = 1;
     private int style;
 
-    private SparseArray<QualityResultView> views = new SparseArray<>();
+    private SparseArray<CheckQualityItemResultView> views = new SparseArray<>();
 
     public WrapLayoutQualityResult(Context context) {
         super(context);
@@ -72,7 +72,7 @@ public class WrapLayoutQualityResult extends ViewGroup {
     private void createChild(List<GetAdvance2Data.CheckItemBean> data, final Context context, int textSize, int pl, int pt, int pr, int pb, int ml, int mt, int mr, int mb) {
         int size = data.size();
         for (int i = 0; i < size; i++) {
-            QualityResultView view = new QualityResultView(context);
+            CheckQualityItemResultView view = new CheckQualityItemResultView(context);
             /**
              * 设置检验结果的标题
              */
@@ -254,7 +254,7 @@ public class WrapLayoutQualityResult extends ViewGroup {
      * @param position
      * @return
      */
-    public QualityResultView getView(int position) {
+    public CheckQualityItemResultView getView(int position) {
 
         return views.get(position);
     }
@@ -264,7 +264,7 @@ public class WrapLayoutQualityResult extends ViewGroup {
      *
      * @return
      */
-    public SparseArray<QualityResultView> getViews() {
+    public SparseArray<CheckQualityItemResultView> getViews() {
 
         return views;
     }

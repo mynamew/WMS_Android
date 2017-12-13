@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--不良原因的弹出框-->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/apk/res-auto"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:baselineAligned="false"
@@ -130,7 +131,7 @@
                 android:background="@drawable/bg_rectangle_et_unfocused"
                 android:gravity="center"
                 android:hint="@string/please_input_measure_value"
-                android:inputType="numberDecimal"
+                android:inputType="text"
                 android:textSize="12sp"/>
 
             <Button
@@ -159,6 +160,7 @@
                 android:visibility="invisible"/>
 
             <LinearLayout
+                android:id="@+id/ll_measure_tip"
                 android:layout_width="263px"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -187,6 +189,14 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/login_txt_color"
                     android:textSize="12sp"/>
+
+                <TextView
+                    android:id="@+id/tv_unit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textColor="@color/login_txt_color"
+                    android:textSize="10sp"/>
             </LinearLayout>
 
         </LinearLayout>
@@ -199,56 +209,11 @@
             android:layout_marginTop="30px"
             android:background="#eee"/>
 
-        <LinearLayout
+        <com.timi.sz.wms_android.view.QualityResultView
+            android:id="@+id/quality_result_chech_item"
             android:layout_width="match_parent"
-            android:layout_height="64px"
-            android:layout_marginLeft="30px"
-            android:layout_marginRight="10px"
-            android:layout_marginTop="10px"
-            android:background="#fff"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/tv_quality_result_tip"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/quality_result_tip"
-                android:textColor="#333"
-                android:textSize="14sp"/>
-
-            <RadioGroup
-                android:id="@+id/rg_qualified"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="horizontal"
-                >
-
-                <RadioButton
-                    android:id="@+id/rd_qualified"
-                    android:layout_width="138px"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/selector_rd_quality"
-                    android:button="@null"
-                    android:gravity="center"
-                    android:text="@string/rd_qualified_tip"
-                    android:textColor="#666"
-                    android:textSize="13sp"/>
-
-                <RadioButton
-                    android:id="@+id/rd_unqualified"
-                    android:layout_width="138px"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="30px"
-                    android:background="@drawable/selector_rd_quality"
-                    android:button="@null"
-                    android:gravity="center"
-                    android:text="@string/unquality"
-                    android:textColor="#666"
-                    android:textSize="13sp"/>
-            </RadioGroup>
-        </LinearLayout>
+            android:layout_height="wrap_content"
+            tools:tabNum="2"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -295,36 +260,64 @@
             </RelativeLayout>
         </LinearLayout>
 
-        <View
-            android:layout_width="585px"
-            android:layout_height="1px"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="30px"
-            android:layout_marginTop="30px"
-            android:background="#eee"/>
-
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:layout_marginBottom="20px"
-            android:layout_marginLeft="20px"
-            android:layout_marginRight="20px"
-            android:layout_marginTop="30px"
-            android:gravity="bottom">
+            android:layout_height="wrap_content">
 
-            <Button
-                android:id="@+id/btn_next"
-                android:layout_width="280px"
-                android:layout_height="72px"
-                android:layout_alignParentRight="true"
+            <View
+                android:layout_width="585px"
+                android:layout_height="1px"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="30px"
+                android:layout_marginTop="30px"
+                android:background="#eee"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_marginBottom="20px"
                 android:layout_marginLeft="20px"
-                android:layout_weight="1"
-                android:background="@drawable/selector_btn_bg_login"
-                android:gravity="center"
-                android:text="@string/next_item"
-                android:textColor="@color/white"
-                android:textSize="16sp"/>
-        </LinearLayout>
+                android:layout_marginRight="20px"
+                android:layout_marginTop="30px"
+                android:gravity="bottom">
+
+                <Button
+                    android:id="@+id/btn_next"
+                    android:layout_width="280px"
+                    android:layout_height="72px"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginLeft="20px"
+                    android:layout_weight="1"
+                    android:background="@drawable/selector_btn_bg_login"
+                    android:gravity="center"
+                    android:text="@string/next_item"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="30px"
+                    android:text="@string/dialog_badness_reason"
+                    android:textColor="#333"
+                    android:textSize="14sp"
+                    android:visibility="invisible"/>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rlv_badness_reason"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"/>
+
+            </LinearLayout>
+        </RelativeLayout>
     </LinearLayout>
 </RelativeLayout>

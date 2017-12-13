@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context="com.timi.sz.wms_android.mvp.UI.quity.quality.advance_quality.Advance2Activity">
+
+    <include
+        android:id="@+id/head"
+        layout="@layout/title_head"/>
+
+    <TextView
+        android:id="@+id/tv_next"
+        android:layout_width="match_parent"
+        android:layout_height="88px"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="20px"
+        android:layout_marginLeft="30px"
+        android:layout_marginRight="30px"
+        android:background="@drawable/selector_btn_bg_login"
+        android:gravity="center"
+        android:text="@string/next_page"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        />
+
+    <com.timi.sz.wms_android.view.QualityResultView
+        android:id="@+id/quality_adavance2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/tv_next"
+        android:layout_marginLeft="30px"
+        custom:canClick="false"
+        android:layout_marginBottom="10px"
+        android:layout_marginRight="30px"
+        custom:tabNum="3"/>
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/quality_adavance2"
+        android:layout_below="@id/head">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <include
+                layout="@layout/layout_material_info"
+                android:visibility="visible"/>
+
+            <include
+                android:id="@+id/quality_standard"
+                layout="@layout/layout_quality_standard"
+                android:visibility="visible"/>
+
+            <include
+                layout="@layout/layout_quality_work"/>
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="118px"
+                />
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+</RelativeLayout>

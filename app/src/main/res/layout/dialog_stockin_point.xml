@@ -143,6 +143,7 @@
             android:paddingTop="10px">
 
             <TextView
+                android:id="@+id/tv_buy_tip"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30px"
@@ -173,6 +174,7 @@
             android:paddingTop="10px">
 
             <TextView
+                android:id="@+id/tv_arrive_tip"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30px"

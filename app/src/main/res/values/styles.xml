@@ -174,4 +174,9 @@
         <attr name="textSize" format="integer"/>
         <attr name="isLockFristRow" format="boolean"/>
     </declare-styleable>
+    <!--自定义 质检结果的view-->
+    <declare-styleable name="QualityResultView">
+        <attr name="tabNum" format="integer"/><!--选项的个数（3/2）-->
+        <attr name="canClick" format="boolean"/><!--是否可点击-->
+    </declare-styleable>
 </resources>

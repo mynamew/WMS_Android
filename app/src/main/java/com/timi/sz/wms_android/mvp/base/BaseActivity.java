@@ -12,6 +12,8 @@ import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.Selection;
 import android.text.TextUtils;
 import android.util.SparseArray;
@@ -458,11 +460,11 @@ public abstract class BaseActivity<V extends MvpView, P extends MvpPresenter<V>>
      */
     public void setTextViewContent(TextView tv, Object object) {
         String content = "";
-        if (object instanceof String) {
-            content = TextUtils.isEmpty(String.valueOf(object)) ? getString(R.string.none) : String.valueOf(object);
-        } else {
+//        if (object instanceof String) {
+//            content = TextUtils.isEmpty(String.valueOf(object)) ? getString(R.string.none) : String.valueOf(object);
+//        } else {
             content = String.valueOf(object);
-        }
+//        }
         tv.setText(content);
     }
 
@@ -577,4 +579,16 @@ public abstract class BaseActivity<V extends MvpView, P extends MvpPresenter<V>>
         void verticalSuccess(String result);
     }
 
+    /**
+     * 设置recycleview  滑动更流畅
+     * @param rlv
+     * @param layoutManager
+     */
+    public void setRecycleViewScrollSmooth(RecyclerView rlv,LinearLayoutManager layoutManager){
+        layoutManager.setSmoothScrollbarEnabled(true);
+        layoutManager.setAutoMeasureEnabled(true);
+        rlv.setLayoutManager(layoutManager);
+        rlv.setNestedScrollingEnabled(false);
+        rlv.setHasFixedSize(true);
+    }
 }

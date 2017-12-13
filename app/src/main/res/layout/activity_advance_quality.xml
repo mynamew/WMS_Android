@@ -11,10 +11,6 @@
     <include
         android:id="@+id/head"
         layout="@layout/title_head"/>
-    　　
-
-    　
-
     <TextView
         android:id="@+id/tv_next"
         android:layout_width="match_parent"
@@ -112,15 +108,15 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <include
-                android:id="@+id/quality_standard"
-                layout="@layout/layout_quality_standard"
-                android:visibility="visible"/>
+
 
             <include
                 layout="@layout/layout_material_info"
                 android:visibility="visible"/>
-
+            <include
+                android:id="@+id/quality_standard"
+                layout="@layout/layout_quality_standard"
+                android:visibility="visible"/>
             <include
                 layout="@layout/layout_quality_work"/>
 

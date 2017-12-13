@@ -274,7 +274,7 @@ public class CommitAdvanceData {
          */
 
         private int CheckItemId;
-        private int QCValue;
+        private String QCValue;
         private int FaultId;
         private int QCResult;
         private String Remark;
@@ -287,11 +287,11 @@ public class CommitAdvanceData {
             this.CheckItemId = CheckItemId;
         }
 
-        public int getQCValue() {
+        public String getQCValue() {
             return QCValue;
         }
 
-        public void setQCValue(int QCValue) {
+        public void setQCValue(String QCValue) {
             this.QCValue = QCValue;
         }
 

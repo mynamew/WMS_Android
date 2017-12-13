@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.zhy.autolayout.AutoLinearLayout     xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
-              android:layout_height="match_parent">
+              android:layout_height="wrap_content">
 
     <TextView
+        android:background="@color/white"
         android:id="@+id/tv_content"
         android:layout_width="match_parent"
-        android:layout_height="72px"
+        android:layout_height="54px"
         android:paddingLeft="20px"
         android:gravity="center_vertical"
         android:textColor="#333"
-        android:textSize="26px"/>
-</LinearLayout>
+        android:textSize="13sp"/>
+</com.zhy.autolayout.AutoLinearLayout>

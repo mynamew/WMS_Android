@@ -55,6 +55,7 @@
 
     <!-- Colors for red theme -->
     <color name="mdtp_red">@color/mdtp_accent_color</color>
+    <color name="red">#ff0000</color>
     <color name="mdtp_red_focused">@color/mdtp_accent_color_dark</color>
     <color name="mdtp_light_gray">#424242</color>
     <color name="mdtp_dark_gray">#323232</color>

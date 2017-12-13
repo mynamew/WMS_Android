@@ -5,19 +5,19 @@
               android:layout_marginTop="30px"
               android:orientation="horizontal">
 
-    <com.timi.sz.wms_android.view.QualityResultView
+    <com.timi.sz.wms_android.view.CheckQualityItemResultView
         android:id="@+id/quality_1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="50px"/>
 
-    <com.timi.sz.wms_android.view.QualityResultView
+    <com.timi.sz.wms_android.view.CheckQualityItemResultView
         android:id="@+id/quality_2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="50px"/>
 
-    <com.timi.sz.wms_android.view.QualityResultView
+    <com.timi.sz.wms_android.view.CheckQualityItemResultView
         android:id="@+id/quality_3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

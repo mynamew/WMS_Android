@@ -41,7 +41,7 @@ public class MyDialog extends Dialog {
 
     public MyDialog(Context context, int layoutId) {
         super(context, R.style.Dialog);
-        if(null==views){
+        if (null == views) {
             views = new SparseArray<>();
         }
         initView(context, layoutId);
@@ -69,6 +69,16 @@ public class MyDialog extends Dialog {
     }
 
     /**
+     * 设置内容的点击事件
+     *
+     * @param clickListener
+     */
+    public MyDialog setContentViewListener(View.OnClickListener clickListener) {
+        rootView.setOnClickListener(clickListener);
+        return this;
+    }
+
+    /**
      * 设置Dialog中的文本
      *
      * @autor timi
@@ -82,7 +92,7 @@ public class MyDialog extends Dialog {
         //存储控件
         views.put(resId, tv);
         //设置内容
-        if (null != tv && null != content ) {
+        if (null != tv && null != content) {
             tv.setText(String.valueOf(content));
         }
         return this;
@@ -276,6 +286,7 @@ public class MyDialog extends Dialog {
         }
         return this;
     }
+
     /**
      * 设置Dialog的Edittext
      *
@@ -377,6 +388,7 @@ public class MyDialog extends Dialog {
 
     /**
      * 设置Dialog的动画 不设置默认是渐变
+     *
      * @param stryleId
      * @return
      */

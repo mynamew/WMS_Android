@@ -40,7 +40,7 @@ public class FragmentPointPresenter extends MvpBasePresenter<FragmentPointView> 
     public void savePointMaterial(Map<String, Object> params) {
         getView().showProgressDialog();
         if (null == savePointMaterialHttpSubscriber) {
-            savePointMaterialHttpSubscriber = new HttpSubscriber<>(new OnResultCallBack<Integer>() {
+            savePointMaterialHttpSubscriber = new HttpSubscriber<>(false,new OnResultCallBack<Integer>() {
                 @Override
                 public void onSuccess(Integer result) {
                     getView().savePointMaterial(result);
@@ -49,6 +49,7 @@ public class FragmentPointPresenter extends MvpBasePresenter<FragmentPointView> 
                 @Override
                 public void onError(String errorMsg) {
                     ToastUtils.showShort(errorMsg);
+                    getView().dismisProgressDialog();
                 }
             });
         }
@@ -61,7 +62,7 @@ public class FragmentPointPresenter extends MvpBasePresenter<FragmentPointView> 
     public void saveSendMaterialPoint(Map<String, Object> params) {
         getView().showProgressDialog();
         if (null == savePointMaterialHttpSubscriber) {
-            saveSendMaterialPointHttpSubscriber = new HttpSubscriber<>(new OnResultCallBack<Integer>() {
+            saveSendMaterialPointHttpSubscriber = new HttpSubscriber<>(false,new OnResultCallBack<Integer>() {
                 @Override
                 public void onSuccess(Integer result) {
                     getView().saveSendPointMaterial(result);
@@ -70,6 +71,7 @@ public class FragmentPointPresenter extends MvpBasePresenter<FragmentPointView> 
                 @Override
                 public void onError(String errorMsg) {
                     ToastUtils.showShort(errorMsg);
+                    getView().dismisProgressDialog();
                 }
             });
         }
@@ -102,15 +104,17 @@ public class FragmentPointPresenter extends MvpBasePresenter<FragmentPointView> 
      */
     public void getPODetailsByCode(Map<String, Object> params) {
         if (null == getPointMaterialHttpSubscriber) {
-            getPointMaterialHttpSubscriber = new HttpSubscriber<>(new OnResultCallBack<BuyOrdernoBean>() {
+            getPointMaterialHttpSubscriber = new HttpSubscriber<>(false,new OnResultCallBack<BuyOrdernoBean>() {
                 @Override
                 public void onSuccess(BuyOrdernoBean result) {
                     getView().getPODetailsByCode(result);
+                    getView().dismisProgressDialog();
                 }
 
                 @Override
                 public void onError(String errorMsg) {
                     ToastUtils.showShort(errorMsg);
+                    getView().dismisProgressDialog();
                 }
             });
         }
@@ -122,15 +126,17 @@ public class FragmentPointPresenter extends MvpBasePresenter<FragmentPointView> 
      */
     public void getASNDetailsByCode(Map<String, Object> params) {
         if (null == getPointMaterialHttpSubscriber) {
-            getASNDetailsByCodeHttpSubscriber = new HttpSubscriber<>(new OnResultCallBack<SendOrdernoBean>() {
+            getASNDetailsByCodeHttpSubscriber = new HttpSubscriber<>(false,new OnResultCallBack<SendOrdernoBean>() {
                 @Override
                 public void onSuccess(SendOrdernoBean result) {
                     getView().getSendPODetailsByCode(result);
+                    getView().dismisProgressDialog();
                 }
 
                 @Override
                 public void onError(String errorMsg) {
                     ToastUtils.showShort(errorMsg);
+                    getView().dismisProgressDialog();
                 }
             });
         }

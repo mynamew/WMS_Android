@@ -5,7 +5,7 @@
               android:layout_height="match_parent"
               android:layout_marginLeft="30px"
               android:layout_marginRight="30px"
-              android:layout_marginTop="16px">
+              android:layout_marginTop="10px">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -34,30 +34,40 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="120px"
+            android:layout_marginBottom="20px"
             android:layout_marginTop="20px"
             android:gravity="center"
             android:orientation="horizontal">
 
             <com.timi.sz.wms_android.view.StandardLevelView
                 android:id="@+id/stand_quality_level"
-                android:layout_width="160px"
+                android:layout_width="0dp"
                 android:layout_height="120px"
+                android:layout_marginLeft="20px"
+                android:layout_weight="1"
                 app:standardLevelTitle="@string/quality_level"/>
 
             <com.timi.sz.wms_android.view.StandardLevelView
                 android:id="@+id/stand_aql"
-                android:layout_width="160px"
+                android:layout_width="0dp"
                 android:layout_height="120px"
-                android:layout_marginLeft="80px"
+                android:layout_weight="1"
                 app:standardLevelTitle="AQL"/>
 
             <com.timi.sz.wms_android.view.StandardLevelView
                 android:id="@+id/stand_sample_half_yard"
-                android:layout_width="160px"
+                android:layout_width="0dp"
                 android:layout_height="120px"
 
-                android:layout_marginLeft="80px"
+                android:layout_weight="1"
                 app:standardLevelTitle="@string/sample_half_yard_tip"/>
+
+            <com.timi.sz.wms_android.view.StandardLevelView
+                android:id="@+id/stand_strict"
+                android:layout_width="0dp"
+                android:layout_height="120px"
+                android:layout_weight="1"
+                app:standardLevelTitle="@string/quality_strict"/>
         </LinearLayout>
 
         <LinearLayout
@@ -66,13 +76,9 @@
             android:layout_marginBottom="30px"
             android:layout_marginTop="20px"
             android:gravity="center"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:visibility="gone">
 
-            <com.timi.sz.wms_android.view.StandardLevelView
-                android:id="@+id/stand_strict"
-                android:layout_width="160px"
-                android:layout_height="120px"
-                app:standardLevelTitle="@string/quality_strict"/>
 
             <com.timi.sz.wms_android.view.StandardLevelView
                 android:id="@+id/stand_check_method"

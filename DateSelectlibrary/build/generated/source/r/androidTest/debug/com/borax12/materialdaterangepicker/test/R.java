@@ -26,7 +26,7 @@ public final class R {
         public static final int mdtp_dark_gray=0x7f07000c;
         public static final int mdtp_date_picker_month_day=0x7f07000d;
         public static final int mdtp_date_picker_month_day_dark_theme=0x7f07000e;
-        public static final int mdtp_date_picker_selector=0x7f070025;
+        public static final int mdtp_date_picker_selector=0x7f070026;
         public static final int mdtp_date_picker_text_disabled=0x7f07000f;
         public static final int mdtp_date_picker_text_disabled_dark_theme=0x7f070010;
         public static final int mdtp_date_picker_text_highlighted=0x7f070011;
@@ -35,10 +35,10 @@ public final class R {
         public static final int mdtp_date_picker_text_normal_dark_theme=0x7f070014;
         public static final int mdtp_date_picker_view_animator=0x7f070015;
         public static final int mdtp_date_picker_view_animator_dark_theme=0x7f070016;
-        public static final int mdtp_date_picker_year_selector=0x7f070026;
+        public static final int mdtp_date_picker_year_selector=0x7f070027;
         public static final int mdtp_done_disabled_dark=0x7f070017;
-        public static final int mdtp_done_text_color=0x7f070027;
-        public static final int mdtp_done_text_color_dark=0x7f070028;
+        public static final int mdtp_done_text_color=0x7f070028;
+        public static final int mdtp_done_text_color_dark=0x7f070029;
         public static final int mdtp_done_text_color_dark_disabled=0x7f070018;
         public static final int mdtp_done_text_color_dark_normal=0x7f070019;
         public static final int mdtp_done_text_color_disabled=0x7f07001a;
@@ -52,6 +52,7 @@ public final class R {
         public static final int mdtp_red_focused=0x7f070022;
         public static final int mdtp_transparent_black=0x7f070023;
         public static final int mdtp_white=0x7f070024;
+        public static final int red=0x7f070025;
     }
     public static final class dimen {
         public static final int mdtp_ampm_label_size=0x7f050008;

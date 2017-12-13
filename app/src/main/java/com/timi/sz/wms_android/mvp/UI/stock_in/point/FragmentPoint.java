@@ -170,11 +170,17 @@ public class FragmentPoint extends BaseFragment<FragmentPointView, FragmentPoint
                 @Override
                 protected void bindData(RecyclerViewHolder holder, int position, BuyOrdernoBean.DetailResultsBean item) {
                     holder.setTextView(R.id.tv_line_num, item.getPoLine());
-                    holder.setTextView(R.id.tv_material_code, item.getMaterialCode());
-                    holder.setTextView(R.id.tv_arrive_good_num, item.getArrivalQty());
-                    holder.setTextView(R.id.tv_buy_num, item.getPoQty());
-                    holder.setTextView(R.id.tv_instock_num, item.getInStockQty());
                     holder.setTextView(R.id.tv_point_num, item.getCountQty());
+                    holder.setTextView(R.id.tv_material_code, item.getMaterialCode());
+                    if (intentCode == BUY_ORDE_NUM) {
+                        holder.setTextView(R.id.tv_arrive_good_num, item.getArrivalQty());
+                        holder.setTextView(R.id.tv_buy_num, item.getPoQty());
+                        holder.setTextView(R.id.tv_instock_num, item.getInStockQty());
+                    } else {
+                        holder.setTextView(R.id.tv_arrive_good_num, item.getDnQty());
+                        holder.setTextView(R.id.tv_buy_num, item.getRecvQty());
+                        holder.setTextView(R.id.tv_instock_num, item.getInStockQty());
+                    }
 
                     holder.setTextView(R.id.tv_spare_num, item.getGiveQty());
                     holder.setTextView(R.id.tv_material_attr, item.getMaterialName() + (TextUtils.isEmpty(item.getMaterialAttribute()) ? "" : item.getMaterialAttribute()));
@@ -259,7 +265,11 @@ public class FragmentPoint extends BaseFragment<FragmentPointView, FragmentPoint
 
                             int receiveNum = intentCode == BUY_ORDE_NUM || intentCode == OUT_SOURCE ? mBuyBean.getDetailResults().get(position).getPoQty() : mSendBean.getDetailResults().get(position).getPoQty();
                             if (pointNum > receiveNum) {
-                                ToastUtils.showShort(getActivity(), getString(R.string.point_num_no_more_buy_num));
+                                if (intentCode == BUY_ORDE_NUM || intentCode == OUT_SOURCE) {
+                                    ToastUtils.showShort(getActivity(), getString(R.string.point_num_no_more_buy_num));
+                                } else {
+                                    ToastUtils.showShort(getActivity(), getString(R.string.point_count_no_more_send_goods_qty));
+                                }
                                 return;
                             }
                             Map<String, Object> params = new HashMap<>();
@@ -313,8 +323,12 @@ public class FragmentPoint extends BaseFragment<FragmentPointView, FragmentPoint
             mPointDialog.setTextViewContent(R.id.tv_material_code, detailResultsBean.getMaterialCode())
                     .setTextViewContent(R.id.tv_material_name, detailResultsBean.getMaterialName())
                     .setTextViewContent(R.id.tv_material_model, detailResultsBean.getMaterialStandard())
-                    .setTextViewContent(R.id.tv_buy_num, detailResultsBean.getPoQty())
-                    .setTextViewContent(R.id.tv_arrive_goods_num, detailResultsBean.getArrivalQty());
+                    .setTextViewContent(R.id.tv_buy_num, detailResultsBean.getPoQty());
+            //采购 送货 不同的设置
+            mPointDialog.setTextViewContent(R.id.tv_buy_tip, ((intentCode == BUY_ORDE_NUM || intentCode == OUT_SOURCE) ? getString(R.string.item_buy_num) : getString(R.string.item_send_num)));
+            mPointDialog.setTextViewContent(R.id.tv_arrive_tip, ((intentCode == BUY_ORDE_NUM || intentCode == OUT_SOURCE) ? getString(R.string.item_arrive_goods_num) : getString(R.string.item_have_receive_num)));
+            mPointDialog.setTextViewContent(R.id.tv_arrive_goods_num, (intentCode == BUY_ORDE_NUM || intentCode == OUT_SOURCE) ? detailResultsBean.getArrivalQty() : detailResultsBean.getRecvQty());
+            mPointDialog.setTextViewContent(R.id.tv_buy_num, (intentCode == BUY_ORDE_NUM || intentCode == OUT_SOURCE) ? detailResultsBean.getPoQty() : detailResultsBean.getDnQty());
         }
         /**
          * 是否有备品 通过PDA 参数获取到
@@ -343,6 +357,14 @@ public class FragmentPoint extends BaseFragment<FragmentPointView, FragmentPoint
         BaseMessage.post(stockInPointEvent);
 
         ToastUtils.showShort(getString(R.string.material_point_success));
+        /**
+         * 采购单 送货单 scanid
+         */
+        if (intentCode == BUY_ORDE_NUM || intentCode == OUT_SOURCE) {
+            mBuyBean.getSummaryResults().setReceiveId(result);
+        } else {
+            mSendBean.getSummaryResults().setReceiveId(result);
+        }
         /**
          * 获取表体数据
          */
@@ -379,7 +401,16 @@ public class FragmentPoint extends BaseFragment<FragmentPointView, FragmentPoint
         stockInPointEvent.receiveId = result;
         BaseMessage.post(stockInPointEvent);
 
-        ToastUtils.showShort(getString(R.string.material_point_success));        /**
+        ToastUtils.showShort(getString(R.string.material_point_success));
+        /**
+         * 采购单 送货单 scanid
+         */
+        if (intentCode == BUY_ORDE_NUM || intentCode == OUT_SOURCE) {
+            mBuyBean.getSummaryResults().setReceiveId(result);
+        } else {
+            mSendBean.getSummaryResults().setReceiveId(result);
+        }
+        /**
          * 获取表体数据
          */
         requestTableDetail();

@@ -1,38 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="160px"
-              android:layout_height="120px"
-              android:layout_centerInParent="true"
-              android:background="@drawable/bg_rectangle_et_unfocused"
-              android:orientation="vertical">
+<com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                     android:layout_width="match_parent"
+                                     android:layout_height="wrap_content">
 
     <LinearLayout
-        android:layout_width="160px"
-        android:layout_height="120px"
-        android:orientation="vertical">
+        android:id="@+id/ll_quality_result"
+        android:layout_width="match_parent"
+        android:layout_height="84px"
+        android:layout_above="@id/tv_next"
+        android:background="#fff"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingRight="20px">
 
         <TextView
-            android:id="@+id/tv_title"
-            android:layout_width="160px"
-            android:layout_height="54px"
-            android:gravity="center"
-            android:text="检验水平"
-            android:textSize="26px"/>
-        　　　　
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:background="#d7d7dd"/>　　
-
-        <ImageView
-            android:id="@+id/iv_content"
+            android:id="@+id/tv_quality_result_tip"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:scaleType="centerCrop"
-            android:layout_gravity="center"
-            android:layout_marginTop="10px"
-            android:src="@drawable/selector_quality_result"/>
+            android:paddingLeft="30px"
+            android:text="@string/quality_result"
+            android:textColor="#333"
+            android:textSize="14sp"/>
+
+        <LinearLayout
+            android:id="@+id/rg_qualified"
+            android:layout_width="match_parent"
+            android:layout_height="64px"
+            android:orientation="horizontal"
+            android:paddingLeft="30px">
+
+            <Button
+                android:id="@+id/btn_qualified"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/selector_result_quality"
+                android:button="@null"
+                android:clickable="false"
+                android:gravity="center"
+                android:text="@string/rd_qualified_tip"
+                android:textColor="#666"
+                android:textSize="13sp"/>
+
+            <Button
+                android:id="@+id/btn_wait_deal"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="30px"
+                android:layout_weight="1"
+                android:background="@drawable/selector_result_quality"
+                android:button="@null"
+                android:clickable="false"
+                android:gravity="center"
+                android:text="@string/wait_deal"
+                android:textColor="#666"
+                android:textSize="13sp"/>
+
+            <Button
+                android:id="@+id/btn_unqualified"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="30px"
+                android:layout_weight="1"
+                android:background="@drawable/selector_result_quality"
+                android:button="@null"
+                android:clickable="false"
+                android:gravity="center"
+                android:text="@string/unquality"
+                android:textColor="#ff0000"
+                android:textSize="13sp"/>
+        </LinearLayout>
     </LinearLayout>
-</LinearLayout>
+
+</com.zhy.autolayout.AutoLinearLayout>

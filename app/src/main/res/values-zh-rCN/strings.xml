@@ -837,6 +837,9 @@
     <string name="quality_confirm_complete">质检确认完成！</string>
     <string name="please_confirm_quality_complete">请确认质检已完成？</string>
     <string name="number">数量</string>
+    <string name="auto_judge">自动判断</string>
+    <string name="person_judge">主观判断</string>
+    <string name="point_count_no_more_send_goods_qty">请点数不能大于送货数，请重新输入！</string>
 
 
 </resources>

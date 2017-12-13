@@ -29,6 +29,8 @@ import static com.timi.sz.wms_android.http.exception.ApiException.CODE_REQUEST_S
 
 
 public class HttpSubscriber<T> implements Observer<T> {
+    private boolean isAutoDismiss = true;//是否自动隐藏加载框
+
     public static final String CONNECT_EXCEPTION = BaseApplication.getMApplicationContext().getString(R.string.exp_network_exception);
     public static final String SOCKET_TIMEOUT_EXCEPTION = BaseApplication.getMApplicationContext().getString(R.string.exp_network_timeout);
     public static final String MALFORMED_JSON_EXCEPTION = BaseApplication.getMApplicationContext().getString(R.string.exp_json_error);
@@ -41,6 +43,11 @@ public class HttpSubscriber<T> implements Observer<T> {
         this.mOnResultListener = listener;
     }
 
+    public HttpSubscriber(boolean isAutoDismiss, OnResultCallBack listener) {
+        this.isAutoDismiss = isAutoDismiss;
+        this.mOnResultListener = listener;
+    }
+
     @Override
     public void onSubscribe(Disposable d) {
         mDisposable = d;
@@ -48,7 +55,9 @@ public class HttpSubscriber<T> implements Observer<T> {
 
     @Override
     public void onNext(T t) {
-        MyProgressDialog.hideProgressDialog();
+        if(isAutoDismiss){
+            MyProgressDialog.hideProgressDialog();
+        }
         if (mOnResultListener != null) {
             mOnResultListener.onSuccess(t);
         }
@@ -56,7 +65,9 @@ public class HttpSubscriber<T> implements Observer<T> {
 
     @Override
     public void onError(Throwable e) {
-        MyProgressDialog.hideProgressDialog();
+        if(isAutoDismiss){
+            MyProgressDialog.hideProgressDialog();
+        }
         //请求失败的异常
         if (e instanceof CompositeException) {
             CompositeException compositeE = (CompositeException) e;
@@ -105,7 +116,7 @@ public class HttpSubscriber<T> implements Observer<T> {
                     BaseActivity currentActivty = (BaseActivity) BaseActivity.getCurrentActivty();
                     currentActivty.jumpToLoginActivity();
                 }
-                
+
                 ToastUtils.showShort(messageStr);
                 mOnResultListener.onError(messageStr);
                 LogUitls.e("打印输出错误代码httpResultBean---->", httpResultBean.getError().getMessage().toString());
@@ -136,14 +147,18 @@ public class HttpSubscriber<T> implements Observer<T> {
     @Override
     public void onComplete() {
         //进度条消失
-        MyProgressDialog.hideProgressDialog();
+        if(isAutoDismiss){
+            MyProgressDialog.hideProgressDialog();
+        }
     }
 
     public void unSubscribe() {
         if (mDisposable != null && !mDisposable.isDisposed()) {
             mDisposable.dispose();
             //进度条消失
-            MyProgressDialog.hideProgressDialog();
+            if(isAutoDismiss){
+                MyProgressDialog.hideProgressDialog();
+            }
         }
     }
 }

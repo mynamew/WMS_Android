@@ -207,7 +207,7 @@
     <string name="search">搜索</string>
     <string name="stock_in_out_source">委外单</string>
     <string name="material_point_success">物料请点保存成功</string>
-
+    <string name="point_count_no_more_send_goods_qty">请点数不能大于送货数，请重新输入！</string>
     /**======无纸化作业 列表======**/
     <string name="buy_list_title">采购单列表</string>
     <string name="out_source_list_title">委外单列表</string>
@@ -535,6 +535,8 @@
     /******************************************************************************************************************************************************/
     /******************************************************************************************************************************************************/
     /**====== 质量检验 ======**/
+    <string name="auto_judge">自动判断</string>
+    <string name="person_judge">主观判断</string>
     <string name="please_choose">请选择</string>
     <string name="quality_check_title">来料—品质检验</string>
     <string name="quality_material_quality">物料质检</string>

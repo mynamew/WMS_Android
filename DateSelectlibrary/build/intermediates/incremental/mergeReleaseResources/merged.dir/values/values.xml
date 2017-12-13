@@ -37,6 +37,7 @@
     <color name="mdtp_red_focused">@color/mdtp_accent_color_dark</color>
     <color name="mdtp_transparent_black">#7f000000</color>
     <color name="mdtp_white">#ffffff</color>
+    <color name="red">#ff0000</color>
     <dimen name="mdtp_ampm_label_size">16sp</dimen>
     <dimen name="mdtp_ampm_left_padding">6dip</dimen>
     <dimen name="mdtp_date_picker_component_width">270dp</dimen>
