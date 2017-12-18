@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
+              android:layout_marginLeft="20px"
+              android:layout_marginRight="20px"
               android:orientation="horizontal">
     <LinearLayout
         android:id="@+id/ll_tab"
@@ -63,4 +65,4 @@
             android:textSize="13sp"/>
 
     </LinearLayout>
-</LinearLayout>
+</com.zhy.autolayout.AutoLinearLayout>

@@ -27,7 +27,6 @@ import com.timi.sz.wms_android.http.message.BaseMessage;
 import com.timi.sz.wms_android.http.message.event.QualityEvent;
 import com.timi.sz.wms_android.mvp.UI.quity.quality.advance1_quality.Advance1QualityActivity;
 import com.timi.sz.wms_android.mvp.UI.quity.quality.advance_quality.Advance2Activity;
-import com.timi.sz.wms_android.mvp.UI.quity.quality.advance_quality.AdvanceQualityActivity;
 import com.timi.sz.wms_android.mvp.UI.quity.quality.nomal_quality.NormalQualityActivity;
 import com.timi.sz.wms_android.mvp.base.BaseActivity;
 import com.timi.sz.wms_android.view.MyDialog;
@@ -663,7 +662,7 @@ public class QualityCheckActivity extends BaseActivity<QualityCheckView, Quality
                 intent.setClass(QualityCheckActivity.this, Advance1QualityActivity.class);
                 break;
             case 3://高级质检2
-                intent.setClass(QualityCheckActivity.this, AdvanceQualityActivity.class);
+                intent.setClass(QualityCheckActivity.this, Advance2Activity.class);
                 break;
             default:
                 intent.setClass(QualityCheckActivity.this, NormalQualityActivity.class);

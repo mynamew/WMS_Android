@@ -2,8 +2,10 @@ package com.timi.sz.wms_android.base.uils;
 
 import android.content.Context;
 import android.os.Handler;
+import android.support.annotation.StringRes;
 import android.widget.Toast;
 
+import com.timi.sz.wms_android.mvp.base.BaseActivity;
 import com.timi.sz.wms_android.mvp.base.BaseApplication;
 
 /**
@@ -53,7 +55,15 @@ public class ToastUtils {
         }
         mToast.show();
     }
+    public static void showShort(@StringRes int strId) {
+        if (mToast == null) {
+            mToast = Toast.makeText(BaseApplication.getMApplicationContext(), BaseActivity.getCurrentActivty().getString(strId), Toast.LENGTH_SHORT);
 
+        } else {
+            mToast.setText(BaseActivity.getCurrentActivty().getString(strId));
+        }
+        mToast.show();
+    }
     public static void showShort(Context context, Object o) {
         if (mToast == null) {
             mToast = Toast.makeText(context, o.toString(), Toast.LENGTH_SHORT);

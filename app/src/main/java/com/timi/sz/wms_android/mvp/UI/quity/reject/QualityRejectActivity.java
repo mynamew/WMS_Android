@@ -254,6 +254,10 @@ public class QualityRejectActivity extends BaseActivity<QualityRejectView, Quali
      */
     @Override
     public void setEdittextSelect() {
+        etMinPackCode.setFocusable(true);
+        etMinPackCode.setFocusableInTouchMode(true);
+        etMinPackCode.requestFocus();
+        etMinPackCode.findFocus();
         etMinPackCode.selectAll();
     }
 

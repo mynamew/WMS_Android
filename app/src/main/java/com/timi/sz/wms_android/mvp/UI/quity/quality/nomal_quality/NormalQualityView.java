@@ -20,7 +20,7 @@ public interface NormalQualityView extends MvpBaseView {
     /**
      * 提交普通质检的结果
      */
-    void setNormalQualityData(boolean isQualified, int rejectNum);
+    void setNormalQualityData();
 
     /**
      * 质检确认

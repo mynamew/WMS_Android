@@ -35,6 +35,7 @@ import com.timi.sz.wms_android.mvp.UI.stock_in.putaway.FinishedGoodsAuditPutAway
 import com.timi.sz.wms_android.mvp.UI.stock_in.putaway.FinishedGoodsCreateBillPutAwayActivity;
 import com.timi.sz.wms_android.mvp.UI.stock_in.putaway.OtherAuditActivity;
 import com.timi.sz.wms_android.mvp.UI.stock_in.putaway.OutMaterialReturnActivity;
+import com.timi.sz.wms_android.mvp.UI.stock_in.putaway.ProductionMaterialReturnActivity;
 import com.timi.sz.wms_android.mvp.UI.stock_in.putaway.PutAwayActivity;
 import com.timi.sz.wms_android.mvp.UI.stock_in.putaway.SaleGoodsReturnActivity;
 import com.timi.sz.wms_android.mvp.base.BaseActivity;
@@ -289,7 +290,7 @@ public class SearchBuyOrderActivity extends BaseActivity<SearchBuyOrderView, Sea
      */
     @Override
     public void searchProductionReturnMaterialOrderno(QueryPrdReturnByInputResult bean) {
-        Intent it = new Intent(this, PutAwayActivity.class);
+        Intent it = new Intent(this, ProductionMaterialReturnActivity.class);
         it.putExtra(Constants.CODE_STR, intentCode);
         it.putExtra(IN_STOCK_FINISH_PRODUCTION_BEAN, new Gson().toJson(bean));
         startActivity(it);

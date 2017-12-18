@@ -2,6 +2,7 @@ package com.timi.sz.wms_android.mvp.UI.stock_in.putaway;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Selection;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
@@ -104,9 +105,21 @@ public class OutMaterialReturnActivity extends BaseActivity<PutAwayView, PutAway
         returnMaterialBean = new Gson().fromJson(getIntent().getStringExtra(Constants.IN_STOCK_FINISH_OUT_BEAN), QueryOutSourceReturnByInputResult.class);
         ScanId = returnMaterialBean.getScanId();
     }
+    @Override
+    public void setMaterialEdittextSelect() {
+        Selection.selectAll(etPutawayScanMaterial.getText());
+    }
 
     @Override
+    public void setLocationSelect() {
+        Selection.selectAll(etPutawayScanLocation.getText());
+    }
+    @Override
     public void initView() {
+        etPutawayScanLocation.setFocusable(true);
+        etPutawayScanLocation.setFocusableInTouchMode(true);
+        etPutawayScanLocation.requestFocus();
+        etPutawayScanLocation.findFocus();
         setRightImg(R.mipmap.stockin_detail, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -119,61 +132,44 @@ public class OutMaterialReturnActivity extends BaseActivity<PutAwayView, PutAway
                 startActivity(it);
             }
         });
-        etPutawayScanMaterial.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+        setEdittextListener(etPutawayScanMaterial,REQUEST_SCAN_CODE_MATERIIAL,R.string.please_scan_material_code,0, new EdittextInputListener() {
             @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-
-                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                    InputMethodUtils.hide(OutMaterialReturnActivity.this);
-                    String orderNum = etPutawayScanMaterial.getText().toString().trim();
-                    if (TextUtils.isEmpty(orderNum)) {
-                        ToastUtils.showShort(getString(R.string.please_scan_material_code));
-                    }
-                    /**
-                     * 保存库位码
-                     */
-                    locationCode = orderNum;
-                    /**
-                     * 物料扫码并上架的网络请求
-                     */
-                    Map<String, Object> params1 = new HashMap<>();
-                    params1.put("UserId", SpUtils.getInstance().getUserId());
-                    params1.put("OrgId", SpUtils.getInstance().getOrgId());
-                    params1.put("MAC", PackageUtils.getMac());
-                    params1.put("SrcBillType", 22);
-                    params1.put("DestBillType", 22);
-                    params1.put("ScanId", ScanId);
-                    params1.put("BinCode", mVertifyLocationCodeBean.getBinId());
-                    params1.put("BarcodeNo", orderNum);
-                    getPresenter().materialScanNetWork(params1, orderNum);
-                }
-                return false;
+            public void verticalSuccess(String result) {
+                /**
+                 * 物料扫码并上架的网络请求
+                 */
+                Map<String, Object> params1 = new HashMap<>();
+                params1.put("UserId", SpUtils.getInstance().getUserId());
+                params1.put("OrgId", SpUtils.getInstance().getOrgId());
+                params1.put("MAC", PackageUtils.getMac());
+                params1.put("SrcBillType", 22);
+                params1.put("DestBillType", 22);
+                params1.put("ScanId", returnMaterialBean.getScanId());
+                params1.put("BinCode", locationCode);
+                params1.put("BillId", returnMaterialBean.getBillId());
+                params1.put("BarcodeNo", result);
+                getPresenter().materialScanNetWork(params1, result);
             }
         });
-        etPutawayScanLocation.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+        setEdittextListener(etPutawayScanLocation,REQUEST_SCAN_CODE_LIB_LOATION,R.string.please_scan_lib_location_code,0, new EdittextInputListener() {
             @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-
-                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                    InputMethodUtils.hide(OutMaterialReturnActivity.this);
-                    String orderNum = etPutawayScanLocation.getText().toString().trim();
-                    if (TextUtils.isEmpty(orderNum)) {
-                        ToastUtils.showShort(getString(R.string.please_scan_lib_location_code));
-                    }
-                    /**
-                     * 发起请求
-                     */
-                    /**
-                     * 判断库位码是否有效
-                     */
-                    Map<String, Object> params = new HashMap<>();
-                    params.put("UserId", SpUtils.getInstance().getUserId());
-                    params.put("OrgId", SpUtils.getInstance().getOrgId());
-                    params.put("MAC", PackageUtils.getMac());
-                    params.put("BinCode", orderNum);
-                    getPresenter().vertifyLocationCode(params);
-                }
-                return false;
+            public void verticalSuccess(String result) {
+                /**
+                 * 保存库位码
+                 */
+                locationCode = result;
+                /**
+                 * 发起请求
+                 */
+                /**
+                 * 判断库位码是否有效
+                 */
+                Map<String, Object> params = new HashMap<>();
+                params.put("UserId", SpUtils.getInstance().getUserId());
+                params.put("OrgId", SpUtils.getInstance().getOrgId());
+                params.put("MAC", PackageUtils.getMac());
+                params.put("BinCode", result);
+                getPresenter().vertifyLocationCode(params);
             }
         });
     }

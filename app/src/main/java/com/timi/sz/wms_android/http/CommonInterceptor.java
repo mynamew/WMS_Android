@@ -85,8 +85,8 @@ public class CommonInterceptor implements Interceptor {
                     .url(parseUrl)
                     .build();
         }
-//        LogUitls.e("处理后的头部-->" + newRequest.headers().toString());
-//        LogUitls.e("处理后的url-->" + newRequest.url().toString());
+        LogUitls.e("处理后的头部-->" + newRequest.headers().toString());
+        LogUitls.e("处理后的url-->" + newRequest.url().toString());
         return chain.proceed(newRequest);
     }
 }

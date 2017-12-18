@@ -6,6 +6,8 @@ import com.timi.sz.wms_android.base.uils.ToastUtils;
 import com.timi.sz.wms_android.bean.instock.list.QueryPoListBean;
 import com.timi.sz.wms_android.bean.instock.outsource_return_material.QueryOutSourceReturnByInputResult;
 import com.timi.sz.wms_android.bean.instock.search.BuyOrdernoBean;
+import com.timi.sz.wms_android.bean.instock.search.QueryPrdInstockByInputResult;
+import com.timi.sz.wms_android.bean.instock.search.QueryPrdReturnByInputResult;
 import com.timi.sz.wms_android.bean.list.RequestBuyInStockListBean;
 import com.timi.sz.wms_android.bean.outstock.buy.BuyReturnMaterialByOrdernoData;
 import com.timi.sz.wms_android.bean.outstock.outsource.QueryOutSourceFeedByInputResult;
@@ -20,6 +22,8 @@ import java.util.List;
 import java.util.Map;
 
 import static com.timi.sz.wms_android.base.uils.Constants.BUY_ORDE_NUM;
+import static com.timi.sz.wms_android.base.uils.Constants.CREATE_PRO_CHECK_NUM;
+import static com.timi.sz.wms_android.base.uils.Constants.CREATE_RETURN_MATERAIL;
 import static com.timi.sz.wms_android.base.uils.Constants.OUT_RETURN_MATERAIL;
 import static com.timi.sz.wms_android.base.uils.Constants.OUT_SOURCE;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_OUTSOURCE_ALLOT;
@@ -57,6 +61,10 @@ public class BuyInStockListPresenter extends MvpBasePresenter<BuyInStockListView
     private HttpSubscriber<QueryProductPickByInputResult> produtionGetMaterial;
     //生产工单
     private HttpSubscriber<QueryWWPickDataByOutSourceResult> produtionWorkOrderno;
+    //生产退料单
+    private HttpSubscriber<QueryPrdReturnByInputResult> produtionReturnOrderno;
+    //成品入库
+    private HttpSubscriber<QueryPrdInstockByInputResult> finishGoodInstock;
 
     private BuyInStockListModel model;
 
@@ -118,6 +126,12 @@ public class BuyInStockListPresenter extends MvpBasePresenter<BuyInStockListView
                 break;
             case STOCK_OUT_PRODUCTION_APPLY_BILL://查询生产领料单列表
                 model.getPickApplyList(params, httpSubscriber);
+                break;
+            case CREATE_RETURN_MATERAIL://生产退料
+                model.queryPrdReturnList(params, httpSubscriber);
+                break;
+            case CREATE_PRO_CHECK_NUM://查询成品入库单列表
+                model.queryPrdInstockByInput(params, httpSubscriber);
                 break;
         }
 
@@ -237,6 +251,7 @@ public class BuyInStockListPresenter extends MvpBasePresenter<BuyInStockListView
         }
         model.getOutSourceReturnData(params, outsourceReturn);
     }
+
     /**
      * 委外补料数据
      *
@@ -259,6 +274,7 @@ public class BuyInStockListPresenter extends MvpBasePresenter<BuyInStockListView
         }
         model.getOutSourceFeedData(params, outsourceFeed);
     }
+
     /**
      * 领料申请数据
      *
@@ -306,17 +322,17 @@ public class BuyInStockListPresenter extends MvpBasePresenter<BuyInStockListView
     }
 
     /**
-     * 生产领料单数据
+     * 成品入库单数据
      *
      * @param params
      */
-    public void getProductPickData(Map<String, Object> params) {
+    public void getPrdInstockData(Map<String, Object> params) {
         getView().showProgressDialog();
         if (null == produtionGetMaterial) {
-            produtionGetMaterial = new HttpSubscriber<>(new OnResultCallBack<QueryProductPickByInputResult>() {
+            produtionGetMaterial = new HttpSubscriber<>(new OnResultCallBack<QueryPrdInstockByInputResult>() {
                 @Override
-                public void onSuccess(QueryProductPickByInputResult bean) {
-                    getView().getProductPickData(bean);
+                public void onSuccess(QueryPrdInstockByInputResult bean) {
+                    getView().getPrdInstockData(bean);
                 }
 
                 @Override
@@ -325,7 +341,53 @@ public class BuyInStockListPresenter extends MvpBasePresenter<BuyInStockListView
                 }
             });
         }
-        model.getProductPickData(params, produtionGetMaterial);
+        model.getPrdInstockData(params, finishGoodInstock);
+    }
+
+    /**
+     * 生产领料单数据
+     *
+     * @param params
+     */
+    public void finishGoodInstock(Map<String, Object> params) {
+        getView().showProgressDialog();
+        if (null == finishGoodInstock) {
+            finishGoodInstock = new HttpSubscriber<>(new OnResultCallBack<QueryPrdInstockByInputResult>() {
+                @Override
+                public void onSuccess(QueryPrdInstockByInputResult bean) {
+                    getView().getPrdInstockData(bean);
+                }
+
+                @Override
+                public void onError(String errorMsg) {
+                    ToastUtils.showShort(errorMsg);
+                }
+            });
+        }
+        model.getPrdInstockData(params, finishGoodInstock);
+    }
+
+    /**
+     * 生产退料单数据
+     *
+     * @param params
+     */
+    public void getPrdReturnData(Map<String, Object> params) {
+        getView().showProgressDialog();
+        if (null == produtionReturnOrderno) {
+            produtionReturnOrderno = new HttpSubscriber<>(new OnResultCallBack<QueryPrdReturnByInputResult>() {
+                @Override
+                public void onSuccess(QueryPrdReturnByInputResult bean) {
+                    getView().getPrdReturnData(bean);
+                }
+
+                @Override
+                public void onError(String errorMsg) {
+                    ToastUtils.showShort(errorMsg);
+                }
+            });
+        }
+        model.getPrdReturnData(params, produtionReturnOrderno);
     }
 
     @Override
@@ -366,6 +428,14 @@ public class BuyInStockListPresenter extends MvpBasePresenter<BuyInStockListView
         if (null != produtionWorkOrderno) {
             produtionWorkOrderno.unSubscribe();
             produtionWorkOrderno = null;
+        }
+        if (null != produtionReturnOrderno) {
+            produtionReturnOrderno.unSubscribe();
+            produtionReturnOrderno = null;
+        }
+        if (null != finishGoodInstock) {
+            finishGoodInstock.unSubscribe();
+            finishGoodInstock = null;
         }
     }
 }

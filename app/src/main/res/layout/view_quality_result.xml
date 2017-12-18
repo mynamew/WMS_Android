@@ -27,7 +27,7 @@
             android:layout_width="match_parent"
             android:layout_height="64px"
             android:orientation="horizontal"
-            android:paddingLeft="30px">
+            >
 
             <Button
                 android:id="@+id/btn_qualified"
@@ -42,19 +42,7 @@
                 android:textColor="#666"
                 android:textSize="13sp"/>
 
-            <Button
-                android:id="@+id/btn_wait_deal"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="30px"
-                android:layout_weight="1"
-                android:background="@drawable/selector_result_quality"
-                android:button="@null"
-                android:clickable="false"
-                android:gravity="center"
-                android:text="@string/wait_deal"
-                android:textColor="#666"
-                android:textSize="13sp"/>
+
 
             <Button
                 android:id="@+id/btn_unqualified"
@@ -68,6 +56,19 @@
                 android:gravity="center"
                 android:text="@string/unquality"
                 android:textColor="#ff0000"
+                android:textSize="13sp"/>
+            <Button
+                android:id="@+id/btn_wait_deal"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="30px"
+                android:layout_weight="1"
+                android:background="@drawable/selector_result_quality"
+                android:button="@null"
+                android:clickable="false"
+                android:gravity="center"
+                android:text="@string/wait_deal"
+                android:textColor="#666"
                 android:textSize="13sp"/>
         </LinearLayout>
     </LinearLayout>

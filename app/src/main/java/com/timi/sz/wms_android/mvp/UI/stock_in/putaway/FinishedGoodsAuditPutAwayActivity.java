@@ -1,6 +1,7 @@
 package com.timi.sz.wms_android.mvp.UI.stock_in.putaway;
 
 import android.os.Bundle;
+import android.text.Selection;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
@@ -97,62 +98,48 @@ public class FinishedGoodsAuditPutAwayActivity extends BaseActivity<PutAwayView,
 
     @Override
     public void initView() {
-        etPutawayScanMaterial.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+        etPutawayScanLocation.setFocusable(true);
+        etPutawayScanLocation.setFocusableInTouchMode(true);
+        etPutawayScanLocation.requestFocus();
+        etPutawayScanLocation.findFocus();
+        setEdittextListener(etPutawayScanMaterial,REQUEST_SCAN_CODE_MATERIIAL,R.string.please_scan_material_code,0, new EdittextInputListener() {
             @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-
-                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                    InputMethodUtils.hide(FinishedGoodsAuditPutAwayActivity.this);
-                    String orderNum = etPutawayScanMaterial.getText().toString().trim();
-                    if (TextUtils.isEmpty(orderNum)) {
-                        ToastUtils.showShort(getString(R.string.please_scan_material_code));
-                    }
-                    /**
-                     * 物料扫码并上架的网络请求
-                     */
-                    Map<String, Object> params1 = new HashMap<>();
-                    params1.put("UserId", SpUtils.getInstance().getUserId());
-                    params1.put("OrgId", SpUtils.getInstance().getOrgId());
-                    params1.put("MAC", PackageUtils.getMac());
-                    params1.put("SrcBillType", 40);
-                    params1.put("DestBillType", 40);
-                    params1.put("BillId", mFinishBean.getReceipId());
-                    params1.put("ScanId", ScanId);
-                    params1.put("BinCode", locationCode);
-                    params1.put("BarcodeNo", orderNum);
-                    getPresenter().materialScanNetWork(params1, orderNum);
-                }
-                return false;
+            public void verticalSuccess(String result) {
+                /**
+                 * 物料扫码并上架的网络请求
+                 */
+                Map<String, Object> params1 = new HashMap<>();
+                params1.put("UserId", SpUtils.getInstance().getUserId());
+                params1.put("OrgId", SpUtils.getInstance().getOrgId());
+                params1.put("MAC", PackageUtils.getMac());
+                params1.put("SrcBillType", 40);
+                params1.put("DestBillType", 40);
+                params1.put("ScanId", mFinishBean.getScanId());
+                params1.put("BinCode", locationCode);
+                params1.put("BillId", mFinishBean.getReceipId());
+                params1.put("BarcodeNo", result);
+                getPresenter().materialScanNetWork(params1, result);
             }
         });
-        etPutawayScanLocation.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+        setEdittextListener(etPutawayScanLocation,REQUEST_SCAN_CODE_LIB_LOATION,R.string.please_scan_lib_location_code,0, new EdittextInputListener() {
             @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-
-                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                    InputMethodUtils.hide(FinishedGoodsAuditPutAwayActivity.this);
-                    String orderNum = etPutawayScanLocation.getText().toString().trim();
-                    if (TextUtils.isEmpty(orderNum)) {
-                        ToastUtils.showShort(getString(R.string.please_scan_lib_location_code));
-                    }
-                    /**
-                     * 保存库位码
-                     */
-                    locationCode = orderNum;
-                    /**
-                     * 发起请求
-                     */
-                    /**
-                     * 判断库位码是否有效
-                     */
-                    Map<String, Object> params = new HashMap<>();
-                    params.put("UserId", SpUtils.getInstance().getUserId());
-                    params.put("OrgId", SpUtils.getInstance().getOrgId());
-                    params.put("MAC", PackageUtils.getMac());
-                    params.put("BinCode", orderNum);
-                    getPresenter().vertifyLocationCode(params);
-                }
-                return false;
+            public void verticalSuccess(String result) {
+                /**
+                 * 保存库位码
+                 */
+                locationCode = result;
+                /**
+                 * 发起请求
+                 */
+                /**
+                 * 判断库位码是否有效
+                 */
+                Map<String, Object> params = new HashMap<>();
+                params.put("UserId", SpUtils.getInstance().getUserId());
+                params.put("OrgId", SpUtils.getInstance().getOrgId());
+                params.put("MAC", PackageUtils.getMac());
+                params.put("BinCode", result);
+                getPresenter().vertifyLocationCode(params);
             }
         });
     }
@@ -225,7 +212,15 @@ public class FinishedGoodsAuditPutAwayActivity extends BaseActivity<PutAwayView,
 
     private VertifyLocationCodeBean mVertifyLocationCodeBean;
     private boolean locationCodeIsUse = false;
+    @Override
+    public void setMaterialEdittextSelect() {
+        Selection.selectAll(etPutawayScanMaterial.getText());
+    }
 
+    @Override
+    public void setLocationSelect() {
+        Selection.selectAll(etPutawayScanLocation.getText());
+    }
     @Override
     public void vertifyLocationCode(VertifyLocationCodeBean bean) {
         ToastUtils.showShort(getString(R.string.location_code_is_visible));

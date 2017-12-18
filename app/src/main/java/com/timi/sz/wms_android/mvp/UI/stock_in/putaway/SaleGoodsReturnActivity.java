@@ -2,6 +2,7 @@ package com.timi.sz.wms_android.mvp.UI.stock_in.putaway;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Selection;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
@@ -102,6 +103,10 @@ public class SaleGoodsReturnActivity extends BaseActivity<PutAwayView, PutAwayPr
 
     @Override
     public void initView() {
+        etPutawayScanLocation.setFocusable(true);
+        etPutawayScanLocation.setFocusableInTouchMode(true);
+        etPutawayScanLocation.requestFocus();
+        etPutawayScanLocation.findFocus();
         setRightImg(R.mipmap.stockin_detail, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -114,65 +119,64 @@ public class SaleGoodsReturnActivity extends BaseActivity<PutAwayView, PutAwayPr
                 startActivity(it);
             }
         });
-        etPutawayScanMaterial.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+        setEdittextListener(etPutawayScanMaterial,REQUEST_SCAN_CODE_MATERIIAL,R.string.please_scan_material_code,0, new EdittextInputListener() {
             @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-
-                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                    InputMethodUtils.hide(SaleGoodsReturnActivity.this);
-                    String orderNum = etPutawayScanMaterial.getText().toString().trim();
-                    if (TextUtils.isEmpty(orderNum)) {
-                        ToastUtils.showShort(getString(R.string.please_scan_material_code));
-                    }
-                    /**
-                     * 物料扫码并上架的网络请求
-                     */
-                    Map<String, Object> params1 = new HashMap<>();
-                    params1.put("UserId", SpUtils.getInstance().getUserId());
-                    params1.put("OrgId", SpUtils.getInstance().getOrgId());
-                    params1.put("MAC", PackageUtils.getMac());
-                    params1.put("SrcBillType", 43);
-                    params1.put("DestBillType", 43);
-                    params1.put("ScanId", ScanId);
-                    params1.put("BinCode", locationCode);
-                    params1.put("BarcodeNo", orderNum);
-                    getPresenter().materialScanNetWork(params1, orderNum);
-                }
-                return false;
+            public void verticalSuccess(String result) {
+                /**
+                 * 物料扫码并上架的网络请求
+                 */
+                Map<String, Object> params1 = new HashMap<>();
+                params1.put("UserId", SpUtils.getInstance().getUserId());
+                params1.put("OrgId", SpUtils.getInstance().getOrgId());
+                params1.put("MAC", PackageUtils.getMac());
+                params1.put("SrcBillType", 43);
+                params1.put("DestBillType", 43);
+                params1.put("ScanId", saleGoodsReturnBean.getScanId());
+                params1.put("BinCode", locationCode);
+                params1.put("BillId", saleGoodsReturnBean.getBillId());
+                params1.put("BarcodeNo", result);
+                getPresenter().materialScanNetWork(params1, result);
             }
         });
-        etPutawayScanLocation.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+        setEdittextListener(etPutawayScanLocation,REQUEST_SCAN_CODE_LIB_LOATION,R.string.please_scan_lib_location_code,0, new EdittextInputListener() {
             @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-
-                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                    InputMethodUtils.hide(SaleGoodsReturnActivity.this);
-                    String orderNum = etPutawayScanLocation.getText().toString().trim();
-                    if (TextUtils.isEmpty(orderNum)) {
-                        ToastUtils.showShort(getString(R.string.please_scan_lib_location_code));
-                    }
-                    /**
-                     * 保存库位码
-                     */
-                    locationCode = orderNum;
-                    /**
-                     * 发起请求
-                     */
-                    /**
-                     * 判断库位码是否有效
-                     */
-                    Map<String, Object> params = new HashMap<>();
-                    params.put("UserId", SpUtils.getInstance().getUserId());
-                    params.put("OrgId", SpUtils.getInstance().getOrgId());
-                    params.put("MAC", PackageUtils.getMac());
-                    params.put("BinCode", orderNum);
-                    getPresenter().vertifyLocationCode(params);
-                }
-                return false;
+            public void verticalSuccess(String result) {
+                /**
+                 * 保存库位码
+                 */
+                locationCode = result;
+                /**
+                 * 发起请求
+                 */
+                /**
+                 * 判断库位码是否有效
+                 */
+                Map<String, Object> params = new HashMap<>();
+                params.put("UserId", SpUtils.getInstance().getUserId());
+                params.put("OrgId", SpUtils.getInstance().getOrgId());
+                params.put("MAC", PackageUtils.getMac());
+                params.put("BinCode", result);
+                getPresenter().vertifyLocationCode(params);
             }
         });
     }
+    @Override
+    public void setMaterialEdittextSelect() {
+        etPutawayScanMaterial.setFocusable(true);
+        etPutawayScanMaterial.setFocusableInTouchMode(true);
+        etPutawayScanMaterial.requestFocus();
+        etPutawayScanMaterial.findFocus();
+        Selection.selectAll(etPutawayScanMaterial.getText());
+    }
 
+    @Override
+    public void setLocationSelect() {
+        etPutawayScanLocation.setFocusable(true);
+        etPutawayScanLocation.setFocusableInTouchMode(true);
+        etPutawayScanLocation.requestFocus();
+        etPutawayScanLocation.findFocus();
+        Selection.selectAll(etPutawayScanLocation.getText());
+    }
     @Override
     public void initData() {
         /**

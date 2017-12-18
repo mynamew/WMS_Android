@@ -3,6 +3,8 @@ package com.timi.sz.wms_android.mvp.UI.list;
 import com.timi.sz.wms_android.bean.instock.list.QueryPoListBean;
 import com.timi.sz.wms_android.bean.instock.outsource_return_material.QueryOutSourceReturnByInputResult;
 import com.timi.sz.wms_android.bean.instock.search.BuyOrdernoBean;
+import com.timi.sz.wms_android.bean.instock.search.QueryPrdInstockByInputResult;
+import com.timi.sz.wms_android.bean.instock.search.QueryPrdReturnByInputResult;
 import com.timi.sz.wms_android.bean.outstock.buy.BuyReturnMaterialByOrdernoData;
 import com.timi.sz.wms_android.bean.outstock.buy.SubmitBarcodePurReturnData;
 import com.timi.sz.wms_android.bean.outstock.outsource.QueryOutSourceFeedByInputResult;
@@ -76,7 +78,7 @@ public interface BuyInStockListView extends MvpBaseView {
      * 生产领料
      * @param bean
      */
-    void getProductPickData(QueryProductPickByInputResult bean);
+    void getProductPickData(QueryWWPickDataByOutSourceResult bean);
 
     /**
      * 生产工单
@@ -84,4 +86,15 @@ public interface BuyInStockListView extends MvpBaseView {
      */
     void getPrdPickData(QueryWWPickDataByOutSourceResult bean);
 
+    /**
+     * 成品入库
+     * @param bean
+     */
+    void getPrdInstockData(QueryPrdInstockByInputResult bean);
+
+    /**
+     * 生产退料
+      * @param bean
+     */
+    void getPrdReturnData(QueryPrdReturnByInputResult bean);
 }

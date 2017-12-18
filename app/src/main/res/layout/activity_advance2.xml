@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="#e7e7ed"
     tools:context="com.timi.sz.wms_android.mvp.UI.quity.quality.advance_quality.Advance2Activity">
 
     <include
@@ -36,7 +36,7 @@
         custom:canClick="false"
         android:layout_marginBottom="10px"
         android:layout_marginRight="30px"
-        custom:tabNum="3"/>
+        custom:tabNum="2"/>
 
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"

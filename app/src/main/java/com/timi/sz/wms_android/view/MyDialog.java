@@ -1,5 +1,6 @@
 package com.timi.sz.wms_android.view;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -19,6 +20,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.timi.sz.wms_android.R;
+import com.timi.sz.wms_android.base.uils.InputMethodUtils;
 
 
 /**
@@ -47,18 +49,20 @@ public class MyDialog extends Dialog {
         initView(context, layoutId);
     }
 
-    public void initView(Context ctx, int layoutId) {
+    public void initView(final Context ctx, int layoutId) {
         this.ctx = ctx;
         rootView = LayoutInflater.from(ctx).inflate(layoutId, null);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.setCanceledOnTouchOutside(true);
         this.setContentView(rootView);
-//        rootView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                MyDialog.this.dismiss();
-//            }
-//        });
+        rootView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(ctx instanceof Activity){
+                    InputMethodUtils.hide((Activity) ctx);
+                }
+            }
+        });
         this.setOnDismissListener(new OnDismissListener() {
             @Override
             public void onDismiss(DialogInterface dialogInterface) {

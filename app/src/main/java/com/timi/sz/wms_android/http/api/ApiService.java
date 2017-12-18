@@ -48,10 +48,13 @@ import com.timi.sz.wms_android.bean.outstock.sale.QuerySalesOutSotckByInputForOu
 import com.timi.sz.wms_android.bean.quality.BarcodeData;
 import com.timi.sz.wms_android.bean.quality.GetAQLList;
 import com.timi.sz.wms_android.bean.quality.QualityListBean;
+import com.timi.sz.wms_android.bean.quality.RequestUpdateCheckitemBean;
 import com.timi.sz.wms_android.bean.quality.adavance.CommitAdvance1Data;
 import com.timi.sz.wms_android.bean.quality.adavance.CommitAdvanceData;
 import com.timi.sz.wms_android.bean.quality.adavance.GetAdvance2Data;
 import com.timi.sz.wms_android.bean.quality.adavance.GetAdvanceData;
+import com.timi.sz.wms_android.bean.quality.adavance.IQCGetAdvanceData;
+import com.timi.sz.wms_android.bean.quality.adavance.UpdateCheckItemResult;
 import com.timi.sz.wms_android.bean.quality.mrp.MrpReviewData;
 import com.timi.sz.wms_android.bean.quality.normal.CommitNormalData;
 import com.timi.sz.wms_android.bean.quality.normal.NormalQualityData;
@@ -325,6 +328,20 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("api/services/wpda/PrdInstock/GetWorkOrderDetail")
     Observable<CommonResult<List<OrderDetailData>>> getWorkOrderDetail(@FieldMap Map<String, Object> params);
+    /**
+     * 成品入库单列表
+     */
+    @POST("api/services/wpda/PrdInstock/QueryPrdInstockList")
+    Observable<CommonResult<List<QueryPoListBean>>> qeryPrdInstockList(@Body RequestBuyInStockListBean params);
+    /**
+     * 获得成品入库单入库数据
+     *
+     * @param params
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("api/services/wpda/PrdInstock/GetPrdInstockData")
+    Observable<CommonResult<QueryPrdInstockByInputResult>> getPrdInstockData(@FieldMap Map<String, Object> params);
 
     /**
      * 其他入库—审核
@@ -427,6 +444,25 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("api/services/wpda/PrdReturn/GetPrdReturnDetail")
     Observable<CommonResult<List<OrderDetailData>>> getPrdReturnDetail(@FieldMap Map<String, Object> params);
+     /**
+     * 查询生产退料单列表
+     *
+     * @param params
+     * @return
+     */
+    @POST("api/services/wpda/PrdReturn/QueryPrdReturnList")
+    Observable<CommonResult<List<QueryPoListBean>>> queryPrdReturnList(@Body RequestBuyInStockListBean params);
+
+    /**
+     * 生产退料单列表获取数据
+     *
+     * @param params
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("api/services/wpda/PrdReturn/GetPrdReturnData")
+    Observable<CommonResult<QueryPrdReturnByInputResult>> getPrdReturnData(@FieldMap Map<String, Object> params);
+
     /**====== 销售退料 ======**/
     /**
      * 销售退货
@@ -1074,7 +1110,6 @@ public interface ApiService {
      *
      * @return
      */
-    @FormUrlEncoded
     @POST("api/services/wpda/IQC/IQCSetAdvance1Data")
     Observable<CommonResult<Object>> setAdvance1Data(@Body CommitAdvance1Data params);
 
@@ -1085,6 +1120,23 @@ public interface ApiService {
      */
     @POST("api/services/wpda/IQC/IQCSetAdvance2Data")
     Observable<CommonResult<Object>> setAdvance2Data(@Body CommitAdvanceData data);
+
+    /**
+     * 获取高级质检2 质检项目
+     *
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("api/services/wpda/IQC/GetIQCAdvance2CheckItem")
+    Observable<CommonResult<IQCGetAdvanceData>> IQCGetAdvanceData(@FieldMap  Map<String, Object> params);
+
+    /**
+     * 修改高检二质检项目
+     *
+     * @return
+     */
+    @POST("api/services/wpda/IQC/IQCUpdateAdvance2Item")
+    Observable<CommonResult<UpdateCheckItemResult>> IQCUpdateAdvance2Item(@Body RequestUpdateCheckitemBean params);
     /**======MRP评审=====**/
     /**
      * 查询MRP评审信息列表
@@ -1282,8 +1334,9 @@ public interface ApiService {
      */
     @FormUrlEncoded
     @POST("api/services/wpda/StockCheck/GetMaterialData")
-    Observable<CommonResult<MaterialDataBean>>getMaterialData(@FieldMap Map<String, Object> params);
-   /**
+    Observable<CommonResult<MaterialDataBean>> getMaterialData(@FieldMap Map<String, Object> params);
+
+    /**
      * 获取物料的信息
      *
      * @param params
@@ -1291,7 +1344,7 @@ public interface ApiService {
      */
     @FormUrlEncoded
     @POST("api/services/wpda/StockCheck/SubmitCheckData")
-    Observable<CommonResult<SubmitCheckDataResult>>submitCheckData(@Body RequestSubmitCheckDataBean params);
+    Observable<CommonResult<SubmitCheckDataResult>> submitCheckData(@Body RequestSubmitCheckDataBean params);
     /************************************************************************************************************/
     /**************************************************************************************************************/
 

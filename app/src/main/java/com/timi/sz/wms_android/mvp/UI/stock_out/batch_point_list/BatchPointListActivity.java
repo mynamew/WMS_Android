@@ -534,9 +534,9 @@ public class BatchPointListActivity extends BaseActivity<BatchPointListView, Bat
      */
     public void setHeaderContent(String billCode, String billDate, String wareHouseName, String regionName, int qty, int waitQty, int scanQty) {
         tvOutsourceOrderno.setText(billCode);
-        tvCreateOrdernoDate.setText(TextUtils.isEmpty(billDate) ? getString(R.string.none) : billDate);
-        tvStockName.setText(TextUtils.isEmpty(wareHouseName) ? getString(R.string.none) : wareHouseName);
-        tvStrictName.setText(TextUtils.isEmpty(regionName) ? getString(R.string.none) : regionName);
+        tvCreateOrdernoDate.setText(billDate);
+        tvStockName.setText( wareHouseName);
+        tvStrictName.setText( regionName);
         tvBuyNum.setText(String.valueOf(qty));
         tvWaitPointNum.setText(String.valueOf(waitQty));
         tvHaveCountNum.setText(String.valueOf(scanQty));

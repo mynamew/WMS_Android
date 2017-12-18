@@ -18,10 +18,8 @@ public interface Advance1QualityView extends MvpBaseView {
 
     /**
      * 设置高级质检1
-     * @param isQualified
-     * @param rejectNum
      */
-    void setAdvance1Data(int isQualified, int rejectNum);
+    void setAdvance1Data();
     /**
      * 质检确认
      */

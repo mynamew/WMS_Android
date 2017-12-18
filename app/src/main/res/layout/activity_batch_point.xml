@@ -60,7 +60,7 @@
                     android:paddingLeft="55px"
                     android:text=""
                     android:textColor="#000"
-                    android:textSize="26px"/>
+                    android:textSize="13sp"/>
             </LinearLayout>
 
             <LinearLayout
@@ -76,7 +76,7 @@
                     android:paddingLeft="30px"
                     android:text="@string/item_material_name"
                     android:textColor="#333"
-                    android:textSize="26px"/>
+                    android:textSize="13sp"/>
 
                 <TextView
                     android:id="@+id/tv_material_name"
@@ -85,7 +85,7 @@
                     android:paddingLeft="55px"
                     android:text=""
                     android:textColor="#000"
-                    android:textSize="26px"/>
+                    android:textSize="13sp"/>
             </LinearLayout>
 
 
@@ -101,7 +101,7 @@
                     android:paddingLeft="30px"
                     android:text="@string/item_material_model"
                     android:textColor="#333"
-                    android:textSize="26px"/>
+                    android:textSize="13sp"/>
 
                 <TextView
                     android:id="@+id/tv_material_model"
@@ -110,7 +110,7 @@
                     android:paddingLeft="55px"
                     android:text=""
                     android:textColor="#000"
-                    android:textSize="26px"/>
+                    android:textSize="13sp"/>
             </LinearLayout>
 
             <LinearLayout
@@ -127,7 +127,7 @@
                     android:paddingLeft="30px"
                     android:text="@string/item_material_attr"
                     android:textColor="#333"
-                    android:textSize="26px"/>
+                    android:textSize="13sp"/>
 
                 <TextView
                     android:id="@+id/tv_material_attr"
@@ -136,7 +136,7 @@
                     android:paddingLeft="55px"
                     android:text=""
                     android:textColor="#000"
-                    android:textSize="26px"/>
+                    android:textSize="13sp"/>
             </LinearLayout>
 
             <LinearLayout
@@ -152,7 +152,7 @@
                     android:paddingLeft="30px"
                     android:text="@string/send_material_num_tip"
                     android:textColor="#333"
-                    android:textSize="26px"/>
+                    android:textSize="13sp"/>
 
                 <TextView
                     android:id="@+id/tv_send_material_num"
@@ -161,7 +161,7 @@
                     android:paddingLeft="55px"
                     android:text=""
                     android:textColor="@color/login_txt_color"
-                    android:textSize="26px"/>
+                    android:textSize="13sp"/>
             </LinearLayout>
 
             <LinearLayout
@@ -177,7 +177,7 @@
                     android:paddingLeft="20px"
                     android:text="@string/have_get_total_num_tip"
                     android:textColor="#333"
-                    android:textSize="26px"/>
+                    android:textSize="13sp"/>
 
                 <TextView
                     android:id="@+id/tv_have_get_total_num"
@@ -186,7 +186,7 @@
                     android:paddingLeft="55px"
                     android:text=""
                     android:textColor="#000"
-                    android:textSize="26px"/>
+                    android:textSize="13sp"/>
             </LinearLayout>
 
             <LinearLayout
@@ -203,7 +203,7 @@
                     android:paddingLeft="20px"
                     android:text="@string/can_get_total_num_tip"
                     android:textColor="#333"
-                    android:textSize="26px"/>
+                    android:textSize="13sp"/>
 
                 <TextView
                     android:id="@+id/tv_can_get_total_num"
@@ -212,7 +212,7 @@
                     android:paddingLeft="55px"
                     android:text=""
                     android:textColor="#000"
-                    android:textSize="26px"/>
+                    android:textSize="13sp"/>
             </LinearLayout>
 
             <LinearLayout
@@ -228,7 +228,7 @@
                     android:paddingLeft="30px"
                     android:text="@string/send_material_lib_tip"
                     android:textColor="#333"
-                    android:textSize="26px"/>
+                    android:textSize="13sp"/>
 
                 <TextView
                     android:id="@+id/tv_send_material_lib"
@@ -237,7 +237,7 @@
                     android:paddingLeft="55px"
                     android:text=""
                     android:textColor="#000"
-                    android:textSize="26px"/>
+                    android:textSize="13sp"/>
             </LinearLayout>
 
             <LinearLayout
@@ -254,7 +254,7 @@
                     android:paddingLeft="30px"
                     android:text="@string/controll_type_tip"
                     android:textColor="#333"
-                    android:textSize="26px"/>
+                    android:textSize="13sp"/>
 
                 <TextView
                     android:id="@+id/tv_controll_type"
@@ -263,7 +263,7 @@
                     android:paddingLeft="55px"
                     android:text=""
                     android:textColor="@color/login_txt_color"
-                    android:textSize="26px"/>
+                    android:textSize="13sp"/>
             </LinearLayout>
 
             <LinearLayout
@@ -329,7 +329,7 @@
                     android:paddingLeft="30px"
                     android:text="@string/scan_material"
                     android:textColor="#333"
-                    android:textSize="26px"
+                    android:textSize="13sp"
                     />
 
                 <EditText
@@ -374,7 +374,7 @@
                 android:paddingTop="10px"
                 android:text="@string/batch_info_title"
                 android:textColor="#333"
-                android:textSize="28px"
+                android:textSize="14sp"
                 android:textStyle="bold"/>
 
             <View
@@ -387,6 +387,8 @@
                 android:id="@+id/ll_tab"
                 android:layout_width="match_parent"
                 android:layout_height="88px"
+                android:layout_marginRight="30px"
+                android:layout_marginLeft="30px"
                 android:layout_below="@id/head"
                 android:orientation="horizontal">
 

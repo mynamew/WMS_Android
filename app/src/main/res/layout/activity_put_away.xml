@@ -10,9 +10,23 @@
 
     <include layout="@layout/title_head"/>
 
+    <Button
+        android:id="@+id/btn_login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="20px"
+        android:layout_marginLeft="50px"
+        android:layout_marginRight="50px"
+        android:background="@drawable/selector_btn_bg_login"
+        android:text="@string/confirm_commit"
+        android:textColor="#fff"
+        android:textSize="18sp"/>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_above="@id/btn_login"
         android:layout_marginTop="100px">
 
         <LinearLayout
@@ -41,7 +55,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:paddingBottom="5px"
-                android:paddingTop="20px">
+                android:paddingTop="5px">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -66,7 +80,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:paddingBottom="5px"
-                android:paddingTop="10px">
+                android:paddingTop="5px">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -91,24 +105,57 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:paddingBottom="5px"
-                android:paddingTop="10px">
+                android:paddingTop="5px">
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="40px"
-                    android:text="@string/arrive_pro_total_num"
-                    android:textColor="#333"
-                    android:textSize="13sp"/>
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    >
 
-                <TextView
-                    android:id="@+id/tv_arrive_pro_total_num"
-                    android:layout_width="match_parent"
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="40px"
+                        android:text="@string/arrive_pro_total_num"
+                        android:textColor="#333"
+                        android:textSize="13sp"/>
+
+                    <TextView
+                        android:id="@+id/tv_arrive_pro_total_num"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="40px"
+                        android:text=" "
+                        android:textColor="#000"
+                        android:textSize="13sp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="40px"
-                    android:text=" "
-                    android:textColor="#000"
-                    android:textSize="13sp"/>
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="40px"
+                        android:text="@string/wait_count_num"
+                        android:textColor="#333"
+                        android:textSize="13sp"/>
+
+                    <TextView
+                        android:id="@+id/tv_wait_count_num"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="40px"
+                        android:text=" "
+                        android:textColor="@color/login_txt_color"
+                        android:textSize="13sp"/>
+                </LinearLayout>
             </LinearLayout>
 
             <LinearLayout
@@ -116,82 +163,67 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:paddingBottom="5px"
-                android:paddingTop="10px">
+                android:paddingTop="5px">
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="40px"
-                    android:text="@string/right_pro_num"
-                    android:textColor="#333"
-                    android:textSize="13sp"/>
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    >
 
-                <TextView
-                    android:id="@+id/tv_right_pro_num"
-                    android:layout_width="match_parent"
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="40px"
+                        android:text="@string/right_pro_num"
+                        android:textColor="#333"
+                        android:textSize="13sp"/>
+
+                    <TextView
+                        android:id="@+id/tv_right_pro_num"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="40px"
+                        android:text=" "
+                        android:textColor="#000"
+                        android:textSize="13sp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="40px"
-                    android:text=" "
-                    android:textColor="#000"
-                    android:textSize="13sp"/>
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="40px"
+                        android:text="@string/have_count_num"
+                        android:textColor="#333"
+                        android:textSize="13sp"/>
+
+                    <TextView
+                        android:id="@+id/tv_have_count_num"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="40px"
+                        android:text=" "
+                        android:textColor="@color/login_txt_color"
+                        android:textSize="13sp"/>
+                </LinearLayout>
+
             </LinearLayout>
+
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:paddingBottom="5px"
-                android:paddingTop="10px">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="40px"
-                    android:text="@string/wait_count_num"
-                    android:textColor="#333"
-                    android:textSize="13sp"/>
-
-                <TextView
-                    android:id="@+id/tv_wait_count_num"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="40px"
-                    android:text=" "
-                    android:textColor="#000"
-                    android:textSize="13sp"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingBottom="5px"
-                android:paddingTop="10px">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="40px"
-                    android:text="@string/have_count_num"
-                    android:textColor="#333"
-                    android:textSize="13sp"/>
-
-                <TextView
-                    android:id="@+id/tv_have_count_num"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="40px"
-                    android:text=" "
-                    android:textColor="#000"
-                    android:textSize="13sp"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingBottom="20px"
-                android:paddingTop="10px">
+                android:paddingTop="5px">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -215,16 +247,4 @@
         </LinearLayout>
     </ScrollView>
 
-    <Button
-        android:id="@+id/btn_login"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="20px"
-        android:layout_marginLeft="50px"
-        android:layout_marginRight="50px"
-        android:background="@drawable/selector_btn_bg_login"
-        android:text="@string/confirm_commit"
-        android:textColor="#fff"
-        android:textSize="18sp"/>
 </RelativeLayout>

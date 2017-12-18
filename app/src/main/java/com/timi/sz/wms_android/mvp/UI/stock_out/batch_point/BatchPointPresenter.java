@@ -86,12 +86,14 @@ public class BatchPointPresenter extends MvpBasePresenter<BatchPointView> {
             submitBarcodeLotPickOutResultHttpSubscriber = new HttpSubscriber<>(new OnResultCallBack<SubmitBarcodeLotPickOutResult>() {
                 @Override
                 public void onSuccess(SubmitBarcodeLotPickOutResult bean) {
+                    getView().setBarcodeSelect();
                     getView().submitBarcodeLotPickOut(bean);
                 }
 
                 @Override
                 public void onError(String errorMsg) {
                     ToastUtils.showShort(errorMsg);
+                    getView().setBarcodeSelect();
                 }
             });
         }

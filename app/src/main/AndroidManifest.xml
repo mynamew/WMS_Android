@@ -239,11 +239,6 @@
             android:windowSoftInputMode="adjustPan|stateHidden">
         </activity>
         <activity
-            android:name=".mvp.UI.quity.quality.advance_quality.AdvanceQualityActivity"
-            android:hardwareAccelerated="false"
-            android:windowSoftInputMode="adjustPan|stateHidden">
-        </activity>
-        <activity
             android:name=".mvp.UI.quity.reject.QualityRejectActivity"
             android:windowSoftInputMode="stateVisible|adjustResize|stateHidden|stateAlwaysHidden">
         </activity>

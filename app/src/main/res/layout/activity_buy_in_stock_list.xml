@@ -29,7 +29,7 @@
             />
 
         <EditText
-            android:id="@+id/et_putaway_scan_location"
+            android:id="@+id/et_orderno"
             android:layout_width="match_parent"
             android:layout_height="64px"
             android:layout_centerVertical="true"
@@ -58,13 +58,14 @@
     </RelativeLayout>
 
     <RelativeLayout
+        android:id="@+id/rl_supplier"
         android:layout_width="match_parent"
         android:layout_height="88px"
         android:layout_marginRight="30px"
         android:layout_marginTop="10px">
 
         <TextView
-            android:id="@+id/tv_putaway_scan_material_tip"
+            android:id="@+id/tv_tip"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
@@ -75,16 +76,132 @@
             />
 
         <EditText
-            android:id="@+id/et_putaway_scan_material"
+            android:id="@+id/et_supplier"
+            android:layout_width="match_parent"
+            android:layout_height="64px"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20px"
+            android:layout_toRightOf="@id/tv_tip"
+            android:background="@drawable/selector_et"
+            android:ellipsize="end"
+            android:hint="@string/please_input_supplier"
+            android:imeOptions="actionSearch"
+            android:paddingLeft="20px"
+            android:paddingRight="80px"
+            android:singleLine="true"
+            android:text=""
+            android:textSize="13sp"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_date"
+        android:layout_width="match_parent"
+        android:layout_height="88px"
+        android:layout_marginRight="30px"
+        android:layout_marginTop="10px"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/tv_date_tip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:paddingLeft="30px"
+            android:text="@string/date"
+            android:textColor="#333"
+            android:textSize="13sp"
+            />
+
+        <EditText
+            android:id="@+id/et_date"
+            android:layout_width="match_parent"
+            android:layout_height="64px"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="50px"
+            android:layout_toRightOf="@id/tv_date_tip"
+            android:background="@drawable/selector_et"
+            android:ellipsize="end"
+            android:hint="@string/please_input_supplier"
+            android:imeOptions="actionSearch"
+            android:paddingLeft="20px"
+            android:paddingRight="80px"
+            android:singleLine="true"
+            android:text=""
+            android:textSize="13sp"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_department"
+        android:layout_width="match_parent"
+        android:layout_height="88px"
+        android:layout_marginRight="30px"
+        android:layout_marginTop="10px"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/tv_department_tip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:paddingLeft="30px"
+            android:text="@string/department_tip"
+            android:textColor="#333"
+            android:textSize="13sp"
+            />
+
+        <EditText
+            android:id="@+id/et_department"
             android:layout_width="match_parent"
             android:layout_height="64px"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="20px"
-            android:layout_toRightOf="@id/tv_putaway_scan_material_tip"
+            android:layout_marginLeft="50px"
+            android:layout_toRightOf="@id/tv_department_tip"
             android:background="@drawable/selector_et"
             android:ellipsize="end"
             android:gravity="center_vertical"
-            android:hint="@string/please_input_supplier"
+            android:hint="@string/please_input_department"
+            android:imeOptions="actionSearch"
+            android:paddingLeft="20px"
+            android:paddingRight="80px"
+            android:singleLine="true"
+            android:text=""
+            android:textSize="13sp"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_barcode"
+        android:layout_width="match_parent"
+        android:layout_height="88px"
+        android:layout_marginRight="30px"
+        android:layout_marginTop="10px"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/tv_barcode_tip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:paddingLeft="30px"
+            android:text="@string/bar_code_tip"
+            android:textColor="#333"
+            android:textSize="13sp"
+            />
+
+        <EditText
+            android:id="@+id/et_barcode"
+            android:layout_width="match_parent"
+            android:layout_height="64px"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="50px"
+            android:layout_toRightOf="@id/tv_barcode_tip"
+            android:background="@drawable/selector_et"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:hint="@string/please_input_barcode"
             android:imeOptions="actionSearch"
             android:paddingLeft="20px"
             android:paddingRight="80px"

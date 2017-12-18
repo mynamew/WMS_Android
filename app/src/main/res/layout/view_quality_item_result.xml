@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:background="@drawable/bg_rectangle_et_unfocused"
-              android:orientation="vertical">
+                                     android:layout_width="wrap_content"
+                                     android:layout_height="wrap_content"
+                                     android:layout_marginLeft="5px"
+                                     android:layout_marginRight="5px"
+                                     android:background="@drawable/bg_rectangle_et_unfocused"
+                                     android:orientation="vertical">
 
     <com.zhy.autolayout.AutoLinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="10px"
         android:gravity="center_vertical"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="10px">
 
         <TextView
             android:id="@+id/tv_title"
@@ -32,9 +34,9 @@
             android:id="@+id/iv_content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:scaleType="centerCrop"
             android:layout_gravity="center"
             android:layout_marginTop="10px"
+            android:scaleType="centerCrop"
             android:src="@drawable/selector_quality_item_result"/>
     </com.zhy.autolayout.AutoLinearLayout>
 </com.zhy.autolayout.AutoLinearLayout>

@@ -73,6 +73,7 @@ public class QualityRejectPresenter extends MvpBasePresenter<QualityRejectView> 
                 @Override
                 public void onError(String errorMsg) {
                     ToastUtils.showShort(errorMsg);
+                    getView().setEdittextSelect();
                 }
             });
         }

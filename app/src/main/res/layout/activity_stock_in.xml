@@ -6,6 +6,7 @@
     android:id="@+id/activity_stock_in"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/divide_color"
     android:orientation="vertical"
     tools:context="com.timi.sz.wms_android.mvp.UI.stock_in.StockInActivity">
 

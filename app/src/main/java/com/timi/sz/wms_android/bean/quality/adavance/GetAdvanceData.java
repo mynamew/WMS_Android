@@ -106,12 +106,12 @@ public class GetAdvanceData {
         private String receiptDate;
         private String sourceBillCode;
         private String supplierName;
-        private Object creater;
+        private String creater;
         private int materialId;
         private String materialCode;
         private String materialName;
         private String materialStandard;
-        private Object materialAttribute;
+        private String materialAttribute;
         private int receiveQty;
         private int sampleQty;
         private int ngQty;
@@ -169,11 +169,11 @@ public class GetAdvanceData {
             this.supplierName = supplierName;
         }
 
-        public Object getCreater() {
+        public String getCreater() {
             return creater;
         }
 
-        public void setCreater(Object creater) {
+        public void setCreater(String creater) {
             this.creater = creater;
         }
 
@@ -209,11 +209,11 @@ public class GetAdvanceData {
             this.materialStandard = materialStandard;
         }
 
-        public Object getMaterialAttribute() {
+        public String getMaterialAttribute() {
             return materialAttribute;
         }
 
-        public void setMaterialAttribute(Object materialAttribute) {
+        public void setMaterialAttribute(String materialAttribute) {
             this.materialAttribute = materialAttribute;
         }
 
@@ -305,8 +305,8 @@ public class GetAdvanceData {
         private String currentLevel;
         private String sampleCode;
         private String currentAQL;
-        private int acceptAQL;
-        private int rejectAQL;
+        private int aqlAcceptQty;
+        private int aqlRejectQty;
         private int beginQty;
         private int endQty;
         private int qcQty;
@@ -356,19 +356,19 @@ public class GetAdvanceData {
         }
 
         public int getAcceptAQL() {
-            return acceptAQL;
+            return aqlAcceptQty;
         }
 
         public void setAcceptAQL(int acceptAQL) {
-            this.acceptAQL = acceptAQL;
+            this.aqlAcceptQty = acceptAQL;
         }
 
         public int getRejectAQL() {
-            return rejectAQL;
+            return aqlRejectQty;
         }
 
         public void setRejectAQL(int rejectAQL) {
-            this.rejectAQL = rejectAQL;
+            this.aqlRejectQty = rejectAQL;
         }
 
         public int getBeginQty() {

@@ -289,18 +289,23 @@ public class MRPNormalReviewActivity extends BaseActivity<MRPNormalReviewView, M
                     ToastUtils.showShort(getString(R.string.please_select_mrp_review_result));
                     return;
                 }
-                String pickNumStr = etPickNum.getText().toString();
-                if (TextUtils.isEmpty(pickNumStr)) {
-                    ToastUtils.showShort(getString(R.string.please_input_pick_num));
-                    return;
-                }
                 /**
-                 * 挑选 特采 能输入数量
+                 * 特采 挑选 控制
                  */
-                int pickNum = Integer.parseInt(pickNumStr);
-                if (qcReviewResult < 3 && pickNum > mrpReviewData.getReceiveQty()) {//挑选或特采数量大于实收数
-                    ToastUtils.showShort(getString(R.string.mrp_more_receive_num_tip));
-                    return;
+                if (qcReviewResult < 3) {
+                    String pickNumStr = etPickNum.getText().toString();
+                    if (TextUtils.isEmpty(pickNumStr)) {
+                        ToastUtils.showShort(getString(R.string.please_input_pick_num));
+                        return;
+                    }
+                    /**
+                     * 挑选 特采 能输入数量
+                     */
+                    int pickNum = Integer.parseInt(pickNumStr);
+                    if (pickNum > mrpReviewData.getReceiveQty()) {//挑选或特采数量大于实收数
+                        ToastUtils.showShort(getString(R.string.mrp_more_receive_num_tip));
+                        return;
+                    }
                 }
                 /**
                  * 备注
@@ -317,8 +322,8 @@ public class MRPNormalReviewActivity extends BaseActivity<MRPNormalReviewView, M
                 /**
                  * 特采 挑选 传入数量 否则不传
                  */
-                if(qcReviewResult<3){
-                    params.put("ReviewQty", pickNum);
+                if (qcReviewResult < 3) {
+                    params.put("ReviewQty", Integer.parseInt(etPickNum.getText().toString().trim()));
                 }
                 params.put("QCReview", qcReviewResult);
                 params.put("QCId", mrpReviewData.getQcId());
@@ -329,6 +334,7 @@ public class MRPNormalReviewActivity extends BaseActivity<MRPNormalReviewView, M
 
     @Override
     public void setMrpReviewData() {
+        ToastUtils.showShort(getString(R.string.mrp_review_success));
         BaseMessage.post(new MrpEvent(MrpEvent.MRP_REVIEW_SUCCESS));
         onBackPressed();
     }

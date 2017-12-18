@@ -20,7 +20,9 @@ public class RequestBuyInStockListBean {
     private int UserId;
     private String MAC;
     private String BillNo;
+    private String BarcodeNo;
     private String SupplierName;
+    private String DeptName;
 
     public int getOrgId() {
         return OrgId;
@@ -60,5 +62,21 @@ public class RequestBuyInStockListBean {
 
     public void setSupplierName(String SupplierName) {
         this.SupplierName = SupplierName;
+    }
+
+    public String getBarcodeNo() {
+        return BarcodeNo;
+    }
+
+    public void setBarcodeNo(String barcodeNo) {
+        BarcodeNo = barcodeNo;
+    }
+
+    public String getDeptName() {
+        return DeptName;
+    }
+
+    public void setDeptName(String deptName) {
+        DeptName = deptName;
     }
 }

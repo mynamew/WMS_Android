@@ -98,10 +98,10 @@ public class HomeFragment extends Fragment {
     public void onViewClicked(View view) {
         Intent it=new Intent();
         switch (view.getId()) {
-            case R.id.tv_home_todayin_num:
-                break;
-            case R.id.tv_home_todayout_num:
-                break;
+//            case R.id.tv_home_todayin_num:
+//                break;
+//            case R.id.tv_home_todayout_num:
+//                break;
             case R.id.tv_home_instock://入库作业
                 it.setClass(getActivity(), StockInActivity.class);
                 break;
@@ -117,10 +117,10 @@ public class HomeFragment extends Fragment {
             case R.id.tv_home_query:
                 it.setClass(getActivity(), QueryActivity.class);
                 break;
-            case R.id.rl_today_in://今日入库
-                break;
-            case R.id.rl_today_out://进入出库
-                break;
+//            case R.id.rl_today_in://今日入库
+//                break;
+//            case R.id.rl_today_out://进入出库
+//                break;
         }
         getActivity().startActivity(it);
     }

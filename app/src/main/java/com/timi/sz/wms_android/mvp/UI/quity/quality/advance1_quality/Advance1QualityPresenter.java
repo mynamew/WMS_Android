@@ -111,15 +111,14 @@ public class Advance1QualityPresenter extends MvpBasePresenter<Advance1QualityVi
      * 设置普通质检的数据
      *
      * @param params
-     * @param isQualified
      */
-    public void setAdvance1Data(CommitAdvance1Data params, final int isQualified, final int rejectNum) {
+    public void setAdvance1Data(CommitAdvance1Data params) {
         getView().showProgressDialog();
         if (null == setAdvance1QualityDataHttpSubscriber) {
             setAdvance1QualityDataHttpSubscriber = new HttpSubscriber<>(new OnResultCallBack<Object>() {
                 @Override
                 public void onSuccess(Object o) {
-                    getView().setAdvance1Data(isQualified,rejectNum);
+                    getView().setAdvance1Data();
                 }
 
                 @Override

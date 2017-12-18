@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Selection;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +18,7 @@ import com.timi.sz.wms_android.base.adapter.BaseRecyclerAdapter;
 import com.timi.sz.wms_android.base.adapter.RecyclerViewHolder;
 import com.timi.sz.wms_android.base.divider.DividerItemDecoration;
 import com.timi.sz.wms_android.base.uils.Constants;
+import com.timi.sz.wms_android.base.uils.InputMethodUtils;
 import com.timi.sz.wms_android.base.uils.LogUitls;
 import com.timi.sz.wms_android.base.uils.PackageUtils;
 import com.timi.sz.wms_android.base.uils.SpUtils;
@@ -172,7 +174,7 @@ public class FragmentPoint extends BaseFragment<FragmentPointView, FragmentPoint
                     holder.setTextView(R.id.tv_line_num, item.getPoLine());
                     holder.setTextView(R.id.tv_point_num, item.getCountQty());
                     holder.setTextView(R.id.tv_material_code, item.getMaterialCode());
-                    if (intentCode == BUY_ORDE_NUM) {
+                    if (intentCode == BUY_ORDE_NUM||intentCode==OUT_SOURCE) {
                         holder.setTextView(R.id.tv_arrive_good_num, item.getArrivalQty());
                         holder.setTextView(R.id.tv_buy_num, item.getPoQty());
                         holder.setTextView(R.id.tv_instock_num, item.getInStockQty());
@@ -341,6 +343,8 @@ public class FragmentPoint extends BaseFragment<FragmentPointView, FragmentPoint
                 mPointDialog = null;
             }
         });
+        //设置请点数被选中
+        Selection.selectAll(mPointDialog.getEdittext(R.id.et_stockin_point_pro_point_num).getText());
         mPointDialog.show();
     }
 

@@ -3,6 +3,8 @@ package com.timi.sz.wms_android.mvp.UI.list;
 import com.timi.sz.wms_android.bean.instock.list.QueryPoListBean;
 import com.timi.sz.wms_android.bean.instock.outsource_return_material.QueryOutSourceReturnByInputResult;
 import com.timi.sz.wms_android.bean.instock.search.BuyOrdernoBean;
+import com.timi.sz.wms_android.bean.instock.search.QueryPrdInstockByInputResult;
+import com.timi.sz.wms_android.bean.instock.search.QueryPrdReturnByInputResult;
 import com.timi.sz.wms_android.bean.list.RequestBuyInStockListBean;
 import com.timi.sz.wms_android.bean.outstock.buy.BuyReturnMaterialByOrdernoData;
 import com.timi.sz.wms_android.bean.outstock.buy.SubmitBarcodePurReturnData;
@@ -204,6 +206,7 @@ public class BuyInStockListModel extends MvpBaseModel {
             }
         });
     }
+
     /**
      * 获取委外单列表（审核）
      *
@@ -235,6 +238,7 @@ public class BuyInStockListModel extends MvpBaseModel {
             }
         });
     }
+
     /**
      * 获取领料申请单列表
      *
@@ -282,6 +286,7 @@ public class BuyInStockListModel extends MvpBaseModel {
             }
         });
     }
+
     /**
      * 从生产领料单列表获取数据
      *
@@ -297,6 +302,7 @@ public class BuyInStockListModel extends MvpBaseModel {
             }
         });
     }
+
     /**
      * 获取生产领料单列表
      *
@@ -325,6 +331,66 @@ public class BuyInStockListModel extends MvpBaseModel {
             public Observable<CommonResult<QueryProductPickByInputResult>> createObservable(ApiService apiService) {
 
                 return apiService.getProductPickData(params);
+            }
+        });
+    }
+    /**
+     * 查询成品入库单列表
+     *
+     * @param params
+     * @param observer
+     */
+    public void queryPrdInstockByInput(final RequestBuyInStockListBean params, Observer<List<QueryPoListBean>> observer) {
+        HttpManager.getInstance().HttpManagerRequest(observer, new ApiServiceMethodCallBack<List<QueryPoListBean>>() {
+            @Override
+            public Observable<CommonResult<List<QueryPoListBean>>> createObservable(ApiService apiService) {
+
+                return apiService.qeryPrdInstockList(params);
+            }
+        });
+    }
+    /**
+     * 从成品入库单列表获取数据
+     *
+     * @param params
+     * @param observer
+     */
+    public void getPrdInstockData(final Map<String, Object> params, Observer<QueryPrdInstockByInputResult> observer) {
+        HttpManager.getInstance().HttpManagerRequest(observer, new ApiServiceMethodCallBack<QueryPrdInstockByInputResult>() {
+            @Override
+            public Observable<CommonResult<QueryPrdInstockByInputResult>> createObservable(ApiService apiService) {
+
+                return apiService.getPrdInstockData(params);
+            }
+        });
+    }
+    /**
+     * 查询生产退料单列表
+     *
+     * @param params
+     * @param observer
+     */
+    public void queryPrdReturnList(final RequestBuyInStockListBean params, Observer<List<QueryPoListBean>> observer) {
+        HttpManager.getInstance().HttpManagerRequest(observer, new ApiServiceMethodCallBack<List<QueryPoListBean>>() {
+            @Override
+            public Observable<CommonResult<List<QueryPoListBean>>> createObservable(ApiService apiService) {
+
+                return apiService.queryPrdReturnList(params);
+            }
+        });
+    }
+    /**
+     * 从成品入库单列表获取数据
+     *
+     * @param params
+     * @param observer
+     */
+    public void getPrdReturnData(final Map<String, Object> params, Observer<QueryPrdReturnByInputResult> observer) {
+        HttpManager.getInstance().HttpManagerRequest(observer, new ApiServiceMethodCallBack<QueryPrdReturnByInputResult>() {
+            @Override
+            public Observable<CommonResult<QueryPrdReturnByInputResult>> createObservable(ApiService apiService) {
+
+                return apiService.getPrdReturnData(params);
             }
         });
     }

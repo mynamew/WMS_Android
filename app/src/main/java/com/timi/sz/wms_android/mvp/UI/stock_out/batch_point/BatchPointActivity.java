@@ -319,7 +319,7 @@ public class BatchPointActivity extends BaseActivity<BatchPointView, BatchPointP
             findViewById(R.id.ll_carton).setVisibility(View.VISIBLE);
             tvCartonNum.setText(String.valueOf(cartonNum));
         } else {
-            findViewById(R.id.ll_carton).setVisibility(View.INVISIBLE);
+            findViewById(R.id.ll_carton).setVisibility(View.GONE);
         }
         /**
          * 判断materialResultsBean是否未null
@@ -517,6 +517,11 @@ public class BatchPointActivity extends BaseActivity<BatchPointView, BatchPointP
         }
     }
 
+    @Override
+    public void setBarcodeSelect() {
+        etMaterialScan.selectAll();
+    }
+
     @OnClick({R.id.iv_material_scan, R.id.btn_close})
     public void onViewClicked(View view) {
         switch (view.getId()) {
@@ -597,7 +602,7 @@ public class BatchPointActivity extends BaseActivity<BatchPointView, BatchPointP
                     holder.setTextView(R.id.tv_bathch_num, item.getDateCode());
                     holder.setTextView(R.id.tv_have_count_num, item.getLotScanQty());
                     holder.setTextView(R.id.tv_can_user_lib, item.getLotUseQty());
-                    holder.setTextView(R.id.tv_useful_life, TextUtils.isEmpty(item.getPeriod()) ? getString(R.string.none) : item.getPeriod());
+                    holder.setTextView(R.id.tv_useful_life,  item.getPeriod());
                 }
             };
             rlvOrdernoInfo.setAdapter(adapter);
@@ -625,9 +630,9 @@ public class BatchPointActivity extends BaseActivity<BatchPointView, BatchPointP
          */
         tvMaterialName.setText(materialName);
         tvMaterialCode.setText(materialCode);
-        tvMaterialAttr.setText(TextUtils.isEmpty(materialAttr) ? getString(R.string.none) : materialAttr);
-        tvMaterialModel.setText(TextUtils.isEmpty(materialStandard) ? getString(R.string.none) : materialStandard);
-        tvSendMaterialLib.setText(TextUtils.isEmpty(wareHouseName) ? getString(R.string.none) : wareHouseName);
+        tvMaterialAttr.setText(materialAttr);
+        tvMaterialModel.setText(materialStandard);
+        tvSendMaterialLib.setText(wareHouseName);
         tvSendMaterialNum.setText("(0)" + scanQty + "/" + qty);
         /**
          * 设置 是否显示附加属性

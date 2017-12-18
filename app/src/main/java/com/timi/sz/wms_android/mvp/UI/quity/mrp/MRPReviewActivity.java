@@ -168,7 +168,11 @@ public class MRPReviewActivity extends BaseActivity<MRPReviewView, MRPReviewPres
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void refreshMrpReviewData(MrpEvent event) {
         if (event.getEvent().equals(MrpEvent.MRP_REVIEW_SUCCESS)) {
-            initData();
+            Map<String, Object> params = new HashMap<>();
+            params.put("UserId", SpUtils.getInstance().getUserId());
+            params.put("OrgId", SpUtils.getInstance().getOrgId());
+            params.put("mac", PackageUtils.getMac());
+            getPresenter().getMRPReviewData(params);
         }
     }
 }

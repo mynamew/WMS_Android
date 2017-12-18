@@ -24,10 +24,11 @@ public class QualityResultView extends LinearLayout implements View.OnClickListe
     private Button btnQuality, btnUnQuality, btnWaitDeal;
     private List<Button> btns = new ArrayList<>();
     private int tabQty = 3;//默认质检结果有3个 合格 不合格 待定
-    private int qcResult = -1;//合格的 1 待定 2 不合格 3
+    private int qcResult = -1;//合格的 0  不合格 1 待定 2
 
     private Context mContext;
     private boolean isCanClick = true;
+    public static final int QUALITY_RESULT_DEFAULT = -1;
     public static final int QUALITY_RESULT_SUCCESS = 0;
     public static final int QUALITY_RESULT_FAIL = 1;
     public static final int QUALITY_RESULT_WAIT_DEAL = 2;
@@ -63,7 +64,7 @@ public class QualityResultView extends LinearLayout implements View.OnClickListe
         btnWaitDeal = inflate.findViewById(R.id.btn_wait_deal);
         //tab的数量 如果不是3 设置待定为 GONE
         if (tabQty != 3) {
-            btnWaitDeal.setVisibility(GONE);
+            btnWaitDeal.setVisibility(INVISIBLE);
         }
         //加入 view
         btns.add(btnQuality);
@@ -112,15 +113,15 @@ public class QualityResultView extends LinearLayout implements View.OnClickListe
         switch (view.getId()) {
             case R.id.btn_qualified://合格
                 clickPosition = 0;
-                qcResult = 1;
+                qcResult = QUALITY_RESULT_SUCCESS;
                 break;
             case R.id.btn_unqualified://不合格
                 clickPosition = 1;
-                qcResult = 3;
+                qcResult = QUALITY_RESULT_FAIL;
                 break;
             case R.id.btn_wait_deal://待定
                 clickPosition = 2;
-                qcResult = 2;
+                qcResult = QUALITY_RESULT_WAIT_DEAL;
                 break;
         }
         btns.get(clickPosition).setSelected(true);
@@ -137,27 +138,14 @@ public class QualityResultView extends LinearLayout implements View.OnClickListe
         /**
          * 通过 qcResult 设置不同的状态值
          */
-         switch (qcResult){
-             case QUALITY_RESULT_SUCCESS:
-                 //设置质检结果
-                 this.qcResult =1;
-                 break;
-             case QUALITY_RESULT_WAIT_DEAL:
-                 //设置质检结果
-                 this.qcResult =2;
-                 break;
-             case QUALITY_RESULT_FAIL:
-                 //设置质检结果
-                 this.qcResult =3;
-                 break;
-         }
+        this.qcResult = qcResult;
         //设置按钮状态
         for (int i = 0; i < btns.size(); i++) {
             btns.get(i).setSelected(false);
             btns.get(i).setTextColor(mContext.getResources().getColor(R.color.color_666));
         }
         btns.get(qcResult).setSelected(true);
-        if (qcResult == 1) {
+        if (qcResult == QUALITY_RESULT_FAIL) {
             btns.get(qcResult).setTextColor(mContext.getResources().getColor(R.color.red));
         } else {
             btns.get(qcResult).setTextColor(mContext.getResources().getColor(R.color.white));
@@ -168,6 +156,9 @@ public class QualityResultView extends LinearLayout implements View.OnClickListe
      * 清楚所有状态
      */
     public void clearBtnsStatus() {
+        //重置质检结果
+        qcResult = -1;
+        //清楚按钮状态
         for (int i = 0; i < btns.size(); i++) {
             btns.get(i).setSelected(false);
             btns.get(i).setTextColor(mContext.getResources().getColor(R.color.color_666));

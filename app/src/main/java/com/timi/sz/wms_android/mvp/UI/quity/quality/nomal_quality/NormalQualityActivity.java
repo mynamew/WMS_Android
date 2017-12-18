@@ -346,9 +346,7 @@ public class NormalQualityActivity extends BaseActivity<NormalQualityView, Norma
         commitNormalData.setCommonlyQty(CommonlyQty);
         commitNormalData.setSlightQty(SlightQty);
 
-        getPresenter().
-
-                setNormalQualityData(commitNormalData, isQualified, Integer.parseInt(refuseReceiveNum));
+        getPresenter().setNormalQualityData(commitNormalData);
     }
 
     @Override
@@ -500,18 +498,16 @@ public class NormalQualityActivity extends BaseActivity<NormalQualityView, Norma
                             for (int i = 0; i < commintFaultData.size(); i++) {
                                 totalBadnessNum = totalBadnessNum + commintFaultData.get(i).getFaultQty();
                             }
-                            /**
-                             * 输入的抽样数
-                             */
-                            String inputSampleNumStr = etSpotCheckNum.getText().toString();
-                            if (totalBadnessNum > Integer.parseInt(inputSampleNumStr)) {
-                                ToastUtils.showShort(getString(R.string.badness_num_no_more_sample_qty));
-                                return;
-                            }
+//                            /**
+//                             * 当不良总数大于实收数 时提示用户
+//                             */
+//                            String inputSampleNumStr = etSpotCheckNum.getText().toString();
+//                            if (totalBadnessNum > Integer.parseInt(inputSampleNumStr)) {
+//                                ToastUtils.showShort(getString(R.string.badness_num_no_more_sample_qty));
+//                                return;
+//                            }
                             adapter.notifyDataSetChanged();
-                            /**
-                             * 当不良总数大于实收数 时提示用户
-                             */
+
                             /**
                              * 设置文本的不良总数
                              */
@@ -563,7 +559,13 @@ public class NormalQualityActivity extends BaseActivity<NormalQualityView, Norma
     }
 
     @Override
-    public void setNormalQualityData(boolean isQualified, int rejectNum) {
+    public void setNormalQualityData() {
+        boolean isQualified=true;
+        if(rdUnqualified.isChecked()){
+            isQualified=false;
+        }
+        int rejectNum=0;
+        rejectNum=Integer.parseInt(etRefuseReceiveNum.getText().toString());
         LogUitls.e("质检提交------>", "成功");
         /**
          * 发送质检成功的消息

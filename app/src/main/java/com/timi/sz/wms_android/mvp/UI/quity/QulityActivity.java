@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.timi.sz.wms_android.R;
-import com.timi.sz.wms_android.mvp.UI.quity.quality.advance_quality.AdvanceQualityActivity;
 import com.timi.sz.wms_android.mvp.UI.quity.mrp.MRPReviewActivity;
 import com.timi.sz.wms_android.mvp.UI.quity.quality.QualityCheckActivity;
 import com.timi.sz.wms_android.mvp.UI.quity.update_barcode.UpdateBarcodeActivity;

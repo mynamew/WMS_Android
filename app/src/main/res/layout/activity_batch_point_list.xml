@@ -32,7 +32,7 @@
                 android:paddingTop="10px"
                 android:text="委外发料（审核）物料清单"
                 android:textColor="#333"
-                android:textSize="28px"
+                android:textSize="14sp"
                 android:textStyle="bold"/>
 
             <View
@@ -51,7 +51,7 @@
 
                 <LinearLayout
                     android:layout_width="0dp"
-                    android:layout_height="96px"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_vertical"
                     android:orientation="vertical">
@@ -79,7 +79,7 @@
 
                 <LinearLayout
                     android:layout_width="0dp"
-                    android:layout_height="96px"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_vertical"
                     android:orientation="vertical">
@@ -106,7 +106,7 @@
 
                 <LinearLayout
                     android:layout_width="0dp"
-                    android:layout_height="96px"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_vertical"
                     android:orientation="vertical">
@@ -133,7 +133,7 @@
 
                 <LinearLayout
                     android:layout_width="0dp"
-                    android:layout_height="96px"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_vertical"
                     android:orientation="vertical">
@@ -170,13 +170,13 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="96px"
+                android:layout_height="wrap_content"
                 android:paddingLeft="30px"
                 android:orientation="horizontal">
 
                 <LinearLayout
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_weight="1"
                     android:orientation="vertical">
@@ -205,6 +205,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:layout_gravity="center_vertical"
                     android:gravity="center_vertical"
                     android:orientation="vertical">
 
@@ -230,8 +231,9 @@
 
                 <LinearLayout
                     android:layout_width="0dp"
+                    android:gravity="center_vertical"
+                    android:layout_gravity="center_vertical"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="20px"
                     android:layout_weight="1"
                     android:orientation="vertical">
 

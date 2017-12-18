@@ -1,7 +1,10 @@
 package com.timi.sz.wms_android.mvp.UI.quity.quality.advance_quality;
 
+import com.timi.sz.wms_android.bean.quality.RequestUpdateCheckitemBean;
 import com.timi.sz.wms_android.bean.quality.adavance.CommitAdvanceData;
 import com.timi.sz.wms_android.bean.quality.adavance.GetAdvance2Data;
+import com.timi.sz.wms_android.bean.quality.adavance.IQCGetAdvanceData;
+import com.timi.sz.wms_android.bean.quality.adavance.UpdateCheckItemResult;
 import com.timi.sz.wms_android.http.HttpManager;
 import com.timi.sz.wms_android.http.api.ApiService;
 import com.timi.sz.wms_android.http.api.CommonResult;
@@ -60,6 +63,34 @@ public class AdvanceQualityModel extends MvpBaseModel {
             @Override
             public Observable<CommonResult<Object>> createObservable(ApiService apiService) {
                 return apiService.submitFinish(params);
+            }
+        });
+    }
+    /**
+     * 修改高检二质检项目
+     *
+     * @param params
+     * @param observer
+     */
+    public void IQCUpdateAdvance2Item(final RequestUpdateCheckitemBean params, Observer<UpdateCheckItemResult> observer) {
+        HttpManager.getInstance().HttpManagerRequest(observer, new ApiServiceMethodCallBack<UpdateCheckItemResult>() {
+            @Override
+            public Observable<CommonResult<UpdateCheckItemResult>> createObservable(ApiService apiService) {
+                return apiService.IQCUpdateAdvance2Item(params);
+            }
+        });
+    }
+    /**
+     * 获取高级质检2 质检项目
+     *
+     * @param params
+     * @param observer
+     */
+    public void IQCGetAdvanceData(final Map<String, Object> params, Observer<IQCGetAdvanceData> observer) {
+        HttpManager.getInstance().HttpManagerRequest(observer, new ApiServiceMethodCallBack<IQCGetAdvanceData>() {
+            @Override
+            public Observable<CommonResult<IQCGetAdvanceData>> createObservable(ApiService apiService) {
+                return apiService.IQCGetAdvanceData(params);
             }
         });
     }

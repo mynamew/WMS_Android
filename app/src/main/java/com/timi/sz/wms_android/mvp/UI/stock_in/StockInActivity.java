@@ -86,12 +86,30 @@ public class StockInActivity extends BaseNoMvpActivity {
                 break;
             case R.id.tv_stock_in_check://产成品入库审核
                 it.putExtra(CODE_STR, Constants.CREATE_PRO_CHECK_NUM);
+                /**
+                 * 如果是无纸化作业
+                 */
+                if (SpUtils.getInstance().getIsBillList()) {
+                    it.setClass(StockInActivity.this, BuyInStockListActivity.class);
+                }
                 break;
             case R.id.tv_stock_in_create_order://产成品入库生单
                 it.putExtra(CODE_STR, Constants.CREATE_PRO_CREATE_ORDER_NUM);
+                /**
+                 * 如果是无纸化作业
+                 */
+                if (SpUtils.getInstance().getIsBillList()) {
+                    it.setClass(StockInActivity.this, BuyInStockListActivity.class);
+                }
                 break;
             case R.id.tv_stockin_other_inlib_check://其他入入库选单
                 it.putExtra(CODE_STR, Constants.OTHER_IN_STOCK_SELECT_ORDERNO);
+                /**
+                 * 如果是无纸化作业
+                 */
+                if (SpUtils.getInstance().getIsBillList()) {
+                    it.setClass(StockInActivity.this, BuyInStockListActivity.class);
+                }
                 break;
             case R.id.tv_stockin_other_inlib_create_order://其他入库扫描
                 it.putExtra(CODE_STR, Constants.OTHER_IN_STOCK_SCAN);

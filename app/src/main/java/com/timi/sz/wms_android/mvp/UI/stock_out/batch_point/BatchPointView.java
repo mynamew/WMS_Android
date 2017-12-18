@@ -17,4 +17,7 @@ public interface BatchPointView extends MvpBaseView {
     void submitBarcodeLotPickOutSplit(SubmitBarcodeLotPickOutSplitResult result);
 
     void submitBarcodeLotPickOut(SubmitBarcodeLotPickOutResult result);
+
+    void setBarcodeSelect();
+
 }

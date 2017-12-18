@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                                      android:layout_width="88px"
+                                     android:background="@drawable/bg_circle_buy_return"
                                      android:layout_height="88px"
                                      android:orientation="vertical">
 

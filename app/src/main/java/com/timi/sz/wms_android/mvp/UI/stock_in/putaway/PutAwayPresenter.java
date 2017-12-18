@@ -43,11 +43,13 @@ public class PutAwayPresenter extends MvpBasePresenter<PutAwayView> {
                 @Override
                 public void onSuccess(MaterialScanPutAwayBean materialBean) {
                     getView().materialScanResult(materialBean);
+                    getView().setMaterialEdittextSelect();
                 }
 
                 @Override
                 public void onError(String errorMsg) {
                     ToastUtils.showShort(errorMsg);
+                    getView().setMaterialEdittextSelect();
                 }
             });
         }
@@ -71,6 +73,7 @@ public class PutAwayPresenter extends MvpBasePresenter<PutAwayView> {
                 @Override
                 public void onError(String errorMsg) {
                     ToastUtils.showShort(errorMsg);
+                    getView().setLocationSelect();
                 }
             });
         }

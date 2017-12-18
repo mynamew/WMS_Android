@@ -822,6 +822,21 @@
     <string name="auto_judge">自动判断</string>
     <string name="person_judge">主观判断</string>
     <string name="point_count_no_more_send_goods_qty">请点数不能大于送货数，请重新输入！</string>
+    <string name="current_material_no_checkitem">当前物料未设置检验项目！</string>
+    <string name="please_input_right_value">请输入正确的数值！</string>
+    <string name="mrp_review_success">MRP评审成功！</string>
+    <string name="should_instock_qty">应入库数</string>
+    <string name="update_check_item_result_success">更改检验项目结果成功！</string>
+    <string name="production_instock_list_title">产成品入库单列表</string>
+    <string name="dont_query_data_please_repeat_input">未查询到数据，请重新输入！</string>
+    <string name="production_return_list_title">生产退料单列表</string>
+    <string name="department_tip">部门</string>
+    <string name="please_input_department">请输入部门</string>
+    <string name="please_input_barcode">请输入条码</string>
+    <string name="date">日期</string>
+    <string name="production_feed_list_title">生产补料单列表</string>
+    <string name="send_goods_message_list_title">发货通知单列表</string>
+    <string name="sale_out_stock_list_title">销售出库单（生单）列表</string>
 
 
 </resources>

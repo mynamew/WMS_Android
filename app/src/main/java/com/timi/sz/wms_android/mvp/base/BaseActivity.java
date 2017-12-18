@@ -544,6 +544,7 @@ public abstract class BaseActivity<V extends MvpView, P extends MvpPresenter<V>>
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
+//        InputMethodUtils.hide(currentActivity);
         /**
          * 按下扫描件
          */

@@ -55,7 +55,7 @@ public class HttpSubscriber<T> implements Observer<T> {
 
     @Override
     public void onNext(T t) {
-        if(isAutoDismiss){
+        if (isAutoDismiss) {
             MyProgressDialog.hideProgressDialog();
         }
         if (mOnResultListener != null) {
@@ -65,7 +65,7 @@ public class HttpSubscriber<T> implements Observer<T> {
 
     @Override
     public void onError(Throwable e) {
-        if(isAutoDismiss){
+        if (isAutoDismiss) {
             MyProgressDialog.hideProgressDialog();
         }
         //请求失败的异常
@@ -141,13 +141,16 @@ public class HttpSubscriber<T> implements Observer<T> {
              * 弹出提示 所有的后台返回的提示
              */
             mOnResultListener.onError(e.getMessage());
+        } else if (e instanceof SocketTimeoutException) {
+            mOnResultListener.onError(SOCKET_TIMEOUT_EXCEPTION);
+            return;
         }
     }
 
     @Override
     public void onComplete() {
         //进度条消失
-        if(isAutoDismiss){
+        if (isAutoDismiss) {
             MyProgressDialog.hideProgressDialog();
         }
     }
@@ -156,7 +159,7 @@ public class HttpSubscriber<T> implements Observer<T> {
         if (mDisposable != null && !mDisposable.isDisposed()) {
             mDisposable.dispose();
             //进度条消失
-            if(isAutoDismiss){
+            if (isAutoDismiss) {
                 MyProgressDialog.hideProgressDialog();
             }
         }

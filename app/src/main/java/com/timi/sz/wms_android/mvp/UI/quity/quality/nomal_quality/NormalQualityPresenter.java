@@ -55,15 +55,14 @@ public class NormalQualityPresenter extends MvpBasePresenter<NormalQualityView> 
      * 设置普通质检的数据
      *
      * @param params
-     * @param isQualified
      */
-    public void setNormalQualityData(CommitNormalData params, final boolean isQualified, final int rejectNum) {
+    public void setNormalQualityData(CommitNormalData params) {
         getView().showProgressDialog();
         if (null == setNormalQualityDataHttpSubscriber) {
             setNormalQualityDataHttpSubscriber = new HttpSubscriber<>(new OnResultCallBack<Object>() {
                 @Override
                 public void onSuccess(Object o) {
-                    getView().setNormalQualityData(isQualified,rejectNum);
+                    getView().setNormalQualityData();
                 }
 
                 @Override

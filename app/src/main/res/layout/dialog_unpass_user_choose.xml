@@ -8,7 +8,7 @@
 
     <LinearLayout
         android:layout_width="650px"
-        android:layout_height="548px"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:background="@drawable/bg_quality_item_white"
         android:orientation="vertical">
