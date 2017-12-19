@@ -36,6 +36,7 @@ import com.timi.sz.wms_android.http.message.event.OutsourceAuditEvent;
 import com.timi.sz.wms_android.http.message.event.SubmitBarcodeLotPickOutSplitEvent;
 import com.timi.sz.wms_android.mvp.UI.stock_out.divide_print.SplitPrintActivity;
 import com.timi.sz.wms_android.mvp.base.BaseActivity;
+import com.timi.sz.wms_android.qrcode.utils.Constant;
 import com.timi.sz.wms_android.view.MyDialog;
 
 import org.greenrobot.eventbus.Subscribe;
@@ -336,48 +337,34 @@ public class BatchPointActivity extends BaseActivity<BatchPointView, BatchPointP
         } else {
             setHeaderContent(materialResultsBean.getDetailId(), materialResultsBean.getMaterialId(), materialResultsBean.getMaterialName(), materialResultsBean.getMaterialCode(), materialResultsBean.getMaterialStandard(), materialResultsBean.getMaterialAttribute(), materialResultsBean.getWarehouseName(), materialResultsBean.getScanQty(), materialResultsBean.getQty());
         }
-        /**
-         * 输入框 的监听事件
-         */
-        etMaterialScan.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+        setEdittextListener(etMaterialScan, Constants.REQUEST_SCAN_CODE_MATERIIAL,R.string.please_scan_material_code,0, new EdittextInputListener() {
             @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                    /**
-                     * 输入的内容
-                     */
-                    String inputStr = etMaterialScan.getText().toString().trim();
-                    if (TextUtils.isEmpty(inputStr)) {
-                        ToastUtils.showShort(getString(R.string.please_scan_material_code));
-                    } else {
-                        /**
-                         *   批次拣料的请求
-                         */
-                        Map<String, Object> params = new HashMap<>();
-                        /**
-                         * 是否 装箱
-                         */
-                        if (isCarton) {
-                            params.put("cartonNo", cartonNum);
-                        }
-                        params.put("UserId", SpUtils.getInstance().getUserId());
-                        params.put("OrgId", SpUtils.getInstance().getOrgId());
-                        params.put("MAC", PackageUtils.getMac());
-                        params.put("BillId", billId);
-                        params.put("SrcBillType", srcBillType);
-                        params.put("DestBillType", destBillType);
-                        params.put("ScanId", scanId);
-                        params.put("BarcodeNo", inputStr);
-                        //判断 批次是否为空
-                        boolean isNoDateCode = (null == mData.getLotDetail()|| mData.getLotDetail().isEmpty());
-                        params.put("DateCode", isNoDateCode ? "" : mData.getLotDetail().get(0).getDateCode());
-                        params.put("bCheckMode", true);
-                        params.put("MaterialId", null != detailResultsBean ? detailResultsBean.getMaterialId() : materialResultsBean.getMaterialId());
-                        params.put("MaterialAttribute", null != detailResultsBean ? detailResultsBean.getMaterialAttribute() : materialResultsBean.getMaterialAttribute());
-                        getPresenter().submitBarcodeLotPickOut(params);
-                    }
+            public void verticalSuccess(String result) {
+                /**
+                 *   批次拣料的请求
+                 */
+                Map<String, Object> params = new HashMap<>();
+                /**
+                 * 是否 装箱
+                 */
+                if (isCarton) {
+                    params.put("cartonNo", cartonNum);
                 }
-                return false;
+                params.put("UserId", SpUtils.getInstance().getUserId());
+                params.put("OrgId", SpUtils.getInstance().getOrgId());
+                params.put("MAC", PackageUtils.getMac());
+                params.put("BillId", billId);
+                params.put("SrcBillType", srcBillType);
+                params.put("DestBillType", destBillType);
+                params.put("ScanId", scanId);
+                params.put("BarcodeNo", result);
+                //判断 批次是否为空
+                boolean isNoDateCode = (null == mData.getLotDetail()|| mData.getLotDetail().isEmpty());
+                params.put("DateCode", isNoDateCode ? "" : mData.getLotDetail().get(0).getDateCode());
+                params.put("bCheckMode", true);
+                params.put("MaterialId", null != detailResultsBean ? detailResultsBean.getMaterialId() : materialResultsBean.getMaterialId());
+                params.put("MaterialAttribute", null != detailResultsBean ? detailResultsBean.getMaterialAttribute() : materialResultsBean.getMaterialAttribute());
+                getPresenter().submitBarcodeLotPickOut(params);
             }
         });
     }

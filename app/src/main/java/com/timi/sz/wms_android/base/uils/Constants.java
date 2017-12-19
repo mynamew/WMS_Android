@@ -217,6 +217,8 @@ public class Constants {
     public static final String OUT_STOCK_PRINT_MATERIAL_MODEL = "out_stock_print_material_model";//出库打印的物料model
     public static final String OUT_STOCK_PRINT_CURRENT_QTY = "out_stock_print_current_qty";//出库打印的当前的数量
     public static final String OUT_STOCK_PRINT_OUT_QTY = "out_stock_print_out_qty";//出库打印的超出的数量
+    public static final String OUT_STOCK_PRINT_NORMAL = "out_stock_print_normal";//是否是普通出库的拆分条码
+    public static final String OUT_STOCK_PRINT_BATCh_AND_NORMAL = "out_stock_print_batch_and_normal";//是否是批次和普通物料混合的普通出库的拆分条码
 
     public static final String OUT_STOCK_SCANID = "out_stock_out_point_scan_id";//跳转到清点详情的scanid
     public static final String OUT_STOCK_MATERIAL_RESULTS_BEAN = "out_stock_material_results_bean";//跳转到物料请点详情的实体(MaterialResultsBean)

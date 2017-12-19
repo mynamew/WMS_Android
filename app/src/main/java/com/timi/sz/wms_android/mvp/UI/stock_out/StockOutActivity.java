@@ -78,7 +78,7 @@ public class StockOutActivity extends BaseNoMvpActivity {
                  */
                 if (SpUtils.getInstance().getIsBillList()) {
                     intent.setClass(StockOutActivity.this, BuyInStockListActivity.class);
-                }else {
+                } else {
                     intent.setClass(StockOutActivity.this, StockOutSearchActivity.class);
                 }
                 break;
@@ -88,13 +88,20 @@ public class StockOutActivity extends BaseNoMvpActivity {
                  */
                 if (SpUtils.getInstance().getIsBillList()) {
                     intent.setClass(StockOutActivity.this, BuyInStockListActivity.class);
-                }else {
+                } else {
                     intent.setClass(StockOutActivity.this, StockOutSearchActivity.class);
                 }
                 intent.putExtra(STOCK_OUT_CODE_STR, STOCK_OUT_OUTSOURCE_AUDIT);
                 break;
             case R.id.tv_stock_out_out_allot://委外调拨
-                intent.setClass(StockOutActivity.this, StockOutSearchActivity.class);
+                /**
+                 * 如果是无纸化作业
+                 */
+                if (SpUtils.getInstance().getIsBillList()) {
+                    intent.setClass(StockOutActivity.this, BuyInStockListActivity.class);
+                } else {
+                    intent.setClass(StockOutActivity.this, StockOutSearchActivity.class);
+                }
                 intent.putExtra(STOCK_OUT_CODE_STR, STOCK_OUT_OUTSOURCE_ALLOT);
                 break;
             case R.id.tv_stock_out_out_create_order://委外生单
@@ -103,7 +110,7 @@ public class StockOutActivity extends BaseNoMvpActivity {
                  */
                 if (SpUtils.getInstance().getIsBillList()) {
                     intent.setClass(StockOutActivity.this, BuyInStockListActivity.class);
-                }else {
+                } else {
                     intent.setClass(StockOutActivity.this, StockOutSearchActivity.class);
                 }
                 intent.putExtra(STOCK_OUT_CODE_STR, STOCK_OUT_OUTSOURCE_BILL);
@@ -114,7 +121,7 @@ public class StockOutActivity extends BaseNoMvpActivity {
                  */
                 if (SpUtils.getInstance().getIsBillList()) {
                     intent.setClass(StockOutActivity.this, BuyInStockListActivity.class);
-                }else {
+                } else {
                     intent.setClass(StockOutActivity.this, StockOutSearchActivity.class);
                 }
                 intent.putExtra(STOCK_OUT_CODE_STR, STOCK_OUT_PRODUCTION_FEEDING);
@@ -125,7 +132,7 @@ public class StockOutActivity extends BaseNoMvpActivity {
                  */
                 if (SpUtils.getInstance().getIsBillList()) {
                     intent.setClass(StockOutActivity.this, BuyInStockListActivity.class);
-                }else {
+                } else {
                     intent.setClass(StockOutActivity.this, StockOutSearchActivity.class);
                 }
                 intent.putExtra(STOCK_OUT_CODE_STR, STOCK_OUT_PRODUCTION_AUDIT);
@@ -136,7 +143,7 @@ public class StockOutActivity extends BaseNoMvpActivity {
                  */
                 if (SpUtils.getInstance().getIsBillList()) {
                     intent.setClass(StockOutActivity.this, BuyInStockListActivity.class);
-                }else {
+                } else {
                     intent.setClass(StockOutActivity.this, StockOutSearchActivity.class);
                 }
                 intent.putExtra(STOCK_OUT_CODE_STR, STOCK_OUT_PRODUCTION_BILL);
@@ -147,7 +154,7 @@ public class StockOutActivity extends BaseNoMvpActivity {
                  */
                 if (SpUtils.getInstance().getIsBillList()) {
                     intent.setClass(StockOutActivity.this, BuyInStockListActivity.class);
-                }else {
+                } else {
                     intent.setClass(StockOutActivity.this, StockOutSearchActivity.class);
                 }
                 intent.putExtra(STOCK_OUT_CODE_STR, STOCK_OUT_PRODUCTION_ALLOT);
@@ -162,7 +169,7 @@ public class StockOutActivity extends BaseNoMvpActivity {
                  */
                 if (SpUtils.getInstance().getIsBillList()) {
                     intent.setClass(StockOutActivity.this, BuyInStockListActivity.class);
-                }else {
+                } else {
                     intent.setClass(StockOutActivity.this, StockOutSearchActivity.class);
                 }
                 intent.putExtra(STOCK_OUT_CODE_STR, STOCK_OUT_SELL_OUT_AUDIT);
@@ -173,7 +180,7 @@ public class StockOutActivity extends BaseNoMvpActivity {
                  */
                 if (SpUtils.getInstance().getIsBillList()) {
                     intent.setClass(StockOutActivity.this, BuyInStockListActivity.class);
-                }else {
+                } else {
                     intent.setClass(StockOutActivity.this, StockOutSearchActivity.class);
                 }
                 intent.putExtra(STOCK_OUT_CODE_STR, STOCK_OUT_SELL_OUT_BILL);
@@ -184,7 +191,7 @@ public class StockOutActivity extends BaseNoMvpActivity {
                  */
                 if (SpUtils.getInstance().getIsBillList()) {
                     intent.setClass(StockOutActivity.this, BuyInStockListActivity.class);
-                }else {
+                } else {
                     intent.setClass(this, BuyReturnMaterialActivity.class);
                 }
                 intent.putExtra(STOCK_OUT_CODE_STR, STOCK_OUT_PURCHASE_MATERIAL_RETURN);
@@ -195,20 +202,13 @@ public class StockOutActivity extends BaseNoMvpActivity {
                  */
                 if (SpUtils.getInstance().getIsBillList()) {
                     intent.setClass(StockOutActivity.this, BuyInStockListActivity.class);
-                }else {
+                } else {
                     intent.setClass(StockOutActivity.this, StockOutSearchActivity.class);
                 }
                 intent.putExtra(STOCK_OUT_CODE_STR, STOCK_OUT_OTHER_OUT_AUDIT);
                 break;
             case R.id.tv_stock_out_other_create_order://其他生单
-                /**
-                 * 如果是无纸化作业
-                 */
-                if (SpUtils.getInstance().getIsBillList()) {
-                    intent.setClass(StockOutActivity.this, BuyInStockListActivity.class);
-                }else {
-                    intent.setClass(StockOutActivity.this, OtherOutStockScanActivity.class);
-                }
+                intent.setClass(StockOutActivity.this, OtherOutStockScanActivity.class);
                 intent.putExtra(STOCK_OUT_CODE_STR, STOCK_OUT_OTHER_OUT_BILL);
                 break;
             case R.id.tv_stock_out_apply_bill://申请生单
@@ -217,7 +217,7 @@ public class StockOutActivity extends BaseNoMvpActivity {
                  */
                 if (SpUtils.getInstance().getIsBillList()) {
                     intent.setClass(StockOutActivity.this, BuyInStockListActivity.class);
-                }else {
+                } else {
                     intent.setClass(StockOutActivity.this, StockOutSearchActivity.class);
                 }
                 intent.putExtra(STOCK_OUT_CODE_STR, STOCK_OUT_PRODUCTION_APPLY_BILL);
@@ -228,7 +228,7 @@ public class StockOutActivity extends BaseNoMvpActivity {
                  */
                 if (SpUtils.getInstance().getIsBillList()) {
                     intent.setClass(StockOutActivity.this, BuyInStockListActivity.class);
-                }else {
+                } else {
                     intent.setClass(StockOutActivity.this, StockOutSearchActivity.class);
                 }
                 intent.putExtra(STOCK_OUT_CODE_STR, STOCK_OUT_FINISH_GOODS_PICK);

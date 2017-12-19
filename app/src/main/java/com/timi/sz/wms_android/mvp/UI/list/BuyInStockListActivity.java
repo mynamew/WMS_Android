@@ -60,12 +60,15 @@ import static com.timi.sz.wms_android.base.uils.Constants.EDITTEXT_SUPPLIER;
 import static com.timi.sz.wms_android.base.uils.Constants.IN_STOCK_BUY_BEAN;
 import static com.timi.sz.wms_android.base.uils.Constants.IN_STOCK_FINISH_BEAN;
 import static com.timi.sz.wms_android.base.uils.Constants.IN_STOCK_FINISH_OUT_BEAN;
+import static com.timi.sz.wms_android.base.uils.Constants.OTHER_IN_STOCK_SELECT_ORDERNO;
 import static com.timi.sz.wms_android.base.uils.Constants.OUT_RETURN_MATERAIL;
 import static com.timi.sz.wms_android.base.uils.Constants.OUT_SOURCE;
 import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_BUY_RETURN_ORDERNO_BEAN;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_BEAN;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_CODE_STR;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_FINISH_GOODS_PICK;
+import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_OTHER_OUT_AUDIT;
+import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_OTHER_OUT_BILL;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_OUTSOURCE_ALLOT;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_OUTSOURCE_AUDIT;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_OUTSOURCE_BILL;
@@ -246,6 +249,15 @@ public class BuyInStockListActivity extends BaseActivity<BuyInStockListView, Buy
                 setActivityTitle(R.string.sale_out_stock_list_title);
                 currentUIState = ORDERNO;
                 break;
+            case  STOCK_OUT_OTHER_OUT_AUDIT:
+            case  STOCK_OUT_OTHER_OUT_BILL:
+                setActivityTitle(R.string.other_outstock_list_title);
+                currentUIState = ORDERNO;
+                break;
+            case  OTHER_IN_STOCK_SELECT_ORDERNO:
+                setActivityTitle(R.string.other_instock_list_title);
+                currentUIState = ORDERNO;
+                break;
 
         }
         //设置状态
@@ -377,10 +389,13 @@ public class BuyInStockListActivity extends BaseActivity<BuyInStockListView, Buy
                 break;
             case STOCK_OUT_OUTSOURCE_ALLOT://委外调拨
                 requestBuyInStockListBean.setSupplierName(supplier);
+                requestBuyInStockListBean.setBillDate(date);
+                requestBuyInStockListBean.setDestBillType(50);
                 break;
             case STOCK_OUT_OUTSOURCE_BILL://委外发料生单列表
                 requestBuyInStockListBean.setSupplierName(supplier);
                 requestBuyInStockListBean.setBillDate(date);
+                requestBuyInStockListBean.setDestBillType(20);
                 break;
             case STOCK_OUT_OUTSOURCE_AUDIT://委外发料审核列表
                 requestBuyInStockListBean.setSupplierName(supplier);
@@ -396,6 +411,7 @@ public class BuyInStockListActivity extends BaseActivity<BuyInStockListView, Buy
                 break;
             case STOCK_OUT_PRODUCTION_BILL://生产领料生单列表
                 requestBuyInStockListBean.setBillDate(date);
+                requestBuyInStockListBean.setDestBillType(23);
                 requestBuyInStockListBean.setDeptName(department);
                 break;
             case STOCK_OUT_PRODUCTION_APPLY_BILL://领料申请单列表
@@ -405,12 +421,19 @@ public class BuyInStockListActivity extends BaseActivity<BuyInStockListView, Buy
             case STOCK_OUT_PRODUCTION_ALLOT://生产调拨单列表
                 requestBuyInStockListBean.setBillDate(date);
                 requestBuyInStockListBean.setDeptName(department);
+                requestBuyInStockListBean.setDestBillType(50);
                 break;
             case Constants.STOCK_OUT_PRODUCTION_FEEDING://查询生产补料单列表
                 requestBuyInStockListBean.setDeptName(department);
                 break;
             case Constants.CREATE_RETURN_MATERAIL://查询生产退料单列表
                 requestBuyInStockListBean.setDeptName(department);
+                break;
+            case Constants.STOCK_OUT_SELL_OUT_AUDIT://发货通知单列表
+                requestBuyInStockListBean.setBillDate(date);
+                break;
+            case Constants.STOCK_OUT_SELL_OUT_BILL://销售出库单列表
+                requestBuyInStockListBean.setBillDate(date);
                 break;
             case CREATE_PRO_CHECK_NUM://查询成品入库单列表
                 requestBuyInStockListBean.setSupplierName(supplier);

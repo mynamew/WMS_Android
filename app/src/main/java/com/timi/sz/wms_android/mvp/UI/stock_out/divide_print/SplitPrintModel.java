@@ -1,5 +1,6 @@
 package com.timi.sz.wms_android.mvp.UI.stock_out.divide_print;
 
+import com.timi.sz.wms_android.bean.outstock.buy.SubmitBarcodeOutSplitAuditData;
 import com.timi.sz.wms_android.bean.outstock.outsource.SubmitBarcodeLotPickOutSplitResult;
 import com.timi.sz.wms_android.http.HttpManager;
 import com.timi.sz.wms_android.http.api.ApiService;
@@ -29,6 +30,19 @@ public class SplitPrintModel extends MvpBaseModel {
             @Override
             public Observable<CommonResult<SubmitBarcodeLotPickOutSplitResult>> createObservable(ApiService apiService) {
                 return apiService.submitBarcodeLotPickOutSplit(params);
+            }
+        });
+    }
+    /**
+     * 提交条码拆分出库（普通）
+     * @param params
+     * @param observer
+     */
+    public void submitBarcodeOutSplitAudit(final Map<String, Object> params, Observer<SubmitBarcodeOutSplitAuditData> observer) {
+        HttpManager.getInstance().HttpManagerRequest(observer, new ApiServiceMethodCallBack<SubmitBarcodeOutSplitAuditData>() {
+            @Override
+            public Observable<CommonResult<SubmitBarcodeOutSplitAuditData>> createObservable(ApiService apiService) {
+                return apiService.submitBarcodeOutSplitAudit(params);
             }
         });
     }

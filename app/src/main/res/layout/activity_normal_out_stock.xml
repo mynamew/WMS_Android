@@ -30,7 +30,7 @@
                 android:paddingTop="10px"
                 android:text="@string/outsource_send_material_oderno_info"
                 android:textColor="#333"
-                android:textSize="28px"
+                android:textSize="14sp"
                 android:textStyle="bold"/>
 
             <View
@@ -53,7 +53,7 @@
                     android:paddingLeft="30px"
                     android:text="@string/outsource_orderno_tip"
                     android:textColor="#333"
-                    android:textSize="26px"/>
+                    android:textSize="13sp"/>
 
                 <TextView
                     android:id="@+id/tv_outsource_orderno"
@@ -62,7 +62,7 @@
                     android:paddingLeft="60px"
                     android:text=""
                     android:textColor="#000"
-                    android:textSize="26px"/>
+                    android:textSize="13sp"/>
             </LinearLayout>
 
 
@@ -79,7 +79,7 @@
                     android:paddingLeft="30px"
                     android:text="@string/create_orderno_date_tip"
                     android:textColor="#333"
-                    android:textSize="26px"/>
+                    android:textSize="13sp"/>
 
                 <TextView
                     android:id="@+id/tv_create_orderno_date"
@@ -88,7 +88,7 @@
                     android:paddingLeft="60px"
                     android:text=""
                     android:textColor="#000"
-                    android:textSize="26px"/>
+                    android:textSize="13sp"/>
             </LinearLayout>
 
 
@@ -105,7 +105,7 @@
                     android:paddingLeft="30px"
                     android:text="@string/have_get_total_num_tip"
                     android:textColor="#333"
-                    android:textSize="26px"/>
+                    android:textSize="13sp"/>
 
                 <TextView
                     android:id="@+id/tv_have_get_total_num"
@@ -114,7 +114,7 @@
                     android:paddingLeft="60px"
                     android:text=""
                     android:textColor="#000"
-                    android:textSize="26px"/>
+                    android:textSize="13sp"/>
             </LinearLayout>
 
             <LinearLayout
@@ -131,7 +131,7 @@
                     android:paddingLeft="30px"
                     android:text="@string/can_get_total_num_tip"
                     android:textColor="#333"
-                    android:textSize="26px"/>
+                    android:textSize="13sp"/>
 
                 <TextView
                     android:id="@+id/tv_can_get_total_num"
@@ -140,7 +140,7 @@
                     android:paddingLeft="60px"
                     android:text=""
                     android:textColor="#000"
-                    android:textSize="26px"/>
+                    android:textSize="13sp"/>
             </LinearLayout>
 
             <LinearLayout
@@ -155,7 +155,7 @@
                     android:paddingLeft="30px"
                     android:text="@string/out_stock_total_num_tip"
                     android:textColor="#333"
-                    android:textSize="26px"/>
+                    android:textSize="13sp"/>
 
                 <TextView
                     android:id="@+id/tv_outstock_total_num"
@@ -164,7 +164,7 @@
                     android:paddingLeft="60px"
                     android:text=""
                     android:textColor="#000"
-                    android:textSize="26px"/>
+                    android:textSize="13sp"/>
             </LinearLayout>
 
             <LinearLayout
@@ -180,7 +180,7 @@
                     android:paddingLeft="30px"
                     android:text="@string/have_point_num_tip"
                     android:textColor="#333"
-                    android:textSize="26px"/>
+                    android:textSize="13sp"/>
 
                 <TextView
                     android:id="@+id/tv_have_count_num"
@@ -189,7 +189,7 @@
                     android:paddingLeft="60px"
                     android:text=""
                     android:textColor="#000"
-                    android:textSize="26px"/>
+                    android:textSize="13sp"/>
             </LinearLayout>
 
             <LinearLayout
@@ -205,7 +205,7 @@
                     android:paddingLeft="30px"
                     android:text="@string/wait_point_num_tip"
                     android:textColor="#333"
-                    android:textSize="26px"/>
+                    android:textSize="13sp"/>
 
                 <TextView
                     android:id="@+id/tv_wait_point_num"
@@ -214,8 +214,9 @@
                     android:paddingLeft="60px"
                     android:text=""
                     android:textColor="#000"
-                    android:textSize="26px"/>
+                    android:textSize="13sp"/>
             </LinearLayout>
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="96px"
@@ -223,55 +224,59 @@
                 android:gravity="center_vertical"
                 android:text="@string/materail_info"
                 android:textColor="#333"
-                android:textSize="28px"
+                android:textSize="14sp"
                 android:textStyle="bold"/>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1px"
                 android:background="@color/divide_color"/>
+
             <LinearLayout
                 android:id="@+id/ll_carton"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20px"
-                android:visibility="visible"
-                android:orientation="vertical">
+                android:layout_height="88px"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2px"
+                    android:layout_marginLeft="30px"
+                    android:background="@color/divide_color"/>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
-                    >
+                    android:paddingLeft="30px">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/carton_num_tip"
-                        android:paddingLeft="38px"
                         android:textColor="#333"/>
 
                     <TextView
                         android:id="@+id/tv_carton_num"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="90px"
-                        android:text="1"
+                        android:layout_marginLeft="100px"
+                        android:layout_weight="1"
                         android:textColor="#333"/>
 
                     <Button
                         android:id="@+id/btn_add"
-                        android:layout_marginLeft="30px"
-                        android:layout_width="wrap_content"
-                        android:layout_height="54px"
+                        android:layout_width="60px"
+                        android:layout_height="60px"
                         android:layout_marginRight="30px"
                         android:background="@drawable/selector_btn_bg_login"
-                        android:text="换箱"
-                        android:layout_gravity="center_vertical"
-                        android:gravity="center"
+                        android:text="+"
                         android:textColor="#fff"/>
                 </LinearLayout>
             </LinearLayout>
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="88px">
@@ -280,14 +285,14 @@
                     android:id="@+id/tv_putaway_scan_material_tip"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingLeft="38px"
-                    android:text="@string/material_barcode_tip"
-                    android:textColor="#333"
-                    android:textSize="13sp"
                     android:layout_alignBaseline="@+id/et_scan_material"
                     android:layout_alignBottom="@+id/et_scan_material"
                     android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"/>
+                    android:layout_alignParentStart="true"
+                    android:paddingLeft="38px"
+                    android:text="@string/material_barcode_tip"
+                    android:textColor="#333"
+                    android:textSize="13sp"/>
 
                 <EditText
                     android:id="@+id/et_scan_material"
@@ -318,129 +323,136 @@
             </RelativeLayout>
 
             <LinearLayout
+                android:id="@+id/ll_material_info"
                 android:layout_width="match_parent"
+                android:visibility="gone"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingBottom="5px"
-                android:paddingTop="10px">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="40px"
-                    android:text="@string/item_material_code"
-                    android:textColor="#333"
-                    android:textSize="13sp"/>
-
-                <TextView
-                    android:id="@+id/tv_material_code"
+                android:orientation="vertical">
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="50px"
-                    android:text=""
-                    android:textColor="#000"
-                    android:textSize="13sp"/>
-            </LinearLayout>
+                    android:orientation="horizontal"
+                    android:paddingBottom="5px"
+                    android:paddingTop="10px">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingBottom="5px"
-                android:paddingTop="10px">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="40px"
+                        android:text="@string/item_material_code"
+                        android:textColor="#333"
+                        android:textSize="13sp"/>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="40px"
-                    android:text="@string/item_goods_num"
-                    android:textColor="#333"
-                    android:textSize="13sp"/>
+                    <TextView
+                        android:id="@+id/tv_material_code"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="50px"
+                        android:text=""
+                        android:textColor="#000"
+                        android:textSize="13sp"/>
+                </LinearLayout>
 
-                <TextView
-                    android:id="@+id/tv_material_num"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="50px"
-                    android:text=""
-                    android:textColor="#000"
-                    android:textSize="13sp"/>
-            </LinearLayout>
+                    android:orientation="horizontal"
+                    android:paddingBottom="5px"
+                    android:paddingTop="10px">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingBottom="5px"
-                android:paddingTop="10px">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="40px"
+                        android:text="@string/item_goods_num"
+                        android:textColor="#333"
+                        android:textSize="13sp"/>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="40px"
-                    android:text="@string/item_material_name"
-                    android:textColor="#333"
-                    android:textSize="13sp"/>
+                    <TextView
+                        android:id="@+id/tv_material_num"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="50px"
+                        android:text=""
+                        android:textColor="#000"
+                        android:textSize="13sp"/>
+                </LinearLayout>
 
-                <TextView
-                    android:id="@+id/tv_material_name"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="50px"
-                    android:text=""
-                    android:textColor="#000"
-                    android:textSize="13sp"/>
-            </LinearLayout>
+                    android:orientation="horizontal"
+                    android:paddingBottom="5px"
+                    android:paddingTop="10px">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingBottom="5px"
-                android:paddingTop="10px">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="40px"
+                        android:text="@string/item_material_name"
+                        android:textColor="#333"
+                        android:textSize="13sp"/>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="40px"
-                    android:text="@string/item_material_model"
-                    android:textColor="#333"
-                    android:textSize="13sp"/>
+                    <TextView
+                        android:id="@+id/tv_material_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="50px"
+                        android:text=""
+                        android:textColor="#000"
+                        android:textSize="13sp"/>
+                </LinearLayout>
 
-                <TextView
-                    android:id="@+id/tv_material_nmodel"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="50px"
-                    android:text=""
-                    android:textColor="#000"
-                    android:textSize="13sp"/>
-            </LinearLayout>
+                    android:orientation="horizontal"
+                    android:paddingBottom="5px"
+                    android:paddingTop="10px">
 
-            <LinearLayout
-                android:id="@+id/ll_material_attr"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingBottom="5px"
-                android:paddingTop="10px">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="40px"
+                        android:text="@string/item_material_model"
+                        android:textColor="#333"
+                        android:textSize="13sp"/>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="40px"
-                    android:text="@string/item_material_attr"
-                    android:textColor="#333"
-                    android:textSize="13sp"/>
+                    <TextView
+                        android:id="@+id/tv_material_nmodel"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="50px"
+                        android:text=""
+                        android:textColor="#000"
+                        android:textSize="13sp"/>
+                </LinearLayout>
 
-                <TextView
-                    android:id="@+id/tv_material_attr"
+                <LinearLayout
+                    android:id="@+id/ll_material_attr"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="50px"
-                    android:text=""
-                    android:textColor="#000"
-                    android:textSize="13sp"/>
+                    android:orientation="horizontal"
+                    android:paddingBottom="5px"
+                    android:paddingTop="10px">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="40px"
+                        android:text="@string/item_material_attr"
+                        android:textColor="#333"
+                        android:textSize="13sp"/>
+
+                    <TextView
+                        android:id="@+id/tv_material_attr"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="50px"
+                        android:text=""
+                        android:textColor="#000"
+                        android:textSize="13sp"/>
+                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>

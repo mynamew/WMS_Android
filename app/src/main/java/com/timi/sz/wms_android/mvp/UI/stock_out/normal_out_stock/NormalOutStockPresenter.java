@@ -5,6 +5,7 @@ import android.content.Context;
 import com.timi.sz.wms_android.base.uils.ToastUtils;
 import com.timi.sz.wms_android.bean.outstock.buy.SubmitBarcodeOutAuditData;
 import com.timi.sz.wms_android.bean.outstock.buy.SubmitBarcodeOutSplitAuditData;
+import com.timi.sz.wms_android.bean.outstock.outsource.SubmitBarcodeLotPickOutResult;
 import com.timi.sz.wms_android.http.callback.OnResultCallBack;
 import com.timi.sz.wms_android.http.subscriber.HttpSubscriber;
 import com.timi.sz.wms_android.mvp.base.presenter.impl.MvpBasePresenter;
@@ -26,7 +27,7 @@ public class NormalOutStockPresenter extends MvpBasePresenter<NormalOutStockView
     private HttpSubscriber<SubmitBarcodeOutAuditData> submitBarcodeOutAuditDataHttpSubscriber;
     private HttpSubscriber<SubmitBarcodeOutSplitAuditData> submitBarcodeOutSplitAuditDataHttpSubscriber;
     private HttpSubscriber<Object> submitMakeOrAuditBillHttpSubscriber;
-
+    private HttpSubscriber<SubmitBarcodeLotPickOutResult> submitBarcodeLotPickOutResultHttpSubscriber;
     private NormalOutStockModel model;
 
     /**
@@ -41,11 +42,13 @@ public class NormalOutStockPresenter extends MvpBasePresenter<NormalOutStockView
                 @Override
                 public void onSuccess(SubmitBarcodeOutAuditData bean) {
                     getView().submitBarcodeOutAudit(bean);
+                    getView().setBarcodeSelect();
                 }
 
                 @Override
                 public void onError(String errorMsg) {
                     ToastUtils.showShort(errorMsg);
+                    getView().setBarcodeSelect();
                 }
             });
         }
@@ -96,6 +99,30 @@ public class NormalOutStockPresenter extends MvpBasePresenter<NormalOutStockView
             });
         }
         model.submitMakeOrAuditBill(params, submitMakeOrAuditBillHttpSubscriber);
+    }
+    /**
+     * 提交条码出库(批次拣货)。
+     *
+     * @param params
+     */
+    public void submitBarcodeLotPickOut(Map<String, Object> params) {
+        getView().showProgressDialog();
+        if (null == submitBarcodeLotPickOutResultHttpSubscriber) {
+            submitBarcodeLotPickOutResultHttpSubscriber = new HttpSubscriber<>(new OnResultCallBack<SubmitBarcodeLotPickOutResult>() {
+                @Override
+                public void onSuccess(SubmitBarcodeLotPickOutResult bean) {
+                    getView().setBarcodeSelect();
+                    getView().submitBarcodeLotPickOut(bean);
+                }
+
+                @Override
+                public void onError(String errorMsg) {
+                    ToastUtils.showShort(errorMsg);
+                    getView().setBarcodeSelect();
+                }
+            });
+        }
+        model.submitBarcodeLotPickOut(params, submitBarcodeLotPickOutResultHttpSubscriber);
     }
 
 

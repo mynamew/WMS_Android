@@ -2,6 +2,7 @@ package com.timi.sz.wms_android.mvp.UI.stock_out.normal_out_stock;
 
 import com.timi.sz.wms_android.bean.outstock.buy.SubmitBarcodeOutAuditData;
 import com.timi.sz.wms_android.bean.outstock.buy.SubmitBarcodeOutSplitAuditData;
+import com.timi.sz.wms_android.bean.outstock.outsource.SubmitBarcodeLotPickOutResult;
 import com.timi.sz.wms_android.http.HttpManager;
 import com.timi.sz.wms_android.http.api.ApiService;
 import com.timi.sz.wms_android.http.api.CommonResult;
@@ -57,6 +58,19 @@ public class NormalOutStockModel extends MvpBaseModel {
             @Override
             public Observable<CommonResult<Object>> createObservable(ApiService apiService) {
                 return apiService.submitMakeOrAuditBill(params);
+            }
+        });
+    }
+    /**
+     * 提交条码出库(批次拣货)。
+     *
+     * @param observer
+     */
+    public void submitBarcodeLotPickOut(final Map<String, Object> params, Observer<SubmitBarcodeLotPickOutResult> observer) {
+        HttpManager.getInstance().HttpManagerRequest(observer, new ApiServiceMethodCallBack<SubmitBarcodeLotPickOutResult>() {
+            @Override
+            public Observable<CommonResult<SubmitBarcodeLotPickOutResult>> createObservable(ApiService apiService) {
+                return apiService.submitBarcodeLotPickOut(params);
             }
         });
     }

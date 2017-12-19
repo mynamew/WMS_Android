@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.timi.sz.wms_android.R;
+import com.timi.sz.wms_android.base.uils.Constants;
 import com.timi.sz.wms_android.base.uils.LogUitls;
 import com.timi.sz.wms_android.base.uils.PackageUtils;
 import com.timi.sz.wms_android.base.uils.SpUtils;
@@ -47,6 +48,7 @@ import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_POINT_DETIAI
 import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_POINT_REGIONID;
 import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_POINT_WAREHOUSEID;
 import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_PRINT_BARCODENO;
+import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_PRINT_BATCh_AND_NORMAL;
 import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_PRINT_BILLID;
 import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_PRINT_CURRENT_QTY;
 import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_PRINT_DATECODE;
@@ -170,10 +172,6 @@ public class BatchNormalActivity extends BaseActivity<BatchNormalView, BatchNorm
      */
     private int detailId;
     /**
-     * 仓库id
-     */
-    private int warehouseId;
-    /**
      * 区域的id
      */
     private int regionId;
@@ -196,7 +194,6 @@ public class BatchNormalActivity extends BaseActivity<BatchNormalView, BatchNorm
         detailResultsBean = new Gson().fromJson(getIntent().getStringExtra(OUT_STOCK_DETAIL_RESULTS_BEAN), DetailResultsBean.class);
         billId = getIntent().getIntExtra(OUT_STOCK_POINT_DETIAIL_BILLID, 0);
         scanId = getIntent().getIntExtra(OUT_STOCK_SCANID, 0);
-        warehouseId = getIntent().getIntExtra(OUT_STOCK_POINT_WAREHOUSEID, 0);
         regionId = getIntent().getIntExtra(OUT_STOCK_POINT_REGIONID, 0);
         switch (intentCode) {
             case STOCK_OUT_OUTSOURCE_FEED_SUPLLIEMENT://委外补料
@@ -306,46 +303,33 @@ public class BatchNormalActivity extends BaseActivity<BatchNormalView, BatchNorm
         } else {
             setHeaderContent(materialResultsBean.getDetailId(), materialResultsBean.getMaterialId(), materialResultsBean.getMaterialName(), materialResultsBean.getMaterialCode(), materialResultsBean.getMaterialStandard(), materialResultsBean.getMaterialAttribute(), materialResultsBean.getWarehouseName(), materialResultsBean.getScanQty(), materialResultsBean.getQty());
         }
-        /**
-         * 输入框 的监听事件
-         */
-        etMaterialScan.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+        setEdittextListener(etMaterialScan, Constants.REQUEST_SCAN_CODE_MATERIIAL,R.string.please_scan_material_code,0, new EdittextInputListener() {
             @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                    /**
-                     * 输入的内容
-                     */
-                    String inputStr = etMaterialScan.getText().toString().trim();
-                    if (TextUtils.isEmpty(inputStr)) {
-                        ToastUtils.showShort(getString(R.string.please_scan_material_code));
-                    } else {
-                        /**
-                         *   批次拣料的请求
-                         */
-                        Map<String, Object> params = new HashMap<>();
-                        /**
-                         * 是否 装箱
-                         */
-                        if (isCarton) {
-                            params.put("cartonNo", cartonNum);
-                        }
-                        params.put("UserId", SpUtils.getInstance().getUserId());
-                        params.put("OrgId", SpUtils.getInstance().getOrgId());
-                        params.put("MAC", PackageUtils.getMac());
-                        params.put("BillId", billId);
-                        params.put("SrcBillType", srcBillType);
-                        params.put("DestBillType", destBillType);
-                        params.put("ScanId", scanId);
-                        params.put("BarcodeNo", inputStr);
-                        //判断 批次是否为空
-                        params.put("bCheckMode", true);
-                        getPresenter().submitBarcodeLotPickOut(params);
-                    }
+            public void verticalSuccess(String result) {
+                /**
+                 *   批次拣料的请求
+                 */
+                Map<String, Object> params = new HashMap<>();
+                /**
+                 * 是否 装箱
+                 */
+                if (isCarton) {
+                    params.put("cartonNo", cartonNum);
                 }
-                return false;
+                params.put("UserId", SpUtils.getInstance().getUserId());
+                params.put("OrgId", SpUtils.getInstance().getOrgId());
+                params.put("MAC", PackageUtils.getMac());
+                params.put("BillId", billId);
+                params.put("SrcBillType", srcBillType);
+                params.put("DestBillType", destBillType);
+                params.put("ScanId", scanId);
+                params.put("BarcodeNo", result);
+                //判断 批次是否为空
+                params.put("bCheckMode", true);
+                getPresenter().submitBarcodeLotPickOut(params);
             }
         });
+
     }
 
     @Override
@@ -383,6 +367,7 @@ public class BatchNormalActivity extends BaseActivity<BatchNormalView, BatchNorm
             intent.putExtra(OUT_STOCK_PRINT_MATERIAL_MODEL, result.getMaterialStandard());
             intent.putExtra(OUT_STOCK_PRINT_CURRENT_QTY, result.getBarcodeQty());
             intent.putExtra(OUT_STOCK_PRINT_OUT_QTY, result.getExceedQty());
+            intent.putExtra(OUT_STOCK_PRINT_BATCh_AND_NORMAL, true);
             startActivity(intent);
         } else {
             /**

@@ -991,6 +991,22 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("api/services/wpda/OtherOutStock/GetOtherOutStockDetail")
     Observable<CommonResult<List<MaterialDetailResult>>> getOtherOutStockDetail(@FieldMap Map<String, Object> params);
+    /**
+     * 查询其他出库单列表
+     *
+     * @param params
+     * @return
+     */
+    @POST("api/services/wpda/OtherOutStock/QueryOtherOutstockList")
+    Observable<CommonResult<List<QueryPoListBean>>> queryOtherOutstockList(@Body RequestBuyInStockListBean params);
+ /**
+     * 其他出库单列表的数据
+     *
+     * @param params
+     * @return
+     */
+    @POST("api/services/wpda/OtherOutStock/GetOtherOutstockData")
+    Observable<CommonResult<List<QueryPoListBean>>> getOtherOutstockData(@Body RequestBuyInStockListBean params);
 
     /**
      * 调拨调出

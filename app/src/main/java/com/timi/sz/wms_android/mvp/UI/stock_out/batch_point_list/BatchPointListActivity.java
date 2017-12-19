@@ -38,6 +38,7 @@ import com.timi.sz.wms_android.bean.outstock.sale.QuerySalesOutSotckByInputForOu
 import com.timi.sz.wms_android.bean.stockin_work.allot_out.QueryAllotOutResult;
 import com.timi.sz.wms_android.http.message.BaseMessage;
 import com.timi.sz.wms_android.http.message.event.OutsourceAuditEvent;
+import com.timi.sz.wms_android.mvp.UI.stock_out.batch_normal.BatchNormalActivity;
 import com.timi.sz.wms_android.mvp.UI.stock_out.batch_point.BatchPointActivity;
 import com.timi.sz.wms_android.mvp.base.BaseActivity;
 
@@ -649,7 +650,24 @@ public class BatchPointListActivity extends BaseActivity<BatchPointListView, Bat
     public void getMaterialLotData(GetMaterialLotData data) {
         switch (data.getControlType()) {
             case 0://非管控 跳转到非管控界面
-
+                Intent it1 = new Intent(BatchPointListActivity.this, BatchNormalActivity.class);
+                it1.putExtra(STOCK_OUT_CODE_STR, intentCode);
+                it1.putExtra(OUT_STOCK_POINT_DETIAIL_BILLID, billId);
+                it1.putExtra(OUT_STOCK_MATERIAL_RESULTS_BEAN, new Gson().toJson(null==mDatas?mDatasDetail.get(currentPosition):mDatas.get(currentPosition)));
+                it1.putExtra(OUT_STOCK_SCANID, scanId);
+                it1.putExtra(OUT_STOCK_POINT_REGIONID, regionId);
+                /**
+                 * 是否是销售 如果是销售出库 还会由箱号这个字段
+                 */
+                if (intentCode == STOCK_OUT_OTHER_OUT_AUDIT) {
+                    it1.putExtra(OUT_STOCK_SALE_IS_CARTON, otherAuditSelectOrdernoBean.getSummaryResults().isIsCarton());
+                    it1.putExtra(OUT_STOCK_SALE_CARTON_NUM, otherAuditSelectOrdernoBean.getSummaryResults().getCartonNo());
+                }
+                if (intentCode == STOCK_OUT_OTHER_OUT_BILL) {
+                    it1.putExtra(OUT_STOCK_SALE_IS_CARTON, queryOtherOutStockByInputResult.getSummaryResults().isIsCarton());
+                    it1.putExtra(OUT_STOCK_SALE_CARTON_NUM, queryOtherOutStockByInputResult.getSummaryResults().getCartonNo());
+                }
+                startActivity(it1);
                 break;
             case 1://非强制管控 （出库非制定批次则提醒）
             case 2://强制管控（必须扫描指定的批次出库）

@@ -1,5 +1,6 @@
 package com.timi.sz.wms_android.mvp.UI.stock_out.divide_print;
 
+import com.timi.sz.wms_android.bean.outstock.buy.SubmitBarcodeOutSplitAuditData;
 import com.timi.sz.wms_android.bean.outstock.outsource.SubmitBarcodeLotPickOutSplitResult;
 import com.timi.sz.wms_android.mvp.base.view.iml.MvpBaseView;
 
@@ -12,4 +13,5 @@ import com.timi.sz.wms_android.mvp.base.view.iml.MvpBaseView;
 public interface SplitPrintView extends MvpBaseView {
     void submitBarcodeLotPickOutSplit(SubmitBarcodeLotPickOutSplitResult result);
 
+    void submitBarcodeOutSplitAudit(SubmitBarcodeOutSplitAuditData data);
 }

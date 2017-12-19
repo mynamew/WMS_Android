@@ -2,6 +2,7 @@ package com.timi.sz.wms_android.mvp.UI.stock_out.normal_out_stock;
 
 import com.timi.sz.wms_android.bean.outstock.buy.SubmitBarcodeOutAuditData;
 import com.timi.sz.wms_android.bean.outstock.buy.SubmitBarcodeOutSplitAuditData;
+import com.timi.sz.wms_android.bean.outstock.outsource.SubmitBarcodeLotPickOutResult;
 import com.timi.sz.wms_android.mvp.base.view.iml.MvpBaseView;
 
 /**
@@ -15,5 +16,9 @@ public interface NormalOutStockView extends MvpBaseView {
 
     void submitBarcodeOutSplitAudit(SubmitBarcodeOutSplitAuditData data);
 
+    void submitBarcodeLotPickOut(SubmitBarcodeLotPickOutResult result);
+
     void submitMakeOrAuditBill();
+
+    void setBarcodeSelect();
 }

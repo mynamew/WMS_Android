@@ -18,6 +18,7 @@ public class RequestBuyInStockListBean {
 
     private int OrgId;
     private int UserId;
+    private int DestBillType;
     private String MAC;
     private String BillNo;
     private String BarcodeNo;
@@ -87,5 +88,13 @@ public class RequestBuyInStockListBean {
 
     public void setBillDate(String billDate) {
         BillDate = billDate;
+    }
+
+    public int getDestBillType() {
+        return DestBillType;
+    }
+
+    public void setDestBillType(int destBillType) {
+        DestBillType = destBillType;
     }
 }
