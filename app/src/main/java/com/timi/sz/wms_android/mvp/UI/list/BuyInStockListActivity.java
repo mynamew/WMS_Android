@@ -305,31 +305,56 @@ public class BuyInStockListActivity extends BaseActivity<BuyInStockListView, Buy
                     case ORDERNO:
                         if (TextUtils.isEmpty(orderno)) {
                             ToastUtils.showShort(getString(R.string.please_input_orderno_or_scan));
+                            return;
                         }
-                        return;
+                        break;
                     case ORDERNO_DEPARTMENT:
                         if (TextUtils.isEmpty(orderno)&&TextUtils.isEmpty(department)) {
-                            ToastUtils.showShort("请输入/扫描单号/部门");
+                            ToastUtils.showShort("请输入单号或部门至少一个！");
+                            return;
                         }
-                        return;
+                        break;
                     case ORDERNO_DATE:
-                        return;
+                        if (TextUtils.isEmpty(orderno)&&TextUtils.isEmpty(date)) {
+                            ToastUtils.showShort("请输入单号或日期至少一个！");
+                            return;
+                        }
+                        break;
                     case ORDERNO_BARCODE:
-                        return;
+                        if (TextUtils.isEmpty(orderno)&&TextUtils.isEmpty(barcode)) {
+                            ToastUtils.showShort("请输入单号或条码至少一个！");
+                            return;
+                        }
+                        break;
                     case ORDERNO_SUPPLIER:
-                        return;
+                        if (TextUtils.isEmpty(orderno)&&TextUtils.isEmpty(supplier)) {
+                            ToastUtils.showShort("请输入单号或供应少至少一个！");
+                            return;
+                        }
+                        break;
                     case ORDERNO_DATE_BARCODE:
-                        return;
+                        if (TextUtils.isEmpty(orderno)&&TextUtils.isEmpty(barcode)&&TextUtils.isEmpty(date)) {
+                            ToastUtils.showShort("请输入单号或日期或条码至少一个！");
+                            return;
+                        }
+                        break;
                     case ORDERNO_DATE_DEPARTMENT:
+                        if (TextUtils.isEmpty(orderno)&&TextUtils.isEmpty(date)&&TextUtils.isEmpty(department)) {
+                            ToastUtils.showShort("请输入单号或条码或部门至少一个");
+                            return;
+                        }
                         break;
                     case ORDERNO_SUPPLIER_DATE:
+                        if (TextUtils.isEmpty(orderno)&&TextUtils.isEmpty(supplier)&&TextUtils.isEmpty(date)) {
+                            ToastUtils.showShort("请输入单号或供应商或日期至少一个");
+                            return;
+                        }
                         break;
                 }
                 requestOrdernoData();
                 break;
         }
     }
-
     /**
      * 发送请求
      */
@@ -337,6 +362,8 @@ public class BuyInStockListActivity extends BaseActivity<BuyInStockListView, Buy
         InputMethodUtils.hide(this);
         String orderno = etOrderno.getText().toString().trim();
         String supplier = etSupplier.getText().toString().trim();
+        String date = etDate.getText().toString().trim();
+        String department = etDepartment.getText().toString().trim();
         RequestBuyInStockListBean requestBuyInStockListBean = new RequestBuyInStockListBean();
         requestBuyInStockListBean.setBillNo(orderno);
         switch (intentCode) {
@@ -353,6 +380,7 @@ public class BuyInStockListActivity extends BaseActivity<BuyInStockListView, Buy
                 break;
             case STOCK_OUT_OUTSOURCE_BILL://委外发料生单列表
                 requestBuyInStockListBean.setSupplierName(supplier);
+                requestBuyInStockListBean.setBillDate(date);
                 break;
             case STOCK_OUT_OUTSOURCE_AUDIT://委外发料审核列表
                 requestBuyInStockListBean.setSupplierName(supplier);
@@ -364,18 +392,25 @@ public class BuyInStockListActivity extends BaseActivity<BuyInStockListView, Buy
                 requestBuyInStockListBean.setSupplierName(supplier);
                 break;
             case STOCK_OUT_PRODUCTION_AUDIT://生产领料审核列表
-                requestBuyInStockListBean.setDeptName(supplier);
+                requestBuyInStockListBean.setDeptName(department);
                 break;
             case STOCK_OUT_PRODUCTION_BILL://生产领料生单列表
-                requestBuyInStockListBean.setDeptName(supplier);
+                requestBuyInStockListBean.setBillDate(date);
+                requestBuyInStockListBean.setDeptName(department);
                 break;
             case STOCK_OUT_PRODUCTION_APPLY_BILL://领料申请单列表
-                requestBuyInStockListBean.setDeptName(supplier);
+                requestBuyInStockListBean.setDeptName(department);
+                requestBuyInStockListBean.setBillDate(date);
                 break;
             case STOCK_OUT_PRODUCTION_ALLOT://生产调拨单列表
+                requestBuyInStockListBean.setBillDate(date);
+                requestBuyInStockListBean.setDeptName(department);
+                break;
+            case Constants.STOCK_OUT_PRODUCTION_FEEDING://查询生产补料单列表
+                requestBuyInStockListBean.setDeptName(department);
                 break;
             case Constants.CREATE_RETURN_MATERAIL://查询生产退料单列表
-                requestBuyInStockListBean.setDeptName(supplier);
+                requestBuyInStockListBean.setDeptName(department);
                 break;
             case CREATE_PRO_CHECK_NUM://查询成品入库单列表
                 requestBuyInStockListBean.setSupplierName(supplier);

@@ -23,6 +23,7 @@ public class RequestBuyInStockListBean {
     private String BarcodeNo;
     private String SupplierName;
     private String DeptName;
+    private String BillDate;
 
     public int getOrgId() {
         return OrgId;
@@ -78,5 +79,13 @@ public class RequestBuyInStockListBean {
 
     public void setDeptName(String deptName) {
         DeptName = deptName;
+    }
+
+    public String getBillDate() {
+        return BillDate;
+    }
+
+    public void setBillDate(String billDate) {
+        BillDate = billDate;
     }
 }

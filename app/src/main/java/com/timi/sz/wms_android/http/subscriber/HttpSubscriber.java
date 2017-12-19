@@ -144,6 +144,8 @@ public class HttpSubscriber<T> implements Observer<T> {
         } else if (e instanceof SocketTimeoutException) {
             mOnResultListener.onError(SOCKET_TIMEOUT_EXCEPTION);
             return;
+        }else  if (e instanceof  ConnectException){
+            mOnResultListener.onError(SOCKET_TIMEOUT_EXCEPTION);
         }
     }
 

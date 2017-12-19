@@ -15,7 +15,7 @@ public class Constants {
     //base url
 //    public static final String BASE_URL = "http://szjuqent.imwork.net:83/";
     public static final String BASE_URL = "http://192.168.0.39:8066/";
-//    public static final String BASE_URL = "http://192.168.18.117:8066/";
+    //    public static final String BASE_URL = "http://192.168.18.117:8066/";
     //超时时间   5s
     public static int DEFAULT_TIMEOUT = 5000;
 
@@ -209,8 +209,14 @@ public class Constants {
     public static final String OUT_STOCK_PRINT_BARCODENO = "out_stock_print_barcode";//出库打印 的barcode
     public static final String OUT_STOCK_PRINT_DESBILLTYPE = "out_stock_print_desbilltype";//出库打印目的单据
     public static final String OUT_STOCK_PRINT_DATECODE = "out_stock_print_datecode";//出库打印的批次code
+    public static final String OUT_STOCK_PRINT_LIB_CODE = "out_stock_print_datecode";//出库打印的库位码
     public static final String OUT_STOCK_PRINT_MATERIAL_ATTR = "out_stock_print_material_attr";//出库打印的物料附加属性
     public static final String OUT_STOCK_PRINT_MATERIALID = "out_stock_print_materialid";//出库打印的物料id
+    public static final String OUT_STOCK_PRINT_MATERIAL_NAME = "out_stock_print_material_name";//出库打印的物料name
+    public static final String OUT_STOCK_PRINT_MATERIAL_CODE = "out_stock_print_material_code";//出库打印的物料code
+    public static final String OUT_STOCK_PRINT_MATERIAL_MODEL = "out_stock_print_material_model";//出库打印的物料model
+    public static final String OUT_STOCK_PRINT_CURRENT_QTY = "out_stock_print_current_qty";//出库打印的当前的数量
+    public static final String OUT_STOCK_PRINT_OUT_QTY = "out_stock_print_out_qty";//出库打印的超出的数量
 
     public static final String OUT_STOCK_SCANID = "out_stock_out_point_scan_id";//跳转到清点详情的scanid
     public static final String OUT_STOCK_MATERIAL_RESULTS_BEAN = "out_stock_material_results_bean";//跳转到物料请点详情的实体(MaterialResultsBean)

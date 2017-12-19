@@ -318,7 +318,8 @@
         <activity android:name=".mvp.UI.stock_in_work.check_record.CheckRecordActivity">
         </activity>
         <activity android:name=".mvp.UI.quity.quality.advance_quality.Advance2Activity">
-
+        </activity>
+        <activity android:name=".mvp.UI.stock_out.batch_normal.BatchNormalActivity">
         </activity>
     </application>
 

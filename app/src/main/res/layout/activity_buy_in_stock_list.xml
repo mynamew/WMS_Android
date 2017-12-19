@@ -125,7 +125,7 @@
             android:layout_toRightOf="@id/tv_date_tip"
             android:background="@drawable/selector_et"
             android:ellipsize="end"
-            android:hint="@string/please_input_supplier"
+            android:hint="@string/please_input_date"
             android:imeOptions="actionSearch"
             android:paddingLeft="20px"
             android:paddingRight="80px"

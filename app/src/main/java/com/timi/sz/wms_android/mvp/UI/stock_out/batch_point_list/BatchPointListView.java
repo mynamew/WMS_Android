@@ -1,5 +1,6 @@
 package com.timi.sz.wms_android.mvp.UI.stock_out.batch_point_list;
 
+import com.timi.sz.wms_android.bean.outstock.outsource.GetMaterialLotData;
 import com.timi.sz.wms_android.mvp.base.view.iml.MvpBaseView;
 
 /**
@@ -10,4 +11,6 @@ import com.timi.sz.wms_android.mvp.base.view.iml.MvpBaseView;
 
 public interface BatchPointListView extends MvpBaseView {
     void submitMakeOrAuditBill();
+
+    void getMaterialLotData(GetMaterialLotData data);
 }

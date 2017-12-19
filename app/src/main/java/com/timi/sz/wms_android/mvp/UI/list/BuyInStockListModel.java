@@ -380,7 +380,7 @@ public class BuyInStockListModel extends MvpBaseModel {
         });
     }
     /**
-     * 从成品入库单列表获取数据
+     * 从生产退料单获取数据
      *
      * @param params
      * @param observer

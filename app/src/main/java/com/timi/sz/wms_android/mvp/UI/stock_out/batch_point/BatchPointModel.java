@@ -34,7 +34,9 @@ public class BatchPointModel extends MvpBaseModel {
                 return apiService.getMaterialLotData(params);
             }
         });
-    }/**
+    }
+
+    /**
      * 提交条码出库(批次拣货)。
      *
      * @param observer

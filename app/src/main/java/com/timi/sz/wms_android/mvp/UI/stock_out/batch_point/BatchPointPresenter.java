@@ -31,7 +31,7 @@ public class BatchPointPresenter extends MvpBasePresenter<BatchPointView> {
     }
 
     /**
-     * 提交制单
+     * 获取批次信息
      *
      * @param params
      */

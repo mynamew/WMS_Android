@@ -921,6 +921,25 @@ public interface ApiService {
     @POST("api/services/wpda/PrdFeed/GetPrdFeedDetail")
     Observable<CommonResult<List<MaterialDetailResult>>> getPrdFeedDetail(@FieldMap Map<String, Object> params);
 
+    /**
+     * 生产补料单列表
+     *
+     * @param params
+     * @return
+     */
+    @POST("api/services/wpda/PrdFeed/QueryPrdFeedList")
+    Observable<CommonResult<List<QueryPoListBean>>> QueryPrdFeedList(@Body RequestBuyInStockListBean params);
+
+    /**
+     * 生产补料数据
+     *
+     * @param params
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("api/services/wpda/PrdFeed/GetProductPickData")
+    Observable<CommonResult<QueryPrdFeedByInputResult>> getProductPickDataByFeed(@FieldMap Map<String, Object> params);
+
     /**====== 销售出库 ======**/
     /**
      * 销售出库 审核

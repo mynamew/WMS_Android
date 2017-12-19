@@ -3,6 +3,7 @@ package com.timi.sz.wms_android.mvp.UI.stock_out.divide_print;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Selection;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -33,10 +34,15 @@ import butterknife.OnClick;
 
 import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_PRINT_BARCODENO;
 import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_PRINT_BILLID;
+import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_PRINT_CURRENT_QTY;
 import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_PRINT_DATECODE;
 import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_PRINT_DESBILLTYPE;
 import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_PRINT_MATERIALID;
 import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_PRINT_MATERIAL_ATTR;
+import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_PRINT_MATERIAL_CODE;
+import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_PRINT_MATERIAL_MODEL;
+import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_PRINT_MATERIAL_NAME;
+import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_PRINT_OUT_QTY;
 import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_PRINT_SCANID;
 import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_PRINT_SRCBILLTYPE;
 
@@ -91,6 +97,11 @@ public class SplitPrintActivity extends BaseActivity<SplitPrintView, SplitPrintP
     private String dateCode;
     private int materialId;
     private String materialAttribute;
+    private String materialName;
+    private String materialCode;
+    private String materialModel;
+    private int currentQty;
+    private int outQty;//chao出数量
 
     @Override
     public int setLayoutId() {
@@ -107,13 +118,31 @@ public class SplitPrintActivity extends BaseActivity<SplitPrintView, SplitPrintP
         billId = getIntent().getIntExtra(OUT_STOCK_PRINT_BILLID, 0);
         materialId = getIntent().getIntExtra(OUT_STOCK_PRINT_MATERIALID, 0);
         materialAttribute = getIntent().getStringExtra(OUT_STOCK_PRINT_MATERIAL_ATTR);
+        materialName = getIntent().getStringExtra(OUT_STOCK_PRINT_MATERIAL_NAME);
+        materialCode = getIntent().getStringExtra(OUT_STOCK_PRINT_MATERIAL_CODE);
+        materialModel = getIntent().getStringExtra(OUT_STOCK_PRINT_MATERIAL_MODEL);
         dateCode = getIntent().getStringExtra(OUT_STOCK_PRINT_DATECODE);
+        currentQty = getIntent().getIntExtra(OUT_STOCK_PRINT_CURRENT_QTY, 0);
+        outQty = getIntent().getIntExtra(OUT_STOCK_PRINT_OUT_QTY, 0);
         setActivityTitle(getString(R.string.divide_barcode_tip));
     }
 
     @Override
     public void initView() {
-
+        //物料信息
+        setTextViewContent(tvMaterialName, materialName);
+        setTextViewContent(tvMaterialAttr, materialAttribute);
+        setTextViewContent(tvMaterialCode, materialCode);
+        setTextViewContent(tvMaterialModel, materialModel);
+        //物料条码
+        setTextViewContent(tvBarcode, barcode);
+        //批次
+        setTextViewContent(tvBatch, dateCode);
+        //当前数量
+        setTextViewContent(tvCurrentNum, currentQty);
+        //拆分数量
+        setTextViewContent(etDivideNum, currentQty - outQty);
+        Selection.selectAll(etDivideNum.getText());
     }
 
     @Override
@@ -133,17 +162,24 @@ public class SplitPrintActivity extends BaseActivity<SplitPrintView, SplitPrintP
 
     @Override
     public void submitBarcodeLotPickOutSplit(SubmitBarcodeLotPickOutSplitResult result) {
-        ToastUtils.showShort(getString(R.string.submit_barcode_split_outstock_success));
-        SubmitBarcodeLotPickOutSplitEvent event = new SubmitBarcodeLotPickOutSplitEvent(SubmitBarcodeLotPickOutSplitEvent.SUBMIT_BARCODE_SPLIT_SUCCESS);
-        event.setResult(result);
-        BaseMessage.post(event);
         /**
-         * 如果选中 则打印条码 并且提交条码拆分 否则直接关闭
+         * 判断超出数量
          */
-        if (ivPrint.isSelected()) {
-            printBarCode(result);
-        }else {
-            onBackPressed();
+        if (result.getExceedQty() > 0) {
+            ToastUtils.showShort(R.string.input_divide_qty_incorrect);
+        } else {
+            ToastUtils.showShort(getString(R.string.submit_barcode_split_outstock_success));
+            SubmitBarcodeLotPickOutSplitEvent event = new SubmitBarcodeLotPickOutSplitEvent(SubmitBarcodeLotPickOutSplitEvent.SUBMIT_BARCODE_SPLIT_SUCCESS);
+            event.setResult(result);
+            BaseMessage.post(event);
+            /**
+             * 如果选中 则打印条码 并且提交条码拆分 否则直接关闭
+             */
+            if (ivPrint.isSelected()) {
+                printBarCode(result);
+            } else {
+                onBackPressed();
+            }
         }
 
     }
@@ -190,6 +226,15 @@ public class SplitPrintActivity extends BaseActivity<SplitPrintView, SplitPrintP
                  * 获取拆分数量
                  */
                 int splitQty = Integer.parseInt(etDivideNum.getText().toString().trim());
+                if (splitQty > currentQty) {//拆分数量大于 当前条码所含的数量
+                    ToastUtils.showShort("拆分数量不能大于当前数量，请重新输入！");
+                    etDivideNum.setFocusable(true);
+                    etDivideNum.setFocusableInTouchMode(true);
+                    etDivideNum.requestFocus();
+                    etDivideNum.findFocus();
+                    Selection.selectAll(etDivideNum.getText());
+                    return;
+                }
                 /**
                  * 拆分请求
                  */
@@ -217,6 +262,7 @@ public class SplitPrintActivity extends BaseActivity<SplitPrintView, SplitPrintP
 
     /**
      * 打印条码
+     *
      * @param result
      */
     public void printBarCode(SubmitBarcodeLotPickOutSplitResult result) {

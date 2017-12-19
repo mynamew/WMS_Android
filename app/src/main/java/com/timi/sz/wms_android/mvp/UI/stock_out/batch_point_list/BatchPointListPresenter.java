@@ -3,6 +3,8 @@ package com.timi.sz.wms_android.mvp.UI.stock_out.batch_point_list;
 import android.content.Context;
 
 import com.timi.sz.wms_android.base.uils.ToastUtils;
+import com.timi.sz.wms_android.bean.outstock.outsource.GetMaterialLotData;
+import com.timi.sz.wms_android.bean.outstock.outsource.RequestGetMaterialLotBean;
 import com.timi.sz.wms_android.http.callback.OnResultCallBack;
 import com.timi.sz.wms_android.http.subscriber.HttpSubscriber;
 import com.timi.sz.wms_android.mvp.base.presenter.impl.MvpBasePresenter;
@@ -24,6 +26,7 @@ public class BatchPointListPresenter extends MvpBasePresenter<BatchPointListView
     }
 
     HttpSubscriber<Object> submitMakeOrAuditBillHttpSubscriber = null;
+    private HttpSubscriber<GetMaterialLotData> getMaterialLotDataHttpSubscriber;
 
     /**
      * 提交制单
@@ -47,13 +50,37 @@ public class BatchPointListPresenter extends MvpBasePresenter<BatchPointListView
         }
         model.submitMakeOrAuditBill(params, submitMakeOrAuditBillHttpSubscriber);
     }
+    /**
+     * 获取批次信息
+     *
+     * @param params
+     */
+    public void getMaterialLotData(RequestGetMaterialLotBean params) {
+        if (null == getMaterialLotDataHttpSubscriber) {
+            getMaterialLotDataHttpSubscriber = new HttpSubscriber<>(new OnResultCallBack<GetMaterialLotData>() {
+                @Override
+                public void onSuccess(GetMaterialLotData bean) {
+                    getView().getMaterialLotData(bean);
+                }
 
+                @Override
+                public void onError(String errorMsg) {
+                    ToastUtils.showShort(errorMsg);
+                }
+            });
+        }
+        model.getMaterialLotData(params, getMaterialLotDataHttpSubscriber);
+    }
     @Override
     public void dettachView() {
         super.dettachView();
         if (null != submitMakeOrAuditBillHttpSubscriber) {
             submitMakeOrAuditBillHttpSubscriber.unSubscribe();
             submitMakeOrAuditBillHttpSubscriber = null;
+        }
+        if (null != getMaterialLotDataHttpSubscriber) {
+            getMaterialLotDataHttpSubscriber.unSubscribe();
+            getMaterialLotDataHttpSubscriber = null;
         }
     }
 }
