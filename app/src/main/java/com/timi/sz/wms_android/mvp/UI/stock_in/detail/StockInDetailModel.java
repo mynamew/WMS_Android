@@ -59,6 +59,9 @@ public class StockInDetailModel extends MvpBaseModel {
                     case Constants.SALE_RETURN_MATERAIL://销售 退料
 
                         return apiService.getSalesReturnDetail(params);
+                    case Constants.STOCK_OUT_PURCHASE_MATERIAL_RETURN://采购 退料
+
+                        return apiService.getPurReturnDetail(params);
 
                     default:
 

@@ -19,5 +19,6 @@ public interface BuyReturnMaterialOrderNoView extends MvpBaseView {
     void submitBarcodeOutSplitAudit(SubmitBarcodeOutSplitAuditData data);
 
     void submitMakeOrAuditBill();
+    void setBarcodeSelect();
 
 }

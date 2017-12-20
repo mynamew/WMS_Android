@@ -195,7 +195,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:paddingLeft="20px"
-                    android:text="@string/item_material_code"
+                    android:text="@string/material_code_tip"
                     android:textColor="#666"
                     />
 

@@ -1,6 +1,8 @@
 package com.timi.sz.wms_android.bean.outstock.product;
 
+import com.timi.sz.wms_android.bean.outstock.outsource.GetWWDetailPickDataResult;
 import com.timi.sz.wms_android.bean.outstock.outsource.common.DetailResultsBean;
+import com.timi.sz.wms_android.bean.outstock.outsource.common.MaterialResultsBean;
 
 import java.util.List;
 
@@ -17,7 +19,7 @@ public class QueryPrdFeedByInputResult {
      */
 
     private SummaryResultsBean summaryResults;
-    private List<DetailResultsBean> detailResults;
+    private List<MaterialResultsBean> detailResults;
 
     public SummaryResultsBean getSummaryResults() {
         return summaryResults;
@@ -27,11 +29,11 @@ public class QueryPrdFeedByInputResult {
         this.summaryResults = summaryResults;
     }
 
-    public List<DetailResultsBean> getDetailResults() {
+    public List<MaterialResultsBean> getDetailResults() {
         return detailResults;
     }
 
-    public void setDetailResults(List<DetailResultsBean> detailResults) {
+    public void setDetailResults(List<MaterialResultsBean> detailResults) {
         this.detailResults = detailResults;
     }
 

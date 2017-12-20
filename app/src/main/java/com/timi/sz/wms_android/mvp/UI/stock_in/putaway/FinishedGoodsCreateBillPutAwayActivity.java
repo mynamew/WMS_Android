@@ -333,19 +333,19 @@ public class FinishedGoodsCreateBillPutAwayActivity extends BaseActivity<PutAway
                 scan(Constants.REQUEST_SCAN_CODE_MATERIIAL, this);
                 break;
             case R.id.btn_login://确认提交
-                if (TextUtils.isEmpty(locationCode)) {
-                    ToastUtils.showShort(getString(R.string.please_scan_lib_location_code));
-                    return;
-                }
-                if (!locationCodeIsUse) {
-                    ToastUtils.showShort(getString(R.string.location_code_no_user));
-                    return;
-                }
-                String materialCode = etPutawayScanMaterial.getText().toString();
-                if (TextUtils.isEmpty(materialCode)) {
-                    ToastUtils.showShort(getString(R.string.please_scan_material_code));
-                    return;
-                }
+//                if (TextUtils.isEmpty(locationCode)) {
+//                    ToastUtils.showShort(getString(R.string.please_scan_lib_location_code));
+//                    return;
+//                }
+//                if (!locationCodeIsUse) {
+//                    ToastUtils.showShort(getString(R.string.location_code_no_user));
+//                    return;
+//                }
+//                String materialCode = etPutawayScanMaterial.getText().toString();
+//                if (TextUtils.isEmpty(materialCode)) {
+//                    ToastUtils.showShort(getString(R.string.please_scan_material_code));
+//                    return;
+//                }
                 /**
                  * 生成入库单
                  */
@@ -353,7 +353,8 @@ public class FinishedGoodsCreateBillPutAwayActivity extends BaseActivity<PutAway
                 params.put("UserId", SpUtils.getInstance().getUserId());
                 params.put("OrgId", SpUtils.getInstance().getOrgId());
                 params.put("MAC", PackageUtils.getMac());
-                params.put("BillNo", locationCode);
+                params.put("ScanId", ScanId);
+                params.put("SubmitType", 0);
                 getPresenter().createInSockOrderno(params);
         }
     }

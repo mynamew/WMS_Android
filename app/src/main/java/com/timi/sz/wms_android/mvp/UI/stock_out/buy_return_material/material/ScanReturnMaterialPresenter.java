@@ -40,11 +40,13 @@ public class ScanReturnMaterialPresenter extends MvpBasePresenter<ScanReturnMate
                 @Override
                 public void onSuccess(SubmitBarcodeOutAuditData bean) {
                     getView().submitBarcodeOutAudit(bean);
+                    getView().setBarcodeSelect();
                 }
 
                 @Override
                 public void onError(String errorMsg) {
                     ToastUtils.showShort(errorMsg);
+                    getView().setBarcodeSelect();
                 }
             });
         }

@@ -17,4 +17,6 @@ public interface ScanReturnMaterialView extends MvpBaseView {
     void submitBarcodePurReturn(SubmitBarcodePurReturnData bean);
 
     void submitMakeOrAuditBill();
+
+    void setBarcodeSelect();
 }

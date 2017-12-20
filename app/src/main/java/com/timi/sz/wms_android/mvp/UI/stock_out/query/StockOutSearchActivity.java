@@ -38,6 +38,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 import static com.timi.sz.wms_android.base.uils.Constants.EDITTEXT_ORDERNO;
+import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_ALLOT_OUT_PICK;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_BEAN;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_CODE_STR;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_FINISH_GOODS_PICK;
@@ -51,8 +52,10 @@ import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_PRODUCTION_A
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_PRODUCTION_AUDIT;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_PRODUCTION_BILL;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_PRODUCTION_FEEDING;
+import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_SALE_OUT_PICK;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_SELL_OUT_AUDIT;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_SELL_OUT_BILL;
+import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_SEND_OUT_PICK;
 
 /**
  * 出库搜索界面
@@ -152,6 +155,22 @@ public class StockOutSearchActivity extends BaseActivity<StockOutSearchView, Sto
                 tvStockoutTip.setText(R.string.stock_out_pick_send_orderno);
                 tvQueryTitle.setText(R.string.finish_goods_outstock_tip);
                 break;
+            case STOCK_OUT_SEND_OUT_PICK://发货拣货
+                setActivityTitle(R.string.stock_out_pick_send_tab);
+                tvStockoutTip.setText(R.string.stock_out_pick_send_orderno);
+                tvQueryTitle.setText(R.string.stock_out_pick_send_tab);
+                break;
+            case STOCK_OUT_SALE_OUT_PICK://销售拣货
+                setActivityTitle(getString(R.string.stock_out_pick_sale_tab));
+                tvStockoutTip.setText(R.string.stock_out_pick_sell_outstock_orderno);
+                tvQueryTitle.setText(R.string.stock_out_pick_sale_tab);
+                break;
+            case STOCK_OUT_ALLOT_OUT_PICK://调拨拣货
+                setActivityTitle(getString(R.string.stock_out_pick_tab));
+                tvStockoutTip.setText(R.string.query_allot_scan_tip);
+                tvQueryTitle.setText(R.string.stock_out_pick_tab);
+                break;
+
         }
         /**
          * 设置输入框的监听
@@ -356,6 +375,7 @@ public class StockOutSearchActivity extends BaseActivity<StockOutSearchView, Sto
 
     /**
      * 生产领料单末尾号查询（审核流程）的返回
+     *
      * @param bean
      */
     @Override

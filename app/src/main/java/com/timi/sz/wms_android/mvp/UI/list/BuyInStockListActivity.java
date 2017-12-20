@@ -26,20 +26,25 @@ import com.timi.sz.wms_android.base.uils.ToastUtils;
 import com.timi.sz.wms_android.bean.instock.list.QueryPoListBean;
 import com.timi.sz.wms_android.bean.instock.outsource_return_material.QueryOutSourceReturnByInputResult;
 import com.timi.sz.wms_android.bean.instock.search.BuyOrdernoBean;
+import com.timi.sz.wms_android.bean.instock.search.OtherAuditSelectOrdernoBean;
 import com.timi.sz.wms_android.bean.instock.search.QueryPrdInstockByInputResult;
 import com.timi.sz.wms_android.bean.instock.search.QueryPrdReturnByInputResult;
 import com.timi.sz.wms_android.bean.list.RequestBuyInStockListBean;
 import com.timi.sz.wms_android.bean.outstock.buy.BuyReturnMaterialByOrdernoData;
+import com.timi.sz.wms_android.bean.outstock.other.QueryOtherOutStockByInputResult;
 import com.timi.sz.wms_android.bean.outstock.outsource.QueryOutSourceFeedByInputResult;
 import com.timi.sz.wms_android.bean.outstock.outsource.QueryOutSourcePickByInputResult;
 import com.timi.sz.wms_android.bean.outstock.outsource.QueryWWPickDataByOutSourceResult;
 import com.timi.sz.wms_android.bean.outstock.product.QueryProductPickByInputResult;
 import com.timi.sz.wms_android.mvp.UI.stock_in.point.StockInPointActivity;
 import com.timi.sz.wms_android.mvp.UI.stock_in.putaway.FinishedGoodsAuditPutAwayActivity;
+import com.timi.sz.wms_android.mvp.UI.stock_in.putaway.OtherAuditActivity;
 import com.timi.sz.wms_android.mvp.UI.stock_in.putaway.OutMaterialReturnActivity;
 import com.timi.sz.wms_android.mvp.UI.stock_in.putaway.ProductionMaterialReturnActivity;
 import com.timi.sz.wms_android.mvp.UI.stock_out.batch_point_list.BatchPointListActivity;
 import com.timi.sz.wms_android.mvp.UI.stock_out.buy_return_material.material.ScanReturnMaterialActivity;
+import com.timi.sz.wms_android.mvp.UI.stock_out.buy_return_material.orderno.BuyReturnMaterialOrderNoActivity;
+import com.timi.sz.wms_android.mvp.UI.stock_out.detail.outsource_bill_detail.OutsourceBillDetailActivity;
 import com.timi.sz.wms_android.mvp.UI.stock_out.normal_out_stock.NormalOutStockActivity;
 import com.timi.sz.wms_android.mvp.base.BaseActivity;
 
@@ -59,6 +64,7 @@ import static com.timi.sz.wms_android.base.uils.Constants.EDITTEXT_ORDERNO;
 import static com.timi.sz.wms_android.base.uils.Constants.EDITTEXT_SUPPLIER;
 import static com.timi.sz.wms_android.base.uils.Constants.IN_STOCK_BUY_BEAN;
 import static com.timi.sz.wms_android.base.uils.Constants.IN_STOCK_FINISH_BEAN;
+import static com.timi.sz.wms_android.base.uils.Constants.IN_STOCK_FINISH_OTHER_BEAN;
 import static com.timi.sz.wms_android.base.uils.Constants.IN_STOCK_FINISH_OUT_BEAN;
 import static com.timi.sz.wms_android.base.uils.Constants.OTHER_IN_STOCK_SELECT_ORDERNO;
 import static com.timi.sz.wms_android.base.uils.Constants.OUT_RETURN_MATERAIL;
@@ -249,12 +255,12 @@ public class BuyInStockListActivity extends BaseActivity<BuyInStockListView, Buy
                 setActivityTitle(R.string.sale_out_stock_list_title);
                 currentUIState = ORDERNO;
                 break;
-            case  STOCK_OUT_OTHER_OUT_AUDIT:
-            case  STOCK_OUT_OTHER_OUT_BILL:
+            case STOCK_OUT_OTHER_OUT_AUDIT:
+            case STOCK_OUT_OTHER_OUT_BILL:
                 setActivityTitle(R.string.other_outstock_list_title);
                 currentUIState = ORDERNO;
                 break;
-            case  OTHER_IN_STOCK_SELECT_ORDERNO:
+            case OTHER_IN_STOCK_SELECT_ORDERNO:
                 setActivityTitle(R.string.other_instock_list_title);
                 currentUIState = ORDERNO;
                 break;
@@ -321,43 +327,43 @@ public class BuyInStockListActivity extends BaseActivity<BuyInStockListView, Buy
                         }
                         break;
                     case ORDERNO_DEPARTMENT:
-                        if (TextUtils.isEmpty(orderno)&&TextUtils.isEmpty(department)) {
+                        if (TextUtils.isEmpty(orderno) && TextUtils.isEmpty(department)) {
                             ToastUtils.showShort("请输入单号或部门至少一个！");
                             return;
                         }
                         break;
                     case ORDERNO_DATE:
-                        if (TextUtils.isEmpty(orderno)&&TextUtils.isEmpty(date)) {
+                        if (TextUtils.isEmpty(orderno) && TextUtils.isEmpty(date)) {
                             ToastUtils.showShort("请输入单号或日期至少一个！");
                             return;
                         }
                         break;
                     case ORDERNO_BARCODE:
-                        if (TextUtils.isEmpty(orderno)&&TextUtils.isEmpty(barcode)) {
+                        if (TextUtils.isEmpty(orderno) && TextUtils.isEmpty(barcode)) {
                             ToastUtils.showShort("请输入单号或条码至少一个！");
                             return;
                         }
                         break;
                     case ORDERNO_SUPPLIER:
-                        if (TextUtils.isEmpty(orderno)&&TextUtils.isEmpty(supplier)) {
+                        if (TextUtils.isEmpty(orderno) && TextUtils.isEmpty(supplier)) {
                             ToastUtils.showShort("请输入单号或供应少至少一个！");
                             return;
                         }
                         break;
                     case ORDERNO_DATE_BARCODE:
-                        if (TextUtils.isEmpty(orderno)&&TextUtils.isEmpty(barcode)&&TextUtils.isEmpty(date)) {
+                        if (TextUtils.isEmpty(orderno) && TextUtils.isEmpty(barcode) && TextUtils.isEmpty(date)) {
                             ToastUtils.showShort("请输入单号或日期或条码至少一个！");
                             return;
                         }
                         break;
                     case ORDERNO_DATE_DEPARTMENT:
-                        if (TextUtils.isEmpty(orderno)&&TextUtils.isEmpty(date)&&TextUtils.isEmpty(department)) {
+                        if (TextUtils.isEmpty(orderno) && TextUtils.isEmpty(date) && TextUtils.isEmpty(department)) {
                             ToastUtils.showShort("请输入单号或条码或部门至少一个");
                             return;
                         }
                         break;
                     case ORDERNO_SUPPLIER_DATE:
-                        if (TextUtils.isEmpty(orderno)&&TextUtils.isEmpty(supplier)&&TextUtils.isEmpty(date)) {
+                        if (TextUtils.isEmpty(orderno) && TextUtils.isEmpty(supplier) && TextUtils.isEmpty(date)) {
                             ToastUtils.showShort("请输入单号或供应商或日期至少一个");
                             return;
                         }
@@ -367,6 +373,7 @@ public class BuyInStockListActivity extends BaseActivity<BuyInStockListView, Buy
                 break;
         }
     }
+
     /**
      * 发送请求
      */
@@ -522,20 +529,20 @@ public class BuyInStockListActivity extends BaseActivity<BuyInStockListView, Buy
                             break;
                         case STOCK_OUT_PRODUCTION_AUDIT://生产审核
                             params.put("BillNo", mDatas.get(pos).getBillCode());
-                            getPresenter().getOutSourceReturnData(params);
+                            getPresenter().getProductPickData(params);
                             break;
                         case STOCK_OUT_PRODUCTION_BILL://生产生单
                             params.put("DestBillType", 23);
                             params.put("BillNo", mDatas.get(pos).getBillCode());
-                            getPresenter().getOutSourceReturnData(params);
+                            getPresenter().getPrdPickData(params);
                             break;
                         case STOCK_OUT_PRODUCTION_APPLY_BILL://领料申请
                             params.put("BillNo", mDatas.get(pos).getBillCode());
-                            getPresenter().getOutSourceReturnData(params);
+                            getPresenter().getPrdPickApplyData(params);
                             break;
                         case STOCK_OUT_PRODUCTION_ALLOT://生产调拨
                             params.put("BillNo", mDatas.get(pos).getBillCode());
-                            getPresenter().getOutSourceReturnData(params);
+                            getPresenter().getPrdPickData(params);
                             break;
                         case Constants.CREATE_RETURN_MATERAIL:
                             params.put("BillNo", mDatas.get(pos).getBillCode());
@@ -544,6 +551,14 @@ public class BuyInStockListActivity extends BaseActivity<BuyInStockListView, Buy
                         case CREATE_PRO_CHECK_NUM://查询成品入库单列表
                             params.put("BillId", mDatas.get(pos).getBillId());
                             getPresenter().finishGoodInstock(params);
+                            break;
+                        case OTHER_IN_STOCK_SELECT_ORDERNO://其他入库列表数据
+                            params.put("BillNo", mDatas.get(pos).getBillCode());
+                            getPresenter().getOtherInstockData(params);
+                            break;
+                        case STOCK_OUT_OTHER_OUT_AUDIT://其他出库列表数据
+                            params.put("BillNo", mDatas.get(pos).getBillCode());
+                            getPresenter().getOtherOutstockData(params);
                             break;
                     }
                 }
@@ -566,11 +581,17 @@ public class BuyInStockListActivity extends BaseActivity<BuyInStockListView, Buy
 
     @Override
     public void getPurReturnData(BuyReturnMaterialByOrdernoData bean) {
-        Intent intent = new Intent(this, ScanReturnMaterialActivity.class);
+        Intent intent = new Intent(this, BuyReturnMaterialOrderNoActivity.class);
         intent.putExtra(OUT_STOCK_BUY_RETURN_ORDERNO_BEAN, new Gson().toJson(bean));
+        intent.putExtra(Constants.STOCK_OUT_CODE_STR, intentCode);
         startActivity(intent);
     }
 
+    /**
+     * 委外生单
+     *
+     * @param bean
+     */
     @Override
     public void getWWPickDataByOutSource(QueryWWPickDataByOutSourceResult bean) {
         QueryWWPickDataByOutSourceResult.SummaryResultsBean summaryResults = bean.getSummaryResults();
@@ -585,13 +606,22 @@ public class BuyInStockListActivity extends BaseActivity<BuyInStockListView, Buy
         intent.putExtra(STOCK_OUT_BEAN, new Gson().toJson(bean));
         intent.putExtra(STOCK_OUT_CODE_STR, intentCode);
         if (summaryResults.isIsLotPick()) {//批次拣货
-            intent.setClass(this, BatchPointListActivity.class);
+            if (summaryResults.isIsMerge()) {//是否是合并拣货
+                intent.setClass(this, BatchPointListActivity.class);
+            } else {
+                intent.setClass(this, OutsourceBillDetailActivity.class);
+            }
         } else {
             intent.setClass(this, NormalOutStockActivity.class);
         }
         startActivity(intent);
     }
 
+    /**
+     * 委外调拨
+     *
+     * @param bean
+     */
     @Override
     public void getOutSourcePickData(QueryOutSourcePickByInputResult bean) {
         Intent intent = new Intent();
@@ -658,7 +688,7 @@ public class BuyInStockListActivity extends BaseActivity<BuyInStockListView, Buy
      * @param bean
      */
     @Override
-    public void getProductPickData(QueryWWPickDataByOutSourceResult bean) {
+    public void getProductPickData(QueryProductPickByInputResult bean) {
         Intent intent = new Intent();
         intent.putExtra(STOCK_OUT_BEAN, new Gson().toJson(bean));
         intent.putExtra(STOCK_OUT_CODE_STR, intentCode);
@@ -702,6 +732,27 @@ public class BuyInStockListActivity extends BaseActivity<BuyInStockListView, Buy
         it.putExtra(Constants.CODE_STR, intentCode);
         it.putExtra(IN_STOCK_FINISH_BEAN, new Gson().toJson(bean));
         startActivity(it);
+    }
+
+    @Override
+    public void getOtherInstockData(OtherAuditSelectOrdernoBean bean) {
+        Intent it = new Intent(this, OtherAuditActivity.class);
+        it.putExtra(Constants.CODE_STR, intentCode);
+        it.putExtra(IN_STOCK_FINISH_OTHER_BEAN, new Gson().toJson(bean));
+        startActivity(it);
+    }
+
+    @Override
+    public void getOtherOutstockData(QueryOtherOutStockByInputResult bean) {
+        Intent intent = new Intent();
+        intent.putExtra(STOCK_OUT_BEAN, new Gson().toJson(bean));
+        intent.putExtra(STOCK_OUT_CODE_STR, intentCode);
+        if (bean.getSummaryResults().isIsLotPick()) {//批次拣货
+            intent.setClass(this, BatchPointListActivity.class);
+        } else {
+            intent.setClass(this, NormalOutStockActivity.class);
+        }
+        startActivity(intent);
     }
 
     /**

@@ -310,6 +310,7 @@
             android:paddingLeft="60px"
             android:src="@mipmap/ic_scan"/>
     </RelativeLayout>
+
     <View
         android:id="@+id/view_divide"
         android:layout_width="match_parent"

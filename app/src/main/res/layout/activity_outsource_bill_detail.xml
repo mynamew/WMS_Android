@@ -1,69 +1,176 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/set_bg"
+    android:background="@color/white"
     android:orientation="vertical"
     tools:context=".mvp.UI.stock_out.detail.outsource_bill_detail.OutsourceBillDetailActivity">>
 
-    <include
-        android:id="@+id/head"
-        layout="@layout/title_head"/>
+    <include layout="@layout/title_head"/>
 
-    <RelativeLayout
-        android:id="@+id/rl_top_menu"
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="96px"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/head"
-        android:background="#fff">
+        android:layout_height="0dp"
+        android:layout_weight="1">
 
-        <TextView
-            android:id="@+id/tv_tip"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="30px"
-            android:text="@string/outsource_send_material_orderno_detial_tip"
-            android:textColor="#333"
-            android:textStyle="bold"/>
+            android:background="#fff"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/iv_show_more"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="20px"
-            android:scaleType="centerCrop"
-            android:src="@drawable/selector_stockin_detail"/>
 
-    </RelativeLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="30px"
+                android:paddingTop="10px">
 
-    <View
-        android:id="@+id/view_divide"
-        android:layout_width="match_parent"
-        android:layout_height="24px"
-        android:layout_below="@id/rl_top_menu"
-        android:background="@color/divide_color"/>
+                <TextView
+                    android:id="@+id/tv_orderno_tip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:text="@string/outsource_orderno_tip"
+                    android:textColor="#666"
+                    android:textSize="13sp"/>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rlv_detial"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/view_divide"/>
+                <TextView
+                    android:id="@+id/tv_outsource_orderno"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30px"
+                    android:gravity="left"
+                    android:text=""
+                    android:textColor="#000"
+                    android:textSize="13sp"/>
+            </LinearLayout>
 
-    <com.timi.sz.wms_android.view.FloatCircleButtonUpTopView
-        android:id="@+id/fbtn_detail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginBottom="30px"
-        android:layout_marginRight="30px"/>
-</RelativeLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="10px"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="30px">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:text="@string/create_orderno_date_tip"
+                    android:textColor="#666"
+                    android:textSize="13sp"/>
+
+                <TextView
+                    android:id="@+id/tv_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30px"
+                    android:gravity="left"
+                    android:text=""
+                    android:textColor="#000"
+                    android:textSize="13sp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="10px"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingBottom="10px"
+                android:paddingLeft="30px">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:paddingLeft="30px"
+                    android:text="@string/item_supplier"
+                    android:textColor="#666"
+                    android:textSize="13sp"/>
+
+                <TextView
+                    android:id="@+id/tv_supplier"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30px"
+                    android:gravity="left"
+                    android:text=""
+                    android:textColor="#000"
+                    android:textSize="13sp"/>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="24px"
+                android:background="@color/divide_color"/>
+
+            <RelativeLayout
+                android:id="@+id/rl_top_menu"
+                android:layout_width="match_parent"
+                android:layout_height="96px"
+                android:layout_below="@id/head"
+                android:background="#fff">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="30px"
+                    android:text="@string/orderno_info_point_tip"
+                    android:textColor="#333"
+                    android:textStyle="bold"/>
+
+                <ImageView
+                    android:id="@+id/iv_show_more"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="20px"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/selector_stockin_detail"/>
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_below="@id/rl_top_menu"
+                android:background="@color/divide_color"
+                android:visibility="visible"/>
+
+            <include
+                android:id="@+id/head_material"
+                layout="@layout/header_outsoure_point_material"
+                android:visibility="visible"/>
+
+            <View
+                android:id="@+id/view_divide"
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_below="@id/rl_top_menu"
+                android:background="@color/divide_color"
+                android:visibility="visible"/>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rlv_orderno_info"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+</LinearLayout>
 

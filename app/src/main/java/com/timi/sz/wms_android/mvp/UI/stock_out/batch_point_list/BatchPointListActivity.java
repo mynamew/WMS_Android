@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -22,6 +21,7 @@ import com.timi.sz.wms_android.base.uils.PackageUtils;
 import com.timi.sz.wms_android.base.uils.SpUtils;
 import com.timi.sz.wms_android.base.uils.ToastUtils;
 import com.timi.sz.wms_android.bean.instock.search.OtherAuditSelectOrdernoBean;
+import com.timi.sz.wms_android.bean.outstock.detail.BillMaterialDetailResult;
 import com.timi.sz.wms_android.bean.outstock.other.QueryOtherOutStockByInputResult;
 import com.timi.sz.wms_android.bean.outstock.outsource.GetMaterialLotData;
 import com.timi.sz.wms_android.bean.outstock.outsource.QueryOutSourceFeedByInputResult;
@@ -51,6 +51,7 @@ import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_DETAIL_RESULTS_BEAN;
@@ -64,6 +65,7 @@ import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_SCANID;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_ALLOT_OUT_PICK;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_BEAN;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_CODE_STR;
+import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_DETAIL_BEAN;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_FINISH_GOODS_PICK;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_OTHER_OUT_AUDIT;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_OTHER_OUT_BILL;
@@ -109,7 +111,6 @@ public class BatchPointListActivity extends BaseActivity<BatchPointListView, Bat
     TextView tvSendMaterialTotalNumTip;
     @BindView(R.id.tv_buy_num)
     TextView tvBuyNum;
-    TextView tvWaitCountNumTip;
     @BindView(R.id.tv_wait_point_num)
     TextView tvWaitPointNum;
     @BindView(R.id.tv_have_count_num_tip)
@@ -138,6 +139,20 @@ public class BatchPointListActivity extends BaseActivity<BatchPointListView, Bat
     RecyclerView rlvOrdernoInfo;
     @BindView(R.id.btn_point_commit)
     Button btnPointCommit;
+    @BindView(R.id.ll_stock_name)
+    LinearLayout llStockName;
+    @BindView(R.id.ll_strict_mame)
+    LinearLayout llStrictMame;
+    @BindView(R.id.ll_send_total)
+    LinearLayout llSendTotal;
+    @BindView(R.id.tv_wait_count_num_tip)
+    TextView tvWaitCountNumTip;
+    @BindView(R.id.ll_wait_total)
+    LinearLayout llWaitTotal;
+    @BindView(R.id.tv_material_name)
+    TextView tvMaterialName;
+    @BindView(R.id.ll_have_scan)
+    LinearLayout llHaveScan;
     /**
      * 跳转的code
      */
@@ -165,7 +180,7 @@ public class BatchPointListActivity extends BaseActivity<BatchPointListView, Bat
     /**
      * 当前的点击位置
      */
-    private int currentPosition=0;
+    private int currentPosition = 0;
     /**
      * 是否显示区域 仓库
      */
@@ -229,13 +244,11 @@ public class BatchPointListActivity extends BaseActivity<BatchPointListView, Bat
     /**
      * 适配器
      */
-    private BaseRecyclerAdapter<DetailResultsBean> adapterDetail;
     private BaseRecyclerAdapter<MaterialResultsBean> adapterMaterial;
     /**
      * 链表
      */
     private List<MaterialResultsBean> mDatas = new ArrayList<>();
-    private List<DetailResultsBean> mDatasDetail = new ArrayList<>();
 
     @Override
     public int setLayoutId() {
@@ -644,6 +657,7 @@ public class BatchPointListActivity extends BaseActivity<BatchPointListView, Bat
 
     /**
      * 获取批次
+     *
      * @param data
      */
     @Override
@@ -653,7 +667,7 @@ public class BatchPointListActivity extends BaseActivity<BatchPointListView, Bat
                 Intent it1 = new Intent(BatchPointListActivity.this, BatchNormalActivity.class);
                 it1.putExtra(STOCK_OUT_CODE_STR, intentCode);
                 it1.putExtra(OUT_STOCK_POINT_DETIAIL_BILLID, billId);
-                it1.putExtra(OUT_STOCK_MATERIAL_RESULTS_BEAN, new Gson().toJson(null==mDatas?mDatasDetail.get(currentPosition):mDatas.get(currentPosition)));
+                it1.putExtra(OUT_STOCK_MATERIAL_RESULTS_BEAN, new Gson().toJson(mDatas.get(currentPosition)));
                 it1.putExtra(OUT_STOCK_SCANID, scanId);
                 it1.putExtra(OUT_STOCK_POINT_REGIONID, regionId);
                 /**
@@ -671,7 +685,6 @@ public class BatchPointListActivity extends BaseActivity<BatchPointListView, Bat
                 break;
             case 1://非强制管控 （出库非制定批次则提醒）
             case 2://强制管控（必须扫描指定的批次出库）
-                if(null!=mDatas) {
                     Intent it = new Intent(BatchPointListActivity.this, BatchPointActivity.class);
                     it.putExtra(STOCK_OUT_CODE_STR, intentCode);
                     it.putExtra(OUT_STOCK_POINT_DETIAIL_BILLID, billId);
@@ -691,14 +704,6 @@ public class BatchPointListActivity extends BaseActivity<BatchPointListView, Bat
                         it.putExtra(OUT_STOCK_SALE_CARTON_NUM, queryOtherOutStockByInputResult.getSummaryResults().getCartonNo());
                     }
                     startActivity(it);
-                }else {
-                    Intent it = new Intent(BatchPointListActivity.this, BatchPointActivity.class);
-                    it.putExtra(STOCK_OUT_CODE_STR, intentCode);
-                    it.putExtra(OUT_STOCK_DETAIL_RESULTS_BEAN, new Gson().toJson(mDatasDetail.get(currentPosition)));
-                    it.putExtra(OUT_STOCK_POINT_DETIAIL_BILLID, billId);
-                    it.putExtra(OUT_STOCK_SCANID, scanId);
-                    startActivity(it);
-                }
                 break;
             default:
                 break;
@@ -754,9 +759,7 @@ public class BatchPointListActivity extends BaseActivity<BatchPointListView, Bat
      */
     private void initAdapter() {
         mDatas.clear();
-        mDatasDetail.clear();
         boolean isIsMerge = false;
-        List<DetailResultsBean> detailResults = null;
         List<MaterialResultsBean> materialResults = null;
         /**
          * 通过对 isIsMerge （是否合并 ） 的判断进行数据源的设置
@@ -764,7 +767,7 @@ public class BatchPointListActivity extends BaseActivity<BatchPointListView, Bat
         switch (intentCode) {
             case STOCK_OUT_OUTSOURCE_FEED_SUPLLIEMENT://委外补料
                 isIsMerge = false;
-                detailResults = queryOutSourceFeedByInputResult.getDetailResults();
+                materialResults = queryOutSourceFeedByInputResult.getDetailResults();
                 break;
             case STOCK_OUT_OUTSOURCE_AUDIT://委外审核
                 isIsMerge = true;
@@ -773,12 +776,19 @@ public class BatchPointListActivity extends BaseActivity<BatchPointListView, Bat
             case STOCK_OUT_OUTSOURCE_BILL://委外生单
             case STOCK_OUT_OUTSOURCE_ALLOT://委外调拨
                 isIsMerge = queryWWPickDataByOutSourceResult.getSummaryResults().isIsMerge();
-                detailResults = queryWWPickDataByOutSourceResult.getDetailResults();
-                materialResults = queryWWPickDataByOutSourceResult.getMaterialResults();
+                if (isIsMerge) {//如果是合并拣料则直接拿MaterialResults
+                    materialResults = queryWWPickDataByOutSourceResult.getMaterialResults();
+                } else {
+                    BillMaterialDetailResult billMaterialDetailResult = new Gson().fromJson(getIntent().getStringExtra(STOCK_OUT_DETAIL_BEAN), BillMaterialDetailResult.class);
+                    setTextViewContent(tvWaitPointNum,billMaterialDetailResult.getTotalWaitQty());
+                    setTextViewContent(tvHaveCountNum,billMaterialDetailResult.getTotalScanQty());
+                    setTextViewContent(tvBuyNum,billMaterialDetailResult.getTotalQty());
+                    materialResults = billMaterialDetailResult.getMaterialResults();
+                }
                 break;
             case STOCK_OUT_PRODUCTION_FEEDING://生产补料
                 isIsMerge = false;
-                detailResults = queryPrdFeedByInputResult.getDetailResults();
+                materialResults = queryPrdFeedByInputResult.getDetailResults();
                 break;
             case STOCK_OUT_PRODUCTION_AUDIT://生产审核
             case STOCK_OUT_PRODUCTION_APPLY_BILL://领料申请
@@ -787,246 +797,123 @@ public class BatchPointListActivity extends BaseActivity<BatchPointListView, Bat
                 break;
             case STOCK_OUT_PRODUCTION_BILL://生产生单
             case STOCK_OUT_PRODUCTION_ALLOT://生产调拨
-                isIsMerge = queryWWPickDataByOutSourceResult.getSummaryResults().isIsMerge();
-                detailResults = queryWWPickDataByOutSourceResult.getDetailResults();
-                materialResults = queryWWPickDataByOutSourceResult.getMaterialResults();
+                if (isIsMerge) {//如果是合并拣料则直接拿MaterialResults
+                    materialResults = queryWWPickDataByOutSourceResult.getMaterialResults();
+                } else {
+                    BillMaterialDetailResult billMaterialDetailResult = new Gson().fromJson(getIntent().getStringExtra(STOCK_OUT_DETAIL_BEAN), BillMaterialDetailResult.class);
+                    setTextViewContent(tvWaitPointNum,billMaterialDetailResult.getTotalWaitQty());
+                    setTextViewContent(tvHaveCountNum,billMaterialDetailResult.getTotalScanQty());
+                    setTextViewContent(tvBuyNum,billMaterialDetailResult.getTotalQty());
+                    materialResults = billMaterialDetailResult.getMaterialResults();
+                }
                 break;
             case STOCK_OUT_PICK://拣料
                 break;
             case STOCK_OUT_SELL_OUT_AUDIT://销售审核
                 isIsMerge = false;
-                detailResults = queryDNByInputForOutStockResult.getDetailResults();
+                materialResults = queryDNByInputForOutStockResult.getDetailResults();
                 break;
             case STOCK_OUT_SELL_OUT_BILL://销售生单
                 isIsMerge = false;
-                detailResults = querySalesOutSotckByInputForOutStockResult.getDetailResults();
+                BillMaterialDetailResult billMaterialDetailResult = new Gson().fromJson(getIntent().getStringExtra(STOCK_OUT_DETAIL_BEAN), BillMaterialDetailResult.class);
+                materialResults = billMaterialDetailResult.getMaterialResults();
                 break;
             case STOCK_OUT_PURCHASE_MATERIAL_RETURN://采购退料
                 break;
             case STOCK_OUT_OTHER_OUT_AUDIT://其他审核
                 isIsMerge = false;
-                detailResults = otherAuditSelectOrdernoBean.getDetailResults();
+                materialResults = otherAuditSelectOrdernoBean.getDetailResults();
                 break;
             case STOCK_OUT_OTHER_OUT_BILL://其他生单
                 isIsMerge = false;
-                detailResults = queryOtherOutStockByInputResult.getDetailResults();
+                BillMaterialDetailResult billMaterialDetailResultOther = new Gson().fromJson(getIntent().getStringExtra(STOCK_OUT_DETAIL_BEAN), BillMaterialDetailResult.class);
+                materialResults = billMaterialDetailResultOther.getMaterialResults();
                 break;
             case STOCK_OUT_FINISH_GOODS_PICK://成品拣货
-                isIsMerge = false;
-                detailResults = queryDNByInputForPickResult.getDetailResults();
+                BillMaterialDetailResult billMaterialDetailResultFinish = new Gson().fromJson(getIntent().getStringExtra(STOCK_OUT_DETAIL_BEAN), BillMaterialDetailResult.class);
+                materialResults = billMaterialDetailResultFinish.getMaterialResults();
                 break;
             case STOCK_OUT_ALLOT_OUT_PICK:
-                isIsMerge = false;
-                detailResults = queryAllotOutResult.getDetailResults();
+                BillMaterialDetailResult billMaterialDetailResultPick = new Gson().fromJson(getIntent().getStringExtra(STOCK_OUT_DETAIL_BEAN), BillMaterialDetailResult.class);
+                materialResults = billMaterialDetailResultPick.getMaterialResults();
                 break;
             default:
                 break;
         }
         /**
-         * 是否是合并拣货
+         * 对数据进行处理
          */
-        if (isIsMerge) {
-            for (int i = 0; i < materialResults.size(); i++) {
-                if (!ivShowMore.isSelected()) {
-                    if (materialResults.get(i).getWaitQty() > 0) {
-                        mDatas.add(materialResults.get(i));
-                    }
-                } else {
+        for (int i = 0; i < materialResults.size(); i++) {
+            if (!ivShowMore.isSelected()) {
+                if (materialResults.get(i).getWaitQty() > 0) {
                     mDatas.add(materialResults.get(i));
                 }
-            }
-        } else {
-            for (int i = 0; i < detailResults.size(); i++) {
-                if (ivShowMore.isSelected()) {
-                    /**
-                     * 如果齐套数小于采购数 则显示
-                     */
-                    if (detailResults.get(i).getWipQty() < detailResults.get(i).getPoQty()) {
-                        mDatasDetail.add(detailResults.get(i));
-                    }
-                } else {
-                    mDatasDetail.add(detailResults.get(i));
-                }
+            } else {
+                mDatas.add(materialResults.get(i));
             }
         }
+
+        findViewById(R.id.head_detail).setVisibility(View.VISIBLE);
         /**
-         * 是否合并发料
+         * 初始化adapter
          */
-        if (isIsMerge) {
+        if (null == adapterMaterial) {
+            adapterMaterial = new BaseRecyclerAdapter<MaterialResultsBean>(this, mDatas) {
+                @Override
+                protected int getItemLayoutId(int viewType) {
+                    return R.layout.item_outsource_feed;
+                }
+
+                @Override
+                protected void bindData(RecyclerViewHolder holder, int position, MaterialResultsBean item) {
+                    holder.setTextView(R.id.tv_line_num, item.getLine());
+                    holder.setTextView(R.id.tv_material_code, item.getMaterialCode());
+                    holder.setTextView(R.id.tv_send_material_num, item.getQty());
+                    holder.setTextView(R.id.tv_scan_num, item.getScanQty());
+                    holder.setTextView(R.id.tv_material_name, item.getMaterialName() + item.getMaterialAttribute());
+                }
+            };
             /**
-             * 设置头部
+             * 初始化  adapter
              */
-            findViewById(R.id.head_material).setVisibility(View.GONE);
-            findViewById(R.id.head_detail).setVisibility(View.VISIBLE);
-            /**
-             * 初始化adapter
-             */
-            if (null == adapterMaterial) {
-                adapterMaterial = new BaseRecyclerAdapter<MaterialResultsBean>(this, mDatas) {
-                    @Override
-                    protected int getItemLayoutId(int viewType) {
-                        return R.layout.item_outsource_feed;
-                    }
+            rlvOrdernoInfo.setAdapter(adapterMaterial);
+            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+            linearLayoutManager.setSmoothScrollbarEnabled(true);
+            linearLayoutManager.setAutoMeasureEnabled(true);
+            rlvOrdernoInfo.setLayoutManager(linearLayoutManager);
+            rlvOrdernoInfo.setNestedScrollingEnabled(false);
+            rlvOrdernoInfo.setHasFixedSize(true);
+            rlvOrdernoInfo.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST, R.drawable.item_badness_divider));
+            adapterMaterial.setOnItemClickListener(new BaseRecyclerAdapter.OnItemClickListener() {
+                @Override
+                public void onItemClick(View itemView, int pos) {
+                    currentPosition = pos;
+                    /**
+                     * 提交成功后 对批次信息进行修改
+                     * 1、用于显示批次信息中的已点数是否发生了更改
+                     */
+                    MaterialResultsBean materialResultsBean = mDatas.get(pos);
 
-                    @Override
-                    protected void bindData(RecyclerViewHolder holder, int position, MaterialResultsBean item) {
-                        holder.setTextView(R.id.tv_line_num, item.getLine());
-                        holder.setTextView(R.id.tv_material_code, item.getMaterialCode());
-                        holder.setTextView(R.id.tv_send_material_num, item.getQty());
-                        holder.setTextView(R.id.tv_scan_num, item.getScanQty());
-                        holder.setTextView(R.id.tv_material_name, item.getMaterialName() + item.getMaterialAttribute());
-                    }
-                };
-                /**
-                 * 初始化  adapter
-                 */
-                rlvOrdernoInfo.setAdapter(adapterMaterial);
-                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-                linearLayoutManager.setSmoothScrollbarEnabled(true);
-                linearLayoutManager.setAutoMeasureEnabled(true);
-                rlvOrdernoInfo.setLayoutManager(linearLayoutManager);
-                rlvOrdernoInfo.setNestedScrollingEnabled(false);
-                rlvOrdernoInfo.setHasFixedSize(true);
-                rlvOrdernoInfo.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST, R.drawable.item_badness_divider));
-                adapterMaterial.setOnItemClickListener(new BaseRecyclerAdapter.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(View itemView, int pos) {
-                        currentPosition=pos;
-                        /**
-                         * 提交成功后 对批次信息进行修改
-                         * 1、用于显示批次信息中的已点数是否发生了更改
-                         */
-                        MaterialResultsBean materialResultsBean = mDatas.get(pos);
-
-                        RequestGetMaterialLotBean bean = new RequestGetMaterialLotBean();
-                        bean.setMAC(PackageUtils.getMac());
-                        bean.setUserId(SpUtils.getInstance().getUserId());
-                        bean.setOrgId(SpUtils.getInstance().getOrgId());
-                        bean.setBillId(billId);
-                        bean.setSrcBillType(srcBillType);
-                        bean.setDestBillType(destBillType);
-                        bean.setWarehouseId(warehouseId);
-                        bean.setMaterialId(materialResultsBean.getMaterialId());
-                        bean.setMaterialCode(materialResultsBean.getMaterialCode());
-                        bean.setMaterialAttribute(materialResultsBean.getMaterialAttribute());
-                        LogUitls.e("上传的参数---->", new Gson().toJson(bean));
-                        showProgressDialog();
-                        getPresenter().getMaterialLotData(bean);
-                    }
-                });
-            } else {
-                adapterMaterial.notifyDataSetChanged();
-            }
-
+                    RequestGetMaterialLotBean bean = new RequestGetMaterialLotBean();
+                    bean.setMAC(PackageUtils.getMac());
+                    bean.setUserId(SpUtils.getInstance().getUserId());
+                    bean.setOrgId(SpUtils.getInstance().getOrgId());
+                    bean.setBillId(billId);
+                    bean.setSrcBillType(srcBillType);
+                    bean.setDestBillType(destBillType);
+                    bean.setWarehouseId(warehouseId);
+                    bean.setMaterialId(materialResultsBean.getMaterialId());
+                    bean.setMaterialCode(materialResultsBean.getMaterialCode());
+                    bean.setMaterialAttribute(materialResultsBean.getMaterialAttribute());
+                    LogUitls.e("上传的参数---->", new Gson().toJson(bean));
+                    showProgressDialog();
+                    getPresenter().getMaterialLotData(bean);
+                }
+            });
         } else {
-
-            /**
-             * 初始化 adapterDetail
-             */
-            if (null == adapterDetail) {
-                /**
-                 * 设置头部
-                 */
-                findViewById(R.id.head_material).setVisibility(View.VISIBLE);
-                findViewById(R.id.head_detail).setVisibility(View.GONE);
-                adapterDetail = new BaseRecyclerAdapter<DetailResultsBean>(this, mDatasDetail) {
-                    @Override
-                    protected int getItemLayoutId(int viewType) {
-                        return R.layout.item_outsource_feed;
-                    }
-
-                    @Override
-                    protected void bindData(RecyclerViewHolder holder, int position, DetailResultsBean item) {
-                        switch (intentCode) {
-                            case STOCK_OUT_OUTSOURCE_FEED_SUPLLIEMENT://委外补料
-                                holder.setTextView(R.id.tv_line_num, item.getLine());
-                                break;
-                            case STOCK_OUT_OUTSOURCE_AUDIT://委外审核
-                                holder.setTextView(R.id.tv_line_num, item.getPoLine());
-                                break;
-                            case STOCK_OUT_OUTSOURCE_BILL://委外生单
-                            case STOCK_OUT_OUTSOURCE_ALLOT://委外调拨
-                                holder.setTextView(R.id.tv_line_num, item.getPoLine());
-                                break;
-                            case STOCK_OUT_PRODUCTION_FEEDING://生产补料
-                                holder.setTextView(R.id.tv_line_num, item.getLine());
-                                break;
-                            case STOCK_OUT_PRODUCTION_AUDIT://生产审核
-                            case STOCK_OUT_PRODUCTION_APPLY_BILL://领料申请
-                                holder.setTextView(R.id.tv_line_num, item.getPoLine());
-                                break;
-                            case STOCK_OUT_PRODUCTION_BILL://生产生单
-                            case STOCK_OUT_PRODUCTION_ALLOT://生产生单
-                                holder.setTextView(R.id.tv_line_num, item.getPoLine());
-                                break;
-                            case STOCK_OUT_PICK://拣料
-                                break;
-                            case STOCK_OUT_SELL_OUT_AUDIT://销售审核
-                                holder.setTextView(R.id.tv_line_num, item.getLine());
-                                break;
-                            case STOCK_OUT_SELL_OUT_BILL://销售生单
-                                holder.setTextView(R.id.tv_line_num, item.getLine());
-                                break;
-                            case STOCK_OUT_PURCHASE_MATERIAL_RETURN://采购退料
-                                break;
-                            case STOCK_OUT_OTHER_OUT_AUDIT://其他审核
-                                holder.setTextView(R.id.tv_line_num, item.getLine());
-                                break;
-                            case STOCK_OUT_OTHER_OUT_BILL://其他生单
-                                holder.setTextView(R.id.tv_line_num, item.getLine());
-                                break;
-                            case STOCK_OUT_FINISH_GOODS_PICK://成品拣货
-                                holder.setTextView(R.id.tv_line_num, item.getLine());
-                                break;
-                            case STOCK_OUT_ALLOT_OUT_PICK://调拨调出
-                                holder.setTextView(R.id.tv_line_num, item.getLine());
-                                break;
-                            default:
-                                break;
-                        }
-                        holder.setTextView(R.id.tv_material_code, item.getMaterialCode());
-                        holder.setTextView(R.id.tv_send_material_num, item.getQty());
-                        holder.setTextView(R.id.tv_scan_num, item.getWipQty());
-                        holder.setTextView(R.id.tv_material_name, item.getMaterialName() + item.getMaterialAttribute());
-                    }
-                };
-                rlvOrdernoInfo.setAdapter(adapterDetail);
-                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-                linearLayoutManager.setSmoothScrollbarEnabled(true);
-                linearLayoutManager.setAutoMeasureEnabled(true);
-                rlvOrdernoInfo.setLayoutManager(linearLayoutManager);
-                rlvOrdernoInfo.setNestedScrollingEnabled(false);
-                rlvOrdernoInfo.setHasFixedSize(true);
-                rlvOrdernoInfo.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST, R.drawable.item_badness_divider));
-                adapterDetail.setOnItemClickListener(new BaseRecyclerAdapter.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(View itemView, int pos) {
-                        currentPosition=pos;
-                        /**
-                         * 获取批次信息，（是否管控）
-                         */
-                        DetailResultsBean materialResultsBean = mDatasDetail.get(pos);
-                        RequestGetMaterialLotBean bean = new RequestGetMaterialLotBean();
-                        bean.setMAC(PackageUtils.getMac());
-                        bean.setUserId(SpUtils.getInstance().getUserId());
-                        bean.setOrgId(SpUtils.getInstance().getOrgId());
-                        bean.setBillId(billId);
-                        bean.setSrcBillType(srcBillType);
-                        bean.setDestBillType(destBillType);
-                        bean.setWarehouseId(warehouseId);
-                        bean.setMaterialId(materialResultsBean.getMaterialId());
-                        bean.setMaterialCode(materialResultsBean.getMaterialCode());
-                        bean.setMaterialAttribute(materialResultsBean.getMaterialAttribute());
-                        LogUitls.e("上传的参数---->", new Gson().toJson(bean));
-                        showProgressDialog();
-                        getPresenter().getMaterialLotData(bean);
-
-                    }
-                });
-            } else {
-                adapterDetail.notifyDataSetChanged();
-            }
+            adapterMaterial.notifyDataSetChanged();
         }
+
     }
 
     /**
@@ -1041,7 +928,6 @@ public class BatchPointListActivity extends BaseActivity<BatchPointListView, Bat
             /**
              * 对adapter 进行判断，从而对数据源进行改变
              */
-            if (null != adapterMaterial) {
                 for (int i = 0; i < mDatas.size(); i++) {
                     if (mDatas.get(i).getMaterialCode().equals(event.getMaterialCode())) {
                         mDatas.get(i).setScanQty(mDatas.get(i).getScanQty() + event.getBarcodeQty());
@@ -1050,16 +936,6 @@ public class BatchPointListActivity extends BaseActivity<BatchPointListView, Bat
                         break;
                     }
                 }
-            } else {
-                for (int i = 0; i < mDatasDetail.size(); i++) {
-                    if (mDatasDetail.get(i).getMaterialCode().equals(event.getMaterialCode())) {
-                        mDatasDetail.get(i).setScanQty(mDatasDetail.get(i).getScanQty() + event.getBarcodeQty());
-                        mDatasDetail.get(i).setWaitQty(mDatas.get(i).getWaitQty() - event.getBarcodeQty());
-                        adapterDetail.notifyDataSetChanged();
-                        break;
-                    }
-                }
-            }
             int waitQty = Integer.parseInt(tvWaitPointNum.getText().toString());
             int scanQty = Integer.parseInt(tvHaveCountNum.getText().toString());
             tvWaitPointNum.setText(String.valueOf(waitQty - event.getBarcodeQty()));

@@ -10,8 +10,10 @@ import com.timi.sz.wms_android.http.callback.ApiServiceMethodCallBack;
 import com.timi.sz.wms_android.http.exception.ApiException;
 import com.timi.sz.wms_android.mvp.base.BaseActivity;
 import com.timi.sz.wms_android.mvp.base.BaseApplication;
+import com.timi.sz.wms_android.qrcode.utils.Constant;
 
 import java.io.File;
+import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
 import io.reactivex.Observer;
@@ -66,7 +68,7 @@ public class HttpManager {
         /**
          * 初始化 okhttp
          */
-        OkHttpClient okHttpClient = new OkHttpClient.Builder().addInterceptor(new CommonInterceptor()).build();
+        OkHttpClient okHttpClient = new OkHttpClient.Builder().connectTimeout(Constants.DEFAULT_TIMEOUT, TimeUnit.MINUTES).addInterceptor(new CommonInterceptor()).build();
         /**
          * 初始化 retrofit
          */

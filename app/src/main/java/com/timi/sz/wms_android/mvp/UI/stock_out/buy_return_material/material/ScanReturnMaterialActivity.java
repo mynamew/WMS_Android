@@ -1,6 +1,7 @@
 package com.timi.sz.wms_android.mvp.UI.stock_out.buy_return_material.material;
 
 import android.os.Bundle;
+import android.text.Selection;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
@@ -75,6 +76,7 @@ public class ScanReturnMaterialActivity extends BaseActivity<ScanReturnMaterialV
     private BuyReturnMaterialByMaterialCodeData ordernoBean;
     //扫到的物料码
     private String materialCode = "";
+    private int intentCode;
 
     @Override
     public int setLayoutId() {
@@ -84,6 +86,8 @@ public class ScanReturnMaterialActivity extends BaseActivity<ScanReturnMaterialV
     @Override
     public void initBundle(Bundle savedInstanceState) {
         setActivityTitle(getString(R.string.buy_return_material_orderno_title));
+        intentCode = getIntent().getIntExtra(Constants.STOCK_OUT_CODE_STR, -1);
+
     }
 
     @Override
@@ -198,6 +202,15 @@ public class ScanReturnMaterialActivity extends BaseActivity<ScanReturnMaterialV
     public void submitMakeOrAuditBill() {
         ToastUtils.showShort(getString(R.string.commit_check_success));
         onBackPressed();
+    }
+
+    @Override
+    public void setBarcodeSelect() {
+        etMaterialScan.setFocusable(true);
+        etMaterialScan.setFocusableInTouchMode(true);
+        etMaterialScan.requestFocus();
+        etMaterialScan.findFocus();
+        Selection.selectAll(etMaterialScan.getText());
     }
 
     @Override

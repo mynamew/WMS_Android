@@ -841,6 +841,15 @@
     <string name="input_divide_qty_incorrect">输入的拆分数量不正确，请重新输入！</string>
     <string name="other_instock_list_title">其他入库单列表</string>
     <string name="other_outstock_list_title">其他出库单列表</string>
+    <string name="order_detail_come_material_title">来料入库单据信息</string>
+    <string name="order_detial_finish_goods_audit_title">产成品(审核)单据信息</string>
+    <string name="order_detial_finish_goods_bill_title">产成品(生单)单据信息</string>
+    <string name="order_detail_other_select_bill_title">其他入库(选单)单据详情</string>
+    <string name="order_detial_other_scan_title">其他入库(扫描)单据详情</string>
+    <string name="order_detial_outsource_title">委外退料单单据详情</string>
+    <string name="order_detial_production_return_title">生产退料单单据详情</string>
+    <string name="order_detial_sale_return_title">销售退料单单据详情</string>
+    <string name="order_detial_buy_return_title">采购退料单单据详情</string>
 
 
 </resources>

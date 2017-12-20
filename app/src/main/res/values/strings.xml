@@ -339,12 +339,14 @@
     <string name="please_input_orderno_or_scan">请输入单号或扫码查询订单</string>
     <string name="receive_goods_orderno_query">送货单查询</string>
     <string name="please_input_send_orderno_or_scan">请输入送货单号或扫码查询</string>
-    <string name="detail">详情</string>
+    <string name="detail">单据详情</string>
     /******************************************************************************************************************************************************/
     /******************************************************************************************************************************************************/
     /**====== 出库 ======**/
     <string name="stock_out_out_resource">委外</string>
-    <string name="stock_out_pick_tab">拣货</string>
+    <string name="stock_out_pick_tab">调拨拣货</string>
+    <string name="stock_out_pick_send_tab">发货拣货</string>
+    <string name="stock_out_pick_sale_tab">销售拣货</string>
     <string name="stock_out_all">综合</string>
     /**====== 出库搜索 ======**/
     <string name="sale_outstock_orderno_tip">销售出库单</string>
@@ -538,11 +540,11 @@
     <string name="material_point_sale_audit_title">物品清点（销售审核）</string>
     <string name="create_sale_outstock_orderno_tip">生成销售出库单</string>
     /**====== 单据详情 ======**/
-    <string name="orderno_detail_outsource_bill_title">单据详情(委外生单)</string>
-    <string name="orderno_detail_outsource_allot_title">单据详情(委外调拨)</string>
-    <string name="orderno_detail_production_bill_title">单据详情(生产生单)</string>
-    <string name="orderno_detail_production_allot_title">单据详情(生产调拨)</string>
-    <string name="outsource_send_material_orderno_detial_tip">委外发料(生单)单据详情</string>
+    <string name="orderno_detail_outsource_bill_title">订单详情(委外生单)</string>
+    <string name="orderno_detail_outsource_allot_title">订单详情(委外调拨)</string>
+    <string name="orderno_detail_production_bill_title">订单详情(生产生单)</string>
+    <string name="orderno_detail_production_allot_title">订单详情(生产调拨)</string>
+    <string name="outsource_send_material_orderno_detial_tip">订单详情(委外发料(生单))</string>
     <string name="outsource_send_material_bill_title">委外发料(生单)物料清单</string>
     /******************************************************************************************************************************************************/
     /******************************************************************************************************************************************************/
@@ -859,6 +861,15 @@
     <string name="please_input_date">请输入日期</string>
     <string name="other_instock_list_title">其他入库单列表</string>
     <string name="other_outstock_list_title">其他出库单列表</string>
+    <string name="order_detail_come_material_title">来料入库单据信息</string>
+    <string name="order_detial_finish_goods_audit_title">产成品(审核)单据信息</string>
+    <string name="order_detial_finish_goods_bill_title">产成品(生单)单据信息</string>
+    <string name="order_detail_other_select_bill_title">其他入库(选单)单据详情</string>
+    <string name="order_detial_other_scan_title">其他入库(扫描)单据详情</string>
+    <string name="order_detial_outsource_title">委外退料单单据详情</string>
+    <string name="order_detial_production_return_title">生产退料单单据详情</string>
+    <string name="order_detial_sale_return_title">销售退料单单据详情</string>
+    <string name="order_detial_buy_return_title">采购退料单单据详情</string>
 
 
 </resources>

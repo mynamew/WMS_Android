@@ -223,6 +223,8 @@
     <string name="production_feed_list_title">生产补料单列表</string>
     <string name="production_instock_list_title">产成品入库单（审核）列表</string>
     <string name="production_instock_bill_list_title">产成品入库单（生单）列表</string>
+    <string name="send_goods_message_list_title">发货通知单列表</string>
+    <string name="sale_out_stock_list_title">销售出库单列表</string>
     <string name="dont_query_data_please_repeat_input">未查询到数据，请重新输入！</string>
     <string name="production_return_list_title">生产退料单列表</string>
     <string name="department_tip">部门</string>
@@ -337,12 +339,14 @@
     <string name="please_input_orderno_or_scan">请输入单号或扫码查询订单</string>
     <string name="receive_goods_orderno_query">送货单查询</string>
     <string name="please_input_send_orderno_or_scan">请输入送货单号或扫码查询</string>
-    <string name="detail">详情</string>
+    <string name="detail">单据详情</string>
     /******************************************************************************************************************************************************/
     /******************************************************************************************************************************************************/
     /**====== 出库 ======**/
     <string name="stock_out_out_resource">委外</string>
-    <string name="stock_out_pick_tab">拣货</string>
+    <string name="stock_out_pick_tab">调拨拣货</string>
+    <string name="stock_out_pick_send_tab">发货拣货</string>
+    <string name="stock_out_pick_sale_tab">销售拣货</string>
     <string name="stock_out_all">综合</string>
     /**====== 出库搜索 ======**/
     <string name="sale_outstock_orderno_tip">销售出库单</string>
@@ -519,6 +523,7 @@
     <string name="current_num_tip">当前数量</string>
     <string name="have_connected_tip">已连接</string>
     <string name="print_and_commit">打印并提交</string>
+    <string name="input_divide_qty_incorrect">输入的拆分数量不正确，请重新输入！</string>
     <string name="btn_commit">提交</string>
     <string name="submit_barcode_split_outstock_success">批次拣货提交条码拆分出库成功</string>
     /**====== 生产调拨 ======**/
@@ -535,11 +540,11 @@
     <string name="material_point_sale_audit_title">物品清点（销售审核）</string>
     <string name="create_sale_outstock_orderno_tip">生成销售出库单</string>
     /**====== 单据详情 ======**/
-    <string name="orderno_detail_outsource_bill_title">单据详情(委外生单)</string>
-    <string name="orderno_detail_outsource_allot_title">单据详情(委外调拨)</string>
-    <string name="orderno_detail_production_bill_title">单据详情(生产生单)</string>
-    <string name="orderno_detail_production_allot_title">单据详情(生产调拨)</string>
-    <string name="outsource_send_material_orderno_detial_tip">委外发料(生单)单据详情</string>
+    <string name="orderno_detail_outsource_bill_title">订单详情(委外生单)</string>
+    <string name="orderno_detail_outsource_allot_title">订单详情(委外调拨)</string>
+    <string name="orderno_detail_production_bill_title">订单详情(生产生单)</string>
+    <string name="orderno_detail_production_allot_title">订单详情(生产调拨)</string>
+    <string name="outsource_send_material_orderno_detial_tip">订单详情(委外发料(生单))</string>
     <string name="outsource_send_material_bill_title">委外发料(生单)物料清单</string>
     /******************************************************************************************************************************************************/
     /******************************************************************************************************************************************************/
@@ -853,12 +858,18 @@
     <string name="query_record_tip">记录查询</string>
     <string name="query_statistical_tip">统计查询</string>
     <string name="date">日期</string>
-    <string name="send_goods_message_list_title">发货通知单列表</string>
-    <string name="sale_out_stock_list_title">销售出库单列表</string>
     <string name="please_input_date">请输入日期</string>
-    <string name="input_divide_qty_incorrect">输入的拆分数量不正确，请重新输入！</string>
     <string name="other_instock_list_title">其他入库单列表</string>
     <string name="other_outstock_list_title">其他出库单列表</string>
+    <string name="order_detail_come_material_title">来料入库单据信息</string>
+    <string name="order_detial_finish_goods_audit_title">产成品(审核)单据信息</string>
+    <string name="order_detial_finish_goods_bill_title">产成品(生单)单据信息</string>
+    <string name="order_detail_other_select_bill_title">其他入库(选单)单据详情</string>
+    <string name="order_detial_other_scan_title">其他入库(扫描)单据详情</string>
+    <string name="order_detial_outsource_title">委外退料单单据详情</string>
+    <string name="order_detial_production_return_title">生产退料单单据详情</string>
+    <string name="order_detial_sale_return_title">销售退料单单据详情</string>
+    <string name="order_detial_buy_return_title">采购退料单单据详情</string>
 
 
 </resources>

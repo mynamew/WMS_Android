@@ -32,8 +32,10 @@ import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_PRODUCTION_A
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_PRODUCTION_BILL;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_PRODUCTION_FEEDING;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_PURCHASE_MATERIAL_RETURN;
+import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_SALE_OUT_PICK;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_SELL_OUT_AUDIT;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_SELL_OUT_BILL;
+import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_SEND_OUT_PICK;
 
 /**
  * 出库作业
@@ -66,7 +68,22 @@ public class StockOutActivity extends BaseNoMvpActivity {
      * author: timi
      * create at: 2017/8/18 13:48
      */
-    @OnClick({R.id.tv_stock_out_out_add_materail, R.id.tv_stock_out_apply_bill, R.id.tv_stock_out_finish_goods_pick, R.id.tv_stock_out_out_check, R.id.tv_stock_out_out_create_order, R.id.tv_stock_out_out_allot, R.id.tv_stock_out_create_add_materail, R.id.tv_stock_out_create_allot, R.id.tv_stock_out_create_check, R.id.tv_stock_out_create_create_order, R.id.tv_stock_out_sale_trans, R.id.tv_stock_out_sale_check, R.id.tv_stock_out_sale_create_order, R.id.tv_stock_out_other_buy_return, R.id.tv_stock_out_other_check, R.id.tv_stock_out_other_create_order, R.id.activity_stock_out})
+    @OnClick({R.id.tv_stock_out_out_add_materail,
+            R.id.tv_stock_out_apply_bill,
+            R.id.tv_stock_out_out_check,
+            R.id.tv_stock_out_out_create_order,
+            R.id.tv_stock_out_out_allot,
+            R.id.tv_stock_out_create_add_materail,
+            R.id.tv_stock_out_create_allot,
+            R.id.tv_stock_out_create_check,
+            R.id.tv_stock_out_create_create_order,
+            R.id.tv_stock_out_sale_trans,
+            R.id.tv_stock_out_sale_check,
+            R.id.tv_stock_out_sale_create_order,
+            R.id.tv_stock_out_other_buy_return,
+            R.id.tv_stock_out_other_check,
+            R.id.tv_stock_out_other_create_order,
+            R.id.activity_stock_out})
     public void onViewClicked(View view) {
         Intent intent = new Intent();
         switch (view.getId()) {
@@ -159,9 +176,38 @@ public class StockOutActivity extends BaseNoMvpActivity {
                 }
                 intent.putExtra(STOCK_OUT_CODE_STR, STOCK_OUT_PRODUCTION_ALLOT);
                 break;
-            case R.id.tv_stock_out_sale_trans://调拨
-                intent.putExtra(STOCK_OUT_CODE_STR, STOCK_OUT_PICK);
-                intent.setClass(StockOutActivity.this, PickActivity.class);
+            case R.id.tv_stock_out_pick_send://发货拣货
+                /**
+                 * 如果是无纸化作业
+                 */
+                if (SpUtils.getInstance().getIsBillList()) {
+                    intent.setClass(StockOutActivity.this, BuyInStockListActivity.class);
+                } else {
+                    intent.setClass(StockOutActivity.this, StockOutSearchActivity.class);
+                }
+                intent.putExtra(STOCK_OUT_CODE_STR, STOCK_OUT_SEND_OUT_PICK);
+                break;
+            case R.id.tv_stock_out_pick_sale://销售拣货
+                /**
+                 * 如果是无纸化作业
+                 */
+                if (SpUtils.getInstance().getIsBillList()) {
+                    intent.setClass(StockOutActivity.this, BuyInStockListActivity.class);
+                } else {
+                    intent.setClass(StockOutActivity.this, StockOutSearchActivity.class);
+                }
+                intent.putExtra(STOCK_OUT_CODE_STR, STOCK_OUT_SALE_OUT_PICK);
+                break;
+            case R.id.tv_stock_out_sale_trans://调拨拣货
+                /**
+                 * 如果是无纸化作业
+                 */
+                if (SpUtils.getInstance().getIsBillList()) {
+                    intent.setClass(StockOutActivity.this, BuyInStockListActivity.class);
+                } else {
+                    intent.setClass(StockOutActivity.this, StockOutSearchActivity.class);
+                }
+                intent.putExtra(STOCK_OUT_CODE_STR, STOCK_OUT_PRODUCTION_ALLOT);
                 break;
             case R.id.tv_stock_out_sale_check://销售审核
                 /**
@@ -222,17 +268,17 @@ public class StockOutActivity extends BaseNoMvpActivity {
                 }
                 intent.putExtra(STOCK_OUT_CODE_STR, STOCK_OUT_PRODUCTION_APPLY_BILL);
                 break;
-            case R.id.tv_stock_out_finish_goods_pick://产成品 拣货
-                /**
-                 * 如果是无纸化作业
-                 */
-                if (SpUtils.getInstance().getIsBillList()) {
-                    intent.setClass(StockOutActivity.this, BuyInStockListActivity.class);
-                } else {
-                    intent.setClass(StockOutActivity.this, StockOutSearchActivity.class);
-                }
-                intent.putExtra(STOCK_OUT_CODE_STR, STOCK_OUT_FINISH_GOODS_PICK);
-                break;
+//            case R.id.tv_stock_out_finish_goods_pick://产成品 拣货
+//                /**
+//                 * 如果是无纸化作业
+//                 */
+//                if (SpUtils.getInstance().getIsBillList()) {
+//                    intent.setClass(StockOutActivity.this, BuyInStockListActivity.class);
+//                } else {
+//                    intent.setClass(StockOutActivity.this, StockOutSearchActivity.class);
+//                }
+//                intent.putExtra(STOCK_OUT_CODE_STR, STOCK_OUT_FINISH_GOODS_PICK);
+//                break;
             case R.id.activity_stock_out:
                 break;
         }

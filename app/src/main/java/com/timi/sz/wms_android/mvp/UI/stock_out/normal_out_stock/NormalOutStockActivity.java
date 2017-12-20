@@ -82,6 +82,7 @@ import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_OUTSOURCE_BI
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_OUTSOURCE_FEED_SUPLLIEMENT;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_PICK;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_PRODUCTION_ALLOT;
+import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_PRODUCTION_APPLY_BILL;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_PRODUCTION_AUDIT;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_PRODUCTION_BILL;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_PRODUCTION_FEEDING;
@@ -161,7 +162,8 @@ public class NormalOutStockActivity extends BaseActivity<NormalOutStockView, Nor
     private boolean isCarton;
     //箱号
     private int cartonNum = 0;
-
+   //审核/制单
+    private int submitType = 0;
     @Override
     public int setLayoutId() {
         return R.layout.activity_normal_out_stock;
@@ -187,6 +189,13 @@ public class NormalOutStockActivity extends BaseActivity<NormalOutStockView, Nor
                 warehouseId = summaryResults.getWarehouseId();
                 //设置区域id
                 regionId = summaryResults.getRegionId();
+                //scanid
+                scanId = summaryResults.getScanId();
+                //设置 submitType
+                submitType = 1;
+                //源单类型  目标单类型
+                srcBillType = 21;
+                destBillType = 21;
                 break;
             case STOCK_OUT_OUTSOURCE_AUDIT://委外审核
                 tvHeadTitle.setText(getString(R.string.outsource_send_material_oderno_info));
@@ -201,6 +210,13 @@ public class NormalOutStockActivity extends BaseActivity<NormalOutStockView, Nor
                 warehouseId = summaryResultsAudit.getWarehouseId();
                 //设置区域id
                 regionId = summaryResultsAudit.getRegionId();
+                //scanid
+                scanId = summaryResultsAudit.getScanId();
+                //设置 submitType
+                submitType = 1;
+                //源单类型  目标单类型
+                srcBillType = 20;
+                destBillType = 20;
                 break;
             case STOCK_OUT_OUTSOURCE_BILL://委外生单
                 tvHeadTitle.setText(getString(R.string.outsource_send_material_oderno_info));
@@ -215,8 +231,15 @@ public class NormalOutStockActivity extends BaseActivity<NormalOutStockView, Nor
                 warehouseId = summaryResultsBill.getWarehouseId();
                 //设置区域id
                 regionId = summaryResultsBill.getRegionId();
+                //scanid
+                scanId = summaryResultsBill.getScanId();
                 //设置按钮文字  生成生产领料单
                 btnCommit.setText(R.string.create_production_get_material_list_tip);
+                //设置 submitType
+                submitType = 0;
+                //源单类型  目标单类型
+                srcBillType = 12;
+                destBillType = 20;
                 break;
             case STOCK_OUT_OUTSOURCE_ALLOT://委外调拨
                 tvHeadTitle.setText(R.string.outsource_allot_info_tip);
@@ -235,6 +258,13 @@ public class NormalOutStockActivity extends BaseActivity<NormalOutStockView, Nor
                 warehouseId = summaryResultsAllot.getWarehouseId();
                 //设置区域id
                 regionId = summaryResultsAllot.getRegionId();
+                //scanid
+                scanId = summaryResultsAllot.getScanId();
+                //设置 submitType
+                submitType = 0;
+                //源单类型  目标单类型
+                srcBillType = 12;
+                destBillType = 50;
                 break;
             case STOCK_OUT_PRODUCTION_FEEDING://生产补料
                 setActivityTitle(getString(R.string.stock_out_create_add_materail));
@@ -253,6 +283,13 @@ public class NormalOutStockActivity extends BaseActivity<NormalOutStockView, Nor
                 warehouseId = summaryResultsProductionFeed.getWarehouseId();
                 //设置区域id
                 regionId = summaryResultsProductionFeed.getRegionId();
+                //scanid
+                scanId = summaryResultsProductionFeed.getScanId();
+                //设置 submitType
+                submitType = 1;
+                //源单类型  目标单类型
+                srcBillType = 24;
+                destBillType = 24;
                 break;
             case STOCK_OUT_PRODUCTION_AUDIT://生产审核
                 setActivityTitle(getString(R.string.stock_out_create_check));
@@ -271,6 +308,13 @@ public class NormalOutStockActivity extends BaseActivity<NormalOutStockView, Nor
                 warehouseId = summaryResultsProductionAudit.getWarehouseId();
                 //设置区域id
                 regionId = summaryResultsProductionAudit.getRegionId();
+                //scanid
+                scanId = summaryResultsProductionAudit.getScanId();
+                //设置 submitType
+                submitType = 1;
+                //源单类型  目标单类型
+                srcBillType = 23;
+                destBillType = 23;
                 break;
             case STOCK_OUT_PRODUCTION_BILL://生产生单
                 setActivityTitle(getString(R.string.stock_out_create_create_order));
@@ -291,8 +335,15 @@ public class NormalOutStockActivity extends BaseActivity<NormalOutStockView, Nor
                 regionId = summaryResultsProductionBill.getRegionId();
                 //billId
                 billId = summaryResultsProductionBill.getBillId();
+                //scanid
+                scanId = summaryResultsProductionBill.getScanId();
                 //设置按钮文字  生成生产领料单
                 btnCommit.setText(R.string.create_production_get_material_list_tip);
+                //设置 submitType
+                submitType = 0;
+                //源单类型  目标单类型
+                srcBillType = 30;
+                destBillType = 23;
                 break;
             case STOCK_OUT_PRODUCTION_ALLOT://生产调拨
                 setActivityTitle(getString(R.string.production_allot));
@@ -313,6 +364,33 @@ public class NormalOutStockActivity extends BaseActivity<NormalOutStockView, Nor
                 regionId = summaryResultsProductionAllot.getRegionId();
                 //billId
                 billId = summaryResultsProductionAllot.getBillId();
+                //设置 submitType
+                submitType = 0;
+                //源单类型  目标单类型
+                srcBillType = 30;
+                destBillType = 50;
+                break;
+            case STOCK_OUT_PRODUCTION_APPLY_BILL://领料申请
+                tvHeadTitle.setText(R.string.get_material_material_list_tip);
+                /**
+                 * 生产生单 和委外生单的返回结果是一样的 所以直接一起处理
+                 */
+                QueryProductPickByInputResult queryProductPickByInputResult = new Gson().fromJson(getIntent().getStringExtra(STOCK_OUT_BEAN), QueryProductPickByInputResult.class);
+                //获取 summaryResults
+                QueryProductPickByInputResult.SummaryResultsBean summaryResultsProductionApply = queryProductPickByInputResult.getSummaryResults();
+                //设置内容
+                setHeaderContent(summaryResultsProductionApply.getBillCode(), summaryResultsProductionApply.getBillDate(),  summaryResultsProductionApply.getQty(), summaryResultsProductionApply.getWaitQty(), summaryResultsProductionApply.getScanQty());
+                //设置scanid
+                scanId = summaryResultsProductionApply.getScanId();
+                //设置 submitType
+                submitType = 1;
+                //设置区域id
+                regionId = summaryResultsProductionApply.getRegionId();
+                //billId
+                billId = summaryResultsProductionApply.getBillId();
+                //源单类型  目标单类型
+                srcBillType = 31;
+                destBillType = 31;
                 break;
             case STOCK_OUT_PICK://拣料
                 break;
@@ -335,6 +413,9 @@ public class NormalOutStockActivity extends BaseActivity<NormalOutStockView, Nor
                 isCarton = summaryResultsSaleAudit.isIsCarton();
                 //cartonnum
                 cartonNum = summaryResultsSaleAudit.getCartonNo();
+                //源单类型  目标单类型
+                srcBillType = 42;
+                destBillType = 42;
                 break;
             case STOCK_OUT_SELL_OUT_BILL://销售生单
                 setActivityTitle(getString(R.string.sale_outstock_title));
@@ -357,6 +438,9 @@ public class NormalOutStockActivity extends BaseActivity<NormalOutStockView, Nor
                 isCarton = summaryResultsSaleBill.isIsCarton();
                 //cartonnum
                 cartonNum = summaryResultsSaleBill.getCartonNo();
+                //源单类型  目标单类型
+                srcBillType = 41;
+                destBillType = 42;
                 break;
             case STOCK_OUT_PURCHASE_MATERIAL_RETURN://采购退料
                 break;
@@ -375,6 +459,9 @@ public class NormalOutStockActivity extends BaseActivity<NormalOutStockView, Nor
                 regionId = summaryResultsOtherAudit.getRegionId();
                 //billId
                 billId = summaryResultsOtherAudit.getBillId();
+                //源单类型  目标单类型
+                srcBillType = 52;
+                destBillType = 52;
                 break;
             case STOCK_OUT_OTHER_OUT_BILL://其他生单
                 break;
@@ -396,6 +483,9 @@ public class NormalOutStockActivity extends BaseActivity<NormalOutStockView, Nor
                 regionId = summaryResultsFinishGoodsPick.getRegionId();
                 //billId
                 billId = summaryResultsFinishGoodsPick.getBillId();
+                //源单类型  目标单类型
+                srcBillType = 61;
+                destBillType = 61;
                 break;
             case STOCK_OUT_ALLOT_OUT_PICK://调拨调出
                 QueryAllotOutResult queryAllotOutResult = new Gson().fromJson(getIntent().getStringExtra(STOCK_OUT_BEAN), QueryAllotOutResult.class);
@@ -410,6 +500,9 @@ public class NormalOutStockActivity extends BaseActivity<NormalOutStockView, Nor
                 regionId = summaryResultsAllotOut.getRegionId();
                 //billId
                 billId = summaryResultsAllotOut.getBillId();
+                //源单类型  目标单类型
+                srcBillType = 50;
+                destBillType = 50;
                 break;
             default:
                 break;
@@ -766,20 +859,16 @@ public class NormalOutStockActivity extends BaseActivity<NormalOutStockView, Nor
                 });
                 break;
             case R.id.btn_commit:
-                if (TextUtils.isEmpty(etScanMaterial.getText().toString().trim())) {
-                    ToastUtils.showShort(getString(R.string.please_input_return_matrial_code_or_scan));
-                    return;
-                }
-                if (scanId == 0) {//scanid 为0  证明未扫过条码或者条码已经入库 或者出库过了
-                    ToastUtils.showShort(getString(R.string.please_inpiut_or_scan_visible_material_code));
-                    return;
-                }
+//                if (scanId == 0) {//scanid 为0  证明未扫过条码或者条码已经入库 或者出库过了
+//                    ToastUtils.showShort(getString(R.string.please_inpiut_or_scan_visible_material_code));
+//                    return;
+//                }
                 Map<String, Object> params = new HashMap<>();
                 params.put("UserId", SpUtils.getInstance().getUserId());
                 params.put("MAC", PackageUtils.getMac());
                 params.put("OrgId", SpUtils.getInstance().getOrgId());
                 params.put("ScanId", scanId);
-                params.put("SubmitType", 0);
+                params.put("SubmitType", submitType);
                 getPresenter().submitMakeOrAuditBill(params);
                 break;
         }

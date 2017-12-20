@@ -3,10 +3,12 @@ package com.timi.sz.wms_android.mvp.UI.list;
 import com.timi.sz.wms_android.bean.instock.list.QueryPoListBean;
 import com.timi.sz.wms_android.bean.instock.outsource_return_material.QueryOutSourceReturnByInputResult;
 import com.timi.sz.wms_android.bean.instock.search.BuyOrdernoBean;
+import com.timi.sz.wms_android.bean.instock.search.OtherAuditSelectOrdernoBean;
 import com.timi.sz.wms_android.bean.instock.search.QueryPrdInstockByInputResult;
 import com.timi.sz.wms_android.bean.instock.search.QueryPrdReturnByInputResult;
 import com.timi.sz.wms_android.bean.outstock.buy.BuyReturnMaterialByOrdernoData;
 import com.timi.sz.wms_android.bean.outstock.buy.SubmitBarcodePurReturnData;
+import com.timi.sz.wms_android.bean.outstock.other.QueryOtherOutStockByInputResult;
 import com.timi.sz.wms_android.bean.outstock.outsource.QueryOutSourceFeedByInputResult;
 import com.timi.sz.wms_android.bean.outstock.outsource.QueryOutSourcePickByInputResult;
 import com.timi.sz.wms_android.bean.outstock.outsource.QueryWWPickDataByOutSourceResult;
@@ -59,42 +61,64 @@ public interface BuyInStockListView extends MvpBaseView {
 
     /**
      * 委外补料
+     *
      * @param bean
      */
     void getOutSourceFeedData(QueryOutSourceFeedByInputResult bean);
 
     /**
      * 委外退料
+     *
      * @param bean
      */
     void getOutSourceReturnData(QueryOutSourceReturnByInputResult bean);
+
     /**
      * 领料申请
+     *
      * @param bean
      */
     void getPrdPickApplyData(QueryProductPickByInputResult bean);
 
     /**
      * 生产领料
+     *
      * @param bean
      */
-    void getProductPickData(QueryWWPickDataByOutSourceResult bean);
+    void getProductPickData(QueryProductPickByInputResult bean);
 
     /**
      * 生产工单
+     *
      * @param bean
      */
     void getPrdPickData(QueryWWPickDataByOutSourceResult bean);
 
     /**
      * 成品入库
+     *
      * @param bean
      */
     void getPrdInstockData(QueryPrdInstockByInputResult bean);
 
     /**
      * 生产退料
-      * @param bean
+     *
+     * @param bean
      */
     void getPrdReturnData(QueryPrdReturnByInputResult bean);
+
+    /**
+     * 获取其他入库单数据
+     *
+     * @param bean
+     */
+    void getOtherInstockData(OtherAuditSelectOrdernoBean bean);
+
+    /**
+     * 获取其他出库单数据
+     *
+     * @param bean
+     */
+    void getOtherOutstockData(QueryOtherOutStockByInputResult bean);
 }

@@ -107,6 +107,10 @@ public class OutMaterialReturnActivity extends BaseActivity<PutAwayView, PutAway
     }
     @Override
     public void setMaterialEdittextSelect() {
+        etPutawayScanMaterial.setFocusable(true);
+        etPutawayScanMaterial.setFocusableInTouchMode(true);
+        etPutawayScanMaterial.requestFocus();
+        etPutawayScanMaterial.findFocus();
         Selection.selectAll(etPutawayScanMaterial.getText());
     }
 
@@ -323,19 +327,19 @@ public class OutMaterialReturnActivity extends BaseActivity<PutAwayView, PutAway
                 scan(Constants.REQUEST_SCAN_CODE_MATERIIAL, this);
                 break;
             case R.id.btn_login://确认提交
-                if (TextUtils.isEmpty(locationCode)) {
-                    ToastUtils.showShort(getString(R.string.please_scan_lib_location_code));
-                    return;
-                }
-                if (!locationCodeIsUse) {
-                    ToastUtils.showShort(getString(R.string.location_code_no_user));
-                    return;
-                }
-                String materialCode = etPutawayScanMaterial.getText().toString();
-                if (TextUtils.isEmpty(materialCode)) {
-                    ToastUtils.showShort(getString(R.string.please_scan_material_code));
-                    return;
-                }
+//                if (TextUtils.isEmpty(locationCode)) {
+//                    ToastUtils.showShort(getString(R.string.please_scan_lib_location_code));
+//                    return;
+//                }
+//                if (!locationCodeIsUse) {
+//                    ToastUtils.showShort(getString(R.string.location_code_no_user));
+//                    return;
+//                }
+//                String materialCode = etPutawayScanMaterial.getText().toString();
+//                if (TextUtils.isEmpty(materialCode)) {
+//                    ToastUtils.showShort(getString(R.string.please_scan_material_code));
+//                    return;
+//                }
                 /**
                  * 生成入库单
                  */
@@ -343,16 +347,10 @@ public class OutMaterialReturnActivity extends BaseActivity<PutAwayView, PutAway
                 params.put("UserId", SpUtils.getInstance().getUserId());
                 params.put("OrgId", SpUtils.getInstance().getOrgId());
                 params.put("MAC", PackageUtils.getMac());
-                params.put("BillNo", locationCode);
+                params.put("ScanId", ScanId);
+                params.put("SubmitType", 1);
                 getPresenter().createInSockOrderno(params);
 
         }
-    }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
     }
 }

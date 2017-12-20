@@ -22,4 +22,5 @@ public interface BuyReturnMaterialView extends MvpBaseView {
      * @param bean
      */
      void ReturnMaterialOrderNoScanResult(BuyReturnMaterialByOrdernoData bean);
+
 }

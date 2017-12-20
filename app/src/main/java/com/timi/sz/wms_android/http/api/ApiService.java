@@ -328,11 +328,13 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("api/services/wpda/PrdInstock/GetWorkOrderDetail")
     Observable<CommonResult<List<OrderDetailData>>> getWorkOrderDetail(@FieldMap Map<String, Object> params);
+
     /**
      * 成品入库单列表
      */
     @POST("api/services/wpda/PrdInstock/QueryPrdInstockList")
     Observable<CommonResult<List<QueryPoListBean>>> qeryPrdInstockList(@Body RequestBuyInStockListBean params);
+
     /**
      * 获得成品入库单入库数据
      *
@@ -362,6 +364,25 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("api/services/wpda/OtherInstock/GetOtherInstockDetail")
     Observable<CommonResult<List<MaterialDetailResult>>> getOtherInstockDetail(@FieldMap Map<String, Object> params);
+
+    /**
+     * 其他入库列表
+     *
+     * @param params
+     * @return
+     */
+    @POST("api/services/wpda/OtherInstock/QueryOtherInstockList")
+    Observable<CommonResult<List<QueryPoListBean>>> queryOtherInstockList(@Body RequestBuyInStockListBean params);
+    /**
+     * 其他入库单列表详情
+     *
+     * @param params
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("api/services/wpda/OtherInstock/GetOtherInstockData")
+    Observable<CommonResult<OtherAuditSelectOrdernoBean>> getOtherInstockData(@FieldMap Map<String, Object> params);
+
 
     /**====== 成品拣货 ======**/
     /**
@@ -444,7 +465,8 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("api/services/wpda/PrdReturn/GetPrdReturnDetail")
     Observable<CommonResult<List<OrderDetailData>>> getPrdReturnDetail(@FieldMap Map<String, Object> params);
-     /**
+
+    /**
      * 查询生产退料单列表
      *
      * @param params
@@ -746,7 +768,7 @@ public interface ApiService {
      */
     @FormUrlEncoded
     @POST("api/services/wpda/PurReturn/GetPurReturnDetail")
-    Observable<CommonResult<BuyReturnMaterialByOrdernoData>> getPurReturnDetail(@FieldMap Map<String, Object> params);
+    Observable<CommonResult<List<OrderDetailData>>> getPurReturnDetail(@FieldMap Map<String, Object> params);
 
     /**
      * 获取采购退料单列表
@@ -991,6 +1013,7 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("api/services/wpda/OtherOutStock/GetOtherOutStockDetail")
     Observable<CommonResult<List<MaterialDetailResult>>> getOtherOutStockDetail(@FieldMap Map<String, Object> params);
+
     /**
      * 查询其他出库单列表
      *
@@ -999,14 +1022,16 @@ public interface ApiService {
      */
     @POST("api/services/wpda/OtherOutStock/QueryOtherOutstockList")
     Observable<CommonResult<List<QueryPoListBean>>> queryOtherOutstockList(@Body RequestBuyInStockListBean params);
- /**
+
+    /**
      * 其他出库单列表的数据
      *
      * @param params
      * @return
      */
+    @FormUrlEncoded
     @POST("api/services/wpda/OtherOutStock/GetOtherOutstockData")
-    Observable<CommonResult<List<QueryPoListBean>>> getOtherOutstockData(@Body RequestBuyInStockListBean params);
+    Observable<CommonResult<QueryOtherOutStockByInputResult>> getOtherOutstockData(@FieldMap Map<String, Object> params);
 
     /**
      * 调拨调出
@@ -1163,7 +1188,7 @@ public interface ApiService {
      */
     @FormUrlEncoded
     @POST("api/services/wpda/IQC/GetIQCAdvance2CheckItem")
-    Observable<CommonResult<IQCGetAdvanceData>> IQCGetAdvanceData(@FieldMap  Map<String, Object> params);
+    Observable<CommonResult<IQCGetAdvanceData>> IQCGetAdvanceData(@FieldMap Map<String, Object> params);
 
     /**
      * 修改高检二质检项目

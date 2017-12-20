@@ -16,8 +16,8 @@ public class Constants {
 //    public static final String BASE_URL = "http://szjuqent.imwork.net:83/";
     public static final String BASE_URL = "http://192.168.0.39:8066/";
     //    public static final String BASE_URL = "http://192.168.18.117:8066/";
-    //超时时间   5s
-    public static int DEFAULT_TIMEOUT = 5000;
+    //超时时间   2分钟
+    public static int DEFAULT_TIMEOUT = 2;
 
     /***********
      * PDA  配置
@@ -175,13 +175,18 @@ public class Constants {
     public static final int STOCK_OUT_OTHER_OUT_BILL = 5033;//其他出库-生单
     public static final int STOCK_OUT_PRODUCTION_APPLY_BILL = 5034;//生产领料申请单-生单
     public static final int STOCK_OUT_FINISH_GOODS_PICK = 5035;//产成品拣货
-    public static final int STOCK_OUT_ALLOT_OUT_PICK = 5036;//调拨调出
+
+
+    public static final int STOCK_OUT_ALLOT_OUT_PICK = 5036;//调拨拣货
+    public static final int STOCK_OUT_SEND_OUT_PICK = 5037;//发货拣货
+    public static final int STOCK_OUT_SALE_OUT_PICK = 5038;//销售拣货
     /**
      * 出库搜索 跳转的传递对象的key
      */
     //委外补料传递实体的key
 
     public static final String STOCK_OUT_BEAN = "stock_out_bean";//委外传递实体的key
+    public static final String STOCK_OUT_DETAIL_BEAN = "stock_out_detail_bean";//出库传递不合并时的明细实体
     public static final String STOCK_OUT_OUTSOURCE_FEED_BEAN = "stock_out_outsource_feed_bean";//委外补料传递实体的key
     public static final String STOCK_OUT_OUTSOURCE_AUDIT_BEAN = "stock_out_outsource_audit_bean";//委外发料单-审核传递实体的key
     public static final String STOCK_OUT_OUTSOURCE_BILL_BEAN = "stock_out_outsource_bill_bean";//委外发料单-生单传递实体的key

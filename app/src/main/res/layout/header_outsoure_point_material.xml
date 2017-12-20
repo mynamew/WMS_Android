@@ -53,7 +53,7 @@
             android:layout_height="match_parent"
             android:layout_weight="2"
             android:gravity="center"
-            android:text="@string/header_outsource_audit"
+            android:text="@string/item_point_buy_num"
 
             android:textColor="#333"
             android:textSize="13sp"/>

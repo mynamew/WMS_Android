@@ -181,6 +181,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/ll_send_total"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
@@ -208,6 +209,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/ll_wait_total"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
@@ -236,6 +238,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/ll_have_scan"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
@@ -310,10 +313,6 @@
                 android:id="@+id/head_detail"
                 layout="@layout/header_outsoure_point"/>
 
-            <include
-                android:id="@+id/head_material"
-                layout="@layout/header_outsoure_point_material"
-                android:visibility="gone"/>
 
             <View
                 android:id="@+id/view_divide"

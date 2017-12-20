@@ -3,11 +3,13 @@ package com.timi.sz.wms_android.mvp.UI.list;
 import com.timi.sz.wms_android.bean.instock.list.QueryPoListBean;
 import com.timi.sz.wms_android.bean.instock.outsource_return_material.QueryOutSourceReturnByInputResult;
 import com.timi.sz.wms_android.bean.instock.search.BuyOrdernoBean;
+import com.timi.sz.wms_android.bean.instock.search.OtherAuditSelectOrdernoBean;
 import com.timi.sz.wms_android.bean.instock.search.QueryPrdInstockByInputResult;
 import com.timi.sz.wms_android.bean.instock.search.QueryPrdReturnByInputResult;
 import com.timi.sz.wms_android.bean.list.RequestBuyInStockListBean;
 import com.timi.sz.wms_android.bean.outstock.buy.BuyReturnMaterialByOrdernoData;
 import com.timi.sz.wms_android.bean.outstock.buy.SubmitBarcodePurReturnData;
+import com.timi.sz.wms_android.bean.outstock.other.QueryOtherOutStockByInputResult;
 import com.timi.sz.wms_android.bean.outstock.outsource.QueryOutSourceFeedByInputResult;
 import com.timi.sz.wms_android.bean.outstock.outsource.QueryOutSourcePickByInputResult;
 import com.timi.sz.wms_android.bean.outstock.outsource.QueryWWPickDataByOutSourceResult;
@@ -391,6 +393,66 @@ public class BuyInStockListModel extends MvpBaseModel {
             public Observable<CommonResult<QueryPrdReturnByInputResult>> createObservable(ApiService apiService) {
 
                 return apiService.getPrdReturnData(params);
+            }
+        });
+    }
+    /**
+     * 查询其他入库单列表
+     *
+     * @param params
+     * @param observer
+     */
+    public void queryOtherInstockList(final RequestBuyInStockListBean params, Observer<List<QueryPoListBean>> observer) {
+        HttpManager.getInstance().HttpManagerRequest(observer, new ApiServiceMethodCallBack<List<QueryPoListBean>>() {
+            @Override
+            public Observable<CommonResult<List<QueryPoListBean>>> createObservable(ApiService apiService) {
+
+                return apiService.queryOtherInstockList(params);
+            }
+        });
+    }
+    /**
+     * 从查询其他入库单数据
+     *
+     * @param params
+     * @param observer
+     */
+    public void getOtherInstockData(final Map<String, Object> params, Observer<OtherAuditSelectOrdernoBean> observer) {
+        HttpManager.getInstance().HttpManagerRequest(observer, new ApiServiceMethodCallBack<OtherAuditSelectOrdernoBean>() {
+            @Override
+            public Observable<CommonResult<OtherAuditSelectOrdernoBean>> createObservable(ApiService apiService) {
+
+                return apiService.getOtherInstockData(params);
+            }
+        });
+    }
+    /**
+     * 查询其他出库单列表
+     *
+     * @param params
+     * @param observer
+     */
+    public void queryOtherOutstockList(final RequestBuyInStockListBean params, Observer<List<QueryPoListBean>> observer) {
+        HttpManager.getInstance().HttpManagerRequest(observer, new ApiServiceMethodCallBack<List<QueryPoListBean>>() {
+            @Override
+            public Observable<CommonResult<List<QueryPoListBean>>> createObservable(ApiService apiService) {
+
+                return apiService.queryOtherOutstockList(params);
+            }
+        });
+    }
+    /**
+     * 查询其他出库列表获取数据
+     *
+     * @param params
+     * @param observer
+     */
+    public void getOtherOutstockData(final Map<String, Object> params, Observer<QueryOtherOutStockByInputResult> observer) {
+        HttpManager.getInstance().HttpManagerRequest(observer, new ApiServiceMethodCallBack<QueryOtherOutStockByInputResult>() {
+            @Override
+            public Observable<CommonResult<QueryOtherOutStockByInputResult>> createObservable(ApiService apiService) {
+
+                return apiService.getOtherOutstockData(params);
             }
         });
     }

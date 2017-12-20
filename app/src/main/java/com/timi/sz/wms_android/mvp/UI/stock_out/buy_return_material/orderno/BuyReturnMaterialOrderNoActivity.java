@@ -2,6 +2,7 @@ package com.timi.sz.wms_android.mvp.UI.stock_out.buy_return_material.orderno;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Selection;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
@@ -34,6 +35,8 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_BUY_RETURN_ORDERNO_BEAN;
+import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_CODE_STR;
+import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_OTHER_OUT_BILL;
 
 /**
  * 通过退料单单号  查询获取到的退料单信息，  进行退料操作
@@ -74,6 +77,7 @@ public class BuyReturnMaterialOrderNoActivity extends BaseActivity<BuyReturnMate
     @BindView(R.id.btn_commit_check)
     Button btnCommitCheck;
     private BuyReturnMaterialByOrdernoData orderBoBean = null;
+    private int intentCode;
 
     @Override
     public int setLayoutId() {
@@ -83,6 +87,7 @@ public class BuyReturnMaterialOrderNoActivity extends BaseActivity<BuyReturnMate
     @Override
     public void initBundle(Bundle savedInstanceState) {
         setActivityTitle(getString(R.string.buy_return_material_scan));
+        intentCode = getIntent().getIntExtra(Constants.STOCK_OUT_CODE_STR, -1);
     }
 
     @Override
@@ -95,44 +100,33 @@ public class BuyReturnMaterialOrderNoActivity extends BaseActivity<BuyReturnMate
                  */
                 Intent it = new Intent(BuyReturnMaterialOrderNoActivity.this, StockInDetailActivity.class);
                 it.putExtra("BillId", orderBoBean.getPurReturnId());
+                it.putExtra(STOCK_OUT_CODE_STR, intentCode);
                 startActivity(it);
             }
         });
-        etMaterialScan.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+        setEdittextListener(etMaterialScan, Constants.REQUEST_SCAN_CODE_MATERIIAL,R.string.please_input_return_matrial_code_or_scan, 0, new EdittextInputListener() {
             @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+            public void verticalSuccess(String result) {
+                if (orderBoBean.getWaitQty() == 0) {
+                    ToastUtils.showShort(getString(R.string.have_scan_all_materail));
+                    setBarcodeSelect();
+                }else {
                     /**
-                     * 如果待点数量未0 证明全部退料完毕
+                     * 扫物料码的网络请求
                      */
-                    if (orderBoBean.getWaitQty() == 0) {
-                        ToastUtils.showShort(getString(R.string.have_scan_all_materail));
-                    } else {
-                        /**
-                         * 输入的内容
-                         */
-                        String inputStr = etMaterialScan.getText().toString().trim();
-                        if (TextUtils.isEmpty(inputStr)) {
-                            ToastUtils.showShort(getString(R.string.please_input_return_matrial_code_or_scan));
-                        } else {
-                            /**
-                             * 扫物料码的网络请求
-                             */
-                            Map<String, Object> params = new HashMap<>();
-                            params.put("UserId", SpUtils.getInstance().getUserId());
-                            params.put("OrgId", SpUtils.getInstance().getOrgId());
-                            params.put("MAC", PackageUtils.getMac());
-                            params.put("BillId", orderBoBean.getPurReturnId());
-                            params.put("SrcBillType", 15);
-                            params.put("DestBillType", 15);
-                            params.put("ScanId", orderBoBean.getScanId());
-                            getPresenter().submitBarcodeOutAudit(params);
-                        }
-                    }
+                    Map<String, Object> params = new HashMap<>();
+                    params.put("UserId", SpUtils.getInstance().getUserId());
+                    params.put("OrgId", SpUtils.getInstance().getOrgId());
+                    params.put("MAC", PackageUtils.getMac());
+                    params.put("BillId", orderBoBean.getPurReturnId());
+                    params.put("SrcBillType", 15);
+                    params.put("DestBillType", 15);
+                    params.put("ScanId", orderBoBean.getScanId());
+                    getPresenter().submitBarcodeOutAudit(params);
                 }
-                return false;
             }
         });
+
     }
 
     @Override
@@ -296,5 +290,14 @@ public class BuyReturnMaterialOrderNoActivity extends BaseActivity<BuyReturnMate
     public void submitMakeOrAuditBill() {
         ToastUtils.showShort(getString(R.string.commit_check_success));
         onBackPressed();
+    }
+
+    @Override
+    public void setBarcodeSelect() {
+        etMaterialScan.setFocusable(true);
+        etMaterialScan.setFocusableInTouchMode(true);
+        etMaterialScan.requestFocus();
+        etMaterialScan.findFocus();
+        Selection.selectAll(etMaterialScan.getText());
     }
 }

@@ -208,13 +208,13 @@ public class BatchNormalActivity extends BaseActivity<BatchNormalView, BatchNorm
                 break;
             case STOCK_OUT_OUTSOURCE_BILL://委外生单
                 setActivityTitle(getString(R.string.oursource_audit_maiterial_point_title));
-                srcBillType = 20;
+                srcBillType = 12;
                 destBillType = 20;
                 break;
             case STOCK_OUT_OUTSOURCE_ALLOT://委外调拨
                 setActivityTitle(getString(R.string.oursource_allot_maiterial_point_title));
-                srcBillType = 20;
-                destBillType = 20;
+                srcBillType = 12;
+                destBillType = 50;
                 break;
             case STOCK_OUT_PRODUCTION_FEEDING://生产补料
                 setActivityTitle(getString(R.string.material_point_production_feed_title));
@@ -233,24 +233,24 @@ public class BatchNormalActivity extends BaseActivity<BatchNormalView, BatchNorm
                 break;
             case STOCK_OUT_PRODUCTION_BILL://生产生单
                 setActivityTitle(getString(R.string.material_point_production_pick_title));
-                srcBillType = 23;
+                srcBillType = 30;
                 destBillType = 23;
                 break;
             case STOCK_OUT_PRODUCTION_ALLOT://生产调拨
                 setActivityTitle(getString(R.string.material_point_production_allot_title));
-                srcBillType = 50;
+                srcBillType = 30;
                 destBillType = 50;
                 break;
             case STOCK_OUT_PICK://拣料
                 break;
             case STOCK_OUT_SELL_OUT_AUDIT://销售审核
                 setActivityTitle(getString(R.string.material_point_sale_audit_title));
-                srcBillType = 41;
+                srcBillType = 42;
                 destBillType = 42;
                 break;
             case STOCK_OUT_SELL_OUT_BILL://销售生单
                 setActivityTitle(getString(R.string.material_point_sale_bill_title));
-                srcBillType = 42;
+                srcBillType = 41;
                 destBillType = 42;
                 break;
             case STOCK_OUT_PURCHASE_MATERIAL_RETURN://采购退料
