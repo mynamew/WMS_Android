@@ -209,6 +209,13 @@
     <string name="material_point_success">物料请点保存成功</string>
     <string name="point_count_no_more_send_goods_qty">请点数不能大于送货数，请重新输入！</string>
     /**======无纸化作业 列表======**/
+    <string name="allot_order">调拨单</string>
+    <string name="check_list_title">盘点单列表</string>
+    <string name="other_instock_list_title">其他入库单列表</string>
+    <string name="other_outstock_list_title">其他出库单列表</string>
+    <string name="sale_outstock_list_title">销售出库单列表</string>
+    <string name="send_outstock_list_title">发货出库单列表</string>
+    <string name="allot_orderno_list_title">调拨单列表</string>
     <string name="buy_list_title">采购单列表</string>
     <string name="out_source_list_title">委外单列表</string>
     <string name="outsource_send_material_list">委外发料单(生单)列表</string>
@@ -233,23 +240,23 @@
     /**====== 来料入库 ======**/
     <string name="should_instock_qty">应入库数：</string>
     <string name="in_stock_num_title">入库上架(来料入库)</string>
-    <string name="receive_pro_num">到货单号：</string>
-    <string name="create_orderno_date">到货日期：</string>
-    <string name="arrive_pro_total_num">到货总数：</string>
-    <string name="right_pro_num">合格总数：</string>
-    <string name="have_in_stock_num">已入库数：</string>
-    <string name="can_in_stock_num">可入库数：</string>
-    <string name="wait_count_num">待点总数：</string>
-    <string name="have_count_num">已扫总数：</string>
+    <string name="receive_pro_num">到货单号</string>
+    <string name="create_orderno_date">到货日期</string>
+    <string name="arrive_pro_total_num">到货总数</string>
+    <string name="right_pro_num">合格总数</string>
+    <string name="have_in_stock_num">已入库数</string>
+    <string name="can_in_stock_num">可入库数</string>
+    <string name="wait_count_num">待点总数</string>
+    <string name="have_count_num">已扫总数</string>
     <string name="material_code">物料编码：  %1$s</string>
     <string name="scan_material_hint">扫物料条码</string>
-    <string name="scan_material">物料条码：</string>
+    <string name="scan_material">物料条码</string>
     <string name="scan_location_hint">扫库位码</string>
-    <string name="lib_code">目的库位码：</string>
+    <string name="lib_code">目的库位码</string>
     <string name="material_num">物料数量：%1$s</string>
     <string name="material_name">物料名称：%1$s</string>
     <string name="material_model">规格型号：%1$s</string>
-    <string name="in_stock_total_num">入库总数：</string>
+    <string name="in_stock_total_num">入库总数</string>
     <string name="material_scan_putaway_success">物品扫码入库上架成功</string>
     <string name="create_instock_orderno">生成入库单</string>
     <string name="please_scan_lib_location_code">请输入或扫描库位码</string>
@@ -282,7 +289,7 @@
     /**====== 产成品入库 ======**/
     <string name="product_orderno_tip">产成品单号</string>
     <string name="putaway_other_tip">入库上架(其他)</string>
-    <string name="product_warehous_warrent_num">产成品入库单：</string>
+    <string name="product_warehous_warrent_num">产成品入库单</string>
     <string name="finish_goods_in_stock_title">入库上架(产成品)</string>
     <string name="warehous_total_num">入库总数：</string>
     <string name="create_product_orderno">生成产成品入库单</string>
@@ -291,7 +298,7 @@
     <string name="produce_create_order">产成品-选单</string>
     <string name="please_input_create_product_orderno_or_scan">请输入产成品入库单单号或扫码查询</string>
     /**====== 生产入库 ======**/
-    <string name="create_task_orderno">生产任务单：</string>
+    <string name="create_task_orderno">生产任务单</string>
     <string name="create_task_orderno_tip">生产任务单</string>
     <string name="product_in_stock_create_orderno">产成品入库</string>
     <string name="please_input_create_task_num_or_scan">请输入生产任务单号或扫码查询</string>
@@ -302,7 +309,7 @@
     <string name="out_return_order">委外退料单</string>
     <string name="out_return_material_select_orderno">委外退料</string>
     <string name="pealse_out_return_material_select_orderno_or_scan">请输入委外退料单号或扫码查询</string>
-    <string name="out_return_material_orderno">委外退料单：</string>
+    <string name="out_return_material_orderno">委外退料单</string>
     /**====== 生产退料 ======**/
     <string name="putaway_production_return_material_tip">入库上架(生产退料)</string>
     <string name="create_return_material_title">入库上架(生产退料)</string>
@@ -312,7 +319,7 @@
     <string name="create_return_material_orderno">生产退料单：%1$s</string>
     /**====== 销售退料 ======**/
     <string name="putaway_sale_return_material_tip">入库上架(销售退货)</string>
-    <string name="sale_return_material_orderno_tip">销售退货单号：</string>
+    <string name="sale_return_material_orderno_tip">销售退货单号</string>
     <string name="sale_return_material_title">入库上架(销售退货)</string>
     <string name="sale_return_material_tip">销售退货单</string>
     <string name="sale_return_material_select_orderno">销售退货-选单</string>
@@ -546,6 +553,15 @@
     <string name="orderno_detail_production_allot_title">订单详情(生产调拨)</string>
     <string name="outsource_send_material_orderno_detial_tip">订单详情(委外发料(生单))</string>
     <string name="outsource_send_material_bill_title">委外发料(生单)物料清单</string>
+    <string name="order_detial_finish_goods_audit_title">产成品(审核)单据信息</string>
+    <string name="order_detial_finish_goods_bill_title">产成品(生单)单据信息</string>
+    <string name="order_detail_other_select_bill_title">其他入库(选单)单据详情</string>
+    <string name="order_detial_other_scan_title">其他入库(扫描)单据详情</string>
+    <string name="order_detial_outsource_title">委外退料单单据详情</string>
+    <string name="order_detial_production_return_title">生产退料单单据详情</string>
+    <string name="order_detial_sale_return_title">销售退料单单据详情</string>
+    <string name="order_detial_buy_return_title">采购退料单单据详情</string>
+    <string name="order_detail_come_material_title">来料入库单据信息</string>
     /******************************************************************************************************************************************************/
     /******************************************************************************************************************************************************/
     /**====== 质量检验 ======**/
@@ -859,17 +875,10 @@
     <string name="query_statistical_tip">统计查询</string>
     <string name="date">日期</string>
     <string name="please_input_date">请输入日期</string>
-    <string name="other_instock_list_title">其他入库单列表</string>
-    <string name="other_outstock_list_title">其他出库单列表</string>
-    <string name="order_detail_come_material_title">来料入库单据信息</string>
-    <string name="order_detial_finish_goods_audit_title">产成品(审核)单据信息</string>
-    <string name="order_detial_finish_goods_bill_title">产成品(生单)单据信息</string>
-    <string name="order_detail_other_select_bill_title">其他入库(选单)单据详情</string>
-    <string name="order_detial_other_scan_title">其他入库(扫描)单据详情</string>
-    <string name="order_detial_outsource_title">委外退料单单据详情</string>
-    <string name="order_detial_production_return_title">生产退料单单据详情</string>
-    <string name="order_detial_sale_return_title">销售退料单单据详情</string>
-    <string name="order_detial_buy_return_title">采购退料单单据详情</string>
+    <string name="form_change_list_title">形态转换单列表</string>
+    <string name="commit_normal_outstock_split_success">提交普通出库条码拆分成功</string>
+    <string name="please_input_right_split_number">请输入正确的拆分数量！</string>
+    <string name="should_return_material_qty">应退料数：</string>
 
 
 </resources>

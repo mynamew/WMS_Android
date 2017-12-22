@@ -90,7 +90,7 @@ public class QueryWWPickDataByOutSourceResult {
         private int regionId;
         private String regionName;
         private boolean isSplitPrint;
-
+        private String deptName;
         public int getSrcBillType() {
             return srcBillType;
         }
@@ -241,6 +241,46 @@ public class QueryWWPickDataByOutSourceResult {
 
         public void setIsSplitPrint(boolean isSplitPrint) {
             this.isSplitPrint = isSplitPrint;
+        }
+
+        public String getDeptName() {
+            return deptName;
+        }
+
+        public void setDeptName(String deptName) {
+            this.deptName = deptName;
+        }
+
+        public boolean isMerge() {
+            return isMerge;
+        }
+
+        public void setMerge(boolean merge) {
+            isMerge = merge;
+        }
+
+        public boolean isLotPick() {
+            return isLotPick;
+        }
+
+        public void setLotPick(boolean lotPick) {
+            isLotPick = lotPick;
+        }
+
+        public boolean isRegion() {
+            return isRegion;
+        }
+
+        public void setRegion(boolean region) {
+            isRegion = region;
+        }
+
+        public boolean isSplitPrint() {
+            return isSplitPrint;
+        }
+
+        public void setSplitPrint(boolean splitPrint) {
+            isSplitPrint = splitPrint;
         }
     }
 

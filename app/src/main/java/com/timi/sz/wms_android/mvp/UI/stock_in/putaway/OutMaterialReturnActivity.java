@@ -116,6 +116,11 @@ public class OutMaterialReturnActivity extends BaseActivity<PutAwayView, PutAway
 
     @Override
     public void setLocationSelect() {
+        etPutawayScanLocation.setText(etPutawayScanLocation.getText());
+        etPutawayScanLocation.setFocusable(true);
+        etPutawayScanLocation.setFocusableInTouchMode(true);
+        etPutawayScanLocation.requestFocus();
+        etPutawayScanLocation.findFocus();
         Selection.selectAll(etPutawayScanLocation.getText());
     }
     @Override
@@ -132,7 +137,7 @@ public class OutMaterialReturnActivity extends BaseActivity<PutAwayView, PutAway
                  */
                 Intent it = new Intent(OutMaterialReturnActivity.this, StockInDetailActivity.class);
                 it.putExtra(Constants.CODE_STR, intentCode);
-                it.putExtra("BillId", returnMaterialBean.getBillId());
+                it.putExtra(Constants.STOCKIN_BILLID, returnMaterialBean.getBillId());
                 startActivity(it);
             }
         });
@@ -186,7 +191,7 @@ public class OutMaterialReturnActivity extends BaseActivity<PutAwayView, PutAway
         tvReceiveProNum.setText(returnMaterialBean.getBillCode());
 
         /**
-         * 已入库总数
+         * 退料总数
          */
         tvInStockTotalNum.setText(String.valueOf(returnMaterialBean.getQty()));
         /**
@@ -237,7 +242,7 @@ public class OutMaterialReturnActivity extends BaseActivity<PutAwayView, PutAway
         /**
          * 设置已入库总数
          */
-        tvInStockTotalNum.setText(String.valueOf(bean.getTotalInstockQty()));
+//        tvInStockTotalNum.setText(String.valueOf(bean.getTotalInstockQty()));
         /**
          * 设置扫码Id
          */

@@ -2,6 +2,7 @@ package com.timi.sz.wms_android.mvp.UI.stock_in.other_scan;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Selection;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
@@ -95,77 +96,58 @@ public class OtherScanActivity extends BaseActivity<OtherScanView, OtherScanPres
 
     @Override
     public void initView() {
-        etScanMaterial.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+        setEdittextListener(etScanMaterial, Constants.REQUEST_SCAN_CODE_MATERIIAL, R.string.please_scan_material_code, 0, new EdittextInputListener() {
             @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-
-                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                    InputMethodUtils.hide(OtherScanActivity.this);
-                    String orderNum = etScanMaterial.getText().toString().trim();
-                    if (TextUtils.isEmpty(orderNum)) {
-                        ToastUtils.showShort(getString(R.string.please_scan_material_code));
-                        return false;
-                    }
-                    /**
-                     * 对库位码进行判断
-                     */
-                    if (TextUtils.isEmpty(locationCode)) {
-                        ToastUtils.showShort(getString(R.string.please_scan_lib_location_code));
-                        return false;
-                    }
-                    if (!locationCodeIsUse) {
-                        ToastUtils.showShort(getString(R.string.location_code_no_user));
-                        return false;
-                    }
-                    /**
-                     * 物料扫码并上架的网络请求
-                     */
-                    Map<String, Object> params1 = new HashMap<>();
-                    params1.put("UserId", SpUtils.getInstance().getUserId());
-                    params1.put("OrgId", SpUtils.getInstance().getOrgId());
-                    params1.put("MAC", PackageUtils.getMac());
-                    params1.put("SrcBillType", 0);
-                    params1.put("DestBillType", 51);
-                    params1.put("ScanId", ScanId);
-                    params1.put("BillId", 0);
-                    params1.put("BinCode", locationCode);
-                    params1.put("BarcodeNo", orderNum);
-                    getPresenter().materialScanNetWork(params1);
+            public void verticalSuccess(String result) {
+                /**
+                 * 对库位码进行判断
+                 */
+                if (TextUtils.isEmpty(locationCode)) {
+                    ToastUtils.showShort(getString(R.string.please_scan_lib_location_code));
+                    return;
                 }
-                return false;
+                if (!locationCodeIsUse) {
+                    ToastUtils.showShort(getString(R.string.location_code_no_user));
+                    return;
+                }
+                /**
+                 * 物料扫码并上架的网络请求
+                 */
+                Map<String, Object> params1 = new HashMap<>();
+                params1.put("UserId", SpUtils.getInstance().getUserId());
+                params1.put("OrgId", SpUtils.getInstance().getOrgId());
+                params1.put("MAC", PackageUtils.getMac());
+                params1.put("SrcBillType", 0);
+                params1.put("DestBillType", 51);
+                params1.put("ScanId", ScanId);
+                params1.put("BillId", 0);
+                params1.put("BinCode", locationCode);
+                params1.put("BarcodeNo", result);
+                getPresenter().materialScanNetWork(params1);
             }
         });
-        etScanLocation.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+        setEdittextListener(etScanLocation, Constants.REQUEST_SCAN_CODE_LIB_LOATION, R.string.please_scan_lib_location_code, 0, new EdittextInputListener() {
             @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-
-                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                    InputMethodUtils.hide(OtherScanActivity.this);
-                    String orderNum = etScanLocation.getText().toString().trim();
-                    if (TextUtils.isEmpty(orderNum)) {
-                        ToastUtils.showShort(getString(R.string.please_scan_lib_location_code));
-                        return false;
-                    }
-                    /**
-                     * 保存库位码
-                     */
-                    locationCode = orderNum;
-                    /**
-                     * 发起请求
-                     */
-                    /**
-                     * 判断库位码是否有效
-                     */
-                    Map<String, Object> params = new HashMap<>();
-                    params.put("UserId", SpUtils.getInstance().getUserId());
-                    params.put("OrgId", SpUtils.getInstance().getOrgId());
-                    params.put("MAC", PackageUtils.getMac());
-                    params.put("BinCode", orderNum);
-                    getPresenter().vertifyLocationCode(params);
-                }
-                return false;
+            public void verticalSuccess(String result) {
+                /**
+                 * 保存库位码
+                 */
+                locationCode = result;
+                /**
+                 * 发起请求
+                 */
+                /**
+                 * 判断库位码是否有效
+                 */
+                Map<String, Object> params = new HashMap<>();
+                params.put("UserId", SpUtils.getInstance().getUserId());
+                params.put("OrgId", SpUtils.getInstance().getOrgId());
+                params.put("MAC", PackageUtils.getMac());
+                params.put("BinCode", result);
+                getPresenter().vertifyLocationCode(params);
             }
         });
+
     }
 
     @Override
@@ -244,7 +226,7 @@ public class OtherScanActivity extends BaseActivity<OtherScanView, OtherScanPres
          */
         int haveScanNum = Integer.parseInt(tvHaveScanNum.getText().toString()) + bean.getBarcodeQty();
         tvHaveScanNum.setText(String.valueOf(haveScanNum));
-        ScanId=bean.getScanId();
+        ScanId = bean.getScanId();
     }
 
     /**
@@ -268,6 +250,25 @@ public class OtherScanActivity extends BaseActivity<OtherScanView, OtherScanPres
     public void createInStockOrderno() {
         ToastUtils.showShort(getString(R.string.create_instock_bill_success));
         onBackPressed();
+    }
+
+    @Override
+    public void setMaterialEdittextSelect() {
+        etScanMaterial.setFocusable(true);
+        etScanMaterial.setFocusableInTouchMode(true);
+        etScanMaterial.requestFocus();
+        etScanMaterial.findFocus();
+        Selection.selectAll(etScanMaterial.getText());
+    }
+
+    @Override
+    public void setLocationSelect() {
+        etScanLocation.setText(etScanLocation.getText());
+        etScanLocation.setFocusable(true);
+        etScanLocation.setFocusableInTouchMode(true);
+        etScanLocation.requestFocus();
+        etScanLocation.findFocus();
+        Selection.selectAll(etScanLocation.getText());
     }
 
     /**

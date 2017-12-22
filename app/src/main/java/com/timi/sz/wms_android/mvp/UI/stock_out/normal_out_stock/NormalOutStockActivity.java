@@ -3,10 +3,7 @@ package com.timi.sz.wms_android.mvp.UI.stock_out.normal_out_stock;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Selection;
-import android.text.TextUtils;
-import android.view.KeyEvent;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -16,7 +13,6 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.timi.sz.wms_android.R;
 import com.timi.sz.wms_android.base.uils.Constants;
-import com.timi.sz.wms_android.base.uils.LogUitls;
 import com.timi.sz.wms_android.base.uils.PackageUtils;
 import com.timi.sz.wms_android.base.uils.SpUtils;
 import com.timi.sz.wms_android.base.uils.ToastUtils;
@@ -26,17 +22,17 @@ import com.timi.sz.wms_android.bean.outstock.buy.SubmitBarcodeOutSplitAuditData;
 import com.timi.sz.wms_android.bean.outstock.outsource.QueryOutSourceFeedByInputResult;
 import com.timi.sz.wms_android.bean.outstock.outsource.QueryOutSourcePickByInputResult;
 import com.timi.sz.wms_android.bean.outstock.outsource.QueryWWPickDataByOutSourceResult;
-import com.timi.sz.wms_android.bean.outstock.outsource.RequestGetMaterialLotBean;
 import com.timi.sz.wms_android.bean.outstock.outsource.SubmitBarcodeLotPickOutResult;
 import com.timi.sz.wms_android.bean.outstock.outsource.SubmitBarcodeLotPickOutSplitResult;
 import com.timi.sz.wms_android.bean.outstock.pick.QueryDNByInputForPickResult;
+import com.timi.sz.wms_android.bean.outstock.pick.QueryTransferByInputForPickResult;
 import com.timi.sz.wms_android.bean.outstock.product.QueryPrdFeedByInputResult;
 import com.timi.sz.wms_android.bean.outstock.product.QueryProductPickByInputResult;
 import com.timi.sz.wms_android.bean.outstock.sale.QueryDNByInputForOutStockResult;
 import com.timi.sz.wms_android.bean.outstock.sale.QuerySalesOutSotckByInputForOutStockResult;
 import com.timi.sz.wms_android.bean.stockin_work.allot_out.QueryAllotOutResult;
 import com.timi.sz.wms_android.http.message.BaseMessage;
-import com.timi.sz.wms_android.http.message.event.OutsourceAuditEvent;
+import com.timi.sz.wms_android.http.message.event.StockOutSubmitScanMaterialEvent;
 import com.timi.sz.wms_android.http.message.event.SubmitBarcodeLotPickOutSplitEvent;
 import com.timi.sz.wms_android.mvp.UI.stock_out.detail.DetailActivity;
 import com.timi.sz.wms_android.mvp.UI.stock_out.detail.outsource_bill_detail.OutsourceBillDetailActivity;
@@ -50,7 +46,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_POINT_DETIAIL_BILLID;
@@ -58,6 +53,7 @@ import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_POINT_REGION
 import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_POINT_WAREHOUSEID;
 import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_PRINT_BARCODENO;
 import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_PRINT_BATCh_AND_NORMAL;
+import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_PRINT_BATCh_DETAILID;
 import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_PRINT_BILLID;
 import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_PRINT_CURRENT_QTY;
 import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_PRINT_DESBILLTYPE;
@@ -66,11 +62,11 @@ import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_PRINT_MATERI
 import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_PRINT_MATERIAL_CODE;
 import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_PRINT_MATERIAL_MODEL;
 import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_PRINT_MATERIAL_NAME;
-import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_PRINT_NORMAL;
 import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_PRINT_OUT_QTY;
 import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_PRINT_SCANID;
 import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_PRINT_SRCBILLTYPE;
 import static com.timi.sz.wms_android.base.uils.Constants.REQUEST_SCAN_CODE_MATERIIAL;
+import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_ALLOT_OUT;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_ALLOT_OUT_PICK;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_BEAN;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_FINISH_GOODS_PICK;
@@ -87,8 +83,10 @@ import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_PRODUCTION_A
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_PRODUCTION_BILL;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_PRODUCTION_FEEDING;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_PURCHASE_MATERIAL_RETURN;
+import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_SALE_OUT_PICK;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_SELL_OUT_AUDIT;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_SELL_OUT_BILL;
+import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_SEND_OUT_PICK;
 
 /**
  * 普通出库
@@ -162,8 +160,11 @@ public class NormalOutStockActivity extends BaseActivity<NormalOutStockView, Nor
     private boolean isCarton;
     //箱号
     private int cartonNum = 0;
-   //审核/制单
+    //审核/制单
     private int submitType = 0;
+    //明细表Id
+    private int detailId;
+
     @Override
     public int setLayoutId() {
         return R.layout.activity_normal_out_stock;
@@ -172,6 +173,7 @@ public class NormalOutStockActivity extends BaseActivity<NormalOutStockView, Nor
     @Override
     public void initBundle(Bundle savedInstanceState) {
         intentCode = getIntent().getIntExtra(Constants.STOCK_OUT_CODE_STR, 0);
+        detailId = getIntent().getIntExtra(OUT_STOCK_PRINT_BATCh_DETAILID, -1);
         BaseMessage.register(this);
         switch (intentCode) {
             case STOCK_OUT_OUTSOURCE_FEED_SUPLLIEMENT://委外补料
@@ -379,7 +381,7 @@ public class NormalOutStockActivity extends BaseActivity<NormalOutStockView, Nor
                 //获取 summaryResults
                 QueryProductPickByInputResult.SummaryResultsBean summaryResultsProductionApply = queryProductPickByInputResult.getSummaryResults();
                 //设置内容
-                setHeaderContent(summaryResultsProductionApply.getBillCode(), summaryResultsProductionApply.getBillDate(),  summaryResultsProductionApply.getQty(), summaryResultsProductionApply.getWaitQty(), summaryResultsProductionApply.getScanQty());
+                setHeaderContent(summaryResultsProductionApply.getBillCode(), summaryResultsProductionApply.getBillDate(), summaryResultsProductionApply.getQty(), summaryResultsProductionApply.getWaitQty(), summaryResultsProductionApply.getScanQty());
                 //设置scanid
                 scanId = summaryResultsProductionApply.getScanId();
                 //设置 submitType
@@ -502,6 +504,55 @@ public class NormalOutStockActivity extends BaseActivity<NormalOutStockView, Nor
                 billId = summaryResultsAllotOut.getBillId();
                 //源单类型  目标单类型
                 srcBillType = 50;
+                destBillType = 61;
+                break;
+            case STOCK_OUT_SALE_OUT_PICK://销售拣货
+                QueryDNByInputForPickResult salePickBean = new Gson().fromJson(getIntent().getStringExtra(STOCK_OUT_BEAN), QueryDNByInputForPickResult.class);
+                QueryDNByInputForPickResult.SummaryResultsBean summaryResultsSendPick = salePickBean.getSummaryResults();
+
+                setHeaderContent(summaryResultsSendPick.getBillCode(), summaryResultsSendPick.getBillDate(), summaryResultsSendPick.getQty(), summaryResultsSendPick.getWaitQty(), summaryResultsSendPick.getScanQty());
+                //设置scanid
+                scanId = summaryResultsSendPick.getScanId();
+                //设置仓库id
+                warehouseId = summaryResultsSendPick.getWarehouseId();
+                //设置区域id
+                regionId = summaryResultsSendPick.getRegionId();
+                //billId
+                billId = summaryResultsSendPick.getBillId();
+                srcBillType = 42;
+                destBillType = 61;
+            case STOCK_OUT_SEND_OUT_PICK://发货拣货
+                QueryDNByInputForPickResult sendPick = new Gson().fromJson(getIntent().getStringExtra(STOCK_OUT_BEAN), QueryDNByInputForPickResult.class);
+                QueryDNByInputForPickResult.SummaryResultsBean summaryResultsSend = sendPick.getSummaryResults();
+                setHeaderContent(summaryResultsSend.getBillCode(), summaryResultsSend.getBillDate(), summaryResultsSend.getQty(), summaryResultsSend.getWaitQty(), summaryResultsSend.getScanQty());
+                //设置scanid
+                scanId = summaryResultsSend.getScanId();
+                //设置仓库id
+                warehouseId = summaryResultsSend.getWarehouseId();
+                //设置区域id
+                regionId = summaryResultsSend.getRegionId();
+                //billId
+                billId = summaryResultsSend.getBillId();
+                srcBillType = 41;
+                destBillType = 61;
+                break;
+            case STOCK_OUT_ALLOT_OUT://调拨调出
+                QueryTransferByInputForPickResult allotPick = new Gson().fromJson(getIntent().getStringExtra(STOCK_OUT_BEAN), QueryTransferByInputForPickResult.class);
+                QueryTransferByInputForPickResult.SummaryResultsBean summaryResultsAllotPick = allotPick.getSummaryResults();
+                setHeaderContent(summaryResultsAllotPick.getBillCode()
+                        , summaryResultsAllotPick.getBillDate()
+                        , summaryResultsAllotPick.getQty()
+                        , summaryResultsAllotPick.getWaitQty()
+                        , summaryResultsAllotPick.getScanQty());
+                //设置scanid
+                scanId = summaryResultsAllotPick.getScanId();
+                //设置仓库id
+                warehouseId = summaryResultsAllotPick.getWarehouseId();
+                //设置区域id
+                regionId = summaryResultsAllotPick.getRegionId();
+                //billId
+                billId = summaryResultsAllotPick.getBillId();
+                srcBillType = 50;
                 destBillType = 50;
                 break;
             default:
@@ -622,20 +673,25 @@ public class NormalOutStockActivity extends BaseActivity<NormalOutStockView, Nor
                         it.putExtra(OUT_STOCK_POINT_DETIAIL_BILLID, billId);
                         break;
                     case STOCK_OUT_FINISH_GOODS_PICK://成品拣货
-                        it.setClass(NormalOutStockActivity.this, OutsourceBillDetailActivity.class);
                         it.setClass(NormalOutStockActivity.this, DetailActivity.class);
                         it.putExtra(OUT_STOCK_POINT_WAREHOUSEID, warehouseId);
                         it.putExtra(OUT_STOCK_POINT_REGIONID, regionId);
                         it.putExtra(OUT_STOCK_POINT_DETIAIL_BILLID, billId);
                         break;
                     case STOCK_OUT_ALLOT_OUT_PICK://调拨出库
-                        it.setClass(NormalOutStockActivity.this, OutsourceBillDetailActivity.class);
                         it.setClass(NormalOutStockActivity.this, DetailActivity.class);
                         it.putExtra(OUT_STOCK_POINT_WAREHOUSEID, warehouseId);
                         it.putExtra(OUT_STOCK_POINT_REGIONID, regionId);
                         it.putExtra(OUT_STOCK_POINT_DETIAIL_BILLID, billId);
                         break;
-
+                    case STOCK_OUT_SALE_OUT_PICK:
+                    case STOCK_OUT_SEND_OUT_PICK:
+                    case STOCK_OUT_ALLOT_OUT:
+                        it.setClass(NormalOutStockActivity.this, DetailActivity.class);
+                        it.putExtra(OUT_STOCK_POINT_WAREHOUSEID, warehouseId);
+                        it.putExtra(OUT_STOCK_POINT_REGIONID, regionId);
+                        it.putExtra(OUT_STOCK_POINT_DETIAIL_BILLID, billId);
+                        break;
                 }
                 /**
                  * 查看详情
@@ -681,6 +737,12 @@ public class NormalOutStockActivity extends BaseActivity<NormalOutStockView, Nor
                 params.put("DestBillType", destBillType);
                 params.put("ScanId", scanId);
                 params.put("BarcodeNo", result);
+                /**
+                 * 如果detailid 有值 证明是从明细表过来的子件数据
+                 */
+                if (detailId != -1) {
+                    params.put("DetailId", detailId);
+                }
                 //判断 批次是否为空
                 params.put("bCheckMode", true);
                 getPresenter().submitBarcodeLotPickOut(params);
@@ -724,6 +786,7 @@ public class NormalOutStockActivity extends BaseActivity<NormalOutStockView, Nor
             Intent intent = new Intent(this, SplitPrintActivity.class);
             intent.putExtra(OUT_STOCK_PRINT_BILLID, billId);
             intent.putExtra(OUT_STOCK_PRINT_SRCBILLTYPE, srcBillType);
+            intent.putExtra(OUT_STOCK_PRINT_BATCh_DETAILID, detailId);
             intent.putExtra(OUT_STOCK_PRINT_BARCODENO, etScanMaterial.getText().toString().trim());
             intent.putExtra(OUT_STOCK_PRINT_DESBILLTYPE, destBillType);
             intent.putExtra(OUT_STOCK_PRINT_SCANID, data.getScanId());
@@ -734,6 +797,7 @@ public class NormalOutStockActivity extends BaseActivity<NormalOutStockView, Nor
             intent.putExtra(OUT_STOCK_PRINT_MATERIAL_MODEL, data.getMaterialStandard());
             intent.putExtra(OUT_STOCK_PRINT_CURRENT_QTY, data.getBarcodeQty());
             intent.putExtra(OUT_STOCK_PRINT_OUT_QTY, data.getExceedQty());
+            intent.putExtra(OUT_STOCK_POINT_REGIONID, regionId);
             startActivity(intent);
         } else {
             /**
@@ -742,13 +806,6 @@ public class NormalOutStockActivity extends BaseActivity<NormalOutStockView, Nor
             scanQty = scanQty + data.getBarcodeQty();
             tvMaterialNum.setText("(" + data.getBarcodeQty() + ")" + scanQty + "/" + totalQty);
             scanId = data.getScanId();
-            /***
-             * 是否装箱
-             */
-            if (isCarton) {
-                cartonNum = data.getCartonNo();
-                tvCartonNum.setText(String.valueOf(cartonNum));
-            }
         }
     }
 
@@ -773,6 +830,7 @@ public class NormalOutStockActivity extends BaseActivity<NormalOutStockView, Nor
         if (result.getExceedQty() > 0) {
             Intent intent = new Intent(this, SplitPrintActivity.class);
             intent.putExtra(OUT_STOCK_PRINT_BILLID, billId);
+            intent.putExtra(OUT_STOCK_PRINT_BATCh_DETAILID, detailId);
             intent.putExtra(OUT_STOCK_PRINT_SRCBILLTYPE, srcBillType);
             intent.putExtra(OUT_STOCK_PRINT_BARCODENO, etScanMaterial.getText().toString().trim());
             intent.putExtra(OUT_STOCK_PRINT_DESBILLTYPE, destBillType);
@@ -796,13 +854,11 @@ public class NormalOutStockActivity extends BaseActivity<NormalOutStockView, Nor
             } else {//提交成功
                 ToastUtils.showShort(getString(R.string.commit_success));
                 /**
-                 * 发送时间  传递 scanid
+                 * 发送事件  传递 scanid
                  */
-                OutsourceAuditEvent outsourceAuditEvent = new OutsourceAuditEvent(OutsourceAuditEvent.OUT_SOURCE_AUDIT_SCAN_MATERIAL_SUCCESS);
-                outsourceAuditEvent.setScanId(result.getScanId());
-                outsourceAuditEvent.setMaterialCode(result.getMaterialCode());
-                outsourceAuditEvent.setBarcodeQty(result.getBarcodeQty());
-                BaseMessage.post(outsourceAuditEvent);
+                StockOutSubmitScanMaterialEvent event = new StockOutSubmitScanMaterialEvent(StockOutSubmitScanMaterialEvent.OUT_SOURCE_AUDIT_SCAN_MATERIAL_SUCCESS);
+                event.setResult(result);
+                BaseMessage.post(event);
                 //设置scanid
                 scanId = result.getScanId();
                 /***
@@ -885,13 +941,18 @@ public class NormalOutStockActivity extends BaseActivity<NormalOutStockView, Nor
         if (event.getEvent().equals(SubmitBarcodeLotPickOutSplitEvent.SUBMIT_BARCODE_SPLIT_SUCCESS)) {
             SubmitBarcodeLotPickOutSplitResult result = event.getResult();
             /**
-             * 发送时间  传递 scanid
+             * 发送事件  传递 scanid
              */
-            OutsourceAuditEvent outsourceAuditEvent = new OutsourceAuditEvent(OutsourceAuditEvent.OUT_SOURCE_AUDIT_SCAN_MATERIAL_SUCCESS);
-            outsourceAuditEvent.setScanId(result.getScanId());
-            outsourceAuditEvent.setMaterialCode(result.getMaterialCode());
-            outsourceAuditEvent.setBarcodeQty(result.getBarcodeQty());
-            BaseMessage.post(outsourceAuditEvent);
+            StockOutSubmitScanMaterialEvent stockOutSubmitScanMaterialEvent = new StockOutSubmitScanMaterialEvent(StockOutSubmitScanMaterialEvent.OUT_SOURCE_AUDIT_SCAN_MATERIAL_SUCCESS);
+            SubmitBarcodeLotPickOutResult resultScanMaterial = stockOutSubmitScanMaterialEvent.getResult();
+            resultScanMaterial.setBarcodeQty(result.getBarcodeQty());
+            resultScanMaterial.setExceedQty(result.getExceedQty());
+            resultScanMaterial.setScanId(result.getScanId());
+            resultScanMaterial.setMaterialCode(result.getMaterialCode());
+            resultScanMaterial.setTotalScanQty(result.getTotalScanQty());
+            resultScanMaterial.setLineScanQty(result.getLineScanQty());
+            stockOutSubmitScanMaterialEvent.setResult(resultScanMaterial);
+            BaseMessage.post(stockOutSubmitScanMaterialEvent);
             //设置scanid
             scanId = result.getScanId();
             /**

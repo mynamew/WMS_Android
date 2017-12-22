@@ -259,6 +259,12 @@ public class BuyReturnMaterialOrderNoActivity extends BaseActivity<BuyReturnMate
                     getPresenter().submitBarcodeOutAudit(params);
                 }
             });
+            divideBarcodeDialog.setImageViewListener(R.id.iv_close, new MyDialog.DialogClickListener() {
+                @Override
+                public void dialogClick(MyDialog dialog) {
+                    dialog.dismiss();
+                }
+            });
             divideBarcodeDialog.setButtonListener(R.id.btn_cancel, null, new MyDialog.DialogClickListener() {
                 @Override
                 public void dialogClick(MyDialog dialog) {

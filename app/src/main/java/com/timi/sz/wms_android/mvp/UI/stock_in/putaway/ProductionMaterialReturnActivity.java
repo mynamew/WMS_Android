@@ -4,9 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Selection;
 import android.text.TextUtils;
-import android.view.KeyEvent;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -15,7 +13,6 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.timi.sz.wms_android.R;
 import com.timi.sz.wms_android.base.uils.Constants;
-import com.timi.sz.wms_android.base.uils.InputMethodUtils;
 import com.timi.sz.wms_android.base.uils.LogUitls;
 import com.timi.sz.wms_android.base.uils.PackageUtils;
 import com.timi.sz.wms_android.base.uils.SpUtils;
@@ -42,6 +39,7 @@ import static com.timi.sz.wms_android.base.uils.Constants.REQUEST_SCAN_CODE_MATE
  * create at: 2017/11/22 15:44
  */
 public class ProductionMaterialReturnActivity extends BaseActivity<PutAwayView, PutAwayPresenter> implements PutAwayView, BaseActivity.ScanQRCodeResultListener {
+
     @BindView(R.id.tv_receive_pro_num)
     TextView tvReceiveProNum;
     @BindView(R.id.tv_create_orderno_date)
@@ -50,8 +48,8 @@ public class ProductionMaterialReturnActivity extends BaseActivity<PutAwayView, 
     TextView tvWaitCountNum;
     @BindView(R.id.tv_have_count_num)
     TextView tvHaveCountNum;
-    @BindView(R.id.tv_in_stock_total_num)
-    TextView tvInStockTotalNum;
+    @BindView(R.id.tv_in_stock_return_total_num)
+    TextView tvInStockReturnTotalNum;
     @BindView(R.id.view_line)
     View viewLine;
     @BindView(R.id.tv_putaway_scan_location_tip)
@@ -94,7 +92,7 @@ public class ProductionMaterialReturnActivity extends BaseActivity<PutAwayView, 
         /**
          * 标题
          */
-        setActivityTitle(getString(R.string.out_return_material_title));
+        setActivityTitle(getString(R.string.putaway_production_return_material_tip));
         intentCode = getIntent().getIntExtra(Constants.CODE_STR, Constants.COME_MATERAIL_NUM);
         queryPrdReturnByInputResult = new Gson().fromJson(getIntent().getStringExtra(Constants.IN_STOCK_FINISH_PRODUCTION_BEAN), QueryPrdReturnByInputResult.class);
         ScanId = queryPrdReturnByInputResult.getScanId();
@@ -114,10 +112,11 @@ public class ProductionMaterialReturnActivity extends BaseActivity<PutAwayView, 
                  */
                 Intent it = new Intent(ProductionMaterialReturnActivity.this, StockInDetailActivity.class);
                 it.putExtra(Constants.CODE_STR, intentCode);
+                it.putExtra(Constants.STOCKIN_BILLID, queryPrdReturnByInputResult.getBillId());
                 startActivity(it);
             }
         });
-        setEdittextListener(etPutawayScanMaterial,REQUEST_SCAN_CODE_MATERIIAL,R.string.please_scan_material_code,0, new EdittextInputListener() {
+        setEdittextListener(etPutawayScanMaterial, REQUEST_SCAN_CODE_MATERIIAL, R.string.please_scan_material_code, 0, new EdittextInputListener() {
             @Override
             public void verticalSuccess(String result) {
                 /**
@@ -136,7 +135,7 @@ public class ProductionMaterialReturnActivity extends BaseActivity<PutAwayView, 
                 getPresenter().materialScanNetWork(params1, result);
             }
         });
-        setEdittextListener(etPutawayScanLocation,REQUEST_SCAN_CODE_LIB_LOATION,R.string.please_scan_lib_location_code,0, new EdittextInputListener() {
+        setEdittextListener(etPutawayScanLocation, REQUEST_SCAN_CODE_LIB_LOATION, R.string.please_scan_lib_location_code, 0, new EdittextInputListener() {
             @Override
             public void verticalSuccess(String result) {
                 /**
@@ -167,9 +166,9 @@ public class ProductionMaterialReturnActivity extends BaseActivity<PutAwayView, 
         tvReceiveProNum.setText(queryPrdReturnByInputResult.getBillCode());
 
         /**
-         * 已入库总数
+         * 退料总数
          */
-        tvInStockTotalNum.setText(String.valueOf(queryPrdReturnByInputResult.getScanQty()));
+        tvInStockReturnTotalNum.setText(String.valueOf(queryPrdReturnByInputResult.getQty()));
         /**
          * 日期
          */
@@ -201,12 +200,12 @@ public class ProductionMaterialReturnActivity extends BaseActivity<PutAwayView, 
         /**
          * 扫码出来的数据
          */
-        setTextViewContent(tvMaterialCode,bean.getMaterialCode());
-        setTextViewContent(tvMaterialName,bean.getMaterialName());
-        setTextViewContent(tvMaterialModel,bean.getMaterialStandard());
-        setTextViewContent(tvMaterialAttr,bean.getMaterialAttribute());
-        setTextViewContent(tvMaterialCode,bean.getMaterialCode());
-        setTextViewContent(tvMaterialNum,bean.getBarcodeQty());
+        setTextViewContent(tvMaterialCode, bean.getMaterialCode());
+        setTextViewContent(tvMaterialName, bean.getMaterialName());
+        setTextViewContent(tvMaterialModel, bean.getMaterialStandard());
+        setTextViewContent(tvMaterialAttr, bean.getMaterialAttribute());
+        setTextViewContent(tvMaterialCode, bean.getMaterialCode());
+        setTextViewContent(tvMaterialNum, bean.getBarcodeQty());
         /**
          * 设置附加属性
          */
@@ -216,23 +215,34 @@ public class ProductionMaterialReturnActivity extends BaseActivity<PutAwayView, 
          */
         tvHaveCountNum.setText(String.valueOf(bean.getTotalScanQty()));
         /**
-         * 设置已入库总数
+         * 设置待点总数
          */
-        tvInStockTotalNum.setText(String.valueOf(bean.getTotalInstockQty()));
+        tvWaitCountNum.setText(String.valueOf(queryPrdReturnByInputResult.getQty() - bean.getTotalScanQty()));
         /**
          * 设置扫码Id
          */
         ScanId = bean.getScanId();
     }
+
     @Override
     public void setMaterialEdittextSelect() {
+        etPutawayScanMaterial.setFocusable(true);
+        etPutawayScanMaterial.setFocusableInTouchMode(true);
+        etPutawayScanMaterial.requestFocus();
+        etPutawayScanMaterial.findFocus();
         Selection.selectAll(etPutawayScanMaterial.getText());
     }
 
     @Override
     public void setLocationSelect() {
+        etPutawayScanLocation.setText(etPutawayScanLocation.getText());
+        etPutawayScanLocation.setFocusable(true);
+        etPutawayScanLocation.setFocusableInTouchMode(true);
+        etPutawayScanLocation.requestFocus();
+        etPutawayScanLocation.findFocus();
         Selection.selectAll(etPutawayScanLocation.getText());
     }
+
     /**
      * 扫描的Id  默认是0  当提交物料扫码入库后 会返回sanid
      */
@@ -345,5 +355,12 @@ public class ProductionMaterialReturnActivity extends BaseActivity<PutAwayView, 
                 getPresenter().createInSockOrderno(params);
 
         }
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
     }
 }

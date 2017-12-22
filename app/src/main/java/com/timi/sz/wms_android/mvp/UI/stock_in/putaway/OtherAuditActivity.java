@@ -120,6 +120,7 @@ public class OtherAuditActivity extends BaseActivity<PutAwayView, PutAwayPresent
                  */
                 Intent it = new Intent(OtherAuditActivity.this, StockInDetailActivity.class);
                 it.putExtra(Constants.CODE_STR, intentCode);
+                it.putExtra(Constants.STOCKIN_BILLID, otherBean.getSummaryResults().getBillId());
                 startActivity(it);
             }
         });
@@ -166,11 +167,20 @@ public class OtherAuditActivity extends BaseActivity<PutAwayView, PutAwayPresent
     }
     @Override
     public void setMaterialEdittextSelect() {
+        etPutawayScanMaterial.setFocusable(true);
+        etPutawayScanMaterial.setFocusableInTouchMode(true);
+        etPutawayScanMaterial.requestFocus();
+        etPutawayScanMaterial.findFocus();
         Selection.selectAll(etPutawayScanMaterial.getText());
     }
 
     @Override
     public void setLocationSelect() {
+        etPutawayScanLocation.setText(etPutawayScanLocation.getText());
+        etPutawayScanLocation.setFocusable(true);
+        etPutawayScanLocation.setFocusableInTouchMode(true);
+        etPutawayScanLocation.requestFocus();
+        etPutawayScanLocation.findFocus();
         Selection.selectAll(etPutawayScanLocation.getText());
     }
     @Override
@@ -184,7 +194,7 @@ public class OtherAuditActivity extends BaseActivity<PutAwayView, PutAwayPresent
         /**
          * 已入库总数
          */
-        tvInStockTotalNum.setText(String.valueOf(summaryResults.getQty()));
+//        tvInStockTotalNum.setText(String.valueOf(summaryResults.getQty()));
         /**
          * 日期
          */
@@ -231,9 +241,9 @@ public class OtherAuditActivity extends BaseActivity<PutAwayView, PutAwayPresent
          */
         tvHaveCountNum.setText(String.valueOf(bean.getTotalScanQty()));
         /**
-         * 设置已入库总数
+         * 设置待点总数
          */
-        tvInStockTotalNum.setText(String.valueOf(bean.getTotalInstockQty()));
+        setTextViewContent(tvWaitCountNum, otherBean.getSummaryResults().getQty() - bean.getTotalScanQty());
         /**
          * 设置扫码Id
          */

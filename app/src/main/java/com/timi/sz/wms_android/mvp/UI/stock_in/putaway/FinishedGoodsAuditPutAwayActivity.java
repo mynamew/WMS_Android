@@ -1,5 +1,6 @@
 package com.timi.sz.wms_android.mvp.UI.stock_in.putaway;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Selection;
 import android.text.TextUtils;
@@ -22,6 +23,7 @@ import com.timi.sz.wms_android.base.uils.ToastUtils;
 import com.timi.sz.wms_android.bean.instock.MaterialScanPutAwayBean;
 import com.timi.sz.wms_android.bean.instock.VertifyLocationCodeBean;
 import com.timi.sz.wms_android.bean.instock.search.QueryPrdInstockByInputResult;
+import com.timi.sz.wms_android.mvp.UI.stock_in.detail.StockInDetailActivity;
 import com.timi.sz.wms_android.mvp.base.BaseActivity;
 
 import java.util.HashMap;
@@ -80,6 +82,7 @@ public class FinishedGoodsAuditPutAwayActivity extends BaseActivity<PutAwayView,
      * 扫描的Id  默认是0  当提交物料扫码入库后 会返回sanid
      */
     private int ScanId = 0;
+    private int intentCode;
 
     @Override
     public int setLayoutId() {
@@ -93,6 +96,7 @@ public class FinishedGoodsAuditPutAwayActivity extends BaseActivity<PutAwayView,
          */
         setActivityTitle(getString(R.string.finish_goods_in_stock_title));
         mFinishBean = new Gson().fromJson(getIntent().getStringExtra(Constants.IN_STOCK_FINISH_BEAN), QueryPrdInstockByInputResult.class);
+        intentCode = getIntent().getIntExtra(Constants.CODE_STR, Constants.COME_MATERAIL_NUM);
         ScanId = mFinishBean.getScanId();
     }
 
@@ -102,7 +106,19 @@ public class FinishedGoodsAuditPutAwayActivity extends BaseActivity<PutAwayView,
         etPutawayScanLocation.setFocusableInTouchMode(true);
         etPutawayScanLocation.requestFocus();
         etPutawayScanLocation.findFocus();
-        setEdittextListener(etPutawayScanMaterial,REQUEST_SCAN_CODE_MATERIIAL,R.string.please_scan_material_code,0, new EdittextInputListener() {
+        setRightImg(R.mipmap.stockin_detail, new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                /**
+                 * 查看详情
+                 */
+                Intent it = new Intent(FinishedGoodsAuditPutAwayActivity.this, StockInDetailActivity.class);
+                it.putExtra(Constants.CODE_STR, intentCode);
+                it.putExtra(Constants.STOCKIN_BILLID, mFinishBean.getBillId());
+                startActivity(it);
+            }
+        });
+        setEdittextListener(etPutawayScanMaterial, REQUEST_SCAN_CODE_MATERIIAL, R.string.please_scan_material_code, 0, new EdittextInputListener() {
             @Override
             public void verticalSuccess(String result) {
                 /**
@@ -116,12 +132,12 @@ public class FinishedGoodsAuditPutAwayActivity extends BaseActivity<PutAwayView,
                 params1.put("DestBillType", 40);
                 params1.put("ScanId", mFinishBean.getScanId());
                 params1.put("BinCode", locationCode);
-                params1.put("BillId", mFinishBean.getReceipId());
+                params1.put("BillId", mFinishBean.getBillId());
                 params1.put("BarcodeNo", result);
                 getPresenter().materialScanNetWork(params1, result);
             }
         });
-        setEdittextListener(etPutawayScanLocation,REQUEST_SCAN_CODE_LIB_LOATION,R.string.please_scan_lib_location_code,0, new EdittextInputListener() {
+        setEdittextListener(etPutawayScanLocation, REQUEST_SCAN_CODE_LIB_LOATION, R.string.please_scan_lib_location_code, 0, new EdittextInputListener() {
             @Override
             public void verticalSuccess(String result) {
                 /**
@@ -149,16 +165,16 @@ public class FinishedGoodsAuditPutAwayActivity extends BaseActivity<PutAwayView,
         /**
          * 收货单号
          */
-        tvReceiveProNum.setText(mFinishBean.getReceiptCode());
+        tvReceiveProNum.setText(mFinishBean.getBillCode());
 
         /**
-         * 已入库总数
+         * 入库总数
          */
-        tvInStockTotalNum.setText(String.valueOf(mFinishBean.getInstockQty()));
+        tvInStockTotalNum.setText(String.valueOf(mFinishBean.getQty()));
         /**
          * 日期
          */
-        tvCreateOrdernoDate.setText(mFinishBean.getReceipDate());
+        tvCreateOrdernoDate.setText(mFinishBean.getBillDate());
         /**
          * 待点总数
          */
@@ -186,12 +202,12 @@ public class FinishedGoodsAuditPutAwayActivity extends BaseActivity<PutAwayView,
         /**
          * 扫码出来的数据
          */
-        setTextViewContent(tvMaterialCode,bean.getMaterialCode());
-        setTextViewContent(tvMaterialName,bean.getMaterialName());
-        setTextViewContent(tvMaterialModel,bean.getMaterialStandard());
-        setTextViewContent(tvMaterialAttr,bean.getMaterialAttribute());
-        setTextViewContent(tvMaterialCode,bean.getMaterialCode());
-        setTextViewContent(tvMaterialNum,bean.getBarcodeQty());
+        setTextViewContent(tvMaterialCode, bean.getMaterialCode());
+        setTextViewContent(tvMaterialName, bean.getMaterialName());
+        setTextViewContent(tvMaterialModel, bean.getMaterialStandard());
+        setTextViewContent(tvMaterialAttr, bean.getMaterialAttribute());
+        setTextViewContent(tvMaterialCode, bean.getMaterialCode());
+        setTextViewContent(tvMaterialNum, bean.getBarcodeQty());
         /**
          * 设置附加属性
          */
@@ -201,9 +217,9 @@ public class FinishedGoodsAuditPutAwayActivity extends BaseActivity<PutAwayView,
          */
         tvHaveCountNum.setText(String.valueOf(bean.getTotalScanQty()));
         /**
-         * 设置已入库总数
+         * 设置待点总数
          */
-        tvInStockTotalNum.setText(String.valueOf(bean.getTotalInstockQty()));
+        setTextViewContent(tvWaitCountNum, mFinishBean.getQty() - bean.getTotalScanQty());
         /**
          * 设置扫码Id
          */
@@ -212,15 +228,26 @@ public class FinishedGoodsAuditPutAwayActivity extends BaseActivity<PutAwayView,
 
     private VertifyLocationCodeBean mVertifyLocationCodeBean;
     private boolean locationCodeIsUse = false;
+
     @Override
     public void setMaterialEdittextSelect() {
+        etPutawayScanMaterial.setFocusable(true);
+        etPutawayScanMaterial.setFocusableInTouchMode(true);
+        etPutawayScanMaterial.requestFocus();
+        etPutawayScanMaterial.findFocus();
         Selection.selectAll(etPutawayScanMaterial.getText());
     }
 
     @Override
     public void setLocationSelect() {
+        etPutawayScanLocation.setText(etPutawayScanLocation.getText());
+        etPutawayScanLocation.setFocusable(true);
+        etPutawayScanLocation.setFocusableInTouchMode(true);
+        etPutawayScanLocation.requestFocus();
+        etPutawayScanLocation.findFocus();
         Selection.selectAll(etPutawayScanLocation.getText());
     }
+
     @Override
     public void vertifyLocationCode(VertifyLocationCodeBean bean) {
         ToastUtils.showShort(getString(R.string.location_code_is_visible));
@@ -247,7 +274,7 @@ public class FinishedGoodsAuditPutAwayActivity extends BaseActivity<PutAwayView,
                 params1.put("UserId", SpUtils.getInstance().getUserId());
                 params1.put("OrgId", SpUtils.getInstance().getOrgId());
                 params1.put("MAC", PackageUtils.getMac());
-                params1.put("BillId", mFinishBean.getReceipId());
+                params1.put("BillId", mFinishBean.getBillId());
                 params1.put("SrcBillType", 40);
                 params1.put("DestBillType", 40);
                 params1.put("ScanId", ScanId);

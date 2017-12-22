@@ -25,6 +25,7 @@ public class RequestBuyInStockListBean {
     private String SupplierName;
     private String DeptName;
     private String BillDate;
+    private String StartDate;
 
     public int getOrgId() {
         return OrgId;
@@ -96,5 +97,13 @@ public class RequestBuyInStockListBean {
 
     public void setDestBillType(int destBillType) {
         DestBillType = destBillType;
+    }
+
+    public String getStartDate() {
+        return StartDate;
+    }
+
+    public void setStartDate(String startDate) {
+        StartDate = startDate;
     }
 }

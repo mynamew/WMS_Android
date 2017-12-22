@@ -80,7 +80,60 @@
                         android:textSize="13sp"/>
                 </LinearLayout>
 
+                <LinearLayout
+                    android:id="@+id/ll_supplier"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:visibility="gone"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
 
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="left"
+                        android:text="@string/item_supplier"
+                        android:textColor="#666"
+                        android:textSize="13sp"/>
+
+                    <TextView
+                        android:id="@+id/tv_supllier"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="left"
+                        android:text=""
+                        android:layout_marginLeft="30px"
+                        android:textColor="#000"
+                        android:textSize="13sp"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/ll_department"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:visibility="gone"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="left"
+                        android:text="@string/department_tip"
+                        android:textColor="#666"
+                        android:textSize="13sp"/>
+
+                    <TextView
+                        android:id="@+id/tv_department"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="left"
+                        android:text=""
+                        android:layout_marginLeft="85px"
+                        android:textColor="#000"
+                        android:textSize="13sp"/>
+                </LinearLayout>
                 <LinearLayout
                     android:visibility="gone"
                     android:id="@+id/ll_stock_name"
@@ -337,7 +390,7 @@
         android:layout_alignParentBottom="true"
         android:layout_margin="20px"
         android:background="@drawable/selector_btn_bg_login"
-        android:text="@string/confirm_commit"
+        android:text="@string/commit_check"
         android:textColor="#fff"
         android:textSize="18sp"/>
 </LinearLayout>

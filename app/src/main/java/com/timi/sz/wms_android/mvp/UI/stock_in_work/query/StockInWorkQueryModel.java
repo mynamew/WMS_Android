@@ -1,5 +1,6 @@
 package com.timi.sz.wms_android.mvp.UI.stock_in_work.query;
 
+import com.timi.sz.wms_android.bean.stockin_work.allot_out.QueryAllotOutResult;
 import com.timi.sz.wms_android.bean.stockin_work.query.AllotOneSetpResult;
 import com.timi.sz.wms_android.bean.stockin_work.query.AllotScanResult;
 import com.timi.sz.wms_android.bean.stockin_work.query.FormChangeInResult;
@@ -103,5 +104,6 @@ public class StockInWorkQueryModel extends MvpBaseModel {
             }
         });
     }
+
 
 }

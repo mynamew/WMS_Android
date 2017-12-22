@@ -43,7 +43,9 @@ public class StockInDetailModel extends MvpBaseModel {
 
                         return apiService.getReceiptDetail(params);
                     case Constants.CREATE_PRO_CREATE_ORDER_NUM://产成品 生单
+
                         return apiService.getWorkOrderDetail(params);
+
                     case Constants.OTHER_IN_STOCK_SELECT_ORDERNO://其他 选单
 
                         return apiService.getReceiptDetail(params);

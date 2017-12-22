@@ -1,4 +1,4 @@
-package com.timi.sz.wms_android.bean.stockin_work.allot_out;
+package com.timi.sz.wms_android.bean.outstock.pick;
 
 import com.timi.sz.wms_android.bean.outstock.outsource.common.DetailResultsBean;
 import com.timi.sz.wms_android.bean.outstock.outsource.common.MaterialResultsBean;
@@ -8,10 +8,10 @@ import java.util.List;
 /**
  * $dsc
  * author: timi
- * create at: 2017-12-03 08:30
+ * create at: 2017-12-20 18:52
  */
 
-public class QueryAllotOutResult {
+public class QueryTransferByInputForPickResult {
 
     /**
      * summaryResults : {"isLotPick":true,"isRegion":false,"billId":176,"billCode":"0000000218","billDate":"2015-05-19","outOwner":"","inOwner":"","createrName":"方艳冬","scanId":0,"qty":50,"waitQty":50,"scanQty":0,"warehouseId":0,"warehouseName":null,"regionId":0,"regionName":null,"isSplitPrint":true}

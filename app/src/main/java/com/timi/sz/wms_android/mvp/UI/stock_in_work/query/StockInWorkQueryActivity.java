@@ -16,6 +16,7 @@ import com.timi.sz.wms_android.base.uils.InputMethodUtils;
 import com.timi.sz.wms_android.base.uils.PackageUtils;
 import com.timi.sz.wms_android.base.uils.SpUtils;
 import com.timi.sz.wms_android.base.uils.ToastUtils;
+import com.timi.sz.wms_android.bean.stockin_work.allot_out.QueryAllotOutResult;
 import com.timi.sz.wms_android.bean.stockin_work.query.AllotOneSetpResult;
 import com.timi.sz.wms_android.bean.stockin_work.query.AllotScanResult;
 import com.timi.sz.wms_android.bean.stockin_work.query.FormChangeInResult;
@@ -146,6 +147,7 @@ public class StockInWorkQueryActivity extends BaseActivity<StockInWorkQueryView,
         intent.putExtra(Constants.STOCK_IN_WORK_CODE_STR, intentCode);
         startActivity(intent);
     }
+
 
     @OnClick({R.id.iv_sbo_scan})
     public void onViewClicked(View view) {

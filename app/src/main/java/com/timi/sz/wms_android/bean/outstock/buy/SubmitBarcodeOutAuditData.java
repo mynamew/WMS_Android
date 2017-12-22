@@ -10,17 +10,18 @@ public class SubmitBarcodeOutAuditData {
 
 
     /**
-     * scanId : 75
-     * materialId : 3912
-     * materialCode : 20301010017
-     * materialName : 750前壳(带音频)
-     * materialStandard : 烤漆/哑黑/压铸锌合金/69*43*23/钻孔
+     * scanId : 4
+     * materialId : 198
+     * materialCode : 10101010198
+     * materialName : 贴片电阻
+     * materialStandard : 330R/1206/±5%
      * materialAttribute :
-     * barcodeQty : 4
-     * lineMustQty : 8
-     * lineScanQty : 4
-     * totalScanQty : 4
+     * barcodeQty : 1
+     * lineMustQty : 0
+     * lineScanQty : 2
+     * totalScanQty : 12
      * exceedQty : 0
+     * newBarcode : null
      */
 
     private int scanId;
@@ -34,7 +35,8 @@ public class SubmitBarcodeOutAuditData {
     private int lineScanQty;
     private int totalScanQty;
     private int exceedQty;
-    private int cartonNo;
+    private String newBarcode;
+
     public int getScanId() {
         return scanId;
     }
@@ -123,11 +125,11 @@ public class SubmitBarcodeOutAuditData {
         this.exceedQty = exceedQty;
     }
 
-    public int getCartonNo() {
-        return cartonNo;
+    public Object getNewBarcode() {
+        return newBarcode;
     }
 
-    public void setCartonNo(int cartonNo) {
-        this.cartonNo = cartonNo;
+    public void setNewBarcode(String newBarcode) {
+        this.newBarcode = newBarcode;
     }
 }

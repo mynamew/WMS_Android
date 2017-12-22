@@ -19,6 +19,7 @@ public class QueryPoListBean {
     private String billCode;
     private String billDate;
     private String supplierName;
+    private String deptName;
 
     public int getBillId() {
         return billId;
@@ -50,5 +51,13 @@ public class QueryPoListBean {
 
     public void setSupplierName(String supplierName) {
         this.supplierName = supplierName;
+    }
+
+    public String getDeptName() {
+        return deptName;
+    }
+
+    public void setDeptName(String deptName) {
+        this.deptName = deptName;
     }
 }

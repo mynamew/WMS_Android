@@ -6,10 +6,13 @@ import com.timi.sz.wms_android.bean.outstock.outsource.QueryOutSourceFeedByInput
 import com.timi.sz.wms_android.bean.outstock.outsource.QueryOutSourcePickByInputResult;
 import com.timi.sz.wms_android.bean.outstock.outsource.QueryWWPickDataByOutSourceResult;
 import com.timi.sz.wms_android.bean.outstock.pick.QueryDNByInputForPickResult;
+import com.timi.sz.wms_android.bean.outstock.pick.QuerySalesOutSotckByInputForPickResult;
+import com.timi.sz.wms_android.bean.outstock.pick.QueryTransferByInputForPickResult;
 import com.timi.sz.wms_android.bean.outstock.product.QueryPrdFeedByInputResult;
 import com.timi.sz.wms_android.bean.outstock.product.QueryProductPickByInputResult;
 import com.timi.sz.wms_android.bean.outstock.sale.QueryDNByInputForOutStockResult;
 import com.timi.sz.wms_android.bean.outstock.sale.QuerySalesOutSotckByInputForOutStockResult;
+import com.timi.sz.wms_android.bean.stockin_work.allot_out.QueryAllotOutResult;
 import com.timi.sz.wms_android.http.HttpManager;
 import com.timi.sz.wms_android.http.api.ApiService;
 import com.timi.sz.wms_android.http.api.CommonResult;
@@ -134,20 +137,6 @@ public class StockOutSearchModel extends MvpBaseModel {
         });
     }
 
-    /**
-     * 成品拣货
-     *
-     * @param observer
-     */
-    public void queryDNByInputForPick(final Map<String, Object> params, Observer<QueryDNByInputForPickResult> observer) {
-
-        HttpManager.getInstance().HttpManagerRequest(observer, new ApiServiceMethodCallBack<QueryDNByInputForPickResult>() {
-            @Override
-            public Observable<CommonResult<QueryDNByInputForPickResult>> createObservable(ApiService apiService) {
-                return apiService.queryDNByInputForPick(params);
-            }
-        });
-    }
 
     /**
      * 销售出库 审核
@@ -209,6 +198,66 @@ public class StockOutSearchModel extends MvpBaseModel {
             @Override
             public Observable<CommonResult<QueryOtherOutStockByInputResult>> createObservable(ApiService apiService) {
                 return apiService.queryOtherOutStockByInput(params);
+            }
+        });
+    }
+
+    /**
+     * 发货通知单末尾号查询
+     *
+     * @param observer
+     */
+    public void queryDNByInputForPick(final Map<String, Object> params, Observer<QueryDNByInputForPickResult> observer) {
+
+        HttpManager.getInstance().HttpManagerRequest(observer, new ApiServiceMethodCallBack<QueryDNByInputForPickResult>() {
+            @Override
+            public Observable<CommonResult<QueryDNByInputForPickResult>> createObservable(ApiService apiService) {
+                return apiService.queryDNByInputForPick(params);
+            }
+        });
+    }
+
+    /**
+     * 销售出库单末尾号查询
+     *
+     * @param observer
+     */
+    public void querySalesOutSotckByInputForPick(final Map<String, Object> params, Observer<QuerySalesOutSotckByInputForPickResult> observer) {
+
+        HttpManager.getInstance().HttpManagerRequest(observer, new ApiServiceMethodCallBack<QuerySalesOutSotckByInputForPickResult>() {
+            @Override
+            public Observable<CommonResult<QuerySalesOutSotckByInputForPickResult>> createObservable(ApiService apiService) {
+                return apiService.querySalesOutSotckByInputForPick(params);
+            }
+        });
+    }
+
+    /**
+     * 调拨拣货出库单末尾号查询
+     *
+     * @param observer
+     */
+    public void queryTransferByInputForPick(final Map<String, Object> params, Observer<QueryTransferByInputForPickResult> observer) {
+
+        HttpManager.getInstance().HttpManagerRequest(observer, new ApiServiceMethodCallBack<QueryTransferByInputForPickResult>() {
+            @Override
+            public Observable<CommonResult<QueryTransferByInputForPickResult>> createObservable(ApiService apiService) {
+                return apiService.queryTransferByInputForPick(params);
+            }
+        });
+    }
+    /**
+     * 调拨调出
+     *
+     * @param params
+     * @param observer
+     */
+    public void queryTransferByInputForOutStock(final Map<String, Object> params, Observer<QueryAllotOutResult> observer) {
+
+        HttpManager.getInstance().HttpManagerRequest(observer, new ApiServiceMethodCallBack<QueryAllotOutResult>() {
+            @Override
+            public Observable<CommonResult<QueryAllotOutResult>> createObservable(ApiService apiService) {
+                return apiService.queryTransferByInputForOutStock(params);
             }
         });
     }

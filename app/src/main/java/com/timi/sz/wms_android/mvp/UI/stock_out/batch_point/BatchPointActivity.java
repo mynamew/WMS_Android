@@ -5,10 +5,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Selection;
-import android.text.TextUtils;
-import android.view.KeyEvent;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -32,11 +29,11 @@ import com.timi.sz.wms_android.bean.outstock.outsource.SubmitBarcodeLotPickOutSp
 import com.timi.sz.wms_android.bean.outstock.outsource.common.DetailResultsBean;
 import com.timi.sz.wms_android.bean.outstock.outsource.common.MaterialResultsBean;
 import com.timi.sz.wms_android.http.message.BaseMessage;
-import com.timi.sz.wms_android.http.message.event.OutsourceAuditEvent;
+import com.timi.sz.wms_android.http.message.event.StockInPointEvent;
+import com.timi.sz.wms_android.http.message.event.StockOutSubmitScanMaterialEvent;
 import com.timi.sz.wms_android.http.message.event.SubmitBarcodeLotPickOutSplitEvent;
 import com.timi.sz.wms_android.mvp.UI.stock_out.divide_print.SplitPrintActivity;
 import com.timi.sz.wms_android.mvp.base.BaseActivity;
-import com.timi.sz.wms_android.qrcode.utils.Constant;
 import com.timi.sz.wms_android.view.MyDialog;
 
 import org.greenrobot.eventbus.Subscribe;
@@ -48,7 +45,6 @@ import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_DETAIL_RESULTS_BEAN;
@@ -57,11 +53,11 @@ import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_POINT_DETIAI
 import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_POINT_REGIONID;
 import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_POINT_WAREHOUSEID;
 import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_PRINT_BARCODENO;
+import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_PRINT_BATCh_DETAILID;
 import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_PRINT_BILLID;
 import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_PRINT_CURRENT_QTY;
 import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_PRINT_DATECODE;
 import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_PRINT_DESBILLTYPE;
-import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_PRINT_LIB_CODE;
 import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_PRINT_MATERIALID;
 import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_PRINT_MATERIAL_ATTR;
 import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_PRINT_MATERIAL_CODE;
@@ -90,8 +86,10 @@ import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_PRODUCTION_A
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_PRODUCTION_BILL;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_PRODUCTION_FEEDING;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_PURCHASE_MATERIAL_RETURN;
+import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_SALE_OUT_PICK;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_SELL_OUT_AUDIT;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_SELL_OUT_BILL;
+import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_SEND_OUT_PICK;
 
 /**
  * 批次清点的界面
@@ -190,7 +188,7 @@ public class BatchPointActivity extends BaseActivity<BatchPointView, BatchPointP
      */
     private int destBillType;
     /**
-     * 详情的id
+     * 明细表的id
      */
     private int detailId;
     /**
@@ -222,6 +220,7 @@ public class BatchPointActivity extends BaseActivity<BatchPointView, BatchPointP
         intentCode = getIntent().getIntExtra(STOCK_OUT_CODE_STR, STOCK_OUT_OUTSOURCE_FEED_SUPLLIEMENT);
         isCarton = getIntent().getBooleanExtra(OUT_STOCK_SALE_IS_CARTON, false);
         cartonNum = getIntent().getIntExtra(OUT_STOCK_SALE_CARTON_NUM, 0);
+        detailId = getIntent().getIntExtra(OUT_STOCK_PRINT_BATCh_DETAILID, -1);
         switch (intentCode) {
             case STOCK_OUT_OUTSOURCE_FEED_SUPLLIEMENT://委外补料
                 setActivityTitle(getString(R.string.material_point_outsource_feed_title));
@@ -298,9 +297,15 @@ public class BatchPointActivity extends BaseActivity<BatchPointView, BatchPointP
                 destBillType = 61;
                 break;
             case STOCK_OUT_ALLOT_OUT_PICK://调拨调出
-                setActivityTitle(getString(R.string.material_point_allot_out));
                 srcBillType = 50;
-                destBillType = 50;
+                destBillType = 61;
+                break;
+            case STOCK_OUT_SALE_OUT_PICK://销售拣货
+                srcBillType = 42;
+                destBillType = 61;
+            case STOCK_OUT_SEND_OUT_PICK://发货拣货
+                srcBillType = 41;
+                destBillType = 61;
                 break;
             default:
                 break;
@@ -327,17 +332,8 @@ public class BatchPointActivity extends BaseActivity<BatchPointView, BatchPointP
         } else {
             findViewById(R.id.ll_carton).setVisibility(View.GONE);
         }
-        /**
-         * 判断materialResultsBean是否未null
-         * 1、 为null  则传过来的是 detailResultsBean
-         * 2、 不为null  则传过来的是  materialResultsBean
-         */
-        if (null == materialResultsBean) {
-            setHeaderContent(detailResultsBean.getDetailId(), detailResultsBean.getMaterialId(), detailResultsBean.getMaterialName(), detailResultsBean.getMaterialCode(), detailResultsBean.getMaterialStandard(), detailResultsBean.getMaterialAttribute(), detailResultsBean.getWarehouseName(), detailResultsBean.getWipQty(), detailResultsBean.getQty());
-        } else {
-            setHeaderContent(materialResultsBean.getDetailId(), materialResultsBean.getMaterialId(), materialResultsBean.getMaterialName(), materialResultsBean.getMaterialCode(), materialResultsBean.getMaterialStandard(), materialResultsBean.getMaterialAttribute(), materialResultsBean.getWarehouseName(), materialResultsBean.getScanQty(), materialResultsBean.getQty());
-        }
-        setEdittextListener(etMaterialScan, Constants.REQUEST_SCAN_CODE_MATERIIAL,R.string.please_scan_material_code,0, new EdittextInputListener() {
+        setHeaderContent(materialResultsBean.getMaterialId(), materialResultsBean.getMaterialName(), materialResultsBean.getMaterialCode(), materialResultsBean.getMaterialStandard(), materialResultsBean.getMaterialAttribute(), materialResultsBean.getWarehouseName(), materialResultsBean.getScanQty(), materialResultsBean.getQty());
+        setEdittextListener(etMaterialScan, Constants.REQUEST_SCAN_CODE_MATERIIAL, R.string.please_scan_material_code, 0, new EdittextInputListener() {
             @Override
             public void verticalSuccess(String result) {
                 /**
@@ -358,8 +354,15 @@ public class BatchPointActivity extends BaseActivity<BatchPointView, BatchPointP
                 params.put("DestBillType", destBillType);
                 params.put("ScanId", scanId);
                 params.put("BarcodeNo", result);
+                params.put("RegionId", regionId);
+                /**
+                 * 如果etailId= 有值 证明是从明细表过来的子件数据
+                 */
+                if (detailId != -1) {
+                    params.put("DetailId", detailId);
+                }
                 //判断 批次是否为空
-                boolean isNoDateCode = (null == mData.getLotDetail()|| mData.getLotDetail().isEmpty());
+                boolean isNoDateCode = (null == mData.getLotDetail() || mData.getLotDetail().isEmpty());
                 params.put("DateCode", isNoDateCode ? "" : mData.getLotDetail().get(0).getDateCode());
                 params.put("bCheckMode", true);
                 params.put("MaterialId", null != detailResultsBean ? detailResultsBean.getMaterialId() : materialResultsBean.getMaterialId());
@@ -411,6 +414,7 @@ public class BatchPointActivity extends BaseActivity<BatchPointView, BatchPointP
         if (result.getExceedQty() > 0) {
             Intent intent = new Intent(this, SplitPrintActivity.class);
             intent.putExtra(OUT_STOCK_PRINT_BILLID, billId);
+            intent.putExtra(OUT_STOCK_PRINT_BATCh_DETAILID, detailId);
             intent.putExtra(OUT_STOCK_PRINT_SRCBILLTYPE, srcBillType);
             intent.putExtra(OUT_STOCK_PRINT_BARCODENO, etMaterialScan.getText().toString().trim());
             intent.putExtra(OUT_STOCK_PRINT_DESBILLTYPE, destBillType);
@@ -423,6 +427,7 @@ public class BatchPointActivity extends BaseActivity<BatchPointView, BatchPointP
             intent.putExtra(OUT_STOCK_PRINT_MATERIAL_MODEL, result.getMaterialStandard());
             intent.putExtra(OUT_STOCK_PRINT_CURRENT_QTY, result.getBarcodeQty());
             intent.putExtra(OUT_STOCK_PRINT_OUT_QTY, result.getExceedQty());
+            intent.putExtra(OUT_STOCK_POINT_REGIONID, regionId);
             startActivity(intent);
         } else {
             /**
@@ -475,13 +480,11 @@ public class BatchPointActivity extends BaseActivity<BatchPointView, BatchPointP
             } else {//提交成功
                 ToastUtils.showShort(getString(R.string.commit_success));
                 /**
-                 * 发送时间  传递 scanid
+                 * 发送事件  传递 scanid
                  */
-                OutsourceAuditEvent outsourceAuditEvent = new OutsourceAuditEvent(OutsourceAuditEvent.OUT_SOURCE_AUDIT_SCAN_MATERIAL_SUCCESS);
-                outsourceAuditEvent.setScanId(result.getScanId());
-                outsourceAuditEvent.setMaterialCode(result.getMaterialCode());
-                outsourceAuditEvent.setBarcodeQty(result.getBarcodeQty());
-                BaseMessage.post(outsourceAuditEvent);
+                StockOutSubmitScanMaterialEvent event = new StockOutSubmitScanMaterialEvent(StockOutSubmitScanMaterialEvent.OUT_SOURCE_AUDIT_SCAN_MATERIAL_SUCCESS);
+                event.setResult(result);
+                BaseMessage.post(event);
                 //设置scanid
                 scanId = result.getScanId();
                 /***
@@ -631,7 +634,7 @@ public class BatchPointActivity extends BaseActivity<BatchPointView, BatchPointP
      * @param scanQty
      * @param qty
      */
-    public void setHeaderContent(int detailId, int materialId, String materialName, String materialCode, String materialStandard, String materialAttr, String wareHouseName, int scanQty, int qty) {
+    public void setHeaderContent(int materialId, String materialName, String materialCode, String materialStandard, String materialAttr, String wareHouseName, int scanQty, int qty) {
         /**
          * 设置物料的信息
          */
@@ -651,10 +654,6 @@ public class BatchPointActivity extends BaseActivity<BatchPointView, BatchPointP
         this.scanQty = scanQty;
         this.totalQty = qty;
         /**
-         * detailId
-         */
-        this.detailId = detailId;
-        /**
          * 附加属性
          */
         this.materialAttribute = materialAttr;
@@ -673,19 +672,24 @@ public class BatchPointActivity extends BaseActivity<BatchPointView, BatchPointP
         if (event.getEvent().equals(SubmitBarcodeLotPickOutSplitEvent.SUBMIT_BARCODE_SPLIT_SUCCESS)) {
             SubmitBarcodeLotPickOutSplitResult result = event.getResult();
             /**
-             * 发送时间  传递 scanid
+             * 发送事件  传递 scanid
              */
-            OutsourceAuditEvent outsourceAuditEvent = new OutsourceAuditEvent(OutsourceAuditEvent.OUT_SOURCE_AUDIT_SCAN_MATERIAL_SUCCESS);
-            outsourceAuditEvent.setScanId(result.getScanId());
-            outsourceAuditEvent.setMaterialCode(result.getMaterialCode());
-            outsourceAuditEvent.setBarcodeQty(result.getBarcodeQty());
-            BaseMessage.post(outsourceAuditEvent);
+            StockOutSubmitScanMaterialEvent stockOutSubmitScanMaterialEvent = new StockOutSubmitScanMaterialEvent(StockOutSubmitScanMaterialEvent.OUT_SOURCE_AUDIT_SCAN_MATERIAL_SUCCESS);
+            SubmitBarcodeLotPickOutResult resultScanMaterial = stockOutSubmitScanMaterialEvent.getResult();
+            resultScanMaterial.setBarcodeQty(result.getBarcodeQty());
+            resultScanMaterial.setExceedQty(result.getExceedQty());
+            resultScanMaterial.setScanId(result.getScanId());
+            resultScanMaterial.setMaterialCode(result.getMaterialCode());
+            resultScanMaterial.setTotalScanQty(result.getTotalScanQty());
+            resultScanMaterial.setLineScanQty(result.getLineScanQty());
+            stockOutSubmitScanMaterialEvent.setResult(resultScanMaterial);
+            BaseMessage.post(stockOutSubmitScanMaterialEvent);
             //设置scanid
             scanId = result.getScanId();
             /**
              * 物料返回设置扫描的数量
              */
-            scanQty = scanQty + result.getBarcodeQty();
+            scanQty = result.getTotalScanQty();
             //设置数量
             tvSendMaterialNum.setText("(" + result.getBarcodeQty() + ")" + scanQty + "/" + totalQty);
 

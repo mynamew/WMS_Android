@@ -850,6 +850,15 @@
     <string name="order_detial_production_return_title">生产退料单单据详情</string>
     <string name="order_detial_sale_return_title">销售退料单单据详情</string>
     <string name="order_detial_buy_return_title">采购退料单单据详情</string>
+    <string name="sale_outstock_list_title">销售出库单列表</string>
+    <string name="send_outstock_list_title">发货出库单列表</string>
+    <string name="allot_orderno_list_title">调拨单列表</string>
+    <string name="allot_order">调拨单</string>
+    <string name="check_list_title">盘点单列表</string>
+    <string name="form_change_list_title">形态转换单列表</string>
+    <string name="commit_normal_outstock_split_success">提交普通出库条码拆分成功</string>
+    <string name="please_input_right_split_number">请输入正确的拆分数量！</string>
+    <string name="should_return_material_qty">应退料数：</string>
 
 
 </resources>

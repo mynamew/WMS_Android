@@ -140,13 +140,14 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:paddingBottom="20px"
+            android:visibility="visible"
             android:paddingTop="10px">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="60px"
-                android:text="@string/in_stock_total_num"
+                android:text="@string/return_material_total_num_tip"
                 android:textColor="#333"
                 android:textSize="13sp"/>
 

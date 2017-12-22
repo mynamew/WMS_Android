@@ -109,10 +109,11 @@ public class FinishedGoodsCreateBillPutAwayActivity extends BaseActivity<PutAway
          * 设置已点总数
          */
         tvHaveCountNum.setText(String.valueOf(bean.getTotalScanQty()));
+
         /**
-         * 设置已入库总数
+         * 设置待点总数
          */
-        tvInStockTotalNum.setText(String.valueOf(bean.getTotalInstockQty()));
+        setTextViewContent(tvWaitCountNum, finishGoodsCreateBillBean.getQty() - bean.getTotalScanQty());
         /**
          * 设置扫码Id
          */
@@ -151,11 +152,20 @@ public class FinishedGoodsCreateBillPutAwayActivity extends BaseActivity<PutAway
     }
     @Override
     public void setMaterialEdittextSelect() {
+        etPutawayScanMaterial.setFocusable(true);
+        etPutawayScanMaterial.setFocusableInTouchMode(true);
+        etPutawayScanMaterial.requestFocus();
+        etPutawayScanMaterial.findFocus();
         Selection.selectAll(etPutawayScanMaterial.getText());
     }
 
     @Override
     public void setLocationSelect() {
+        etPutawayScanLocation.setText(etPutawayScanLocation.getText());
+        etPutawayScanLocation.setFocusable(true);
+        etPutawayScanLocation.setFocusableInTouchMode(true);
+        etPutawayScanLocation.requestFocus();
+        etPutawayScanLocation.findFocus();
         Selection.selectAll(etPutawayScanLocation.getText());
     }
     @Override
@@ -172,6 +182,7 @@ public class FinishedGoodsCreateBillPutAwayActivity extends BaseActivity<PutAway
                  */
                 Intent it = new Intent(FinishedGoodsCreateBillPutAwayActivity.this, StockInDetailActivity.class);
                 it.putExtra(Constants.CODE_STR, intentCode);
+                it.putExtra(Constants.STOCKIN_BILLID,finishGoodsCreateBillBean.getBillId());
                 startActivity(it);
             }
         });
@@ -234,10 +245,10 @@ public class FinishedGoodsCreateBillPutAwayActivity extends BaseActivity<PutAway
          * 单据总数
          */
         tvOrdernoTotalNum.setText(String.valueOf(finishGoodsCreateBillBean.getQty()));
-        /**
-         * 已入库总数
-         */
-        tvInStockTotalNum.setText(String.valueOf(finishGoodsCreateBillBean.getScanQty()));
+//        /**
+//         * 已入库总数
+//         */
+//        tvInStockTotalNum.setText(String.valueOf(finishGoodsCreateBillBean.getQty()));
         /**
          * 日期
          */

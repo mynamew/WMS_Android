@@ -102,7 +102,7 @@
                             style="@style/stock_in_tab"
                             android:drawableTop="@mipmap/stockin_work_group_change"
                             android:text="@string/allot_outstock_tip"
-                            android:visibility="invisible"/>
+                            android:visibility="visible"/>
 
                         <TextView
                             style="@style/stock_in_tab"

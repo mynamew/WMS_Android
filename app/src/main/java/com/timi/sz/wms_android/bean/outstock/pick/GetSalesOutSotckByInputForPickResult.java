@@ -1,6 +1,5 @@
-package com.timi.sz.wms_android.bean.stockin_work.allot_out;
+package com.timi.sz.wms_android.bean.outstock.pick;
 
-import com.timi.sz.wms_android.bean.outstock.outsource.common.DetailResultsBean;
 import com.timi.sz.wms_android.bean.outstock.outsource.common.MaterialResultsBean;
 
 import java.util.List;
@@ -8,14 +7,14 @@ import java.util.List;
 /**
  * $dsc
  * author: timi
- * create at: 2017-12-03 08:30
+ * create at: 2017-12-21 08:47
  */
 
-public class QueryAllotOutResult {
+public class GetSalesOutSotckByInputForPickResult {
 
     /**
-     * summaryResults : {"isLotPick":true,"isRegion":false,"billId":176,"billCode":"0000000218","billDate":"2015-05-19","outOwner":"","inOwner":"","createrName":"方艳冬","scanId":0,"qty":50,"waitQty":50,"scanQty":0,"warehouseId":0,"warehouseName":null,"regionId":0,"regionName":null,"isSplitPrint":true}
-     * detailResults : [{"detailId":3240,"line":1,"materialId":69,"materialCode":"10101010069","materialName":"贴片电阻","materialStandard":"24K/0603/±5%","materialAttribute":"","warehouseId":1,"warehouseName":"原材料仓","qty":38,"waitQty":38,"scanQty":0},{"detailId":3241,"line":2,"materialId":155,"materialCode":"10101010155","materialName":"贴片电阻","materialStandard":"9.1K/0805/±5%","materialAttribute":"","warehouseId":1,"warehouseName":"原材料仓","qty":12,"waitQty":12,"scanQty":0}]
+     * summaryResults : {"isLotPick":true,"isRegion":false,"billId":110,"billCode":"CK140616002","billDate":"2014-06-16","customerName":"上海卧虎环保科技有限公司","createrName":"方艳冬","scanId":0,"qty":50,"waitQty":50,"scanQty":0,"warehouseId":0,"warehouseName":null,"regionId":0,"regionName":null,"isSplitPrint":true,"isCarton":false,"cartonNo":0}
+     * detailResults : [{"detailId":259,"line":1,"materialId":4943,"materialCode":"30101010056","materialName":"MS-708DC显示器","materialStandard":"三路音视频，三路触发/7寸数字屏/24V/13P大D公（139A#)","materialAttribute":"","warehouseId":3,"warehouseName":"成品仓","qty":50,"waitQty":50,"scanQty":0}]
      */
 
     private SummaryResultsBean summaryResults;
@@ -41,11 +40,10 @@ public class QueryAllotOutResult {
         /**
          * isLotPick : true
          * isRegion : false
-         * billId : 176
-         * billCode : 0000000218
-         * billDate : 2015-05-19
-         * outOwner :
-         * inOwner :
+         * billId : 110
+         * billCode : CK140616002
+         * billDate : 2014-06-16
+         * customerName : 上海卧虎环保科技有限公司
          * createrName : 方艳冬
          * scanId : 0
          * qty : 50
@@ -56,6 +54,8 @@ public class QueryAllotOutResult {
          * regionId : 0
          * regionName : null
          * isSplitPrint : true
+         * isCarton : false
+         * cartonNo : 0
          */
 
         private boolean isLotPick;
@@ -63,8 +63,7 @@ public class QueryAllotOutResult {
         private int billId;
         private String billCode;
         private String billDate;
-        private String outOwner;
-        private String inOwner;
+        private String customerName;
         private String createrName;
         private int scanId;
         private int qty;
@@ -75,6 +74,8 @@ public class QueryAllotOutResult {
         private int regionId;
         private String regionName;
         private boolean isSplitPrint;
+        private boolean isCarton;
+        private int cartonNo;
 
         public boolean isIsLotPick() {
             return isLotPick;
@@ -116,20 +117,12 @@ public class QueryAllotOutResult {
             this.billDate = billDate;
         }
 
-        public String getOutOwner() {
-            return outOwner;
+        public String getCustomerName() {
+            return customerName;
         }
 
-        public void setOutOwner(String outOwner) {
-            this.outOwner = outOwner;
-        }
-
-        public String getInOwner() {
-            return inOwner;
-        }
-
-        public void setInOwner(String inOwner) {
-            this.inOwner = inOwner;
+        public void setCustomerName(String customerName) {
+            this.customerName = customerName;
         }
 
         public String getCreaterName() {
@@ -210,6 +203,22 @@ public class QueryAllotOutResult {
 
         public void setIsSplitPrint(boolean isSplitPrint) {
             this.isSplitPrint = isSplitPrint;
+        }
+
+        public boolean isIsCarton() {
+            return isCarton;
+        }
+
+        public void setIsCarton(boolean isCarton) {
+            this.isCarton = isCarton;
+        }
+
+        public int getCartonNo() {
+            return cartonNo;
+        }
+
+        public void setCartonNo(int cartonNo) {
+            this.cartonNo = cartonNo;
         }
     }
 }

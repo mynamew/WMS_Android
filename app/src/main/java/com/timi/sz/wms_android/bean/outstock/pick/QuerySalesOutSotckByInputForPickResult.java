@@ -1,25 +1,24 @@
-package com.timi.sz.wms_android.bean.stockin_work.allot_out;
+package com.timi.sz.wms_android.bean.outstock.pick;
 
 import com.timi.sz.wms_android.bean.outstock.outsource.common.DetailResultsBean;
-import com.timi.sz.wms_android.bean.outstock.outsource.common.MaterialResultsBean;
 
 import java.util.List;
 
 /**
  * $dsc
  * author: timi
- * create at: 2017-12-03 08:30
+ * create at: 2017-12-20 18:51
  */
 
-public class QueryAllotOutResult {
+public class QuerySalesOutSotckByInputForPickResult {
 
     /**
-     * summaryResults : {"isLotPick":true,"isRegion":false,"billId":176,"billCode":"0000000218","billDate":"2015-05-19","outOwner":"","inOwner":"","createrName":"方艳冬","scanId":0,"qty":50,"waitQty":50,"scanQty":0,"warehouseId":0,"warehouseName":null,"regionId":0,"regionName":null,"isSplitPrint":true}
-     * detailResults : [{"detailId":3240,"line":1,"materialId":69,"materialCode":"10101010069","materialName":"贴片电阻","materialStandard":"24K/0603/±5%","materialAttribute":"","warehouseId":1,"warehouseName":"原材料仓","qty":38,"waitQty":38,"scanQty":0},{"detailId":3241,"line":2,"materialId":155,"materialCode":"10101010155","materialName":"贴片电阻","materialStandard":"9.1K/0805/±5%","materialAttribute":"","warehouseId":1,"warehouseName":"原材料仓","qty":12,"waitQty":12,"scanQty":0}]
+     * summaryResults : {"isLotPick":true,"isRegion":false,"billId":5337,"billCode":"CK160815029","billDate":"2016-08-15","customerName":"Jason","createrName":"方艳冬","scanId":0,"qty":5,"waitQty":5,"scanQty":0,"warehouseId":0,"warehouseName":null,"regionId":0,"regionName":null,"isSplitPrint":true}
+     * detailResults : [{"detailId":10467,"line":1,"materialId":5499,"materialCode":"30201010144","materialName":"MS-708RSM无线后视系统","materialStandard":"客户：RVS-2CAM/708M显示器(车充#)*1+757M摄像头(225#)*1+配件","materialAttribute":"","warehouseId":3,"warehouseName":"成品仓","qty":2,"waitQty":2,"scanQty":0},{"detailId":10468,"line":2,"materialId":5237,"materialCode":"30102010263","materialName":"MS-305WF摄像头","materialStandard":"2.4G WF无线，PC309/N制/黑色，带电池/DC头充电","materialAttribute":"","warehouseId":3,"warehouseName":"成品仓","qty":3,"waitQty":3,"scanQty":0}]
      */
 
     private SummaryResultsBean summaryResults;
-    private List<MaterialResultsBean> detailResults;
+    private List<DetailResultsBean> detailResults;
 
     public SummaryResultsBean getSummaryResults() {
         return summaryResults;
@@ -29,11 +28,11 @@ public class QueryAllotOutResult {
         this.summaryResults = summaryResults;
     }
 
-    public List<MaterialResultsBean> getDetailResults() {
+    public List<DetailResultsBean> getDetailResults() {
         return detailResults;
     }
 
-    public void setDetailResults(List<MaterialResultsBean> detailResults) {
+    public void setDetailResults(List<DetailResultsBean> detailResults) {
         this.detailResults = detailResults;
     }
 
@@ -41,15 +40,14 @@ public class QueryAllotOutResult {
         /**
          * isLotPick : true
          * isRegion : false
-         * billId : 176
-         * billCode : 0000000218
-         * billDate : 2015-05-19
-         * outOwner :
-         * inOwner :
+         * billId : 5337
+         * billCode : CK160815029
+         * billDate : 2016-08-15
+         * customerName : Jason
          * createrName : 方艳冬
          * scanId : 0
-         * qty : 50
-         * waitQty : 50
+         * qty : 5
+         * waitQty : 5
          * scanQty : 0
          * warehouseId : 0
          * warehouseName : null
@@ -63,17 +61,16 @@ public class QueryAllotOutResult {
         private int billId;
         private String billCode;
         private String billDate;
-        private String outOwner;
-        private String inOwner;
+        private String customerName;
         private String createrName;
         private int scanId;
         private int qty;
         private int waitQty;
         private int scanQty;
         private int warehouseId;
-        private String warehouseName;
+        private Object warehouseName;
         private int regionId;
-        private String regionName;
+        private Object regionName;
         private boolean isSplitPrint;
 
         public boolean isIsLotPick() {
@@ -116,20 +113,12 @@ public class QueryAllotOutResult {
             this.billDate = billDate;
         }
 
-        public String getOutOwner() {
-            return outOwner;
+        public String getCustomerName() {
+            return customerName;
         }
 
-        public void setOutOwner(String outOwner) {
-            this.outOwner = outOwner;
-        }
-
-        public String getInOwner() {
-            return inOwner;
-        }
-
-        public void setInOwner(String inOwner) {
-            this.inOwner = inOwner;
+        public void setCustomerName(String customerName) {
+            this.customerName = customerName;
         }
 
         public String getCreaterName() {
@@ -180,11 +169,11 @@ public class QueryAllotOutResult {
             this.warehouseId = warehouseId;
         }
 
-        public String getWarehouseName() {
+        public Object getWarehouseName() {
             return warehouseName;
         }
 
-        public void setWarehouseName(String warehouseName) {
+        public void setWarehouseName(Object warehouseName) {
             this.warehouseName = warehouseName;
         }
 
@@ -196,11 +185,11 @@ public class QueryAllotOutResult {
             this.regionId = regionId;
         }
 
-        public String getRegionName() {
+        public Object getRegionName() {
             return regionName;
         }
 
-        public void setRegionName(String regionName) {
+        public void setRegionName(Object regionName) {
             this.regionName = regionName;
         }
 

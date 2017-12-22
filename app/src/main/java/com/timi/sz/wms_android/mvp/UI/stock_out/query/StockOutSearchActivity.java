@@ -22,10 +22,13 @@ import com.timi.sz.wms_android.bean.outstock.outsource.QueryOutSourceFeedByInput
 import com.timi.sz.wms_android.bean.outstock.outsource.QueryOutSourcePickByInputResult;
 import com.timi.sz.wms_android.bean.outstock.outsource.QueryWWPickDataByOutSourceResult;
 import com.timi.sz.wms_android.bean.outstock.pick.QueryDNByInputForPickResult;
+import com.timi.sz.wms_android.bean.outstock.pick.QuerySalesOutSotckByInputForPickResult;
+import com.timi.sz.wms_android.bean.outstock.pick.QueryTransferByInputForPickResult;
 import com.timi.sz.wms_android.bean.outstock.product.QueryPrdFeedByInputResult;
 import com.timi.sz.wms_android.bean.outstock.product.QueryProductPickByInputResult;
 import com.timi.sz.wms_android.bean.outstock.sale.QueryDNByInputForOutStockResult;
 import com.timi.sz.wms_android.bean.outstock.sale.QuerySalesOutSotckByInputForOutStockResult;
+import com.timi.sz.wms_android.bean.stockin_work.allot_out.QueryAllotOutResult;
 import com.timi.sz.wms_android.mvp.UI.stock_out.batch_point_list.BatchPointListActivity;
 import com.timi.sz.wms_android.mvp.UI.stock_out.normal_out_stock.NormalOutStockActivity;
 import com.timi.sz.wms_android.mvp.base.BaseActivity;
@@ -170,6 +173,11 @@ public class StockOutSearchActivity extends BaseActivity<StockOutSearchView, Sto
                 tvStockoutTip.setText(R.string.query_allot_scan_tip);
                 tvQueryTitle.setText(R.string.stock_out_pick_tab);
                 break;
+            case  Constants.STOCK_OUT_ALLOT_OUT:
+                setActivityTitle(getString(R.string.allot_outstock_tip));
+                tvStockoutTip.setText(R.string.stock_out_pick_tip);
+                tvQueryTitle.setText(R.string.allot_outstock_tip);
+                break;
 
         }
         /**
@@ -271,6 +279,18 @@ public class StockOutSearchActivity extends BaseActivity<StockOutSearchView, Sto
                 break;
             case STOCK_OUT_FINISH_GOODS_PICK:// 成品拣货
                 getPresenter().queryDNByInputForPick(params);
+                break;
+            case STOCK_OUT_SEND_OUT_PICK://发货拣货
+                getPresenter().queryDNByInputForPick(params);
+                break;
+            case STOCK_OUT_SALE_OUT_PICK://销售拣货
+                getPresenter().querySalesOutSotckByInputForPick(params);
+                break;
+            case STOCK_OUT_ALLOT_OUT_PICK://调拨拣货
+                getPresenter().queryTransferByInputForPick(params);
+                break;
+            case  Constants.STOCK_OUT_ALLOT_OUT://调拨调出
+                getPresenter().queryTransferByInputForOutStock(params);
                 break;
         }
     }
@@ -409,23 +429,7 @@ public class StockOutSearchActivity extends BaseActivity<StockOutSearchView, Sto
         startActivity(intent);
     }
 
-    /**
-     * 成品拣货
-     *
-     * @param bean
-     */
-    @Override
-    public void queryDNByInputForPick(QueryDNByInputForPickResult bean) {
-        Intent intent = new Intent();
-        intent.putExtra(STOCK_OUT_BEAN, new Gson().toJson(bean));
-        intent.putExtra(STOCK_OUT_CODE_STR, intentCode);
-        if (bean.getSummaryResults().isIsLotPick()) {//批次拣货
-            intent.setClass(this, BatchPointListActivity.class);
-        } else {
-            intent.setClass(this, NormalOutStockActivity.class);
-        }
-        startActivity(intent);
-    }
+
 
     /**
      * 其他审核  返回结果
@@ -471,8 +475,80 @@ public class StockOutSearchActivity extends BaseActivity<StockOutSearchView, Sto
         startActivity(intent);
     }
 
+    /**
+     * 其他出库
+     * @param bean
+     */
     @Override
     public void queryOtherOutStockByInput(QueryOtherOutStockByInputResult bean) {
+        Intent intent = new Intent();
+        intent.putExtra(STOCK_OUT_BEAN, new Gson().toJson(bean));
+        intent.putExtra(STOCK_OUT_CODE_STR, intentCode);
+        if (bean.getSummaryResults().isIsLotPick()) {//批次拣货
+            intent.setClass(this, BatchPointListActivity.class);
+        } else {
+            intent.setClass(this, NormalOutStockActivity.class);
+        }
+        startActivity(intent);
+    }
+
+    /**
+     * 销售拣货
+     * @param bean
+     */
+    @Override
+    public void querySalesOutSotckByInputForPick(QuerySalesOutSotckByInputForPickResult bean) {
+        Intent intent = new Intent();
+        intent.putExtra(STOCK_OUT_BEAN, new Gson().toJson(bean));
+        intent.putExtra(STOCK_OUT_CODE_STR, intentCode);
+        if (bean.getSummaryResults().isIsLotPick()) {//批次拣货
+            intent.setClass(this, BatchPointListActivity.class);
+        } else {
+            intent.setClass(this, NormalOutStockActivity.class);
+        }
+        startActivity(intent);
+    }
+
+    /**
+     * 调拨拣货
+     * @param bean
+     */
+    @Override
+    public void queryTransferByInputForPick(QueryTransferByInputForPickResult bean) {
+        Intent intent = new Intent();
+        intent.putExtra(STOCK_OUT_BEAN, new Gson().toJson(bean));
+        intent.putExtra(STOCK_OUT_CODE_STR, intentCode);
+        if (bean.getSummaryResults().isIsLotPick()) {//批次拣货
+            intent.setClass(this, BatchPointListActivity.class);
+        } else {
+            intent.setClass(this, NormalOutStockActivity.class);
+        }
+        startActivity(intent);
+    }
+    /**
+     * 成品拣货 发货拣货
+     *
+     * @param bean
+     */
+    @Override
+    public void queryDNByInputForPick(QueryDNByInputForPickResult bean) {
+        Intent intent = new Intent();
+        intent.putExtra(STOCK_OUT_BEAN, new Gson().toJson(bean));
+        intent.putExtra(STOCK_OUT_CODE_STR, intentCode);
+        if (bean.getSummaryResults().isIsLotPick()) {//批次拣货
+            intent.setClass(this, BatchPointListActivity.class);
+        } else {
+            intent.setClass(this, NormalOutStockActivity.class);
+        }
+        startActivity(intent);
+    }
+
+    /**
+     * 调拨调出
+     * @param bean
+     */
+    @Override
+    public void queryTransferByInputForOutStock(QueryAllotOutResult bean) {
         Intent intent = new Intent();
         intent.putExtra(STOCK_OUT_BEAN, new Gson().toJson(bean));
         intent.putExtra(STOCK_OUT_CODE_STR, intentCode);

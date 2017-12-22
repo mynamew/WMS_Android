@@ -17,22 +17,20 @@ import com.timi.sz.wms_android.base.adapter.RecyclerViewHolder;
 import com.timi.sz.wms_android.base.divider.DividerItemDecoration;
 import com.timi.sz.wms_android.base.uils.PackageUtils;
 import com.timi.sz.wms_android.base.uils.SpUtils;
-import com.timi.sz.wms_android.bean.instock.search.BuyOrdernoBean;
-import com.timi.sz.wms_android.bean.instock.search.OtherAuditSelectOrdernoBean;
 import com.timi.sz.wms_android.bean.outstock.detail.BillMaterialDetailResult;
-import com.timi.sz.wms_android.bean.outstock.other.QueryOtherOutStockByInputResult;
-import com.timi.sz.wms_android.bean.outstock.outsource.QueryOutSourceFeedByInputResult;
-import com.timi.sz.wms_android.bean.outstock.outsource.QueryOutSourcePickByInputResult;
 import com.timi.sz.wms_android.bean.outstock.outsource.QueryWWPickDataByOutSourceResult;
+import com.timi.sz.wms_android.bean.outstock.outsource.SubmitBarcodeLotPickOutResult;
+import com.timi.sz.wms_android.bean.outstock.outsource.SubmitBarcodeLotPickOutSplitResult;
 import com.timi.sz.wms_android.bean.outstock.outsource.common.DetailResultsBean;
-import com.timi.sz.wms_android.bean.outstock.pick.QueryDNByInputForPickResult;
-import com.timi.sz.wms_android.bean.outstock.product.QueryPrdFeedByInputResult;
-import com.timi.sz.wms_android.bean.outstock.product.QueryProductPickByInputResult;
-import com.timi.sz.wms_android.bean.outstock.sale.QueryDNByInputForOutStockResult;
-import com.timi.sz.wms_android.bean.outstock.sale.QuerySalesOutSotckByInputForOutStockResult;
-import com.timi.sz.wms_android.bean.stockin_work.allot_out.QueryAllotOutResult;
+import com.timi.sz.wms_android.http.message.BaseMessage;
+import com.timi.sz.wms_android.http.message.event.StockOutSubmitScanMaterialEvent;
+import com.timi.sz.wms_android.http.message.event.SubmitBarcodeLotPickOutSplitEvent;
+import com.timi.sz.wms_android.http.message.event.SubmitCreateBillEvent;
 import com.timi.sz.wms_android.mvp.UI.stock_out.batch_point_list.BatchPointListActivity;
 import com.timi.sz.wms_android.mvp.base.BaseActivity;
+
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -40,32 +38,17 @@ import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-import static android.support.v7.widget.RecyclerView.SCROLL_STATE_IDLE;
-import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_POINT_DETIAILId;
-import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_POINT_DETIAIL_BILLID;
-import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_ALLOT_OUT_PICK;
+import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_PRINT_BATCh_DETAILID;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_BEAN;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_CODE_STR;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_DETAIL_BEAN;
-import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_FINISH_GOODS_PICK;
-import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_OTHER_OUT_AUDIT;
-import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_OTHER_OUT_BILL;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_OUTSOURCE_ALLOT;
-import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_OUTSOURCE_AUDIT;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_OUTSOURCE_BILL;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_OUTSOURCE_FEED_SUPLLIEMENT;
-import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_PICK;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_PRODUCTION_ALLOT;
-import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_PRODUCTION_APPLY_BILL;
-import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_PRODUCTION_AUDIT;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_PRODUCTION_BILL;
-import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_PRODUCTION_FEEDING;
-import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_PURCHASE_MATERIAL_RETURN;
-import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_SELL_OUT_AUDIT;
-import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_SELL_OUT_BILL;
 
 /**
  * 委外生单 明细
@@ -114,18 +97,10 @@ public class OutsourceBillDetailActivity extends BaseActivity<OutsourceBillDetai
     private int intentCode;
     //委外生单
     private QueryWWPickDataByOutSourceResult queryWWPickDataByOutSourceResult;
-    //生产领料申请单
-    private QueryProductPickByInputResult queryProductPickByInputResult;
-    //成品拣货
-    private QueryDNByInputForPickResult queryDNByInputForPickResult;
-    //调拨调出
-    private QueryAllotOutResult queryAllotOutResult;
-    //其他生单
-    private QueryOtherOutStockByInputResult queryOtherOutStockByInputResult;
-    //销售生单
-    private QuerySalesOutSotckByInputForOutStockResult querySalesOutSotckByInputForOutStockResult;
     //目标单据类型
     private int destBillType = -1;
+    //当前点击的位置
+    private int currentPosition = 0;
 
     @Override
     public int setLayoutId() {
@@ -134,6 +109,7 @@ public class OutsourceBillDetailActivity extends BaseActivity<OutsourceBillDetai
 
     @Override
     public void initBundle(Bundle savedInstanceState) {
+        BaseMessage.register(this);
         intentCode = getIntent().getIntExtra(STOCK_OUT_CODE_STR, STOCK_OUT_OUTSOURCE_FEED_SUPLLIEMENT);
         switch (intentCode) {
             case STOCK_OUT_OUTSOURCE_BILL://委外生单
@@ -148,7 +124,7 @@ public class OutsourceBillDetailActivity extends BaseActivity<OutsourceBillDetai
                 //billId
                 billId = summaryResultsBill.getBillId();
                 //
-                setHeaderContent(summaryResultsBill.getBillCode(),summaryResultsBill.getBillDate(),summaryResultsBill.getSupplierName());
+                setHeaderContent(summaryResultsBill.getBillCode(), summaryResultsBill.getBillDate(), summaryResultsBill.getSupplierName());
                 break;
             case STOCK_OUT_PRODUCTION_BILL://生产生单
             case STOCK_OUT_PRODUCTION_ALLOT://生产调拨
@@ -164,7 +140,7 @@ public class OutsourceBillDetailActivity extends BaseActivity<OutsourceBillDetai
                 destBillType = 23;
                 //billId
                 billId = summaryResultsProductionAllot.getBillId();
-                setHeaderContent(summaryResultsProductionAllot.getBillCode(),summaryResultsProductionAllot.getBillDate(),summaryResultsProductionAllot.getSupplierName());
+                setHeaderContent(summaryResultsProductionAllot.getBillCode(), summaryResultsProductionAllot.getBillDate(), summaryResultsProductionAllot.getSupplierName());
 
                 break;
             default:
@@ -223,6 +199,7 @@ public class OutsourceBillDetailActivity extends BaseActivity<OutsourceBillDetai
         }
         intent.putExtra(STOCK_OUT_DETAIL_BEAN, new Gson().toJson(result));
         intent.putExtra(STOCK_OUT_CODE_STR, intentCode);
+        intent.putExtra(OUT_STOCK_PRINT_BATCh_DETAILID, mDatas.get(currentPosition).getDetailId());
         startActivity(intent);
     }
 
@@ -240,7 +217,7 @@ public class OutsourceBillDetailActivity extends BaseActivity<OutsourceBillDetai
         mDatas.clear();
         for (int i = 0; i < detailResults.size(); i++) {
             if (!ivShowMore.isSelected()) {//如果是选中 则是显示所有的
-                if (detailResults.get(i).getWipQty()<detailResults.get(i).getPoQty()) {
+                if (detailResults.get(i).getWipQty() < detailResults.get(i).getPoQty()) {
                     mDatas.add(detailResults.get(i));
                 }
             } else
@@ -275,6 +252,7 @@ public class OutsourceBillDetailActivity extends BaseActivity<OutsourceBillDetai
             adapter.setOnItemClickListener(new BaseRecyclerAdapter.OnItemClickListener() {
                 @Override
                 public void onItemClick(View itemView, int pos) {
+                    currentPosition = pos;
                     /**
                      * 退料单号的 网络请求
                      */
@@ -301,13 +279,54 @@ public class OutsourceBillDetailActivity extends BaseActivity<OutsourceBillDetai
 
     /**
      * 设置头部信息
+     *
      * @param orderno
      * @param date
      * @param supplier
      */
-    public void setHeaderContent(String orderno,String date,String supplier){
+    public void setHeaderContent(String orderno, String date, String supplier) {
         tvOutsourceOrderno.setText(orderno);
         tvDate.setText(date);
         tvSupplier.setText(supplier);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        BaseMessage.unregister(this);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void resetScanId(SubmitCreateBillEvent event) {
+        if (event.getEvent().equals(SubmitCreateBillEvent.SUBMIT_CREATE_BILL_SUCCESS)) {
+            //重置scanid
+            if (null != queryWWPickDataByOutSourceResult) {
+                queryWWPickDataByOutSourceResult.getSummaryResults().setScanId(0);
+            }
+        }
+    }
+    /**
+     * 设置scanid
+     *
+     * @param event
+     */
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void setScanId(StockOutSubmitScanMaterialEvent event) {
+        if (event.getEvent().equals(StockOutSubmitScanMaterialEvent.OUT_SOURCE_AUDIT_SCAN_MATERIAL_SUCCESS)) {
+            SubmitBarcodeLotPickOutResult result = event.getResult();
+            queryWWPickDataByOutSourceResult.getSummaryResults().setScanId(result.getScanId());
+        }
+    }
+    /**
+     * 设置scanid
+     *
+     * @param event
+     */
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void setScanId(SubmitBarcodeLotPickOutSplitEvent event) {
+        if (event.getEvent().equals(StockOutSubmitScanMaterialEvent.OUT_SOURCE_AUDIT_SCAN_MATERIAL_SUCCESS)) {
+            SubmitBarcodeLotPickOutSplitResult result = event.getResult();
+            queryWWPickDataByOutSourceResult.getSummaryResults().setScanId(result.getScanId());
+        }
     }
 }

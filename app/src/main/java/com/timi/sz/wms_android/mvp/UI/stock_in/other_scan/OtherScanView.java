@@ -28,4 +28,14 @@ public interface OtherScanView extends MvpBaseView {
      * 创建入库单
      */
     void createInStockOrderno( );
+
+    /**
+     * 设置物料条码选中
+     */
+    void setMaterialEdittextSelect();
+
+    /**
+     * 设置库位码选中
+     */
+    void setLocationSelect();
 }

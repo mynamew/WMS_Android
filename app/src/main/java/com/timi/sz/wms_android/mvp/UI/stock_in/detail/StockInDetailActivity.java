@@ -66,7 +66,7 @@ public class StockInDetailActivity extends BaseActivity<StockInDetailView, Stock
         if (intentCode == -1) {
             intentCode = getIntent().getIntExtra(Constants.STOCK_OUT_CODE_STR, -1);
         }
-        BillId = getIntent().getIntExtra("BillId", 0);
+        BillId = getIntent().getIntExtra(Constants.STOCKIN_BILLID, 0);
     }
 
     @Override
@@ -162,9 +162,14 @@ public class StockInDetailActivity extends BaseActivity<StockInDetailView, Stock
                         case Constants.COME_MATERAIL_NUM:
                             holder.setTextView(R.id.tv_should_return_num_tip, getString(R.string.should_instock_qty));
                             break;
+                        case Constants.OUT_RETURN_MATERAIL:
+                        case Constants.CREATE_RETURN_MATERAIL:
+                        case Constants.SALE_RETURN_MATERAIL:
+                            holder.setTextView(R.id.tv_should_return_num_tip,getString(R.string.should_return_material_qty));
+                            break;
                     }
                     holder.setTextView(R.id.tv_wait_count_num, item.getWaitQty());
-                    holder.setTextView(R.id.tv_should_return_num, item.getPassQty());
+                    holder.setTextView(R.id.tv_should_return_num, item.getQty());
                     holder.setTextView(R.id.tv_scan_num, item.getScanQty());
                     holder.setTextView(R.id.tv_material_code, item.getMaterialCode() + item.getMaterialName());//合格数？ 应退数
                     holder.setTextView(R.id.tv_material_model, item.getMaterialAttribute() + item.getMaterialStandard());

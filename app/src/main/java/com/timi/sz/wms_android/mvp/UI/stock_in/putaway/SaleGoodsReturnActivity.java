@@ -115,7 +115,7 @@ public class SaleGoodsReturnActivity extends BaseActivity<PutAwayView, PutAwayPr
                  */
                 Intent it = new Intent(SaleGoodsReturnActivity.this, StockInDetailActivity.class);
                 it.putExtra(Constants.CODE_STR, intentCode);
-                it.putExtra("BillId", saleGoodsReturnBean.getBillId());
+                it.putExtra(Constants.STOCKIN_BILLID, saleGoodsReturnBean.getBillId());
                 startActivity(it);
             }
         });
@@ -185,7 +185,7 @@ public class SaleGoodsReturnActivity extends BaseActivity<PutAwayView, PutAwayPr
         tvReceiveProNum.setText(saleGoodsReturnBean.getBillCode());
 
         /**
-         * 已入库总数
+         * 退料总数
          */
         tvInStockTotalNum.setText(String.valueOf(saleGoodsReturnBean.getQty()));
         /**

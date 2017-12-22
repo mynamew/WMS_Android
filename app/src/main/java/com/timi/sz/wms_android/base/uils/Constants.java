@@ -99,7 +99,10 @@ public class Constants {
      *********************************************************************************************/
     public static final String IS_NEED_SHOW_SHOW_SERVER_SET = "isNeedShowServerSet.apk";
 
-
+    /***********
+     * 入库跳转到单据详情的BillId
+     *********************************************************************************************/
+   public static  final String STOCKIN_BILLID="stockin_billid";
     /***********
      * 入库跳转到查询界面的不同code码
      *********************************************************************************************/
@@ -180,6 +183,8 @@ public class Constants {
     public static final int STOCK_OUT_ALLOT_OUT_PICK = 5036;//调拨拣货
     public static final int STOCK_OUT_SEND_OUT_PICK = 5037;//发货拣货
     public static final int STOCK_OUT_SALE_OUT_PICK = 5038;//销售拣货
+
+    public static final int STOCK_OUT_ALLOT_OUT= 5039;//调拨调出
     /**
      * 出库搜索 跳转的传递对象的key
      */
@@ -224,6 +229,7 @@ public class Constants {
     public static final String OUT_STOCK_PRINT_OUT_QTY = "out_stock_print_out_qty";//出库打印的超出的数量
     public static final String OUT_STOCK_PRINT_NORMAL = "out_stock_print_normal";//是否是普通出库的拆分条码
     public static final String OUT_STOCK_PRINT_BATCh_AND_NORMAL = "out_stock_print_batch_and_normal";//是否是批次和普通物料混合的普通出库的拆分条码
+    public static final String OUT_STOCK_PRINT_BATCh_DETAILID = "out_stock_print_batch_detailid";//明细传值的id
 
     public static final String OUT_STOCK_SCANID = "out_stock_out_point_scan_id";//跳转到清点详情的scanid
     public static final String OUT_STOCK_MATERIAL_RESULTS_BEAN = "out_stock_material_results_bean";//跳转到物料请点详情的实体(MaterialResultsBean)
@@ -253,6 +259,7 @@ public class Constants {
 
     public static final int STOCK_IN_WORK_STOCK_QUERY = 5207;//库存呢查询
     public static final int STOCK_IN_WORK_POINT = 5208;//盘点
+    public static final int STOCK_IN_ALLOT_OUT = 5209;//调拨调出
 
     /***********
      * Edittext 的code码

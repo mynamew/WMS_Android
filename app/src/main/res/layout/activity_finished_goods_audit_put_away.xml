@@ -44,7 +44,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="40px"
+                android:layout_marginLeft="10px"
                 android:text="@string/product_warehous_warrent_num"
                 android:textColor="#333"
                 android:textSize="13sp"/>
@@ -69,7 +69,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="40px"
+                android:layout_marginLeft="60px"
                 android:text="@string/create_orderno_date"
                 android:textColor="#333"
                 android:textSize="13sp"/>
@@ -95,7 +95,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="40px"
+                android:layout_marginLeft="60px"
                 android:text="@string/wait_count_num"
                 android:textColor="#333"
                 android:textSize="13sp"/>
@@ -120,7 +120,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="40px"
+                android:layout_marginLeft="60px"
                 android:text="@string/have_count_num"
                 android:textColor="#333"
                 android:textSize="13sp"/>
@@ -139,13 +139,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:visibility="visible"
             android:paddingBottom="20px"
             android:paddingTop="10px">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="40px"
+                android:layout_marginLeft="60px"
                 android:text="@string/in_stock_total_num"
                 android:textColor="#333"
                 android:textSize="13sp"/>

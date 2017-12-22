@@ -34,8 +34,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_POINT_REGIONID;
 import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_PRINT_BARCODENO;
 import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_PRINT_BATCh_AND_NORMAL;
+import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_PRINT_BATCh_DETAILID;
 import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_PRINT_BILLID;
 import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_PRINT_CURRENT_QTY;
 import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_PRINT_DATECODE;
@@ -108,6 +110,12 @@ public class SplitPrintActivity extends BaseActivity<SplitPrintView, SplitPrintP
     private int outQty;//chao出数量
     //是否是批次 普通物料混合出库的普通拆分（普通拆分 不需要 datecode 附加属性 和物料id）
     boolean isNormalAndBatch = false;
+    //区域Id
+    private int regionId;
+    //明细表 id
+    private int detailId;
+    //是否是普通出库 跳转到拆分界面
+    private boolean isNormalStockOut;
 
     @Override
     public int setLayoutId() {
@@ -121,7 +129,6 @@ public class SplitPrintActivity extends BaseActivity<SplitPrintView, SplitPrintP
         destBillType = getIntent().getIntExtra(OUT_STOCK_PRINT_DESBILLTYPE, 0);
         scanId = getIntent().getIntExtra(OUT_STOCK_PRINT_SCANID, 0);
         barcode = getIntent().getStringExtra(OUT_STOCK_PRINT_BARCODENO);
-        billId = getIntent().getIntExtra(OUT_STOCK_PRINT_BILLID, 0);
         materialId = getIntent().getIntExtra(OUT_STOCK_PRINT_MATERIALID, 0);
         materialAttribute = getIntent().getStringExtra(OUT_STOCK_PRINT_MATERIAL_ATTR);
         materialName = getIntent().getStringExtra(OUT_STOCK_PRINT_MATERIAL_NAME);
@@ -131,6 +138,9 @@ public class SplitPrintActivity extends BaseActivity<SplitPrintView, SplitPrintP
         currentQty = getIntent().getIntExtra(OUT_STOCK_PRINT_CURRENT_QTY, 0);
         outQty = getIntent().getIntExtra(OUT_STOCK_PRINT_OUT_QTY, 0);
         isNormalAndBatch = getIntent().getBooleanExtra(OUT_STOCK_PRINT_BATCh_AND_NORMAL, false);
+        regionId = getIntent().getIntExtra(OUT_STOCK_POINT_REGIONID, 0);
+        detailId = getIntent().getIntExtra(OUT_STOCK_PRINT_BATCh_DETAILID, -1);
+        isNormalStockOut = getIntent().getBooleanExtra(OUT_STOCK_PRINT_NORMAL, false);
         setActivityTitle(getString(R.string.divide_barcode_tip));
     }
 
@@ -199,13 +209,14 @@ public class SplitPrintActivity extends BaseActivity<SplitPrintView, SplitPrintP
         if (data.getExceedQty() > 0) {
             ToastUtils.showShort(R.string.input_divide_qty_incorrect);
         } else {
-            ToastUtils.showShort(getString(R.string.submit_barcode_split_outstock_success));
+            ToastUtils.showShort(R.string.commit_normal_outstock_split_success);
             SubmitBarcodeLotPickOutSplitEvent event = new SubmitBarcodeLotPickOutSplitEvent(SubmitBarcodeLotPickOutSplitEvent.SUBMIT_BARCODE_SPLIT_SUCCESS);
             SubmitBarcodeLotPickOutSplitResult result = new SubmitBarcodeLotPickOutSplitResult();
             result.setBarcodeQty(data.getBarcodeQty());
             result.setExceedQty(data.getExceedQty());
             result.setScanId(data.getScanId());
             result.setMaterialCode(data.getMaterialCode());
+            result.setTotalScanQty(data.getTotalScanQty());
             event.setResult(result);
             BaseMessage.post(event);
             /**
@@ -260,7 +271,13 @@ public class SplitPrintActivity extends BaseActivity<SplitPrintView, SplitPrintP
                 /**
                  * 获取拆分数量
                  */
-                int splitQty = Integer.parseInt(etDivideNum.getText().toString().trim());
+                int splitQty = 0;
+                try {
+                    splitQty = Integer.parseInt(etDivideNum.getText().toString().trim());
+                } catch (NumberFormatException e) {
+                    ToastUtils.showShort(R.string.please_input_right_split_number);
+                    return;
+                }
                 if (splitQty > currentQty) {//拆分数量大于 当前条码所含的数量
                     ToastUtils.showShort("拆分数量不能大于当前数量，请重新输入！");
                     etDivideNum.setFocusable(true);
@@ -270,9 +287,6 @@ public class SplitPrintActivity extends BaseActivity<SplitPrintView, SplitPrintP
                     Selection.selectAll(etDivideNum.getText());
                     return;
                 }
-                /**
-                 * 拆分请求
-                 */
                 Map<String, Object> params = new HashMap<>();
                 params.put("UserId", SpUtils.getInstance().getUserId());
                 params.put("OrgId", SpUtils.getInstance().getOrgId());
@@ -283,14 +297,28 @@ public class SplitPrintActivity extends BaseActivity<SplitPrintView, SplitPrintP
                 params.put("ScanId", scanId);
                 params.put("BarcodeNo", barcode);
                 params.put("SplitQty", splitQty);
-                if (!isNormalAndBatch) {
-                    //批次出库
-                    params.put("DateCode", dateCode);
-                    params.put("MaterialId", materialId);
-                    params.put("MaterialAttribute", materialAttribute);
+                if (!isNormalStockOut) {
+                    /**
+                     * 拆分请求
+                     */
+                    params.put("RegionId", regionId);
+                    if (!isNormalAndBatch) {
+                        //批次出库
+                        params.put("DateCode", dateCode);
+                        params.put("MaterialId", materialId);
+                        params.put("MaterialAttribute", materialAttribute);
+                    }
+                    /**
+                     * 如果detailid 有值 证明是从明细表过来的子件数据
+                     */
+                    if (detailId != -1) {
+                        params.put("DetailId", detailId);
+                    }
+                    params.put("bCheckMode", false);
+                    getPresenter().submitBarcodeLotPickOutSplit(params);
+                } else {
+                    getPresenter().submitBarcodeOutSplitAudit(params);
                 }
-                params.put("bCheckMode", false);
-                getPresenter().submitBarcodeLotPickOutSplit(params);
                 break;
             case R.id.btn_cancel:
                 onBackPressed();

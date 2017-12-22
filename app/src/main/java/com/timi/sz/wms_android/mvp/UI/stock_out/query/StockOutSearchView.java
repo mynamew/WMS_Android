@@ -7,10 +7,13 @@ import com.timi.sz.wms_android.bean.outstock.outsource.QueryOutSourceFeedByInput
 import com.timi.sz.wms_android.bean.outstock.outsource.QueryOutSourcePickByInputResult;
 import com.timi.sz.wms_android.bean.outstock.outsource.QueryWWPickDataByOutSourceResult;
 import com.timi.sz.wms_android.bean.outstock.pick.QueryDNByInputForPickResult;
+import com.timi.sz.wms_android.bean.outstock.pick.QuerySalesOutSotckByInputForPickResult;
+import com.timi.sz.wms_android.bean.outstock.pick.QueryTransferByInputForPickResult;
 import com.timi.sz.wms_android.bean.outstock.product.QueryPrdFeedByInputResult;
 import com.timi.sz.wms_android.bean.outstock.product.QueryProductPickByInputResult;
 import com.timi.sz.wms_android.bean.outstock.sale.QueryDNByInputForOutStockResult;
 import com.timi.sz.wms_android.bean.outstock.sale.QuerySalesOutSotckByInputForOutStockResult;
+import com.timi.sz.wms_android.bean.stockin_work.allot_out.QueryAllotOutResult;
 import com.timi.sz.wms_android.mvp.base.view.iml.MvpBaseView;
 
 /**
@@ -88,4 +91,22 @@ public interface StockOutSearchView extends MvpBaseView {
      * @param bean
      */
     void queryOtherOutStockByInput(QueryOtherOutStockByInputResult bean);
+
+    /**
+     * 销售出库单末尾号查询
+     * @param bean
+     */
+    void querySalesOutSotckByInputForPick(QuerySalesOutSotckByInputForPickResult bean);
+
+    /**
+     * 调拨单查询
+     * @param bean
+     */
+    void queryTransferByInputForPick(QueryTransferByInputForPickResult bean);
+
+    /**
+     * 调拨调出
+     * @param bean
+     */
+    void queryTransferByInputForOutStock(QueryAllotOutResult bean);
 }

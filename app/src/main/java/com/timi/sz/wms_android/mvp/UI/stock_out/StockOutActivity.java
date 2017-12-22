@@ -5,9 +5,12 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.timi.sz.wms_android.R;
+import com.timi.sz.wms_android.base.uils.Constants;
 import com.timi.sz.wms_android.base.uils.SpUtils;
 import com.timi.sz.wms_android.mvp.UI.list.BuyInStockListActivity;
 import com.timi.sz.wms_android.mvp.UI.stock_in.StockInActivity;
+import com.timi.sz.wms_android.mvp.UI.stock_in_work.StockInWorkActivity;
+import com.timi.sz.wms_android.mvp.UI.stock_in_work.query.StockInWorkQueryActivity;
 import com.timi.sz.wms_android.mvp.UI.stock_out.buy_return_material.BuyReturnMaterialActivity;
 import com.timi.sz.wms_android.mvp.UI.stock_out.other.scan.OtherOutStockScanActivity;
 import com.timi.sz.wms_android.mvp.UI.stock_out.pick.PickActivity;
@@ -17,6 +20,7 @@ import com.timi.sz.wms_android.mvp.base.view.BaseNoMvpActivity;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_ALLOT_OUT_PICK;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_CODE_STR;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_FINISH_GOODS_PICK;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_OTHER_OUT_AUDIT;
@@ -83,7 +87,10 @@ public class StockOutActivity extends BaseNoMvpActivity {
             R.id.tv_stock_out_other_buy_return,
             R.id.tv_stock_out_other_check,
             R.id.tv_stock_out_other_create_order,
-            R.id.activity_stock_out})
+            R.id.activity_stock_out,
+            R.id.tv_stock_out_pick_send,
+            R.id.tv_stock_out_pick_sale,
+            R.id.tv_allot_outstock})
     public void onViewClicked(View view) {
         Intent intent = new Intent();
         switch (view.getId()) {
@@ -207,7 +214,7 @@ public class StockOutActivity extends BaseNoMvpActivity {
                 } else {
                     intent.setClass(StockOutActivity.this, StockOutSearchActivity.class);
                 }
-                intent.putExtra(STOCK_OUT_CODE_STR, STOCK_OUT_PRODUCTION_ALLOT);
+                intent.putExtra(STOCK_OUT_CODE_STR, STOCK_OUT_ALLOT_OUT_PICK);
                 break;
             case R.id.tv_stock_out_sale_check://销售审核
                 /**
@@ -280,6 +287,17 @@ public class StockOutActivity extends BaseNoMvpActivity {
 //                intent.putExtra(STOCK_OUT_CODE_STR, STOCK_OUT_FINISH_GOODS_PICK);
 //                break;
             case R.id.activity_stock_out:
+                break;
+            case R.id.tv_allot_outstock://调拨调出
+                /**
+                 * 如果是无纸化作业
+                 */
+                if (SpUtils.getInstance().getIsBillList()) {
+                    intent.setClass(StockOutActivity.this, BuyInStockListActivity.class);
+                } else {
+                    intent.setClass(StockOutActivity.this, StockOutSearchActivity.class);
+                }
+                intent.putExtra(Constants.STOCK_OUT_CODE_STR, Constants.STOCK_OUT_ALLOT_OUT);
                 break;
         }
         startActivity(intent);

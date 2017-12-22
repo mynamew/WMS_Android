@@ -133,13 +133,9 @@ public class NormalOutStockPresenter extends MvpBasePresenter<NormalOutStockView
             submitMakeOrAuditBillHttpSubscriber.unSubscribe();
             submitMakeOrAuditBillHttpSubscriber = null;
         }
-        if (null != submitBarcodeOutAuditDataHttpSubscriber) {
-            submitBarcodeOutAuditDataHttpSubscriber.unSubscribe();
-            submitBarcodeOutAuditDataHttpSubscriber = null;
-        }
-        if (null != submitBarcodeOutSplitAuditDataHttpSubscriber) {
-            submitBarcodeOutSplitAuditDataHttpSubscriber.unSubscribe();
-            submitBarcodeOutSplitAuditDataHttpSubscriber = null;
+        if (null != submitBarcodeLotPickOutResultHttpSubscriber) {
+            submitBarcodeLotPickOutResultHttpSubscriber.unSubscribe();
+            submitBarcodeLotPickOutResultHttpSubscriber = null;
         }
     }
 }
