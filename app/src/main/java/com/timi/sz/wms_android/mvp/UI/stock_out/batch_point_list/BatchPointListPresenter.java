@@ -44,7 +44,7 @@ public class BatchPointListPresenter extends MvpBasePresenter<BatchPointListView
 
                 @Override
                 public void onError(String errorMsg) {
-                    ToastUtils.showShort(errorMsg);
+//                    ToastUtils.showShort(errorMsg);
                 }
             });
         }
@@ -65,7 +65,7 @@ public class BatchPointListPresenter extends MvpBasePresenter<BatchPointListView
 
                 @Override
                 public void onError(String errorMsg) {
-                    ToastUtils.showShort(errorMsg);
+//                    ToastUtils.showShort(errorMsg);
                 }
             });
         }

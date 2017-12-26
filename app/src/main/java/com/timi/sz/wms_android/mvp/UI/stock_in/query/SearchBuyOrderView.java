@@ -9,6 +9,7 @@ import com.timi.sz.wms_android.bean.instock.search.QueryPrdReturnByInputResult;
 import com.timi.sz.wms_android.bean.instock.search.ReceiveOrdernoBean;
 import com.timi.sz.wms_android.bean.instock.search.SaleGoodsReturnBean;
 import com.timi.sz.wms_android.bean.instock.search.SendOrdernoBean;
+import com.timi.sz.wms_android.bean.other.OtherOutAndInStockBean;
 import com.timi.sz.wms_android.mvp.base.view.iml.MvpBaseView;
 
 /**
@@ -57,7 +58,7 @@ public interface SearchBuyOrderView extends MvpBaseView {
      *
      * @param bean
      */
-    void searchOtherAuditSelectOrderno(OtherAuditSelectOrdernoBean bean);
+    void searchOtherAuditSelectOrderno(OtherOutAndInStockBean bean);
 
     /**
      * 搜索委外退料—选单的单号

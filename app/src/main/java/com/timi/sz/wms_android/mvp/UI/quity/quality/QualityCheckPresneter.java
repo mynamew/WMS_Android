@@ -44,7 +44,7 @@ public class QualityCheckPresneter extends MvpBasePresenter<QualityCheckView> {
 
                 @Override
                 public void onError(String errorMsg) {
-                    ToastUtils.showShort(errorMsg);
+//                    ToastUtils.showShort(errorMsg);
                 }
             });
         }
@@ -65,8 +65,8 @@ public class QualityCheckPresneter extends MvpBasePresenter<QualityCheckView> {
 
                 @Override
                 public void onError(String errorMsg) {
-                    ToastUtils.showShort(errorMsg);
-                    getView().queryReceiptForIQC(position);
+//                    ToastUtils.showShort(errorMsg);
+//                    getView().queryReceiptForIQC(position);
                 }
             });
         }
@@ -86,7 +86,7 @@ public class QualityCheckPresneter extends MvpBasePresenter<QualityCheckView> {
 
                 @Override
                 public void onError(String errorMsg) {
-                    ToastUtils.showShort(errorMsg);
+//                    ToastUtils.showShort(errorMsg);
                 }
             });
         }
@@ -109,7 +109,7 @@ public class QualityCheckPresneter extends MvpBasePresenter<QualityCheckView> {
 
                 @Override
                 public void onError(String errorMsg) {
-                    ToastUtils.showShort(errorMsg);
+//                    ToastUtils.showShort(errorMsg);
                 }
             });
         }
@@ -132,7 +132,7 @@ public class QualityCheckPresneter extends MvpBasePresenter<QualityCheckView> {
 
                 @Override
                 public void onError(String errorMsg) {
-                    ToastUtils.showShort(errorMsg);
+//                    ToastUtils.showShort(errorMsg);
                 }
             });
         }

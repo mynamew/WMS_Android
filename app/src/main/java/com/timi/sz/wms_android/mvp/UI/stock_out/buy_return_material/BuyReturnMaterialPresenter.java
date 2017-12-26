@@ -45,7 +45,7 @@ public class BuyReturnMaterialPresenter extends MvpBasePresenter<BuyReturnMateri
 
                 @Override
                 public void onError(String errorMsg) {
-                     ToastUtils.showShort(errorMsg);
+//                     ToastUtils.showShort(errorMsg);
                 }
             });
         }
@@ -68,7 +68,7 @@ public class BuyReturnMaterialPresenter extends MvpBasePresenter<BuyReturnMateri
 
                 @Override
                 public void onError(String errorMsg) {
-                    ToastUtils.showShort(errorMsg);
+//                    ToastUtils.showShort(errorMsg);
                 }
             });
         }

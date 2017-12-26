@@ -27,29 +27,7 @@ public class OneStepAllotPresenter extends MvpBasePresenter<OneStepAllotView> {
     private HttpSubscriber<VertifyLocationCodeBean> vertifyLocationCodeBeanHttpSubscriber = null;
     private HttpSubscriber<Object> submitTransferOneStepHttpSubscriber = null;
     /**
-     * 验证库位码 是否有效
-     *
-     * @param params
-     */
-    public void vertifyLocationCode(final Map<String, Object> params) {
-        getView().showProgressDialog();
-        if (null == vertifyLocationCodeBeanHttpSubscriber) {
-            vertifyLocationCodeBeanHttpSubscriber = new HttpSubscriber<>(new OnResultCallBack<VertifyLocationCodeBean>() {
-                @Override
-                public void onSuccess(VertifyLocationCodeBean bean) {
-                    getView().vertifyLocationCode(bean);
-                }
-
-                @Override
-                public void onError(String errorMsg) {
-                    ToastUtils.showShort(errorMsg);
-                }
-            });
-        }
-        model.vertifyLocationCode(params, vertifyLocationCodeBeanHttpSubscriber);
-    }
-    /**
-     * 验证库位码 是否有效
+     * 提交一步调入
      *
      * @param params
      */
@@ -60,11 +38,13 @@ public class OneStepAllotPresenter extends MvpBasePresenter<OneStepAllotView> {
                 @Override
                 public void onSuccess(Object o) {
                     getView().submitTransferOneStep(o);
+                    getView().setLocationSelect();
                 }
 
                 @Override
                 public void onError(String errorMsg) {
-                    ToastUtils.showShort(errorMsg);
+//                    ToastUtils.showShort(errorMsg);
+                    getView().setLocationSelect();
                 }
             });
         }

@@ -46,61 +46,61 @@ public class Advance1QualityPresenter extends MvpBasePresenter<Advance1QualityVi
 
                 @Override
                 public void onError(String errorMsg) {
-                    ToastUtils.showShort(errorMsg);
-                    /**
-                     * 测试数据
-                     */
-                    GetAdvanceData getAdvanceData = new GetAdvanceData();
-                    GetAdvanceData.NormalSummaryBean bean = new GetAdvanceData.NormalSummaryBean();
-                    bean.setReceiptId(9695);
-                    bean.setReceiptDetailId(23468);
-                    bean.setReceiptCode("DH160921011");
-                    bean.setReceiptDate("receiptDate");
-                    bean.setSourceBillCode("sourceBillCode");
-                    bean.setSupplierName("深圳市日科实业有限公司");
-                    bean.setCreater("");
-                    bean.setMaterialId(330);
-                    bean.setMaterialCode("10101010331");
-                    bean.setMaterialName("贴片电阻");
-                    bean.setMaterialStandard("47K/0402/±5%");
-                    bean.setMaterialAttribute("");
-                    bean.setReceiveQty(10000);
-                    bean.setSampleQty(80);
-                    bean.setQcStatus(0);
-                    bean.setQcResult(0);
-                    bean.setIsBarCode(false);
-                    bean.setBarcodeSource(1);
-                    getAdvanceData.setNormalSummary(bean);
-                    GetAdvanceData.AdvanceSummaryBean advance = new GetAdvanceData.AdvanceSummaryBean();
-                    advance.setQcType(2);
-                    advance.setCurrentStrict("正常");
-                    advance.setCurrentLevel("Ⅰ");
-                    advance.setSampleCode("J");
-                    advance.setCurrentAQL("0.65");
-                    advance.setAcceptAQL(0);
-                    advance.setRejectAQL(2);
-                    advance.setBeginQty(3201);
-                    advance.setEndQty(10000);
-                    advance.setQcQty(0);
-                    advance.setFatalQty(0);
-                    advance.setSeriousQty(0);
-                    advance.setCommonlyQty(0);
-                    advance.setSlightQty(0);
-                    getAdvanceData.setAdvanceSummary(advance);
-
-                    List<GetAdvanceData.FaultDataBean> datas = new ArrayList<>();
-                    for (int i = 0; i < 3; i++) {
-                        GetAdvanceData.FaultDataBean fault = new GetAdvanceData.FaultDataBean();
-                        fault.setFaultId(i);
-                        fault.setFaultCode("00" + i);
-                        fault.setFaultName(i + "不良");
-                        fault.setFaultQty(0);
-                        fault.setqC_DefectGrade(i % 2 == 0 ? "A" : "C");
-                        datas.add(fault);
-                    }
-
-                    getAdvanceData.setFaultData(datas);
-                    getView().getAdvance1Data(getAdvanceData);
+//                    ToastUtils.showShort(errorMsg);
+//                    /**
+//                     * 测试数据
+//                     */
+//                    GetAdvanceData getAdvanceData = new GetAdvanceData();
+//                    GetAdvanceData.NormalSummaryBean bean = new GetAdvanceData.NormalSummaryBean();
+//                    bean.setReceiptId(9695);
+//                    bean.setReceiptDetailId(23468);
+//                    bean.setReceiptCode("DH160921011");
+//                    bean.setReceiptDate("receiptDate");
+//                    bean.setSourceBillCode("sourceBillCode");
+//                    bean.setSupplierName("深圳市日科实业有限公司");
+//                    bean.setCreater("");
+//                    bean.setMaterialId(330);
+//                    bean.setMaterialCode("10101010331");
+//                    bean.setMaterialName("贴片电阻");
+//                    bean.setMaterialStandard("47K/0402/±5%");
+//                    bean.setMaterialAttribute("");
+//                    bean.setReceiveQty(10000);
+//                    bean.setSampleQty(80);
+//                    bean.setQcStatus(0);
+//                    bean.setQcResult(0);
+//                    bean.setIsBarCode(false);
+//                    bean.setBarcodeSource(1);
+//                    getAdvanceData.setNormalSummary(bean);
+//                    GetAdvanceData.AdvanceSummaryBean advance = new GetAdvanceData.AdvanceSummaryBean();
+//                    advance.setQcType(2);
+//                    advance.setCurrentStrict("正常");
+//                    advance.setCurrentLevel("Ⅰ");
+//                    advance.setSampleCode("J");
+//                    advance.setCurrentAQL("0.65");
+//                    advance.setAcceptAQL(0);
+//                    advance.setRejectAQL(2);
+//                    advance.setBeginQty(3201);
+//                    advance.setEndQty(10000);
+//                    advance.setQcQty(0);
+//                    advance.setFatalQty(0);
+//                    advance.setSeriousQty(0);
+//                    advance.setCommonlyQty(0);
+//                    advance.setSlightQty(0);
+//                    getAdvanceData.setAdvanceSummary(advance);
+//
+//                    List<GetAdvanceData.FaultDataBean> datas = new ArrayList<>();
+//                    for (int i = 0; i < 3; i++) {
+//                        GetAdvanceData.FaultDataBean fault = new GetAdvanceData.FaultDataBean();
+//                        fault.setFaultId(i);
+//                        fault.setFaultCode("00" + i);
+//                        fault.setFaultName(i + "不良");
+//                        fault.setFaultQty(0);
+//                        fault.setqC_DefectGrade(i % 2 == 0 ? "A" : "C");
+//                        datas.add(fault);
+//                    }
+//
+//                    getAdvanceData.setFaultData(datas);
+//                    getView().getAdvance1Data(getAdvanceData);
                 }
             });
         }
@@ -123,7 +123,7 @@ public class Advance1QualityPresenter extends MvpBasePresenter<Advance1QualityVi
 
                 @Override
                 public void onError(String errorMsg) {
-                    ToastUtils.showShort(errorMsg);
+//                    ToastUtils.showShort(errorMsg);
                 }
             });
         }
@@ -146,7 +146,7 @@ public class Advance1QualityPresenter extends MvpBasePresenter<Advance1QualityVi
 
                 @Override
                 public void onError(String errorMsg) {
-                    ToastUtils.showShort(errorMsg);
+//                    ToastUtils.showShort(errorMsg);
                 }
             });
         }

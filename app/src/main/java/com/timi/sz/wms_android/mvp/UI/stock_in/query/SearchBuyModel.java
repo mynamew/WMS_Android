@@ -9,6 +9,7 @@ import com.timi.sz.wms_android.bean.instock.search.QueryPrdReturnByInputResult;
 import com.timi.sz.wms_android.bean.instock.search.ReceiveOrdernoBean;
 import com.timi.sz.wms_android.bean.instock.search.SaleGoodsReturnBean;
 import com.timi.sz.wms_android.bean.instock.search.SendOrdernoBean;
+import com.timi.sz.wms_android.bean.other.OtherOutAndInStockBean;
 import com.timi.sz.wms_android.http.HttpManager;
 import com.timi.sz.wms_android.http.api.ApiService;
 import com.timi.sz.wms_android.http.api.CommonResult;
@@ -109,11 +110,11 @@ public class SearchBuyModel extends MvpBaseModel {
      * @param observer
      */
     public void searchOtherAuditSelectOrderno(final Map<String, Object> params,
-                                                   final Observer<OtherAuditSelectOrdernoBean> observer) {
+                                                   final Observer<OtherOutAndInStockBean> observer) {
         HttpManager.getInstance().HttpManagerRequest(observer,
-                new ApiServiceMethodCallBack<OtherAuditSelectOrdernoBean>() {
+                new ApiServiceMethodCallBack<OtherOutAndInStockBean>() {
                     @Override
-                    public Observable<CommonResult<OtherAuditSelectOrdernoBean>> createObservable(ApiService apiService) {
+                    public Observable<CommonResult<OtherOutAndInStockBean>> createObservable(ApiService apiService) {
                         return apiService.searchOtherAuditSelectOrderno(params);
                     }
                 });

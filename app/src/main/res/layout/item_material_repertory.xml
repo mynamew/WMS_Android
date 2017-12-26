@@ -14,7 +14,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="30px"
+            android:layout_marginLeft="10px"
             android:text="@string/batch"
             android:textColor="@color/color_666"
             android:textSize="14sp"/>
@@ -37,7 +37,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="30px"
+            android:layout_marginLeft="10px"
             android:text="@string/location_code"
             android:textColor="@color/color_666"
             android:textSize="28px"/>

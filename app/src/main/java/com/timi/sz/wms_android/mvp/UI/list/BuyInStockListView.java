@@ -7,6 +7,8 @@ import com.timi.sz.wms_android.bean.instock.search.FinishGoodsCreateBillBean;
 import com.timi.sz.wms_android.bean.instock.search.OtherAuditSelectOrdernoBean;
 import com.timi.sz.wms_android.bean.instock.search.QueryPrdInstockByInputResult;
 import com.timi.sz.wms_android.bean.instock.search.QueryPrdReturnByInputResult;
+import com.timi.sz.wms_android.bean.instock.search.SaleGoodsReturnBean;
+import com.timi.sz.wms_android.bean.other.OtherOutAndInStockBean;
 import com.timi.sz.wms_android.bean.outstock.buy.BuyReturnMaterialByOrdernoData;
 import com.timi.sz.wms_android.bean.outstock.buy.SubmitBarcodePurReturnData;
 import com.timi.sz.wms_android.bean.outstock.other.QueryOtherOutStockByInputResult;
@@ -18,10 +20,12 @@ import com.timi.sz.wms_android.bean.outstock.pick.QueryDNByInputForPickResult;
 import com.timi.sz.wms_android.bean.outstock.pick.QueryTransferByInputForPickResult;
 import com.timi.sz.wms_android.bean.outstock.product.QueryPrdFeedByInputResult;
 import com.timi.sz.wms_android.bean.outstock.product.QueryProductPickByInputResult;
+import com.timi.sz.wms_android.bean.outstock.sale.QuerySalesOutSotckByInputForOutStockResult;
 import com.timi.sz.wms_android.bean.stockin_work.allot_out.QueryAllotOutResult;
 import com.timi.sz.wms_android.bean.stockin_work.query.AllotOneSetpResult;
 import com.timi.sz.wms_android.bean.stockin_work.query.AllotScanResult;
 import com.timi.sz.wms_android.bean.stockin_work.query.FormChangeInResult;
+import com.timi.sz.wms_android.bean.stockin_work.query.FormChangeOutResult;
 import com.timi.sz.wms_android.bean.stockin_work.query.PointResult;
 import com.timi.sz.wms_android.mvp.base.view.iml.MvpBaseView;
 
@@ -128,14 +132,14 @@ public interface BuyInStockListView extends MvpBaseView {
      *
      * @param bean
      */
-    void getOtherInstockData(OtherAuditSelectOrdernoBean bean);
+    void getOtherInstockData(OtherOutAndInStockBean bean);
 
     /**
      * 获取其他出库单数据
      *
      * @param bean
      */
-    void getOtherOutstockData(QueryOtherOutStockByInputResult bean);
+    void getOtherOutstockData(OtherOutAndInStockBean bean);
 
     /**
      * 调拨拣货
@@ -205,6 +209,22 @@ public interface BuyInStockListView extends MvpBaseView {
      * 形态转换出库
      * @param bean
      */
-    void getConvertOutByInput(FormChangeInResult bean);
+    void getConvertOutByInput(FormChangeOutResult bean);
 
+    /**
+     * 销售审核列表获取数据
+     * @param bean
+     */
+    void getSalesOutSotckByInputForOutStock(QuerySalesOutSotckByInputForOutStockResult bean);
+    /**
+     * 销售生单列表获取数据
+     * @param bean
+     */
+    void getDNDataForOutStock(QuerySalesOutSotckByInputForOutStockResult bean);
+
+    /**
+     * 销售退料数据
+     * @param bean
+     */
+    void getSalesReturnData(SaleGoodsReturnBean bean);
 }

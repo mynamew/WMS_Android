@@ -6,16 +6,16 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.timi.sz.wms_android.R;
 import com.timi.sz.wms_android.base.adapter.BaseRecyclerAdapter;
 import com.timi.sz.wms_android.base.adapter.RecyclerViewHolder;
 import com.timi.sz.wms_android.base.divider.DividerItemDecoration;
+import com.timi.sz.wms_android.base.uils.Constants;
 import com.timi.sz.wms_android.base.uils.PackageUtils;
 import com.timi.sz.wms_android.base.uils.SpUtils;
 import com.timi.sz.wms_android.bean.outstock.detail.MaterialDetailResult;
-import com.timi.sz.wms_android.bean.outstock.outsource.GetOutSourcePickDetailResult;
-import com.timi.sz.wms_android.bean.outstock.outsource.GetWWDetailPickDataResult;
 import com.timi.sz.wms_android.mvp.base.BaseActivity;
 import com.timi.sz.wms_android.view.FloatCircleButtonUpTopView;
 
@@ -33,7 +33,6 @@ import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_POINT_DETIAI
 import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_POINT_REGIONID;
 import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_POINT_WAREHOUSEID;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_CODE_STR;
-import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_OUTSOURCE_FEED_SUPLLIEMENT;
 
 /**
  * 出库单据详情
@@ -53,6 +52,8 @@ public class DetailActivity extends BaseActivity<DetailView, DetailPresenter> im
     RecyclerView rlvDetial;
     @BindView(R.id.fbtn_detail)
     FloatCircleButtonUpTopView fbtnDetail;
+    @BindView(R.id.tv_tip)
+    TextView tvTip;
     private int billId;
     private int regionId;
     private int warehouseId;
@@ -71,9 +72,16 @@ public class DetailActivity extends BaseActivity<DetailView, DetailPresenter> im
 
     @Override
     public void initBundle(Bundle savedInstanceState) {
-        intentCode = getIntent().getIntExtra(STOCK_OUT_CODE_STR, STOCK_OUT_OUTSOURCE_FEED_SUPLLIEMENT);
-        setActivityTitle(getString(R.string.outstock_detail_title));
-        billId = getIntent().getIntExtra(OUT_STOCK_POINT_DETIAIL_BILLID, 0);
+        intentCode = getIntent().getIntExtra(STOCK_OUT_CODE_STR, -1);
+        if (intentCode == -1) {
+            intentCode = getIntent().getIntExtra(Constants.CODE_STR, -1);
+        }
+        setActivityTitle(getString(R.string.detail));
+        billId = getIntent().getIntExtra(OUT_STOCK_POINT_DETIAIL_BILLID, -1);
+        //如果不是出库传过来的billid则是入库的billid
+        if (billId == -1) {
+            billId = getIntent().getIntExtra(Constants.STOCKIN_BILLID, -1);
+        }
         warehouseId = getIntent().getIntExtra(OUT_STOCK_POINT_WAREHOUSEID, 0);
         regionId = getIntent().getIntExtra(OUT_STOCK_POINT_REGIONID, 0);
 
@@ -81,7 +89,20 @@ public class DetailActivity extends BaseActivity<DetailView, DetailPresenter> im
 
     @Override
     public void initView() {
-
+        switch (intentCode) {
+            case Constants.CREATE_PRO_CHECK_NUM://产成品 审核
+               tvTip.setText("产成品入库(审核)单据详情");
+                break;
+            case Constants.CREATE_PRO_CREATE_ORDER_NUM://产成品 生单
+                tvTip.setText("产成品入库(生单)单据详情");
+                break;
+            case Constants.OTHER_IN_STOCK_SELECT_ORDERNO://其他 选单
+                tvTip.setText("其他入库(审核)单据详情");
+                break;
+            case Constants.STOCK_OUT_PRODUCTION_APPLY_BILL://领料 申请
+                tvTip.setText("领料申请单据详情");
+                break;
+        }
     }
 
     @Override
@@ -93,7 +114,7 @@ public class DetailActivity extends BaseActivity<DetailView, DetailPresenter> im
         params.put("BillId", billId);
         params.put("RegionId", regionId);
         params.put("WarehouseId", warehouseId);
-        getPresenter().getDetailPickData(params,intentCode);
+        getPresenter().getDetailPickData(params, intentCode);
     }
 
     @Override
@@ -119,7 +140,9 @@ public class DetailActivity extends BaseActivity<DetailView, DetailPresenter> im
     public void onViewClicked() {
         ivShowMore.setSelected(!ivShowMore.isSelected());
         dealData();
-        adapter.notifyDataSetChanged();
+        if(null!=adapter){
+            adapter.notifyDataSetChanged();
+        }
     }
 
     /**

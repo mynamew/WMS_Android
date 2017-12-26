@@ -10,7 +10,6 @@
     tools:context="com.timi.sz.wms_android.mvp.UI.stock_in_work.lib_adjust.LibraryAdjustActivity">
     <include layout="@layout/title_head"/>
 
-
     <RelativeLayout
         android:id="@+id/rl_location_code"
         android:layout_width="match_parent"
@@ -20,35 +19,35 @@
         >
         <!--库位码-->
         <TextView
-            android:id="@+id/tv_location_code_tip"
+            android:id="@+id/tv_old_pack_code_tip"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
             android:layout_centerVertical="true"
             android:layout_marginTop="10dp"
             android:gravity="center_vertical"
             android:paddingLeft="15dp"
-            android:text="@string/in_lib_location_code"
+            android:text="@string/old_pack_code"
             android:textColor="#333"
             />
         <!--条码-->
         <EditText
-            android:id="@+id/tv_scan_location"
+            android:id="@+id/et_old_pack_code"
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="20px"
-            android:layout_toRightOf="@id/tv_location_code_tip"
+            android:layout_marginLeft="30px"
+            android:layout_toRightOf="@id/tv_old_pack_code_tip"
             android:background="@drawable/selector_et"
             android:ellipsize="end"
             android:gravity="center_vertical"
-            android:hint="@string/please_scan_lib_location_code"
+            android:hint="@string/please_input_old_pack_code"
             android:paddingLeft="10dp"
             android:singleLine="true"
             android:text=""
             android:textSize="14sp"/>
 
         <ImageView
-            android:id="@+id/iv_can_location"
+            android:id="@+id/iv_old_pack"
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_alignParentRight="true"
@@ -73,28 +72,28 @@
         >
         <!--条码-->
         <TextView
-            android:id="@+id/tv_material_code_tip"
+            android:id="@+id/tv_pack_code_tip"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginTop="10dp"
             android:gravity="center_vertical"
             android:paddingLeft="15dp"
-            android:text="@string/material_code_tip"
+            android:text="@string/dest_pack_code"
             android:textColor="#333"/>
 
         <!--条码-->
         <EditText
-            android:id="@+id/et_material_code"
+            android:id="@+id/et_dest_pack_code_code"
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="50px"
-            android:layout_toRightOf="@id/tv_material_code_tip"
+            android:layout_marginLeft="10px"
+            android:layout_toRightOf="@id/tv_pack_code_tip"
             android:background="@drawable/selector_et"
             android:ellipsize="end"
             android:gravity="center_vertical"
-            android:hint="@string/please_scan_material_code"
+            android:hint="@string/please_input_dest_pack_code"
             android:paddingLeft="10dp"
             android:singleLine="true"
             android:text=""
@@ -111,7 +110,6 @@
             android:src="@mipmap/ic_scan"
             />
     </RelativeLayout>
-
     <LinearLayout
         android:id="@+id/ll_scan_info"
         android:layout_width="match_parent"
@@ -140,15 +138,15 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/material_code_tip"
+                android:text="@string/old_pack_code"
                 android:textColor="#333"
                 android:textSize="26px"/>
 
             <TextView
-                android:id="@+id/tv_barcode"
+                android:id="@+id/tv_old_pack_code"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="60px"
+                android:layout_marginLeft="40px"
                 android:textColor="#000"
                 android:textSize="26px"/>
         </LinearLayout>
@@ -164,7 +162,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/code_type"
+                android:text="@string/dest_pack_code"
                 android:textColor="#333"
                 android:textSize="26px"/>
 
@@ -172,7 +170,7 @@
                 android:id="@+id/tv_barcode_type"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="60px"
+                android:layout_marginLeft="20px"
                 android:textColor="#000"
                 android:textSize="26px"/>
         </LinearLayout>
@@ -196,7 +194,7 @@
                 android:id="@+id/tv_material_code"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="60px"
+                android:layout_marginLeft="70px"
                 android:textColor="#000"
                 android:textSize="26px"/>
         </LinearLayout>
@@ -220,7 +218,7 @@
                 android:id="@+id/tv_material_num"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="60px"
+                android:layout_marginLeft="70px"
                 android:textColor="@color/login_txt_color"
                 android:textSize="26px"/>
         </LinearLayout>
@@ -244,7 +242,7 @@
                 android:id="@+id/tv_material_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="60px"
+                android:layout_marginLeft="70px"
                 android:textColor="#000"
                 android:textSize="26px"/>
         </LinearLayout>
@@ -268,7 +266,7 @@
                 android:id="@+id/tv_material_model"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="60px"
+                android:layout_marginLeft="70px"
                 android:textColor="#000"
                 android:textSize="26px"/>
         </LinearLayout>
@@ -293,7 +291,7 @@
                 android:id="@+id/tv_material_attr"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="60px"
+                android:layout_marginLeft="70px"
                 android:textColor="#000"
                 android:textSize="26px"/>
         </LinearLayout>
@@ -304,17 +302,5 @@
         android:layout_width="match_parent"
         android:layout_height="1px"
         android:background="@color/divide_color"/>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"/>
 
-    <Button
-        android:id="@+id/btn_commit"
-        android:layout_width="match_parent"
-        android:layout_height="98px"
-        android:background="@drawable/selector_btn_bg_login"
-        android:text="@string/confirm_commit"
-        android:textColor="@color/white"
-        android:textSize="36px"/>
 </LinearLayout>

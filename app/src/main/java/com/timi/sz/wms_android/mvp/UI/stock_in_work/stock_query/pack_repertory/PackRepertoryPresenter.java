@@ -38,12 +38,14 @@ public class PackRepertoryPresenter extends MvpBasePresenter<PackRepertoryView> 
             queryStockContainerResultHttpSubscriber = new HttpSubscriber<>(new OnResultCallBack<QueryStockContainerResult>() {
                 @Override
                 public void onSuccess(QueryStockContainerResult o) {
+                    getView().setMaterialEdittextSelect();
                     getView().queryStockContainer(o);
                 }
 
                 @Override
                 public void onError(String errorMsg) {
-                    ToastUtils.showShort(errorMsg);
+//                    ToastUtils.showShort(errorMsg);
+                    getView().setMaterialEdittextSelect();
                 }
             });
         }

@@ -2,6 +2,7 @@ package com.timi.sz.wms_android.mvp.UI.stock_in_work.lib_adjust;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Selection;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
@@ -73,83 +74,55 @@ public class LibraryAdjustActivity extends BaseActivity<LibraryAdjustView, Libra
 
     @Override
     public void initView() {
-        setRightImg(R.mipmap.stockin_detail, new View.OnClickListener() {
+        setLocationSelect();
+        setEdittextListener(etMaterialCode, Constants.REQUEST_SCAN_CODE_MATERIIAL, R.string.please_scan_material_code, 0, new EdittextInputListener() {
             @Override
-            public void onClick(View v) {
+            public void verticalSuccess(String result) {
                 /**
-                 * 查看详情
+                 * 对库位码进行判断
                  */
-                Intent it = new Intent(LibraryAdjustActivity.this, LibAdjustDetailActivity.class);
-                startActivity(it);
-            }
-        });
-        etMaterialCode.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-
-                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                    InputMethodUtils.hide(LibraryAdjustActivity.this);
-                    String materialCode = etMaterialCode.getText().toString().trim();
-                    if (TextUtils.isEmpty(materialCode)) {
-                        ToastUtils.showShort(getString(R.string.please_scan_material_code));
-                        return false;
-                    }
-                    /**
-                     * 对库位码进行判断
-                     */
-                    if (TextUtils.isEmpty(locationCode)) {
-                        ToastUtils.showShort(getString(R.string.please_scan_lib_location_code));
-                        return false;
-                    }
-                    if (!locationCodeIsUse) {
-                        ToastUtils.showShort(getString(R.string.location_code_no_user));
-                        return false;
-                    }
-                    /**
-                     * 物料扫码并上架的网络请求
-                     */
-                    Map<String, Object> params1 = new HashMap<>();
-                    params1.put("UserId", SpUtils.getInstance().getUserId());
-                    params1.put("OrgId", SpUtils.getInstance().getOrgId());
-                    params1.put("MAC", PackageUtils.getMac());
-                    params1.put("SrcBillType", 0);
-                    params1.put("DestBillType", 51);
-                    params1.put("BinCode", locationCode);
-                    getPresenter().scanMaterialCode(params1);
+                if (TextUtils.isEmpty(locationCode)) {
+                    ToastUtils.showShort(getString(R.string.please_scan_lib_location_code));
+                    return ;
                 }
-                return false;
-            }
-        });
-        etScanLocation.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-
-                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                    InputMethodUtils.hide(LibraryAdjustActivity.this);
-                    String locationCodeStr = etScanLocation.getText().toString().trim();
-                    if (TextUtils.isEmpty(locationCodeStr)) {
-                        ToastUtils.showShort(getString(R.string.please_scan_lib_location_code));
-                    }
-                    /**
-                     * 保存库位码
-                     */
-                    locationCode = locationCodeStr;
-                    /**
-                     * 发起请求
-                     */
-                    /**
-                     * 判断库位码是否有效
-                     */
-                    Map<String, Object> params = new HashMap<>();
-                    params.put("UserId", SpUtils.getInstance().getUserId());
-                    params.put("OrgId", SpUtils.getInstance().getOrgId());
-                    params.put("MAC", PackageUtils.getMac());
-                    params.put("BinCode", locationCode);
-                    getPresenter().vertifyLocationCode(params);
+                if (!locationCodeIsUse) {
+                    ToastUtils.showShort(getString(R.string.location_code_no_user));
+                    return ;
                 }
-                return false;
+                /**
+                 * 物料扫码并上架的网络请求
+                 */
+                Map<String, Object> params1 = new HashMap<>();
+                params1.put("UserId", SpUtils.getInstance().getUserId());
+                params1.put("OrgId", SpUtils.getInstance().getOrgId());
+                params1.put("MAC", PackageUtils.getMac());
+                params1.put("BarcodeNo", etMaterialCode.getText().toString().trim());
+                params1.put("LocationNo", locationCode);
+                getPresenter().scanMaterialCode(params1);
             }
         });
+        setEdittextListener(etScanLocation, Constants.REQUEST_SCAN_CODE_LIB_LOATION, R.string.please_scan_lib_location_code, 0, new EdittextInputListener() {
+            @Override
+            public void verticalSuccess(String result) {
+                /**
+                 * 保存库位码
+                 */
+                locationCode = result;
+                /**
+                 * 发起请求
+                 */
+                /**
+                 * 判断库位码是否有效
+                 */
+                Map<String, Object> params = new HashMap<>();
+                params.put("UserId", SpUtils.getInstance().getUserId());
+                params.put("OrgId", SpUtils.getInstance().getOrgId());
+                params.put("MAC", PackageUtils.getMac());
+                params.put("BinCode", locationCode);
+                getPresenter().vertifyLocationCode(params);
+            }
+        });
+
     }
 
     @Override
@@ -192,10 +165,12 @@ public class LibraryAdjustActivity extends BaseActivity<LibraryAdjustView, Libra
                          * 请求库位信息
                          */
                         Map<String, Object> params = new HashMap<>();
-                        params.put("UserId", SpUtils.getInstance().getUserId());
-                        params.put("MAC", PackageUtils.getMac());
-                        params.put("OrgId", SpUtils.getInstance().getOrgId());
-                        params.put("BinCode", result);
+                        Map<String, Object> params1 = new HashMap<>();
+                        params1.put("UserId", SpUtils.getInstance().getUserId());
+                        params1.put("OrgId", SpUtils.getInstance().getOrgId());
+                        params1.put("MAC", PackageUtils.getMac());
+                        params1.put("BarcodeNo", etMaterialCode.getText().toString().trim());
+                        params1.put("LocationNo", locationCode);
                         getPresenter().vertifyLocationCode(params);
                     }
                 });
@@ -290,7 +265,8 @@ public class LibraryAdjustActivity extends BaseActivity<LibraryAdjustView, Libra
 
     @Override
     public void scanMaterialCode(StockAdjustResult bean) {
-        ToastUtils.showShort(getString(R.string.material_scan_putaway_success));
+        ToastUtils.showShort(R.string.lib_adjust_success);
+        llScanInfo.setVisibility(View.VISIBLE);
         /**
          * 扫码出来的数据
          */
@@ -308,5 +284,23 @@ public class LibraryAdjustActivity extends BaseActivity<LibraryAdjustView, Libra
     @Override
     public void libraryAdjust(LibraryAdjustResult result) {
 
+    }
+    @Override
+    public void setMaterialEdittextSelect() {
+        etMaterialCode.setFocusable(true);
+        etMaterialCode.setFocusableInTouchMode(true);
+        etMaterialCode.requestFocus();
+        etMaterialCode.findFocus();
+        Selection.selectAll(etMaterialCode.getText());
+    }
+
+    @Override
+    public void setLocationSelect() {
+        etScanLocation.setText(etScanLocation.getText());
+        etScanLocation.setFocusable(true);
+        etScanLocation.setFocusableInTouchMode(true);
+        etScanLocation.requestFocus();
+        etScanLocation.findFocus();
+        Selection.selectAll(etScanLocation.getText());
     }
 }

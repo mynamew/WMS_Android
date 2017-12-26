@@ -2,6 +2,7 @@ package com.timi.sz.wms_android.mvp.UI.stock_in_work.stock_query;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
+import android.text.Selection;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
@@ -19,6 +20,9 @@ import com.timi.sz.wms_android.mvp.UI.stock_in_work.stock_query.material_reperto
 import com.timi.sz.wms_android.mvp.UI.stock_in_work.stock_query.pack_repertory.PackRepertoryFragment;
 import com.timi.sz.wms_android.mvp.base.BaseActivity;
 import com.timi.sz.wms_android.view.MyTabView;
+
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -51,6 +55,7 @@ public class StockQueryActivity extends BaseActivity<StockQueryView, StockQueryP
     @Override
     public void initBundle(Bundle savedInstanceState) {
         setActivityTitle(getString(R.string.query_repertory_tip));
+        BaseMessage.register(this);
     }
 
 
@@ -100,7 +105,7 @@ public class StockQueryActivity extends BaseActivity<StockQueryView, StockQueryP
         /**
          * 设置输入框的监听
          */
-        setEdittextListener(etStockQuery, EDITTEXT_ORDERNO,isPackQuery?R.string.please_input_scan_query_material_code: 0, R.string.input_orderno_more_four, new EdittextInputListener() {
+        setEdittextListener(etStockQuery, EDITTEXT_ORDERNO, isPackQuery ? R.string.please_input_scan_query_material_code : 0, R.string.input_orderno_more_four, new EdittextInputListener() {
             @Override
             public void verticalSuccess(String result) {
                 /**
@@ -166,6 +171,12 @@ public class StockQueryActivity extends BaseActivity<StockQueryView, StockQueryP
         }
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        BaseMessage.unregister(this);
+    }
+
     @OnClick(R.id.iv_stock_query_scan)
     public void onViewClicked() {
         /**
@@ -175,6 +186,7 @@ public class StockQueryActivity extends BaseActivity<StockQueryView, StockQueryP
             scan(Constants.REQUEST_SCAN_CODE_CONTAINER, new ScanQRCodeResultListener() {
                 @Override
                 public void scanSuccess(int requestCode, String result) {
+                    etStockQuery.setText(result);
                     StockQueryEvent stockQueryEvent = new StockQueryEvent(StockQueryEvent.STOCK_QUERY_PACK_REPERTORY);
                     stockQueryEvent.inputContent = result;
                     BaseMessage.post(stockQueryEvent);
@@ -184,11 +196,34 @@ public class StockQueryActivity extends BaseActivity<StockQueryView, StockQueryP
             scan(Constants.REQUEST_SCAN_CODE_MATERIIAL, new ScanQRCodeResultListener() {
                 @Override
                 public void scanSuccess(int requestCode, String result) {
+                    etStockQuery.setText(result);
                     StockQueryEvent stockQueryEvent = new StockQueryEvent(StockQueryEvent.STOCK_QUERY_MATERIAL_REPERTORY);
                     stockQueryEvent.inputContent = result;
                     BaseMessage.post(stockQueryEvent);
                 }
             });
         }
+    }
+
+    /**
+     * 设置输入框 选中
+     */
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void setEdittextSelect(StockQueryEvent event) {
+        if (event.getEvent() == StockQueryEvent.STOCK_QUERY_EDITTEXT_SELECT) {
+            etStockQuery.setFocusable(true);
+            etStockQuery.setFocusableInTouchMode(true);
+            etStockQuery.requestFocus();
+            etStockQuery.findFocus();
+            Selection.selectAll(etStockQuery.getText());
+        }
+    }
+
+    /**
+     * 获取输入框内容
+     * @return
+     */
+    public String getEdittextContent() {
+        return etStockQuery.getText().toString().trim();
     }
 }

@@ -29,7 +29,6 @@ import com.timi.sz.wms_android.bean.outstock.outsource.SubmitBarcodeLotPickOutSp
 import com.timi.sz.wms_android.bean.outstock.outsource.common.DetailResultsBean;
 import com.timi.sz.wms_android.bean.outstock.outsource.common.MaterialResultsBean;
 import com.timi.sz.wms_android.http.message.BaseMessage;
-import com.timi.sz.wms_android.http.message.event.StockInPointEvent;
 import com.timi.sz.wms_android.http.message.event.StockOutSubmitScanMaterialEvent;
 import com.timi.sz.wms_android.http.message.event.SubmitBarcodeLotPickOutSplitEvent;
 import com.timi.sz.wms_android.mvp.UI.stock_out.divide_print.SplitPrintActivity;
@@ -70,6 +69,7 @@ import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_SALE_CARTON_
 import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_SALE_IS_CARTON;
 import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_SCANID;
 import static com.timi.sz.wms_android.base.uils.Constants.REQUEST_SCAN_CODE_MATERIIAL;
+import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_ALLOT_OUT;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_ALLOT_OUT_PICK;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_CODE_STR;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_FINISH_GOODS_PICK;
@@ -253,9 +253,9 @@ public class BatchPointActivity extends BaseActivity<BatchPointView, BatchPointP
                 destBillType = 23;
                 break;
             case STOCK_OUT_PRODUCTION_APPLY_BILL://领料申请
-                setActivityTitle(getString(R.string.material_point_production_pick_title));
+                setActivityTitle(getString(R.string.material_point_production_get_material_apply_title));
                 srcBillType = 31;
-                destBillType = 31;
+                destBillType = 23;
                 break;
             case STOCK_OUT_PRODUCTION_BILL://生产生单
                 setActivityTitle(getString(R.string.material_point_production_pick_title));
@@ -288,7 +288,7 @@ public class BatchPointActivity extends BaseActivity<BatchPointView, BatchPointP
                 break;
             case STOCK_OUT_OTHER_OUT_BILL://其他生单
                 setActivityTitle(getString(R.string.material_point_other_bill_title));
-                srcBillType = 51;
+                srcBillType = 0;
                 destBillType = 52;
                 break;
             case STOCK_OUT_FINISH_GOODS_PICK://成品拣货
@@ -296,7 +296,7 @@ public class BatchPointActivity extends BaseActivity<BatchPointView, BatchPointP
                 srcBillType = 61;
                 destBillType = 61;
                 break;
-            case STOCK_OUT_ALLOT_OUT_PICK://调拨调出
+            case STOCK_OUT_ALLOT_OUT_PICK://调拨拣货
                 srcBillType = 50;
                 destBillType = 61;
                 break;
@@ -306,6 +306,10 @@ public class BatchPointActivity extends BaseActivity<BatchPointView, BatchPointP
             case STOCK_OUT_SEND_OUT_PICK://发货拣货
                 srcBillType = 41;
                 destBillType = 61;
+                break;
+            case STOCK_OUT_ALLOT_OUT://调拨调出
+                srcBillType = 50;
+                destBillType = 50;
                 break;
             default:
                 break;
@@ -341,10 +345,12 @@ public class BatchPointActivity extends BaseActivity<BatchPointView, BatchPointP
                  */
                 Map<String, Object> params = new HashMap<>();
                 /**
-                 * 是否 装箱
+                 * 是否 装箱  默认传0
                  */
                 if (isCarton) {
                     params.put("cartonNo", cartonNum);
+                }else {
+                    params.put("cartonNo", 0);
                 }
                 params.put("UserId", SpUtils.getInstance().getUserId());
                 params.put("OrgId", SpUtils.getInstance().getOrgId());
@@ -367,7 +373,7 @@ public class BatchPointActivity extends BaseActivity<BatchPointView, BatchPointP
                 params.put("bCheckMode", true);
                 params.put("MaterialId", null != detailResultsBean ? detailResultsBean.getMaterialId() : materialResultsBean.getMaterialId());
                 params.put("MaterialAttribute", null != detailResultsBean ? detailResultsBean.getMaterialAttribute() : materialResultsBean.getMaterialAttribute());
-                getPresenter().submitBarcodeLotPickOut(params);
+                getPresenter().submitBarcodeLotPickOut(params,intentCode);
             }
         });
     }
@@ -414,6 +420,7 @@ public class BatchPointActivity extends BaseActivity<BatchPointView, BatchPointP
         if (result.getExceedQty() > 0) {
             Intent intent = new Intent(this, SplitPrintActivity.class);
             intent.putExtra(OUT_STOCK_PRINT_BILLID, billId);
+            intent.putExtra(STOCK_OUT_CODE_STR, intentCode);
             intent.putExtra(OUT_STOCK_PRINT_BATCh_DETAILID, detailId);
             intent.putExtra(OUT_STOCK_PRINT_SRCBILLTYPE, srcBillType);
             intent.putExtra(OUT_STOCK_PRINT_BARCODENO, etMaterialScan.getText().toString().trim());
@@ -464,7 +471,7 @@ public class BatchPointActivity extends BaseActivity<BatchPointView, BatchPointP
                         params.put("bCheckMode", false);
                         params.put("MaterialId", null != detailResultsBean ? detailResultsBean.getMaterialId() : materialResultsBean.getMaterialId());
                         params.put("MaterialAttribute", null != detailResultsBean ? detailResultsBean.getMaterialAttribute() : materialResultsBean.getMaterialAttribute());
-                        getPresenter().submitBarcodeLotPickOut(params);
+                        getPresenter().submitBarcodeLotPickOut(params, intentCode);
                     }
                 }).setButtonListener(R.id.btn_cancel, null, new MyDialog.DialogClickListener() {
                     @Override
@@ -562,7 +569,7 @@ public class BatchPointActivity extends BaseActivity<BatchPointView, BatchPointP
                         params.put("bCheckMode", true);
                         params.put("MaterialId", null != detailResultsBean ? detailResultsBean.getMaterialId() : materialResultsBean.getMaterialId());
                         params.put("MaterialAttribute", null != detailResultsBean ? detailResultsBean.getMaterialAttribute() : materialResultsBean.getMaterialAttribute());
-                        getPresenter().submitBarcodeLotPickOut(params);
+                        getPresenter().submitBarcodeLotPickOut(params, intentCode);
                     }
                 });
                 break;

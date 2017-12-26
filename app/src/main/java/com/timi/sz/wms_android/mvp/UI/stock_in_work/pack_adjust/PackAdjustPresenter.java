@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.timi.sz.wms_android.base.uils.ToastUtils;
 import com.timi.sz.wms_android.bean.instock.VertifyLocationCodeBean;
+import com.timi.sz.wms_android.bean.stockin_work.ContainerAdjustResult;
 import com.timi.sz.wms_android.bean.stockin_work.LibraryAdjustResult;
 import com.timi.sz.wms_android.bean.stockin_work.ScanLocationResult;
 import com.timi.sz.wms_android.bean.stockin_work.ScanMaterialResult;
@@ -24,75 +25,38 @@ import java.util.Map;
 
 public class PackAdjustPresenter extends MvpBasePresenter<PackAdjustView> {
     private PackAdjustModel model;
-    private HttpSubscriber<VertifyLocationCodeBean> vertifyLocationCodeBeanHttpSubscriber = null;
-    private HttpSubscriber<StockAdjustResult> scanMaterialResultHttpSubscriber = null;
-    private HttpSubscriber<LibraryAdjustResult> libraryAdjustResultHttpSubscriber = null;
+    private HttpSubscriber<ContainerAdjustResult> scanMaterialResultHttpSubscriber = null;
 
     public PackAdjustPresenter(Context context) {
         super(context);
         model = new PackAdjustModel();
     }
 
+
+
     /**
-     * 验证目的库位码是否有效
+     * 扫描物料码
      * @param params
      */
-    public void vertifyLocationCode(Map<String, Object> params) {
+    public void  containnerAdjust(Map<String, Object> params){
         getView().showProgressDialog();
-        if (null == vertifyLocationCodeBeanHttpSubscriber) {
-            vertifyLocationCodeBeanHttpSubscriber = new HttpSubscriber<>(new OnResultCallBack<VertifyLocationCodeBean>() {
-                @Override
-                public void onSuccess(VertifyLocationCodeBean o) {
-                    getView().vertifyLocationCode(o);
-                }
-
-                @Override
-                public void onError(String errorMsg) {
-                    ToastUtils.showShort(errorMsg);
-                }
-            });
-        }
-        model.vertifyLocationCode(params, vertifyLocationCodeBeanHttpSubscriber);
-    }
-
-    /**
-     * 扫描物料码
-     * @param params
-     */
-    public void  scanMaterialCode(Map<String, Object> params){
         if (null == scanMaterialResultHttpSubscriber) {
-            scanMaterialResultHttpSubscriber = new HttpSubscriber<>(new OnResultCallBack<StockAdjustResult>() {
+            scanMaterialResultHttpSubscriber = new HttpSubscriber<>(new OnResultCallBack<ContainerAdjustResult>() {
                 @Override
-                public void onSuccess(StockAdjustResult o) {
-
+                public void onSuccess(ContainerAdjustResult o) {
+                  getView().containnerAdjust(o);
+                    getView().setOldPackSelect();
                 }
 
                 @Override
                 public void onError(String errorMsg) {
+//                    ToastUtils.showShort(errorMsg);
+                    getView().setOldPackSelect();
 
                 }
             });
         }
-        model.scanMaterialCode(params, scanMaterialResultHttpSubscriber);
-    }
-    /**
-     * 扫描物料码
-     * @param params
-     */
-    public void  libraryAdjustResult(Map<String, Object> params){
-        if (null == libraryAdjustResultHttpSubscriber) {
-            libraryAdjustResultHttpSubscriber = new HttpSubscriber<>(new OnResultCallBack<LibraryAdjustResult>() {
-                @Override
-                public void onSuccess(LibraryAdjustResult o) {
-
-                }
-                @Override
-                public void onError(String errorMsg) {
-
-                }
-            });
-        }
-        model.libraryAdjustResult(params, libraryAdjustResultHttpSubscriber);
+        model.containnerAdjust(params, scanMaterialResultHttpSubscriber);
     }
 
     @Override
@@ -101,14 +65,6 @@ public class PackAdjustPresenter extends MvpBasePresenter<PackAdjustView> {
         if (null != scanMaterialResultHttpSubscriber) {
             scanMaterialResultHttpSubscriber.unSubscribe();
             scanMaterialResultHttpSubscriber = null;
-        }
-        if (null != vertifyLocationCodeBeanHttpSubscriber) {
-            vertifyLocationCodeBeanHttpSubscriber.unSubscribe();
-            vertifyLocationCodeBeanHttpSubscriber = null;
-        }
-        if (null != libraryAdjustResultHttpSubscriber) {
-            libraryAdjustResultHttpSubscriber.unSubscribe();
-            libraryAdjustResultHttpSubscriber = null;
         }
     }
 }

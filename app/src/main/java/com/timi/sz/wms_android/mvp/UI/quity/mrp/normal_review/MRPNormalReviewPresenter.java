@@ -40,7 +40,7 @@ public class MRPNormalReviewPresenter extends MvpBasePresenter<MRPNormalReviewVi
 
                 @Override
                 public void onError(String errorMsg) {
-                    ToastUtils.showShort(errorMsg);
+//                    ToastUtils.showShort(errorMsg);
                 }
             });
         }

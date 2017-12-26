@@ -50,7 +50,7 @@ public class PickPresenter extends MvpBasePresenter<PickView> {
 
                 @Override
                 public void onError(String errorMsg) {
-                    ToastUtils.showShort(errorMsg);
+//                    ToastUtils.showShort(errorMsg);
                 }
             });
         }

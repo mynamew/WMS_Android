@@ -72,14 +72,14 @@ public class MainActivity extends BaseActivity<MainView, MainPresenter> implemen
     public void initData() {
         //加载首页
         intentIndex(0);
-        String userName = SpUtils.getInstance().getUserName();
-        String password = SpUtils.getInstance().getPassword();
-        String tenacyName = SpUtils.getInstance().gettenancyName();
-        String mac = PackageUtils.getMac();
-        /**
-         * 获取版本
-         */
-        getPresenter().getVersion(tenacyName, userName, password, mac);
+//        String userName = SpUtils.getInstance().getUserName();
+//        String password = SpUtils.getInstance().getPassword();
+//        String tenacyName = SpUtils.getInstance().gettenancyName();
+//        String mac = PackageUtils.getMac();
+//        /**
+//         * 获取版本
+//         */
+//        getPresenter().getVersion(tenacyName, userName, password, mac);
         /**
          * 获取PDA信息
          */

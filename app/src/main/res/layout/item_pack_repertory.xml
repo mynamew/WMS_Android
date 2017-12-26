@@ -39,12 +39,12 @@
                 android:orientation="horizontal">
                 <LinearLayout
                     android:layout_width="0dp"
-                    android:layout_weight="1"
+                    android:layout_weight="2"
                     android:layout_height="wrap_content">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="30px"
+                        android:layout_marginLeft="10px"
                         android:text="@string/batch"
                         android:textColor="#666"
                         android:textSize="13sp"/>
@@ -59,12 +59,12 @@
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="0dp"
-                    android:layout_weight="1"
+                    android:layout_weight="2"
                     android:layout_height="wrap_content">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="30px"
+                        android:layout_marginLeft="10px"
                         android:text="@string/coding"
                         android:textColor="#666"
                         android:textSize="13sp"/>
@@ -77,13 +77,27 @@
                         android:textColor="@color/color_000"
                         android:textSize="13sp"/>
                 </LinearLayout>
-                <TextView
-                    android:id="@+id/tv_qty"
-                    android:textColor="@color/login_txt_color"
-                    android:layout_width="wrap_content"
-                    android:textSize="13sp"
-                    android:text="320"
-                    android:layout_height="wrap_content"/>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1.5"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10px"
+                        android:text="数量："
+                        android:textColor="#666"
+                        android:textSize="13sp"/>
+
+                    <TextView
+                        android:id="@+id/tv_qty"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="100"
+                        android:textColor="@color/login_txt_color"
+                        android:textSize="13sp"/>
+                </LinearLayout>
+
             </LinearLayout>
 
             <TextView

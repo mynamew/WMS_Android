@@ -11,16 +11,13 @@ import com.timi.sz.wms_android.mvp.base.view.iml.MvpBaseView;
 
 public interface OneStepAllotView extends MvpBaseView {
     /**
-     * 库位码是否有效
-     *
-     * @param bean
-     */
-    void vertifyLocationCode(VertifyLocationCodeBean bean);
-
-    /**
      * 一部调出提交
      *
      * @param bean
      */
     void submitTransferOneStep(Object bean);
+    /**
+     * 设置库位码选中
+     */
+    void setLocationSelect();
 }

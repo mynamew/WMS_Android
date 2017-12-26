@@ -28,4 +28,9 @@ public class StockQueryEvent extends BaseEvent {
      * 物料查询
      */
     public  static final String  STOCK_QUERY_MATERIAL_REPERTORY="stock_query_material_repertory";
+    /**
+     * 设置输入框选中
+     */
+    public  static final String  STOCK_QUERY_EDITTEXT_SELECT="stock_query_edittext_select";
+
 }

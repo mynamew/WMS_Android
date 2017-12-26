@@ -24,6 +24,7 @@ import com.timi.sz.wms_android.bean.instock.MaterialScanPutAwayBean;
 import com.timi.sz.wms_android.bean.instock.VertifyLocationCodeBean;
 import com.timi.sz.wms_android.bean.instock.search.QueryPrdInstockByInputResult;
 import com.timi.sz.wms_android.mvp.UI.stock_in.detail.StockInDetailActivity;
+import com.timi.sz.wms_android.mvp.UI.stock_out.detail.DetailActivity;
 import com.timi.sz.wms_android.mvp.base.BaseActivity;
 
 import java.util.HashMap;
@@ -112,7 +113,7 @@ public class FinishedGoodsAuditPutAwayActivity extends BaseActivity<PutAwayView,
                 /**
                  * 查看详情
                  */
-                Intent it = new Intent(FinishedGoodsAuditPutAwayActivity.this, StockInDetailActivity.class);
+                Intent it = new Intent(FinishedGoodsAuditPutAwayActivity.this, DetailActivity.class);
                 it.putExtra(Constants.CODE_STR, intentCode);
                 it.putExtra(Constants.STOCKIN_BILLID, mFinishBean.getBillId());
                 startActivity(it);
@@ -130,7 +131,7 @@ public class FinishedGoodsAuditPutAwayActivity extends BaseActivity<PutAwayView,
                 params1.put("MAC", PackageUtils.getMac());
                 params1.put("SrcBillType", 40);
                 params1.put("DestBillType", 40);
-                params1.put("ScanId", mFinishBean.getScanId());
+                params1.put("ScanId",ScanId);
                 params1.put("BinCode", locationCode);
                 params1.put("BillId", mFinishBean.getBillId());
                 params1.put("BarcodeNo", result);
@@ -257,7 +258,7 @@ public class FinishedGoodsAuditPutAwayActivity extends BaseActivity<PutAwayView,
 
     @Override
     public void createInStockOrderno() {
-        ToastUtils.showShort(getString(R.string.create_instock_bill_success));
+        ToastUtils.showShort(getString(R.string.commit_check_success));
         onBackPressed();
     }
 

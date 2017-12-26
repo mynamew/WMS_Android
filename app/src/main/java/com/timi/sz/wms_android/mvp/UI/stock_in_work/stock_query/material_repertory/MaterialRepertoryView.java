@@ -15,4 +15,8 @@ public interface MaterialRepertoryView extends MvpBaseView{
      * @param o
      */
     void queryStockMaterial(MaterialQueryResult o);
+    /**
+     * 设置物料条码选中
+     */
+    void setMaterialEdittextSelect();
 }

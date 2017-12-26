@@ -52,7 +52,7 @@ public class StockInWorkQueryPresenter extends MvpBasePresenter<StockInWorkQuery
 
                 @Override
                 public void onError(String errorMsg) {
-                    ToastUtils.showShort(errorMsg);
+//                    ToastUtils.showShort(errorMsg);
                 }
             });
         }
@@ -74,7 +74,7 @@ public class StockInWorkQueryPresenter extends MvpBasePresenter<StockInWorkQuery
 
                 @Override
                 public void onError(String errorMsg) {
-                    ToastUtils.showShort(errorMsg);
+//                    ToastUtils.showShort(errorMsg);
                 }
             });
         }
@@ -95,7 +95,7 @@ public class StockInWorkQueryPresenter extends MvpBasePresenter<StockInWorkQuery
 
                 @Override
                 public void onError(String errorMsg) {
-                    ToastUtils.showShort(errorMsg);
+//                    ToastUtils.showShort(errorMsg);
                 }
             });
         }
@@ -116,7 +116,7 @@ public class StockInWorkQueryPresenter extends MvpBasePresenter<StockInWorkQuery
 
                 @Override
                 public void onError(String errorMsg) {
-                    ToastUtils.showShort(errorMsg);
+//                    ToastUtils.showShort(errorMsg);
                 }
             });
         }
@@ -137,7 +137,7 @@ public class StockInWorkQueryPresenter extends MvpBasePresenter<StockInWorkQuery
 
                 @Override
                 public void onError(String errorMsg) {
-                    ToastUtils.showShort(errorMsg);
+//                    ToastUtils.showShort(errorMsg);
                 }
             });
         }

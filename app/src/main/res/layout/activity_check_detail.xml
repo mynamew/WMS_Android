@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:ptr="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context="com.timi.sz.wms_android.mvp.UI.stock_in_work.check_detail.CheckDetailActivity">
+    <include
+        android:id="@+id/head"
+        layout="@layout/title_head"/>
+    <com.handmark.pulltorefresh.library.PullToRefreshRecyclerView
+        android:id="@+id/ptr_detail"
+        android:layout_below="@id/head"
+        android:layout_width="match_parent"
+        ptr:ptrDrawable="@drawable/default_ptr_rotate"
+        ptr:ptrMode="both"
+        android:layout_height="match_parent"/>
+    <com.timi.sz.wms_android.view.FloatCircleButtonUpTopView
+        android:id="@+id/fbtn_detail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="30px"
+        android:layout_marginRight="30px"/>
+</RelativeLayout>

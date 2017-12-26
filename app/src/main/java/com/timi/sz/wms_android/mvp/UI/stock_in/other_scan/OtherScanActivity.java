@@ -80,18 +80,18 @@ public class OtherScanActivity extends BaseActivity<OtherScanView, OtherScanPres
     public void initBundle(Bundle savedInstanceState) {
         final int intentCode = getIntent().getIntExtra(Constants.CODE_STR, Constants.COME_MATERAIL_NUM);
         setActivityTitle("其他入库(扫描入库)");
-        setRightImg(R.mipmap.stockin_detail, new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                /**
-                 * 查看详情
-                 */
-                Intent it = new Intent(OtherScanActivity.this, StockInDetailActivity.class);
-                it.putExtra(Constants.CODE_STR, intentCode);
-                it.putExtra(Constants.IN_STOCK_ORDERNO, inStockOrderno);
-                startActivity(it);
-            }
-        });
+//        setRightImg(R.mipmap.stockin_detail, new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                /**
+//                 * 查看详情
+//                 */
+//                Intent it = new Intent(OtherScanActivity.this, StockInDetailActivity.class);
+//                it.putExtra(Constants.CODE_STR, intentCode);
+//                it.putExtra(Constants.IN_STOCK_ORDERNO, inStockOrderno);
+//                startActivity(it);
+//            }
+//        });
     }
 
     @Override

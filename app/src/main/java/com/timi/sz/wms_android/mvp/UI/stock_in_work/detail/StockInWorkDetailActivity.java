@@ -6,14 +6,15 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.timi.sz.wms_android.R;
 import com.timi.sz.wms_android.base.adapter.BaseRecyclerAdapter;
 import com.timi.sz.wms_android.base.adapter.RecyclerViewHolder;
 import com.timi.sz.wms_android.base.divider.DividerItemDecoration;
+import com.timi.sz.wms_android.base.uils.Constants;
 import com.timi.sz.wms_android.base.uils.PackageUtils;
 import com.timi.sz.wms_android.base.uils.SpUtils;
-import com.timi.sz.wms_android.bean.outstock.detail.MaterialDetailResult;
 import com.timi.sz.wms_android.bean.stockin_work.StockInWorkDetailResult;
 import com.timi.sz.wms_android.mvp.base.BaseActivity;
 import com.timi.sz.wms_android.view.FloatCircleButtonUpTopView;
@@ -24,13 +25,12 @@ import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 import static android.support.v7.widget.RecyclerView.SCROLL_STATE_IDLE;
-import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_POINT_DETIAIL_BILLID;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_IN_WORK_BILLID;
-import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_CODE_STR;
-import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_OUTSOURCE_FEED_SUPLLIEMENT;
+import static com.timi.sz.wms_android.base.uils.Constants.STOCK_IN_WORK_CODE_STR;
 
 /**
  * 库内作业详情
@@ -48,6 +48,8 @@ public class StockInWorkDetailActivity extends BaseActivity<StockInWorkDetailVie
     RecyclerView rlvDetial;
     @BindView(R.id.fbtn_detail)
     FloatCircleButtonUpTopView fbtnDetail;
+    @BindView(R.id.tv_tip)
+    TextView tvTip;
 
 
     private List<StockInWorkDetailResult> mDatas = new ArrayList<>();
@@ -57,6 +59,7 @@ public class StockInWorkDetailActivity extends BaseActivity<StockInWorkDetailVie
     private int billId;
     //intentcode
     private int intentCode;
+
     @Override
     public int setLayoutId() {
         return R.layout.activity_stock_in_work_detail;
@@ -65,8 +68,24 @@ public class StockInWorkDetailActivity extends BaseActivity<StockInWorkDetailVie
     @Override
     public void initBundle(Bundle savedInstanceState) {
         setActivityTitle(getString(R.string.stock_in_work_detial));
-        intentCode = getIntent().getIntExtra(STOCK_OUT_CODE_STR, STOCK_OUT_OUTSOURCE_FEED_SUPLLIEMENT);
+        intentCode = getIntent().getIntExtra(STOCK_IN_WORK_CODE_STR, 0);
         billId = getIntent().getIntExtra(STOCK_IN_WORK_BILLID, 0);
+        switch (intentCode) {
+
+            case Constants.STOCK_IN_WORK_FORM_CHANGE_IN://形态转换入库
+                tvTip.setText(R.string.form_change_instock_detial_info_tip);
+                break;
+            case Constants.STOCK_IN_WORK_FORM_CHANGE_OUT://形态转换出库
+                tvTip.setText(R.string.form_change_outstock_detial_info_tip);
+                break;
+            case Constants.STOCK_IN_WORK_POINT://盘点
+                tvTip.setText(R.string.check_orderno_info);
+                break;
+            case Constants.STOCK_IN_WORK_ALLOT_SCAN://扫描调入
+                tvTip.setText(R.string.scan_allot_in_orderno_detail);
+                break;
+        }
+
     }
 
     @Override
@@ -81,7 +100,7 @@ public class StockInWorkDetailActivity extends BaseActivity<StockInWorkDetailVie
         params.put("OrgId", SpUtils.getInstance().getOrgId());
         params.put("MAC", PackageUtils.getMac());
         params.put("BillId", billId);
-        getPresenter().queryAllotScanDetail(params);
+        getPresenter().queryAllotScanDetail(params,intentCode);
     }
 
     @Override
@@ -102,6 +121,7 @@ public class StockInWorkDetailActivity extends BaseActivity<StockInWorkDetailVie
         dealData();
         initAdapter();
     }
+
     /**
      * 对数据源做处理，
      */
@@ -183,11 +203,13 @@ public class StockInWorkDetailActivity extends BaseActivity<StockInWorkDetailVie
             adapter.notifyDataSetChanged();
 
     }
+
     @OnClick(R.id.iv_show_more)
     public void onViewClicked() {
         ivShowMore.setSelected(!ivShowMore.isSelected());
         dealData();
-        adapter.notifyDataSetChanged();
+        if(null!=adapter){
+            adapter.notifyDataSetChanged();
+        }
     }
-
 }

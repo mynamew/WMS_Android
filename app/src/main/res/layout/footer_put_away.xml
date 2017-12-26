@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:orientation="vertical">
@@ -116,4 +116,7 @@
         android:id="@+id/layout_material_info"
         layout="@layout/footer_form_change"
         android:visibility="gone"/>
-</LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="200px"/>
+</com.zhy.autolayout.AutoLinearLayout>

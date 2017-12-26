@@ -44,7 +44,7 @@ public class OtherScanPresenter extends MvpBasePresenter<OtherScanView> {
 
                 @Override
                 public void onError(String errorMsg) {
-                    ToastUtils.showShort(errorMsg);
+//                    ToastUtils.showShort(errorMsg);
                     getView().setMaterialEdittextSelect();
                 }
             });
@@ -67,7 +67,7 @@ public class OtherScanPresenter extends MvpBasePresenter<OtherScanView> {
 
                 @Override
                 public void onError(String errorMsg) {
-                    ToastUtils.showShort(errorMsg);
+//                    ToastUtils.showShort(errorMsg);
                     getView().setLocationSelect();
                 }
             });
@@ -90,7 +90,7 @@ public class OtherScanPresenter extends MvpBasePresenter<OtherScanView> {
 
                 @Override
                 public void onError(String errorMsg) {
-                    ToastUtils.showShort(errorMsg);
+//                    ToastUtils.showShort(errorMsg);
                 }
             });
         }

@@ -69,7 +69,7 @@ public abstract  class BaseFragment <V extends MvpView, P extends MvpPresenter<V
 
     @Override
     public void showProgressDialog() {
-        MyProgressDialog.showProgressDialog(getActivity());
+        MyProgressDialog.showProgressDialog(BaseActivity.getCurrentActivty());
     }
 
     @Override

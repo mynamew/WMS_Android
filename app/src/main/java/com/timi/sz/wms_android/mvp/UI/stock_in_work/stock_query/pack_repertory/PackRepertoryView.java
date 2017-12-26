@@ -15,4 +15,9 @@ public interface PackRepertoryView extends MvpBaseView {
      * @param result
      */
     void queryStockContainer(QueryStockContainerResult result);
+
+    /**
+     * 设置物料条码选中
+     */
+    void setMaterialEdittextSelect();
 }

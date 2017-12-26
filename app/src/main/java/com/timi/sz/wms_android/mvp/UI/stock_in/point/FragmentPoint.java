@@ -2,14 +2,11 @@ package com.timi.sz.wms_android.mvp.UI.stock_in.point;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Selection;
 import android.text.TextUtils;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -18,7 +15,6 @@ import com.timi.sz.wms_android.base.adapter.BaseRecyclerAdapter;
 import com.timi.sz.wms_android.base.adapter.RecyclerViewHolder;
 import com.timi.sz.wms_android.base.divider.DividerItemDecoration;
 import com.timi.sz.wms_android.base.uils.Constants;
-import com.timi.sz.wms_android.base.uils.InputMethodUtils;
 import com.timi.sz.wms_android.base.uils.LogUitls;
 import com.timi.sz.wms_android.base.uils.PackageUtils;
 import com.timi.sz.wms_android.base.uils.SpUtils;
@@ -39,9 +35,7 @@ import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.Unbinder;
 
 import static com.timi.sz.wms_android.base.uils.Constants.BUY_ORDE_NUM;
 import static com.timi.sz.wms_android.base.uils.Constants.OUT_SOURCE;
@@ -353,12 +347,6 @@ public class FragmentPoint extends BaseFragment<FragmentPointView, FragmentPoint
      */
     @Override
     public void savePointMaterial(Integer result) {
-        /**
-         * 更新清点记录 设置receive id
-         */
-        StockInPointEvent stockInPointEvent = new StockInPointEvent(StockInPointEvent.MATERIAL_POINT_RECORD_UPDATE);
-        stockInPointEvent.receiveId = result;
-        BaseMessage.post(stockInPointEvent);
 
         ToastUtils.showShort(getString(R.string.material_point_success));
         /**
@@ -440,6 +428,17 @@ public class FragmentPoint extends BaseFragment<FragmentPointView, FragmentPoint
         mDatas.clear();
         mDatas.addAll(bean.getDetailResults());
         adapter.notifyDataSetChanged();
+        /**
+         * 更新清点记录
+         */
+        StockInPointEvent stockInPointEvent = new StockInPointEvent(StockInPointEvent.MATERIAL_POINT_RECORD_UPDATE);
+        if (intentCode == BUY_ORDE_NUM || intentCode == OUT_SOURCE) {
+            stockInPointEvent.receiveId=mBuyBean.getSummaryResults().getReceiveId();
+        } else {
+            stockInPointEvent.receiveId=mSendBean.getSummaryResults().getReceiveId();
+        }
+        BaseMessage.post(stockInPointEvent);
+
     }
 
     @Override
@@ -448,6 +447,16 @@ public class FragmentPoint extends BaseFragment<FragmentPointView, FragmentPoint
         mDatas.clear();
         mDatas.addAll(bean.getDetailResults());
         adapter.notifyDataSetChanged();
+        /**
+         * 更新清点记录
+         */
+        StockInPointEvent stockInPointEvent = new StockInPointEvent(StockInPointEvent.MATERIAL_POINT_RECORD_UPDATE);
+        if (intentCode == BUY_ORDE_NUM || intentCode == OUT_SOURCE) {
+            stockInPointEvent.receiveId=mBuyBean.getSummaryResults().getReceiveId();
+        } else {
+            stockInPointEvent.receiveId=mSendBean.getSummaryResults().getReceiveId();
+        }
+        BaseMessage.post(stockInPointEvent);
     }
 
     /**

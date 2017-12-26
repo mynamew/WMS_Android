@@ -40,7 +40,7 @@ public class MRPReviewPresenter extends MvpBasePresenter<MRPReviewView> {
 
                 @Override
                 public void onError(String errorMsg) {
-                    ToastUtils.showShort(errorMsg);
+//                    ToastUtils.showShort(errorMsg);
                 }
             });
         }

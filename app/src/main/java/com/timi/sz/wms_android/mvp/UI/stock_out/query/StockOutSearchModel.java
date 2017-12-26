@@ -1,6 +1,7 @@
 package com.timi.sz.wms_android.mvp.UI.stock_out.query;
 
 import com.timi.sz.wms_android.bean.instock.search.OtherAuditSelectOrdernoBean;
+import com.timi.sz.wms_android.bean.other.OtherOutAndInStockBean;
 import com.timi.sz.wms_android.bean.outstock.other.QueryOtherOutStockByInputResult;
 import com.timi.sz.wms_android.bean.outstock.outsource.QueryOutSourceFeedByInputResult;
 import com.timi.sz.wms_android.bean.outstock.outsource.QueryOutSourcePickByInputResult;
@@ -176,27 +177,27 @@ public class StockOutSearchModel extends MvpBaseModel {
      * @param params
      * @param observer
      */
-    public void searchOtherAuditSelectOrderno(final Map<String, Object> params, Observer<OtherAuditSelectOrdernoBean> observer) {
+    public void searchOtherAuditSelectOrderno(final Map<String, Object> params, Observer<OtherOutAndInStockBean> observer) {
 
-        HttpManager.getInstance().HttpManagerRequest(observer, new ApiServiceMethodCallBack<OtherAuditSelectOrdernoBean>() {
+        HttpManager.getInstance().HttpManagerRequest(observer, new ApiServiceMethodCallBack<OtherOutAndInStockBean>() {
             @Override
-            public Observable<CommonResult<OtherAuditSelectOrdernoBean>> createObservable(ApiService apiService) {
+            public Observable<CommonResult<OtherOutAndInStockBean>> createObservable(ApiService apiService) {
                 return apiService.searchOtherAuditSelectOrderno(params);
             }
         });
     }
 
     /**
-     * 其他出库-生单（蓝单）
+     * 其他出库-审核
      *
      * @param params
      * @param observer
      */
-    public void queryOtherOutStockByInput(final Map<String, Object> params, Observer<QueryOtherOutStockByInputResult> observer) {
+    public void queryOtherOutStockByInput(final Map<String, Object> params, Observer<OtherOutAndInStockBean> observer) {
 
-        HttpManager.getInstance().HttpManagerRequest(observer, new ApiServiceMethodCallBack<QueryOtherOutStockByInputResult>() {
+        HttpManager.getInstance().HttpManagerRequest(observer, new ApiServiceMethodCallBack<OtherOutAndInStockBean>() {
             @Override
-            public Observable<CommonResult<QueryOtherOutStockByInputResult>> createObservable(ApiService apiService) {
+            public Observable<CommonResult<OtherOutAndInStockBean>> createObservable(ApiService apiService) {
                 return apiService.queryOtherOutStockByInput(params);
             }
         });

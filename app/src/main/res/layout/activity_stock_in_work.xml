@@ -73,6 +73,27 @@
                             android:text="@string/siw_storage_location_change"/>
 
                         <TextView
+                            android:id="@+id/tv_stockin_work_group_change"
+                            style="@style/stock_in_tab"
+                            android:drawableTop="@mipmap/stock_in_other_check"
+                            android:text="@string/stockin_work_group_change"/>
+
+                        <TextView
+                            android:id="@+id/tv_stockin_work_barcode_change"
+                            style="@style/stock_in_tab"
+                            android:drawableTop="@mipmap/stock_in_other_check"
+                            android:text="@string/barcode_exchange"/>
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:background="#fff"
+                        android:orientation="horizontal">
+
+                        <TextView
                             android:id="@+id/tv_stockin_work_scan_in"
                             style="@style/stock_in_tab"
                             android:drawableTop="@mipmap/stockin_work_scan_in"
@@ -83,31 +104,14 @@
                             style="@style/stock_in_tab"
                             android:drawableTop="@mipmap/stockin_work_one_step_in"
                             android:text="@string/stockin_work_one_step_in"/>
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="80dp"
-                        android:background="#fff"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:id="@+id/tv_stockin_work_group_change"
-                            style="@style/stock_in_tab"
-                            android:drawableTop="@mipmap/stock_in_other_check"
-                            android:text="@string/stockin_work_group_change"/>
 
                         <TextView
                             android:id="@+id/tv_allot_outstock"
                             style="@style/stock_in_tab"
-                            android:drawableTop="@mipmap/stockin_work_group_change"
+                            android:layout_weight="1"
+                            android:drawableTop="@mipmap/stock_out_allot_outstock"
                             android:text="@string/allot_outstock_tip"
                             android:visibility="visible"/>
-
-                        <TextView
-                            style="@style/stock_in_tab"
-                            android:drawableTop="@mipmap/stock_in_buy_order"
-                            android:visibility="invisible"/>
                     </LinearLayout>
                 </LinearLayout>
             </android.support.v7.widget.CardView>

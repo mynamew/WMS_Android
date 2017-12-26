@@ -171,6 +171,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:visibility="gone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
@@ -196,6 +197,9 @@
                 </LinearLayout>
 
                 <include layout="@layout/footer_put_away"/>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="100px"/>
             </LinearLayout>
         </ScrollView>
 
@@ -208,7 +212,7 @@
             android:layout_marginLeft="50px"
             android:layout_marginRight="50px"
             android:background="@drawable/selector_btn_bg_login"
-            android:text="@string/confirm_commit"
+            android:text="@string/create_product_orderno"
             android:textColor="#fff"
             android:textSize="18sp"/>
     </RelativeLayout>

@@ -19,7 +19,10 @@ import com.timi.sz.wms_android.bean.stockin_work.MaterialDataBean;
 import com.timi.sz.wms_android.bean.stockin_work.check.RequestSubmitCheckDataBean;
 import com.timi.sz.wms_android.bean.stockin_work.check.SubmitCheckDataResult;
 import com.timi.sz.wms_android.bean.stockin_work.query.PointResult;
-import com.timi.sz.wms_android.mvp.UI.stock_in_work.form_change_detail.FormChangeDetailActivity;
+import com.timi.sz.wms_android.mvp.UI.stock_in.detail.StockInDetailActivity;
+import com.timi.sz.wms_android.mvp.UI.stock_in_work.check_detail.CheckDetailActivity;
+import com.timi.sz.wms_android.mvp.UI.stock_in_work.check_record.CheckRecordActivity;
+import com.timi.sz.wms_android.mvp.UI.stock_in_work.detail.StockInWorkDetailActivity;
 import com.timi.sz.wms_android.mvp.UI.stock_in_work.form_change_instock.FormChangeInstockActivity;
 import com.timi.sz.wms_android.mvp.base.BaseActivity;
 
@@ -156,12 +159,16 @@ public class CheckActivity extends BaseActivity<CheckView, CheckPresenter> imple
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_look_record:
+                Intent intent = new Intent(CheckActivity.this, CheckRecordActivity.class);
+                intent.putExtra(STOCK_IN_WORK_CODE_STR, intentCode);
+                intent.putExtra(Constants.STOCK_IN_WORK_BILLID, pointBean.getBillId());
+                startActivity(intent);
                 break;
             case R.id.btn_look_detail:
                 /**
                  * 查看详情
                  */
-                Intent it = new Intent(CheckActivity.this, FormChangeDetailActivity.class);
+                Intent it = new Intent(CheckActivity.this, CheckDetailActivity.class);
                 it.putExtra(STOCK_IN_WORK_CODE_STR, intentCode);
                 it.putExtra(Constants.STOCK_IN_WORK_BILLID, pointBean.getBillId());
                 startActivity(it);
@@ -177,6 +184,13 @@ public class CheckActivity extends BaseActivity<CheckView, CheckPresenter> imple
                     ToastUtils.showShort(getString(R.string.please_input_check_num));
                     return;
                 }
+                //盘点数量
+                int checkQty=Integer.parseInt(checkNumStr);
+                if(checkQty<=0){
+                    ToastUtils.showShort(R.string.check_qty_no_less_zero);
+                    return;
+                }
+
                 RequestSubmitCheckDataBean bean = new RequestSubmitCheckDataBean();
                 bean.setBillId(pointBean.getBillId());
                 bean.setCheckQty(Integer.parseInt(checkNumStr));
@@ -221,12 +235,13 @@ public class CheckActivity extends BaseActivity<CheckView, CheckPresenter> imple
         //设置物料的附加属性
         setMaterialAttrStatus(tvMaterialAttr);
 
-        setTextViewContent(tvWaitPointNum, bean.getWaitQty());
-        setTextViewContent(tvHaveCountNum, bean.getCheckQty());
     }
 
     @Override
-    public void submitCheckData(SubmitCheckDataResult o) {
+    public void submitCheckData(SubmitCheckDataResult bean) {
         ToastUtils.showShort(getString(R.string.commit_check_data_success));
+        tvMaterialNum.setText(etCheckNum.getText().toString());
+        setTextViewContent(tvWaitPointNum, pointBean.getWaitQty()-bean.getCheckQty());
+        setTextViewContent(tvHaveCountNum, pointBean.getScanQty()+bean.getCheckQty());
     }
 }

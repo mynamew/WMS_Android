@@ -30,6 +30,7 @@ import com.timi.sz.wms_android.bean.instock.search.QueryPrdReturnByInputResult;
 import com.timi.sz.wms_android.bean.instock.search.ReceiveOrdernoBean;
 import com.timi.sz.wms_android.bean.instock.search.SaleGoodsReturnBean;
 import com.timi.sz.wms_android.bean.instock.search.SendOrdernoBean;
+import com.timi.sz.wms_android.bean.other.OtherOutAndInStockBean;
 import com.timi.sz.wms_android.mvp.UI.stock_in.point.StockInPointActivity;
 import com.timi.sz.wms_android.mvp.UI.stock_in.putaway.FinishedGoodsAuditPutAwayActivity;
 import com.timi.sz.wms_android.mvp.UI.stock_in.putaway.FinishedGoodsCreateBillPutAwayActivity;
@@ -38,6 +39,8 @@ import com.timi.sz.wms_android.mvp.UI.stock_in.putaway.OutMaterialReturnActivity
 import com.timi.sz.wms_android.mvp.UI.stock_in.putaway.ProductionMaterialReturnActivity;
 import com.timi.sz.wms_android.mvp.UI.stock_in.putaway.PutAwayActivity;
 import com.timi.sz.wms_android.mvp.UI.stock_in.putaway.SaleGoodsReturnActivity;
+import com.timi.sz.wms_android.mvp.UI.stock_out.batch_point_list.BatchPointListActivity;
+import com.timi.sz.wms_android.mvp.UI.stock_out.normal_out_stock.NormalOutStockActivity;
 import com.timi.sz.wms_android.mvp.base.BaseActivity;
 import com.timi.sz.wms_android.qrcode.utils.Constant;
 
@@ -58,6 +61,8 @@ import static com.timi.sz.wms_android.base.uils.Constants.IN_STOCK_FINISH_PRODUC
 import static com.timi.sz.wms_android.base.uils.Constants.IN_STOCK_FINISH_SALE_BEAN;
 import static com.timi.sz.wms_android.base.uils.Constants.IN_STOCK_RECEIVE_BEAN;
 import static com.timi.sz.wms_android.base.uils.Constants.IN_STOCK_SEND_BEAN;
+import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_BEAN;
+import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_CODE_STR;
 
 /**
  * 查找订单
@@ -160,6 +165,7 @@ public class SearchBuyOrderActivity extends BaseActivity<SearchBuyOrderView, Sea
             }
         });
     }
+
     @Override
     public void initData() {
 
@@ -263,11 +269,23 @@ public class SearchBuyOrderActivity extends BaseActivity<SearchBuyOrderView, Sea
      * @param bean
      */
     @Override
-    public void searchOtherAuditSelectOrderno(OtherAuditSelectOrdernoBean bean) {
-        Intent it = new Intent(this, OtherAuditActivity.class);
-        it.putExtra(Constants.CODE_STR, intentCode);
-        it.putExtra(IN_STOCK_FINISH_OTHER_BEAN, new Gson().toJson(bean));
-        startActivity(it);
+    public void searchOtherAuditSelectOrderno(OtherOutAndInStockBean bean) {
+        Intent intent = new Intent();
+        if (bean.getSummaryResults().getRob() == 0) {//蓝单　　入库
+            intent.setClass(this, OtherAuditActivity.class);
+            intent.putExtra(Constants.CODE_STR, intentCode);
+            intent.putExtra(IN_STOCK_FINISH_OTHER_BEAN, new Gson().toJson(bean));
+
+        } else {//
+            intent.putExtra(STOCK_OUT_BEAN, new Gson().toJson(bean));
+            intent.putExtra(STOCK_OUT_CODE_STR, intentCode);
+            if (bean.getSummaryResults().isIsLotPick()) {//批次拣货
+                intent.setClass(this, BatchPointListActivity.class);
+            } else {
+                intent.setClass(this, NormalOutStockActivity.class);
+            }
+        }
+        startActivity(intent);
     }
 
     /**

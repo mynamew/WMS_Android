@@ -153,7 +153,7 @@ public class OutMaterialReturnActivity extends BaseActivity<PutAwayView, PutAway
                 params1.put("MAC", PackageUtils.getMac());
                 params1.put("SrcBillType", 22);
                 params1.put("DestBillType", 22);
-                params1.put("ScanId", returnMaterialBean.getScanId());
+                params1.put("ScanId", ScanId);
                 params1.put("BinCode", locationCode);
                 params1.put("BillId", returnMaterialBean.getBillId());
                 params1.put("BarcodeNo", result);
@@ -261,7 +261,7 @@ public class OutMaterialReturnActivity extends BaseActivity<PutAwayView, PutAway
 
     @Override
     public void createInStockOrderno() {
-        ToastUtils.showShort(getString(R.string.create_instock_bill_success));
+        ToastUtils.showShort(getString(R.string.commit_check_success));
         onBackPressed();
     }
 
@@ -279,8 +279,8 @@ public class OutMaterialReturnActivity extends BaseActivity<PutAwayView, PutAway
                 params1.put("UserId", SpUtils.getInstance().getUserId());
                 params1.put("OrgId", SpUtils.getInstance().getOrgId());
                 params1.put("MAC", PackageUtils.getMac());
-                params1.put("SrcBillType", 13);
-                params1.put("DestBillType", 14);
+                params1.put("SrcBillType", 22);
+                params1.put("DestBillType", 22);
                 params1.put("ScanId", ScanId);
                 params1.put("BinCode", mVertifyLocationCodeBean.getBinId());
                 params1.put("BarcodeNo", result);

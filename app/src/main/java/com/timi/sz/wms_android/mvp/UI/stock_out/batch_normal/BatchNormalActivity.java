@@ -57,6 +57,7 @@ import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_SALE_CARTON_
 import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_SALE_IS_CARTON;
 import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_SCANID;
 import static com.timi.sz.wms_android.base.uils.Constants.REQUEST_SCAN_CODE_MATERIIAL;
+import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_ALLOT_OUT;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_ALLOT_OUT_PICK;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_CODE_STR;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_FINISH_GOODS_PICK;
@@ -222,9 +223,9 @@ public class BatchNormalActivity extends BaseActivity<BatchNormalView, BatchNorm
                 destBillType = 23;
                 break;
             case STOCK_OUT_PRODUCTION_APPLY_BILL://领料申请
-                setActivityTitle(getString(R.string.material_point_production_pick_title));
+                setActivityTitle(getString(R.string.material_point_production_get_material_apply_title));
                 srcBillType = 31;
-                destBillType = 31;
+                destBillType = 23;
                 break;
             case STOCK_OUT_PRODUCTION_BILL://生产生单
                 setActivityTitle(getString(R.string.material_point_production_pick_title));
@@ -252,12 +253,12 @@ public class BatchNormalActivity extends BaseActivity<BatchNormalView, BatchNorm
                 break;
             case STOCK_OUT_OTHER_OUT_AUDIT://其他审核
                 setActivityTitle(getString(R.string.material_point_other_audit_title));
-                srcBillType = 51;
+                srcBillType = 52;
                 destBillType = 52;
                 break;
             case STOCK_OUT_OTHER_OUT_BILL://其他生单
                 setActivityTitle(getString(R.string.material_point_other_bill_title));
-                srcBillType = 52;
+                srcBillType = 0;
                 destBillType = 52;
                 break;
             case STOCK_OUT_FINISH_GOODS_PICK://成品拣货
@@ -265,16 +266,25 @@ public class BatchNormalActivity extends BaseActivity<BatchNormalView, BatchNorm
                 srcBillType = 61;
                 destBillType = 61;
                 break;
-            case STOCK_OUT_ALLOT_OUT_PICK://调拨调出
+            case STOCK_OUT_SALE_OUT_PICK://销售拣货
+                setActivityTitle(R.string.materil_point_sale_pick_title);
+                srcBillType = 42;
+                destBillType = 61;
+                break;
+            case STOCK_OUT_SEND_OUT_PICK://发货拣货
+                setActivityTitle(R.string.material_point_send_pick_title);
+                srcBillType = 41;
+                destBillType = 61;
+                break;
+            case STOCK_OUT_ALLOT_OUT_PICK://调拨拣货
+                setActivityTitle(R.string.material_point_allot_pick_title);
                 srcBillType = 50;
                 destBillType = 61;
                 break;
-            case STOCK_OUT_SALE_OUT_PICK://销售拣货
-                srcBillType = 42;
-                destBillType = 61;
-            case STOCK_OUT_SEND_OUT_PICK://发货拣货
-                srcBillType = 41;
-                destBillType = 61;
+            case STOCK_OUT_ALLOT_OUT://调拨调出
+                setActivityTitle(R.string.material_point_allot_out_title);
+                srcBillType = 50;
+                destBillType = 50;
                 break;
             default:
                 break;
@@ -306,7 +316,9 @@ public class BatchNormalActivity extends BaseActivity<BatchNormalView, BatchNorm
                  * 是否 装箱
                  */
                 if (isCarton) {
-                    params.put("cartonNo", cartonNum);
+                    params.put("CartonNo", cartonNum);
+                }else {
+                    params.put("CartonNo", 0);
                 }
                 params.put("UserId", SpUtils.getInstance().getUserId());
                 params.put("OrgId", SpUtils.getInstance().getOrgId());
@@ -325,7 +337,7 @@ public class BatchNormalActivity extends BaseActivity<BatchNormalView, BatchNorm
                 }
                 //判断 批次是否为空
                 params.put("bCheckMode", true);
-                getPresenter().submitBarcodeLotPickOut(params);
+                getPresenter().submitBarcodeLotPickOut(params,intentCode);
             }
         });
 
@@ -355,6 +367,7 @@ public class BatchNormalActivity extends BaseActivity<BatchNormalView, BatchNorm
         if (result.getExceedQty() > 0) {
             Intent intent = new Intent(this, SplitPrintActivity.class);
             intent.putExtra(OUT_STOCK_PRINT_BILLID, billId);
+            intent.putExtra(STOCK_OUT_CODE_STR, intentCode);
             intent.putExtra(OUT_STOCK_PRINT_BATCh_DETAILID, detailId);
             intent.putExtra(OUT_STOCK_PRINT_SRCBILLTYPE, srcBillType);
             intent.putExtra(OUT_STOCK_PRINT_BARCODENO, etMaterialScan.getText().toString().trim());
@@ -466,7 +479,7 @@ public class BatchNormalActivity extends BaseActivity<BatchNormalView, BatchNorm
             /**
              * 物料返回设置扫描的数量
              */
-            scanQty = scanQty + result.getBarcodeQty();
+            scanQty = result.getTotalScanQty();
             //设置数量
             tvSendMaterialNum.setText("(" + result.getBarcodeQty() + ")" + scanQty + "/" + totalQty);
         }
@@ -502,7 +515,9 @@ public class BatchNormalActivity extends BaseActivity<BatchNormalView, BatchNorm
                          * 是否 装箱
                          */
                         if (isCarton) {
-                            params.put("cartonNo", cartonNum);
+                            params.put("CartonNo", cartonNum);
+                        }else {
+                            params.put("CartonNo", 0);
                         }
                         params.put("UserId", SpUtils.getInstance().getUserId());
                         params.put("OrgId", SpUtils.getInstance().getOrgId());
@@ -513,7 +528,7 @@ public class BatchNormalActivity extends BaseActivity<BatchNormalView, BatchNorm
                         params.put("ScanId", scanId);
                         params.put("BarcodeNo", result);
                         params.put("bCheckMode", true);
-                        getPresenter().submitBarcodeLotPickOut(params);
+                        getPresenter().submitBarcodeLotPickOut(params, intentCode);
                     }
                 });
                 break;

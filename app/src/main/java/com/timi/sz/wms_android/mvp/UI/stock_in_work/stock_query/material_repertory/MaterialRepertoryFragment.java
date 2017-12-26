@@ -3,6 +3,7 @@ package com.timi.sz.wms_android.mvp.UI.stock_in_work.stock_query.material_repert
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Selection;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +19,7 @@ import com.timi.sz.wms_android.base.uils.SpUtils;
 import com.timi.sz.wms_android.bean.stockin_work.stock_query.MaterialQueryResult;
 import com.timi.sz.wms_android.http.message.BaseMessage;
 import com.timi.sz.wms_android.http.message.event.StockQueryEvent;
+import com.timi.sz.wms_android.mvp.UI.stock_in_work.stock_query.StockQueryActivity;
 import com.timi.sz.wms_android.mvp.base.BaseFragment;
 
 import org.greenrobot.eventbus.Subscribe;
@@ -68,6 +70,14 @@ public class MaterialRepertoryFragment extends BaseFragment<MaterialRepertoryVie
     @Override
     public void initData() {
         mDatas = new ArrayList<>();
+        if (!TextUtils.isEmpty(((StockQueryActivity) getActivity()).getEdittextContent())) {
+            Map<String, Object> params1 = new HashMap<>();
+            params1.put("UserId", SpUtils.getInstance().getUserId());
+            params1.put("OrgId", SpUtils.getInstance().getOrgId());
+            params1.put("MAC", PackageUtils.getMac());
+            params1.put("MaterialBarcode", ((StockQueryActivity) getActivity()).getEdittextContent());
+            getPresenter().queryStockMaterial(params1);
+        }
     }
 
     @Override
@@ -88,12 +98,14 @@ public class MaterialRepertoryFragment extends BaseFragment<MaterialRepertoryVie
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void queryStockContainer(StockQueryEvent event) {
         if (event.getEvent().equals(StockQueryEvent.STOCK_QUERY_MATERIAL_REPERTORY)) {
+
             Map<String, Object> params1 = new HashMap<>();
             params1.put("UserId", SpUtils.getInstance().getUserId());
             params1.put("OrgId", SpUtils.getInstance().getOrgId());
             params1.put("MAC", PackageUtils.getMac());
             params1.put("MaterialBarcode", event.inputContent);
             getPresenter().queryStockMaterial(params1);
+
         }
     }
 
@@ -124,17 +136,22 @@ public class MaterialRepertoryFragment extends BaseFragment<MaterialRepertoryVie
 
                 @Override
                 protected void bindData(RecyclerViewHolder holder, int position, MaterialQueryResult.DetailResultsBean item) {
-                    holder.setTextView(R.id.tv_batch,item.getLotNo());
-                    holder.setTextView(R.id.tv_location_code,item.getLocationNo());
-                    holder.setTextView(R.id.tv_material_num,item.getQty());
+                    holder.setTextView(R.id.tv_batch, item.getLotNo());
+                    holder.setTextView(R.id.tv_location_code, item.getLocationNo());
+                    holder.setTextView(R.id.tv_material_num, item.getQty());
                 }
             };
             rlvMaterialRepertory.setAdapter(adapter);
             rlvMaterialRepertory.setLayoutManager(new LinearLayoutManager(getActivity()));
             rlvMaterialRepertory.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST, R.drawable.item_badness_divider));
 
-        }else {
+        } else {
             adapter.notifyDataSetChanged();
         }
-        }
+    }
+
+    @Override
+    public void setMaterialEdittextSelect() {
+        BaseMessage.post(new StockQueryEvent(StockQueryEvent.STOCK_QUERY_EDITTEXT_SELECT));
+    }
 }

@@ -12,6 +12,7 @@ import com.timi.sz.wms_android.bean.instock.search.QueryPrdReturnByInputResult;
 import com.timi.sz.wms_android.bean.instock.search.ReceiveOrdernoBean;
 import com.timi.sz.wms_android.bean.instock.search.SaleGoodsReturnBean;
 import com.timi.sz.wms_android.bean.instock.search.SendOrdernoBean;
+import com.timi.sz.wms_android.bean.other.OtherOutAndInStockBean;
 import com.timi.sz.wms_android.http.callback.OnResultCallBack;
 import com.timi.sz.wms_android.http.subscriber.HttpSubscriber;
 import com.timi.sz.wms_android.mvp.base.presenter.impl.MvpBasePresenter;
@@ -31,7 +32,7 @@ public class SearchBuyOrderPresenter extends MvpBasePresenter<SearchBuyOrderView
     private HttpSubscriber<ReceiveOrdernoBean> mReceiveSubscriber = null;//收货上架
     private HttpSubscriber<QueryPrdInstockByInputResult> mFinishSubscriber = null;//产成品-审核
     private HttpSubscriber<FinishGoodsCreateBillBean> mFinishCreateSubscriber = null;//产成品-生单
-    private HttpSubscriber<OtherAuditSelectOrdernoBean> mOtherSubscriber = null;//其他入库-选单
+    private HttpSubscriber<OtherOutAndInStockBean> mOtherSubscriber = null;//其他入库-选单
     private HttpSubscriber<QueryOutSourceReturnByInputResult> mOutSubscriber = null;//委外退料-选单
     private HttpSubscriber<QueryPrdReturnByInputResult> mProductionSubscriber = null;//生产退料-选单
     private HttpSubscriber<SaleGoodsReturnBean> mSaleSubscriber = null;//销售退货-选单
@@ -56,7 +57,7 @@ public class SearchBuyOrderPresenter extends MvpBasePresenter<SearchBuyOrderView
 
                 @Override
                 public void onError(String errorMsg) {
-                    ToastUtils.showShort(errorMsg);
+//                    ToastUtils.showShort(errorMsg);
                 }
             });
         }
@@ -77,7 +78,7 @@ public class SearchBuyOrderPresenter extends MvpBasePresenter<SearchBuyOrderView
 
                 @Override
                 public void onError(String errorMsg) {
-                    ToastUtils.showShort(errorMsg);
+//                    ToastUtils.showShort(errorMsg);
                     getView().errorSetEdittextSelect();
                 }
             });
@@ -102,7 +103,7 @@ public class SearchBuyOrderPresenter extends MvpBasePresenter<SearchBuyOrderView
 
                 @Override
                 public void onError(String errorMsg) {
-                    ToastUtils.showShort(errorMsg);
+//                    ToastUtils.showShort(errorMsg);
                     getView().errorSetEdittextSelect();
                 }
             });
@@ -127,7 +128,7 @@ public class SearchBuyOrderPresenter extends MvpBasePresenter<SearchBuyOrderView
 
                 @Override
                 public void onError(String errorMsg) {
-                    ToastUtils.showShort(errorMsg);
+//                    ToastUtils.showShort(errorMsg);
                     getView().errorSetEdittextSelect();
                 }
             });
@@ -152,7 +153,7 @@ public class SearchBuyOrderPresenter extends MvpBasePresenter<SearchBuyOrderView
 
                 @Override
                 public void onError(String errorMsg) {
-                    ToastUtils.showShort(errorMsg);
+//                    ToastUtils.showShort(errorMsg);
                     getView().errorSetEdittextSelect();
                 }
             });
@@ -168,15 +169,15 @@ public class SearchBuyOrderPresenter extends MvpBasePresenter<SearchBuyOrderView
     public void searchOtherAuditSelectOrderno(final Map<String,Object> params) {
         getView().showProgressDialog();
         if (null == mOtherSubscriber) {
-            mOtherSubscriber = new HttpSubscriber<>(new OnResultCallBack<OtherAuditSelectOrdernoBean>() {
+            mOtherSubscriber = new HttpSubscriber<>(new OnResultCallBack<OtherOutAndInStockBean>() {
                 @Override
-                public void onSuccess(OtherAuditSelectOrdernoBean bean) {
+                public void onSuccess(OtherOutAndInStockBean bean) {
                     getView().searchOtherAuditSelectOrderno(bean);
                 }
 
                 @Override
                 public void onError(String errorMsg) {
-                    ToastUtils.showShort(errorMsg);
+//                    ToastUtils.showShort(errorMsg);
                     getView().errorSetEdittextSelect();
                 }
             });
@@ -200,7 +201,7 @@ public class SearchBuyOrderPresenter extends MvpBasePresenter<SearchBuyOrderView
 
                 @Override
                 public void onError(String errorMsg) {
-                    ToastUtils.showShort(errorMsg);
+//                    ToastUtils.showShort(errorMsg);
                     getView().errorSetEdittextSelect();
                 }
             });
@@ -224,7 +225,7 @@ public class SearchBuyOrderPresenter extends MvpBasePresenter<SearchBuyOrderView
 
                 @Override
                 public void onError(String errorMsg) {
-                    ToastUtils.showShort(errorMsg);
+//                    ToastUtils.showShort(errorMsg);
                     getView().errorSetEdittextSelect();
                 }
             });
@@ -248,7 +249,7 @@ public class SearchBuyOrderPresenter extends MvpBasePresenter<SearchBuyOrderView
 
                 @Override
                 public void onError(String errorMsg) {
-                    ToastUtils.showShort(errorMsg);
+//                    ToastUtils.showShort(errorMsg);
                     getView().errorSetEdittextSelect();
                 }
             });

@@ -298,10 +298,6 @@
             android:windowSoftInputMode="adjustPan|stateHidden">
         </activity>
         <activity
-            android:name=".mvp.UI.stock_in_work.form_change_detail.FormChangeDetailActivity"
-            android:configChanges="orientation|keyboardHidden">
-        </activity>
-        <activity
             android:name=".mvp.UI.stock_in_work.allot_one_step.OneStepAllotActivity"
             android:windowSoftInputMode="adjustPan|stateHidden">
         </activity>
@@ -320,6 +316,10 @@
         <activity android:name=".mvp.UI.quity.quality.advance_quality.Advance2Activity">
         </activity>
         <activity android:name=".mvp.UI.stock_out.batch_normal.BatchNormalActivity">
+        </activity>
+        <activity android:name=".mvp.UI.stock_in_work.barcode_exchange.BarcodeExchangeActivity">
+        </activity>
+        <activity android:name=".mvp.UI.stock_in_work.check_detail.CheckDetailActivity">
         </activity>
     </application>
 

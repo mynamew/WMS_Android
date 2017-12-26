@@ -2,6 +2,7 @@ package com.timi.sz.wms_android.mvp.UI.stock_in_work.form_change_outstock;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Selection;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
@@ -19,20 +20,43 @@ import com.timi.sz.wms_android.base.uils.InputMethodUtils;
 import com.timi.sz.wms_android.base.uils.PackageUtils;
 import com.timi.sz.wms_android.base.uils.SpUtils;
 import com.timi.sz.wms_android.base.uils.ToastUtils;
-import com.timi.sz.wms_android.bean.instock.MaterialScanPutAwayBean;
 import com.timi.sz.wms_android.bean.outstock.buy.SubmitBarcodeOutAuditData;
 import com.timi.sz.wms_android.bean.outstock.buy.SubmitBarcodeOutSplitAuditData;
+import com.timi.sz.wms_android.bean.outstock.outsource.SubmitBarcodeLotPickOutResult;
+import com.timi.sz.wms_android.bean.outstock.outsource.SubmitBarcodeLotPickOutSplitResult;
 import com.timi.sz.wms_android.bean.stockin_work.query.FormChangeOutResult;
-import com.timi.sz.wms_android.mvp.UI.stock_in_work.form_change_detail.FormChangeDetailActivity;
-import com.timi.sz.wms_android.mvp.UI.stock_in_work.form_change_instock.FormChangeInstockActivity;
+import com.timi.sz.wms_android.http.message.BaseMessage;
+import com.timi.sz.wms_android.http.message.event.StockOutSubmitScanMaterialEvent;
+import com.timi.sz.wms_android.http.message.event.SubmitBarcodeLotPickOutSplitEvent;
+import com.timi.sz.wms_android.mvp.UI.stock_in.detail.StockInDetailActivity;
+import com.timi.sz.wms_android.mvp.UI.stock_in_work.detail.StockInWorkDetailActivity;
 import com.timi.sz.wms_android.mvp.UI.stock_out.divide_print.SplitPrintActivity;
 import com.timi.sz.wms_android.mvp.base.BaseActivity;
+
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+
+import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_PRINT_BARCODENO;
+import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_PRINT_BATCh_DETAILID;
+import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_PRINT_BILLID;
+import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_PRINT_CURRENT_QTY;
+import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_PRINT_DESBILLTYPE;
+import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_PRINT_MATERIALID;
+import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_PRINT_MATERIAL_ATTR;
+import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_PRINT_MATERIAL_CODE;
+import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_PRINT_MATERIAL_MODEL;
+import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_PRINT_MATERIAL_NAME;
+import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_PRINT_NORMAL;
+import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_PRINT_OUT_QTY;
+import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_PRINT_SCANID;
+import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_PRINT_SRCBILLTYPE;
+import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_CODE_STR;
 
 /**
  * 形态转换出库
@@ -102,40 +126,28 @@ public class FormChangeOutstockActivity extends BaseActivity<FormChangeOutstockV
                 /**
                  * 查看详情
                  */
-                Intent it = new Intent(FormChangeOutstockActivity.this, FormChangeDetailActivity.class);
+                Intent it = new Intent(FormChangeOutstockActivity.this, StockInWorkDetailActivity.class);
                 it.putExtra(Constants.STOCK_IN_WORK_CODE_STR, intentCode);
-                it.putExtra(Constants.STOCK_IN_WORK_BILLID,formChangeOutResult.getBillId());
+                it.putExtra(Constants.STOCK_IN_WORK_BILLID, formChangeOutResult.getBillId());
                 startActivity(it);
             }
         });
-        etScanMaterial.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+        setEdittextListener(etScanMaterial, Constants.REQUEST_SCAN_CODE_MATERIIAL, R.string.please_scan_material_code, 0, new EdittextInputListener() {
             @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-
-                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                    InputMethodUtils.hide(FormChangeOutstockActivity.this);
-                    String result = etScanMaterial.getText().toString().trim();
-                    if (TextUtils.isEmpty(result)) {
-                        ToastUtils.showShort(getString(R.string.please_scan_material_code));
-                    }
-                    /**
-                     * 物料扫码并上架的网络请求
-                     */
-                    /**
-                     * 物料扫码并上架的网络请求
-                     */
-                    Map<String, Object> params = new HashMap<>();
-                    params.put("UserId", SpUtils.getInstance().getUserId());
-                    params.put("OrgId", SpUtils.getInstance().getOrgId());
-                    params.put("MAC", PackageUtils.getMac());
-                    params.put("BillId", billId);
-                    params.put("SrcBillType", 53);
-                    params.put("DestBillType", 53);
-                    params.put("ScanId", scanId);
-                    params.put("BarcodeNo", result);
-                    getPresenter().submitBarcodeOutAudit(params);
-                }
-                return false;
+            public void verticalSuccess(String result) {
+                /**
+                 * 物料扫码并上架的网络请求
+                 */
+                Map<String, Object> params = new HashMap<>();
+                params.put("UserId", SpUtils.getInstance().getUserId());
+                params.put("OrgId", SpUtils.getInstance().getOrgId());
+                params.put("MAC", PackageUtils.getMac());
+                params.put("BillId", billId);
+                params.put("SrcBillType", 53);
+                params.put("DestBillType", 53);
+                params.put("ScanId", scanId);
+                params.put("BarcodeNo", result);
+                getPresenter().submitBarcodeOutAudit(params);
             }
         });
     }
@@ -172,11 +184,9 @@ public class FormChangeOutstockActivity extends BaseActivity<FormChangeOutstockV
         tvHaveCountNum.setText(String.valueOf(haveCountNum));
     }
 
-    @OnClick({R.id.btn_commit, R.id.iv_scan_material})
+    @OnClick({ R.id.iv_scan_material})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.btn_commit:
-                break;
             case R.id.iv_scan_material:
                 scan(Constants.REQUEST_SCAN_CODE_MATERIIAL, new ScanQRCodeResultListener() {
                     @Override
@@ -203,14 +213,14 @@ public class FormChangeOutstockActivity extends BaseActivity<FormChangeOutstockV
 
     @Override
     public void submitBarcodeOutAudit(SubmitBarcodeOutAuditData data) {
-        ToastUtils.showShort(getString(R.string.commit_success));
+        llMaterialInfo.setVisibility(View.VISIBLE);
         /**
          * 设置物料的信息
          */
         tvMaterialName.setText(data.getMaterialName());
         tvMaterialCode.setText(data.getMaterialCode());
-        tvMaterialAttr.setText(TextUtils.isEmpty(data.getMaterialAttribute()) ? getString(R.string.none) : data.getMaterialAttribute());
-        tvMaterialNmodel.setText(TextUtils.isEmpty(data.getMaterialStandard()) ? getString(R.string.none) : data.getMaterialStandard());
+        tvMaterialAttr.setText(data.getMaterialAttribute());
+        tvMaterialNmodel.setText(data.getMaterialStandard());
         /**
          * 设置 是否显示附加属性
          */
@@ -219,14 +229,31 @@ public class FormChangeOutstockActivity extends BaseActivity<FormChangeOutstockV
          * 超出数量  跳转到拆分条吗界面
          */
         if (data.getExceedQty() > 0) {
-            startActivity(new Intent(this, SplitPrintActivity.class));
+            Intent intent = new Intent(this, SplitPrintActivity.class);
+            intent.putExtra(OUT_STOCK_PRINT_BILLID, billId);
+            intent.putExtra(STOCK_OUT_CODE_STR, intentCode);
+            intent.putExtra(OUT_STOCK_PRINT_SRCBILLTYPE, 53);
+            intent.putExtra(OUT_STOCK_PRINT_BARCODENO, etScanMaterial.getText().toString().trim());
+            intent.putExtra(OUT_STOCK_PRINT_DESBILLTYPE, 53);
+            intent.putExtra(OUT_STOCK_PRINT_SCANID, data.getScanId());
+            intent.putExtra(OUT_STOCK_PRINT_MATERIAL_ATTR, data.getMaterialAttribute());
+            intent.putExtra(OUT_STOCK_PRINT_MATERIALID, data.getMaterialId());
+            intent.putExtra(OUT_STOCK_PRINT_MATERIAL_NAME, data.getMaterialName());
+            intent.putExtra(OUT_STOCK_PRINT_MATERIAL_CODE, data.getMaterialCode());
+            intent.putExtra(OUT_STOCK_PRINT_MATERIAL_MODEL, data.getMaterialStandard());
+            intent.putExtra(OUT_STOCK_PRINT_CURRENT_QTY, data.getBarcodeQty());
+            intent.putExtra(OUT_STOCK_PRINT_OUT_QTY, data.getExceedQty());
+            intent.putExtra(OUT_STOCK_PRINT_NORMAL, true);
+            startActivity(intent);
         } else {
+            ToastUtils.showShort(getString(R.string.commit_success));
             scanId = data.getScanId();
             /**
              * 设置物料数量
              */
-            formChangeOutResult.setScanQty(formChangeOutResult.getScanQty() + data.getBarcodeQty());
-            tvMaterialNum.setText("(" + data.getBarcodeQty() + ")" + formChangeOutResult.getScanQty() + "/" + formChangeOutResult.getQty());
+            setTextViewContent(tvWaitPointNum, formChangeOutResult.getQty() - data.getTotalScanQty());
+            setTextViewContent(tvHaveCountNum, data.getTotalScanQty());
+            tvMaterialNum.setText("(" + data.getBarcodeQty() + ")" + data.getTotalScanQty() + "/" + formChangeOutResult.getQty());
 
         }
     }
@@ -238,7 +265,40 @@ public class FormChangeOutstockActivity extends BaseActivity<FormChangeOutstockV
 
     @Override
     public void submitMakeOrAuditBill() {
-        ToastUtils.showShort(getString(R.string.commit_check_success));
-        onBackPressed();
+    }
+
+    @Override
+    public void setMaterialEdittextSelect() {
+        etScanMaterial.setFocusable(true);
+        etScanMaterial.setFocusableInTouchMode(true);
+        etScanMaterial.requestFocus();
+        etScanMaterial.findFocus();
+        Selection.selectAll(etScanMaterial.getText());
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void submitBarcodeSplitSuccess(SubmitBarcodeLotPickOutSplitEvent event) {
+        if (event.getEvent().equals(SubmitBarcodeLotPickOutSplitEvent.SUBMIT_BARCODE_SPLIT_SUCCESS)) {
+            SubmitBarcodeLotPickOutSplitResult result = event.getResult();
+            /**
+             * 发送事件  传递 scanid
+             */
+            StockOutSubmitScanMaterialEvent stockOutSubmitScanMaterialEvent = new StockOutSubmitScanMaterialEvent(StockOutSubmitScanMaterialEvent.OUT_SOURCE_AUDIT_SCAN_MATERIAL_SUCCESS);
+            SubmitBarcodeLotPickOutResult resultScanMaterial = new SubmitBarcodeLotPickOutResult();
+            resultScanMaterial.setBarcodeQty(result.getBarcodeQty());
+            resultScanMaterial.setExceedQty(result.getExceedQty());
+            resultScanMaterial.setScanId(result.getScanId());
+            resultScanMaterial.setMaterialCode(result.getMaterialCode());
+            resultScanMaterial.setTotalScanQty(result.getTotalScanQty());
+            resultScanMaterial.setLineScanQty(result.getLineScanQty());
+            stockOutSubmitScanMaterialEvent.setResult(resultScanMaterial);
+            BaseMessage.post(stockOutSubmitScanMaterialEvent);
+            //设置scanid
+            scanId = result.getScanId();
+            //设置数量
+            setTextViewContent(tvHaveCountNum, result.getTotalScanQty());
+            setTextViewContent(tvWaitPointNum, formChangeOutResult.getQty() - result.getTotalScanQty());
+            tvMaterialNum.setText("(" + result.getBarcodeQty() + ")" + result.getTotalScanQty() + "/" + formChangeOutResult.getQty());
+        }
     }
 }

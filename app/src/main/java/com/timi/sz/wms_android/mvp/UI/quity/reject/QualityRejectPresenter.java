@@ -48,7 +48,7 @@ public class QualityRejectPresenter extends MvpBasePresenter<QualityRejectView> 
                     /**
                      * 显示错误信息 并且将输入框的内容选中
                      */
-                    ToastUtils.showShort(errorMsg);
+//                    ToastUtils.showShort(errorMsg);
                     getView().setEdittextSelect();
                 }
             });
@@ -72,7 +72,7 @@ public class QualityRejectPresenter extends MvpBasePresenter<QualityRejectView> 
 
                 @Override
                 public void onError(String errorMsg) {
-                    ToastUtils.showShort(errorMsg);
+//                    ToastUtils.showShort(errorMsg);
                     getView().setEdittextSelect();
                 }
             });
@@ -96,7 +96,7 @@ public class QualityRejectPresenter extends MvpBasePresenter<QualityRejectView> 
 
                 @Override
                 public void onError(String errorMsg) {
-                    ToastUtils.showShort(errorMsg);
+//                    ToastUtils.showShort(errorMsg);
                 }
             });
         }

@@ -34,6 +34,19 @@ public class SplitPrintModel extends MvpBaseModel {
         });
     }
     /**
+     * 提交条码拆分出库(批次拣货) --- 成品拣货
+     *
+     * @param observer
+     */
+    public void submitBarcodePickSplit(final Map<String, Object> params, Observer<SubmitBarcodeLotPickOutSplitResult> observer) {
+        HttpManager.getInstance().HttpManagerRequest(observer, new ApiServiceMethodCallBack<SubmitBarcodeLotPickOutSplitResult>() {
+            @Override
+            public Observable<CommonResult<SubmitBarcodeLotPickOutSplitResult>> createObservable(ApiService apiService) {
+                return apiService.submitBarcodePickSplit(params);
+            }
+        });
+    }
+    /**
      * 提交条码拆分出库（普通）
      * @param params
      * @param observer

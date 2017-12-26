@@ -128,7 +128,7 @@ public class ProductionMaterialReturnActivity extends BaseActivity<PutAwayView, 
                 params1.put("MAC", PackageUtils.getMac());
                 params1.put("SrcBillType", 25);
                 params1.put("DestBillType", 25);
-                params1.put("ScanId", queryPrdReturnByInputResult.getScanId());
+                params1.put("ScanId",ScanId);
                 params1.put("BinCode", locationCode);
                 params1.put("BillId", queryPrdReturnByInputResult.getBillId());
                 params1.put("BarcodeNo", result);
@@ -259,7 +259,7 @@ public class ProductionMaterialReturnActivity extends BaseActivity<PutAwayView, 
 
     @Override
     public void createInStockOrderno() {
-        ToastUtils.showShort(getString(R.string.create_instock_bill_success));
+        ToastUtils.showShort(getString(R.string.commit_check_success));
         onBackPressed();
     }
 

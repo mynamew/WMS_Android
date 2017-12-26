@@ -236,7 +236,10 @@ public class Constants {
     public static final String OUT_STOCK_DETAIL_RESULTS_BEAN = "out_stock_details_results_bean";//跳转到物料请点详情的实体(DetailResultsBean)
     public static final String OUT_STOCK_SALE_IS_CARTON = "out_stock_sale_is_carton";//跳转到物料请点是否装箱
     public static final String OUT_STOCK_SALE_CARTON_NUM = "out_stock_sale_carton_num";//跳转到物料请点箱号
-
+    /**
+     * 出库跳转到 委外生单/调拨 生产生单/调拨 的明细的key  因为在这个界面来源可能来自于普通出库也可能来自于批次出库需要做判断
+     */
+    public static final String OUT_STOCK_TO_DETAIL_FORM_NORMAL= "out_stock_to_detial_form_nomal";//跳转到明细OutsourceBillDetailActivity界面
     /***********
      * 库内作业跳转的key
      *********************************************************************************************/

@@ -51,6 +51,7 @@ import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_PRINT_NORMAL
 import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_PRINT_OUT_QTY;
 import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_PRINT_SCANID;
 import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_PRINT_SRCBILLTYPE;
+import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_CODE_STR;
 
 /**
  * 拆分打码的界面
@@ -96,6 +97,7 @@ public class SplitPrintActivity extends BaseActivity<SplitPrintView, SplitPrintP
 
     //bundle
     private int billId;
+    private int intentCode;
     private int srcBillType;
     private int destBillType;
     private int scanId;
@@ -125,6 +127,7 @@ public class SplitPrintActivity extends BaseActivity<SplitPrintView, SplitPrintP
     @Override
     public void initBundle(Bundle savedInstanceState) {
         billId = getIntent().getIntExtra(OUT_STOCK_PRINT_BILLID, 0);
+        intentCode = getIntent().getIntExtra(STOCK_OUT_CODE_STR, 0);
         srcBillType = getIntent().getIntExtra(OUT_STOCK_PRINT_SRCBILLTYPE, 0);
         destBillType = getIntent().getIntExtra(OUT_STOCK_PRINT_DESBILLTYPE, 0);
         scanId = getIntent().getIntExtra(OUT_STOCK_PRINT_SCANID, 0);
@@ -315,7 +318,7 @@ public class SplitPrintActivity extends BaseActivity<SplitPrintView, SplitPrintP
                         params.put("DetailId", detailId);
                     }
                     params.put("bCheckMode", false);
-                    getPresenter().submitBarcodeLotPickOutSplit(params);
+                    getPresenter().submitBarcodeLotPickOutSplit(params,intentCode);
                 } else {
                     getPresenter().submitBarcodeOutSplitAudit(params);
                 }

@@ -33,6 +33,7 @@ public class LibraryAdjustPresenter extends MvpBasePresenter<LibraryAdjustView> 
 
     /**
      * 验证目的库位码是否有效
+     *
      * @param params
      */
     public void vertifyLocationCode(Map<String, Object> params) {
@@ -41,12 +42,13 @@ public class LibraryAdjustPresenter extends MvpBasePresenter<LibraryAdjustView> 
             vertifyLocationCodeBeanHttpSubscriber = new HttpSubscriber<>(new OnResultCallBack<VertifyLocationCodeBean>() {
                 @Override
                 public void onSuccess(VertifyLocationCodeBean o) {
-                   getView().vertifyLocationCode(o);
+                    getView().vertifyLocationCode(o);
                 }
 
                 @Override
                 public void onError(String errorMsg) {
-                    ToastUtils.showShort(errorMsg);
+//                    ToastUtils.showShort(errorMsg);
+                    getView().setLocationSelect();
                 }
             });
         }
@@ -55,35 +57,42 @@ public class LibraryAdjustPresenter extends MvpBasePresenter<LibraryAdjustView> 
 
     /**
      * 扫描物料码
+     *
      * @param params
      */
-    public void  scanMaterialCode(Map<String, Object> params){
+    public void scanMaterialCode(Map<String, Object> params) {
+        getView().showProgressDialog();
         if (null == scanMaterialResultHttpSubscriber) {
             scanMaterialResultHttpSubscriber = new HttpSubscriber<>(new OnResultCallBack<StockAdjustResult>() {
                 @Override
                 public void onSuccess(StockAdjustResult o) {
                     getView().scanMaterialCode(o);
+                    getView().setMaterialEdittextSelect();
                 }
 
                 @Override
                 public void onError(String errorMsg) {
-                  ToastUtils.showShort(errorMsg);
+//                    ToastUtils.showShort(errorMsg);
+                    getView().setMaterialEdittextSelect();
                 }
             });
         }
         model.scanMaterialCode(params, scanMaterialResultHttpSubscriber);
     }
+
     /**
      * 扫描物料码
+     *
      * @param params
      */
-    public void  libraryAdjustResult(Map<String, Object> params){
+    public void libraryAdjustResult(Map<String, Object> params) {
         if (null == libraryAdjustResultHttpSubscriber) {
             libraryAdjustResultHttpSubscriber = new HttpSubscriber<>(new OnResultCallBack<LibraryAdjustResult>() {
                 @Override
                 public void onSuccess(LibraryAdjustResult o) {
 
                 }
+
                 @Override
                 public void onError(String errorMsg) {
 

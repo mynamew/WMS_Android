@@ -48,7 +48,7 @@ public class FragmentPointRecordPresenter extends MvpBasePresenter<FragmentPoint
 
                 @Override
                 public void onError(String errorMsg) {
-                    ToastUtils.showShort(errorMsg);
+//                    ToastUtils.showShort(errorMsg);
                 }
             });
         }
@@ -72,7 +72,7 @@ public class FragmentPointRecordPresenter extends MvpBasePresenter<FragmentPoint
 
                 @Override
                 public void onError(String errorMsg) {
-                    ToastUtils.showShort(errorMsg);
+//                    ToastUtils.showShort(errorMsg);
                 }
             });
         }
@@ -99,7 +99,7 @@ public class FragmentPointRecordPresenter extends MvpBasePresenter<FragmentPoint
 
                 @Override
                 public void onError(String errorMsg) {
-                    ToastUtils.showShort(errorMsg);
+//                    ToastUtils.showShort(errorMsg);
                 }
             });
         }

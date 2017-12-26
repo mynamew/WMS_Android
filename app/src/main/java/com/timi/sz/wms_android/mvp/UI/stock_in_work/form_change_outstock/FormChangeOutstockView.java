@@ -19,4 +19,10 @@ public interface FormChangeOutstockView extends MvpBaseView {
     void submitBarcodeOutSplitAudit(SubmitBarcodeOutSplitAuditData data);
 
     void submitMakeOrAuditBill();
+
+    /**
+     * 设置物料条码选中
+     */
+    void setMaterialEdittextSelect();
+
 }

@@ -39,11 +39,13 @@ public class FormChangeInstockPresenter extends MvpBasePresenter<FormChangeInsto
                 @Override
                 public void onSuccess(MaterialScanPutAwayBean materialBean) {
                     getView().materialScanResult(materialBean);
+                    getView().setMaterialEdittextSelect();
                 }
 
                 @Override
                 public void onError(String errorMsg) {
-                    ToastUtils.showShort(errorMsg);
+//                    ToastUtils.showShort(errorMsg);
+                    getView().setMaterialEdittextSelect();
                 }
             });
         }
@@ -66,7 +68,8 @@ public class FormChangeInstockPresenter extends MvpBasePresenter<FormChangeInsto
 
                 @Override
                 public void onError(String errorMsg) {
-                    ToastUtils.showShort(errorMsg);
+//                    ToastUtils.showShort(errorMsg);
+                    getView().setLocationSelect();
                 }
             });
         }
@@ -79,6 +82,7 @@ public class FormChangeInstockPresenter extends MvpBasePresenter<FormChangeInsto
      * @param params
      */
     public void createInSockOrderno(final Map<String, Object> params) {
+        getView().showProgressDialog();
         if (null == createInStockOrdernoBeanHttpSubscriber) {
             createInStockOrdernoBeanHttpSubscriber = new HttpSubscriber<>(new OnResultCallBack<Object>() {
                 @Override
@@ -89,7 +93,7 @@ public class FormChangeInstockPresenter extends MvpBasePresenter<FormChangeInsto
                 @Override
                 public void onError(String errorMsg) {
 
-                    ToastUtils.showShort(errorMsg);
+//                    ToastUtils.showShort(errorMsg);
                 }
             });
         }

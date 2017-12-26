@@ -2,6 +2,7 @@ package com.timi.sz.wms_android.mvp.UI.stock_out.batch_point;
 
 import android.content.Context;
 
+import com.timi.sz.wms_android.base.uils.Constants;
 import com.timi.sz.wms_android.base.uils.ToastUtils;
 import com.timi.sz.wms_android.bean.outstock.outsource.GetMaterialLotData;
 import com.timi.sz.wms_android.bean.outstock.outsource.RequestGetMaterialLotBean;
@@ -45,7 +46,7 @@ public class BatchPointPresenter extends MvpBasePresenter<BatchPointView> {
 
                 @Override
                 public void onError(String errorMsg) {
-                    ToastUtils.showShort(errorMsg);
+//                    ToastUtils.showShort(errorMsg);
                 }
             });
         }
@@ -79,8 +80,9 @@ public class BatchPointPresenter extends MvpBasePresenter<BatchPointView> {
      * 提交条码出库(批次拣货)。
      *
      * @param params
+     * @param intentCode
      */
-    public void submitBarcodeLotPickOut(Map<String, Object> params) {
+    public void submitBarcodeLotPickOut(Map<String, Object> params, int intentCode) {
         getView().showProgressDialog();
         if (null == submitBarcodeLotPickOutResultHttpSubscriber) {
             submitBarcodeLotPickOutResultHttpSubscriber = new HttpSubscriber<>(new OnResultCallBack<SubmitBarcodeLotPickOutResult>() {
@@ -92,12 +94,17 @@ public class BatchPointPresenter extends MvpBasePresenter<BatchPointView> {
 
                 @Override
                 public void onError(String errorMsg) {
-                    ToastUtils.showShort(errorMsg);
+//                    ToastUtils.showShort(errorMsg);
                     getView().setBarcodeSelect();
                 }
             });
         }
-        model.submitBarcodeLotPickOut(params, submitBarcodeLotPickOutResultHttpSubscriber);
+        //成品拣货出库 调用成品拣货出库接口
+        if(intentCode== Constants.STOCK_OUT_ALLOT_OUT_PICK||intentCode== Constants.STOCK_OUT_SALE_OUT_PICK||intentCode== Constants.STOCK_OUT_SEND_OUT_PICK){
+            model.submitBarcodePick(params, submitBarcodeLotPickOutResultHttpSubscriber);
+        }else {
+            model.submitBarcodeLotPickOut(params, submitBarcodeLotPickOutResultHttpSubscriber);
+        }
     }
 
     @Override

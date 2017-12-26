@@ -23,7 +23,9 @@ import com.timi.sz.wms_android.base.uils.ToastUtils;
 import com.timi.sz.wms_android.bean.instock.MaterialScanPutAwayBean;
 import com.timi.sz.wms_android.bean.instock.VertifyLocationCodeBean;
 import com.timi.sz.wms_android.bean.instock.search.OtherAuditSelectOrdernoBean;
+import com.timi.sz.wms_android.bean.other.OtherOutAndInStockBean;
 import com.timi.sz.wms_android.mvp.UI.stock_in.detail.StockInDetailActivity;
+import com.timi.sz.wms_android.mvp.UI.stock_out.detail.DetailActivity;
 import com.timi.sz.wms_android.mvp.base.BaseActivity;
 
 import java.util.HashMap;
@@ -80,7 +82,7 @@ public class OtherAuditActivity extends BaseActivity<PutAwayView, PutAwayPresent
     TextView tvMaterialAttr;
     @BindView(R.id.btn_login)
     Button btnLogin;
-    private OtherAuditSelectOrdernoBean otherBean;
+    private OtherOutAndInStockBean otherBean;
     /**
      * 默认是 入库来料单
      */
@@ -102,7 +104,7 @@ public class OtherAuditActivity extends BaseActivity<PutAwayView, PutAwayPresent
          */
         setActivityTitle(getString(R.string.other_instock_orderno_title));
         intentCode = getIntent().getIntExtra(Constants.CODE_STR, Constants.COME_MATERAIL_NUM);
-        otherBean = new Gson().fromJson(getIntent().getStringExtra(Constants.IN_STOCK_FINISH_OTHER_BEAN), OtherAuditSelectOrdernoBean.class);
+        otherBean = new Gson().fromJson(getIntent().getStringExtra(Constants.IN_STOCK_FINISH_OTHER_BEAN), OtherOutAndInStockBean.class);
         ScanId = otherBean.getSummaryResults().getScanId();
     }
 
@@ -118,7 +120,7 @@ public class OtherAuditActivity extends BaseActivity<PutAwayView, PutAwayPresent
                 /**
                  * 查看详情
                  */
-                Intent it = new Intent(OtherAuditActivity.this, StockInDetailActivity.class);
+                Intent it = new Intent(OtherAuditActivity.this, DetailActivity.class);
                 it.putExtra(Constants.CODE_STR, intentCode);
                 it.putExtra(Constants.STOCKIN_BILLID, otherBean.getSummaryResults().getBillId());
                 startActivity(it);
@@ -136,7 +138,7 @@ public class OtherAuditActivity extends BaseActivity<PutAwayView, PutAwayPresent
                 params1.put("MAC", PackageUtils.getMac());
                 params1.put("SrcBillType", 51);
                 params1.put("DestBillType", 51);
-                params1.put("ScanId", otherBean.getSummaryResults().getScanId());
+                params1.put("ScanId",ScanId);
                 params1.put("BinCode", locationCode);
                 params1.put("BillId", otherBean.getSummaryResults().getBillId());
                 params1.put("BarcodeNo", result);
@@ -185,16 +187,16 @@ public class OtherAuditActivity extends BaseActivity<PutAwayView, PutAwayPresent
     }
     @Override
     public void initData() {
-        OtherAuditSelectOrdernoBean.SummaryResultsBean summaryResults = otherBean.getSummaryResults();
+        OtherOutAndInStockBean.SummaryResultsBean summaryResults = otherBean.getSummaryResults();
         /**
          * 收货单号
          */
         tvReceiveProNum.setText(summaryResults.getBillCode());
 
         /**
-         * 已入库总数
+         * 入库总数
          */
-//        tvInStockTotalNum.setText(String.valueOf(summaryResults.getQty()));
+        tvInStockTotalNum.setText(String.valueOf(summaryResults.getQty()));
         /**
          * 日期
          */
@@ -262,7 +264,7 @@ public class OtherAuditActivity extends BaseActivity<PutAwayView, PutAwayPresent
 
     @Override
     public void createInStockOrderno() {
-        ToastUtils.showShort(getString(R.string.create_instock_bill_success));
+        ToastUtils.showShort(getString(R.string.commit_check_success));
         onBackPressed();
     }
 

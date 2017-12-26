@@ -12,7 +12,9 @@ import com.timi.sz.wms_android.bean.instock.search.FinishGoodsCreateBillBean;
 import com.timi.sz.wms_android.bean.instock.search.OtherAuditSelectOrdernoBean;
 import com.timi.sz.wms_android.bean.instock.search.QueryPrdInstockByInputResult;
 import com.timi.sz.wms_android.bean.instock.search.QueryPrdReturnByInputResult;
+import com.timi.sz.wms_android.bean.instock.search.SaleGoodsReturnBean;
 import com.timi.sz.wms_android.bean.list.RequestBuyInStockListBean;
+import com.timi.sz.wms_android.bean.other.OtherOutAndInStockBean;
 import com.timi.sz.wms_android.bean.outstock.buy.BuyReturnMaterialByOrdernoData;
 import com.timi.sz.wms_android.bean.outstock.other.QueryOtherOutStockByInputResult;
 import com.timi.sz.wms_android.bean.outstock.outsource.QueryOutSourceFeedByInputResult;
@@ -23,6 +25,7 @@ import com.timi.sz.wms_android.bean.outstock.pick.QueryDNByInputForPickResult;
 import com.timi.sz.wms_android.bean.outstock.pick.QueryTransferByInputForPickResult;
 import com.timi.sz.wms_android.bean.outstock.product.QueryPrdFeedByInputResult;
 import com.timi.sz.wms_android.bean.outstock.product.QueryProductPickByInputResult;
+import com.timi.sz.wms_android.bean.outstock.sale.QuerySalesOutSotckByInputForOutStockResult;
 import com.timi.sz.wms_android.bean.stockin_work.allot_out.QueryAllotOutResult;
 import com.timi.sz.wms_android.bean.stockin_work.query.AllotOneSetpResult;
 import com.timi.sz.wms_android.bean.stockin_work.query.AllotScanResult;
@@ -43,6 +46,7 @@ import static com.timi.sz.wms_android.base.uils.Constants.CREATE_RETURN_MATERAIL
 import static com.timi.sz.wms_android.base.uils.Constants.OTHER_IN_STOCK_SELECT_ORDERNO;
 import static com.timi.sz.wms_android.base.uils.Constants.OUT_RETURN_MATERAIL;
 import static com.timi.sz.wms_android.base.uils.Constants.OUT_SOURCE;
+import static com.timi.sz.wms_android.base.uils.Constants.SALE_RETURN_MATERAIL;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_IN_WORK_ALLOT_ONE_STEP;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_IN_WORK_ALLOT_SCAN;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_IN_WORK_FORM_CHANGE_IN;
@@ -100,15 +104,21 @@ public class BuyInStockListPresenter extends MvpBasePresenter<BuyInStockListView
     //成品入库生单
     private HttpSubscriber<FinishGoodsCreateBillBean> finishGoodInstockBill;
     //其他入库
-    private HttpSubscriber<OtherAuditSelectOrdernoBean> otherInStock;
+    private HttpSubscriber<OtherOutAndInStockBean> otherInStock;
     //其他出库
-    private HttpSubscriber<QueryOtherOutStockByInputResult> otherOutStock;
+    private HttpSubscriber<OtherOutAndInStockBean> otherOutStock;
     //发货拣货
     private HttpSubscriber<QueryDNByInputForPickResult> sendMaterailPick;
     //销售拣货
     private HttpSubscriber<GetSalesOutSotckByInputForPickResult> salePick;
     //调拨拣货
     private HttpSubscriber<QueryTransferByInputForPickResult> allotPick;
+    //销售出库－审核
+    private HttpSubscriber<QuerySalesOutSotckByInputForOutStockResult> saleOutStockAudit;
+    //销售出库－生单
+    private HttpSubscriber<QuerySalesOutSotckByInputForOutStockResult> saleOutStockBill;
+    //销售退料
+    private HttpSubscriber<SaleGoodsReturnBean> saleReturn;
     //扫描调入
     private HttpSubscriber<AllotScanResult> scanAllot;
     //一步调入
@@ -146,7 +156,7 @@ public class BuyInStockListPresenter extends MvpBasePresenter<BuyInStockListView
 
                 @Override
                 public void onError(String errorMsg) {
-                    ToastUtils.showShort(errorMsg);
+//                    ToastUtils.showShort(errorMsg);
                     getView().setOrdernoSelect();
                 }
             });
@@ -207,12 +217,17 @@ public class BuyInStockListPresenter extends MvpBasePresenter<BuyInStockListView
                 model.queryOtherOutstockList(params, httpSubscriber);
                 break;
             case STOCK_OUT_SALE_OUT_PICK://销售拣货
-            case STOCK_OUT_SELL_OUT_AUDIT://销售审核
                 model.querySalesOutStockList(params, httpSubscriber);
                 break;
             case STOCK_OUT_SEND_OUT_PICK://发货拣货
             case STOCK_OUT_SELL_OUT_BILL://销售生单
                 model.queryDNOutList(params, httpSubscriber);
+                break;
+            case STOCK_OUT_SELL_OUT_AUDIT://销售审核
+                model.querySalesOutStockList(params, httpSubscriber);
+                break;
+            case SALE_RETURN_MATERAIL://销售退料
+                model.querySalesReturnList(params, httpSubscriber);
                 break;
             case STOCK_OUT_ALLOT_OUT_PICK://调拨拣货
                 model.QueryTransferListForOutStock(params, httpSubscriber);
@@ -252,7 +267,7 @@ public class BuyInStockListPresenter extends MvpBasePresenter<BuyInStockListView
 
                 @Override
                 public void onError(String errorMsg) {
-                    ToastUtils.showShort(errorMsg);
+//                    ToastUtils.showShort(errorMsg);
                     getView().setOrdernoSelect();
                 }
             });
@@ -277,7 +292,7 @@ public class BuyInStockListPresenter extends MvpBasePresenter<BuyInStockListView
 
                 @Override
                 public void onError(String errorMsg) {
-                    ToastUtils.showShort(errorMsg);
+//                    ToastUtils.showShort(errorMsg);
                     getView().setOrdernoSelect();
                 }
             });
@@ -302,7 +317,7 @@ public class BuyInStockListPresenter extends MvpBasePresenter<BuyInStockListView
 
                 @Override
                 public void onError(String errorMsg) {
-                    ToastUtils.showShort(errorMsg);
+//                    ToastUtils.showShort(errorMsg);
                     getView().setOrdernoSelect();
                 }
             });
@@ -327,7 +342,7 @@ public class BuyInStockListPresenter extends MvpBasePresenter<BuyInStockListView
 
                 @Override
                 public void onError(String errorMsg) {
-                    ToastUtils.showShort(errorMsg);
+//                    ToastUtils.showShort(errorMsg);
                     getView().setOrdernoSelect();
                 }
             });
@@ -352,7 +367,7 @@ public class BuyInStockListPresenter extends MvpBasePresenter<BuyInStockListView
 
                 @Override
                 public void onError(String errorMsg) {
-                    ToastUtils.showShort(errorMsg);
+//                    ToastUtils.showShort(errorMsg);
                     getView().setOrdernoSelect();
                 }
             });
@@ -377,7 +392,7 @@ public class BuyInStockListPresenter extends MvpBasePresenter<BuyInStockListView
 
                 @Override
                 public void onError(String errorMsg) {
-                    ToastUtils.showShort(errorMsg);
+//                    ToastUtils.showShort(errorMsg);
                     getView().setOrdernoSelect();
                 }
             });
@@ -402,7 +417,7 @@ public class BuyInStockListPresenter extends MvpBasePresenter<BuyInStockListView
 
                 @Override
                 public void onError(String errorMsg) {
-                    ToastUtils.showShort(errorMsg);
+//                    ToastUtils.showShort(errorMsg);
                     getView().setOrdernoSelect();
                 }
             });
@@ -427,7 +442,7 @@ public class BuyInStockListPresenter extends MvpBasePresenter<BuyInStockListView
 
                 @Override
                 public void onError(String errorMsg) {
-                    ToastUtils.showShort(errorMsg);
+//                    ToastUtils.showShort(errorMsg);
                     getView().setOrdernoSelect();
                 }
             });
@@ -452,7 +467,7 @@ public class BuyInStockListPresenter extends MvpBasePresenter<BuyInStockListView
 
                 @Override
                 public void onError(String errorMsg) {
-                    ToastUtils.showShort(errorMsg);
+//                    ToastUtils.showShort(errorMsg);
                     getView().setOrdernoSelect();
                 }
             });
@@ -477,7 +492,7 @@ public class BuyInStockListPresenter extends MvpBasePresenter<BuyInStockListView
 
                 @Override
                 public void onError(String errorMsg) {
-                    ToastUtils.showShort(errorMsg);
+//                    ToastUtils.showShort(errorMsg);
                     getView().setOrdernoSelect();
                 }
             });
@@ -502,7 +517,7 @@ public class BuyInStockListPresenter extends MvpBasePresenter<BuyInStockListView
 
                 @Override
                 public void onError(String errorMsg) {
-                    ToastUtils.showShort(errorMsg);
+//                    ToastUtils.showShort(errorMsg);
                     getView().setOrdernoSelect();
                 }
             });
@@ -527,7 +542,7 @@ public class BuyInStockListPresenter extends MvpBasePresenter<BuyInStockListView
 
                 @Override
                 public void onError(String errorMsg) {
-                    ToastUtils.showShort(errorMsg);
+//                    ToastUtils.showShort(errorMsg);
                     getView().setOrdernoSelect();
                 }
             });
@@ -552,7 +567,7 @@ public class BuyInStockListPresenter extends MvpBasePresenter<BuyInStockListView
 
                 @Override
                 public void onError(String errorMsg) {
-                    ToastUtils.showShort(errorMsg);
+//                    ToastUtils.showShort(errorMsg);
                     getView().setOrdernoSelect();
                 }
             });
@@ -568,16 +583,16 @@ public class BuyInStockListPresenter extends MvpBasePresenter<BuyInStockListView
     public void getOtherInstockData(Map<String, Object> params) {
         getView().showProgressDialog();
         if (null == otherInStock) {
-            otherInStock = new HttpSubscriber<>(new OnResultCallBack<OtherAuditSelectOrdernoBean>() {
+            otherInStock = new HttpSubscriber<>(new OnResultCallBack<OtherOutAndInStockBean>() {
                 @Override
-                public void onSuccess(OtherAuditSelectOrdernoBean bean) {
+                public void onSuccess(OtherOutAndInStockBean bean) {
                     getView().getOtherInstockData(bean);
                     getView().setOrdernoSelect();
                 }
 
                 @Override
                 public void onError(String errorMsg) {
-                    ToastUtils.showShort(errorMsg);
+//                    ToastUtils.showShort(errorMsg);
                     getView().setOrdernoSelect();
                 }
             });
@@ -593,16 +608,16 @@ public class BuyInStockListPresenter extends MvpBasePresenter<BuyInStockListView
     public void getOtherOutstockData(Map<String, Object> params) {
         getView().showProgressDialog();
         if (null == otherOutStock) {
-            otherOutStock = new HttpSubscriber<>(new OnResultCallBack<QueryOtherOutStockByInputResult>() {
+            otherOutStock = new HttpSubscriber<>(new OnResultCallBack<OtherOutAndInStockBean>() {
                 @Override
-                public void onSuccess(QueryOtherOutStockByInputResult bean) {
+                public void onSuccess(OtherOutAndInStockBean bean) {
                     getView().getOtherOutstockData(bean);
                     getView().setOrdernoSelect();
                 }
 
                 @Override
                 public void onError(String errorMsg) {
-                    ToastUtils.showShort(errorMsg);
+//                    ToastUtils.showShort(errorMsg);
                     getView().setOrdernoSelect();
                 }
             });
@@ -627,7 +642,7 @@ public class BuyInStockListPresenter extends MvpBasePresenter<BuyInStockListView
 
                 @Override
                 public void onError(String errorMsg) {
-                    ToastUtils.showShort(errorMsg);
+//                    ToastUtils.showShort(errorMsg);
                     getView().setOrdernoSelect();
                 }
             });
@@ -652,7 +667,7 @@ public class BuyInStockListPresenter extends MvpBasePresenter<BuyInStockListView
 
                 @Override
                 public void onError(String errorMsg) {
-                    ToastUtils.showShort(errorMsg);
+//                    ToastUtils.showShort(errorMsg);
                     getView().setOrdernoSelect();
                 }
             });
@@ -677,12 +692,36 @@ public class BuyInStockListPresenter extends MvpBasePresenter<BuyInStockListView
 
                 @Override
                 public void onError(String errorMsg) {
-                    ToastUtils.showShort(errorMsg);
+//                    ToastUtils.showShort(errorMsg);
                     getView().setOrdernoSelect();
                 }
             });
         }
         model.getSalesOutSotckByInputForPick(params, salePick);
+    }
+  /**
+     * 根据销售退货列表获取退货单数据
+     *
+     * @param params
+     */
+    public void getSalesReturnData(Map<String, Object> params) {
+        getView().showProgressDialog();
+        if (null == saleReturn) {
+            saleReturn = new HttpSubscriber<>(new OnResultCallBack<SaleGoodsReturnBean>() {
+                @Override
+                public void onSuccess(SaleGoodsReturnBean bean) {
+                    getView().getSalesReturnData(bean);
+                    getView().setOrdernoSelect();
+                }
+
+                @Override
+                public void onError(String errorMsg) {
+//                    ToastUtils.showShort(errorMsg);
+                    getView().setOrdernoSelect();
+                }
+            });
+        }
+        model.getSalesReturnData(params, saleReturn);
     }
 
     /**
@@ -702,7 +741,7 @@ public class BuyInStockListPresenter extends MvpBasePresenter<BuyInStockListView
 
                 @Override
                 public void onError(String errorMsg) {
-                    ToastUtils.showShort(errorMsg);
+//                    ToastUtils.showShort(errorMsg);
                     getView().setOrdernoSelect();
                 }
             });
@@ -727,12 +766,62 @@ public class BuyInStockListPresenter extends MvpBasePresenter<BuyInStockListView
 
                 @Override
                 public void onError(String errorMsg) {
-                    ToastUtils.showShort(errorMsg);
+//                    ToastUtils.showShort(errorMsg);
                     getView().setOrdernoSelect();
                 }
             });
         }
         model.getTransferForOneStep(params, oneStepAllot);
+    }
+
+    /**
+     * 销售审核列表获取数据
+     *
+     * @param params
+     */
+    public void getSalesOutSotckByInputForOutStock(Map<String, Object> params) {
+        getView().showProgressDialog();
+        if (null == saleOutStockAudit) {
+            saleOutStockAudit = new HttpSubscriber<>(new OnResultCallBack<QuerySalesOutSotckByInputForOutStockResult>() {
+                @Override
+                public void onSuccess(QuerySalesOutSotckByInputForOutStockResult bean) {
+                    getView().getSalesOutSotckByInputForOutStock(bean);
+                    getView().setOrdernoSelect();
+                }
+
+                @Override
+                public void onError(String errorMsg) {
+//                    ToastUtils.showShort(errorMsg);
+                    getView().setOrdernoSelect();
+                }
+            });
+        }
+        model.getSalesOutSotckByInputForOutStock(params, saleOutStockAudit);
+    }
+
+    /**
+     * 销售生单列表获取数据
+     *
+     * @param params
+     */
+    public void getDNDataForOutStock(Map<String, Object> params) {
+        getView().showProgressDialog();
+        if (null == saleOutStockBill) {
+            saleOutStockBill = new HttpSubscriber<>(new OnResultCallBack<QuerySalesOutSotckByInputForOutStockResult>() {
+                @Override
+                public void onSuccess(QuerySalesOutSotckByInputForOutStockResult bean) {
+                    getView().getDNDataForOutStock(bean);
+                    getView().setOrdernoSelect();
+                }
+
+                @Override
+                public void onError(String errorMsg) {
+//                    ToastUtils.showShort(errorMsg);
+                    getView().setOrdernoSelect();
+                }
+            });
+        }
+        model.getDNDataForOutStock(params, saleOutStockBill);
     }
 
     /**
@@ -752,7 +841,7 @@ public class BuyInStockListPresenter extends MvpBasePresenter<BuyInStockListView
 
                 @Override
                 public void onError(String errorMsg) {
-                    ToastUtils.showShort(errorMsg);
+//                    ToastUtils.showShort(errorMsg);
                     getView().setOrdernoSelect();
                 }
             });
@@ -777,7 +866,7 @@ public class BuyInStockListPresenter extends MvpBasePresenter<BuyInStockListView
 
                 @Override
                 public void onError(String errorMsg) {
-                    ToastUtils.showShort(errorMsg);
+//                    ToastUtils.showShort(errorMsg);
                     getView().setOrdernoSelect();
                 }
             });
@@ -793,16 +882,16 @@ public class BuyInStockListPresenter extends MvpBasePresenter<BuyInStockListView
     public void getConvertOutByInput(Map<String, Object> params) {
         getView().showProgressDialog();
         if (null == formOutChange) {
-            formOutChange = new HttpSubscriber<>(new OnResultCallBack<FormChangeInResult>() {
+            formOutChange = new HttpSubscriber<>(new OnResultCallBack<FormChangeOutResult>() {
                 @Override
-                public void onSuccess(FormChangeInResult bean) {
+                public void onSuccess(FormChangeOutResult bean) {
                     getView().getConvertOutByInput(bean);
                     getView().setOrdernoSelect();
                 }
 
                 @Override
                 public void onError(String errorMsg) {
-                    ToastUtils.showShort(errorMsg);
+//                    ToastUtils.showShort(errorMsg);
                     getView().setOrdernoSelect();
                 }
             });
@@ -827,7 +916,7 @@ public class BuyInStockListPresenter extends MvpBasePresenter<BuyInStockListView
 
                 @Override
                 public void onError(String errorMsg) {
-                    ToastUtils.showShort(errorMsg);
+//                    ToastUtils.showShort(errorMsg);
                     getView().setOrdernoSelect();
                 }
             });

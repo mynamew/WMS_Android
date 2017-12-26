@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.timi.sz.wms_android.base.uils.ToastUtils;
 import com.timi.sz.wms_android.bean.instock.search.OtherAuditSelectOrdernoBean;
+import com.timi.sz.wms_android.bean.other.OtherOutAndInStockBean;
 import com.timi.sz.wms_android.bean.outstock.other.QueryOtherOutStockByInputResult;
 import com.timi.sz.wms_android.bean.outstock.outsource.OutSourceFeedBean;
 import com.timi.sz.wms_android.bean.outstock.outsource.QueryOutSourceFeedByInputResult;
@@ -43,8 +44,8 @@ public class StockOutSearchPresenter extends MvpBasePresenter<StockOutSearchView
     private HttpSubscriber<QueryPrdFeedByInputResult> queryPrdFeedByInputResultHttpSubscriber;
     private HttpSubscriber<QueryDNByInputForOutStockResult> queryDNByInputForOutStockResultHttpSubscriber;
     private HttpSubscriber<QuerySalesOutSotckByInputForOutStockResult> querySalesOutSotckByInputForOutStockResultHttpSubscriber;
-    private HttpSubscriber<OtherAuditSelectOrdernoBean> otherAuditSelectOrdernoBeanHttpSubscriber;
-    private HttpSubscriber<QueryOtherOutStockByInputResult> queryOtherOutStockByInputResultHttpSubscriber;
+    private HttpSubscriber<OtherOutAndInStockBean> otherAuditSelectOrdernoBeanHttpSubscriber;
+    private HttpSubscriber<OtherOutAndInStockBean> queryOtherOutStockByInputResultHttpSubscriber;
     //成品拣货
     private HttpSubscriber<QueryDNByInputForPickResult> queryDNByInputForPickResultHttpSubscriber;
     private HttpSubscriber<QuerySalesOutSotckByInputForPickResult> querySalesOutSotckByInputForPickResultHttpSubscriber;
@@ -71,7 +72,7 @@ public class StockOutSearchPresenter extends MvpBasePresenter<StockOutSearchView
 
                 @Override
                 public void onError(String errorMsg) {
-                    ToastUtils.showShort(errorMsg);
+//                    ToastUtils.showShort(errorMsg);
                 }
             });
         }
@@ -92,7 +93,7 @@ public class StockOutSearchPresenter extends MvpBasePresenter<StockOutSearchView
 
                 @Override
                 public void onError(String errorMsg) {
-                    ToastUtils.showShort(errorMsg);
+//                    ToastUtils.showShort(errorMsg);
                 }
             });
         }
@@ -113,7 +114,7 @@ public class StockOutSearchPresenter extends MvpBasePresenter<StockOutSearchView
 
                 @Override
                 public void onError(String errorMsg) {
-                    ToastUtils.showShort(errorMsg);
+//                    ToastUtils.showShort(errorMsg);
                 }
             });
         }
@@ -134,7 +135,7 @@ public class StockOutSearchPresenter extends MvpBasePresenter<StockOutSearchView
 
                 @Override
                 public void onError(String errorMsg) {
-                    ToastUtils.showShort(errorMsg);
+//                    ToastUtils.showShort(errorMsg);
                 }
             });
         }
@@ -155,7 +156,7 @@ public class StockOutSearchPresenter extends MvpBasePresenter<StockOutSearchView
 
                 @Override
                 public void onError(String errorMsg) {
-                    ToastUtils.showShort(errorMsg);
+//                    ToastUtils.showShort(errorMsg);
                 }
             });
         }
@@ -176,7 +177,7 @@ public class StockOutSearchPresenter extends MvpBasePresenter<StockOutSearchView
 
                 @Override
                 public void onError(String errorMsg) {
-                    ToastUtils.showShort(errorMsg);
+//                    ToastUtils.showShort(errorMsg);
                 }
             });
         }
@@ -197,7 +198,7 @@ public class StockOutSearchPresenter extends MvpBasePresenter<StockOutSearchView
 
                 @Override
                 public void onError(String errorMsg) {
-                    ToastUtils.showShort(errorMsg);
+//                    ToastUtils.showShort(errorMsg);
                 }
             });
         }
@@ -220,7 +221,7 @@ public class StockOutSearchPresenter extends MvpBasePresenter<StockOutSearchView
 
                 @Override
                 public void onError(String errorMsg) {
-                    ToastUtils.showShort(errorMsg);
+//                    ToastUtils.showShort(errorMsg);
                 }
             });
         }
@@ -242,7 +243,7 @@ public class StockOutSearchPresenter extends MvpBasePresenter<StockOutSearchView
 
                 @Override
                 public void onError(String errorMsg) {
-                    ToastUtils.showShort(errorMsg);
+//                    ToastUtils.showShort(errorMsg);
                 }
             });
         }
@@ -256,15 +257,15 @@ public class StockOutSearchPresenter extends MvpBasePresenter<StockOutSearchView
     public void searchOtherAuditSelectOrderno(Map<String, Object> params) {
         getView().showProgressDialog();
         if (null == otherAuditSelectOrdernoBeanHttpSubscriber) {
-            otherAuditSelectOrdernoBeanHttpSubscriber = new HttpSubscriber<>(new OnResultCallBack<OtherAuditSelectOrdernoBean>() {
+            otherAuditSelectOrdernoBeanHttpSubscriber = new HttpSubscriber<>(new OnResultCallBack<OtherOutAndInStockBean>() {
                 @Override
-                public void onSuccess(OtherAuditSelectOrdernoBean o) {
+                public void onSuccess(OtherOutAndInStockBean o) {
                     getView().searchOtherAuditSelectOrderno(o);
                 }
 
                 @Override
                 public void onError(String errorMsg) {
-                    ToastUtils.showShort(errorMsg);
+//                    ToastUtils.showShort(errorMsg);
                 }
             });
         }
@@ -277,15 +278,15 @@ public class StockOutSearchPresenter extends MvpBasePresenter<StockOutSearchView
     public void queryOtherOutStockByInput(Map<String, Object> params) {
         getView().showProgressDialog();
         if (null == queryOtherOutStockByInputResultHttpSubscriber) {
-            queryOtherOutStockByInputResultHttpSubscriber = new HttpSubscriber<>(new OnResultCallBack<QueryOtherOutStockByInputResult>() {
+            queryOtherOutStockByInputResultHttpSubscriber = new HttpSubscriber<>(new OnResultCallBack<OtherOutAndInStockBean>() {
                 @Override
-                public void onSuccess(QueryOtherOutStockByInputResult o) {
+                public void onSuccess(OtherOutAndInStockBean o) {
                     getView().queryOtherOutStockByInput(o);
                 }
 
                 @Override
                 public void onError(String errorMsg) {
-                    ToastUtils.showShort(errorMsg);
+//                    ToastUtils.showShort(errorMsg);
                 }
             });
         }
@@ -307,7 +308,7 @@ public class StockOutSearchPresenter extends MvpBasePresenter<StockOutSearchView
 
                 @Override
                 public void onError(String errorMsg) {
-                    ToastUtils.showShort(errorMsg);
+//                    ToastUtils.showShort(errorMsg);
                 }
             });
         }
@@ -327,7 +328,7 @@ public class StockOutSearchPresenter extends MvpBasePresenter<StockOutSearchView
 
                 @Override
                 public void onError(String errorMsg) {
-                    ToastUtils.showShort(errorMsg);
+//                    ToastUtils.showShort(errorMsg);
                 }
             });
         }
@@ -347,7 +348,7 @@ public class StockOutSearchPresenter extends MvpBasePresenter<StockOutSearchView
 
                 @Override
                 public void onError(String errorMsg) {
-                    ToastUtils.showShort(errorMsg);
+//                    ToastUtils.showShort(errorMsg);
                 }
             });
         }
@@ -368,7 +369,7 @@ public class StockOutSearchPresenter extends MvpBasePresenter<StockOutSearchView
 
                 @Override
                 public void onError(String errorMsg) {
-                    ToastUtils.showShort(errorMsg);
+//                    ToastUtils.showShort(errorMsg);
                 }
             });
         }

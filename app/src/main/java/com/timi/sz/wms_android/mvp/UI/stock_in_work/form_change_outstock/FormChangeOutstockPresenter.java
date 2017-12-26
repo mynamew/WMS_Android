@@ -42,11 +42,13 @@ public class FormChangeOutstockPresenter extends MvpBasePresenter<FormChangeOuts
                 @Override
                 public void onSuccess(SubmitBarcodeOutAuditData bean) {
                     getView().submitBarcodeOutAudit(bean);
+                    getView().setMaterialEdittextSelect();
                 }
 
                 @Override
                 public void onError(String errorMsg) {
-                    ToastUtils.showShort(errorMsg);
+//                    ToastUtils.showShort(errorMsg);
+                    getView().setMaterialEdittextSelect();
                 }
             });
         }
@@ -69,7 +71,7 @@ public class FormChangeOutstockPresenter extends MvpBasePresenter<FormChangeOuts
 
                 @Override
                 public void onError(String errorMsg) {
-                    ToastUtils.showShort(errorMsg);
+//                    ToastUtils.showShort(errorMsg);
                 }
             });
         }
@@ -92,7 +94,7 @@ public class FormChangeOutstockPresenter extends MvpBasePresenter<FormChangeOuts
 
                 @Override
                 public void onError(String errorMsg) {
-                    ToastUtils.showShort(errorMsg);
+//                    ToastUtils.showShort(errorMsg);
                 }
             });
         }

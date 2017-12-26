@@ -44,7 +44,7 @@ public class OtherOutStockScanPresenter extends MvpBasePresenter<OtherOutStockSc
 
                 @Override
                 public void onError(String errorMsg) {
-                    ToastUtils.showShort(errorMsg);
+//                    ToastUtils.showShort(errorMsg);
                 }
             });
         }
@@ -68,7 +68,7 @@ public class OtherOutStockScanPresenter extends MvpBasePresenter<OtherOutStockSc
 
                 @Override
                 public void onError(String errorMsg) {
-                    ToastUtils.showShort(errorMsg);
+//                    ToastUtils.showShort(errorMsg);
                     getView().setBarcodeSelect();
                 }
             });

@@ -37,7 +37,7 @@ public class SubmitBarcodeLotPickOutSplitResult {
     private int totalScanQty;
     private int exceedQty;
     private String newBarcode;
-    private int CartonNo;
+    private int cartonNo;
     public boolean isIsNotAllowPickOut() {
         return isNotAllowPickOut;
     }
@@ -143,10 +143,10 @@ public class SubmitBarcodeLotPickOutSplitResult {
     }
 
     public int getCartonNo() {
-        return CartonNo;
+        return cartonNo;
     }
 
     public void setCartonNo(int cartonNo) {
-        CartonNo = cartonNo;
+        cartonNo = cartonNo;
     }
 }

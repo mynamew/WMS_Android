@@ -63,4 +63,17 @@ public class BatchPointModel extends MvpBaseModel {
             }
         });
     }
+    /**
+     * 提交条码出库(批次拣货)。成品拣货
+     *
+     * @param observer
+     */
+    public void submitBarcodePick(final Map<String, Object> params, Observer<SubmitBarcodeLotPickOutResult> observer) {
+        HttpManager.getInstance().HttpManagerRequest(observer, new ApiServiceMethodCallBack<SubmitBarcodeLotPickOutResult>() {
+            @Override
+            public Observable<CommonResult<SubmitBarcodeLotPickOutResult>> createObservable(ApiService apiService) {
+                return apiService.submitBarcodePick(params);
+            }
+        });
+    }
 }

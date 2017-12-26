@@ -46,7 +46,7 @@ public class LoginPresenter extends MvpBasePresenter<LoginView> {
 
                 @Override
                 public void onError(String errorMsg) {
-                    ToastUtils.showShort(errorMsg);
+//                    ToastUtils.showShort(errorMsg);
                 }
             });
         }

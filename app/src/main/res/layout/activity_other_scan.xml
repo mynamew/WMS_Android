@@ -39,7 +39,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="80px">
+        android:layout_height="100px">
 
         <TextView
             android:id="@+id/tv_scan_location_tip"
@@ -56,12 +56,12 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="20px"
-            android:imeOptions="actionSearch"
             android:layout_toRightOf="@id/tv_scan_location_tip"
             android:background="@drawable/selector_et"
             android:ellipsize="end"
             android:gravity="center_vertical"
             android:hint="@string/please_scan_lib_location_code"
+            android:imeOptions="actionSearch"
             android:paddingLeft="20px"
             android:paddingRight="80px"
             android:singleLine="true"
@@ -81,7 +81,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="80px">
+        android:layout_height="100px">
 
         <TextView
             android:id="@+id/tv_can_material_tip"

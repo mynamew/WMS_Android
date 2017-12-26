@@ -1,6 +1,7 @@
 package com.timi.sz.wms_android.mvp.UI.stock_in_work.pack_adjust;
 
 import com.timi.sz.wms_android.bean.instock.VertifyLocationCodeBean;
+import com.timi.sz.wms_android.bean.stockin_work.ContainerAdjustResult;
 import com.timi.sz.wms_android.bean.stockin_work.LibraryAdjustResult;
 import com.timi.sz.wms_android.bean.stockin_work.ScanLocationResult;
 import com.timi.sz.wms_android.bean.stockin_work.ScanMaterialResult;
@@ -13,21 +14,15 @@ import com.timi.sz.wms_android.mvp.base.view.iml.MvpBaseView;
  */
 
 public interface PackAdjustView extends MvpBaseView {
-    /**
-     * 扫 库位码
-     * @param bean
-     */
-    void vertifyLocationCode(VertifyLocationCodeBean bean);
+
 
     /**
-     * 扫物料码
-     * @param result
+     * 容器调整
+     * @param o
      */
-    void scanMaterialCode(ScanMaterialResult result);
-
+    void containnerAdjust(ContainerAdjustResult o);
     /**
-     * 库位调整
-     * @param result
+     * 设置源容器选中
      */
-    void libraryAdjust(LibraryAdjustResult result);
+    void setOldPackSelect();
 }

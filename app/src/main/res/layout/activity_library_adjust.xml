@@ -324,6 +324,7 @@
         android:layout_height="98px"
         android:background="@drawable/selector_btn"
         android:text="@string/confirm_commit"
+        android:visibility="gone"
         android:textColor="@color/white"
         android:textSize="36px"/>
 </LinearLayout>

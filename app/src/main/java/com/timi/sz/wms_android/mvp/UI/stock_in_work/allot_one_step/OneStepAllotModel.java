@@ -20,22 +20,6 @@ import io.reactivex.Observer;
 
 public class OneStepAllotModel extends MvpBaseModel {
     /**
-     * 验证库位码是否有效
-     * @param params
-     * @param observer
-     */
-    public void vertifyLocationCode(final Map<String,Object> params,
-                                    final Observer<VertifyLocationCodeBean> observer){
-        HttpManager.getInstance().HttpManagerRequest(observer,
-                new ApiServiceMethodCallBack<VertifyLocationCodeBean>() {
-                    @Override
-                    public Observable<CommonResult<VertifyLocationCodeBean>>
-                    createObservable(ApiService apiService) {
-                        return apiService.vertifyLocationCode(params);
-                    }
-                });
-    }
-    /**
      * 一部调出  提交
      * @param params
      * @param observer

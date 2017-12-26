@@ -17,6 +17,7 @@ import com.timi.sz.wms_android.base.uils.PackageUtils;
 import com.timi.sz.wms_android.base.uils.SpUtils;
 import com.timi.sz.wms_android.base.uils.ToastUtils;
 import com.timi.sz.wms_android.bean.instock.search.OtherAuditSelectOrdernoBean;
+import com.timi.sz.wms_android.bean.other.OtherOutAndInStockBean;
 import com.timi.sz.wms_android.bean.outstock.other.QueryOtherOutStockByInputResult;
 import com.timi.sz.wms_android.bean.outstock.outsource.QueryOutSourceFeedByInputResult;
 import com.timi.sz.wms_android.bean.outstock.outsource.QueryOutSourcePickByInputResult;
@@ -29,6 +30,7 @@ import com.timi.sz.wms_android.bean.outstock.product.QueryProductPickByInputResu
 import com.timi.sz.wms_android.bean.outstock.sale.QueryDNByInputForOutStockResult;
 import com.timi.sz.wms_android.bean.outstock.sale.QuerySalesOutSotckByInputForOutStockResult;
 import com.timi.sz.wms_android.bean.stockin_work.allot_out.QueryAllotOutResult;
+import com.timi.sz.wms_android.mvp.UI.stock_in.putaway.OtherAuditActivity;
 import com.timi.sz.wms_android.mvp.UI.stock_out.batch_point_list.BatchPointListActivity;
 import com.timi.sz.wms_android.mvp.UI.stock_out.normal_out_stock.NormalOutStockActivity;
 import com.timi.sz.wms_android.mvp.base.BaseActivity;
@@ -41,6 +43,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 import static com.timi.sz.wms_android.base.uils.Constants.EDITTEXT_ORDERNO;
+import static com.timi.sz.wms_android.base.uils.Constants.IN_STOCK_FINISH_OTHER_BEAN;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_ALLOT_OUT_PICK;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_BEAN;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_CODE_STR;
@@ -437,14 +440,21 @@ public class StockOutSearchActivity extends BaseActivity<StockOutSearchView, Sto
      * @param bean
      */
     @Override
-    public void searchOtherAuditSelectOrderno(OtherAuditSelectOrdernoBean bean) {
+    public void searchOtherAuditSelectOrderno(OtherOutAndInStockBean bean) {
         Intent intent = new Intent();
-        intent.putExtra(STOCK_OUT_BEAN, new Gson().toJson(bean));
-        intent.putExtra(STOCK_OUT_CODE_STR, intentCode);
-        if (bean.getSummaryResults().isIsLotPick()) {//批次拣货
-            intent.setClass(this, BatchPointListActivity.class);
-        } else {
-            intent.setClass(this, NormalOutStockActivity.class);
+        if (bean.getSummaryResults().getRob() == 0) {//蓝单　　入库
+            intent.setClass(this, OtherAuditActivity.class);
+            intent.putExtra(Constants.CODE_STR, intentCode);
+            intent.putExtra(IN_STOCK_FINISH_OTHER_BEAN, new Gson().toJson(bean));
+
+        } else {//
+            intent.putExtra(STOCK_OUT_BEAN, new Gson().toJson(bean));
+            intent.putExtra(STOCK_OUT_CODE_STR, intentCode);
+            if (bean.getSummaryResults().isIsLotPick()) {//批次拣货
+                intent.setClass(this, BatchPointListActivity.class);
+            } else {
+                intent.setClass(this, NormalOutStockActivity.class);
+            }
         }
         startActivity(intent);
     }
@@ -480,7 +490,7 @@ public class StockOutSearchActivity extends BaseActivity<StockOutSearchView, Sto
      * @param bean
      */
     @Override
-    public void queryOtherOutStockByInput(QueryOtherOutStockByInputResult bean) {
+    public void queryOtherOutStockByInput(OtherOutAndInStockBean bean) {
         Intent intent = new Intent();
         intent.putExtra(STOCK_OUT_BEAN, new Gson().toJson(bean));
         intent.putExtra(STOCK_OUT_CODE_STR, intentCode);

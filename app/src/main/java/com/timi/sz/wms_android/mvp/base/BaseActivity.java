@@ -540,6 +540,19 @@ public abstract class BaseActivity<V extends MvpView, P extends MvpPresenter<V>>
                 return false;
             }
         });
+        editText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if (b) {
+                    editText.setFocusable(true);
+                    editText.setFocusableInTouchMode(true);
+                    editText.requestFocus();
+                    editText.findFocus();
+                    editText.setSelectAllOnFocus(true);
+                    Selection.selectAll(editText.getText());
+                }
+            }
+        });
     }
 
     @Override

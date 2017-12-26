@@ -2,6 +2,7 @@ package com.timi.sz.wms_android.mvp.UI.stock_out.divide_print;
 
 import android.content.Context;
 
+import com.timi.sz.wms_android.base.uils.Constants;
 import com.timi.sz.wms_android.base.uils.ToastUtils;
 import com.timi.sz.wms_android.bean.outstock.buy.SubmitBarcodeOutSplitAuditData;
 import com.timi.sz.wms_android.bean.outstock.outsource.SubmitBarcodeLotPickOutSplitResult;
@@ -31,8 +32,9 @@ public class SplitPrintPresenter extends MvpBasePresenter<SplitPrintView> {
      * 提交条码拆分出库(批次拣货)
      *
      * @param params
+     * @param intentCode
      */
-    public void submitBarcodeLotPickOutSplit(Map<String, Object> params) {
+    public void submitBarcodeLotPickOutSplit(Map<String, Object> params, int intentCode) {
         getView().showProgressDialog();
         if (null == submitBarcodeLotPickOutSplitResultHttpSubscriber) {
             submitBarcodeLotPickOutSplitResultHttpSubscriber = new HttpSubscriber<>(new OnResultCallBack<SubmitBarcodeLotPickOutSplitResult>() {
@@ -43,11 +45,16 @@ public class SplitPrintPresenter extends MvpBasePresenter<SplitPrintView> {
 
                 @Override
                 public void onError(String errorMsg) {
-                    ToastUtils.showShort(errorMsg);
+//                    ToastUtils.showShort(errorMsg);
                 }
             });
         }
-        model.submitBarcodeLotPickOutSplit(params, submitBarcodeLotPickOutSplitResultHttpSubscriber);
+        //成品拣货出库 调用成品拣货出库接口
+        if(intentCode== Constants.STOCK_OUT_ALLOT_OUT_PICK||intentCode== Constants.STOCK_OUT_SALE_OUT_PICK||intentCode== Constants.STOCK_OUT_SEND_OUT_PICK){
+            model.submitBarcodePickSplit(params, submitBarcodeLotPickOutSplitResultHttpSubscriber);
+        }else {
+            model.submitBarcodeLotPickOutSplit(params, submitBarcodeLotPickOutSplitResultHttpSubscriber);
+        }
     }
 
     /**
@@ -66,7 +73,7 @@ public class SplitPrintPresenter extends MvpBasePresenter<SplitPrintView> {
 
                 @Override
                 public void onError(String errorMsg) {
-                    ToastUtils.showShort(errorMsg);
+//                    ToastUtils.showShort(errorMsg);
                 }
             });
         }

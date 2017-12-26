@@ -1,6 +1,7 @@
 package com.timi.sz.wms_android.mvp.UI.stock_out.query;
 
 import com.timi.sz.wms_android.bean.instock.search.OtherAuditSelectOrdernoBean;
+import com.timi.sz.wms_android.bean.other.OtherOutAndInStockBean;
 import com.timi.sz.wms_android.bean.outstock.other.QueryOtherOutStockByInputResult;
 import com.timi.sz.wms_android.bean.outstock.outsource.OutSourceFeedBean;
 import com.timi.sz.wms_android.bean.outstock.outsource.QueryOutSourceFeedByInputResult;
@@ -73,7 +74,7 @@ public interface StockOutSearchView extends MvpBaseView {
     /**
      * 其他审核
      */
-    void searchOtherAuditSelectOrderno(OtherAuditSelectOrdernoBean bean);
+    void searchOtherAuditSelectOrderno(OtherOutAndInStockBean bean);
 
     /**
      * 销售审核
@@ -90,7 +91,7 @@ public interface StockOutSearchView extends MvpBaseView {
      * 其他生单
      * @param bean
      */
-    void queryOtherOutStockByInput(QueryOtherOutStockByInputResult bean);
+    void queryOtherOutStockByInput(OtherOutAndInStockBean bean);
 
     /**
      * 销售出库单末尾号查询

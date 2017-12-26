@@ -90,18 +90,18 @@ public class SettingFragment extends BaseFragment<SetFragmentView, SetFragmentPr
                 startActivity(new Intent(getActivity(), AboutActivity.class));
                 break;
             case R.id.rl_set_update_version://更新版本
-                String userName = SpUtils.getInstance().getUserName();
-                String password = SpUtils.getInstance().getPassword();
-                String tenacyName = SpUtils.getInstance().gettenancyName();
-                String mac = PackageUtils.getMac();
-                /**
-                 * 显示进度条
-                 */
-                showProgressDialog();
-                /**
-                 * 获取版本
-                 */
-                getPresenter().getVersion(tenacyName, userName, password, mac);
+//                String userName = SpUtils.getInstance().getUserName();
+//                String password = SpUtils.getInstance().getPassword();
+//                String tenacyName = SpUtils.getInstance().gettenancyName();
+//                String mac = PackageUtils.getMac();
+//                /**
+//                 * 显示进度条
+//                 */
+//                showProgressDialog();
+//                /**
+//                 * 获取版本
+//                 */
+//                getPresenter().getVersion(tenacyName, userName, password, mac);
                 break;
             case R.id.btn_set_exit://退出登录
                 shwoLogoutDialog();

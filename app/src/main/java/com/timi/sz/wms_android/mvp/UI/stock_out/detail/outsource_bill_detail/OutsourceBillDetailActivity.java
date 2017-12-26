@@ -41,6 +41,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_PRINT_BATCh_DETAILID;
+import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_TO_DETAIL_FORM_NORMAL;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_BEAN;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_CODE_STR;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_DETAIL_BEAN;
@@ -101,6 +102,8 @@ public class OutsourceBillDetailActivity extends BaseActivity<OutsourceBillDetai
     private int destBillType = -1;
     //当前点击的位置
     private int currentPosition = 0;
+    //是否来自于普通出库的明细跳转
+    private boolean isFromNormalOutStock;
 
     @Override
     public int setLayoutId() {
@@ -111,6 +114,7 @@ public class OutsourceBillDetailActivity extends BaseActivity<OutsourceBillDetai
     public void initBundle(Bundle savedInstanceState) {
         BaseMessage.register(this);
         intentCode = getIntent().getIntExtra(STOCK_OUT_CODE_STR, STOCK_OUT_OUTSOURCE_FEED_SUPLLIEMENT);
+        isFromNormalOutStock=getIntent().getBooleanExtra(OUT_STOCK_TO_DETAIL_FORM_NORMAL,false);
         switch (intentCode) {
             case STOCK_OUT_OUTSOURCE_BILL://委外生单
             case STOCK_OUT_OUTSOURCE_ALLOT://委外调拨
@@ -252,21 +256,27 @@ public class OutsourceBillDetailActivity extends BaseActivity<OutsourceBillDetai
             adapter.setOnItemClickListener(new BaseRecyclerAdapter.OnItemClickListener() {
                 @Override
                 public void onItemClick(View itemView, int pos) {
-                    currentPosition = pos;
                     /**
-                     * 退料单号的 网络请求
+                     * 来自普通出库明细跳转的时候不进行点击事件的设置，
+                     * 即不从明细列表进入到物料清单的界面
                      */
-                    Map<String, Object> params = new HashMap<>();
-                    params.put("UserId", SpUtils.getInstance().getUserId());
-                    params.put("OrgId", SpUtils.getInstance().getOrgId());
-                    params.put("MAC", PackageUtils.getMac());
-                    params.put("MainId", billId);
-                    params.put("DetailId", mDatas.get(pos).getDetailId());
-                    //是否传入目标单据类型
-                    if (destBillType != -1) {
-                        params.put("DestBillType", destBillType);
-                    }
-                    getPresenter().getDetailData(params, intentCode);
+                   if(!isFromNormalOutStock){
+                       currentPosition = pos;
+                       /**
+                        * 退料单号的 网络请求
+                        */
+                       Map<String, Object> params = new HashMap<>();
+                       params.put("UserId", SpUtils.getInstance().getUserId());
+                       params.put("OrgId", SpUtils.getInstance().getOrgId());
+                       params.put("MAC", PackageUtils.getMac());
+                       params.put("MainId", billId);
+                       params.put("DetailId", mDatas.get(pos).getDetailId());
+                       //是否传入目标单据类型
+                       if (destBillType != -1) {
+                           params.put("DestBillType", destBillType);
+                       }
+                       getPresenter().getDetailData(params, intentCode);
+                   }
                 }
             });
             rlvOrdernoInfo.setAdapter(adapter);

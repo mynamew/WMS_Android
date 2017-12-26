@@ -31,4 +31,14 @@ public interface LibraryAdjustView extends MvpBaseView {
      * @param result
      */
     void libraryAdjust(LibraryAdjustResult result);
+
+    /**
+     * 设置物料条码选中
+     */
+    void setMaterialEdittextSelect();
+
+    /**
+     * 设置库位码选中
+     */
+    void setLocationSelect();
 }

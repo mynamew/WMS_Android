@@ -60,6 +60,10 @@ public class DetailModel extends MvpBaseModel {
 
                         return apiService.getProductPickDetail(params);
 
+                    case Constants.STOCK_OUT_PRODUCTION_APPLY_BILL://领料申请
+
+                        return apiService.getPrdPickApplyDetail(params);
+
                     case Constants.STOCK_OUT_SELL_OUT_AUDIT://销售领料-审核
 
                         return apiService.getDNDetail(params);
@@ -70,7 +74,8 @@ public class DetailModel extends MvpBaseModel {
 
                     case Constants.STOCK_OUT_OTHER_OUT_AUDIT://其他出库-审核
 
-                        return apiService.getOtherInstockDetail(params);
+                        return apiService.getOtherOutStockDetail(params);
+
                     case Constants.STOCK_OUT_OTHER_OUT_BILL://其他出库-生单
 
                         return apiService.getOtherOutStockDetail(params);
@@ -83,8 +88,22 @@ public class DetailModel extends MvpBaseModel {
 
                         return apiService.getTransferDetailForOutStock(params);
 
+                    case Constants.CREATE_PRO_CHECK_NUM://产成品审核
+
+                        return apiService.getPrdInstockDetail(params);
+
+                    case Constants.CREATE_PRO_CREATE_ORDER_NUM://产成品生单
+
+                        return apiService.getWorkOrderDetail(params);
+
+                    case Constants.OTHER_IN_STOCK_SELECT_ORDERNO://其他入库-审核
+
+                        return apiService.getOtherInstockDetail(params);
+
                     default:
+
                         return apiService.getOutSourceFeedDetail(params);
+
                 }
             }
         });

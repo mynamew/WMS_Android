@@ -18,7 +18,7 @@
         android:layout_height="88px"
         android:layout_alignParentBottom="true"
         android:background="@drawable/selector_btn"
-        android:text="@string/confirm_commit"
+        android:text="@string/commit_check"
         android:textColor="@color/white"
         />
 
@@ -27,6 +27,7 @@
         android:layout_height="match_parent"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
+        android:layout_above="@id/btn_commit"
         android:layout_below="@+id/head">
 
         <LinearLayout

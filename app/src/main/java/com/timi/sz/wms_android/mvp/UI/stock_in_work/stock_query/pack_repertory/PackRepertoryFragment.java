@@ -111,6 +111,11 @@ public class PackRepertoryFragment extends BaseFragment<PackRepertoryView, PackR
         }
     }
 
+    @Override
+    public void setMaterialEdittextSelect() {
+        BaseMessage.post(new StockQueryEvent(StockQueryEvent.STOCK_QUERY_EDITTEXT_SELECT));
+    }
+
     /**
      * 设置头部的信息
      *

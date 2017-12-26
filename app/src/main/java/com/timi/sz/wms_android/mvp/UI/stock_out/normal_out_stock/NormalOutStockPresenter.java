@@ -47,7 +47,7 @@ public class NormalOutStockPresenter extends MvpBasePresenter<NormalOutStockView
 
                 @Override
                 public void onError(String errorMsg) {
-                    ToastUtils.showShort(errorMsg);
+//                    ToastUtils.showShort(errorMsg);
                     getView().setBarcodeSelect();
                 }
             });
@@ -71,7 +71,7 @@ public class NormalOutStockPresenter extends MvpBasePresenter<NormalOutStockView
 
                 @Override
                 public void onError(String errorMsg) {
-                    ToastUtils.showShort(errorMsg);
+//                    ToastUtils.showShort(errorMsg);
                 }
             });
         }
@@ -94,7 +94,7 @@ public class NormalOutStockPresenter extends MvpBasePresenter<NormalOutStockView
 
                 @Override
                 public void onError(String errorMsg) {
-                    ToastUtils.showShort(errorMsg);
+//                    ToastUtils.showShort(errorMsg);
                 }
             });
         }
@@ -117,7 +117,7 @@ public class NormalOutStockPresenter extends MvpBasePresenter<NormalOutStockView
 
                 @Override
                 public void onError(String errorMsg) {
-                    ToastUtils.showShort(errorMsg);
+//                    ToastUtils.showShort(errorMsg);
                     getView().setBarcodeSelect();
                 }
             });

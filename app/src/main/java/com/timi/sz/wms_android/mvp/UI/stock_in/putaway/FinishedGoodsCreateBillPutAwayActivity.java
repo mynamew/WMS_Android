@@ -24,6 +24,7 @@ import com.timi.sz.wms_android.bean.instock.MaterialScanPutAwayBean;
 import com.timi.sz.wms_android.bean.instock.VertifyLocationCodeBean;
 import com.timi.sz.wms_android.bean.instock.search.FinishGoodsCreateBillBean;
 import com.timi.sz.wms_android.mvp.UI.stock_in.detail.StockInDetailActivity;
+import com.timi.sz.wms_android.mvp.UI.stock_out.detail.DetailActivity;
 import com.timi.sz.wms_android.mvp.base.BaseActivity;
 
 import java.util.HashMap;
@@ -132,7 +133,7 @@ public class FinishedGoodsCreateBillPutAwayActivity extends BaseActivity<PutAway
 
     @Override
     public void createInStockOrderno() {
-        ToastUtils.showShort(getString(R.string.create_instock_bill_success));
+        ToastUtils.showShort(R.string.create_finish_goods_instock_orderno_success);
         onBackPressed();
     }
 
@@ -180,7 +181,7 @@ public class FinishedGoodsCreateBillPutAwayActivity extends BaseActivity<PutAway
                 /**
                  * 查看详情
                  */
-                Intent it = new Intent(FinishedGoodsCreateBillPutAwayActivity.this, StockInDetailActivity.class);
+                Intent it = new Intent(FinishedGoodsCreateBillPutAwayActivity.this, DetailActivity.class);
                 it.putExtra(Constants.CODE_STR, intentCode);
                 it.putExtra(Constants.STOCKIN_BILLID,finishGoodsCreateBillBean.getBillId());
                 startActivity(it);
@@ -196,9 +197,9 @@ public class FinishedGoodsCreateBillPutAwayActivity extends BaseActivity<PutAway
                 params1.put("UserId", SpUtils.getInstance().getUserId());
                 params1.put("OrgId", SpUtils.getInstance().getOrgId());
                 params1.put("MAC", PackageUtils.getMac());
-                params1.put("SrcBillType", 40);
+                params1.put("SrcBillType", 30);
                 params1.put("DestBillType", 40);
-                params1.put("ScanId", finishGoodsCreateBillBean.getScanId());
+                params1.put("ScanId",ScanId);
                 params1.put("BinCode", locationCode);
                 params1.put("BillId", finishGoodsCreateBillBean.getBillId());
                 params1.put("BarcodeNo", result);
@@ -245,10 +246,10 @@ public class FinishedGoodsCreateBillPutAwayActivity extends BaseActivity<PutAway
          * 单据总数
          */
         tvOrdernoTotalNum.setText(String.valueOf(finishGoodsCreateBillBean.getQty()));
-//        /**
-//         * 已入库总数
-//         */
-//        tvInStockTotalNum.setText(String.valueOf(finishGoodsCreateBillBean.getQty()));
+        /**
+         * 入库总数
+         */
+        tvInStockTotalNum.setText(String.valueOf(finishGoodsCreateBillBean.getQty()));
         /**
          * 日期
          */
@@ -290,7 +291,7 @@ public class FinishedGoodsCreateBillPutAwayActivity extends BaseActivity<PutAway
                 params1.put("UserId", SpUtils.getInstance().getUserId());
                 params1.put("OrgId", SpUtils.getInstance().getOrgId());
                 params1.put("MAC", PackageUtils.getMac());
-                params1.put("SrcBillType", 40);
+                params1.put("SrcBillType", 30);
                 params1.put("DestBillType", 40);
                 params1.put("BillId", finishGoodsCreateBillBean.getBillId());
                 params1.put("ScanId", ScanId);

@@ -2,6 +2,7 @@ package com.timi.sz.wms_android.mvp.UI.stock_in_work.allot_scan;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Selection;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
@@ -23,15 +24,12 @@ import com.timi.sz.wms_android.bean.instock.MaterialScanPutAwayBean;
 import com.timi.sz.wms_android.bean.instock.VertifyLocationCodeBean;
 import com.timi.sz.wms_android.bean.stockin_work.query.AllotScanResult;
 import com.timi.sz.wms_android.mvp.UI.stock_in_work.detail.StockInWorkDetailActivity;
-import com.timi.sz.wms_android.mvp.UI.stock_in_work.form_change_detail.FormChangeDetailActivity;
-import com.timi.sz.wms_android.mvp.UI.stock_out.detail.DetailActivity;
 import com.timi.sz.wms_android.mvp.base.BaseActivity;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 import static com.timi.sz.wms_android.base.uils.Constants.REQUEST_SCAN_CODE_LIB_LOATION;
@@ -113,63 +111,48 @@ public class AllotScanActivity extends BaseActivity<AllotScanView, AllotScanPres
                 startActivity(it);
             }
         });
-        etMaterialCode.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+        setEdittextListener(etMaterialCode, Constants.REQUEST_SCAN_CODE_MATERIIAL, R.string.please_scan_material_code, 0, new EdittextInputListener() {
             @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+            public void verticalSuccess(String result) {
+                /**
+                 * 物料扫码并上架的网络请求
+                 */
+                Map<String, Object> params1 = new HashMap<>();
+                params1.put("UserId", SpUtils.getInstance().getUserId());
+                params1.put("OrgId", SpUtils.getInstance().getOrgId());
+                params1.put("MAC", PackageUtils.getMac());
+                params1.put("BillId", allotScanResult.getSummaryResults().getBillId());
+                params1.put("SrcBillType", 50);
+                params1.put("DestBillType", 50);
+                params1.put("ScanId", scanId);
+                params1.put("BinCode", locationCode);
+                params1.put("BarcodeNo", result);
+                getPresenter().materialScanNetWork(params1, result);
 
-                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                    InputMethodUtils.hide(AllotScanActivity.this);
-                    String orderNum = etMaterialCode.getText().toString().trim();
-                    if (TextUtils.isEmpty(orderNum)) {
-                        ToastUtils.showShort(getString(R.string.please_scan_material_code));
-                    }
-                    /**
-                     * 物料扫码并上架的网络请求
-                     */
-                    Map<String, Object> params1 = new HashMap<>();
-                    params1.put("UserId", SpUtils.getInstance().getUserId());
-                    params1.put("OrgId", SpUtils.getInstance().getOrgId());
-                    params1.put("MAC", PackageUtils.getMac());
-                    params1.put("SrcBillType", 13);
-                    params1.put("DestBillType", 14);
-                    params1.put("ScanId", scanId);
-                    params1.put("BinCode", locationCode);
-                    params1.put("BarcodeNo", orderNum);
-                    getPresenter().materialScanNetWork(params1, orderNum);
-                }
-                return false;
             }
         });
-        etScanLocation.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+        setEdittextListener(etScanLocation, Constants.REQUEST_SCAN_CODE_LIB_LOATION, R.string.please_scan_lib_location_code, 0, new EdittextInputListener() {
             @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-
-                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                    InputMethodUtils.hide(AllotScanActivity.this);
-                    String orderNum = etScanLocation.getText().toString().trim();
-                    if (TextUtils.isEmpty(orderNum)) {
-                        ToastUtils.showShort(getString(R.string.please_scan_lib_location_code));
-                    }
-                    /**
-                     * 保存库位码
-                     */
-                    locationCode = orderNum;
-                    /**
-                     * 发起请求
-                     */
-                    /**
-                     * 判断库位码是否有效
-                     */
-                    Map<String, Object> params = new HashMap<>();
-                    params.put("UserId", SpUtils.getInstance().getUserId());
-                    params.put("OrgId", SpUtils.getInstance().getOrgId());
-                    params.put("MAC", PackageUtils.getMac());
-                    params.put("BinCode", orderNum);
-                    getPresenter().vertifyLocationCode(params);
-                }
-                return false;
+            public void verticalSuccess(String result) {
+                /**
+                 * 保存库位码
+                 */
+                locationCode = result;
+                /**
+                 * 发起请求
+                 */
+                /**
+                 * 判断库位码是否有效
+                 */
+                Map<String, Object> params = new HashMap<>();
+                params.put("UserId", SpUtils.getInstance().getUserId());
+                params.put("OrgId", SpUtils.getInstance().getOrgId());
+                params.put("MAC", PackageUtils.getMac());
+                params.put("BinCode", result);
+                getPresenter().vertifyLocationCode(params);
             }
         });
+
     }
 
     @Override
@@ -263,14 +246,12 @@ public class AllotScanActivity extends BaseActivity<AllotScanView, AllotScanPres
          */
         tvMaterialName.setText(bean.getMaterialName());
         tvMaterialCode.setText(bean.getMaterialCode());
-        tvMaterialAttr.setText(TextUtils.isEmpty(bean.getMaterialAttribute()) ? getString(R.string.none) : bean.getMaterialAttribute());
-        tvMaterialModel.setText(TextUtils.isEmpty(bean.getMaterialStandard()) ? getString(R.string.none) : bean.getMaterialStandard());
-        AllotScanResult.SummaryResultsBean summaryResults = allotScanResult.getSummaryResults();
+        tvMaterialAttr.setText( bean.getMaterialAttribute());
+        tvMaterialModel.setText( bean.getMaterialStandard());
         /**
          * 设置扫描数量
          */
-        summaryResults.setScanQty(summaryResults.getScanQty()+bean.getBarcodeQty());
-        tvHaveCountNum.setText("("+bean.getBarcodeQty()+")"+summaryResults.getScanQty()+"/"+summaryResults.getQty());
+        tvMaterialNum.setText("("+bean.getBarcodeQty()+")"+bean.getTotalScanQty()+"/"+allotScanResult.getSummaryResults().getQty());
         /**
          * 设置 是否显示附加属性
          */
@@ -280,9 +261,9 @@ public class AllotScanActivity extends BaseActivity<AllotScanView, AllotScanPres
          */
         tvHaveCountNum.setText(String.valueOf(bean.getTotalScanQty()));
         /**
-         * 设置已入库总数
+         * 设置待点总数
          */
-        tvHaveCountNum.setText(String.valueOf(bean.getTotalInstockQty()));
+        tvWaitPointNum.setText(String.valueOf(allotScanResult.getSummaryResults().getQty()-bean.getTotalScanQty()));
         /**
          * 设置扫码Id
          */
@@ -301,7 +282,7 @@ public class AllotScanActivity extends BaseActivity<AllotScanView, AllotScanPres
 
     @Override
     public void createInStockOrderno() {
-        ToastUtils.showShort(getString(R.string.create_instock_bill_success));
+        ToastUtils.showShort(getString(R.string.commit_check_success));
         onBackPressed();
     }
 
@@ -354,5 +335,23 @@ public class AllotScanActivity extends BaseActivity<AllotScanView, AllotScanPres
                 break;
         }
 
+    }
+    @Override
+    public void setMaterialEdittextSelect() {
+        etMaterialCode.setFocusable(true);
+        etMaterialCode.setFocusableInTouchMode(true);
+        etMaterialCode.requestFocus();
+        etMaterialCode.findFocus();
+        Selection.selectAll(etMaterialCode.getText());
+    }
+
+    @Override
+    public void setLocationSelect() {
+        etScanLocation.setText(etScanLocation.getText());
+        etScanLocation.setFocusable(true);
+        etScanLocation.setFocusableInTouchMode(true);
+        etScanLocation.requestFocus();
+        etScanLocation.findFocus();
+        Selection.selectAll(etScanLocation.getText());
     }
 }

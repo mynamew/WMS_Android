@@ -110,6 +110,8 @@ public class StockInDetailActivity extends BaseActivity<StockInDetailView, Stock
         params.put("UserId", SpUtils.getInstance().getUserId());
         params.put("OrgId", SpUtils.getInstance().getOrgId());
         params.put("MAC", PackageUtils.getMac());
+        params.put("WarehouseId", 0);
+        params.put("RegionId", 0);
         params.put("BillId", BillId);
         getPresenter().getReceiptDetail(params, intentCode);
     }

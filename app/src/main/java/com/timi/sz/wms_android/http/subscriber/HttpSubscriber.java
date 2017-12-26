@@ -13,6 +13,7 @@ import com.timi.sz.wms_android.http.callback.OnResultCallBack;
 import com.timi.sz.wms_android.http.exception.ApiException;
 import com.timi.sz.wms_android.mvp.base.BaseActivity;
 import com.timi.sz.wms_android.mvp.base.BaseApplication;
+import com.timi.sz.wms_android.view.MyDialog;
 import com.timi.sz.wms_android.view.MyProgressDialog;
 
 import java.io.IOException;
@@ -68,25 +69,36 @@ public class HttpSubscriber<T> implements Observer<T> {
         if (isAutoDismiss) {
             MyProgressDialog.hideProgressDialog();
         }
+        String messageStr = "";//提示信息
         //请求失败的异常
         if (e instanceof CompositeException) {
+
+
             CompositeException compositeE = (CompositeException) e;
             for (Throwable throwable : compositeE.getExceptions()) {
                 //超时 异常
                 if (throwable instanceof SocketTimeoutException) {
                     mOnResultListener.onError(SOCKET_TIMEOUT_EXCEPTION);
+                    //设置异常信息
+                    messageStr = SOCKET_TIMEOUT_EXCEPTION;
                 }
                 //连接异常
                 else if (throwable instanceof ConnectException) {
                     mOnResultListener.onError(CONNECT_EXCEPTION);
+                    //设置异常信息
+                    messageStr = CONNECT_EXCEPTION;
                 }
                 //连接异常 位置的host
                 else if (throwable instanceof UnknownHostException) {
                     mOnResultListener.onError(CONNECT_EXCEPTION);
+                    //设置异常信息
+                    messageStr = CONNECT_EXCEPTION;
                 }
                 //json  解析异常
                 else if (throwable instanceof MalformedJsonException) {
                     mOnResultListener.onError(MALFORMED_JSON_EXCEPTION);
+                    //设置异常信息
+                    messageStr = MALFORMED_JSON_EXCEPTION;
                 }
             }
         } else if (e instanceof HttpException) {//服务器 错误 连接超时
@@ -94,7 +106,7 @@ public class HttpSubscriber<T> implements Observer<T> {
              * 当 webapi 返回失败的  500 时 进行解析一场
              * 对异常返回数据 进行捕获 拿出message details 信息
              */
-            String messageStr = "";//提示信息
+
             ResponseBody responseBody = ((HttpException) e).response().errorBody();
             try {
                 assert responseBody != null;
@@ -116,37 +128,54 @@ public class HttpSubscriber<T> implements Observer<T> {
                     BaseActivity currentActivty = (BaseActivity) BaseActivity.getCurrentActivty();
                     currentActivty.jumpToLoginActivity();
                 }
-
-                ToastUtils.showShort(messageStr);
                 mOnResultListener.onError(messageStr);
                 LogUitls.e("打印输出错误代码httpResultBean---->", httpResultBean.getError().getMessage().toString());
-                //进度条消失
-                MyProgressDialog.hideProgressDialog();
-                return;
             } catch (Exception e1) {
                 mOnResultListener.onError(SERVER_TIMEOUT_EXCEPTION);
+                messageStr = SERVER_TIMEOUT_EXCEPTION;
             }
 
         } else if (e instanceof UnknownHostException) {// 测试到时再没网的情况下
             mOnResultListener.onError(CONNECT_EXCEPTION);
+            messageStr = CONNECT_EXCEPTION;
         } else if (e instanceof ApiException) {
             /**
              * 为了解决当服务端返回的数据是空的情况，即map转换时返回值为null抛出异常
              */
             if (e.getMessage().equals(CODE_REQUEST_SUCCESS_EXCEPTION)) {
                 mOnResultListener.onSuccess(null);
-                return;
             }
             /**
              * 弹出提示 所有的后台返回的提示
              */
             mOnResultListener.onError(e.getMessage());
+            messageStr = e.getMessage();
         } else if (e instanceof SocketTimeoutException) {
             mOnResultListener.onError(SOCKET_TIMEOUT_EXCEPTION);
-            return;
-        }else  if (e instanceof  ConnectException){
+            messageStr = SOCKET_TIMEOUT_EXCEPTION;
+        } else if (e instanceof ConnectException) {
             mOnResultListener.onError(SOCKET_TIMEOUT_EXCEPTION);
+            messageStr = SOCKET_TIMEOUT_EXCEPTION;
         }
+        /**
+         * 排除网络请求成功的情况
+         */
+       if(!messageStr.equals(CODE_REQUEST_SUCCESS_EXCEPTION)){
+           /**
+            * 显示 错误提示的对话框
+            */
+           new MyDialog(BaseActivity.getCurrentActivty(), R.layout.dialog_error_tip).setButtonListener(R.id.btn_cancel, null, new MyDialog.DialogClickListener() {
+               @Override
+               public void dialogClick(MyDialog dialog) {
+                   dialog.dismiss();
+               }
+           }).setTextViewContent(R.id.tv_content, messageStr).setImageViewListener(R.id.iv_close, new MyDialog.DialogClickListener() {
+               @Override
+               public void dialogClick(MyDialog dialog) {
+                   dialog.dismiss();
+               }
+           }).show();
+       }
     }
 
     @Override

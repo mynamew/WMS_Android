@@ -52,7 +52,7 @@ public class AdvanceQualityPresenter extends MvpBasePresenter<AdvanceQualityView
 
                 @Override
                 public void onError(String errorMsg) {
-                    ToastUtils.showShort(errorMsg);
+//                    ToastUtils.showShort(errorMsg);
 //        GetAdvance2Data getAdvance2Data = new GetAdvance2Data();
 //        GetAdvance2Data.AdvanceSummaryBean advanceSummaryBean = new GetAdvance2Data.AdvanceSummaryBean();
 //        advanceSummaryBean.setAqlAcceptQty(1);
@@ -164,7 +164,7 @@ public class AdvanceQualityPresenter extends MvpBasePresenter<AdvanceQualityView
 
                 @Override
                 public void onError(String errorMsg) {
-                    ToastUtils.showShort(errorMsg);
+//                    ToastUtils.showShort(errorMsg);
                 }
             });
         }
@@ -187,7 +187,7 @@ public class AdvanceQualityPresenter extends MvpBasePresenter<AdvanceQualityView
 
                 @Override
                 public void onError(String errorMsg) {
-                    ToastUtils.showShort(errorMsg);
+//                    ToastUtils.showShort(errorMsg);
                 }
             });
         }
@@ -210,7 +210,7 @@ public class AdvanceQualityPresenter extends MvpBasePresenter<AdvanceQualityView
 
                 @Override
                 public void onError(String errorMsg) {
-                    ToastUtils.showShort(errorMsg);
+//                    ToastUtils.showShort(errorMsg);
                 }
             });
         }
@@ -233,7 +233,7 @@ public class AdvanceQualityPresenter extends MvpBasePresenter<AdvanceQualityView
 
                 @Override
                 public void onError(String errorMsg) {
-                    ToastUtils.showShort(errorMsg);
+//                    ToastUtils.showShort(errorMsg);
 //                    IQCGetAdvanceData iqcGetAdvanceData = new IQCGetAdvanceData();
 //                    iqcGetAdvanceData.setQcQty(2);
 //                    List<GetAdvance2Data.CheckItemDataBean> mdatas = new ArrayList<>();

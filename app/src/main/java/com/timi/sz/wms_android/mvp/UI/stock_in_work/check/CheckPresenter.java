@@ -45,7 +45,7 @@ public class CheckPresenter extends MvpBasePresenter<CheckView> {
 
                 @Override
                 public void onError(String errorMsg) {
-                    ToastUtils.showShort(errorMsg);
+//                    ToastUtils.showShort(errorMsg);
                 }
             });
         }
@@ -68,7 +68,7 @@ public class CheckPresenter extends MvpBasePresenter<CheckView> {
 
                 @Override
                 public void onError(String errorMsg) {
-                    ToastUtils.showShort(errorMsg);
+//                    ToastUtils.showShort(errorMsg);
                 }
             });
         }

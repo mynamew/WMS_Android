@@ -16,10 +16,11 @@
     <Button
         android:id="@+id/btn_commit"
         android:layout_width="match_parent"
+        android:visibility="gone"
         android:layout_height="88px"
         android:layout_alignParentBottom="true"
         android:background="@drawable/selector_btn"
-        android:text="@string/confirm_commit"
+        android:text="@string/commit_check"
         android:textColor="@color/white"
         />
 
@@ -69,6 +70,7 @@
                     android:layout_toRightOf="@id/tv_scan_material_tip"
                     android:background="@drawable/selector_et"
                     android:ellipsize="end"
+                    android:layout_marginLeft="30px"
                     android:gravity="center_vertical"
                     android:hint="@string/please_scan_material_code"
                     android:imeOptions="actionSearch"

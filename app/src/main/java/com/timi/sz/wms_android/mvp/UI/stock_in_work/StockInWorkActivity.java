@@ -10,6 +10,7 @@ import com.timi.sz.wms_android.base.uils.SpUtils;
 import com.timi.sz.wms_android.mvp.UI.list.BuyInStockListActivity;
 import com.timi.sz.wms_android.mvp.UI.stock_in_work.allot_one_step.OneStepAllotActivity;
 import com.timi.sz.wms_android.mvp.UI.stock_in_work.allot_scan.AllotScanActivity;
+import com.timi.sz.wms_android.mvp.UI.stock_in_work.barcode_exchange.BarcodeExchangeActivity;
 import com.timi.sz.wms_android.mvp.UI.stock_in_work.form_change_instock.FormChangeInstockActivity;
 import com.timi.sz.wms_android.mvp.UI.stock_in_work.form_change_outstock.FormChangeOutstockActivity;
 import com.timi.sz.wms_android.mvp.UI.stock_in_work.lib_adjust.LibraryAdjustActivity;
@@ -18,6 +19,7 @@ import com.timi.sz.wms_android.mvp.UI.stock_in_work.query.StockInWorkQueryActivi
 import com.timi.sz.wms_android.mvp.UI.stock_in_work.query.StockInWorkQueryActivity_ViewBinding;
 import com.timi.sz.wms_android.mvp.UI.stock_in_work.stock_query.StockQueryActivity;
 import com.timi.sz.wms_android.mvp.UI.stock_out.StockOutActivity;
+import com.timi.sz.wms_android.mvp.UI.stock_out.query.StockOutSearchActivity;
 import com.timi.sz.wms_android.mvp.base.view.BaseNoMvpActivity;
 
 import butterknife.ButterKnife;
@@ -52,7 +54,7 @@ public class StockInWorkActivity extends BaseNoMvpActivity {
 
     }
 
-    @OnClick({R.id.tv_stockin_work_storage_location_change, R.id.tv_stockin_work_scan_in, R.id.tv_stockin_work_one_step_in, R.id.tv_stockin_work_group_change, R.id.tv_stockin_work_out_stock, R.id.tv_stockin_work_in_stock, R.id.tv_stockin_work_query_repertory, R.id.tv_stockin_work_count, R.id.tv_stock_in_sale_return})
+    @OnClick({R.id.tv_stockin_work_barcode_change,R.id.tv_allot_outstock,R.id.tv_stockin_work_storage_location_change, R.id.tv_stockin_work_scan_in, R.id.tv_stockin_work_one_step_in, R.id.tv_stockin_work_group_change, R.id.tv_stockin_work_out_stock, R.id.tv_stockin_work_in_stock, R.id.tv_stockin_work_query_repertory, R.id.tv_stockin_work_count, R.id.tv_stock_in_sale_return})
     public void onViewClicked(View view) {
         Intent intent = new Intent();
         switch (view.getId()) {
@@ -109,6 +111,19 @@ public class StockInWorkActivity extends BaseNoMvpActivity {
                 intent.putExtra(Constants.STOCK_IN_WORK_CODE_STR,Constants.STOCK_IN_WORK_POINT);//盘点
                 break;
             case R.id.tv_stock_in_sale_return://
+            case R.id.tv_allot_outstock://调拨调出
+                /**
+                 * 如果是无纸化作业
+                 */
+                if (SpUtils.getInstance().getIsBillList()) {
+                    intent.setClass(this, BuyInStockListActivity.class);
+                } else {
+                    intent.setClass(this, StockOutSearchActivity.class);
+                }
+                intent.putExtra(Constants.STOCK_OUT_CODE_STR, Constants.STOCK_OUT_ALLOT_OUT);
+                break;
+            case R.id.tv_stockin_work_barcode_change://条码转移
+                intent.setClass(this, BarcodeExchangeActivity.class);
                 break;
         }
         startActivity(intent);

@@ -37,12 +37,15 @@ public class MaterialRepertoryPresenter extends MvpBasePresenter<MaterialReperto
             queryResultHttpSubscriber = new HttpSubscriber<>(new OnResultCallBack<MaterialQueryResult>() {
                 @Override
                 public void onSuccess(MaterialQueryResult o) {
+                    getView().setMaterialEdittextSelect();
                     getView().queryStockMaterial(o);
                 }
 
                 @Override
                 public void onError(String errorMsg) {
-                    ToastUtils.showShort(errorMsg);
+//                    ToastUtils.showShort(errorMsg);
+                    getView().setMaterialEdittextSelect();
+
                 }
             });
         }

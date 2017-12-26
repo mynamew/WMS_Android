@@ -45,7 +45,7 @@ public class ScanReturnMaterialPresenter extends MvpBasePresenter<ScanReturnMate
 
                 @Override
                 public void onError(String errorMsg) {
-                    ToastUtils.showShort(errorMsg);
+//                    ToastUtils.showShort(errorMsg);
                     getView().setBarcodeSelect();
                 }
             });
@@ -69,7 +69,7 @@ public class ScanReturnMaterialPresenter extends MvpBasePresenter<ScanReturnMate
 
                 @Override
                 public void onError(String errorMsg) {
-                    ToastUtils.showShort(errorMsg);
+//                    ToastUtils.showShort(errorMsg);
                 }
             });
         }
@@ -91,7 +91,7 @@ public class ScanReturnMaterialPresenter extends MvpBasePresenter<ScanReturnMate
 
                 @Override
                 public void onError(String errorMsg) {
-                    ToastUtils.showShort(errorMsg);
+//                    ToastUtils.showShort(errorMsg);
                 }
             });
         }

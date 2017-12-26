@@ -17,6 +17,7 @@ import com.timi.sz.wms_android.base.uils.PackageUtils;
 import com.timi.sz.wms_android.base.uils.SpUtils;
 import com.timi.sz.wms_android.base.uils.ToastUtils;
 import com.timi.sz.wms_android.bean.instock.search.OtherAuditSelectOrdernoBean;
+import com.timi.sz.wms_android.bean.other.OtherOutAndInStockBean;
 import com.timi.sz.wms_android.bean.outstock.buy.SubmitBarcodeOutAuditData;
 import com.timi.sz.wms_android.bean.outstock.buy.SubmitBarcodeOutSplitAuditData;
 import com.timi.sz.wms_android.bean.outstock.outsource.QueryOutSourceFeedByInputResult;
@@ -65,10 +66,12 @@ import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_PRINT_MATERI
 import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_PRINT_OUT_QTY;
 import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_PRINT_SCANID;
 import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_PRINT_SRCBILLTYPE;
+import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_TO_DETAIL_FORM_NORMAL;
 import static com.timi.sz.wms_android.base.uils.Constants.REQUEST_SCAN_CODE_MATERIIAL;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_ALLOT_OUT;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_ALLOT_OUT_PICK;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_BEAN;
+import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_CODE_STR;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_FINISH_GOODS_PICK;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_OTHER_OUT_AUDIT;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_OTHER_OUT_BILL;
@@ -186,7 +189,11 @@ public class NormalOutStockActivity extends BaseActivity<NormalOutStockView, Nor
                 //设置内容
                 setHeaderContent(summaryResults.getBillCode(), summaryResults.getBillDate(), summaryResults.getQty(), summaryResults.getWaitQty(), summaryResults.getScanQty());
                 //设置bundle的数据
-                setBundleData(summaryResults.getBillId(), summaryResults.getScanId(), summaryResults.getQty(), summaryResults.getWaitQty(), summaryResults.getScanQty(), 21, 21);
+                setBundleData(summaryResults.getBillId(),
+                        summaryResults.getScanId(),
+                        summaryResults.getQty(),
+                        summaryResults.getWaitQty(),
+                        summaryResults.getScanQty(), 21, 21);
                 //设置仓库id
                 warehouseId = summaryResults.getWarehouseId();
                 //设置区域id
@@ -195,9 +202,6 @@ public class NormalOutStockActivity extends BaseActivity<NormalOutStockView, Nor
                 scanId = summaryResults.getScanId();
                 //设置 submitType
                 submitType = 1;
-                //源单类型  目标单类型
-                srcBillType = 21;
-                destBillType = 21;
                 break;
             case STOCK_OUT_OUTSOURCE_AUDIT://委外审核
                 tvHeadTitle.setText(getString(R.string.outsource_send_material_oderno_info));
@@ -207,7 +211,11 @@ public class NormalOutStockActivity extends BaseActivity<NormalOutStockView, Nor
                 QueryOutSourcePickByInputResult.SummaryResultsBean summaryResultsAudit = queryOutSourcePickByInputResult.getSummaryResults();
                 //设置内容
                 setHeaderContent(summaryResultsAudit.getBillCode(), summaryResultsAudit.getBillDate(), summaryResultsAudit.getQty(), summaryResultsAudit.getWaitQty(), summaryResultsAudit.getScanQty());
-                setBundleData(summaryResultsAudit.getBillId(), summaryResultsAudit.getScanId(), summaryResultsAudit.getQty(), summaryResultsAudit.getWaitQty(), summaryResultsAudit.getScanQty(), 20, 20);
+                setBundleData(summaryResultsAudit.getBillId(),
+                        summaryResultsAudit.getScanId(),
+                        summaryResultsAudit.getQty(),
+                        summaryResultsAudit.getWaitQty(),
+                        summaryResultsAudit.getScanQty(), 20, 20);
                 //设置仓库id
                 warehouseId = summaryResultsAudit.getWarehouseId();
                 //设置区域id
@@ -216,9 +224,6 @@ public class NormalOutStockActivity extends BaseActivity<NormalOutStockView, Nor
                 scanId = summaryResultsAudit.getScanId();
                 //设置 submitType
                 submitType = 1;
-                //源单类型  目标单类型
-                srcBillType = 20;
-                destBillType = 20;
                 break;
             case STOCK_OUT_OUTSOURCE_BILL://委外生单
                 tvHeadTitle.setText(getString(R.string.outsource_send_material_oderno_info));
@@ -228,7 +233,11 @@ public class NormalOutStockActivity extends BaseActivity<NormalOutStockView, Nor
                 QueryWWPickDataByOutSourceResult.SummaryResultsBean summaryResultsBill = queryWWPickDataByOutSourceResult.getSummaryResults();
                 //设置内容
                 setHeaderContent(summaryResultsBill.getBillCode(), summaryResultsBill.getBillDate(), summaryResultsBill.getQty(), summaryResultsBill.getWaitQty(), summaryResultsBill.getScanQty());
-                setBundleData(summaryResultsBill.getBillId(), summaryResultsBill.getScanId(), summaryResultsBill.getQty(), summaryResultsBill.getWaitQty(), summaryResultsBill.getScanQty(), 20, 20);
+                setBundleData(summaryResultsBill.getBillId(),
+                        summaryResultsBill.getScanId(),
+                        summaryResultsBill.getQty(),
+                        summaryResultsBill.getWaitQty(),
+                        summaryResultsBill.getScanQty(), 12, 20);
                 //设置仓库id
                 warehouseId = summaryResultsBill.getWarehouseId();
                 //设置区域id
@@ -239,9 +248,6 @@ public class NormalOutStockActivity extends BaseActivity<NormalOutStockView, Nor
                 btnCommit.setText(R.string.create_production_get_material_list_tip);
                 //设置 submitType
                 submitType = 0;
-                //源单类型  目标单类型
-                srcBillType = 12;
-                destBillType = 20;
                 break;
             case STOCK_OUT_OUTSOURCE_ALLOT://委外调拨
                 tvHeadTitle.setText(R.string.outsource_allot_info_tip);
@@ -251,7 +257,11 @@ public class NormalOutStockActivity extends BaseActivity<NormalOutStockView, Nor
                 QueryWWPickDataByOutSourceResult.SummaryResultsBean summaryResultsAllot = queryWWPickDataByOutSourceResultAllot.getSummaryResults();
                 //设置内容
                 setHeaderContent(summaryResultsAllot.getBillCode(), summaryResultsAllot.getBillDate(), summaryResultsAllot.getQty(), summaryResultsAllot.getWaitQty(), summaryResultsAllot.getScanQty());
-                setBundleData(summaryResultsAllot.getBillId(), summaryResultsAllot.getScanId(), summaryResultsAllot.getQty(), summaryResultsAllot.getWaitQty(), summaryResultsAllot.getScanQty(), 50, 50);
+                setBundleData(summaryResultsAllot.getBillId(),
+                        summaryResultsAllot.getScanId(),
+                        summaryResultsAllot.getQty(),
+                        summaryResultsAllot.getWaitQty(),
+                        summaryResultsAllot.getScanQty(), 12, 50);
                 //设置scanid
                 scanId = summaryResultsAllot.getScanId();
                 //billId
@@ -264,9 +274,6 @@ public class NormalOutStockActivity extends BaseActivity<NormalOutStockView, Nor
                 scanId = summaryResultsAllot.getScanId();
                 //设置 submitType
                 submitType = 0;
-                //源单类型  目标单类型
-                srcBillType = 12;
-                destBillType = 50;
                 break;
             case STOCK_OUT_PRODUCTION_FEEDING://生产补料
                 setActivityTitle(getString(R.string.stock_out_create_add_materail));
@@ -280,7 +287,11 @@ public class NormalOutStockActivity extends BaseActivity<NormalOutStockView, Nor
                 //设置内容
                 setHeaderContent(summaryResultsProductionFeed.getBillCode(), summaryResultsProductionFeed.getBillDate(), summaryResultsProductionFeed.getQty(), summaryResultsProductionFeed.getWaitQty(), summaryResultsProductionFeed.getScanQty());
                 //设置bundle的数据
-                setBundleData(summaryResultsProductionFeed.getBillId(), summaryResultsProductionFeed.getScanId(), summaryResultsProductionFeed.getQty(), summaryResultsProductionFeed.getWaitQty(), summaryResultsProductionFeed.getScanQty(), 24, 24);
+                setBundleData(summaryResultsProductionFeed.getBillId(),
+                        summaryResultsProductionFeed.getScanId(),
+                        summaryResultsProductionFeed.getQty(),
+                        summaryResultsProductionFeed.getWaitQty(),
+                        summaryResultsProductionFeed.getScanQty(), 24, 24);
                 //设置仓库id
                 warehouseId = summaryResultsProductionFeed.getWarehouseId();
                 //设置区域id
@@ -305,7 +316,11 @@ public class NormalOutStockActivity extends BaseActivity<NormalOutStockView, Nor
                 //设置内容
                 setHeaderContent(summaryResultsProductionAudit.getBillCode(), summaryResultsProductionAudit.getBillDate(), summaryResultsProductionAudit.getQty(), summaryResultsProductionAudit.getWaitQty(), summaryResultsProductionAudit.getScanQty());
                 //设置bundle的数据
-                setBundleData(summaryResultsProductionAudit.getBillId(), summaryResultsProductionAudit.getScanId(), summaryResultsProductionAudit.getQty(), summaryResultsProductionAudit.getWaitQty(), summaryResultsProductionAudit.getScanQty(), 23, 23);
+                setBundleData(summaryResultsProductionAudit.getBillId(),
+                        summaryResultsProductionAudit.getScanId(),
+                        summaryResultsProductionAudit.getQty(),
+                        summaryResultsProductionAudit.getWaitQty(),
+                        summaryResultsProductionAudit.getScanQty(), 23, 23);
                 //设置仓库id
                 warehouseId = summaryResultsProductionAudit.getWarehouseId();
                 //设置区域id
@@ -330,7 +345,11 @@ public class NormalOutStockActivity extends BaseActivity<NormalOutStockView, Nor
                 //设置内容
                 setHeaderContent(summaryResultsProductionBill.getBillCode(), summaryResultsProductionBill.getBillDate(), summaryResultsProductionBill.getQty(), summaryResultsProductionBill.getWaitQty(), summaryResultsProductionBill.getScanQty());
                 //设置bundle的数据
-                setBundleData(summaryResultsProductionBill.getBillId(), summaryResultsProductionBill.getScanId(), summaryResultsProductionBill.getQty(), summaryResultsProductionBill.getWaitQty(), summaryResultsProductionBill.getScanQty(), 23, 23);
+                setBundleData(summaryResultsProductionBill.getBillId(),
+                        summaryResultsProductionBill.getScanId(),
+                        summaryResultsProductionBill.getQty(),
+                        summaryResultsProductionBill.getWaitQty(),
+                        summaryResultsProductionBill.getScanQty(), 30, 23);
                 //设置仓库id
                 warehouseId = summaryResultsProductionBill.getWarehouseId();
                 //设置区域id
@@ -343,9 +362,7 @@ public class NormalOutStockActivity extends BaseActivity<NormalOutStockView, Nor
                 btnCommit.setText(R.string.create_production_get_material_list_tip);
                 //设置 submitType
                 submitType = 0;
-                //源单类型  目标单类型
-                srcBillType = 30;
-                destBillType = 23;
+
                 break;
             case STOCK_OUT_PRODUCTION_ALLOT://生产调拨
                 setActivityTitle(getString(R.string.production_allot));
@@ -358,6 +375,12 @@ public class NormalOutStockActivity extends BaseActivity<NormalOutStockView, Nor
                 QueryWWPickDataByOutSourceResult.SummaryResultsBean summaryResultsProductionAllot = proAllot.getSummaryResults();
                 //设置内容
                 setHeaderContent(summaryResultsProductionAllot.getBillCode(), summaryResultsProductionAllot.getBillDate(), summaryResultsProductionAllot.getQty(), summaryResultsProductionAllot.getWaitQty(), summaryResultsProductionAllot.getScanQty());
+                //设置bundle 数量
+                setBundleData(summaryResultsProductionAllot.getBillId(),
+                        summaryResultsProductionAllot.getScanId(),
+                        summaryResultsProductionAllot.getQty(),
+                        summaryResultsProductionAllot.getWaitQty(),
+                        summaryResultsProductionAllot.getScanQty(), 30, 50);
                 //设置scanid
                 scanId = summaryResultsProductionAllot.getScanId();
                 //设置仓库id
@@ -368,12 +391,10 @@ public class NormalOutStockActivity extends BaseActivity<NormalOutStockView, Nor
                 billId = summaryResultsProductionAllot.getBillId();
                 //设置 submitType
                 submitType = 0;
-                //源单类型  目标单类型
-                srcBillType = 30;
-                destBillType = 50;
                 break;
             case STOCK_OUT_PRODUCTION_APPLY_BILL://领料申请
-                tvHeadTitle.setText(R.string.get_material_material_list_tip);
+                setActivityTitle(getString(R.string.get_material_apply_tip));
+                tvHeadTitle.setText(R.string.get_material_apply_orderno_info);
                 /**
                  * 生产生单 和委外生单的返回结果是一样的 所以直接一起处理
                  */
@@ -382,6 +403,13 @@ public class NormalOutStockActivity extends BaseActivity<NormalOutStockView, Nor
                 QueryProductPickByInputResult.SummaryResultsBean summaryResultsProductionApply = queryProductPickByInputResult.getSummaryResults();
                 //设置内容
                 setHeaderContent(summaryResultsProductionApply.getBillCode(), summaryResultsProductionApply.getBillDate(), summaryResultsProductionApply.getQty(), summaryResultsProductionApply.getWaitQty(), summaryResultsProductionApply.getScanQty());
+                //设置bundle 数量
+                setBundleData(summaryResultsProductionApply.getBillId(),
+                        summaryResultsProductionApply.getScanId(),
+                        summaryResultsProductionApply.getQty(),
+                        summaryResultsProductionApply.getWaitQty(),
+                        summaryResultsProductionApply.getScanQty(), 31, 23);
+
                 //设置scanid
                 scanId = summaryResultsProductionApply.getScanId();
                 //设置 submitType
@@ -390,9 +418,6 @@ public class NormalOutStockActivity extends BaseActivity<NormalOutStockView, Nor
                 regionId = summaryResultsProductionApply.getRegionId();
                 //billId
                 billId = summaryResultsProductionApply.getBillId();
-                //源单类型  目标单类型
-                srcBillType = 31;
-                destBillType = 31;
                 break;
             case STOCK_OUT_PICK://拣料
                 break;
@@ -403,6 +428,12 @@ public class NormalOutStockActivity extends BaseActivity<NormalOutStockView, Nor
                 QueryDNByInputForOutStockResult.SummaryResultsBean summaryResultsSaleAudit = queryDNByInputForOutStockResult.getSummaryResults();
                 //设置内容
                 setHeaderContent(summaryResultsSaleAudit.getBillCode(), summaryResultsSaleAudit.getBillDate(), summaryResultsSaleAudit.getQty(), summaryResultsSaleAudit.getWaitQty(), summaryResultsSaleAudit.getScanQty());
+                //设置bundle 数量
+                setBundleData(summaryResultsSaleAudit.getBillId(),
+                        summaryResultsSaleAudit.getScanId(),
+                        summaryResultsSaleAudit.getQty(),
+                        summaryResultsSaleAudit.getWaitQty(),
+                        summaryResultsSaleAudit.getScanQty(), 42, 42);
                 //设置scanid
                 scanId = summaryResultsSaleAudit.getScanId();
                 //设置仓库id
@@ -415,19 +446,23 @@ public class NormalOutStockActivity extends BaseActivity<NormalOutStockView, Nor
                 isCarton = summaryResultsSaleAudit.isIsCarton();
                 //cartonnum
                 cartonNum = summaryResultsSaleAudit.getCartonNo();
-                //源单类型  目标单类型
-                srcBillType = 42;
-                destBillType = 42;
                 break;
             case STOCK_OUT_SELL_OUT_BILL://销售生单
-                setActivityTitle(getString(R.string.sale_outstock_title));
-                tvHeadTitle.setText(R.string.production_allot_info_tip);
+                setActivityTitle(R.string.sale_outstock_bill_title);
+                tvHeadTitle.setText("发货通知单信息");
                 //设置按钮文字  销售出库单
                 btnCommit.setText(R.string.create_sale_ger_material_list_tip);
                 QuerySalesOutSotckByInputForOutStockResult querySalesOutSotckByInputForOutStockResult = new Gson().fromJson(getIntent().getStringExtra(STOCK_OUT_BEAN), QuerySalesOutSotckByInputForOutStockResult.class);
                 QuerySalesOutSotckByInputForOutStockResult.SummaryResultsBean summaryResultsSaleBill = querySalesOutSotckByInputForOutStockResult.getSummaryResults();
                 //设置内容
                 setHeaderContent(summaryResultsSaleBill.getBillCode(), summaryResultsSaleBill.getBillDate(), summaryResultsSaleBill.getQty(), summaryResultsSaleBill.getWaitQty(), summaryResultsSaleBill.getScanQty());
+                //设置bundle 数量
+                setBundleData(summaryResultsSaleBill.getBillId(),
+                        summaryResultsSaleBill.getScanId(),
+                        summaryResultsSaleBill.getQty(),
+                        summaryResultsSaleBill.getWaitQty(),
+                        summaryResultsSaleBill.getScanQty(), 41, 42);
+
                 //设置scanid
                 scanId = summaryResultsSaleBill.getScanId();
                 //设置仓库id
@@ -440,19 +475,23 @@ public class NormalOutStockActivity extends BaseActivity<NormalOutStockView, Nor
                 isCarton = summaryResultsSaleBill.isIsCarton();
                 //cartonnum
                 cartonNum = summaryResultsSaleBill.getCartonNo();
-                //源单类型  目标单类型
-                srcBillType = 41;
-                destBillType = 42;
                 break;
             case STOCK_OUT_PURCHASE_MATERIAL_RETURN://采购退料
                 break;
             case STOCK_OUT_OTHER_OUT_AUDIT://其他审核
                 tvHeadTitle.setText(R.string.other_outstock_info);
                 setActivityTitle(getString(R.string.other_outstock_title));
-                OtherAuditSelectOrdernoBean otherAuditSelectOrdernoBean = new Gson().fromJson(getIntent().getStringExtra(STOCK_OUT_BEAN), OtherAuditSelectOrdernoBean.class);
-                OtherAuditSelectOrdernoBean.SummaryResultsBean summaryResultsOtherAudit = otherAuditSelectOrdernoBean.getSummaryResults();
+                OtherOutAndInStockBean otherAuditSelectOrdernoBean = new Gson().fromJson(getIntent().getStringExtra(STOCK_OUT_BEAN), OtherOutAndInStockBean.class);
+                OtherOutAndInStockBean.SummaryResultsBean summaryResultsOtherAudit = otherAuditSelectOrdernoBean.getSummaryResults();
                 //设置内容
                 setHeaderContent(summaryResultsOtherAudit.getBillCode(), summaryResultsOtherAudit.getBillDate(), summaryResultsOtherAudit.getQty(), summaryResultsOtherAudit.getWaitQty(), summaryResultsOtherAudit.getScanQty());
+                //设置bundle 数量
+                setBundleData(summaryResultsOtherAudit.getBillId(),
+                        summaryResultsOtherAudit.getScanId(),
+                        summaryResultsOtherAudit.getQty(),
+                        summaryResultsOtherAudit.getWaitQty(),
+                        summaryResultsOtherAudit.getScanQty(), 52, 52);
+
                 //设置scanid
                 scanId = summaryResultsOtherAudit.getScanId();
                 //设置仓库id
@@ -461,9 +500,6 @@ public class NormalOutStockActivity extends BaseActivity<NormalOutStockView, Nor
                 regionId = summaryResultsOtherAudit.getRegionId();
                 //billId
                 billId = summaryResultsOtherAudit.getBillId();
-                //源单类型  目标单类型
-                srcBillType = 52;
-                destBillType = 52;
                 break;
             case STOCK_OUT_OTHER_OUT_BILL://其他生单
                 break;
@@ -477,6 +513,13 @@ public class NormalOutStockActivity extends BaseActivity<NormalOutStockView, Nor
                 //获取 summaryResults
                 QueryDNByInputForPickResult.SummaryResultsBean summaryResultsFinishGoodsPick = queryDNByInputForPickResult.getSummaryResults();
                 setHeaderContent(summaryResultsFinishGoodsPick.getBillCode(), summaryResultsFinishGoodsPick.getBillDate(), summaryResultsFinishGoodsPick.getQty(), summaryResultsFinishGoodsPick.getWaitQty(), summaryResultsFinishGoodsPick.getScanQty());
+                //设置bundle 数量
+                setBundleData(summaryResultsFinishGoodsPick.getBillId(),
+                        summaryResultsFinishGoodsPick.getScanId(),
+                        summaryResultsFinishGoodsPick.getQty(),
+                        summaryResultsFinishGoodsPick.getWaitQty(),
+                        summaryResultsFinishGoodsPick.getScanQty(), 61, 61);
+
                 //设置scanid
                 scanId = summaryResultsFinishGoodsPick.getScanId();
                 //设置仓库id
@@ -485,15 +528,23 @@ public class NormalOutStockActivity extends BaseActivity<NormalOutStockView, Nor
                 regionId = summaryResultsFinishGoodsPick.getRegionId();
                 //billId
                 billId = summaryResultsFinishGoodsPick.getBillId();
-                //源单类型  目标单类型
-                srcBillType = 61;
-                destBillType = 61;
                 break;
-            case STOCK_OUT_ALLOT_OUT_PICK://调拨调出
+            case STOCK_OUT_ALLOT_OUT_PICK://调拨拣货
+                tvHeadTitle.setText(R.string.stock_out_pick_tab);
+                setActivityTitle(R.string.pick_allot_orderno_info);
+                //拣货没有制单和审核的操作
+                btnCommit.setVisibility(View.GONE);
                 QueryAllotOutResult queryAllotOutResult = new Gson().fromJson(getIntent().getStringExtra(STOCK_OUT_BEAN), QueryAllotOutResult.class);
                 QueryAllotOutResult.SummaryResultsBean summaryResultsAllotOut = queryAllotOutResult.getSummaryResults();
 
                 setHeaderContent(summaryResultsAllotOut.getBillCode(), summaryResultsAllotOut.getBillDate(), summaryResultsAllotOut.getQty(), summaryResultsAllotOut.getWaitQty(), summaryResultsAllotOut.getScanQty());
+                //设置bundle 数量
+                setBundleData(summaryResultsAllotOut.getBillId(),
+                        summaryResultsAllotOut.getScanId(),
+                        summaryResultsAllotOut.getQty(),
+                        summaryResultsAllotOut.getWaitQty(),
+                        summaryResultsAllotOut.getScanQty(), 50, 61);
+
                 //设置scanid
                 scanId = summaryResultsAllotOut.getScanId();
                 //设置仓库id
@@ -502,15 +553,24 @@ public class NormalOutStockActivity extends BaseActivity<NormalOutStockView, Nor
                 regionId = summaryResultsAllotOut.getRegionId();
                 //billId
                 billId = summaryResultsAllotOut.getBillId();
-                //源单类型  目标单类型
-                srcBillType = 50;
-                destBillType = 61;
+
                 break;
             case STOCK_OUT_SALE_OUT_PICK://销售拣货
+                tvHeadTitle.setText(R.string.stock_out_pick_sale_tab);
+                setActivityTitle("");
+                //拣货没有制单和审核的操作
+                btnCommit.setVisibility(View.GONE);
                 QueryDNByInputForPickResult salePickBean = new Gson().fromJson(getIntent().getStringExtra(STOCK_OUT_BEAN), QueryDNByInputForPickResult.class);
                 QueryDNByInputForPickResult.SummaryResultsBean summaryResultsSendPick = salePickBean.getSummaryResults();
 
                 setHeaderContent(summaryResultsSendPick.getBillCode(), summaryResultsSendPick.getBillDate(), summaryResultsSendPick.getQty(), summaryResultsSendPick.getWaitQty(), summaryResultsSendPick.getScanQty());
+                //设置bundle 数量
+                setBundleData(summaryResultsSendPick.getBillId(),
+                        summaryResultsSendPick.getScanId(),
+                        summaryResultsSendPick.getQty(),
+                        summaryResultsSendPick.getWaitQty(),
+                        summaryResultsSendPick.getScanQty(), 42, 61);
+
                 //设置scanid
                 scanId = summaryResultsSendPick.getScanId();
                 //设置仓库id
@@ -519,12 +579,20 @@ public class NormalOutStockActivity extends BaseActivity<NormalOutStockView, Nor
                 regionId = summaryResultsSendPick.getRegionId();
                 //billId
                 billId = summaryResultsSendPick.getBillId();
-                srcBillType = 42;
-                destBillType = 61;
+                break;
             case STOCK_OUT_SEND_OUT_PICK://发货拣货
+                //拣货没有制单和审核的操作
+                btnCommit.setVisibility(View.GONE);
                 QueryDNByInputForPickResult sendPick = new Gson().fromJson(getIntent().getStringExtra(STOCK_OUT_BEAN), QueryDNByInputForPickResult.class);
                 QueryDNByInputForPickResult.SummaryResultsBean summaryResultsSend = sendPick.getSummaryResults();
                 setHeaderContent(summaryResultsSend.getBillCode(), summaryResultsSend.getBillDate(), summaryResultsSend.getQty(), summaryResultsSend.getWaitQty(), summaryResultsSend.getScanQty());
+                //设置bundle 数量
+                setBundleData(summaryResultsSend.getBillId(),
+                        summaryResultsSend.getScanId(),
+                        summaryResultsSend.getQty(),
+                        summaryResultsSend.getWaitQty(),
+                        summaryResultsSend.getScanQty(), 41, 61);
+
                 //设置scanid
                 scanId = summaryResultsSend.getScanId();
                 //设置仓库id
@@ -533,8 +601,6 @@ public class NormalOutStockActivity extends BaseActivity<NormalOutStockView, Nor
                 regionId = summaryResultsSend.getRegionId();
                 //billId
                 billId = summaryResultsSend.getBillId();
-                srcBillType = 41;
-                destBillType = 61;
                 break;
             case STOCK_OUT_ALLOT_OUT://调拨调出
                 QueryTransferByInputForPickResult allotPick = new Gson().fromJson(getIntent().getStringExtra(STOCK_OUT_BEAN), QueryTransferByInputForPickResult.class);
@@ -544,6 +610,13 @@ public class NormalOutStockActivity extends BaseActivity<NormalOutStockView, Nor
                         , summaryResultsAllotPick.getQty()
                         , summaryResultsAllotPick.getWaitQty()
                         , summaryResultsAllotPick.getScanQty());
+                //设置bundle 数量
+                setBundleData(summaryResultsAllotPick.getBillId(),
+                        summaryResultsAllotPick.getScanId(),
+                        summaryResultsAllotPick.getQty(),
+                        summaryResultsAllotPick.getWaitQty(),
+                        summaryResultsAllotPick.getScanQty(), 50,50);
+
                 //设置scanid
                 scanId = summaryResultsAllotPick.getScanId();
                 //设置仓库id
@@ -552,8 +625,6 @@ public class NormalOutStockActivity extends BaseActivity<NormalOutStockView, Nor
                 regionId = summaryResultsAllotPick.getRegionId();
                 //billId
                 billId = summaryResultsAllotPick.getBillId();
-                srcBillType = 50;
-                destBillType = 50;
                 break;
             default:
                 break;
@@ -632,6 +703,7 @@ public class NormalOutStockActivity extends BaseActivity<NormalOutStockView, Nor
                     case Constants.STOCK_OUT_OUTSOURCE_ALLOT://委外调拨
                         it.setClass(NormalOutStockActivity.this, OutsourceBillDetailActivity.class);
                         it.putExtra(OUT_STOCK_POINT_DETIAIL_BILLID, billId);
+                        it.putExtra(OUT_STOCK_TO_DETAIL_FORM_NORMAL, true);
                         break;
 
                     case Constants.STOCK_OUT_PRODUCTION_FEEDING://生产补料
@@ -646,8 +718,13 @@ public class NormalOutStockActivity extends BaseActivity<NormalOutStockView, Nor
                     case Constants.STOCK_OUT_PRODUCTION_ALLOT://生产调拨
                         it.setClass(NormalOutStockActivity.this, OutsourceBillDetailActivity.class);
                         it.putExtra(OUT_STOCK_POINT_DETIAIL_BILLID, billId);
+                        it.putExtra(OUT_STOCK_TO_DETAIL_FORM_NORMAL, true);
                         break;
-
+                    case Constants.STOCK_OUT_PRODUCTION_APPLY_BILL://领料申请
+                        it.setClass(NormalOutStockActivity.this, DetailActivity.class);
+                        it.putExtra(OUT_STOCK_POINT_DETIAIL_BILLID, billId);
+                        it.putExtra(OUT_STOCK_TO_DETAIL_FORM_NORMAL, true);
+                        break;
                     case Constants.STOCK_OUT_SELL_OUT_AUDIT://销售领料-审核
                         it.setClass(NormalOutStockActivity.this, DetailActivity.class);
                         it.putExtra(OUT_STOCK_POINT_WAREHOUSEID, warehouseId);
@@ -785,6 +862,7 @@ public class NormalOutStockActivity extends BaseActivity<NormalOutStockView, Nor
         if (data.getExceedQty() > 0) {
             Intent intent = new Intent(this, SplitPrintActivity.class);
             intent.putExtra(OUT_STOCK_PRINT_BILLID, billId);
+            intent.putExtra(STOCK_OUT_CODE_STR, intentCode);
             intent.putExtra(OUT_STOCK_PRINT_SRCBILLTYPE, srcBillType);
             intent.putExtra(OUT_STOCK_PRINT_BATCh_DETAILID, detailId);
             intent.putExtra(OUT_STOCK_PRINT_BARCODENO, etScanMaterial.getText().toString().trim());
@@ -850,7 +928,7 @@ public class NormalOutStockActivity extends BaseActivity<NormalOutStockView, Nor
              * False:表示提交成功
              */
             if (result.isIsNotAllowPickOut()) {
-                ToastUtils.showShort("请确认物料条码是否正确！");
+                ToastUtils.showShort(R.string.please_comfirm_barcode_is_right);
             } else {//提交成功
                 ToastUtils.showShort(getString(R.string.commit_success));
                 /**
@@ -871,7 +949,7 @@ public class NormalOutStockActivity extends BaseActivity<NormalOutStockView, Nor
                 /**
                  * 物料返回设置扫描的数量
                  */
-                scanQty = scanQty + result.getBarcodeQty();
+                scanQty = result.getTotalScanQty();
                 //设置数量
                 tvMaterialNum.setText("(" + result.getBarcodeQty() + ")" + scanQty + "/" + totalQty);
                 //待点  和  已点数量

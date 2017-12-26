@@ -2,6 +2,8 @@ package com.timi.sz.wms_android.mvp.UI.stock_in_work.detail;
 
 import android.content.Context;
 
+import com.timi.sz.wms_android.R;
+import com.timi.sz.wms_android.base.uils.Constants;
 import com.timi.sz.wms_android.base.uils.ToastUtils;
 import com.timi.sz.wms_android.bean.stockin_work.StockInWorkDetailResult;
 import com.timi.sz.wms_android.http.callback.OnResultCallBack;
@@ -29,8 +31,10 @@ public class StockInWorkDetailPresenter extends MvpBasePresenter<StockInWorkDeta
     /**
      * 扫描调入
      * @param params
+     * @param intentCode
      */
-    public void queryAllotScanDetail(Map<String,Object> params){
+    public void queryAllotScanDetail(Map<String, Object> params, int intentCode){
+        getView().showProgressDialog();
         if(null==httpSubscriber){
             httpSubscriber=new HttpSubscriber<>(new OnResultCallBack<List<StockInWorkDetailResult>>() {
                 @Override
@@ -40,11 +44,26 @@ public class StockInWorkDetailPresenter extends MvpBasePresenter<StockInWorkDeta
 
                 @Override
                 public void onError(String errorMsg) {
-                    ToastUtils.showShort(errorMsg);
+//                    ToastUtils.showShort(errorMsg);
                 }
             });
         }
-        model.queryAllotScanDetail(params,httpSubscriber);
+
+        switch (intentCode){
+
+            case Constants.STOCK_IN_WORK_FORM_CHANGE_IN://形态转换入库
+                model.getConvertInDetail(params,httpSubscriber);
+                break;
+            case Constants.STOCK_IN_WORK_FORM_CHANGE_OUT://形态转换出库
+                model.getConvertOutDetail(params,httpSubscriber);
+                break;
+            case Constants.STOCK_IN_WORK_POINT://盘点
+                model.getCheckStockDetail(params,httpSubscriber);
+                break;
+            case Constants.STOCK_IN_WORK_ALLOT_SCAN://扫描调入
+                model.queryAllotScanDetail(params,httpSubscriber);
+                break;
+        }
     }
     @Override
     public void dettachView() {
