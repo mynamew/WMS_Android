@@ -19,11 +19,8 @@ import com.timi.sz.wms_android.bean.stockin_work.MaterialDataBean;
 import com.timi.sz.wms_android.bean.stockin_work.check.RequestSubmitCheckDataBean;
 import com.timi.sz.wms_android.bean.stockin_work.check.SubmitCheckDataResult;
 import com.timi.sz.wms_android.bean.stockin_work.query.PointResult;
-import com.timi.sz.wms_android.mvp.UI.stock_in.detail.StockInDetailActivity;
 import com.timi.sz.wms_android.mvp.UI.stock_in_work.check_detail.CheckDetailActivity;
 import com.timi.sz.wms_android.mvp.UI.stock_in_work.check_record.CheckRecordActivity;
-import com.timi.sz.wms_android.mvp.UI.stock_in_work.detail.StockInWorkDetailActivity;
-import com.timi.sz.wms_android.mvp.UI.stock_in_work.form_change_instock.FormChangeInstockActivity;
 import com.timi.sz.wms_android.mvp.base.BaseActivity;
 
 import java.util.HashMap;
@@ -81,6 +78,8 @@ public class CheckActivity extends BaseActivity<CheckView, CheckPresenter> imple
     TextView tvMaterialModel;
     @BindView(R.id.tv_material_attr)
     TextView tvMaterialAttr;
+    @BindView(R.id.tv_check_num)
+    TextView tvCheckNum;
     private PointResult pointBean;
 
     @Override
@@ -185,8 +184,8 @@ public class CheckActivity extends BaseActivity<CheckView, CheckPresenter> imple
                     return;
                 }
                 //盘点数量
-                int checkQty=Integer.parseInt(checkNumStr);
-                if(checkQty<=0){
+                int checkQty = Integer.parseInt(checkNumStr);
+                if (checkQty <= 0) {
                     ToastUtils.showShort(R.string.check_qty_no_less_zero);
                     return;
                 }
@@ -231,7 +230,8 @@ public class CheckActivity extends BaseActivity<CheckView, CheckPresenter> imple
         setTextViewContent(tvMaterialCode, bean.getMaterialCode());
         setTextViewContent(tvMaterialModel, bean.getMaterialStandard());
         setTextViewContent(tvMaterialAttr, bean.getMaterialAttribute());
-        setTextViewContent(tvMaterialNum, bean.getCheckQty());
+        setTextViewContent(tvMaterialNum, bean.getQty());
+        setTextViewContent(tvCheckNum, bean.getCheckQty());
         //设置物料的附加属性
         setMaterialAttrStatus(tvMaterialAttr);
 
@@ -240,8 +240,10 @@ public class CheckActivity extends BaseActivity<CheckView, CheckPresenter> imple
     @Override
     public void submitCheckData(SubmitCheckDataResult bean) {
         ToastUtils.showShort(getString(R.string.commit_check_data_success));
-        tvMaterialNum.setText(etCheckNum.getText().toString());
-        setTextViewContent(tvWaitPointNum, pointBean.getWaitQty()-bean.getCheckQty());
-        setTextViewContent(tvHaveCountNum, pointBean.getScanQty()+bean.getCheckQty());
+        tvCheckNum.setText(etCheckNum.getText().toString());
+        setTextViewContent(tvWaitPointNum, pointBean.getQty() - bean.getTotalScanQty());
+        setTextViewContent(tvHaveCountNum, bean.getTotalScanQty());
     }
+
+
 }

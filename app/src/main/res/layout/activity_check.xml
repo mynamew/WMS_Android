@@ -420,12 +420,35 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/check_num_tip"
+                        android:text="@string/item_material_num"
                         android:textColor="#333"
                         android:textSize="13sp"/>
 
                     <TextView
                         android:id="@+id/tv_material_num"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="60px"
+                        android:textColor="@color/login_txt_color"
+                        android:textSize="13sp"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30px"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingLeft="30px">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/check_num_tip"
+                        android:textColor="#333"
+                        android:textSize="13sp"/>
+
+                    <TextView
+                        android:id="@+id/tv_check_num"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="60px"

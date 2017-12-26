@@ -26,6 +26,7 @@ public class SubmitCheckDataResult {
     private String materialAttribute;
     private int qty;
     private int waitQty;
+    private int totalScanQty;
     private int checkQty;
 
     public int getMaterialId() {
@@ -90,5 +91,13 @@ public class SubmitCheckDataResult {
 
     public void setCheckQty(int checkQty) {
         this.checkQty = checkQty;
+    }
+
+    public int getTotalScanQty() {
+        return totalScanQty;
+    }
+
+    public void setTotalScanQty(int totalScanQty) {
+        this.totalScanQty = totalScanQty;
     }
 }
