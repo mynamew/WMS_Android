@@ -104,10 +104,6 @@ public class BatchNormalActivity extends BaseActivity<BatchNormalView, BatchNorm
     TextView tvSendMaterialLibTip;
     @BindView(R.id.tv_send_material_lib)
     TextView tvSendMaterialLib;
-    @BindView(R.id.textView5)
-    TextView textView5;
-    @BindView(R.id.tv_controll_type)
-    TextView tvControllType;
     @BindView(R.id.tv_carton_num)
     TextView tvCartonNum;
     @BindView(R.id.btn_add)
@@ -193,96 +189,95 @@ public class BatchNormalActivity extends BaseActivity<BatchNormalView, BatchNorm
         detailId = getIntent().getIntExtra(OUT_STOCK_PRINT_BATCh_DETAILID, -1);
         switch (intentCode) {
             case STOCK_OUT_OUTSOURCE_FEED_SUPLLIEMENT://委外补料
-                setActivityTitle(getString(R.string.material_point_outsource_feed_title));
+                setActivityTitle(getString(R.string.point_scan_outsource_feed_title));
                 srcBillType = 21;
                 destBillType = 21;
                 break;
             case STOCK_OUT_OUTSOURCE_AUDIT://委外审核
-                setActivityTitle(getString(R.string.oursource_audit_maiterial_point_title));
+                setActivityTitle(getString(R.string.point_scan_outsource_audit_title));
                 srcBillType = 20;
                 destBillType = 20;
                 break;
             case STOCK_OUT_OUTSOURCE_BILL://委外生单
-                setActivityTitle(getString(R.string.oursource_audit_maiterial_point_title));
+                setActivityTitle(getString(R.string.point_scan_outsource_bill_title));
                 srcBillType = 12;
                 destBillType = 20;
                 break;
             case STOCK_OUT_OUTSOURCE_ALLOT://委外调拨
-                setActivityTitle(getString(R.string.oursource_allot_maiterial_point_title));
+                setActivityTitle(getString(R.string.point_scan_outsource_allot_title));
                 srcBillType = 12;
                 destBillType = 50;
                 break;
             case STOCK_OUT_PRODUCTION_FEEDING://生产补料
-                setActivityTitle(getString(R.string.material_point_production_feed_title));
+                setActivityTitle(getString(R.string.point_scan_production_feed_title));
                 srcBillType = 24;
                 destBillType = 24;
                 break;
             case STOCK_OUT_PRODUCTION_AUDIT://生产审核
-                setActivityTitle(getString(R.string.material_point_production_pick_title));
+                setActivityTitle(getString(R.string.point_scan_production_audit_title));
                 srcBillType = 23;
                 destBillType = 23;
                 break;
             case STOCK_OUT_PRODUCTION_APPLY_BILL://领料申请
-                setActivityTitle(getString(R.string.material_point_production_get_material_apply_title));
+                setActivityTitle(getString(R.string.point_scan_production_apply_title));
                 srcBillType = 31;
                 destBillType = 23;
                 break;
             case STOCK_OUT_PRODUCTION_BILL://生产生单
-                setActivityTitle(getString(R.string.material_point_production_pick_title));
+                setActivityTitle(getString(R.string.point_scan_production_bill_title));
                 srcBillType = 30;
                 destBillType = 23;
                 break;
             case STOCK_OUT_PRODUCTION_ALLOT://生产调拨
-                setActivityTitle(getString(R.string.material_point_production_allot_title));
+                setActivityTitle(getString(R.string.point_scan_production_allot_title));
                 srcBillType = 30;
                 destBillType = 50;
                 break;
             case STOCK_OUT_PICK://拣料
                 break;
             case STOCK_OUT_SELL_OUT_AUDIT://销售审核
-                setActivityTitle(getString(R.string.material_point_sale_audit_title));
+                setActivityTitle(getString(R.string.point_scan_sale_audit_title));
                 srcBillType = 42;
                 destBillType = 42;
                 break;
             case STOCK_OUT_SELL_OUT_BILL://销售生单
-                setActivityTitle(getString(R.string.material_point_sale_bill_title));
+                setActivityTitle(getString(R.string.point_scan_sale_bill_title));
                 srcBillType = 41;
                 destBillType = 42;
                 break;
             case STOCK_OUT_PURCHASE_MATERIAL_RETURN://采购退料
                 break;
             case STOCK_OUT_OTHER_OUT_AUDIT://其他审核
-                setActivityTitle(getString(R.string.material_point_other_audit_title));
+                setActivityTitle(getString(R.string.point_scan_other_audit_title));
                 srcBillType = 52;
                 destBillType = 52;
                 break;
             case STOCK_OUT_OTHER_OUT_BILL://其他生单
-                setActivityTitle(getString(R.string.material_point_other_bill_title));
+                setActivityTitle(getString(R.string.point_scan_other_bill_title));
                 srcBillType = 0;
                 destBillType = 52;
                 break;
             case STOCK_OUT_FINISH_GOODS_PICK://成品拣货
-                setActivityTitle(getString(R.string.material_point_finish_goods_pick_title));
+                setActivityTitle(getString(R.string.point_scan_finish_goods_title));
                 srcBillType = 61;
                 destBillType = 61;
                 break;
+            case STOCK_OUT_ALLOT_OUT_PICK://调拨拣货
+                srcBillType = 50;
+                destBillType = 61;
+                setActivityTitle(R.string.point_scan_allot_pick_title);
+                break;
             case STOCK_OUT_SALE_OUT_PICK://销售拣货
-                setActivityTitle(R.string.materil_point_sale_pick_title);
+                setActivityTitle(R.string.point_scan_sale_pick_title);
                 srcBillType = 42;
                 destBillType = 61;
-                break;
             case STOCK_OUT_SEND_OUT_PICK://发货拣货
-                setActivityTitle(R.string.material_point_send_pick_title);
+                setActivityTitle(R.string.point_scan_send_pick_title);
                 srcBillType = 41;
                 destBillType = 61;
                 break;
-            case STOCK_OUT_ALLOT_OUT_PICK://调拨拣货
-                setActivityTitle(R.string.material_point_allot_pick_title);
-                srcBillType = 50;
-                destBillType = 61;
-                break;
             case STOCK_OUT_ALLOT_OUT://调拨调出
-                setActivityTitle(R.string.material_point_allot_out_title);
+                setActivityTitle(R.string.point_scan_allot_out_title);
                 srcBillType = 50;
                 destBillType = 50;
                 break;

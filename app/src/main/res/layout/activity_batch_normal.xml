@@ -171,6 +171,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20px"
+        android:layout_marginBottom="20px"
         android:orientation="horizontal">
 
         <TextView
@@ -191,33 +192,6 @@
             android:textColor="#000"
             android:textSize="13sp"/>
     </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20px"
-        android:layout_marginTop="20px"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/textView5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingLeft="30px"
-            android:text="@string/controll_type_tip"
-            android:textColor="#333"
-            android:textSize="13sp"/>
-
-        <TextView
-            android:id="@+id/tv_controll_type"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingLeft="55px"
-            android:text=""
-            android:textColor="@color/login_txt_color"
-            android:textSize="13sp"/>
-    </LinearLayout>
-
     <LinearLayout
         android:id="@+id/ll_carton"
         android:layout_width="match_parent"

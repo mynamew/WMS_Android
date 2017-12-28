@@ -94,6 +94,7 @@
                         android:layout_height="wrap_content"
                         android:gravity="left"
                         android:text="@string/item_supplier"
+                        android:paddingLeft="25px"
                         android:textColor="#666"
                         android:textSize="13sp"/>
 
@@ -121,6 +122,7 @@
                         android:layout_height="wrap_content"
                         android:gravity="left"
                         android:text="@string/department_tip"
+                        android:paddingLeft="50px"
                         android:textColor="#666"
                         android:textSize="13sp"/>
 

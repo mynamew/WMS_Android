@@ -13,8 +13,8 @@
 
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_height="match_parent"
+        >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -57,11 +57,11 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="10px"
                 android:layout_weight="1"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
-                android:paddingLeft="30px">
+                android:paddingLeft="30px"
+                android:paddingTop="10px">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -85,12 +85,12 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="10px"
                 android:layout_weight="1"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
                 android:paddingBottom="10px"
-                android:paddingLeft="30px">
+                android:paddingLeft="30px"
+                android:paddingTop="10px">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -168,8 +168,8 @@
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rlv_orderno_info"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"/>
+                android:layout_height="match_parent"
+                />
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 </LinearLayout>

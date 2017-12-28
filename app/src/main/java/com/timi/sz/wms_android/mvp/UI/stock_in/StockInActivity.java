@@ -4,21 +4,27 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.NestedScrollView;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
 import com.timi.sz.wms_android.R;
 import com.timi.sz.wms_android.base.uils.Constants;
 import com.timi.sz.wms_android.base.uils.SpUtils;
+import com.timi.sz.wms_android.bean.LoginBean;
 import com.timi.sz.wms_android.mvp.UI.list.BuyInStockListActivity;
 import com.timi.sz.wms_android.mvp.UI.stock_in.other_scan.OtherScanActivity;
 import com.timi.sz.wms_android.mvp.UI.stock_in.query.SearchBuyOrderActivity;
 import com.timi.sz.wms_android.mvp.base.view.BaseNoMvpActivity;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 import static com.timi.sz.wms_android.base.uils.Constants.CODE_STR;
+import static com.timi.sz.wms_android.base.uils.Constants.PERMISSION_STOCKIN;
 
 /**
  * 入库作业的界面
@@ -31,6 +37,28 @@ public class StockInActivity extends BaseNoMvpActivity {
     NestedScrollView nescrollStockIn;
     @BindView(R.id.tv_stock_in_outsource)
     TextView tvStockInOutsource;
+    @BindView(R.id.tv_stockin_buy_order)
+    TextView tvStockinBuyOrder;
+    @BindView(R.id.tv_stock_in_send_order)
+    TextView tvStockInSendOrder;
+    @BindView(R.id.tv_stockin_inlib)
+    TextView tvStockinInlib;
+    @BindView(R.id.tv_stock_in_check)
+    TextView tvStockInCheck;
+    @BindView(R.id.tv_stock_in_create_order)
+    TextView tvStockInCreateOrder;
+    @BindView(R.id.tv_stockin_other_inlib_check)
+    TextView tvStockinOtherInlibCheck;
+    @BindView(R.id.tv_stockin_other_inlib_create_order)
+    TextView tvStockinOtherInlibCreateOrder;
+    @BindView(R.id.tv_stockin_out_return)
+    TextView tvStockinOutReturn;
+    @BindView(R.id.tv_stock_in_produce_return)
+    TextView tvStockInProduceReturn;
+    @BindView(R.id.tv_stock_in_sale_return)
+    TextView tvStockInSaleReturn;
+    @BindView(R.id.activity_stock_in)
+    LinearLayout activityStockIn;
 
     @Override
     public int setLayoutId() {
@@ -45,7 +73,38 @@ public class StockInActivity extends BaseNoMvpActivity {
     @Override
     public void initView() {
         if (SpUtils.getInstance().getIsBillList()) {
-           tvStockInOutsource.setVisibility(View.VISIBLE);
+            tvStockInOutsource.setVisibility(View.VISIBLE);
+        }
+        /**
+         * 获取当前用户的权限，设置显示那些入口
+         */
+        LoginBean loginBean = new Gson().fromJson(SpUtils.getInstance().getString(Constants.USER_INFO), LoginBean.class);
+        LoginBean.GrantPermissionBean grantPermission = loginBean.getGrantPermission();
+        List<LoginBean.GrantPermissionBean.ChildPermissionsBeanX> childPermissions = grantPermission.getChildPermissions();
+        for (int i = 0; i < childPermissions.size(); i++) {
+            if(childPermissions.get(i).getPermissionCode().equals(PERMISSION_STOCKIN)){
+                List<LoginBean.GrantPermissionBean.ChildPermissionsBeanX.ChildPermissionsBean> childPermissionsMenu = childPermissions.get(i).getChildPermissions();
+                for (int j = 0; j <childPermissionsMenu.size() ; j++) {
+                    //采购单
+                    if (childPermissionsMenu.get(j).getPermissionCode().equals(Constants.PERMISSION_STOCKIN_BUY)) {
+                        tvStockinBuyOrder.setVisibility(View.VISIBLE);
+                    }
+                    //送货单
+                    if (childPermissionsMenu.get(j).getPermissionCode().equals(Constants.PERMISSION_STOCKIN_SEND)) {
+                        tvStockInSendOrder.setVisibility(View.VISIBLE);
+                    }
+                    //来料入库
+                    if (childPermissionsMenu.get(j).getPermissionCode().equals(Constants.PERMISSION_STOCKIN_PUTAWAY)) {
+                        tvStockinInlib.setVisibility(View.VISIBLE);
+                    }
+                    //其他入库
+                    if (childPermissionsMenu.get(j).getPermissionCode().equals(Constants.PERMISSION_STOCKIN_OTHER_PUTAWAY)) {
+                        tvStockinOtherInlibCheck.setVisibility(View.VISIBLE);
+                        tvStockinOtherInlibCreateOrder.setVisibility(View.VISIBLE);
+                    }
+                }
+            }
+
         }
     }
 

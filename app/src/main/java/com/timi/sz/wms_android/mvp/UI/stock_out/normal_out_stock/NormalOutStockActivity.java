@@ -181,8 +181,8 @@ public class NormalOutStockActivity extends BaseActivity<NormalOutStockView, Nor
         switch (intentCode) {
             case STOCK_OUT_OUTSOURCE_FEED_SUPLLIEMENT://委外补料
                 //设置头部的提示信息
-                tvHeadTitle.setText(R.string.outsource_feed_orderno_info);
-                setActivityTitle(getString(R.string.outsource_feed_point_title));
+                setActivityTitle(getString(R.string.normal_outstock_outsource_feed_title));
+                tvHeadTitle.setText(R.string.normal_outstock_outsource_feed_info);
                 QueryOutSourceFeedByInputResult queryOutSourceFeedByInputResult = new Gson().fromJson(getIntent().getStringExtra(STOCK_OUT_BEAN), QueryOutSourceFeedByInputResult.class);
                 //获取 summaryResults
                 QueryOutSourceFeedByInputResult.SummaryResultsBean summaryResults = queryOutSourceFeedByInputResult.getSummaryResults();
@@ -204,8 +204,8 @@ public class NormalOutStockActivity extends BaseActivity<NormalOutStockView, Nor
                 submitType = 1;
                 break;
             case STOCK_OUT_OUTSOURCE_AUDIT://委外审核
-                tvHeadTitle.setText(getString(R.string.outsource_send_material_oderno_info));
-                setActivityTitle(getString(R.string.out_source_title));
+                setActivityTitle(getString(R.string.normal_outstock_outsource_audit_title));
+                tvHeadTitle.setText(getString(R.string.normal_outstock_outsource_audit_info));
                 QueryOutSourcePickByInputResult queryOutSourcePickByInputResult = new Gson().fromJson(getIntent().getStringExtra(STOCK_OUT_BEAN), QueryOutSourcePickByInputResult.class);
                 //获取 summaryResults
                 QueryOutSourcePickByInputResult.SummaryResultsBean summaryResultsAudit = queryOutSourcePickByInputResult.getSummaryResults();
@@ -226,8 +226,8 @@ public class NormalOutStockActivity extends BaseActivity<NormalOutStockView, Nor
                 submitType = 1;
                 break;
             case STOCK_OUT_OUTSOURCE_BILL://委外生单
-                tvHeadTitle.setText(getString(R.string.outsource_send_material_oderno_info));
-                setActivityTitle(getString(R.string.out_source_title));
+                setActivityTitle(getString(R.string.normal_outstock_outsource_audit_title));
+                tvHeadTitle.setText(getString(R.string.normal_outstock_outsource_bill_info));
                 QueryWWPickDataByOutSourceResult queryWWPickDataByOutSourceResult = new Gson().fromJson(getIntent().getStringExtra(STOCK_OUT_BEAN), QueryWWPickDataByOutSourceResult.class);
                 //获取 summaryResults
                 QueryWWPickDataByOutSourceResult.SummaryResultsBean summaryResultsBill = queryWWPickDataByOutSourceResult.getSummaryResults();
@@ -250,8 +250,8 @@ public class NormalOutStockActivity extends BaseActivity<NormalOutStockView, Nor
                 submitType = 0;
                 break;
             case STOCK_OUT_OUTSOURCE_ALLOT://委外调拨
-                tvHeadTitle.setText(R.string.outsource_allot_info_tip);
-                setActivityTitle(getString(R.string.outsource_allot));
+                setActivityTitle(getString(R.string.normal_outstock_outsource_allot_title));
+                tvHeadTitle.setText(R.string.normal_outstock_outsource_allot_info);
                 QueryWWPickDataByOutSourceResult queryWWPickDataByOutSourceResultAllot = new Gson().fromJson(getIntent().getStringExtra(STOCK_OUT_BEAN), QueryWWPickDataByOutSourceResult.class);
                 //获取 summaryResults
                 QueryWWPickDataByOutSourceResult.SummaryResultsBean summaryResultsAllot = queryWWPickDataByOutSourceResultAllot.getSummaryResults();
@@ -276,8 +276,8 @@ public class NormalOutStockActivity extends BaseActivity<NormalOutStockView, Nor
                 submitType = 0;
                 break;
             case STOCK_OUT_PRODUCTION_FEEDING://生产补料
-                setActivityTitle(getString(R.string.stock_out_create_add_materail));
-                tvHeadTitle.setText(R.string.production_feed_orderno_info_tip);
+                setActivityTitle(getString(R.string.normal_outstock_production_feed_title));
+                tvHeadTitle.setText(R.string.normal_outstock_production_feed_info);
                 /**
                  * 生产生单 和委外生单的返回结果是一样的 所以直接一起处理
                  */
@@ -305,8 +305,8 @@ public class NormalOutStockActivity extends BaseActivity<NormalOutStockView, Nor
                 destBillType = 24;
                 break;
             case STOCK_OUT_PRODUCTION_AUDIT://生产审核
-                setActivityTitle(getString(R.string.stock_out_create_check));
-                tvHeadTitle.setText(R.string.production_get_orderno_info_tip);
+                setActivityTitle(getString(R.string.normal_outstock_production_audit_title));
+                tvHeadTitle.setText(R.string.normal_outstock_production_audit_info);
                 /**
                  * 生产生单 和委外生单的返回结果是一样的 所以直接一起处理
                  */
@@ -334,8 +334,8 @@ public class NormalOutStockActivity extends BaseActivity<NormalOutStockView, Nor
                 destBillType = 23;
                 break;
             case STOCK_OUT_PRODUCTION_BILL://生产生单
-                setActivityTitle(getString(R.string.stock_out_create_create_order));
-                tvHeadTitle.setText(R.string.production_get_orderno_info_tip);
+                setActivityTitle(getString(R.string.normal_outstock_production_bill_title));
+                tvHeadTitle.setText(R.string.normal_outstock_production_bill_info);
                 /**
                  * 生产生单 和委外生单的返回结果是一样的 所以直接一起处理
                  */
@@ -365,8 +365,8 @@ public class NormalOutStockActivity extends BaseActivity<NormalOutStockView, Nor
 
                 break;
             case STOCK_OUT_PRODUCTION_ALLOT://生产调拨
-                setActivityTitle(getString(R.string.production_allot));
-                tvHeadTitle.setText(R.string.production_allot_info_tip);
+                setActivityTitle(getString(R.string.normal_outstock_production_allot_title));
+                tvHeadTitle.setText(R.string.normal_outstock_production_allot_info);
                 /**
                  * 生产生单 和委外生单的返回结果是一样的 所以直接一起处理
                  */
@@ -393,8 +393,8 @@ public class NormalOutStockActivity extends BaseActivity<NormalOutStockView, Nor
                 submitType = 0;
                 break;
             case STOCK_OUT_PRODUCTION_APPLY_BILL://领料申请
-                setActivityTitle(getString(R.string.get_material_apply_tip));
-                tvHeadTitle.setText(R.string.get_material_apply_orderno_info);
+                setActivityTitle(getString(R.string.normal_outstock_production_apply_title));
+                tvHeadTitle.setText(R.string.normal_outstock_production_apply_info);
                 /**
                  * 生产生单 和委外生单的返回结果是一样的 所以直接一起处理
                  */
@@ -422,8 +422,8 @@ public class NormalOutStockActivity extends BaseActivity<NormalOutStockView, Nor
             case STOCK_OUT_PICK://拣料
                 break;
             case STOCK_OUT_SELL_OUT_AUDIT://销售审核
-                setActivityTitle(getString(R.string.sale_outstock_title));
-                tvHeadTitle.setText(R.string.sale_outstock_orderno_info);
+                setActivityTitle(getString(R.string.normal_outstock_sale_audit_title));
+                tvHeadTitle.setText(R.string.normal_outstock_sale_audit_info);
                 QueryDNByInputForOutStockResult queryDNByInputForOutStockResult = new Gson().fromJson(getIntent().getStringExtra(STOCK_OUT_BEAN), QueryDNByInputForOutStockResult.class);
                 QueryDNByInputForOutStockResult.SummaryResultsBean summaryResultsSaleAudit = queryDNByInputForOutStockResult.getSummaryResults();
                 //设置内容
@@ -448,8 +448,8 @@ public class NormalOutStockActivity extends BaseActivity<NormalOutStockView, Nor
                 cartonNum = summaryResultsSaleAudit.getCartonNo();
                 break;
             case STOCK_OUT_SELL_OUT_BILL://销售生单
-                setActivityTitle(R.string.sale_outstock_bill_title);
-                tvHeadTitle.setText("发货通知单信息");
+                setActivityTitle(R.string.normal_outstock_sale_bill_title);
+                tvHeadTitle.setText(R.string.normal_outstock_sale_bill_info);
                 //设置按钮文字  销售出库单
                 btnCommit.setText(R.string.create_sale_ger_material_list_tip);
                 QuerySalesOutSotckByInputForOutStockResult querySalesOutSotckByInputForOutStockResult = new Gson().fromJson(getIntent().getStringExtra(STOCK_OUT_BEAN), QuerySalesOutSotckByInputForOutStockResult.class);
@@ -479,8 +479,8 @@ public class NormalOutStockActivity extends BaseActivity<NormalOutStockView, Nor
             case STOCK_OUT_PURCHASE_MATERIAL_RETURN://采购退料
                 break;
             case STOCK_OUT_OTHER_OUT_AUDIT://其他审核
-                tvHeadTitle.setText(R.string.other_outstock_info);
-                setActivityTitle(getString(R.string.other_outstock_title));
+                tvHeadTitle.setText(R.string.normal_outstock_other_audit_info);
+                setActivityTitle(getString(R.string.normal_outstock_other_audit_title));
                 OtherOutAndInStockBean otherAuditSelectOrdernoBean = new Gson().fromJson(getIntent().getStringExtra(STOCK_OUT_BEAN), OtherOutAndInStockBean.class);
                 OtherOutAndInStockBean.SummaryResultsBean summaryResultsOtherAudit = otherAuditSelectOrdernoBean.getSummaryResults();
                 //设置内容
@@ -503,35 +503,9 @@ public class NormalOutStockActivity extends BaseActivity<NormalOutStockView, Nor
                 break;
             case STOCK_OUT_OTHER_OUT_BILL://其他生单
                 break;
-            case STOCK_OUT_FINISH_GOODS_PICK://成品拣货
-                tvHeadTitle.setText(R.string.finish_goods_orderno_info);
-                setActivityTitle(getString(R.string.finish_goods_pick_tip));
-                /**
-                 * 生产生单 和委外生单的返回结果是一样的 所以直接一起处理
-                 */
-                QueryDNByInputForPickResult queryDNByInputForPickResult = new Gson().fromJson(getIntent().getStringExtra(STOCK_OUT_BEAN), QueryDNByInputForPickResult.class);
-                //获取 summaryResults
-                QueryDNByInputForPickResult.SummaryResultsBean summaryResultsFinishGoodsPick = queryDNByInputForPickResult.getSummaryResults();
-                setHeaderContent(summaryResultsFinishGoodsPick.getBillCode(), summaryResultsFinishGoodsPick.getBillDate(), summaryResultsFinishGoodsPick.getQty(), summaryResultsFinishGoodsPick.getWaitQty(), summaryResultsFinishGoodsPick.getScanQty());
-                //设置bundle 数量
-                setBundleData(summaryResultsFinishGoodsPick.getBillId(),
-                        summaryResultsFinishGoodsPick.getScanId(),
-                        summaryResultsFinishGoodsPick.getQty(),
-                        summaryResultsFinishGoodsPick.getWaitQty(),
-                        summaryResultsFinishGoodsPick.getScanQty(), 61, 61);
-
-                //设置scanid
-                scanId = summaryResultsFinishGoodsPick.getScanId();
-                //设置仓库id
-                warehouseId = summaryResultsFinishGoodsPick.getWarehouseId();
-                //设置区域id
-                regionId = summaryResultsFinishGoodsPick.getRegionId();
-                //billId
-                billId = summaryResultsFinishGoodsPick.getBillId();
-                break;
             case STOCK_OUT_ALLOT_OUT_PICK://调拨拣货
-                tvHeadTitle.setText(R.string.stock_out_pick_tab);
-                setActivityTitle(R.string.pick_allot_orderno_info);
+                tvHeadTitle.setText(R.string.normal_outstock_allot_pick_info);
+                setActivityTitle(R.string.normal_outstock_allot_pick_title);
                 //拣货没有制单和审核的操作
                 btnCommit.setVisibility(View.GONE);
                 QueryAllotOutResult queryAllotOutResult = new Gson().fromJson(getIntent().getStringExtra(STOCK_OUT_BEAN), QueryAllotOutResult.class);
@@ -556,8 +530,8 @@ public class NormalOutStockActivity extends BaseActivity<NormalOutStockView, Nor
 
                 break;
             case STOCK_OUT_SALE_OUT_PICK://销售拣货
-                tvHeadTitle.setText(R.string.stock_out_pick_sale_tab);
-                setActivityTitle("");
+                tvHeadTitle.setText(R.string.normal_outstock_sale_pick_info);
+                setActivityTitle(R.string.normal_outstock_sale_pick_title);
                 //拣货没有制单和审核的操作
                 btnCommit.setVisibility(View.GONE);
                 QueryDNByInputForPickResult salePickBean = new Gson().fromJson(getIntent().getStringExtra(STOCK_OUT_BEAN), QueryDNByInputForPickResult.class);
@@ -581,6 +555,8 @@ public class NormalOutStockActivity extends BaseActivity<NormalOutStockView, Nor
                 billId = summaryResultsSendPick.getBillId();
                 break;
             case STOCK_OUT_SEND_OUT_PICK://发货拣货
+                tvHeadTitle.setText(R.string.normal_outstock_send_pick_info);
+                setActivityTitle(R.string.normal_outstock_send_pick_title);
                 //拣货没有制单和审核的操作
                 btnCommit.setVisibility(View.GONE);
                 QueryDNByInputForPickResult sendPick = new Gson().fromJson(getIntent().getStringExtra(STOCK_OUT_BEAN), QueryDNByInputForPickResult.class);
@@ -974,9 +950,15 @@ public class NormalOutStockActivity extends BaseActivity<NormalOutStockView, Nor
                     public void scanSuccess(int requestCode, String result) {
                         etScanMaterial.setText(result);
                         /**
-                         * 退料单号的 网络请求
+                         *   批次拣料的请求
                          */
                         Map<String, Object> params = new HashMap<>();
+                        /**
+                         * 是否 装箱
+                         */
+                        if (isCarton) {
+                            params.put("cartonNo", cartonNum);
+                        }
                         params.put("UserId", SpUtils.getInstance().getUserId());
                         params.put("OrgId", SpUtils.getInstance().getOrgId());
                         params.put("MAC", PackageUtils.getMac());
@@ -985,10 +967,15 @@ public class NormalOutStockActivity extends BaseActivity<NormalOutStockView, Nor
                         params.put("DestBillType", destBillType);
                         params.put("ScanId", scanId);
                         params.put("BarcodeNo", result);
-                        if (isCarton) {
-                            params.put("cartonNo", cartonNum);
+                        /**
+                         * 如果detailid 有值 证明是从明细表过来的子件数据
+                         */
+                        if (detailId != -1) {
+                            params.put("DetailId", detailId);
                         }
-                        getPresenter().submitBarcodeOutAudit(params);
+                        //判断 批次是否为空
+                        params.put("bCheckMode", true);
+                        getPresenter().submitBarcodeLotPickOut(params);
                     }
                 });
                 break;

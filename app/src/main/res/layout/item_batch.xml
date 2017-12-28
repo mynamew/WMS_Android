@@ -2,8 +2,8 @@
 <com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
-              android:layout_marginLeft="20px"
-              android:layout_marginRight="20px"
+              android:layout_marginLeft="10px"
+              android:layout_marginRight="10px"
               android:orientation="horizontal">
     <LinearLayout
         android:id="@+id/ll_tab"
@@ -59,7 +59,7 @@
             android:id="@+id/tv_useful_life"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="2"
+            android:layout_weight="3.5"
             android:gravity="center"
             android:text="0"
             android:textSize="13sp"/>

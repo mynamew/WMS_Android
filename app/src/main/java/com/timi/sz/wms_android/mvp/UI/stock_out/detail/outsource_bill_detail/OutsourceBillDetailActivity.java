@@ -246,11 +246,11 @@ public class OutsourceBillDetailActivity extends BaseActivity<OutsourceBillDetai
 
                 @Override
                 protected void bindData(RecyclerViewHolder holder, int position, DetailResultsBean item) {
-                    holder.setTextView(R.id.tv_line_num, item.getLine());
+                    holder.setTextView(R.id.tv_line_num, item.getPoLine());
                     holder.setTextView(R.id.tv_material_code, item.getMaterialCode());
                     holder.setTextView(R.id.tv_send_material_num, item.getPoQty());
                     holder.setTextView(R.id.tv_scan_num, item.getWipQty());
-                    holder.setTextView(R.id.tv_material_name, item.getMaterialName() + item.getMaterialAttribute());
+                    holder.setTextView(R.id.tv_material_name, item.getMaterialName() + "  "+item.getMaterialAttribute());
                 }
             };
             adapter.setOnItemClickListener(new BaseRecyclerAdapter.OnItemClickListener() {

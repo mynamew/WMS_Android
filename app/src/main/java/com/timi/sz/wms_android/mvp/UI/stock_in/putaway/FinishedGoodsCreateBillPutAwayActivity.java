@@ -101,7 +101,8 @@ public class FinishedGoodsCreateBillPutAwayActivity extends BaseActivity<PutAway
         setTextViewContent(tvMaterialModel,bean.getMaterialStandard());
         setTextViewContent(tvMaterialAttr,bean.getMaterialAttribute());
         setTextViewContent(tvMaterialCode,bean.getMaterialCode());
-        setTextViewContent(tvMaterialNum,bean.getBarcodeQty());
+        setTextViewContent(tvMaterialNum, "("+bean.getBarcodeQty()+")"+bean.getTotalScanQty()+"/"+finishGoodsCreateBillBean.getQty());
+
         /**
          * 设置附加属性
          */

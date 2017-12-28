@@ -70,7 +70,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="60px"
-                android:text="@string/create_orderno_date"
+                android:text="@string/create_orderno_date_tip"
                 android:textColor="#333"
                 android:textSize="13sp"/>
 

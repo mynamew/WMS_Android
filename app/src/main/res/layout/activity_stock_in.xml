@@ -68,12 +68,14 @@
                         android:orientation="horizontal">
 
                         <TextView
+                            android:visibility="gone"
                             android:id="@+id/tv_stockin_buy_order"
                             style="@style/stock_in_tab"
                             android:drawableTop="@mipmap/stock_in_sendpro_order"
                             android:text="@string/stock_in_buy_order"/>
 
                         <TextView
+                            android:visibility="gone"
                             android:id="@+id/tv_stock_in_send_order"
                             style="@style/stock_in_tab"
                             android:drawableTop="@mipmap/stock_in_buy_order"
@@ -120,6 +122,7 @@
                         android:orientation="horizontal">
 
                         <TextView
+                            android:visibility="gone"
                             android:id="@+id/tv_stockin_inlib"
                             style="@style/stock_in_tab"
                             android:drawableTop="@mipmap/stock_in_pro_come_in"
@@ -145,12 +148,14 @@
                         android:orientation="horizontal">
 
                         <TextView
+                            android:visibility="gone"
                             android:id="@+id/tv_stockin_other_inlib_check"
                             style="@style/stock_in_tab"
                             android:drawableTop="@mipmap/stock_in_other_check"
                             android:text="@string/stock_in_other_iblib_check"/>
 
                         <TextView
+                            android:visibility="gone"
                             android:id="@+id/tv_stockin_other_inlib_create_order"
                             style="@style/stock_in_tab"
                             android:drawableTop="@mipmap/stock_in_other_create_order"

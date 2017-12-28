@@ -90,6 +90,32 @@ public class Constants {
     public static final String APK_NAME = "wms.apk";      //apk 名称
     public static final String IS_HAVE_DOWNLOAD_NEW = "is_have_download_new";//是否下载了最新版本的安装包
 
+    /**
+     * 权限配置  当前入口I是否存在
+     */
+    public static  final String PERMISSION_STOCKIN="Pages.WPDA.InStock";//入库作业
+    public static  final String PERMISSION_STOCKIN_BUY="Pages.WPDA.InStock.ReceiveByOrder";//采购到货
+    public static  final String PERMISSION_STOCKIN_SEND="Pages.WPDA.InStock.ReceiveByDelivery";//送货单收货
+    public static  final String PERMISSION_STOCKIN_PUTAWAY="Pages.WPDA.PurInstock";//来料入库
+    public static  final String PERMISSION_STOCKIN_OTHER_PUTAWAY="Pages.WPDA.OtherInstock";//其他入库
+
+    public static  final String PERMISSION_QUALITY="Pages.WPDA.IQC";//来料质检
+    public static  final String PERMISSION_BarcodeEdit="Pages.WPDA.BarcodeEdit";//无质检条码修改
+
+
+    public static  final String PERMISSION_STOCKOUT_PURRETURN="Pages.WPDA.PurReturn";//采购退料
+    public static  final String PERMISSION_STOCKOUT_OUT_FEED="Pages.WPDA.WWPick";    //委外发料
+    public static  final String PERMISSION_STOCKOUT_OUT_ALLOT="Pages.WPDA.WPDA_WWTransfer";//委外调拨
+    public static  final String PERMISSION_STOCKOUT_PRODUCTION_PICK="Pages.WPDA.PrdPick";//生产领料
+    public static  final String PERMISSION_STOCKOUT_PRODUCTION_ALLOT="Pages.WPDA.PrdTransfer";//生产调拨
+    public static  final String PERMISSION_STOCKOUT_PRODUCTION_FEED="Pages.WPDA.PrdFeed";//生产补料
+    public static  final String PERMISSION_STOCKOUT_SALE="Pages.WPDA.SalesOutStock";//销售出库
+    public static  final String PERMISSION_STOCKOUT_OTHER="Pages.WPDA.OtherOutStock";//其他出库
+
+    public static  final String PERMISSION_STOCKIN_WORK_ALLOT="Pages.WPDA.Transfer";//库内调拨
+    public static  final String PERMISSION_STOCKIN_WORK_STOCK_QUERY="Pages.WPDA.QueryStock";//库存查询
+    public static  final String PERMISSION_STOCKIN_WORK_FORM_CHANGE="Pages.WPDA.MatConvert";//形态转换
+    public static  final String PERMISSION_STOCKIN_WORK_LIB_ADJUST="Pages.WPDA.StockAdjust";//库位调整
 
     /***********
      * 跳转 传递的相关字段

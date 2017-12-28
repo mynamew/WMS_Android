@@ -414,13 +414,22 @@ public class BuyInStockListActivity extends BaseActivity<BuyInStockListView, Buy
                             ToastUtils.showShort(R.string.please_input_order_or_date_one);
                             return;
                         }
+                        /**
+                         * 销售出库生单
+                         */
+                        if (intentCode == Constants.STOCK_OUT_SELL_OUT_BILL
+                                && TextUtils.isEmpty(orderno)
+                                && TextUtils.isEmpty(date)) {
+                            ToastUtils.showShort(R.string.please_input_order_or_date_one);
+                            return;
+                        }
                         break;
                     case ORDERNO_BARCODE:
                         break;
                     case ORDERNO_SUPPLIER://可为空
-                        if((   intentCode == BUY_ORDE_NUM ||
-                                intentCode == OUT_SOURCE )&& TextUtils.isEmpty(orderno)
-                                && TextUtils.isEmpty(supplier)){
+                        if ((intentCode == BUY_ORDE_NUM ||
+                                intentCode == OUT_SOURCE) && TextUtils.isEmpty(orderno)
+                                && TextUtils.isEmpty(supplier)) {
                             ToastUtils.showShort(R.string.please_input_order_or_supplie_one);
                             return;
                         }

@@ -8,8 +8,12 @@ import android.widget.TextView;
 import com.timi.sz.wms_android.R;
 import com.timi.sz.wms_android.base.uils.NetWorkUtils;
 import com.timi.sz.wms_android.base.uils.PackageUtils;
+import com.timi.sz.wms_android.base.uils.SpUtils;
 import com.timi.sz.wms_android.base.uils.ToastUtils;
 import com.timi.sz.wms_android.mvp.base.BaseActivity;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -36,11 +40,12 @@ public class DeviceInfoActivity extends BaseActivity<DeviceInfoView, DeviceInfoP
     public void initBundle(Bundle savedInstanceState) {
         setActivityTitle(getString(R.string.deviceinfo));
         //设置mac地址
-        String strMac = PackageUtils.getLocalMacAddressFromBusybox();
-        tvSetDeviceinfoMac.setText(String.format(getString(R.string.set_deviceinfo_mac), TextUtils.isEmpty(strMac) ? "" : strMac));
+        String strMac = PackageUtils.getMacAddress();
+        tvSetDeviceinfoMac.setText(String.format(getString(R.string.set_deviceinfo_mac), TextUtils.isEmpty(strMac) ? "未获取到设备MAC地址" : strMac));
         //设置ip地址
         String strIp = NetWorkUtils.getIP(this.getApplicationContext());
         tvSetDeviceInfoIp.setText(String.format(getString(R.string.set_deviceinfo_ip), TextUtils.isEmpty(strIp) ? "" : strIp));
+
     }
 
     @Override
@@ -71,9 +76,18 @@ public class DeviceInfoActivity extends BaseActivity<DeviceInfoView, DeviceInfoP
             ToastUtils.showShort(DeviceInfoActivity.this, getString(R.string.please_input_device_num));
             return;
         }
-        // TODO: 2017/8/24 进行网络请求设置 设备信息
+        Map<String, Object> params = new HashMap<>();
+        params.put("UserId", SpUtils.getInstance().getUserId());
+        params.put("OrgId", SpUtils.getInstance().getOrgId());
+        params.put("MAC", PackageUtils.getMac());
+        params.put("PDANo", setDeviceinfoNum);
+        getPresenter().setPDACode(params);
     }
 
 
-
+    @Override
+    public void setPDACode() {
+        ToastUtils.showShort(R.string.set_pda_code_success);
+        onBackPressed();
+    }
 }

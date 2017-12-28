@@ -102,6 +102,21 @@ public class DetailActivity extends BaseActivity<DetailView, DetailPresenter> im
             case Constants.STOCK_OUT_PRODUCTION_APPLY_BILL://领料 申请
                 tvTip.setText("领料申请单据详情");
                 break;
+            case Constants.STOCK_OUT_OUTSOURCE_FEED_SUPLLIEMENT://委外补料
+                tvTip.setText("委外补料单据详情");
+                break;
+            case Constants.STOCK_OUT_OUTSOURCE_AUDIT://委外发料审核
+                tvTip.setText("委外发料(审核)单据详情");
+                break;
+            case Constants.STOCK_OUT_OUTSOURCE_BILL://委外发料生单
+                tvTip.setText("委外发料(生单)单据详情");
+                break;
+            case Constants.STOCK_OUT_OUTSOURCE_ALLOT://委外调拨
+                tvTip.setText("委外调拨单据详情");
+                break;
+            case Constants.STOCK_OUT_PRODUCTION_FEEDING://生产补料
+                tvTip.setText("生产补料单据详情");
+                break;
         }
     }
 
@@ -181,8 +196,8 @@ public class DetailActivity extends BaseActivity<DetailView, DetailPresenter> im
                     holder.setTextView(R.id.tv_wait_count_num, item.getWaitQty());
                     holder.setTextView(R.id.tv_scan_num, item.getScanQty());
                     holder.setTextView(R.id.tv_should_return_num, item.getQty());
-                    holder.setTextView(R.id.tv_material_code, item.getMaterialCode() + item.getMaterialName());//合格数？ 应退数
-                    holder.setTextView(R.id.tv_material_model, item.getMaterialAttribute() + item.getMaterialStandard());
+                    holder.setTextView(R.id.tv_material_code, item.getMaterialCode() +"  "+ item.getMaterialName());//合格数？ 应退数
+                    holder.setTextView(R.id.tv_material_model, item.getMaterialAttribute() +"  "+ item.getMaterialStandard());
                 }
             };
             rlvDetial.setAdapter(adapter);

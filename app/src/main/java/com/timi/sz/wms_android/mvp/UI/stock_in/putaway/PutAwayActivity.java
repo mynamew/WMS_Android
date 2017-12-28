@@ -104,7 +104,7 @@ public class PutAwayActivity extends BaseActivity<PutAwayView, PutAwayPresenter>
                  */
                 Intent it = new Intent(PutAwayActivity.this, StockInDetailActivity.class);
                 it.putExtra(Constants.CODE_STR, intentCode);
-                it.putExtra("BillId", mReceiveBean.getReceipId());
+                it.putExtra(Constants.STOCKIN_BILLID, mReceiveBean.getReceipId());
                 startActivity(it);
             }
         });
@@ -299,7 +299,7 @@ public class PutAwayActivity extends BaseActivity<PutAwayView, PutAwayPresenter>
         setTextViewContent(tvMaterialModel, bean.getMaterialStandard());
         setTextViewContent(tvMaterialAttr, bean.getMaterialAttribute());
         setTextViewContent(tvMaterialCode, bean.getMaterialCode());
-        setTextViewContent(tvMaterialNum, bean.getBarcodeQty());
+        setTextViewContent(tvMaterialNum, "("+bean.getBarcodeQty()+")"+bean.getTotalScanQty()+"/"+mReceiveBean.getReceiptQty());
         /**
          * 设置附加属性
          */

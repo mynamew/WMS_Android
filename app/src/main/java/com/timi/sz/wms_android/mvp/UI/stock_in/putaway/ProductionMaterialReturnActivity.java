@@ -205,7 +205,7 @@ public class ProductionMaterialReturnActivity extends BaseActivity<PutAwayView, 
         setTextViewContent(tvMaterialModel, bean.getMaterialStandard());
         setTextViewContent(tvMaterialAttr, bean.getMaterialAttribute());
         setTextViewContent(tvMaterialCode, bean.getMaterialCode());
-        setTextViewContent(tvMaterialNum, bean.getBarcodeQty());
+        setTextViewContent(tvMaterialNum, "("+bean.getBarcodeQty()+")"+bean.getTotalScanQty()+"/"+queryPrdReturnByInputResult.getQty());
         /**
          * 设置附加属性
          */
@@ -280,7 +280,7 @@ public class ProductionMaterialReturnActivity extends BaseActivity<PutAwayView, 
                 params1.put("SrcBillType", 25);
                 params1.put("DestBillType", 25);
                 params1.put("ScanId", ScanId);
-                params1.put("BinCode", etPutawayScanLocation.getText().toString().trim());
+                params1.put("BinCode", locationCode);
                 params1.put("BarcodeNo", result);
                 getPresenter().materialScanNetWork(params1, result);
                 break;

@@ -152,6 +152,13 @@ public interface ApiService {
     @POST("api/services/wpda/AMain/GetPDA_Parameter")
     Observable<CommonResult<GetPDA_ParameterResult>> getPDA_Parameter(@FieldMap Map<String, Object> params);
 
+    /**
+     *设置PDA编号
+     */
+    @FormUrlEncoded
+    @POST("api/services/wpda/AMain/SetPDACode")
+    Observable<CommonResult<Object>> setPDACode(@FieldMap Map<String, Object> params);
+
     /********************入库 请求************************************************************/
 
     /**
@@ -615,6 +622,7 @@ public interface ApiService {
      */
     @POST("api/services/wpda/SalesReturn/QuerySalesReturnList")
     Observable<CommonResult<List<QueryPoListBean>>> querySalesReturnList(@Body RequestBuyInStockListBean params);
+
     /**
      * 销售退料单列表获取数据
      *
@@ -1412,6 +1420,7 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("api/services/wpda/StockAdjust/ContainerAdjust")
     Observable<CommonResult<ContainerAdjustResult>> containnerAdjust(@FieldMap Map<String, Object> params);
+
     /**
      * 单一条码转移
      *
@@ -1631,6 +1640,7 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("api/services/wpda/StockCheck/GetCheckStockPageDetail")
     Observable<CommonResult<List<StockInWorkDetailResult>>> getCheckStockDetail(@FieldMap Map<String, Object> params);
+
     /**
      * 盘点记录
      *

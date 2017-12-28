@@ -173,8 +173,8 @@ public class StockInDetailActivity extends BaseActivity<StockInDetailView, Stock
                     holder.setTextView(R.id.tv_wait_count_num, item.getWaitQty());
                     holder.setTextView(R.id.tv_should_return_num, item.getQty());
                     holder.setTextView(R.id.tv_scan_num, item.getScanQty());
-                    holder.setTextView(R.id.tv_material_code, item.getMaterialCode() + item.getMaterialName());//合格数？ 应退数
-                    holder.setTextView(R.id.tv_material_model, item.getMaterialAttribute() + item.getMaterialStandard());
+                    holder.setTextView(R.id.tv_material_code, item.getMaterialCode() +"  "+ item.getMaterialName());//合格数？ 应退数
+                    holder.setTextView(R.id.tv_material_model, item.getMaterialAttribute() +"  "+ item.getMaterialStandard());
                 }
             };
             rlvUnInstock.setAdapter(adapter);
