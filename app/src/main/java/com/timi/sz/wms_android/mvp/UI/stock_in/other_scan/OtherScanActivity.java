@@ -22,6 +22,7 @@ import com.timi.sz.wms_android.base.uils.ToastUtils;
 import com.timi.sz.wms_android.bean.instock.MaterialScanPutAwayBean;
 import com.timi.sz.wms_android.bean.instock.VertifyLocationCodeBean;
 import com.timi.sz.wms_android.mvp.UI.stock_in.detail.StockInDetailActivity;
+import com.timi.sz.wms_android.mvp.UI.stock_out.detail.DetailActivity;
 import com.timi.sz.wms_android.mvp.base.BaseActivity;
 
 import java.util.HashMap;
@@ -79,19 +80,19 @@ public class OtherScanActivity extends BaseActivity<OtherScanView, OtherScanPres
     @Override
     public void initBundle(Bundle savedInstanceState) {
         final int intentCode = getIntent().getIntExtra(Constants.CODE_STR, Constants.COME_MATERAIL_NUM);
-        setActivityTitle("其他入库(扫描入库)");
-//        setRightImg(R.mipmap.stockin_detail, new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                /**
-//                 * 查看详情
-//                 */
-//                Intent it = new Intent(OtherScanActivity.this, StockInDetailActivity.class);
-//                it.putExtra(Constants.CODE_STR, intentCode);
-//                it.putExtra(Constants.IN_STOCK_ORDERNO, inStockOrderno);
-//                startActivity(it);
-//            }
-//        });
+        setActivityTitle(R.string.other_scan_instock_bill_title);
+        setRightImg(R.mipmap.stockin_detail, new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                /**
+                 * 查看详情
+                 */
+                Intent it = new Intent(OtherScanActivity.this, DetailActivity.class);
+                it.putExtra(Constants.CODE_STR, intentCode);
+                it.putExtra(Constants.STOCKIN_BILLID, ScanId);
+                startActivity(it);
+            }
+        });
     }
 
     @Override

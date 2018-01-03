@@ -84,6 +84,9 @@ public class StockInDetailActivity extends BaseActivity<StockInDetailView, Stock
             case Constants.OTHER_IN_STOCK_SELECT_ORDERNO://其他入库(选单)单据详情
                 tvTip.setText(R.string.order_detail_other_select_bill_title);
                 break;
+            case Constants.STOCK_OUT_OTHER_OUT_BILL://其他入库(选单)单据详情
+                tvTip.setText(R.string.order_detail_other_select_bill_title);
+                break;
             case Constants.OTHER_IN_STOCK_SCAN://其他入库(扫描)单据详情
                 tvTip.setText(R.string.order_detial_other_scan_title);
                 break;

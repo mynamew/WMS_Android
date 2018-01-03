@@ -42,7 +42,7 @@ public class DetailPresenter extends MvpBasePresenter<DetailView> {
 
                 @Override
                 public void onError(String errorMsg) {
-                    ToastUtils.showShort(errorMsg);
+//                    ToastUtils.showShort(errorMsg);
                 }
             });
         }

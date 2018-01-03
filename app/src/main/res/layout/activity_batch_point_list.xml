@@ -5,8 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/white"
+    android:orientation="vertical"
     tools:context="com.timi.sz.wms_android.mvp.UI.stock_out.batch_point_list.BatchPointListActivity">
 
     <include layout="@layout/title_head"/>
@@ -49,100 +49,89 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
                 android:layout_marginTop="20px"
+                android:orientation="vertical"
                 android:paddingLeft="30px">
 
+                <include
+                    android:id="@+id/out_feed"
+                    layout="@layout/header_batch_list_out_feed"
+                    android:visibility="gone"/>
+
+                <include
+                    android:id="@+id/out_audit"
+                    layout="@layout/header_batch_list_out_audit"
+                    android:visibility="gone"/>
+
+                <include
+                    android:id="@+id/out_bill"
+                    layout="@layout/header_batch_list_out_bill"
+                    android:visibility="gone"/>
+
+                <include
+                    android:id="@+id/out_allot"
+                    layout="@layout/header_batch_list_out_allot"
+                    android:visibility="gone"/>
+
+                <include
+                    android:id="@+id/production_feed"
+                    layout="@layout/header_batch_list_production_feed"
+                    android:visibility="gone"/>
+                <include
+                    android:id="@+id/production_audit"
+                    layout="@layout/header_batch_list_production_audit"
+                    android:visibility="gone"/>
+
+                <include
+                    android:id="@+id/production_bill"
+                    layout="@layout/header_batch_list_production_bill"
+                    android:visibility="gone"/>
+
+                <include
+                    android:id="@+id/production_allot"
+                    layout="@layout/header_batch_list_production_allot"
+                    android:visibility="gone"/>
+
+                <include
+                    android:id="@+id/production_apply"
+                    layout="@layout/header_batch_list_production_apply"
+                    android:visibility="gone"/>
+
+                <include
+                    android:id="@+id/other_audit"
+                    layout="@layout/header_batch_list_other_audit"
+                    android:visibility="gone"/>
+
+                <include
+                    android:id="@+id/sale_audit"
+                    layout="@layout/header_batch_list_sale_audit"
+                    android:visibility="gone"/>
+
+                <include
+                    android:id="@+id/sale_bill"
+                    layout="@layout/header_batch_list_sale_bill"
+                    android:visibility="gone"/>
+
+                <include
+                    android:id="@+id/sale_pick"
+                    layout="@layout/header_batch_list_sale_pick"
+                    android:visibility="gone"/>
+
+                <include
+                    android:id="@+id/send_pick"
+                    layout="@layout/header_batch_list_send_pick"
+                    android:visibility="gone"/>
+                <include
+                    android:id="@+id/allot_pick"
+                    layout="@layout/header_batch_list_allot_pick"
+                    android:visibility="gone"/>
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/tv_orderno_tip"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="left"
-                        android:text="@string/outsource_orderno_tip"
-                        android:textColor="#666"
-                        android:textSize="13sp"/>
-
-                    <TextView
-                        android:id="@+id/tv_outsource_orderno"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="left"
-                        android:text=""
-                        android:layout_marginLeft="30px"
-                        android:textColor="#000"
-                        android:textSize="13sp"/>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/ll_supplier"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:visibility="gone"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="left"
-                        android:text="@string/item_supplier"
-                        android:paddingLeft="25px"
-                        android:textColor="#666"
-                        android:textSize="13sp"/>
-
-                    <TextView
-                        android:id="@+id/tv_supllier"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="left"
-                        android:text=""
-                        android:layout_marginLeft="30px"
-                        android:textColor="#000"
-                        android:textSize="13sp"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:id="@+id/ll_department"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:visibility="gone"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="left"
-                        android:text="@string/department_tip"
-                        android:paddingLeft="50px"
-                        android:textColor="#666"
-                        android:textSize="13sp"/>
-
-                    <TextView
-                        android:id="@+id/tv_department"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="left"
-                        android:text=""
-                        android:layout_marginLeft="85px"
-                        android:textColor="#000"
-                        android:textSize="13sp"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:visibility="gone"
                     android:id="@+id/ll_stock_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:visibility="gone">
 
                     <TextView
                         android:id="@+id/tv_stock_name_tip"
@@ -157,20 +146,20 @@
                         android:id="@+id/tv_stock_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="left"
                         android:layout_marginLeft="30px"
+                        android:gravity="left"
                         android:text=""
                         android:textColor="#000"
                         android:textSize="13sp"/>
                 </LinearLayout>
 
                 <LinearLayout
-                    android:visibility="gone"
                     android:id="@+id/ll_strict_mame"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:visibility="gone">
 
                     <TextView
                         android:id="@+id/tv_strict_name_tip"
@@ -185,9 +174,9 @@
                         android:id="@+id/tv_strict_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="30px"
                         android:gravity="left"
                         android:text=""
-                        android:layout_marginLeft="30px"
                         android:textColor="#000"
                         android:textSize="13sp"/>
                 </LinearLayout>
@@ -362,7 +351,7 @@
                 android:layout_height="1px"
                 android:layout_below="@id/rl_top_menu"
                 android:background="@color/divide_color"
-                android:visibility="visible"/>
+                android:visibility="gone"/>
 
             <include
                 android:id="@+id/head_detail"
@@ -375,7 +364,7 @@
                 android:layout_height="1px"
                 android:layout_below="@id/rl_top_menu"
                 android:background="@color/divide_color"
-                android:visibility="visible"/>
+                android:visibility="gone"/>
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rlv_orderno_info"

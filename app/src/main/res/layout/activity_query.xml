@@ -9,9 +9,12 @@
     android:background="@color/set_bg"
     android:orientation="vertical"
     tools:context="com.timi.sz.wms_android.mvp.UI.query.QueryActivity">
-
+    <include
+        android:id="@+id/head"
+        layout="@layout/title_head"/>
     <android.support.v4.widget.NestedScrollView
         android:id="@+id/nescroll_query"
+        android:layout_below="@id/head"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbars="none">
@@ -24,9 +27,10 @@
 
             <ImageView
                 android:layout_width="match_parent"
-                android:scaleType="centerCrop"
                 android:layout_height="wrap_content"
-                android:src="@mipmap/query_banner_bg"/>
+                android:scaleType="centerCrop"
+                android:src="@mipmap/query_banner_bg"
+                android:visibility="gone"/>
             <!--库存查询-->
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
@@ -234,5 +238,5 @@
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 
-    <include layout="@layout/title_head"/>
+
 </RelativeLayout>

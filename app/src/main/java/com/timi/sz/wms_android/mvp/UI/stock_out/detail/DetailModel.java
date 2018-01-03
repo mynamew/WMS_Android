@@ -77,9 +77,8 @@ public class DetailModel extends MvpBaseModel {
                         return apiService.getOtherOutStockDetail(params);
 
                     case Constants.STOCK_OUT_OTHER_OUT_BILL://其他出库-生单
-
-                        return apiService.getOtherOutStockDetail(params);
-
+                    case Constants.OTHER_IN_STOCK_SCAN:// 其他扫描 （扫码 不进行单据的查询）
+                        return apiService.getMakeOtherInStockDetail(params);
                     case STOCK_OUT_FINISH_GOODS_PICK://成品拣货
 
                         return apiService.getDNDetail(params);

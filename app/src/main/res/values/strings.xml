@@ -14,6 +14,7 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+    <string name="property">© 版权所有：正业玖坤</string>
     /******************************************************************************************************************************************************/
     /******************************************************************************************************************************************************/
     /**====== 登录 ======**/
@@ -229,7 +230,7 @@
     <string name="production_allot_list">生产调拨单列表</string>
     <string name="production_feed_list_title">生产补料单列表</string>
     <string name="production_instock_list_title">产成品入库单（审核）列表</string>
-    <string name="production_instock_bill_list_title">产成品入库单（生单）列表</string>
+    <string name="production_instock_bill_list_title">生产任务单列表</string>
     <string name="send_goods_message_list_title">发货通知单列表</string>
     <string name="sale_out_stock_list_title">销售出库单列表</string>
     <string name="dont_query_data_please_repeat_input">未查询到数据，请重新输入！</string>
@@ -307,8 +308,8 @@
     <string name="please_input_create_product_orderno_or_scan">请输入产成品入库单单号或扫码查询</string>
     <string name="create_finish_goods_instock_orderno_success">生成产成品入库单成功！</string>
     /**====== 生产入库 ======**/
-    <string name="create_task_orderno">生产任务单</string>
-    <string name="create_task_orderno_tip">生产任务单</string>
+    <string name="create_task_orderno">生产退料单</string>
+    <string name="create_task_orderno_tip">生产退料单</string>
     <string name="product_in_stock_create_orderno">产成品入库</string>
     <string name="please_input_create_task_num_or_scan">请输入生产任务单号或扫码查询</string>
 
@@ -341,6 +342,7 @@
     <string name="please_input_other_lin_num_or_scan">请输入其他入库单号或扫码查询</string>
     <string name="other_instock_orderno">其他入库单</string>
     <string name="orderno_num">单据总数</string>
+    <string name="other_scan_instock_bill_title">其他入库(制单)</string>
     /**====== 其他入库—入库上架 ======**/
     <string name="other_instock_orderno_title">入库上架(其他)</string>
     /**====== 产成品入库—入库上架 ======**/
@@ -365,6 +367,7 @@
     <string name="stock_out_pick_send_tab">发货拣货</string>
     <string name="stock_out_pick_sale_tab">销售拣货</string>
     <string name="stock_out_all">综合</string>
+    <string name="stock_out_pick">拣货</string>
     /**====== 出库搜索 ======**/
     <string name="sale_outstock_orderno_tip">销售出库单</string>
     <string name="sale_orderno_tip">销售订单</string>
@@ -426,16 +429,12 @@
     <string name="finish_goods_outstock_tip">产成品出库</string>
     <string name="pick_allot_orderno_info">拣货调拨单信息</string>
     /**====== 其他出库 ======**/
-    <string name="material_point_other_bill_title">物品清点（其他生单）</string>
-    <string name="other_out_stock_scan_title">其他出库(出库扫描)</string>
+    <string name="other_out_stock_scan_title">其他出库(制单)</string>
     <string name="create_other_out_stock_orderno">生成其他出库单</string>
-    <string name="other_audit_material_orderno">物料清单(其他出库审核)</string>
-    <string name="material_point_other_audit_title">物品清点(其他审核)</string>
     <string name="production_feed_orderno_info_tip">生产补料单信息</string>
     <string name="production_get_orderno_info_tip">生产领料单信息</string>
     <string name="production_allot_info_tip">生产调拨单信息</string>
     <string name="create_other_outstock_orderno_tip">生成其他出库单</string>
-    <string name="other_bill_material_list_title">物料清单(其他出库生单)</string>
     /**====== 普通出库 ======**/
     <string name="other_outstock_title">其他出库</string>
     <string name="other_outstock_info">其他出库单信息</string>
@@ -458,7 +457,7 @@
     <string name="stock_out_production_audit_title">生产领料(选单)</string>
     <string name="stock_out_production_audit_tip">生产领料单号</string>
     <string name="stock_out_production_bill_tip">生产任务单号</string>
-    <string name="stock_out_pick">拣货(选单)</string>
+
     <string name="stock_out_pick_tip">调拨单</string>
     <string name="stock_out_pick_send_orderno">发货通知单</string>
     <string name="stock_out_pick_sell_outstock_orderno">销售出库单</string>
@@ -478,7 +477,6 @@
     <string name="can_get_num">可领数量：%1$s</string>
     <string name="orderno_info_point_tip">单据信息清点操作</string>
     <string name="create_send_material_orderno">生成发料单</string>
-    <string name="foods_list_title">物料清单</string>
 
     /**====== 委外发料 ======**/
     <string name="have_scan_all_materail">已扫描完所有的物料</string>
@@ -532,7 +530,6 @@
     <string name="input_divide_qty_incorrect">输入的拆分数量不正确，请重新输入！</string>
     <string name="btn_commit">提交</string>
     <string name="submit_barcode_split_outstock_success">批次拣货提交条码拆分出库成功</string>
-    <string name="material_point_production_get_material_apply_title">物品清点(领料申请)</string>
     /**====== 生产调拨 ======**/
     <string name="production_allot">生产调拨</string>
     <string name="production_allot_orderno">生产调拨单号</string>
@@ -547,11 +544,10 @@
     <string name="orderno_detail_production_bill_title">订单详情(生产领料生单)</string>
     <string name="orderno_detail_production_allot_title">订单详情(生产调拨)</string>
     <string name="outsource_send_material_orderno_detial_tip">订单详情(委外发料)</string>
-    <string name="outsource_send_material_bill_title">物料清单(委外发料生单)</string>
     <string name="order_detial_finish_goods_audit_title">产成品(审核)单据信息</string>
     <string name="order_detial_finish_goods_bill_title">产成品(生单)单据信息</string>
     <string name="order_detail_other_select_bill_title">其他入库(选单)单据详情</string>
-    <string name="order_detial_other_scan_title">其他入库(扫描)单据详情</string>
+    <string name="order_detial_other_scan_title">其他入库(生单)单据详情</string>
     <string name="order_detial_outsource_title">委外退料单单据详情</string>
     <string name="order_detial_production_return_title">生产退料单单据详情</string>
     <string name="order_detial_sale_return_title">销售退料单单据详情</string>
@@ -576,7 +572,24 @@
     <string name="goods_point_allot_out_title">物品清点(调拨出库)</string>
     <string name="goods_point_allot_pick_title">物品清点(调拨拣货)</string>
     <string name="goods_point_sale_pick_title">物品清点(销售拣货)</string>
-    <string name="goods_point_send_pick_title">物品清点(发料拣货)</string>
+    <string name="goods_point_send_pick_title">物品清点(发货拣货)</string>
+    <string name="goods_point_out_feed_orderno">委外补料单号</string>
+    <string name="goods_point_out_audit_orderno">委外发料审核单号</string>
+    <string name="goods_point_out_bill_orderno">委外发料生单单号</string>
+    <string name="goods_point_out_allot_orderno">委外调拨单号</string>
+    <string name="goods_point_production_feed_orderno">生产补料单号</string>
+    <string name="goods_point_production_audit_orderno">生产领料审核单号</string>
+    <string name="goods_point_production_bill_orderno">生产工单单号</string>
+    <string name="goods_point_production_allot_orderno">生产调拨单号</string>
+    <string name="goods_point_production_apply_orderno">领料申请单单号</string>
+    <string name="goods_point_sale_audit_orderno">销售出库单单号</string>
+    <string name="goods_point_sale_bill_orderno">发货通知单单号</string>
+    <string name="goods_point_other_audit_orderno">其他出库审核单号</string>
+    <string name="goods_point_send_pick_orderno">发货通知单单号</string>
+    <string name="goods_point_sale_pick_orderno">销售出库单单号</string>
+    <string name="goods_point_allot_pick_orderno">调拨单单号</string>
+    <string name="create_allot_orderno">生成调拨单</string>
+    <string name="create_get_material_orderno">生成领料单</string>
     <!--清点扫描-->
     /**====== 清点扫描 ======**/
     <string name="point_scan_outsource_feed_title">清点扫描(委外补料)</string>
@@ -596,7 +609,7 @@
     <string name="point_scan_allot_out_title">清点扫描(调拨出库)</string>
     <string name="point_scan_allot_pick_title">清点扫描(调拨拣货)</string>
     <string name="point_scan_sale_pick_title">清点扫描(销售拣货)</string>
-    <string name="point_scan_send_pick_title">清点扫描(发料拣货)</string>
+    <string name="point_scan_send_pick_title">清点扫描(发货拣货)</string>
     /**====== 普通出库 ======**/
     <string name="normal_outstock_outsource_feed_title">普通出库(委外补料)</string>
     <string name="normal_outstock_outsource_feed_info">委外补料信息</string>
@@ -959,6 +972,7 @@
     <string name="check_qty_no_less_zero">盘点数量不能小于等于0！</string>
     <string name="current_material_no_datecode_please_repeat_in">当前物料没有批次信息，请重新进入！</string>
     <string name="set_pda_code_success">设置PDA参数成功！</string>
-    <string name="create_allot_orderno">生成调拨单</string>
+
+
 
 </resources>

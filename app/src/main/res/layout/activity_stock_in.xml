@@ -18,7 +18,8 @@
             android:layout_width="match_parent"
             android:layout_height="336px"
             android:scaleType="centerCrop"
-            android:src="@mipmap/stock_in_bg"/>
+            android:src="@mipmap/stock_in_bg"
+            android:visibility="gone"/>
 
         <include layout="@layout/title_head"/>
 
@@ -68,18 +69,18 @@
                         android:orientation="horizontal">
 
                         <TextView
-                            android:visibility="gone"
                             android:id="@+id/tv_stockin_buy_order"
                             style="@style/stock_in_tab"
                             android:drawableTop="@mipmap/stock_in_sendpro_order"
-                            android:text="@string/stock_in_buy_order"/>
+                            android:text="@string/stock_in_buy_order"
+                            android:visibility="gone"/>
 
                         <TextView
-                            android:visibility="gone"
                             android:id="@+id/tv_stock_in_send_order"
                             style="@style/stock_in_tab"
                             android:drawableTop="@mipmap/stock_in_buy_order"
-                            android:text="@string/stock_in_send_order"/>
+                            android:text="@string/stock_in_send_order"
+                            android:visibility="gone"/>
 
                         <TextView
                             android:id="@+id/tv_stock_in_outsource"
@@ -122,11 +123,11 @@
                         android:orientation="horizontal">
 
                         <TextView
-                            android:visibility="gone"
                             android:id="@+id/tv_stockin_inlib"
                             style="@style/stock_in_tab"
                             android:drawableTop="@mipmap/stock_in_pro_come_in"
-                            android:text="@string/stock_in_come_pro_in"/>
+                            android:text="@string/stock_in_come_pro_in"
+                            android:visibility="gone"/>
 
                         <TextView
                             android:id="@+id/tv_stock_in_check"
@@ -148,18 +149,18 @@
                         android:orientation="horizontal">
 
                         <TextView
-                            android:visibility="gone"
                             android:id="@+id/tv_stockin_other_inlib_check"
                             style="@style/stock_in_tab"
                             android:drawableTop="@mipmap/stock_in_other_check"
-                            android:text="@string/stock_in_other_iblib_check"/>
+                            android:text="@string/stock_in_other_iblib_check"
+                            android:visibility="gone"/>
 
                         <TextView
-                            android:visibility="gone"
                             android:id="@+id/tv_stockin_other_inlib_create_order"
                             style="@style/stock_in_tab"
                             android:drawableTop="@mipmap/stock_in_other_create_order"
-                            android:text="@string/stock_in_othre_inlib_create_order"/>
+                            android:text="@string/stock_in_othre_inlib_create_order"
+                            android:visibility="gone"/>
 
                         <TextView
                             style="@style/stock_in_tab"

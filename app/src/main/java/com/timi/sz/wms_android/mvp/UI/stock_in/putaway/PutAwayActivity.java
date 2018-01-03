@@ -116,7 +116,7 @@ public class PutAwayActivity extends BaseActivity<PutAwayView, PutAwayPresenter>
         etPutawayScanLocation.setFocusableInTouchMode(true);
         etPutawayScanLocation.requestFocus();
         etPutawayScanLocation.findFocus();
-        setEdittextListener(etPutawayScanMaterial,REQUEST_SCAN_CODE_MATERIIAL,R.string.please_scan_material_code,0, new EdittextInputListener() {
+        setEdittextListener(etPutawayScanMaterial, REQUEST_SCAN_CODE_MATERIIAL, R.string.please_scan_material_code, 0, new EdittextInputListener() {
             @Override
             public void verticalSuccess(String result) {
                 /**
@@ -135,7 +135,7 @@ public class PutAwayActivity extends BaseActivity<PutAwayView, PutAwayPresenter>
                 getPresenter().materialScanNetWork(params1, result);
             }
         });
-        setEdittextListener(etPutawayScanLocation,REQUEST_SCAN_CODE_LIB_LOATION,R.string.please_scan_lib_location_code,0, new EdittextInputListener() {
+        setEdittextListener(etPutawayScanLocation, REQUEST_SCAN_CODE_LIB_LOATION, R.string.please_scan_lib_location_code, 0, new EdittextInputListener() {
             @Override
             public void verticalSuccess(String result) {
                 /**
@@ -252,23 +252,23 @@ public class PutAwayActivity extends BaseActivity<PutAwayView, PutAwayPresenter>
                 scan(Constants.REQUEST_SCAN_CODE_MATERIIAL, this);
                 break;
             case R.id.btn_login://确认提交
-                if (TextUtils.isEmpty(locationCode)) {
-                    ToastUtils.showShort(getString(R.string.please_scan_lib_location_code));
-                    return;
-                }
-                if (!locationCodeIsUse) {
-                    ToastUtils.showShort(getString(R.string.location_code_no_user));
-                    return;
-                }
-                String materialCode = etPutawayScanMaterial.getText().toString();
-                if (TextUtils.isEmpty(materialCode)) {
-                    ToastUtils.showShort(getString(R.string.please_scan_material_code));
-                    return;
-                }
-                if (ScanId == 0) {//scanid 为0  证明未扫过条码或者条码已经入库 或者出库过了
-                    ToastUtils.showShort(getString(R.string.please_inpiut_or_scan_visible_material_code));
-                    return;
-                }
+//                if (TextUtils.isEmpty(locationCode)) {
+//                    ToastUtils.showShort(getString(R.string.please_scan_lib_location_code));
+//                    return;
+//                }
+//                if (!locationCodeIsUse) {
+//                    ToastUtils.showShort(getString(R.string.location_code_no_user));
+//                    return;
+//                }
+//                String materialCode = etPutawayScanMaterial.getText().toString();
+//                if (TextUtils.isEmpty(materialCode)) {
+//                    ToastUtils.showShort(getString(R.string.please_scan_material_code));
+//                    return;
+//                }
+//                if (ScanId == 0) {//scanid 为0  证明未扫过条码或者条码已经入库 或者出库过了
+//                    ToastUtils.showShort(getString(R.string.please_inpiut_or_scan_visible_material_code));
+//                    return;
+//                }
                 /**
                  * 生成入库单
                  */
@@ -299,7 +299,7 @@ public class PutAwayActivity extends BaseActivity<PutAwayView, PutAwayPresenter>
         setTextViewContent(tvMaterialModel, bean.getMaterialStandard());
         setTextViewContent(tvMaterialAttr, bean.getMaterialAttribute());
         setTextViewContent(tvMaterialCode, bean.getMaterialCode());
-        setTextViewContent(tvMaterialNum, "("+bean.getBarcodeQty()+")"+bean.getTotalScanQty()+"/"+mReceiveBean.getReceiptQty());
+        setTextViewContent(tvMaterialNum, "(" + bean.getBarcodeQty() + ")" + bean.getLineScanQty() + "/" + bean.getLineMustQty());
         /**
          * 设置附加属性
          */

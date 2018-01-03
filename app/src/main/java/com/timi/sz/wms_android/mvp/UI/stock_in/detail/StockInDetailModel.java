@@ -43,9 +43,7 @@ public class StockInDetailModel extends MvpBaseModel {
                     case Constants.OTHER_IN_STOCK_SELECT_ORDERNO://其他 选单
 
                         return apiService.getReceiptDetail(params);
-                    case Constants.OTHER_IN_STOCK_SCAN:// 其他扫描 （扫码 不进行单据的查询）
 
-                        return apiService.getReceiptDetail(params);
                     case Constants.OUT_RETURN_MATERAIL://委外退料
 
                         return apiService.getOutSourceReturnDetail(params);
@@ -58,7 +56,6 @@ public class StockInDetailModel extends MvpBaseModel {
                     case Constants.STOCK_OUT_PURCHASE_MATERIAL_RETURN://采购 退料
 
                         return apiService.getPurReturnDetail(params);
-
                     default:
 
                         return apiService.getReceiptDetail(params);

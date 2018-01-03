@@ -413,6 +413,15 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("api/services/wpda/OtherInstock/GetOtherInstockData")
     Observable<CommonResult<OtherOutAndInStockBean>> getOtherInstockData(@FieldMap Map<String, Object> params);
+    /**
+     * 其他扫描入库列表(制单)
+     *
+     * @param params
+     * @return
+     */
+    @FormUrlEncoded
+    @POST(" api/services/wpda/OtherInstock/GetMakeOtherStockDetail")
+    Observable<CommonResult<List<MaterialDetailResult>>> getMakeOtherInStockDetail(@FieldMap Map<String, Object> params);
 
 
     /**====== 成品拣货 ======**/

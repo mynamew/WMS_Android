@@ -233,8 +233,7 @@ public class OtherAuditActivity extends BaseActivity<PutAwayView, PutAwayPresent
         setTextViewContent(tvMaterialModel,bean.getMaterialStandard());
         setTextViewContent(tvMaterialAttr,bean.getMaterialAttribute());
         setTextViewContent(tvMaterialCode,bean.getMaterialCode());
-        setTextViewContent(tvMaterialNum, "("+bean.getBarcodeQty()+")"+bean.getTotalScanQty()+"/"+otherBean.getSummaryResults().getQty());
-        /**
+        setTextViewContent(tvMaterialNum, "("+bean.getBarcodeQty()+")"+bean.getLineScanQty()+"/"+bean.getLineMustQty());        /**
          * 设置附加属性
          */
         setMaterialAttrStatus(tvMaterialAttr);

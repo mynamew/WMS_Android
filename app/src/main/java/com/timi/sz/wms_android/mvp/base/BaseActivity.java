@@ -14,8 +14,10 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
 import android.text.Selection;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.SparseArray;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -515,7 +517,6 @@ public abstract class BaseActivity<V extends MvpView, P extends MvpPresenter<V>>
                 if (actionId == 6 || actionId == 0) {
                     InputMethodUtils.hide(BaseActivity.this);
                     String content = editText.getText().toString().trim();
-
                     if (TextUtils.isEmpty(content)) {
                         ToastUtils.showShort(getString(tipPleaseInputId));
                         Selection.selectAll(editText.getText());

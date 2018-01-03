@@ -21,20 +21,6 @@ import io.reactivex.Observer;
  */
 
 public class NormalOutStockModel extends MvpBaseModel {
-    /**
-     * 提交普通条码出库
-     *
-     * @param params
-     * @param observer
-     */
-    public void submitBarcodeOutAudit(final Map<String, Object> params, Observer<SubmitBarcodeOutAuditData> observer) {
-        HttpManager.getInstance().HttpManagerRequest(observer, new ApiServiceMethodCallBack<SubmitBarcodeOutAuditData>() {
-            @Override
-            public Observable<CommonResult<SubmitBarcodeOutAuditData>> createObservable(ApiService apiService) {
-                return apiService.submitBarcodeOutAudit(params);
-            }
-        });
-    }
 
     /**
      * 提交条码拆分出库（普通）

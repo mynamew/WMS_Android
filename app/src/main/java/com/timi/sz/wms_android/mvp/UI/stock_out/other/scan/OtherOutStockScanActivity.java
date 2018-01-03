@@ -18,6 +18,8 @@ import com.timi.sz.wms_android.base.uils.ToastUtils;
 import com.timi.sz.wms_android.bean.outstock.buy.SubmitBarcodeOutAuditData;
 import com.timi.sz.wms_android.http.message.BaseMessage;
 import com.timi.sz.wms_android.http.message.event.StockOutSubmitScanMaterialEvent;
+import com.timi.sz.wms_android.mvp.UI.stock_in.detail.StockInDetailActivity;
+import com.timi.sz.wms_android.mvp.UI.stock_in.other_scan.OtherScanActivity;
 import com.timi.sz.wms_android.mvp.UI.stock_out.detail.DetailActivity;
 import com.timi.sz.wms_android.mvp.UI.stock_out.divide_print.SplitPrintActivity;
 import com.timi.sz.wms_android.mvp.base.BaseActivity;
@@ -92,6 +94,18 @@ public class OtherOutStockScanActivity extends BaseActivity<OtherOutStockScanVie
 
     @Override
     public void initView() {
+        setRightImg(R.mipmap.stockin_detail, new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                /**
+                 * 查看详情
+                 */
+                Intent it = new Intent(OtherOutStockScanActivity.this, DetailActivity.class);
+                it.putExtra(Constants.CODE_STR, intentCode);
+                it.putExtra(Constants.STOCKIN_BILLID, scanId);
+                startActivity(it);
+            }
+        });
         /***
          * 扫描物料
          */

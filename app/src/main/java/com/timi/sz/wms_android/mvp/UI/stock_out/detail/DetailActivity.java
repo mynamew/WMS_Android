@@ -93,8 +93,8 @@ public class DetailActivity extends BaseActivity<DetailView, DetailPresenter> im
             case Constants.CREATE_PRO_CHECK_NUM://产成品 审核
                tvTip.setText("产成品入库(审核)单据详情");
                 break;
-            case Constants.CREATE_PRO_CREATE_ORDER_NUM://产成品 生单
-                tvTip.setText("产成品入库(生单)单据详情");
+            case Constants.CREATE_PRO_CREATE_ORDER_NUM://产成品 制单
+                tvTip.setText("产成品入库(制单)单据详情");
                 break;
             case Constants.OTHER_IN_STOCK_SELECT_ORDERNO://其他 选单
                 tvTip.setText("其他入库(审核)单据详情");
@@ -108,14 +108,20 @@ public class DetailActivity extends BaseActivity<DetailView, DetailPresenter> im
             case Constants.STOCK_OUT_OUTSOURCE_AUDIT://委外发料审核
                 tvTip.setText("委外发料(审核)单据详情");
                 break;
-            case Constants.STOCK_OUT_OUTSOURCE_BILL://委外发料生单
-                tvTip.setText("委外发料(生单)单据详情");
+            case Constants.STOCK_OUT_OUTSOURCE_BILL://委外发料制单
+                tvTip.setText("委外发料(制单)单据详情");
                 break;
             case Constants.STOCK_OUT_OUTSOURCE_ALLOT://委外调拨
                 tvTip.setText("委外调拨单据详情");
                 break;
             case Constants.STOCK_OUT_PRODUCTION_FEEDING://生产补料
                 tvTip.setText("生产补料单据详情");
+                break;
+            case Constants.STOCK_OUT_OTHER_OUT_BILL://其他出库制单
+                tvTip.setText("其他出库(制单)单据详情");
+                break;
+            case Constants.OTHER_IN_STOCK_SCAN://其他入库制单
+                tvTip.setText("其他入库(制单)单据详情");
                 break;
         }
     }

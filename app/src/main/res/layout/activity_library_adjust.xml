@@ -94,7 +94,7 @@
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="50px"
+            android:layout_marginLeft="40px"
             android:layout_toRightOf="@id/tv_material_code_tip"
             android:background="@drawable/selector_et"
             android:ellipsize="end"
@@ -318,13 +318,5 @@
         android:layout_height="0dp"
         android:layout_weight="1"/>
 
-    <Button
-        android:id="@+id/btn_commit"
-        android:layout_width="match_parent"
-        android:layout_height="98px"
-        android:background="@drawable/selector_btn"
-        android:text="@string/confirm_commit"
-        android:visibility="gone"
-        android:textColor="@color/white"
-        android:textSize="36px"/>
+
 </LinearLayout>

@@ -355,7 +355,13 @@ public class BatchNormalActivity extends BaseActivity<BatchNormalView, BatchNorm
 
     @Override
     public void submitBarcodeLotPickOut(SubmitBarcodeLotPickOutResult result) {
-
+        /**
+         * 设置物料的信息
+         */
+        tvMaterialName.setText(result.getMaterialName());
+        tvMaterialCode.setText(result.getMaterialCode());
+        tvMateZrialAttr.setText(result.getMaterialAttribute());
+        tvMaterialModel.setText(result.getMaterialStandard());
         /**
          * 是否需要拆分打码
          */
@@ -387,6 +393,10 @@ public class BatchNormalActivity extends BaseActivity<BatchNormalView, BatchNorm
             } else {//提交成功
                 ToastUtils.showShort(getString(R.string.commit_success));
                 /**
+                 * 发料数量
+                 */
+                tvSendMaterialNum.setText("("+result.getBarcodeQty()+")" + result.getLineScanQty() + "/" + result.getLineMustQty());
+                /**
                  * 发送事件  传递 scanid
                  */
                 StockOutSubmitScanMaterialEvent event = new StockOutSubmitScanMaterialEvent(StockOutSubmitScanMaterialEvent.OUT_SOURCE_AUDIT_SCAN_MATERIAL_SUCCESS);
@@ -401,12 +411,6 @@ public class BatchNormalActivity extends BaseActivity<BatchNormalView, BatchNorm
                     cartonNum = result.getCartonNo();
                     tvCartonNum.setText(String.valueOf(cartonNum));
                 }
-                /**
-                 * 物料返回设置扫描的数量
-                 */
-                scanQty = result.getTotalScanQty();
-                //设置数量
-                tvSendMaterialNum.setText("(" + result.getBarcodeQty() + ")" + scanQty + "/" + totalQty);
             }
         }
     }
@@ -471,12 +475,8 @@ public class BatchNormalActivity extends BaseActivity<BatchNormalView, BatchNorm
             BaseMessage.post(stockOutSubmitScanMaterialEvent);
             //设置scanid
             scanId = result.getScanId();
-            /**
-             * 物料返回设置扫描的数量
-             */
-            scanQty = result.getTotalScanQty();
             //设置数量
-            tvSendMaterialNum.setText("(" + result.getBarcodeQty() + ")" + scanQty + "/" + totalQty);
+            tvSendMaterialNum.setText("(" + result.getBarcodeQty() + ")" + result.getLineScanQty() + "/" + result.getLineMustQty());
         }
     }
 

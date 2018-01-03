@@ -18,17 +18,6 @@
         android:background="#fff"
 
         android:orientation="vertical">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="96px"
-            android:layout_marginLeft="30px"
-            android:gravity="center_vertical"
-            android:text="@string/instock_info"
-            android:textColor="#333"
-            android:textSize="14sp"
-            android:textStyle="bold"/>
-
         <View
             android:layout_width="match_parent"
             android:layout_height="1px"
@@ -83,7 +72,31 @@
                 android:textColor="#000"
                 android:textSize="13sp"/>
         </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingBottom="5px"
+            android:visibility="visible"
+            android:paddingTop="10px">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40px"
+                android:text="@string/return_material_total_num_tip"
+                android:textColor="#333"
+                android:textSize="13sp"/>
+
+            <TextView
+                android:id="@+id/tv_in_stock_return_total_num"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40px"
+                android:text=" "
+                android:textColor="#000"
+                android:textSize="13sp"/>
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -106,7 +119,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="40px"
                 android:text=" "
-                android:textColor="#000"
+                android:textColor="@color/login_txt_color"
                 android:textSize="13sp"/>
         </LinearLayout>
 
@@ -114,7 +127,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:paddingBottom="5px"
+            android:paddingBottom="20px"
             android:paddingTop="10px">
 
             <TextView
@@ -131,35 +144,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="40px"
                 android:text=" "
-                android:textColor="#000"
+                android:textColor="@color/login_txt_color"
                 android:textSize="13sp"/>
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingBottom="20px"
-            android:visibility="visible"
-            android:paddingTop="10px">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="40px"
-                android:text="@string/return_material_total_num_tip"
-                android:textColor="#333"
-                android:textSize="13sp"/>
-
-            <TextView
-                android:id="@+id/tv_in_stock_return_total_num"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="40px"
-                android:text=" "
-                android:textColor="#000"
-                android:textSize="13sp"/>
-        </LinearLayout>
 
         <include layout="@layout/footer_put_away"/>
     </LinearLayout>

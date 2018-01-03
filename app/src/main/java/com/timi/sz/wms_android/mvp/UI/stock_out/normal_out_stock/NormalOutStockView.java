@@ -12,7 +12,6 @@ import com.timi.sz.wms_android.mvp.base.view.iml.MvpBaseView;
  */
 
 public interface NormalOutStockView extends MvpBaseView {
-    void submitBarcodeOutAudit(SubmitBarcodeOutAuditData data);
 
     void submitBarcodeOutSplitAudit(SubmitBarcodeOutSplitAuditData data);
 

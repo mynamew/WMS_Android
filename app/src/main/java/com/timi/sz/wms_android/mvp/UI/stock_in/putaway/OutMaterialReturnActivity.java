@@ -230,8 +230,7 @@ public class OutMaterialReturnActivity extends BaseActivity<PutAwayView, PutAway
         setTextViewContent(tvMaterialModel,bean.getMaterialStandard());
         setTextViewContent(tvMaterialAttr,bean.getMaterialAttribute());
         setTextViewContent(tvMaterialCode,bean.getMaterialCode());
-        setTextViewContent(tvMaterialNum, "("+bean.getBarcodeQty()+")"+bean.getTotalScanQty()+"/"+returnMaterialBean.getQty());
-
+        setTextViewContent(tvMaterialNum, "("+bean.getBarcodeQty()+")"+bean.getLineScanQty()+"/"+bean.getLineMustQty());
         /**
          * 设置附加属性
          */
@@ -283,8 +282,9 @@ public class OutMaterialReturnActivity extends BaseActivity<PutAwayView, PutAway
                 params1.put("SrcBillType", 22);
                 params1.put("DestBillType", 22);
                 params1.put("ScanId", ScanId);
-                params1.put("BinCode",result);
+                params1.put("BinCode",locationCode);
                 params1.put("BarcodeNo", result);
+                params1.put("BillId", returnMaterialBean.getBillId());
                 getPresenter().materialScanNetWork(params1, result);
                 break;
             case REQUEST_SCAN_CODE_LIB_LOATION:

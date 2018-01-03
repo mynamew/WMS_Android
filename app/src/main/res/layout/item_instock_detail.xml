@@ -105,7 +105,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20px"
-            android:paddingLeft="20px"
+            android:paddingLeft="10px"
             android:textColor="#666"
             android:text=""
             android:textSize="11sp"/>
@@ -115,7 +115,6 @@
             android:layout_width="match_parent"
             android:text=""
             android:layout_height="wrap_content"
-            android:paddingLeft="20px"
             android:layout_marginTop="10px"
             android:textColor="#666"
             android:textSize="11sp"/>

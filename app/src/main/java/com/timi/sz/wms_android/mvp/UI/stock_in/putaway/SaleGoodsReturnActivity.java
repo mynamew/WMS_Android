@@ -260,7 +260,7 @@ public class SaleGoodsReturnActivity extends BaseActivity<PutAwayView, PutAwayPr
         setTextViewContent(tvMaterialModel,bean.getMaterialStandard());
         setTextViewContent(tvMaterialAttr,bean.getMaterialAttribute());
         setTextViewContent(tvMaterialCode,bean.getMaterialCode());
-        setTextViewContent(tvMaterialNum, "("+bean.getBarcodeQty()+")"+bean.getTotalScanQty()+"/"+saleGoodsReturnBean.getQty());
+        setTextViewContent(tvMaterialNum, "("+bean.getBarcodeQty()+")"+bean.getLineScanQty()+"/"+bean.getLineMustQty());
         /**
          * 设置附加属性
          */

@@ -205,7 +205,7 @@ public class ProductionMaterialReturnActivity extends BaseActivity<PutAwayView, 
         setTextViewContent(tvMaterialModel, bean.getMaterialStandard());
         setTextViewContent(tvMaterialAttr, bean.getMaterialAttribute());
         setTextViewContent(tvMaterialCode, bean.getMaterialCode());
-        setTextViewContent(tvMaterialNum, "("+bean.getBarcodeQty()+")"+bean.getTotalScanQty()+"/"+queryPrdReturnByInputResult.getQty());
+        setTextViewContent(tvMaterialNum, "("+bean.getBarcodeQty()+")"+bean.getLineScanQty()+"/"+bean.getLineMustQty());
         /**
          * 设置附加属性
          */
@@ -279,6 +279,7 @@ public class ProductionMaterialReturnActivity extends BaseActivity<PutAwayView, 
                 params1.put("MAC", PackageUtils.getMac());
                 params1.put("SrcBillType", 25);
                 params1.put("DestBillType", 25);
+                params1.put("BillId", queryPrdReturnByInputResult.getBillId());
                 params1.put("ScanId", ScanId);
                 params1.put("BinCode", locationCode);
                 params1.put("BarcodeNo", result);
@@ -355,12 +356,5 @@ public class ProductionMaterialReturnActivity extends BaseActivity<PutAwayView, 
                 getPresenter().createInSockOrderno(params);
 
         }
-    }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
     }
 }

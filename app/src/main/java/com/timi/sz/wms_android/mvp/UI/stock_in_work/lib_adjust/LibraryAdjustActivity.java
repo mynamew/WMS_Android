@@ -145,7 +145,7 @@ public class LibraryAdjustActivity extends BaseActivity<LibraryAdjustView, Libra
      */
     private int ScanId = 0;
 
-    @OnClick({R.id.iv_scan_location, R.id.iv_can_material_code, R.id.btn_commit})
+    @OnClick({R.id.iv_scan_location, R.id.iv_can_material_code})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_scan_location://扫描库位码
@@ -165,12 +165,10 @@ public class LibraryAdjustActivity extends BaseActivity<LibraryAdjustView, Libra
                          * 请求库位信息
                          */
                         Map<String, Object> params = new HashMap<>();
-                        Map<String, Object> params1 = new HashMap<>();
-                        params1.put("UserId", SpUtils.getInstance().getUserId());
-                        params1.put("OrgId", SpUtils.getInstance().getOrgId());
-                        params1.put("MAC", PackageUtils.getMac());
-                        params1.put("BarcodeNo", etMaterialCode.getText().toString().trim());
-                        params1.put("LocationNo", locationCode);
+                        params.put("UserId", SpUtils.getInstance().getUserId());
+                        params.put("OrgId", SpUtils.getInstance().getOrgId());
+                        params.put("MAC", PackageUtils.getMac());
+                        params.put("BinCode", locationCode);
                         getPresenter().vertifyLocationCode(params);
                     }
                 });
@@ -204,40 +202,18 @@ public class LibraryAdjustActivity extends BaseActivity<LibraryAdjustView, Libra
                         /**
                          * 请求物料信息
                          */
-                        Map<String, Object> params = new HashMap<>();
-                        params.put("UserId", SpUtils.getInstance().getUserId());
-                        params.put("MAC", PackageUtils.getMac());
-                        params.put("OrgId", SpUtils.getInstance().getOrgId());
-                        params.put("materialCode", result);
-                        getPresenter().scanMaterialCode(params);
+                        /**
+                         * 物料扫码并上架的网络请求
+                         */
+                        Map<String, Object> params1 = new HashMap<>();
+                        params1.put("UserId", SpUtils.getInstance().getUserId());
+                        params1.put("OrgId", SpUtils.getInstance().getOrgId());
+                        params1.put("MAC", PackageUtils.getMac());
+                        params1.put("BarcodeNo", etMaterialCode.getText().toString().trim());
+                        params1.put("LocationNo", locationCode);
+                        getPresenter().scanMaterialCode(params1);
                     }
                 });
-                break;
-            case R.id.btn_commit://确认提交
-                if (TextUtils.isEmpty(locationCode)) {
-                    ToastUtils.showShort(getString(R.string.please_scan_lib_location_code));
-                    return;
-                }
-                if (!locationCodeIsUse) {
-                    ToastUtils.showShort(getString(R.string.location_code_no_user));
-                    return;
-                }
-                String materialCode = etScanLocation.getText().toString();
-                if (TextUtils.isEmpty(materialCode)) {
-                    ToastUtils.showShort(getString(R.string.please_scan_material_code));
-                    return;
-                }
-                if (ScanId == 0) {//scanid 为0  证明未扫过条码或者条码已经入库 或者出库过了
-                    ToastUtils.showShort(getString(R.string.please_inpiut_or_scan_visible_material_code));
-                    return;
-                }
-                Map<String, Object> params = new HashMap<>();
-                params.put("UserId", SpUtils.getInstance().getUserId());
-                params.put("MAC", PackageUtils.getMac());
-                params.put("OrgId", SpUtils.getInstance().getOrgId());
-                params.put("materialCode", materialCode);
-                params.put("libcode", locationCode);
-                getPresenter().libraryAdjustResult(params);
                 break;
         }
     }

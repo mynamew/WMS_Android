@@ -817,52 +817,6 @@ public class NormalOutStockActivity extends BaseActivity<NormalOutStockView, Nor
     public NormalOutStockView createView() {
         return this;
     }
-
-    @Override
-    public void submitBarcodeOutAudit(SubmitBarcodeOutAuditData data) {
-        ToastUtils.showShort(getString(R.string.commit_success));
-        /**
-         * 设置物料的信息
-         */
-        tvMaterialName.setText(data.getMaterialName());
-        tvMaterialCode.setText(data.getMaterialCode());
-        tvMaterialAttr.setText(data.getMaterialAttribute());
-        tvMaterialNmodel.setText(data.getMaterialStandard());
-        /**
-         * 设置 是否显示附加属性
-         */
-        setMaterialAttrStatus(findViewById(R.id.ll_material_attr));
-        /**
-         * 超出数量  跳转到拆分条吗界面
-         */
-        if (data.getExceedQty() > 0) {
-            Intent intent = new Intent(this, SplitPrintActivity.class);
-            intent.putExtra(OUT_STOCK_PRINT_BILLID, billId);
-            intent.putExtra(STOCK_OUT_CODE_STR, intentCode);
-            intent.putExtra(OUT_STOCK_PRINT_SRCBILLTYPE, srcBillType);
-            intent.putExtra(OUT_STOCK_PRINT_BATCh_DETAILID, detailId);
-            intent.putExtra(OUT_STOCK_PRINT_BARCODENO, etScanMaterial.getText().toString().trim());
-            intent.putExtra(OUT_STOCK_PRINT_DESBILLTYPE, destBillType);
-            intent.putExtra(OUT_STOCK_PRINT_SCANID, data.getScanId());
-            intent.putExtra(OUT_STOCK_PRINT_MATERIAL_ATTR, data.getMaterialAttribute());
-            intent.putExtra(OUT_STOCK_PRINT_MATERIALID, data.getMaterialId());
-            intent.putExtra(OUT_STOCK_PRINT_MATERIAL_NAME, data.getMaterialName());
-            intent.putExtra(OUT_STOCK_PRINT_MATERIAL_CODE, data.getMaterialCode());
-            intent.putExtra(OUT_STOCK_PRINT_MATERIAL_MODEL, data.getMaterialStandard());
-            intent.putExtra(OUT_STOCK_PRINT_CURRENT_QTY, data.getBarcodeQty());
-            intent.putExtra(OUT_STOCK_PRINT_OUT_QTY, data.getExceedQty());
-            intent.putExtra(OUT_STOCK_POINT_REGIONID, regionId);
-            startActivity(intent);
-        } else {
-            /**
-             * 设置已退数量
-             */
-            scanQty = scanQty + data.getBarcodeQty();
-            tvMaterialNum.setText("(" + data.getBarcodeQty() + ")" + scanQty + "/" + totalQty);
-            scanId = data.getScanId();
-        }
-    }
-
     @Override
     public void submitBarcodeOutSplitAudit(SubmitBarcodeOutSplitAuditData data) {
 
@@ -922,15 +876,11 @@ public class NormalOutStockActivity extends BaseActivity<NormalOutStockView, Nor
                     cartonNum = result.getCartonNo();
                     tvCartonNum.setText(String.valueOf(cartonNum));
                 }
-                /**
-                 * 物料返回设置扫描的数量
-                 */
-                scanQty = result.getTotalScanQty();
                 //设置数量
-                tvMaterialNum.setText("(" + result.getBarcodeQty() + ")" + scanQty + "/" + totalQty);
+                tvMaterialNum.setText("(" + result.getBarcodeQty() + ")" + result.getLineScanQty() + "/" + result.getLineMustQty());
                 //待点  和  已点数量
-                setTextViewContent(tvHaveCountNum, scanQty);
-                setTextViewContent(tvWaitPointNum, totalQty - scanQty);
+                setTextViewContent(tvHaveCountNum, result.getTotalScanQty());
+                setTextViewContent(tvWaitPointNum, totalQty - result.getTotalScanQty());
             }
         }
     }
@@ -1020,15 +970,11 @@ public class NormalOutStockActivity extends BaseActivity<NormalOutStockView, Nor
             BaseMessage.post(stockOutSubmitScanMaterialEvent);
             //设置scanid
             scanId = result.getScanId();
-            /**
-             * 物料返回设置扫描的数量
-             */
-            scanQty = scanQty + result.getBarcodeQty();
             //设置数量
-            tvMaterialNum.setText("(" + result.getBarcodeQty() + ")" + scanQty + "/" + totalQty);
+            tvMaterialNum.setText("(" + result.getBarcodeQty() + ")" + result.getLineScanQty() + "/" + result.getLineMustQty());
             //待点  和  已点数量
-            setTextViewContent(tvHaveCountNum, scanQty);
-            setTextViewContent(tvWaitPointNum, totalQty - scanQty);
+            setTextViewContent(tvHaveCountNum, result.getTotalScanQty());
+            setTextViewContent(tvWaitPointNum, totalQty - result.getTotalScanQty());
         }
     }
 

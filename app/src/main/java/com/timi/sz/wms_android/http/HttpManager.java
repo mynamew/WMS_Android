@@ -68,7 +68,11 @@ public class HttpManager {
         /**
          * 初始化 okhttp
          */
-        OkHttpClient okHttpClient = new OkHttpClient.Builder().connectTimeout(Constants.DEFAULT_TIMEOUT, TimeUnit.MINUTES).addInterceptor(new CommonInterceptor()).build();
+        OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                .connectTimeout(Constants.DEFAULT_TIMEOUT, TimeUnit.MINUTES)
+                .writeTimeout(Constants.DEFAULT_TIMEOUT, TimeUnit.MINUTES)
+                .readTimeout(Constants.DEFAULT_TIMEOUT, TimeUnit.MINUTES)
+                .addInterceptor(new CommonInterceptor()).build();
         /**
          * 初始化 retrofit
          */
@@ -96,15 +100,15 @@ public class HttpManager {
         o.subscribeOn(Schedulers.io())
                 .map(new Function<CommonResult<T>, T>() {
                     @Override
-                    public T apply(@NonNull CommonResult<T> t)   {
+                    public T apply(@NonNull CommonResult<T> t) {
                         LogUitls.e("返回结果--->", t.toString());
                         if (t.isSuccess()) {//请求成功的返回
 //                            if (t.isUnAuthorizedRequest()) {
 
-                                if(null== t.getResult()){
-                                    throw new ApiException(CODE_REQUEST_SUCCESS_EXCEPTION);
-                                }
-                                return t.getResult();
+                            if (null == t.getResult()) {
+                                throw new ApiException(CODE_REQUEST_SUCCESS_EXCEPTION);
+                            }
+                            return t.getResult();
 //                            } else {
 //                                /**
 //                                 * 如果返回的tocken 失效
@@ -141,7 +145,9 @@ public class HttpManager {
     /**
      * 下载的方法
      */
-    public void downLoadAPkRequest(Observer<File> subscriber, String url) {
+    public void downLoadAPkRequest(Observer<File> subscriber, String
+
+            url) {
         LogUitls.e("存储APK的路径---->", SDCardUtils.getAPKPath(BaseApplication.getMApplicationContext()));
         Observable<ResponseBody> responseBodyObservable = mApiService.downloadFile(url);
         responseBodyObservable.subscribeOn(Schedulers.io())

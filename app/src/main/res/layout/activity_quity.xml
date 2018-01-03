@@ -18,6 +18,7 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="400px"
+            android:visibility="gone"
             android:scaleType="centerCrop"
             android:src="@mipmap/quality_bg"/>
 

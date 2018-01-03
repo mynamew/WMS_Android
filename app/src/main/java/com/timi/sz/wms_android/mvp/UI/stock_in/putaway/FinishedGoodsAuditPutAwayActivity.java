@@ -208,8 +208,7 @@ public class FinishedGoodsAuditPutAwayActivity extends BaseActivity<PutAwayView,
         setTextViewContent(tvMaterialModel, bean.getMaterialStandard());
         setTextViewContent(tvMaterialAttr, bean.getMaterialAttribute());
         setTextViewContent(tvMaterialCode, bean.getMaterialCode());
-        setTextViewContent(tvMaterialNum, "("+bean.getBarcodeQty()+")"+bean.getTotalScanQty()+"/"+mFinishBean.getQty());
-        /**
+        setTextViewContent(tvMaterialNum, "("+bean.getBarcodeQty()+")"+bean.getLineScanQty()+"/"+bean.getLineMustQty());        /**
          * 设置附加属性
          */
         setMaterialAttrStatus(tvMaterialAttr);

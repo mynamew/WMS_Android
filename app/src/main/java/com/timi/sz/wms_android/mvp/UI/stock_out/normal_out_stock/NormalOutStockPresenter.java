@@ -24,37 +24,10 @@ public class NormalOutStockPresenter extends MvpBasePresenter<NormalOutStockView
         model = new NormalOutStockModel();
     }
 
-    private HttpSubscriber<SubmitBarcodeOutAuditData> submitBarcodeOutAuditDataHttpSubscriber;
     private HttpSubscriber<SubmitBarcodeOutSplitAuditData> submitBarcodeOutSplitAuditDataHttpSubscriber;
     private HttpSubscriber<Object> submitMakeOrAuditBillHttpSubscriber;
     private HttpSubscriber<SubmitBarcodeLotPickOutResult> submitBarcodeLotPickOutResultHttpSubscriber;
     private NormalOutStockModel model;
-
-    /**
-     * 提交退料条码（制单）
-     *
-     * @param params
-     */
-    public void submitBarcodeOutAudit(Map<String, Object> params) {
-        getView().showProgressDialog();
-        if (null == submitBarcodeOutAuditDataHttpSubscriber) {
-            submitBarcodeOutAuditDataHttpSubscriber = new HttpSubscriber<>(new OnResultCallBack<SubmitBarcodeOutAuditData>() {
-                @Override
-                public void onSuccess(SubmitBarcodeOutAuditData bean) {
-                    getView().submitBarcodeOutAudit(bean);
-                    getView().setBarcodeSelect();
-                }
-
-                @Override
-                public void onError(String errorMsg) {
-//                    ToastUtils.showShort(errorMsg);
-                    getView().setBarcodeSelect();
-                }
-            });
-        }
-        model.submitBarcodeOutAudit(params, submitBarcodeOutAuditDataHttpSubscriber);
-    }
-
     /**
      * 提交条码拆分出库（普通）
      *

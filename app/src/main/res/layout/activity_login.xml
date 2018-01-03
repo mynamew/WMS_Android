@@ -164,7 +164,7 @@
     </android.support.v7.widget.CardView>
     <TextView
         android:id="@+id/tv_property"
-        android:text="© 版权所有：玖坤信息"
+        android:text="@string/property"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="20px"
         android:layout_centerHorizontal="true"
