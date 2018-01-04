@@ -55,11 +55,11 @@ public class SplashActivity extends BaseActivity<SplashView, SplashPresenter> im
     @Override
     public void initBundle(Bundle savedInstanceState) {
         StatusBarUtil.setTranslucentBackground(this);
-        SpUtils.getInstance().putBaseUrl(Constants.BASE_URL);
-        SpUtils.getInstance().puttenancyName("Default");
-        SpUtils.getInstance().putLocaleLanguage("zh-CN");
-        SpUtils.getInstance().putUserName("mes");
-        SpUtils.getInstance().putPassword("123qwe");
+//        SpUtils.getInstance().putBaseUrl(Constants.BASE_URL);
+//        SpUtils.getInstance().puttenancyName("Default");
+//        SpUtils.getInstance().putLocaleLanguage("zh-CN");
+//        SpUtils.getInstance().putUserName("mes");
+//        SpUtils.getInstance().putPassword("123qwe");
         handler.sendEmptyMessageDelayed(0, 2000);
     }
 

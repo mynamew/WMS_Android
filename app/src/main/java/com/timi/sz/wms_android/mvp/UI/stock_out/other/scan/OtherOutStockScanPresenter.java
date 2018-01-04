@@ -3,6 +3,7 @@ package com.timi.sz.wms_android.mvp.UI.stock_out.other.scan;
 import android.content.Context;
 
 import com.timi.sz.wms_android.base.uils.ToastUtils;
+import com.timi.sz.wms_android.bean.instock.GetMakeOtherStockTotalResult;
 import com.timi.sz.wms_android.bean.outstock.buy.SubmitBarcodeOutAuditData;
 import com.timi.sz.wms_android.bean.outstock.buy.SubmitBarcodeOutSplitAuditData;
 import com.timi.sz.wms_android.bean.outstock.outsource.SubmitBarcodeLotPickOutResult;
@@ -22,6 +23,7 @@ public class OtherOutStockScanPresenter extends MvpBasePresenter<OtherOutStockSc
     OtherOutStockScanModel model = null;
     private HttpSubscriber<Object> submitMakeOrAuditBillHttpSubscriber;
     private HttpSubscriber<SubmitBarcodeOutAuditData> submitBarcodeLotPickOutResultHttpSubscriber;
+    private HttpSubscriber<GetMakeOtherStockTotalResult> getMakeOtherStockTotalResultHttpSubscriber;
 
     public OtherOutStockScanPresenter(Context context) {
         super(context);
@@ -75,6 +77,29 @@ public class OtherOutStockScanPresenter extends MvpBasePresenter<OtherOutStockSc
         }
         model.submitBarcodeOutAudit(params, submitBarcodeLotPickOutResultHttpSubscriber);
     }
+    /**
+     * 获得其他入库单统计数据（制单）
+     *
+     * @param params
+     */
+    public void getMakeOtherStockTotal(final Map<String, Object> params) {
+        getView().showProgressDialog();
+        if (null == getMakeOtherStockTotalResultHttpSubscriber) {
+            getMakeOtherStockTotalResultHttpSubscriber = new HttpSubscriber<>(new OnResultCallBack<GetMakeOtherStockTotalResult>() {
+                @Override
+                public void onSuccess(GetMakeOtherStockTotalResult bean) {
+                    getView().getMakeOtherStockTotal(bean);
+                }
+
+                @Override
+                public void onError(String errorMsg) {
+//                    ToastUtils.showShort(errorMsg);
+                }
+            });
+        }
+        model.getMakeOtherStockTotal(params, getMakeOtherStockTotalResultHttpSubscriber);
+    }
+
     @Override
     public void dettachView() {
         super.dettachView();
@@ -85,6 +110,9 @@ public class OtherOutStockScanPresenter extends MvpBasePresenter<OtherOutStockSc
         if (null != submitBarcodeLotPickOutResultHttpSubscriber) {
             submitBarcodeLotPickOutResultHttpSubscriber.unSubscribe();
             submitBarcodeLotPickOutResultHttpSubscriber = null;
+        }   if (null != getMakeOtherStockTotalResultHttpSubscriber) {
+            getMakeOtherStockTotalResultHttpSubscriber.unSubscribe();
+            getMakeOtherStockTotalResultHttpSubscriber = null;
         }
     }
 }

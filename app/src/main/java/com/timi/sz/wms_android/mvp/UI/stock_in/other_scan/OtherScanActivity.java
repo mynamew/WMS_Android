@@ -19,6 +19,7 @@ import com.timi.sz.wms_android.base.uils.LogUitls;
 import com.timi.sz.wms_android.base.uils.PackageUtils;
 import com.timi.sz.wms_android.base.uils.SpUtils;
 import com.timi.sz.wms_android.base.uils.ToastUtils;
+import com.timi.sz.wms_android.bean.instock.GetMakeOtherStockTotalResult;
 import com.timi.sz.wms_android.bean.instock.MaterialScanPutAwayBean;
 import com.timi.sz.wms_android.bean.instock.VertifyLocationCodeBean;
 import com.timi.sz.wms_android.mvp.UI.stock_in.detail.StockInDetailActivity;
@@ -153,6 +154,12 @@ public class OtherScanActivity extends BaseActivity<OtherScanView, OtherScanPres
 
     @Override
     public void initData() {
+        Map<String, Object> params = new HashMap<>();
+        params.put("UserId", SpUtils.getInstance().getUserId());
+        params.put("OrgId", SpUtils.getInstance().getOrgId());
+        params.put("MAC", PackageUtils.getMac());
+        params.put("DestBillType", 51);
+        getPresenter().getMakeOtherStockTotal(params);
     }
 
     @Override
@@ -270,6 +277,13 @@ public class OtherScanActivity extends BaseActivity<OtherScanView, OtherScanPres
         etScanLocation.requestFocus();
         etScanLocation.findFocus();
         Selection.selectAll(etScanLocation.getText());
+    }
+
+    @Override
+    public void getMakeOtherStockTotal(GetMakeOtherStockTotalResult bean) {
+        //设置scanid和scan数量
+        ScanId = bean.getScanId();
+        setTextViewContent(tvHaveScanNum, bean.getScanQty());
     }
 
     /**

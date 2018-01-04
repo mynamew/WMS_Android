@@ -1,5 +1,6 @@
 package com.timi.sz.wms_android.mvp.UI.stock_out.other.scan;
 
+import com.timi.sz.wms_android.bean.instock.GetMakeOtherStockTotalResult;
 import com.timi.sz.wms_android.bean.outstock.buy.SubmitBarcodeOutAuditData;
 import com.timi.sz.wms_android.bean.outstock.outsource.SubmitBarcodeLotPickOutResult;
 import com.timi.sz.wms_android.mvp.base.view.iml.MvpBaseView;
@@ -17,4 +18,6 @@ public interface OtherOutStockScanView extends MvpBaseView {
     void submitMakeOrAuditBill();
 
     void setBarcodeSelect();
+
+    void getMakeOtherStockTotal(GetMakeOtherStockTotalResult bean);
 }

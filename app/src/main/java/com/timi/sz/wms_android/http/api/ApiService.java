@@ -5,6 +5,7 @@ import com.timi.sz.wms_android.bean.GetPDA_ParameterResult;
 import com.timi.sz.wms_android.bean.LoginBean;
 import com.timi.sz.wms_android.bean.UserInfoBean;
 import com.timi.sz.wms_android.bean.VersionBean;
+import com.timi.sz.wms_android.bean.instock.GetMakeOtherStockTotalResult;
 import com.timi.sz.wms_android.bean.instock.MaterialScanPutAwayBean;
 import com.timi.sz.wms_android.bean.instock.OrderDetailData;
 import com.timi.sz.wms_android.bean.instock.VertifyLocationCodeBean;
@@ -423,6 +424,15 @@ public interface ApiService {
     @POST(" api/services/wpda/OtherInstock/GetMakeOtherStockDetail")
     Observable<CommonResult<List<MaterialDetailResult>>> getMakeOtherInStockDetail(@FieldMap Map<String, Object> params);
 
+    /**
+     * 获得其他入库单统计数据（制单）
+     *
+     * @param params
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("api/services/wpda/OtherInstock/GetMakeOtherStockTotal")
+    Observable<CommonResult<GetMakeOtherStockTotalResult>> getMakeOtherStockTotal(@FieldMap Map<String, Object> params);
 
     /**====== 成品拣货 ======**/
     /**

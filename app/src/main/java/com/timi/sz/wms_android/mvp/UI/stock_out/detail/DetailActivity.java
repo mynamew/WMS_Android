@@ -91,37 +91,42 @@ public class DetailActivity extends BaseActivity<DetailView, DetailPresenter> im
     public void initView() {
         switch (intentCode) {
             case Constants.CREATE_PRO_CHECK_NUM://产成品 审核
-               tvTip.setText("产成品入库(审核)单据详情");
+                tvTip.setText(R.string.order_detial_finish_googs_audit_title);
                 break;
             case Constants.CREATE_PRO_CREATE_ORDER_NUM://产成品 制单
-                tvTip.setText("产成品入库(制单)单据详情");
+                tvTip.setText(R.string.order_detial_finish_googs_bill_title);
                 break;
             case Constants.OTHER_IN_STOCK_SELECT_ORDERNO://其他 选单
-                tvTip.setText("其他入库(审核)单据详情");
+                tvTip.setText(R.string.order_detial_other_audit_title);
                 break;
             case Constants.STOCK_OUT_PRODUCTION_APPLY_BILL://领料 申请
-                tvTip.setText("领料申请单据详情");
+                tvTip.setText(R.string.order_detial_production_apply_title);
                 break;
             case Constants.STOCK_OUT_OUTSOURCE_FEED_SUPLLIEMENT://委外补料
-                tvTip.setText("委外补料单据详情");
+                tvTip.setText(R.string.order_detial_out_feed_title);
                 break;
             case Constants.STOCK_OUT_OUTSOURCE_AUDIT://委外发料审核
-                tvTip.setText("委外发料(审核)单据详情");
+                tvTip.setText(R.string.order_detial_out_audit_title);
                 break;
             case Constants.STOCK_OUT_OUTSOURCE_BILL://委外发料制单
-                tvTip.setText("委外发料(制单)单据详情");
+                tvTip.setText(R.string.order_detial_out_bill_title);
                 break;
             case Constants.STOCK_OUT_OUTSOURCE_ALLOT://委外调拨
-                tvTip.setText("委外调拨单据详情");
+                tvTip.setText(R.string.order_detial_out_allot_title);
                 break;
             case Constants.STOCK_OUT_PRODUCTION_FEEDING://生产补料
-                tvTip.setText("生产补料单据详情");
+                tvTip.setText(R.string.order_detial_production_feed_title);
+                break;
+            case Constants.STOCK_OUT_OTHER_OUT_AUDIT://其他出库审核
+                tvTip.setText(R.string.order_detial_other_out_audit_title);
                 break;
             case Constants.STOCK_OUT_OTHER_OUT_BILL://其他出库制单
-                tvTip.setText("其他出库(制单)单据详情");
+                tvTip.setText(R.string.order_detial_other_out_bill_title);
+                ivShowMore.setVisibility(View.GONE);//其他出入库 制单不显示显示全部
                 break;
             case Constants.OTHER_IN_STOCK_SCAN://其他入库制单
-                tvTip.setText("其他入库(制单)单据详情");
+                tvTip.setText(R.string.order_detial_other_in_bill_title);
+                ivShowMore.setVisibility(View.GONE);
                 break;
         }
     }
@@ -161,7 +166,7 @@ public class DetailActivity extends BaseActivity<DetailView, DetailPresenter> im
     public void onViewClicked() {
         ivShowMore.setSelected(!ivShowMore.isSelected());
         dealData();
-        if(null!=adapter){
+        if (null != adapter) {
             adapter.notifyDataSetChanged();
         }
     }
@@ -202,8 +207,8 @@ public class DetailActivity extends BaseActivity<DetailView, DetailPresenter> im
                     holder.setTextView(R.id.tv_wait_count_num, item.getWaitQty());
                     holder.setTextView(R.id.tv_scan_num, item.getScanQty());
                     holder.setTextView(R.id.tv_should_return_num, item.getQty());
-                    holder.setTextView(R.id.tv_material_code, item.getMaterialCode() +"  "+ item.getMaterialName());//合格数？ 应退数
-                    holder.setTextView(R.id.tv_material_model, item.getMaterialAttribute() +"  "+ item.getMaterialStandard());
+                    holder.setTextView(R.id.tv_material_code, item.getMaterialCode() + "  " + item.getMaterialName());//合格数？ 应退数
+                    holder.setTextView(R.id.tv_material_model, item.getMaterialAttribute() + "  " + item.getMaterialStandard());
                 }
             };
             rlvDetial.setAdapter(adapter);

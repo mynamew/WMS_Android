@@ -1,5 +1,6 @@
 package com.timi.sz.wms_android.mvp.UI.stock_in.other_scan;
 
+import com.timi.sz.wms_android.bean.instock.GetMakeOtherStockTotalResult;
 import com.timi.sz.wms_android.bean.instock.MaterialScanPutAwayBean;
 import com.timi.sz.wms_android.bean.instock.VertifyLocationCodeBean;
 import com.timi.sz.wms_android.mvp.base.view.iml.MvpBaseView;
@@ -38,4 +39,10 @@ public interface OtherScanView extends MvpBaseView {
      * 设置库位码选中
      */
     void setLocationSelect();
+
+    /**
+     * 获得其他入库单统计数据（制单）
+     * @param bean
+     */
+    void getMakeOtherStockTotal(GetMakeOtherStockTotalResult bean);
 }

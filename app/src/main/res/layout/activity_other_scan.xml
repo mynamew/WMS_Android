@@ -257,7 +257,7 @@
             android:layout_marginLeft="50px"
             android:layout_marginRight="50px"
             android:background="@drawable/selector_btn_bg_login"
-            android:text="@string/create_other_out_stock_orderno"
+            android:text="@string/create_other_out_instock_orderno"
             android:textColor="#fff"
             android:textSize="18sp"/>
     </RelativeLayout>

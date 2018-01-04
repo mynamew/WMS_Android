@@ -3,6 +3,7 @@ package com.timi.sz.wms_android.mvp.UI.stock_in.other_scan;
 import android.content.Context;
 
 import com.timi.sz.wms_android.base.uils.ToastUtils;
+import com.timi.sz.wms_android.bean.instock.GetMakeOtherStockTotalResult;
 import com.timi.sz.wms_android.bean.instock.MaterialScanPutAwayBean;
 import com.timi.sz.wms_android.bean.instock.VertifyLocationCodeBean;
 import com.timi.sz.wms_android.http.callback.OnResultCallBack;
@@ -22,6 +23,7 @@ public class OtherScanPresenter extends MvpBasePresenter<OtherScanView> {
     private HttpSubscriber<MaterialScanPutAwayBean> subscriber = null;
     private HttpSubscriber<VertifyLocationCodeBean> vertifyLocationCodeBeanHttpSubscriber = null;
     private HttpSubscriber<Object> createInStockOrdernoBeanHttpSubscriber = null;
+    private HttpSubscriber<GetMakeOtherStockTotalResult> getMakeOtherStockTotalResultHttpSubscriber = null;
 
     public OtherScanPresenter(Context context) {
         super(context);
@@ -97,6 +99,29 @@ public class OtherScanPresenter extends MvpBasePresenter<OtherScanView> {
         model.createInStockOrderno(params, createInStockOrdernoBeanHttpSubscriber);
     }
 
+    /**
+     * 获得其他入库单统计数据（制单）
+     *
+     * @param params
+     */
+    public void getMakeOtherStockTotal(final Map<String, Object> params) {
+        getView().showProgressDialog();
+        if (null == getMakeOtherStockTotalResultHttpSubscriber) {
+            getMakeOtherStockTotalResultHttpSubscriber = new HttpSubscriber<>(new OnResultCallBack<GetMakeOtherStockTotalResult>() {
+                @Override
+                public void onSuccess(GetMakeOtherStockTotalResult bean) {
+                    getView().getMakeOtherStockTotal(bean);
+                }
+
+                @Override
+                public void onError(String errorMsg) {
+//                    ToastUtils.showShort(errorMsg);
+                }
+            });
+        }
+        model.getMakeOtherStockTotal(params, getMakeOtherStockTotalResultHttpSubscriber);
+    }
+
     @Override
     public void dettachView() {
         super.dettachView();
@@ -111,6 +136,10 @@ public class OtherScanPresenter extends MvpBasePresenter<OtherScanView> {
         if (null != createInStockOrdernoBeanHttpSubscriber) {
             createInStockOrdernoBeanHttpSubscriber.unSubscribe();
             createInStockOrdernoBeanHttpSubscriber = null;
+        }
+        if (null != getMakeOtherStockTotalResultHttpSubscriber) {
+            getMakeOtherStockTotalResultHttpSubscriber.unSubscribe();
+            getMakeOtherStockTotalResultHttpSubscriber = null;
         }
     }
 }

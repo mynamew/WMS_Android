@@ -308,8 +308,8 @@
     <string name="please_input_create_product_orderno_or_scan">请输入产成品入库单单号或扫码查询</string>
     <string name="create_finish_goods_instock_orderno_success">生成产成品入库单成功！</string>
     /**====== 生产入库 ======**/
-    <string name="create_task_orderno">生产退料单</string>
-    <string name="create_task_orderno_tip">生产退料单</string>
+    <string name="create_task_orderno">生产任务单</string>
+    <string name="create_task_orderno_tip">生产任务单</string>
     <string name="product_in_stock_create_orderno">产成品入库</string>
     <string name="please_input_create_task_num_or_scan">请输入生产任务单号或扫码查询</string>
 
@@ -971,7 +971,7 @@
     <string name="check_qty_no_less_zero">盘点数量不能小于等于0！</string>
     <string name="current_material_no_datecode_please_repeat_in">当前物料没有批次信息，请重新进入！</string>
     <string name="set_pda_code_success">设置PDA参数成功！</string>
-
+    <string name="create_other_out_instock_orderno">生成其他入库单</string>
 
 
 </resources>

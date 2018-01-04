@@ -427,6 +427,10 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
                                 //存储url
                                 SpUtils.getInstance().puttenancyName(zuhuStr);
                             }
+                            //设置默认的语言（用户不选择时）
+                            if(TextUtils.isEmpty( SpUtils.getInstance().getLocaleLanguage())){
+                                SpUtils.getInstance().putLocaleLanguage("zh-CN");
+                            }
                             dialog.dismiss();
                         }
                     }).setLinearlayoutListener(R.id.ll_login_language, new MyDialog.DialogClickListener() {

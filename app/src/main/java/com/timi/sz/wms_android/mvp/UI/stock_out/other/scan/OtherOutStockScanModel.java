@@ -1,5 +1,6 @@
 package com.timi.sz.wms_android.mvp.UI.stock_out.other.scan;
 
+import com.timi.sz.wms_android.bean.instock.GetMakeOtherStockTotalResult;
 import com.timi.sz.wms_android.bean.outstock.buy.SubmitBarcodeOutAuditData;
 import com.timi.sz.wms_android.bean.outstock.buy.SubmitBarcodeOutSplitAuditData;
 import com.timi.sz.wms_android.bean.outstock.outsource.SubmitBarcodeLotPickOutResult;
@@ -46,5 +47,21 @@ public class OtherOutStockScanModel extends MvpBaseModel {
                 return apiService.submitMakeOrAuditBill(params);
             }
         });
+    }
+    /**
+     * 获得其他入库单统计数据（制单）
+     *
+     * @param observer
+     */
+    public void getMakeOtherStockTotal(final Map<String, Object> params,
+                                       final Observer<GetMakeOtherStockTotalResult> observer) {
+        HttpManager.getInstance().HttpManagerRequest(observer,
+                new ApiServiceMethodCallBack<GetMakeOtherStockTotalResult>() {
+                    @Override
+                    public Observable<CommonResult<GetMakeOtherStockTotalResult>>
+                    createObservable(ApiService apiService) {
+                        return apiService.getMakeOtherStockTotal(params);
+                    }
+                });
     }
 }
