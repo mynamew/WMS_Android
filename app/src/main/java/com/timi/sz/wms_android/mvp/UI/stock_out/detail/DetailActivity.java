@@ -122,10 +122,12 @@ public class DetailActivity extends BaseActivity<DetailView, DetailPresenter> im
                 break;
             case Constants.STOCK_OUT_OTHER_OUT_BILL://其他出库制单
                 tvTip.setText(R.string.order_detial_other_out_bill_title);
+                ivShowMore.setSelected(true);
                 ivShowMore.setVisibility(View.GONE);//其他出入库 制单不显示显示全部
                 break;
             case Constants.OTHER_IN_STOCK_SCAN://其他入库制单
                 tvTip.setText(R.string.order_detial_other_in_bill_title);
+                ivShowMore.setSelected(true);
                 ivShowMore.setVisibility(View.GONE);
                 break;
         }
