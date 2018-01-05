@@ -49,6 +49,7 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.OnClick;
 
+import static com.timi.sz.wms_android.base.uils.Constants.OTHER_IN_STOCK_SELECT_ORDERNO;
 import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_POINT_DETIAIL_BILLID;
 import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_POINT_REGIONID;
 import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_POINT_WAREHOUSEID;
@@ -478,6 +479,7 @@ public class NormalOutStockActivity extends BaseActivity<NormalOutStockView, Nor
                 break;
             case STOCK_OUT_PURCHASE_MATERIAL_RETURN://采购退料
                 break;
+            case OTHER_IN_STOCK_SELECT_ORDERNO://其他入库审核（红单）:
             case STOCK_OUT_OTHER_OUT_AUDIT://其他审核
                 tvHeadTitle.setText(R.string.normal_outstock_other_audit_info);
                 setActivityTitle(getString(R.string.normal_outstock_other_audit_title));
@@ -490,7 +492,9 @@ public class NormalOutStockActivity extends BaseActivity<NormalOutStockView, Nor
                         summaryResultsOtherAudit.getScanId(),
                         summaryResultsOtherAudit.getQty(),
                         summaryResultsOtherAudit.getWaitQty(),
-                        summaryResultsOtherAudit.getScanQty(), 52, 52);
+                        summaryResultsOtherAudit.getScanQty(),
+                        intentCode==OTHER_IN_STOCK_SELECT_ORDERNO?51:52,
+                        intentCode==OTHER_IN_STOCK_SELECT_ORDERNO?51:52);
 
                 //设置scanid
                 scanId = summaryResultsOtherAudit.getScanId();
@@ -714,6 +718,7 @@ public class NormalOutStockActivity extends BaseActivity<NormalOutStockView, Nor
                         it.putExtra(OUT_STOCK_POINT_DETIAIL_BILLID, billId);
                         break;
                     case Constants.STOCK_OUT_OTHER_OUT_AUDIT://其他出库-审核
+                    case Constants.OTHER_IN_STOCK_SELECT_ORDERNO://其他出库-审核
                         it.setClass(NormalOutStockActivity.this, DetailActivity.class);
                         it.putExtra(OUT_STOCK_POINT_WAREHOUSEID, warehouseId);
                         it.putExtra(OUT_STOCK_POINT_REGIONID, regionId);

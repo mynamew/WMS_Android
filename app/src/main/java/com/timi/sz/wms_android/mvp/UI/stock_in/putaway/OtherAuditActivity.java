@@ -37,6 +37,7 @@ import butterknife.OnClick;
 
 import static com.timi.sz.wms_android.base.uils.Constants.REQUEST_SCAN_CODE_LIB_LOATION;
 import static com.timi.sz.wms_android.base.uils.Constants.REQUEST_SCAN_CODE_MATERIIAL;
+import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_OTHER_OUT_AUDIT;
 
 /**
  * 其他审核
@@ -103,7 +104,12 @@ public class OtherAuditActivity extends BaseActivity<PutAwayView, PutAwayPresent
          * 标题
          */
         setActivityTitle(getString(R.string.other_instock_orderno_title));
-        intentCode = getIntent().getIntExtra(Constants.CODE_STR, Constants.COME_MATERAIL_NUM);
+        //其他入库
+        intentCode = getIntent().getIntExtra(Constants.CODE_STR,-1);
+        //其他出库 红单
+        if(intentCode==-1){
+            intentCode=getIntent().getIntExtra(Constants.STOCK_OUT_CODE_STR,-1);
+        }
         otherBean = new Gson().fromJson(getIntent().getStringExtra(Constants.IN_STOCK_FINISH_OTHER_BEAN), OtherOutAndInStockBean.class);
         ScanId = otherBean.getSummaryResults().getScanId();
     }
@@ -136,8 +142,8 @@ public class OtherAuditActivity extends BaseActivity<PutAwayView, PutAwayPresent
                 params1.put("UserId", SpUtils.getInstance().getUserId());
                 params1.put("OrgId", SpUtils.getInstance().getOrgId());
                 params1.put("MAC", PackageUtils.getMac());
-                params1.put("SrcBillType", 51);
-                params1.put("DestBillType", 51);
+                params1.put("SrcBillType", intentCode==STOCK_OUT_OTHER_OUT_AUDIT?52:51);
+                params1.put("DestBillType", intentCode==STOCK_OUT_OTHER_OUT_AUDIT?52:51);
                 params1.put("ScanId",ScanId);
                 params1.put("BinCode", locationCode);
                 params1.put("BillId", otherBean.getSummaryResults().getBillId());
@@ -281,8 +287,8 @@ public class OtherAuditActivity extends BaseActivity<PutAwayView, PutAwayPresent
                 params1.put("UserId", SpUtils.getInstance().getUserId());
                 params1.put("OrgId", SpUtils.getInstance().getOrgId());
                 params1.put("MAC", PackageUtils.getMac());
-                params1.put("SrcBillType", 51);
-                params1.put("DestBillType", 51);
+                params1.put("SrcBillType", intentCode==STOCK_OUT_OTHER_OUT_AUDIT?52:51);
+                params1.put("DestBillType", intentCode==STOCK_OUT_OTHER_OUT_AUDIT?52:51);
                 params1.put("BillId", otherBean.getSummaryResults().getBillId());
                 params1.put("ScanId", ScanId);
                 params1.put("BinCode", locationCode);

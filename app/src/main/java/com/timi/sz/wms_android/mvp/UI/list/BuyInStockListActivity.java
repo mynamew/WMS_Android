@@ -952,7 +952,7 @@ public class BuyInStockListActivity extends BaseActivity<BuyInStockListView, Buy
 
         } else {//红单
             intent.putExtra(STOCK_OUT_BEAN, new Gson().toJson(bean));
-            intent.putExtra(STOCK_OUT_CODE_STR, STOCK_OUT_OTHER_OUT_AUDIT);
+            intent.putExtra(STOCK_OUT_CODE_STR, intentCode);
             if (bean.getSummaryResults().isIsLotPick()) {//批次拣货
                 intent.setClass(this, BatchPointListActivity.class);
             } else {
@@ -967,7 +967,7 @@ public class BuyInStockListActivity extends BaseActivity<BuyInStockListView, Buy
         Intent intent = new Intent();
         if (bean.getSummaryResults().getRob() == 1) {//红单　　入库
             intent.setClass(this, OtherAuditActivity.class);
-            intent.putExtra(Constants.CODE_STR, OTHER_IN_STOCK_SELECT_ORDERNO);
+            intent.putExtra(Constants.CODE_STR, intentCode);
             intent.putExtra(IN_STOCK_FINISH_OTHER_BEAN, new Gson().toJson(bean));
 
         } else {//

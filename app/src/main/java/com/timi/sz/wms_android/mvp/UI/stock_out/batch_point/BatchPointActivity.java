@@ -47,6 +47,7 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.OnClick;
 
+import static com.timi.sz.wms_android.base.uils.Constants.OTHER_IN_STOCK_SELECT_ORDERNO;
 import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_DETAIL_RESULTS_BEAN;
 import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_MATERIAL_RESULTS_BEAN;
 import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_POINT_DETIAIL_BILLID;
@@ -287,6 +288,11 @@ public class BatchPointActivity extends BaseActivity<BatchPointView, BatchPointP
                 srcBillType = 52;
                 destBillType = 52;
                 break;
+            case OTHER_IN_STOCK_SELECT_ORDERNO://其他入库审核（红单）:
+                setActivityTitle(getString(R.string.point_scan_other_audit_title));
+                srcBillType = 51;
+                destBillType = 51;
+                break;
             case STOCK_OUT_OTHER_OUT_BILL://其他生单
                 setActivityTitle(getString(R.string.point_scan_other_bill_title));
                 srcBillType = 0;
@@ -504,7 +510,7 @@ public class BatchPointActivity extends BaseActivity<BatchPointView, BatchPointP
                 /**
                  * 发料数量
                  */
-                tvSendMaterialNum.setText("("+result.getBarcodeQty()+")" + result.getLineScanQty() + "/" + result.getLineMustQty());
+                tvSendMaterialNum.setText("(" + result.getBarcodeQty() + ")" + result.getLineScanQty() + "/" + result.getLineMustQty());
 
                 /**
                  * 发送事件  传递 scanid
@@ -754,7 +760,7 @@ public class BatchPointActivity extends BaseActivity<BatchPointView, BatchPointP
     /**
      * 显示没有批次的对话框
      */
-    public void showNoDateCodeDialog(){
+    public void showNoDateCodeDialog() {
         /**
          * 显示 错误提示的对话框
          */
