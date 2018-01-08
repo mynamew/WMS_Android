@@ -343,6 +343,7 @@
     <string name="other_instock_orderno">其他入库单</string>
     <string name="orderno_num">单据总数</string>
     <string name="other_scan_instock_bill_title">其他入库(制单)</string>
+    <string name="create_other_out_instock_orderno">生成其他入库单</string>
     /**====== 其他入库—入库上架 ======**/
     <string name="other_instock_orderno_title">入库上架(其他)</string>
     /**====== 产成品入库—入库上架 ======**/
@@ -367,6 +368,7 @@
     <string name="stock_out_pick_send_tab">发货拣货</string>
     <string name="stock_out_pick_sale_tab">销售拣货</string>
     <string name="stock_out_all">综合</string>
+    <string name="stock_out_pick">拣货</string>
     /**====== 出库搜索 ======**/
     <string name="sale_outstock_orderno_tip">销售出库单</string>
     <string name="sale_orderno_tip">销售订单</string>
@@ -456,7 +458,7 @@
     <string name="stock_out_production_audit_title">生产领料(选单)</string>
     <string name="stock_out_production_audit_tip">生产领料单号</string>
     <string name="stock_out_production_bill_tip">生产任务单号</string>
-    <string name="stock_out_pick">拣货</string>
+
     <string name="stock_out_pick_tip">调拨单</string>
     <string name="stock_out_pick_send_orderno">发货通知单</string>
     <string name="stock_out_pick_sell_outstock_orderno">销售出库单</string>
@@ -552,6 +554,18 @@
     <string name="order_detial_sale_return_title">销售退料单单据详情</string>
     <string name="order_detial_buy_return_title">采购退料单单据详情</string>
     <string name="order_detail_come_material_title">来料入库单据信息</string>
+    <string name="order_detial_finish_googs_audit_title">产成品入库(审核)单据详情</string>
+    <string name="order_detial_finish_googs_bill_title">产成品入库(制单)单据详情</string>
+    <string name="order_detial_other_audit_title">其他入库(审核)单据详情</string>
+    <string name="order_detial_production_apply_title">领料申请单据详情</string>
+    <string name="order_detial_out_feed_title">委外补料单据详情</string>
+    <string name="order_detial_out_audit_title">委外发料(审核)单据详情</string>
+    <string name="order_detial_out_bill_title">委外发料(制单)单据详情</string>
+    <string name="order_detial_out_allot_title">委外调拨单据详情</string>
+    <string name="order_detial_production_feed_title">生产补料单据详情</string>
+    <string name="order_detial_other_out_bill_title">其他出库(制单)单据详情</string>
+    <string name="order_detial_other_out_audit_title">其他出库(审核)单据详情</string>
+    <string name="order_detial_other_in_bill_title">其他入库(制单)单据详情</string>
     <!--物品清点-->
     /**====== 物品清点 ======**/
     <string name="goods_point_outsource_feed_title">物品清点(委外补料)</string>
@@ -899,7 +913,7 @@
     <string name="check_orderno_info">盘点单信息详情</string>
     <string name="item_instock_total_num_tip">入库总数</string>
     /**====== 一步调入 ======**/
-    <string name="allot_out_total_num">调出总数</string>
+    <string name="allot_out_total_num">调拨总数</string>
     <string name="allot_total_num">调入总数</string>
     <string name="please_input_scan_lib_code">请输入/扫描货架号</string>
     <string name="goal_storege">目的货架</string>
@@ -971,7 +985,8 @@
     <string name="check_qty_no_less_zero">盘点数量不能小于等于0！</string>
     <string name="current_material_no_datecode_please_repeat_in">当前物料没有批次信息，请重新进入！</string>
     <string name="set_pda_code_success">设置PDA参数成功！</string>
-    <string name="create_other_out_instock_orderno">生成其他入库单</string>
+    <string name="outowner_name">调出货主</string>
+    <string name="inowner_name">调入货主</string>
 
 
 </resources>

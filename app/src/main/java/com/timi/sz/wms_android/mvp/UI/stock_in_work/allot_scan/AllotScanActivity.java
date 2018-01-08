@@ -4,9 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Selection;
 import android.text.TextUtils;
-import android.view.KeyEvent;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -15,7 +13,6 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.timi.sz.wms_android.R;
 import com.timi.sz.wms_android.base.uils.Constants;
-import com.timi.sz.wms_android.base.uils.InputMethodUtils;
 import com.timi.sz.wms_android.base.uils.LogUitls;
 import com.timi.sz.wms_android.base.uils.PackageUtils;
 import com.timi.sz.wms_android.base.uils.SpUtils;
@@ -30,6 +27,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 import static com.timi.sz.wms_android.base.uils.Constants.REQUEST_SCAN_CODE_LIB_LOATION;
@@ -75,6 +73,12 @@ public class AllotScanActivity extends BaseActivity<AllotScanView, AllotScanPres
     TextView tvMaterialAttr;
     @BindView(R.id.tv_material_code)
     TextView tvMaterialCode;
+    @BindView(R.id.tv_outowner_name)
+    TextView tvOutownerName;
+    @BindView(R.id.tv_inowner_name)
+    TextView tvInownerName;
+    @BindView(R.id.tv_create_orderno_name)
+    TextView tvCreateOrdernoName;
     private AllotScanResult allotScanResult;
     private int intentCode;
 
@@ -160,6 +164,9 @@ public class AllotScanActivity extends BaseActivity<AllotScanView, AllotScanPres
         AllotScanResult.SummaryResultsBean summaryResults = allotScanResult.getSummaryResults();
         scanId = summaryResults.getScanId();
         setHeaderContent(summaryResults.getBillCode(), summaryResults.getBillDate(), summaryResults.getQty(), summaryResults.getWaitQty(), summaryResults.getScanQty());
+        tvInownerName.setText(allotScanResult.getSummaryResults().getInOwner());
+        tvOutownerName.setText(allotScanResult.getSummaryResults().getOutOwner());
+        tvCreateOrdernoName.setText(allotScanResult.getSummaryResults().getCreaterName());
     }
 
     @Override
@@ -193,32 +200,15 @@ public class AllotScanActivity extends BaseActivity<AllotScanView, AllotScanPres
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_commit:
-                if (TextUtils.isEmpty(locationCode)) {
-                    ToastUtils.showShort(getString(R.string.please_scan_lib_location_code));
-                    return;
-                }
-                if (!locationCodeIsUse) {
-                    ToastUtils.showShort(getString(R.string.location_code_no_user));
-                    return;
-                }
-                String materialCode = etMaterialCode.getText().toString();
-                if (TextUtils.isEmpty(materialCode)) {
-                    ToastUtils.showShort(getString(R.string.please_scan_material_code));
-                    return;
-                }
-                if (scanId == 0) {//scanid 为0  证明未扫过条码或者条码已经入库 或者出库过了
-                    ToastUtils.showShort(getString(R.string.please_inpiut_or_scan_visible_material_code));
-                    return;
-                }
                 /**
-                 * 生成入库单
+                 * 提交审核
                  */
                 Map<String, Object> params = new HashMap<>();
                 params.put("UserId", SpUtils.getInstance().getUserId());
                 params.put("OrgId", SpUtils.getInstance().getOrgId());
                 params.put("MAC", PackageUtils.getMac());
                 params.put("ScanId", scanId);
-                params.put("SubmitType", 0);
+                params.put("SubmitType", 1);
                 getPresenter().createInSockOrderno(params);
                 break;
             case R.id.iv_putaway_scan_location:
@@ -246,12 +236,12 @@ public class AllotScanActivity extends BaseActivity<AllotScanView, AllotScanPres
          */
         tvMaterialName.setText(bean.getMaterialName());
         tvMaterialCode.setText(bean.getMaterialCode());
-        tvMaterialAttr.setText( bean.getMaterialAttribute());
-        tvMaterialModel.setText( bean.getMaterialStandard());
+        tvMaterialAttr.setText(bean.getMaterialAttribute());
+        tvMaterialModel.setText(bean.getMaterialStandard());
         /**
          * 设置扫描数量
          */
-        tvMaterialNum.setText("("+bean.getBarcodeQty()+")"+bean.getTotalScanQty()+"/"+allotScanResult.getSummaryResults().getQty());
+        tvMaterialNum.setText("(" + bean.getBarcodeQty() + ")" + bean.getTotalScanQty() + "/" + allotScanResult.getSummaryResults().getQty());
         /**
          * 设置 是否显示附加属性
          */
@@ -263,7 +253,7 @@ public class AllotScanActivity extends BaseActivity<AllotScanView, AllotScanPres
         /**
          * 设置待点总数
          */
-        tvWaitPointNum.setText(String.valueOf(allotScanResult.getSummaryResults().getQty()-bean.getTotalScanQty()));
+        tvWaitPointNum.setText(String.valueOf(allotScanResult.getSummaryResults().getQty() - bean.getTotalScanQty()));
         /**
          * 设置扫码Id
          */
@@ -336,6 +326,7 @@ public class AllotScanActivity extends BaseActivity<AllotScanView, AllotScanPres
         }
 
     }
+
     @Override
     public void setMaterialEdittextSelect() {
         etMaterialCode.setFocusable(true);
@@ -353,5 +344,12 @@ public class AllotScanActivity extends BaseActivity<AllotScanView, AllotScanPres
         etScanLocation.requestFocus();
         etScanLocation.findFocus();
         Selection.selectAll(etScanLocation.getText());
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
     }
 }

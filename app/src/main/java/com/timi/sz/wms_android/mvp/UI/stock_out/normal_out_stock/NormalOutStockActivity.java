@@ -16,9 +16,7 @@ import com.timi.sz.wms_android.base.uils.Constants;
 import com.timi.sz.wms_android.base.uils.PackageUtils;
 import com.timi.sz.wms_android.base.uils.SpUtils;
 import com.timi.sz.wms_android.base.uils.ToastUtils;
-import com.timi.sz.wms_android.bean.instock.search.OtherAuditSelectOrdernoBean;
 import com.timi.sz.wms_android.bean.other.OtherOutAndInStockBean;
-import com.timi.sz.wms_android.bean.outstock.buy.SubmitBarcodeOutAuditData;
 import com.timi.sz.wms_android.bean.outstock.buy.SubmitBarcodeOutSplitAuditData;
 import com.timi.sz.wms_android.bean.outstock.outsource.QueryOutSourceFeedByInputResult;
 import com.timi.sz.wms_android.bean.outstock.outsource.QueryOutSourcePickByInputResult;
@@ -47,6 +45,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 import static com.timi.sz.wms_android.base.uils.Constants.OTHER_IN_STOCK_SELECT_ORDERNO;
@@ -72,7 +71,6 @@ import static com.timi.sz.wms_android.base.uils.Constants.REQUEST_SCAN_CODE_MATE
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_ALLOT_OUT;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_ALLOT_OUT_PICK;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_BEAN;
-import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_CODE_STR;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_FINISH_GOODS_PICK;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_OTHER_OUT_AUDIT;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_OTHER_OUT_BILL;
@@ -148,6 +146,16 @@ public class NormalOutStockActivity extends BaseActivity<NormalOutStockView, Nor
     LinearLayout llCarton;
     @BindView(R.id.ll_material_attr)
     LinearLayout llMaterialAttr;
+    @BindView(R.id.tv_outowner_name)
+    TextView tvOutownerName;
+    @BindView(R.id.tv_inowner_name)
+    TextView tvInownerName;
+    @BindView(R.id.tv_create_orderno_name)
+    TextView tvCreateOrdernoName;
+    @BindView(R.id.ll_allot_out)
+    LinearLayout llAllotOut;
+    @BindView(R.id.ll_material_info)
+    LinearLayout llMaterialInfo;
     /**
      * 跳转的code
      */
@@ -493,8 +501,8 @@ public class NormalOutStockActivity extends BaseActivity<NormalOutStockView, Nor
                         summaryResultsOtherAudit.getQty(),
                         summaryResultsOtherAudit.getWaitQty(),
                         summaryResultsOtherAudit.getScanQty(),
-                        intentCode==OTHER_IN_STOCK_SELECT_ORDERNO?51:52,
-                        intentCode==OTHER_IN_STOCK_SELECT_ORDERNO?51:52);
+                        intentCode == OTHER_IN_STOCK_SELECT_ORDERNO ? 51 : 52,
+                        intentCode == OTHER_IN_STOCK_SELECT_ORDERNO ? 51 : 52);
 
                 //设置scanid
                 scanId = summaryResultsOtherAudit.getScanId();
@@ -595,8 +603,13 @@ public class NormalOutStockActivity extends BaseActivity<NormalOutStockView, Nor
                         summaryResultsAllotPick.getScanId(),
                         summaryResultsAllotPick.getQty(),
                         summaryResultsAllotPick.getWaitQty(),
-                        summaryResultsAllotPick.getScanQty(), 50,50);
-
+                        summaryResultsAllotPick.getScanQty(), 50, 50);
+                //调出货主   调入货主
+                //设置调出货主  调入货主 制单人
+                findViewById(R.id.ll_allot_out).setVisibility(View.VISIBLE);
+                tvInownerName.setText(summaryResultsAllotPick.getInOwner());
+                tvOutownerName.setText(summaryResultsAllotPick.getOutOwner());
+                tvCreateOrdernoName.setText(summaryResultsAllotPick.getCreaterName());
                 //设置scanid
                 scanId = summaryResultsAllotPick.getScanId();
                 //设置仓库id
@@ -615,9 +628,9 @@ public class NormalOutStockActivity extends BaseActivity<NormalOutStockView, Nor
         if (isCarton) {
             findViewById(R.id.ll_carton).setVisibility(View.VISIBLE);
             tvCartonNum.setText(String.valueOf(cartonNum));
-            if(cartonNum>0){
+            if (cartonNum > 0) {
                 tvCartonNum.setTextColor(getResources().getColor(R.color.login_txt_color));
-            }else {
+            } else {
                 tvCartonNum.setTextColor(getResources().getColor(R.color.color_333));
             }
         } else {
@@ -836,6 +849,7 @@ public class NormalOutStockActivity extends BaseActivity<NormalOutStockView, Nor
     public NormalOutStockView createView() {
         return this;
     }
+
     @Override
     public void submitBarcodeOutSplitAudit(SubmitBarcodeOutSplitAuditData data) {
 
@@ -894,10 +908,10 @@ public class NormalOutStockActivity extends BaseActivity<NormalOutStockView, Nor
                 if (isCarton) {
                     cartonNum = result.getCartonNo();
                     tvCartonNum.setText(String.valueOf(cartonNum));
-                    setTextViewContent(tvCartonNum,cartonNum);
-                    if(cartonNum>0){
+                    setTextViewContent(tvCartonNum, cartonNum);
+                    if (cartonNum > 0) {
                         tvCartonNum.setTextColor(getResources().getColor(R.color.login_txt_color));
-                    }else {
+                    } else {
                         tvCartonNum.setTextColor(getResources().getColor(R.color.color_333));
                     }
                 }
@@ -974,10 +988,10 @@ public class NormalOutStockActivity extends BaseActivity<NormalOutStockView, Nor
     @OnClick(R.id.btn_add)
     public void onViewClicked() {
         cartonNum = 0;
-        setTextViewContent(tvCartonNum,cartonNum);
-        if(cartonNum>0){
+        setTextViewContent(tvCartonNum, cartonNum);
+        if (cartonNum > 0) {
             tvCartonNum.setTextColor(getResources().getColor(R.color.login_txt_color));
-        }else {
+        } else {
             tvCartonNum.setTextColor(getResources().getColor(R.color.color_333));
         }
     }
@@ -1022,5 +1036,12 @@ public class NormalOutStockActivity extends BaseActivity<NormalOutStockView, Nor
     protected void onDestroy() {
         super.onDestroy();
         BaseMessage.unregister(this);
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
     }
 }

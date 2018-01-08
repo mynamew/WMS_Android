@@ -92,6 +92,86 @@
                     android:textSize="13sp"/>
             </LinearLayout>
 
+            <LinearLayout
+                android:id="@+id/ll_allot_out"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20px"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="30px"
+                        android:text="@string/outowner_name"
+                        android:textColor="#333"
+                        android:textSize="13sp"/>
+
+                    <TextView
+                        android:id="@+id/tv_outowner_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="60px"
+                        android:text=""
+                        android:textColor="#000"
+                        android:textSize="13sp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20px"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="30px"
+                        android:text="@string/inowner_name"
+                        android:textColor="#333"
+                        android:textSize="13sp"/>
+
+                    <TextView
+                        android:id="@+id/tv_inowner_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="60px"
+                        android:text=""
+                        android:textColor="#000"
+                        android:textSize="13sp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20px"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="30px"
+                        android:text="@string/create_orderno_person"
+                        android:textColor="#333"
+                        android:textSize="13sp"/>
+
+                    <TextView
+                        android:id="@+id/tv_create_orderno_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="85px"
+                        android:text=""
+                        android:textColor="#000"
+                        android:textSize="13sp"/>
+                </LinearLayout>
+
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -326,9 +406,10 @@
             <LinearLayout
                 android:id="@+id/ll_material_info"
                 android:layout_width="match_parent"
-                android:visibility="gone"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:visibility="gone">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

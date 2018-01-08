@@ -18,17 +18,17 @@
         android:layout_height="88px"
         android:layout_alignParentBottom="true"
         android:background="@drawable/selector_btn"
-        android:text="@string/confirm_commit"
+        android:text="@string/commit_check"
         android:textColor="@color/white"
         />
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/head">
+        android:layout_below="@+id/head"
+        android:background="@color/white">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -80,6 +80,78 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingLeft="60px"
+                    android:text=""
+                    android:textColor="#000"
+                    android:textSize="13sp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20px"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="30px"
+                    android:text="@string/outowner_name"
+                    android:textColor="#333"
+                    android:textSize="13sp"/>
+
+                <TextView
+                    android:id="@+id/tv_outowner_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="60px"
+                    android:text=""
+                    android:textColor="#000"
+                    android:textSize="13sp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20px"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="30px"
+                    android:text="@string/inowner_name"
+                    android:textColor="#333"
+                    android:textSize="13sp"/>
+
+                <TextView
+                    android:id="@+id/tv_inowner_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="60px"
+                    android:text=""
+                    android:textColor="#000"
+                    android:textSize="13sp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20px"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="30px"
+                    android:text="@string/create_orderno_person"
+                    android:textColor="#333"
+                    android:textSize="13sp"/>
+
+                <TextView
+                    android:id="@+id/tv_create_orderno_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="85px"
                     android:text=""
                     android:textColor="#000"
                     android:textSize="13sp"/>
@@ -228,9 +300,9 @@
                     android:layout_marginTop="10dp"
                     android:gravity="center_vertical"
                     android:paddingLeft="15dp"
-                    android:textSize="13sp"
                     android:text="@string/material_code_tip"
-                    android:textColor="#333"/>
+                    android:textColor="#333"
+                    android:textSize="13sp"/>
 
                 <!--条码-->
                 <EditText

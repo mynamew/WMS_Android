@@ -77,6 +77,7 @@
                     android:id="@+id/production_feed"
                     layout="@layout/header_batch_list_production_feed"
                     android:visibility="gone"/>
+
                 <include
                     android:id="@+id/production_audit"
                     layout="@layout/header_batch_list_production_audit"
@@ -121,10 +122,12 @@
                     android:id="@+id/send_pick"
                     layout="@layout/header_batch_list_send_pick"
                     android:visibility="gone"/>
+
                 <include
                     android:id="@+id/allot_pick"
                     layout="@layout/header_batch_list_allot_pick"
                     android:visibility="gone"/>
+
                 <LinearLayout
                     android:id="@+id/ll_stock_name"
                     android:layout_width="match_parent"
@@ -301,6 +304,132 @@
 
                     <TextView
                         android:id="@+id/tv_have_count_num"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10px"
+                        android:gravity="left"
+                        android:text="123213123"
+                        android:textColor="@color/login_txt_color"
+                        android:textSize="13sp"/>
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginBottom="10px"
+                android:layout_marginLeft="30px"
+                android:layout_marginRight="30px"
+                android:layout_marginTop="10px"
+                android:background="@color/divide_color"/>
+
+            <LinearLayout
+                android:id="@+id/ll_allot_out"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="30px"
+                android:visibility="gone">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="96px"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="left"
+                        android:text="@string/outowner_name"
+                        android:textColor="#666"
+                        android:textSize="13sp"/>
+
+                    <TextView
+                        android:id="@+id/tv_outowner_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10px"
+                        android:gravity="left"
+                        android:text=""
+                        android:textColor="#000"
+                        android:textSize="13sp"/>
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="96px"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="left"
+                        android:text="@string/inowner_name"
+                        android:textColor="#666"
+                        android:textSize="13sp"/>
+
+                    <TextView
+                        android:id="@+id/tv_inowner_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10px"
+                        android:gravity="left"
+                        android:text=""
+                        android:textColor="#000"
+                        android:textSize="13sp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="96px"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="left"
+                        android:text="@string/create_orderno_person"
+                        android:textColor="#666"
+                        android:textSize="13sp"/>
+
+                    <TextView
+                        android:id="@+id/tv_create_orderno_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10px"
+                        android:gravity="left"
+                        android:text=""
+                        android:textColor="#000"
+                        android:textSize="13sp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical"
+                    android:visibility="invisible">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="left"
+                        android:text="@string/have_point_num_tip"
+                        android:textColor="#666"
+                        android:textSize="13sp"/>
+
+                    <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10px"

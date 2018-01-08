@@ -235,6 +235,14 @@ public class BatchPointListActivity extends BaseActivity<BatchPointListView, Bat
     TextView tvProductionFeedOrderno;
     @BindView(R.id.tv_production_feed_department)
     TextView tvProductionFeedDepartment;
+    @BindView(R.id.tv_outowner_name)
+    TextView tvOutownerName;
+    @BindView(R.id.tv_inowner_name)
+    TextView tvInownerName;
+    @BindView(R.id.tv_create_orderno_name)
+    TextView tvCreateOrdernoName;
+    @BindView(R.id.ll_allot_out)
+    LinearLayout llAllotOut;
     /**
      * 跳转的code
      */
@@ -749,6 +757,11 @@ public class BatchPointListActivity extends BaseActivity<BatchPointListView, Bat
                 btnPointCommit.setVisibility(View.GONE);
                 allotOut = new Gson().fromJson(getIntent().getStringExtra(STOCK_OUT_BEAN), QueryAllotOutResult.class);
                 QueryAllotOutResult.SummaryResultsBean summaryResultsAllotOut = allotOut.getSummaryResults();
+                //设置调出货主  调入货主 制单人
+                findViewById(R.id.ll_allot_out).setVisibility(View.VISIBLE);
+                tvInownerName.setText(summaryResultsAllotOut.getInOwner());
+                tvOutownerName.setText(summaryResultsAllotOut.getOutOwner());
+                tvCreateOrdernoName.setText(summaryResultsAllotOut.getCreaterName());
                 //设置内容
                 setHeaderContent(summaryResultsAllotOut.getBillDate(), summaryResultsAllotOut.getWarehouseName(), summaryResultsAllotOut.getRegionName(), summaryResultsAllotOut.getQty(), summaryResultsAllotOut.getWaitQty(), summaryResultsAllotOut.getScanQty());
                 //设置单号
@@ -1161,5 +1174,12 @@ public class BatchPointListActivity extends BaseActivity<BatchPointListView, Bat
             tvWaitPointNum.setText(String.valueOf(Integer.parseInt(tvBuyNum.getText().toString()) - result.getTotalScanQty()));
             tvHaveCountNum.setText(String.valueOf(result.getTotalScanQty()));
         }
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
     }
 }

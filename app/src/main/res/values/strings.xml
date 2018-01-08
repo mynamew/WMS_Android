@@ -913,7 +913,7 @@
     <string name="check_orderno_info">盘点单信息详情</string>
     <string name="item_instock_total_num_tip">入库总数</string>
     /**====== 一步调入 ======**/
-    <string name="allot_out_total_num">调出总数</string>
+    <string name="allot_out_total_num">调拨总数</string>
     <string name="allot_total_num">调入总数</string>
     <string name="please_input_scan_lib_code">请输入/扫描货架号</string>
     <string name="goal_storege">目的货架</string>
@@ -985,7 +985,8 @@
     <string name="check_qty_no_less_zero">盘点数量不能小于等于0！</string>
     <string name="current_material_no_datecode_please_repeat_in">当前物料没有批次信息，请重新进入！</string>
     <string name="set_pda_code_success">设置PDA参数成功！</string>
-
+    <string name="outowner_name">调出货主</string>
+    <string name="inowner_name">调入货主</string>
 
 
 </resources>

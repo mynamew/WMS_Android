@@ -4,10 +4,6 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Selection;
-import android.text.TextUtils;
-import android.view.KeyEvent;
-import android.view.View;
-import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -20,12 +16,10 @@ import com.timi.sz.wms_android.base.adapter.BaseRecyclerAdapter;
 import com.timi.sz.wms_android.base.adapter.RecyclerViewHolder;
 import com.timi.sz.wms_android.base.divider.DividerItemDecoration;
 import com.timi.sz.wms_android.base.uils.Constants;
-import com.timi.sz.wms_android.base.uils.InputMethodUtils;
 import com.timi.sz.wms_android.base.uils.LogUitls;
 import com.timi.sz.wms_android.base.uils.PackageUtils;
 import com.timi.sz.wms_android.base.uils.SpUtils;
 import com.timi.sz.wms_android.base.uils.ToastUtils;
-import com.timi.sz.wms_android.bean.instock.VertifyLocationCodeBean;
 import com.timi.sz.wms_android.bean.outstock.outsource.common.DetailResultsBean;
 import com.timi.sz.wms_android.bean.stockin_work.query.AllotOneSetpResult;
 import com.timi.sz.wms_android.mvp.base.BaseActivity;
@@ -34,6 +28,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
@@ -75,6 +70,12 @@ public class OneStepAllotActivity extends BaseActivity<OneStepAllotView, OneStep
     TextView tvDate;
     @BindView(R.id.tv_name)
     TextView tvName;
+    @BindView(R.id.tv_outowner_name)
+    TextView tvOutownerName;
+    @BindView(R.id.tv_inowner_name)
+    TextView tvInownerName;
+    @BindView(R.id.tv_create_orderno_name)
+    TextView tvCreateOrdernoName;
     private int intentCode;
     private AllotOneSetpResult bean;
     private BaseRecyclerAdapter<DetailResultsBean> detailResultsBeanBaseRecyclerAdapter;
@@ -112,14 +113,18 @@ public class OneStepAllotActivity extends BaseActivity<OneStepAllotView, OneStep
                 params.put("MAC", PackageUtils.getMac());
                 params.put("BillId", bean.getSummaryResults().getBillId());
                 params.put("LocationNo", result);
-                getPresenter().submitTransferOneStep(params);
+                 getPresenter().submitTransferOneStep(params);
             }
         });
     }
+
     @Override
     public void initData() {
         AllotOneSetpResult.SummaryResultsBean summaryResults = bean.getSummaryResults();
         setHeaderContent(summaryResults.getBillCode(), summaryResults.getBillDate(), summaryResults.getWarehouseName(), summaryResults.getQty(), summaryResults.getScanQty());
+        tvInownerName.setText(summaryResults.getInOwner());
+        tvOutownerName.setText(summaryResults.getOutOwner());
+        tvCreateOrdernoName.setText(summaryResults.getCreaterName());
         detailResultsBeanBaseRecyclerAdapter = new BaseRecyclerAdapter<DetailResultsBean>(this, bean.getDetailResults()) {
             @Override
             protected int getItemLayoutId(int viewType) {
@@ -150,6 +155,7 @@ public class OneStepAllotActivity extends BaseActivity<OneStepAllotView, OneStep
     public OneStepAllotView createView() {
         return this;
     }
+
     @Override
     public void submitTransferOneStep(Object bean) {
         ToastUtils.showShort(getString(R.string.one_step_success));
@@ -207,5 +213,12 @@ public class OneStepAllotActivity extends BaseActivity<OneStepAllotView, OneStep
         etGoalStorage.requestFocus();
         etGoalStorage.findFocus();
         Selection.selectAll(etGoalStorage.getText());
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
     }
 }
