@@ -277,6 +277,7 @@ public class BatchNormalActivity extends BaseActivity<BatchNormalView, BatchNorm
                 setActivityTitle(R.string.point_scan_sale_pick_title);
                 srcBillType = 42;
                 destBillType = 61;
+                break;
             case STOCK_OUT_SEND_OUT_PICK://发货拣货
                 setActivityTitle(R.string.point_scan_send_pick_title);
                 srcBillType = 41;
@@ -302,6 +303,11 @@ public class BatchNormalActivity extends BaseActivity<BatchNormalView, BatchNorm
         if (isCarton) {
             findViewById(R.id.ll_carton).setVisibility(View.VISIBLE);
             tvCartonNum.setText(String.valueOf(cartonNum));
+            if(cartonNum>0){
+                tvCartonNum.setTextColor(getResources().getColor(R.color.login_txt_color));
+            }else {
+                tvCartonNum.setTextColor(getResources().getColor(R.color.color_333));
+            }
         } else {
             findViewById(R.id.ll_carton).setVisibility(View.GONE);
         }
@@ -416,6 +422,11 @@ public class BatchNormalActivity extends BaseActivity<BatchNormalView, BatchNorm
                 if (isCarton) {
                     cartonNum = result.getCartonNo();
                     tvCartonNum.setText(String.valueOf(cartonNum));
+                    if(cartonNum>0){
+                        tvCartonNum.setTextColor(getResources().getColor(R.color.login_txt_color));
+                    }else {
+                        tvCartonNum.setTextColor(getResources().getColor(R.color.color_333));
+                    }
                 }
             }
         }
@@ -498,6 +509,12 @@ public class BatchNormalActivity extends BaseActivity<BatchNormalView, BatchNorm
     @OnClick(R.id.btn_add)
     public void onViewClicked() {
         cartonNum = 0;
+        setTextViewContent(tvCartonNum,cartonNum);
+        if(cartonNum>0){
+            tvCartonNum.setTextColor(getResources().getColor(R.color.login_txt_color));
+        }else {
+            tvCartonNum.setTextColor(getResources().getColor(R.color.color_333));
+        }
     }
 
     @OnClick({R.id.iv_material_scan, R.id.btn_close})

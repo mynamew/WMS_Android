@@ -281,7 +281,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="100px"
                         android:layout_weight="1"
-                        android:textColor="#333"/>
+                        android:textColor="@color/color_333"/>
 
                     <Button
                         android:id="@+id/btn_add"

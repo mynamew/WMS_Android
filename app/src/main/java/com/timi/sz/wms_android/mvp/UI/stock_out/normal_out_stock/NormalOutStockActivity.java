@@ -609,6 +609,20 @@ public class NormalOutStockActivity extends BaseActivity<NormalOutStockView, Nor
             default:
                 break;
         }
+        /**
+         * 是否装箱
+         */
+        if (isCarton) {
+            findViewById(R.id.ll_carton).setVisibility(View.VISIBLE);
+            tvCartonNum.setText(String.valueOf(cartonNum));
+            if(cartonNum>0){
+                tvCartonNum.setTextColor(getResources().getColor(R.color.login_txt_color));
+            }else {
+                tvCartonNum.setTextColor(getResources().getColor(R.color.color_333));
+            }
+        } else {
+            findViewById(R.id.ll_carton).setVisibility(View.GONE);
+        }
     }
 
     /**
@@ -880,6 +894,12 @@ public class NormalOutStockActivity extends BaseActivity<NormalOutStockView, Nor
                 if (isCarton) {
                     cartonNum = result.getCartonNo();
                     tvCartonNum.setText(String.valueOf(cartonNum));
+                    setTextViewContent(tvCartonNum,cartonNum);
+                    if(cartonNum>0){
+                        tvCartonNum.setTextColor(getResources().getColor(R.color.login_txt_color));
+                    }else {
+                        tvCartonNum.setTextColor(getResources().getColor(R.color.color_333));
+                    }
                 }
                 //设置数量
                 tvMaterialNum.setText("(" + result.getBarcodeQty() + ")" + result.getLineScanQty() + "/" + result.getLineMustQty());
@@ -954,6 +974,12 @@ public class NormalOutStockActivity extends BaseActivity<NormalOutStockView, Nor
     @OnClick(R.id.btn_add)
     public void onViewClicked() {
         cartonNum = 0;
+        setTextViewContent(tvCartonNum,cartonNum);
+        if(cartonNum>0){
+            tvCartonNum.setTextColor(getResources().getColor(R.color.login_txt_color));
+        }else {
+            tvCartonNum.setTextColor(getResources().getColor(R.color.color_333));
+        }
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
