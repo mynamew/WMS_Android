@@ -216,7 +216,8 @@
             android:hardwareAccelerated="false"
             android:windowSoftInputMode="adjustPan|stateHidden">
         </activity>
-        <activity android:name=".mvp.UI.stock_out.divide_print.SplitPrintActivity">
+        <activity android:name=".mvp.UI.stock_out.divide_print.SplitPrintActivity"
+                  android:windowSoftInputMode="adjustPan|stateHidden">
         </activity>
         <activity android:name=".mvp.UI.stock_out.pick.PickActivity">
         </activity>

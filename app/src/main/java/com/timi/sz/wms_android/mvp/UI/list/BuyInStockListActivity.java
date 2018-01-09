@@ -335,11 +335,11 @@ public class BuyInStockListActivity extends BaseActivity<BuyInStockListView, Buy
                 break;
             case STOCK_IN_WORK_FORM_CHANGE_OUT://形态转换出库
                 setActivityTitle(R.string.form_change_list_title);
-                currentUIState = ORDERNO_DATE;
+                currentUIState = ORDERNO;
                 break;
             case STOCK_IN_WORK_FORM_CHANGE_IN://形态转换入库
                 setActivityTitle(R.string.form_change_list_title);
-                currentUIState = ORDERNO_DATE;
+                currentUIState = ORDERNO;
                 break;
             case Constants.STOCK_IN_WORK_POINT://盘点
                 setActivityTitle(R.string.check_list_title);

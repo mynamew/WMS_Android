@@ -113,6 +113,7 @@ public class FormChangeOutstockActivity extends BaseActivity<FormChangeOutstockV
         intentCode = getIntent().getIntExtra(Constants.STOCK_IN_WORK_CODE_STR, 0);
         scanId = formChangeOutResult.getScanId();
         billId = formChangeOutResult.getBillId();
+        BaseMessage.register(this);
     }
 
     @Override
@@ -300,5 +301,11 @@ public class FormChangeOutstockActivity extends BaseActivity<FormChangeOutstockV
             setTextViewContent(tvWaitPointNum, formChangeOutResult.getQty() - result.getTotalScanQty());
             tvMaterialNum.setText("(" + result.getBarcodeQty() + ")" + result.getTotalScanQty() + "/" + formChangeOutResult.getQty());
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        BaseMessage.unregister(this);
     }
 }
