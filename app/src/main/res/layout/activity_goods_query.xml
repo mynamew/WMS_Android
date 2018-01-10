@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context="com.timi.sz.wms_android.mvp.UI.stock_in_work.goods_query.GoodsQueryActivity">
+
+    <include layout="@layout/title_head"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="88px"
+        android:layout_marginLeft="20px"
+        android:layout_marginRight="30px">
+
+        <TextView
+            android:id="@+id/tv_pack_code_tip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:paddingLeft="10px"
+            android:text="@string/goods_barcode"
+            android:textColor="#333"
+            android:textSize="13sp"
+            />
+
+        <EditText
+            android:id="@+id/et_pack_code"
+            android:layout_width="match_parent"
+            android:layout_height="60px"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="50px"
+            android:layout_toRightOf="@id/tv_pack_code_tip"
+            android:background="@drawable/selector_et"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:hint="@string/please_input_scan_query_material_code"
+            android:imeOptions="actionSearch"
+            android:paddingLeft="20px"
+            android:paddingRight="80px"
+            android:singleLine="true"
+            android:text=""
+            android:textSize="13sp"/>
+
+        <ImageView
+            android:id="@+id/iv_goods_scan"
+            android:layout_width="40px"
+            android:layout_height="40px"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="20px"
+            android:layout_marginRight="20px"
+            android:src="@mipmap/ic_scan"/>
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="20px"
+        android:background="@color/divide_color"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="30px"
+        android:layout_marginTop="20px"
+        android:background="@drawable/bg_rectangle_top_white"
+        android:orientation="vertical"
+        android:paddingLeft="30px"
+        android:paddingRight="30px">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="72px"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="72px"
+                android:gravity="center_vertical"
+                android:text="@string/repertory_total_num"
+                android:textColor="@color/color_333"
+                android:textSize="13sp"/>
+
+            <TextView
+                android:id="@+id/tv_repertort_total_num"
+                android:layout_width="wrap_content"
+                android:layout_height="72px"
+                android:layout_marginLeft="30px"
+                android:text=""
+                android:textColor="@color/color_000"
+                android:textSize="14sp"/>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/divide_color"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingBottom="5px"
+            android:paddingTop="10px">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/item_material_code"
+                android:textColor="#333"
+                android:textSize="13sp"/>
+
+            <TextView
+                android:id="@+id/tv_putaway_material_code"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30px"
+                android:text=""
+
+                android:textColor="#000"
+                android:textSize="13sp"/>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingBottom="5px"
+            android:paddingTop="10px">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/item_material_name"
+                android:textColor="#333"
+                android:textSize="13sp"/>
+
+            <TextView
+                android:id="@+id/tv_putaway_material_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30px"
+                android:text=""
+
+                android:textColor="#000"
+                android:textSize="13sp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingBottom="10px"
+            android:paddingTop="10px">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/item_material_model"
+                android:textColor="#333"
+                android:textSize="13sp"/>
+
+            <TextView
+                android:id="@+id/tv_putaway_material_nmodel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30px"
+                android:text=""
+
+                android:textColor="#000"
+                android:textSize="13sp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingBottom="5px"
+            android:paddingTop="10px">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/item_material_attr"
+                android:textColor="#333"
+                android:textSize="13sp"/>
+
+            <TextView
+                android:id="@+id/tv_putaway_material_attr"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30px"
+                android:text=""
+                android:textColor="#000"
+                android:textSize="13sp"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="20px"
+        android:background="@color/divide_color"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20px"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_line_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30px"
+            android:text="序号"
+            android:textColor="#333"
+            android:textSize="13sp"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30px"
+            android:layout_weight="2"
+            android:text="@string/batch_tip"
+            android:textColor="@color/color_333"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="@string/location_code"
+            android:textColor="@color/color_333"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/number"
+            android:textColor="@color/color_333"/>
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rlv_material_repertory"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
+</LinearLayout>

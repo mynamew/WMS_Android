@@ -13,12 +13,11 @@ import com.timi.sz.wms_android.mvp.UI.stock_in_work.allot_scan.AllotScanActivity
 import com.timi.sz.wms_android.mvp.UI.stock_in_work.barcode_exchange.BarcodeExchangeActivity;
 import com.timi.sz.wms_android.mvp.UI.stock_in_work.form_change_instock.FormChangeInstockActivity;
 import com.timi.sz.wms_android.mvp.UI.stock_in_work.form_change_outstock.FormChangeOutstockActivity;
+import com.timi.sz.wms_android.mvp.UI.stock_in_work.goods_query.GoodsQueryActivity;
 import com.timi.sz.wms_android.mvp.UI.stock_in_work.lib_adjust.LibraryAdjustActivity;
 import com.timi.sz.wms_android.mvp.UI.stock_in_work.pack_adjust.PackAdjustActivity;
+import com.timi.sz.wms_android.mvp.UI.stock_in_work.pack_query.PackQueryActivity;
 import com.timi.sz.wms_android.mvp.UI.stock_in_work.query.StockInWorkQueryActivity;
-import com.timi.sz.wms_android.mvp.UI.stock_in_work.query.StockInWorkQueryActivity_ViewBinding;
-import com.timi.sz.wms_android.mvp.UI.stock_in_work.stock_query.StockQueryActivity;
-import com.timi.sz.wms_android.mvp.UI.stock_out.StockOutActivity;
 import com.timi.sz.wms_android.mvp.UI.stock_out.query.StockOutSearchActivity;
 import com.timi.sz.wms_android.mvp.base.view.BaseNoMvpActivity;
 
@@ -54,7 +53,7 @@ public class StockInWorkActivity extends BaseNoMvpActivity {
 
     }
 
-    @OnClick({R.id.tv_stockin_work_barcode_change,R.id.tv_allot_outstock,R.id.tv_stockin_work_storage_location_change, R.id.tv_stockin_work_scan_in, R.id.tv_stockin_work_one_step_in, R.id.tv_stockin_work_group_change, R.id.tv_stockin_work_out_stock, R.id.tv_stockin_work_in_stock, R.id.tv_stockin_work_query_repertory, R.id.tv_stockin_work_count, R.id.tv_stock_in_sale_return})
+    @OnClick({R.id.tv_stockin_work_barcode_change,R.id.tv_allot_outstock,R.id.tv_stockin_work_storage_location_change, R.id.tv_stockin_work_scan_in, R.id.tv_stockin_work_one_step_in, R.id.tv_stockin_work_group_change, R.id.tv_stockin_work_out_stock, R.id.tv_stockin_work_in_stock, R.id.tv_stockin_work_pack_query,R.id.tv_stockin_work_goods_query, R.id.tv_stockin_work_count})
     public void onViewClicked(View view) {
         Intent intent = new Intent();
         switch (view.getId()) {
@@ -98,8 +97,12 @@ public class StockInWorkActivity extends BaseNoMvpActivity {
                 }
                 intent.putExtra(Constants.STOCK_IN_WORK_CODE_STR,Constants.STOCK_IN_WORK_FORM_CHANGE_IN);
                 break;
-            case R.id.tv_stockin_work_query_repertory://库存查询
-                intent.setClass(StockInWorkActivity.this, StockQueryActivity.class);
+            case R.id.tv_stockin_work_pack_query://容器查询
+                intent.setClass(StockInWorkActivity.this, PackQueryActivity.class);
+                intent.putExtra(Constants.STOCK_IN_WORK_CODE_STR,Constants.STOCK_IN_WORK_STOCK_QUERY);
+                break;
+            case R.id.tv_stockin_work_goods_query://物品查询
+                intent.setClass(StockInWorkActivity.this, GoodsQueryActivity.class);
                 intent.putExtra(Constants.STOCK_IN_WORK_CODE_STR,Constants.STOCK_IN_WORK_STOCK_QUERY);
                 break;
             case R.id.tv_stockin_work_count://盘点
@@ -110,7 +113,6 @@ public class StockInWorkActivity extends BaseNoMvpActivity {
                 }
                 intent.putExtra(Constants.STOCK_IN_WORK_CODE_STR,Constants.STOCK_IN_WORK_POINT);//盘点
                 break;
-            case R.id.tv_stock_in_sale_return://
             case R.id.tv_allot_outstock://调拨调出
                 /**
                  * 如果是无纸化作业

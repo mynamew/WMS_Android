@@ -2,6 +2,7 @@ package com.timi.sz.wms_android.mvp.UI.stock_in_work.check;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Selection;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -80,6 +81,10 @@ public class CheckActivity extends BaseActivity<CheckView, CheckPresenter> imple
     TextView tvMaterialAttr;
     @BindView(R.id.tv_check_num)
     TextView tvCheckNum;
+    @BindView(R.id.tv_check_warehouse)
+    TextView tvCheckWarehouse;
+    @BindView(R.id.tv_check_natureid)
+    TextView tvCheckNatureid;
     private PointResult pointBean;
 
     @Override
@@ -127,6 +132,13 @@ public class CheckActivity extends BaseActivity<CheckView, CheckPresenter> imple
      * @param scanQty
      */
     private void setHeaderContent(String billCode, String billDate, String checkTypeName, String createrName, int items, int qty, int waitQty, int scanQty) {
+        //是否是盲盘
+        //0-明盘 （显示需盘点数和待点数）
+        //1 - 盲盘（只显示扫描数）
+        if (pointBean.getCheckNatureId() == 1) {//盲盘
+            findViewById(R.id.ll_repetory_total).setVisibility(View.GONE);
+            findViewById(R.id.ll_wait_total).setVisibility(View.GONE);
+        }
         tvCheckOrderno.setText(billCode);
         setTextViewContent(tvCheckOrderno, billCode);
         setTextViewContent(tvDate, billDate);
@@ -136,6 +148,8 @@ public class CheckActivity extends BaseActivity<CheckView, CheckPresenter> imple
         setTextViewContent(tvSendMaterialTotalNum, qty);
         setTextViewContent(tvWaitPointNum, waitQty);
         setTextViewContent(tvHaveCountNum, scanQty);
+        setTextViewContent(tvCheckWarehouse, pointBean.getWarehouseName());
+        setTextViewContent(tvCheckNatureid, pointBean.getCheckNatureId()==0?getString(R.string.light_check):getString(R.string.dark_check));
     }
 
     @Override
@@ -169,6 +183,7 @@ public class CheckActivity extends BaseActivity<CheckView, CheckPresenter> imple
                  */
                 Intent it = new Intent(CheckActivity.this, CheckDetailActivity.class);
                 it.putExtra(STOCK_IN_WORK_CODE_STR, intentCode);
+                it.putExtra("isLookCheck",  pointBean.getCheckNatureId()==1);
                 it.putExtra(Constants.STOCK_IN_WORK_BILLID, pointBean.getBillId());
                 startActivity(it);
                 break;
@@ -241,9 +256,28 @@ public class CheckActivity extends BaseActivity<CheckView, CheckPresenter> imple
     public void submitCheckData(SubmitCheckDataResult bean) {
         ToastUtils.showShort(getString(R.string.commit_check_data_success));
         tvCheckNum.setText(etCheckNum.getText().toString());
+        etCheckNum.setText("");
         setTextViewContent(tvWaitPointNum, pointBean.getQty() - bean.getTotalScanQty());
         setTextViewContent(tvHaveCountNum, bean.getTotalScanQty());
     }
 
+    @Override
+    public void setMaterialEdittextSelect() {
+        etMaterialCode.setText(etMaterialCode.getText());
+        etMaterialCode.setFocusable(true);
+        etMaterialCode.setFocusableInTouchMode(true);
+        etMaterialCode.requestFocus();
+        etMaterialCode.findFocus();
+        Selection.selectAll(etMaterialCode.getText());
+    }
 
+    @Override
+    public void setCheckqQtySelect() {
+        etCheckNum.setText(etCheckNum.getText());
+        etCheckNum.setFocusable(true);
+        etCheckNum.setFocusableInTouchMode(true);
+        etCheckNum.requestFocus();
+        etMaterialCode.findFocus();
+        Selection.selectAll(etCheckNum.getText());
+    }
 }

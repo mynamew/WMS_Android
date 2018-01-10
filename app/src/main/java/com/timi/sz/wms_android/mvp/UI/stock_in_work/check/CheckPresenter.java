@@ -41,11 +41,13 @@ public class CheckPresenter extends MvpBasePresenter<CheckView> {
                 @Override
                 public void onSuccess(MaterialDataBean o) {
                     getView().getMaterialData(o);
+                    getView().setCheckqQtySelect();
                 }
 
                 @Override
                 public void onError(String errorMsg) {
 //                    ToastUtils.showShort(errorMsg);
+                    getView().setMaterialEdittextSelect();
                 }
             });
         }
@@ -64,11 +66,13 @@ public class CheckPresenter extends MvpBasePresenter<CheckView> {
                 @Override
                 public void onSuccess(SubmitCheckDataResult o) {
                     getView().submitCheckData(o);
+                    getView().setMaterialEdittextSelect();
                 }
 
                 @Override
                 public void onError(String errorMsg) {
 //                    ToastUtils.showShort(errorMsg);
+                    getView().setCheckqQtySelect();
                 }
             });
         }

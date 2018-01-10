@@ -52,11 +52,12 @@ public class CheckDetailActivity extends BaseActivity<CheckDetailView, CheckDeta
     public int setLayoutId() {
         return R.layout.activity_check_detail;
     }
-
+    private boolean isLookCheck=false;//是否盲盘
     @Override
     public void initBundle(Bundle savedInstanceState) {
         setActivityTitle(R.string.check_detail);
         billId = getIntent().getIntExtra(STOCK_IN_WORK_BILLID, 0);
+        isLookCheck = getIntent().getBooleanExtra("isLookCheck", false);
     }
 
     @Override
@@ -138,6 +139,10 @@ public class CheckDetailActivity extends BaseActivity<CheckDetailView, CheckDeta
                     holder.setTextView(R.id.tv_should_return_num, item.getQty());
                     holder.setTextView(R.id.tv_material_code, item.getMaterialCode() + item.getMaterialName());//合格数？ 应退数
                     holder.setTextView(R.id.tv_material_model, item.getMaterialAttribute() + item.getMaterialStandard());
+                    if(isLookCheck){//盲盘
+                         holder.getView(R.id.ll_repetory_total).setVisibility(View.GONE);
+                         holder.getView(R.id.ll_wait_total).setVisibility(View.GONE);
+                    }
                 }
             };
             rlvDetail.setAdapter(adapter);

@@ -247,7 +247,7 @@
     <string name="please_input_orderno_barcode_department_one">请输入单号或条码或部门至少一个</string>
     <string name="please_input_orderno_startdate_barcode_one">请输入单号或启动日期或条码至少一个</string>
     /**====== 来料入库 ======**/
-    <string name="should_instock_qty">应入：</string>
+    <string name="should_instock_qty">库存：</string>
     <string name="in_stock_num_title">入库上架(来料入库)</string>
     <string name="receive_pro_num">到货单号</string>
     <string name="create_orderno_date">到货日期</string>
@@ -485,7 +485,7 @@
     <string name="outsource_orderno_tip">委外单号</string>
     <string name="stock_name_tip">仓库名称</string>
     <string name="strict_name_tip">区域名称</string>
-    <string name="send_material_total_num_tip">发料总数</string>
+    <string name="send_material_total_num_tip">库存总数</string>
     <string name="have_get_total_num_tip">已领总数</string>
     <string name="can_get_total_num_tip">可领总数</string>
     <string name="send_material_num_tip">发料数量</string>
@@ -896,7 +896,7 @@
     <string name="coding">编码：</string>
     <string name="batch">批次：</string>
     <string name="please_input_query_pack_code">请输入/扫描要查询的容器条码</string>
-    <string name="please_input_scan_query_material_code">请输入/扫描要查询的物料条码</string>
+    <string name="please_input_scan_query_material_code">请输入/扫描要查询的物品条码</string>
     <string name="should_return_material_qty">应退：</string>
     <string name="lib_adjust_success">库位调整成功！</string>
     /**====== 库位调整详情 ======**/
@@ -935,7 +935,7 @@
     <string name="please_input_dest_pack_code">请输入目的容器条码</string>
     <string name="pack_adjust_success">容器调整成功！</string>
     /**====== 库存查询======**/
-    <string name="container_repertory">容器存储</string>
+    <string name="container_repertory">容器库存</string>
     <string name="goods_repertory">物品库存</string>
     <string name="query_repertory_tip">库存查询</string>
     <string name="goods_type">物品种类</string>
@@ -971,7 +971,7 @@
     <string name="number">数量</string>
     <string name="check_detail">盘点明细</string>
     <string name="item_check_num">盘点：</string>
-    <string name="stockin_check_date">盘点日期：</string>
+    <string name="stockin_check_date">盘点时间：</string>
     <string name="check_record_title">盘点记录</string>
     /******************************************************************************************************************************************************/
     /******************************************************************************************************************************************************/
@@ -987,6 +987,12 @@
     <string name="set_pda_code_success">设置PDA参数成功！</string>
     <string name="outowner_name">调出货主</string>
     <string name="inowner_name">调入货主</string>
+    <string name="pack_barcode">容器条码</string>
+    <string name="goods_barcode">物品条码</string>
+    <string name="check_warehouse">盘点仓库</string>
+    <string name="check_natureid">盘点性质</string>
+    <string name="light_check">明盘</string>
+    <string name="dark_check">盲盘</string>
 
 
 </resources>

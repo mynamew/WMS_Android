@@ -130,6 +130,51 @@
                     android:textColor="#000"
                     android:textSize="13sp"/>
             </LinearLayout>
+    <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20px"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="30px"
+                    android:text="@string/check_warehouse"
+                    android:textColor="#333"
+                    android:textSize="13sp"/>
+
+                <TextView
+                    android:id="@+id/tv_check_warehouse"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="60px"
+                    android:text=""
+                    android:textColor="#000"
+                    android:textSize="13sp"/>
+            </LinearLayout>  <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20px"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="30px"
+                    android:text="@string/check_natureid"
+                    android:textColor="#333"
+                    android:textSize="13sp"/>
+
+                <TextView
+                    android:id="@+id/tv_check_natureid"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="60px"
+                    android:text=""
+                    android:textColor="#000"
+                    android:textSize="13sp"/>
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -180,6 +225,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/ll_repetory_total"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20px"
@@ -204,6 +250,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/ll_wait_total"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20px"

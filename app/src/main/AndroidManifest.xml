@@ -8,9 +8,9 @@
     <!-- zxing -->
     <uses-feature android:name="android.hardware.camera"/>
     <uses-feature android:name="android.hardware.camera.autofocus"/>
-    <!--蓝牙权限-->
-    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
-    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <!-- 蓝牙权限 -->
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
+    <uses-permission android:name="android.permission.BLUETOOTH"/>
     <uses-permission android:name="android.permission.VIBRATE"/>
     <uses-permission android:name="android.permission.CAMERA"/>
     <!-- Required -->
@@ -216,8 +216,9 @@
             android:hardwareAccelerated="false"
             android:windowSoftInputMode="adjustPan|stateHidden">
         </activity>
-        <activity android:name=".mvp.UI.stock_out.divide_print.SplitPrintActivity"
-                  android:windowSoftInputMode="adjustPan|stateHidden">
+        <activity
+            android:name=".mvp.UI.stock_out.divide_print.SplitPrintActivity"
+            android:windowSoftInputMode="adjustPan|stateHidden">
         </activity>
         <activity android:name=".mvp.UI.stock_out.pick.PickActivity">
         </activity>
@@ -230,10 +231,6 @@
             android:configChanges="orientation|keyboardHidden">
         </activity>
         <activity android:name=".mvp.UI.stock_in_work.pack_adjust.PackAdjustActivity">
-        </activity>
-        <activity
-            android:name=".mvp.UI.stock_in_work.stock_query.StockQueryActivity"
-            android:windowSoftInputMode="adjustPan|stateHidden">
         </activity>
         <activity android:name=".mvp.UI.quity.mrp.MRPReviewActivity">
         </activity>
@@ -323,6 +320,14 @@
         <activity android:name=".mvp.UI.stock_in_work.barcode_exchange.BarcodeExchangeActivity">
         </activity>
         <activity android:name=".mvp.UI.stock_in_work.check_detail.CheckDetailActivity">
+        </activity>
+        <activity
+            android:name=".mvp.UI.stock_in_work.pack_query.PackQueryActivity"
+            android:windowSoftInputMode="adjustPan|stateHidden">
+        </activity>
+        <activity
+            android:name=".mvp.UI.stock_in_work.goods_query.GoodsQueryActivity"
+            android:windowSoftInputMode="adjustPan|stateHidden">
         </activity>
     </application>
 

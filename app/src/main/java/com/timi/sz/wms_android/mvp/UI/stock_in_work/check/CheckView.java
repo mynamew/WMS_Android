@@ -22,4 +22,14 @@ public interface CheckView extends MvpBaseView {
      * @param o
      */
     void submitCheckData(SubmitCheckDataResult o);
+
+    /**
+     * 设置物料条码选中
+     */
+    void setMaterialEdittextSelect();
+
+    /**
+     * 设置盘点数量选中
+     */
+    void setCheckqQtySelect();
 }
