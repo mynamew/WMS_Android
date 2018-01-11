@@ -31,4 +31,18 @@ public class DeviceInfoModel extends MvpBaseModel {
             }
         });
     }
+    /**
+     * 获取PDA编号
+     * author: timi
+     * create at: 2017/8/15 14:26
+     */
+    public void getPDACode(final Map<String, Object> params, final Observer<String> observer) {
+        HttpManager.getInstance().HttpManagerRequest(observer, new ApiServiceMethodCallBack<String>() {
+            @Override
+            public Observable<CommonResult<String>> createObservable(ApiService apiService) {
+                return apiService.getPDACode(params);
+
+            }
+        });
+    }
 }

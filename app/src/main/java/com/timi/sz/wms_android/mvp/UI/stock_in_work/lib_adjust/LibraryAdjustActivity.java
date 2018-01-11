@@ -197,11 +197,7 @@ public class LibraryAdjustActivity extends BaseActivity<LibraryAdjustView, Libra
                         /**
                          *  设置物料码
                          */
-                        tvMaterialCode.setText(result);
-                        locationCode=result;
-                        /**
-                         * 请求物料信息
-                         */
+                        etMaterialCode.setText(result);
                         /**
                          * 物料扫码并上架的网络请求
                          */
@@ -250,6 +246,8 @@ public class LibraryAdjustActivity extends BaseActivity<LibraryAdjustView, Libra
         tvMaterialName.setText(bean.getMaterialName());
         tvMaterialModel.setText(bean.getMaterialStandard());
         tvMaterialNum.setText(String.valueOf(bean.getQty()));
+        tvBarcodeType.setText(bean.getBarcodeType());
+        tvBarcode.setText(bean.getBarcodeNo());
         /**
          * 设置附加属性
          */

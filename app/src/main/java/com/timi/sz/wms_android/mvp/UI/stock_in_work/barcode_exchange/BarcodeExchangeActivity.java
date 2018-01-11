@@ -2,6 +2,7 @@ package com.timi.sz.wms_android.mvp.UI.stock_in_work.barcode_exchange;
 
 import android.os.Bundle;
 import android.text.Selection;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -78,24 +79,33 @@ public class BarcodeExchangeActivity extends BaseActivity<BarcodeExchangeView, B
         setEdittextListener(etDestPackCodeCode, Constants.REQUEST_SCAN_CODE_MATERIIAL, R.string.please_input_dest_pack_code, 0, new EdittextInputListener() {
             @Override
             public void verticalSuccess(String result) {
-                /**
-                 * 单一条码调整
-                 */
-                Map<String, Object> params1 = new HashMap<>();
-                params1.put("UserId", SpUtils.getInstance().getUserId());
-                params1.put("OrgId", SpUtils.getInstance().getOrgId());
-                params1.put("MAC", PackageUtils.getMac());
-                params1.put("SrcBarcode", etOldPackCode.getText().toString().trim());
-                params1.put("DestContainer", etDestPackCodeCode.getText().toString().trim());
-                getPresenter().barcodeAdjust(params1);
+                requestBarcodeExchange();
             }
         });
         setEdittextListener(etOldPackCode, Constants.REQUEST_SCAN_CODE_LIB_LOATION, R.string.please_input_old_pack_code, 0, new EdittextInputListener() {
             @Override
             public void verticalSuccess(String result) {
-                etOldPackCode.setText(result);
+                requestBarcodeExchange();
             }
         });
+    }
+
+    private void requestBarcodeExchange() {
+        String goodsCode = etOldPackCode.getText().toString().trim();
+        String destPackCode = etDestPackCodeCode.getText().toString().trim();
+        if (TextUtils.isEmpty(goodsCode) || TextUtils.isEmpty(destPackCode)) {
+            return;
+        }
+        /**
+         * 单一条码调整
+         */
+        Map<String, Object> params1 = new HashMap<>();
+        params1.put("UserId", SpUtils.getInstance().getUserId());
+        params1.put("OrgId", SpUtils.getInstance().getOrgId());
+        params1.put("MAC", PackageUtils.getMac());
+        params1.put("SrcBarcode", etOldPackCode.getText().toString().trim());
+        params1.put("DestContainer", etDestPackCodeCode.getText().toString().trim());
+        getPresenter().barcodeAdjust(params1);
     }
 
     @Override
@@ -126,6 +136,7 @@ public class BarcodeExchangeActivity extends BaseActivity<BarcodeExchangeView, B
     @Override
     public void barcodeAdjust(ContainerAdjustResult o) {
         ToastUtils.showShort(R.string.singal_barcode_exchange_success);
+        etOldPackCode.setText("");
         llScanInfo.setVisibility(View.VISIBLE);
         setTextViewContent(tvMaterialAttr, o.getMaterialAttribute());
         setTextViewContent(tvMaterialCode, o.getMaterialCode());
@@ -144,6 +155,7 @@ public class BarcodeExchangeActivity extends BaseActivity<BarcodeExchangeView, B
                     @Override
                     public void scanSuccess(int requestCode, String result) {
                         etOldPackCode.setText(result);
+                        requestBarcodeExchange();
                     }
                 });
                 break;
@@ -152,16 +164,7 @@ public class BarcodeExchangeActivity extends BaseActivity<BarcodeExchangeView, B
                     @Override
                     public void scanSuccess(int requestCode, String result) {
                         etDestPackCodeCode.setText(result);
-                        /**
-                         * 物料扫码并上架的网络请求
-                         */
-                        Map<String, Object> params1 = new HashMap<>();
-                        params1.put("UserId", SpUtils.getInstance().getUserId());
-                        params1.put("OrgId", SpUtils.getInstance().getOrgId());
-                        params1.put("MAC", PackageUtils.getMac());
-                        params1.put("SrcBarcode", etOldPackCode.getText().toString().trim());
-                        params1.put("DestContainer", etDestPackCodeCode.getText().toString().trim());
-                        getPresenter().barcodeAdjust(params1);
+                        requestBarcodeExchange();
                     }
                 });
                 break;

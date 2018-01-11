@@ -1,6 +1,7 @@
 package com.timi.sz.wms_android.mvp.UI.deviceinfo;
 
 import android.os.Bundle;
+import android.text.Selection;
 import android.text.TextUtils;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -55,7 +56,11 @@ public class DeviceInfoActivity extends BaseActivity<DeviceInfoView, DeviceInfoP
 
     @Override
     public void initData() {
-
+        Map<String, Object> params = new HashMap<>();
+        params.put("UserId", SpUtils.getInstance().getUserId());
+        params.put("OrgId", SpUtils.getInstance().getOrgId());
+        params.put("MAC", PackageUtils.getMac());
+        getPresenter().getPDACode(params);
     }
 
     @Override
@@ -89,5 +94,11 @@ public class DeviceInfoActivity extends BaseActivity<DeviceInfoView, DeviceInfoP
     public void setPDACode() {
         ToastUtils.showShort(R.string.set_pda_code_success);
         onBackPressed();
+    }
+
+    @Override
+    public void getPDACode(String o) {
+        etSetDeviceinfoNum.setText(o);
+        Selection.selectAll(etSetDeviceinfoNum.getText());
     }
 }

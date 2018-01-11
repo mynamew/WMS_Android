@@ -16,6 +16,7 @@ import java.util.Map;
 public class DeviceInfoPresenter extends MvpBasePresenter<DeviceInfoView> {
     DeviceInfoModel model = null;
     private HttpSubscriber<Object> subscriber;
+    private HttpSubscriber<String> stringHttpSubscriber;
 
     public DeviceInfoPresenter(Context context) {
         super(context);
@@ -43,5 +44,41 @@ public class DeviceInfoPresenter extends MvpBasePresenter<DeviceInfoView> {
             });
         }
         model.setPDACode(params, subscriber);
+    }
+
+    /**
+     * 设置PDA参数
+     *
+     * @param params
+     */
+    public void getPDACode(Map<String, Object> params) {
+        getView().showProgressDialog();
+        if (null == stringHttpSubscriber) {
+            stringHttpSubscriber = new HttpSubscriber<String>(new OnResultCallBack<String>() {
+                @Override
+                public void onSuccess(String o) {
+                    getView().getPDACode(o);
+                }
+
+                @Override
+                public void onError(String errorMsg) {
+
+                }
+            });
+        }
+        model.getPDACode(params, stringHttpSubscriber);
+    }
+
+    @Override
+    public void dettachView() {
+        super.dettachView();
+        if (null != subscriber) {
+            subscriber.unSubscribe();
+            subscriber = null;
+        }
+        if (null != stringHttpSubscriber) {
+            stringHttpSubscriber.unSubscribe();
+            stringHttpSubscriber = null;
+        }
     }
 }

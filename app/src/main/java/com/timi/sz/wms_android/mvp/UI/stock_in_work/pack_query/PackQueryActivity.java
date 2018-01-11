@@ -3,6 +3,7 @@ package com.timi.sz.wms_android.mvp.UI.stock_in_work.pack_query;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Selection;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -140,7 +141,12 @@ public class PackQueryActivity extends BaseActivity<PackRepertoryView, PackReper
 
     @Override
     public void setMaterialEdittextSelect() {
-
+        etPackCode.setText(etPackCode.getText());
+        etPackCode.setFocusable(true);
+        etPackCode.setFocusableInTouchMode(true);
+        etPackCode.requestFocus();
+        etPackCode.findFocus();
+        Selection.selectAll(etPackCode.getText());
     }
 
     /**
@@ -171,7 +177,7 @@ public class PackQueryActivity extends BaseActivity<PackRepertoryView, PackReper
                 params1.put("UserId", SpUtils.getInstance().getUserId());
                 params1.put("OrgId", SpUtils.getInstance().getOrgId());
                 params1.put("MAC", PackageUtils.getMac());
-                params1.put("MaterialBarcode", result);
+                params1.put("ContainerBarcode", result);
                 getPresenter().queryStockContainer(params1);
             }
         });

@@ -252,11 +252,4 @@ public class StockInDetailActivity extends BaseActivity<StockInDetailView, Stock
                 mDatas.add(mOldDatas.get(i));
         }
     }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
-    }
 }

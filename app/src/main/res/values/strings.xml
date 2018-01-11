@@ -865,7 +865,7 @@
     <string name="stockin_work_query_and_count">查询盘点</string>
     <string name="stockin_work_query_repertory">库存查询</string>
     <string name="stockin_work_count">盘点</string>
-    <string name="barcode_exchange">条码转移</string>
+    <string name="barcode_exchange">容器装载</string>
     /**====== 库内搜索 ======**/
     <string name="allot_outstock_tip">调拨调出</string>
     <string name="item_send_num">送货数</string>
@@ -884,7 +884,7 @@
     <string name="query_point_tip">盘点单</string>
     /**====== 库位调整 ======**/
     <string name="lib_shift_tip">库位转移</string>
-    <string name="code_type">条码类型：</string>
+    <string name="code_type">条码类型</string>
     <string name="in_lib_location_code">目的库位码</string>
     <string name="material_code_tip">物料条码</string>
     <string name="goods_code">物品编码</string>
@@ -899,11 +899,16 @@
     <string name="please_input_scan_query_material_code">请输入/扫描要查询的物品条码</string>
     <string name="should_return_material_qty">应退：</string>
     <string name="lib_adjust_success">库位调整成功！</string>
+    <string name="outowner_name">调出货主</string>
+    <string name="inowner_name">调入货主</string>
+    <string name="pack_barcode">容器条码</string>
+    <string name="goods_barcode">物品条码</string>
     /**====== 库位调整详情 ======**/
     <string name="lib_adjust_detail_title">库位调整详情</string>
 
     /**======单一条码转移 ======**/
     <string name="singal_barcode_exchange_success">单一条码转移成功！</string>
+    <string name="please_input_scan_goods_barcode">请输入或扫描物品条码</string>
     /**====== 形态转换 ======**/
     <string name="outstock_scan_form_change">出库扫描(形态转换)</string>
     <string name="instock_putaway_form_change">入库上架(形态转换)</string>
@@ -930,9 +935,9 @@
     <string name="allot_orderno">调拨单号</string>
     /**====== 容器调整 ======**/
     <string name="old_pack_code">原容器条码</string>
-    <string name="please_input_old_pack_code">请输入原容器条码</string>
+    <string name="please_input_old_pack_code">请输入或扫描原容器条码</string>
     <string name="dest_pack_code">目的容器条码</string>
-    <string name="please_input_dest_pack_code">请输入目的容器条码</string>
+    <string name="please_input_dest_pack_code">请输入或扫描目的容器条码</string>
     <string name="pack_adjust_success">容器调整成功！</string>
     /**====== 库存查询======**/
     <string name="container_repertory">容器库存</string>
@@ -973,6 +978,11 @@
     <string name="item_check_num">盘点：</string>
     <string name="stockin_check_date">盘点时间：</string>
     <string name="check_record_title">盘点记录</string>
+    <string name="check_warehouse">盘点仓库</string>
+    <string name="check_natureid">盘点性质</string>
+    <string name="light_check">明盘</string>
+    <string name="dark_check">盲盘</string>
+    <string name="check_qty_no_less_zero">盘点数量不能小于等于0！</string>
     /******************************************************************************************************************************************************/
     /******************************************************************************************************************************************************/
     /**====== 综合查询 ======**/
@@ -982,17 +992,9 @@
     <string name="query_statistical_tip">统计查询</string>
     <string name="allot_in">调入</string>
     <string name="error_title">错误提示</string>
-    <string name="check_qty_no_less_zero">盘点数量不能小于等于0！</string>
     <string name="current_material_no_datecode_please_repeat_in">当前物料没有批次信息，请重新进入！</string>
     <string name="set_pda_code_success">设置PDA参数成功！</string>
-    <string name="outowner_name">调出货主</string>
-    <string name="inowner_name">调入货主</string>
-    <string name="pack_barcode">容器条码</string>
-    <string name="goods_barcode">物品条码</string>
-    <string name="check_warehouse">盘点仓库</string>
-    <string name="check_natureid">盘点性质</string>
-    <string name="light_check">明盘</string>
-    <string name="dark_check">盲盘</string>
+
 
 
 </resources>

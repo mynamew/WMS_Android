@@ -154,11 +154,18 @@ public interface ApiService {
     Observable<CommonResult<GetPDA_ParameterResult>> getPDA_Parameter(@FieldMap Map<String, Object> params);
 
     /**
-     *设置PDA编号
+     * 设置PDA编号
      */
     @FormUrlEncoded
     @POST("api/services/wpda/AMain/SetPDACode")
     Observable<CommonResult<Object>> setPDACode(@FieldMap Map<String, Object> params);
+
+    /**
+     * 获取PDA编号
+     */
+    @FormUrlEncoded
+    @POST("api/services/wpda/AMain/GetPDACode")
+    Observable<CommonResult<String>> getPDACode(@FieldMap Map<String, Object> params);
 
     /********************入库 请求************************************************************/
 
@@ -414,6 +421,7 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("api/services/wpda/OtherInstock/GetOtherInstockData")
     Observable<CommonResult<OtherOutAndInStockBean>> getOtherInstockData(@FieldMap Map<String, Object> params);
+
     /**
      * 其他扫描入库列表(制单)
      *

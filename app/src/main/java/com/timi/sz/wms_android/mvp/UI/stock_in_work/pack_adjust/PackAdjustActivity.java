@@ -77,22 +77,13 @@ public class PackAdjustActivity extends BaseActivity<PackAdjustView, PackAdjustP
         setEdittextListener(etDestPackCodeCode, Constants.REQUEST_SCAN_CODE_MATERIIAL, R.string.please_input_dest_pack_code, 0, new EdittextInputListener() {
             @Override
             public void verticalSuccess(String result) {
-                /**
-                 * 物料扫码并上架的网络请求
-                 */
-                Map<String, Object> params1 = new HashMap<>();
-                params1.put("UserId", SpUtils.getInstance().getUserId());
-                params1.put("OrgId", SpUtils.getInstance().getOrgId());
-                params1.put("MAC", PackageUtils.getMac());
-                params1.put("SrcContainer", etOldPackCode.getText().toString().trim());
-                params1.put("DestContainer", etDestPackCodeCode.getText().toString().trim());
-                getPresenter().containnerAdjust(params1);
+                requestBarcodeExchange();
             }
         });
         setEdittextListener(etOldPackCode, Constants.REQUEST_SCAN_CODE_LIB_LOATION, R.string.please_input_old_pack_code, 0, new EdittextInputListener() {
             @Override
             public void verticalSuccess(String result) {
-                etOldPackCode.setText(result);
+                requestBarcodeExchange();
             }
         });
     }
@@ -115,6 +106,7 @@ public class PackAdjustActivity extends BaseActivity<PackAdjustView, PackAdjustP
     @Override
     public void containnerAdjust(ContainerAdjustResult o) {
         ToastUtils.showShort(R.string.pack_adjust_success);
+        etOldPackCode.setText("");
         llScanInfo.setVisibility(View.VISIBLE);
         setTextViewContent(tvMaterialAttr, o.getMaterialAttribute());
         setTextViewContent(tvMaterialCode, o.getMaterialCode());
@@ -134,6 +126,7 @@ public class PackAdjustActivity extends BaseActivity<PackAdjustView, PackAdjustP
                     @Override
                     public void scanSuccess(int requestCode, String result) {
                         etOldPackCode.setText(result);
+                        requestBarcodeExchange();
                     }
                 });
                 break;
@@ -142,20 +135,28 @@ public class PackAdjustActivity extends BaseActivity<PackAdjustView, PackAdjustP
                     @Override
                     public void scanSuccess(int requestCode, String result) {
                         etDestPackCodeCode.setText(result);
-                        /**
-                         * 物料扫码并上架的网络请求
-                         */
-                        Map<String, Object> params1 = new HashMap<>();
-                        params1.put("UserId", SpUtils.getInstance().getUserId());
-                        params1.put("OrgId", SpUtils.getInstance().getOrgId());
-                        params1.put("MAC", PackageUtils.getMac());
-                        params1.put("SrcContainer", etOldPackCode.getText().toString().trim());
-                        params1.put("DestContainer", etDestPackCodeCode.getText().toString().trim());
-                        getPresenter().containnerAdjust(params1);
+                        requestBarcodeExchange();
                     }
                 });
                 break;
         }
+    }
+    private void requestBarcodeExchange() {
+        String goodsCode = etOldPackCode.getText().toString().trim();
+        String destPackCode = etDestPackCodeCode.getText().toString().trim();
+        if (TextUtils.isEmpty(goodsCode) || TextUtils.isEmpty(destPackCode)) {
+            return;
+        }
+        /**
+         * 物料扫码并上架的网络请求
+         */
+        Map<String, Object> params1 = new HashMap<>();
+        params1.put("UserId", SpUtils.getInstance().getUserId());
+        params1.put("OrgId", SpUtils.getInstance().getOrgId());
+        params1.put("MAC", PackageUtils.getMac());
+        params1.put("SrcContainer", etOldPackCode.getText().toString().trim());
+        params1.put("DestContainer", etDestPackCodeCode.getText().toString().trim());
+        getPresenter().containnerAdjust(params1);
     }
     @Override
     public void setOldPackSelect() {

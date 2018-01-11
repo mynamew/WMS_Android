@@ -8,4 +8,6 @@ import com.timi.sz.wms_android.mvp.base.view.iml.MvpBaseView;
  */
 public interface DeviceInfoView extends MvpBaseView {
     void  setPDACode();
+
+    void getPDACode(String o);
 }
