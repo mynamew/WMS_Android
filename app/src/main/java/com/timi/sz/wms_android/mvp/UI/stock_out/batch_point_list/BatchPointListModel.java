@@ -22,9 +22,10 @@ import io.reactivex.Observer;
 public class BatchPointListModel extends MvpBaseModel {
     /**
      * 提交审核
+     *
      * @param observer
      */
-    public  void submitMakeOrAuditBill(final Map<String,Object> params, Observer<Object> observer){
+    public void submitMakeOrAuditBill(final Map<String, Object> params, Observer<Object> observer) {
         HttpManager.getInstance().HttpManagerRequest(observer, new ApiServiceMethodCallBack<Object>() {
             @Override
             public Observable<CommonResult<Object>> createObservable(ApiService apiService) {
@@ -32,6 +33,7 @@ public class BatchPointListModel extends MvpBaseModel {
             }
         });
     }
+
     /**
      * 获取批次 拣货的信息
      *
@@ -45,4 +47,5 @@ public class BatchPointListModel extends MvpBaseModel {
             }
         });
     }
+
 }

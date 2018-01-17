@@ -2,6 +2,7 @@ package com.timi.sz.wms_android.mvp.UI.stock_out.buy_return_material;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Selection;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
@@ -52,7 +53,7 @@ public class BuyReturnMaterialActivity extends BaseActivity<BuyReturnMaterialVie
     @BindView(R.id.tv_putaway_scan_material_tip)
     TextView tvPutawayScanMaterialTip;
     @BindView(R.id.et_putaway_scan_material)
-    TextView etPutawayScanMaterial;
+    EditText etPutawayScanMaterial;
     @BindView(R.id.iv_putaway_scan_material)
     ImageView ivPutawayScanMaterial;
     @BindView(R.id.tv_buy_return_material_orderno)
@@ -63,6 +64,7 @@ public class BuyReturnMaterialActivity extends BaseActivity<BuyReturnMaterialVie
     ImageView ivBuyReturnMaterialOrderno;
     private int intentCode;
 
+    private  boolean isCreateBill=false;//是否是制单
     @Override
     public int setLayoutId() {
         return R.layout.activity_buy_return_material;
@@ -72,11 +74,12 @@ public class BuyReturnMaterialActivity extends BaseActivity<BuyReturnMaterialVie
     public void initBundle(Bundle savedInstanceState) {
         setActivityTitle(getString(R.string.out_stock_buy_return_material));
         intentCode = getIntent().getIntExtra(Constants.STOCK_OUT_CODE_STR, -1);
+        isCreateBill = getIntent().getBooleanExtra("isCreateBill", false);
     }
 
     @Override
     public void initView() {
-        setEdittextListener(etBuyReturnMaterialOrderno,Constants.REQUEST_SCAN_CODE_RETURN_MATERIAL,R.string.please_input_return_material_orderno_or_scan,0, new EdittextInputListener() {
+        setEdittextListener( etBuyReturnMaterialOrderno,Constants.REQUEST_SCAN_CODE_RETURN_MATERIAL,R.string.please_input_return_material_orderno_or_scan,0, new EdittextInputListener() {
             @Override
             public void verticalSuccess(String result) {
                 /**
@@ -90,11 +93,11 @@ public class BuyReturnMaterialActivity extends BaseActivity<BuyReturnMaterialVie
                 getPresenter().returnMaterialScanNetWork(params);
             }
         });
-        setEdittextListener(etBuyReturnMaterialOrderno,Constants.REQUEST_SCAN_CODE_MATERIIAL,R.string.please_input_return_material_orderno_or_scan,0, new EdittextInputListener() {
+        setEdittextListener(etPutawayScanMaterial,Constants.REQUEST_SCAN_CODE_ORDERNO,R.string.please_scan_material_code,0, new EdittextInputListener() {
             @Override
             public void verticalSuccess(String result) {
                 /**
-                 * 退料单号的 网络请求
+                 * 物料扫描的 网络请求
                  */
                 Map<String,Object> params=new HashMap<>();
                 params.put("UserId", SpUtils.getInstance().getUserId());
@@ -104,6 +107,14 @@ public class BuyReturnMaterialActivity extends BaseActivity<BuyReturnMaterialVie
                 getPresenter().materialScanNetWork(params);
             }
         });
+        /**
+         * 是否是制单
+         */
+        if(isCreateBill){
+            findViewById(R.id.rl_return_material_orderno).setVisibility(View.GONE);
+        }else {
+            findViewById(R.id.rl_return_material).setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -147,6 +158,26 @@ public class BuyReturnMaterialActivity extends BaseActivity<BuyReturnMaterialVie
         intent.putExtra(OUT_STOCK_BUY_RETURN_ORDERNO_BEAN, new Gson().toJson(bean));
         intent.putExtra(STOCK_OUT_CODE_STR, intentCode);
         startActivity(intent);
+    }
+
+    @Override
+    public void setMaterialEdittextSelect() {
+        etPutawayScanMaterial.setText(etPutawayScanMaterial.getText());
+        etPutawayScanMaterial.setFocusable(true);
+        etPutawayScanMaterial.setFocusableInTouchMode(true);
+        etPutawayScanMaterial.requestFocus();
+        etPutawayScanMaterial.findFocus();
+        Selection.selectAll(etPutawayScanMaterial.getText());
+    }
+
+    @Override
+    public void setReturnMaterialOrderNoSelect() {
+        etBuyReturnMaterialOrderno.setText(etBuyReturnMaterialOrderno.getText());
+        etBuyReturnMaterialOrderno.setFocusable(true);
+        etBuyReturnMaterialOrderno.setFocusableInTouchMode(true);
+        etBuyReturnMaterialOrderno.requestFocus();
+        etBuyReturnMaterialOrderno.findFocus();
+        Selection.selectAll(etBuyReturnMaterialOrderno.getText());
     }
 
     @Override

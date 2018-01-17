@@ -22,6 +22,7 @@ import com.timi.sz.wms_android.bean.instock.search.SendOrdernoBean;
 import com.timi.sz.wms_android.bean.instock.search.StockinMaterialBean;
 import com.timi.sz.wms_android.bean.list.RequestBuyInStockListBean;
 import com.timi.sz.wms_android.bean.other.OtherOutAndInStockBean;
+import com.timi.sz.wms_android.bean.outstock.SetBatchExpRequstBean;
 import com.timi.sz.wms_android.bean.outstock.buy.BuyReturnMaterialByMaterialCodeData;
 import com.timi.sz.wms_android.bean.outstock.buy.BuyReturnMaterialByOrdernoData;
 import com.timi.sz.wms_android.bean.outstock.buy.SubmitBarcodeOutAuditData;
@@ -69,6 +70,7 @@ import com.timi.sz.wms_android.bean.stockin_work.ContainerAdjustResult;
 import com.timi.sz.wms_android.bean.stockin_work.FormChangeDetailResult;
 import com.timi.sz.wms_android.bean.stockin_work.LibraryAdjustResult;
 import com.timi.sz.wms_android.bean.stockin_work.MaterialDataBean;
+import com.timi.sz.wms_android.bean.stockin_work.ReturnDetailResult;
 import com.timi.sz.wms_android.bean.stockin_work.ScanLocationResult;
 import com.timi.sz.wms_android.bean.stockin_work.ScanMaterialResult;
 import com.timi.sz.wms_android.bean.stockin_work.StockInWorkDetailResult;
@@ -886,9 +888,8 @@ public interface ApiService {
      * @param params
      * @return
      */
-    @FormUrlEncoded
-    @POST("api/services/wpda/common/SetMaterialLotData")
-    Observable<CommonResult<GetMaterialLotData>> setMaterialLotData(@FieldMap Map<String, Object> params);
+    @POST("api/services/wpda/common/SetMaterialLotExcept")
+    Observable<CommonResult<Object>> setMaterialLotData(@Body SetBatchExpRequstBean params);
 
 
     /*****************************************采购退料******************************************************************/
@@ -899,9 +900,28 @@ public interface ApiService {
      * @return
      */
     @FormUrlEncoded
-    @POST("api/services/wpda/PurReturn/QueryAuditPOBillForPurReturn ")
+    @POST("api/services/wpda/PurReturn/QueryAuditPOBillForPurReturn")
     Observable<CommonResult<BuyReturnMaterialByMaterialCodeData>> materialScanGetBuyRetrurnOrderNo(@FieldMap Map<String, Object> params);
 
+    /**
+     * 获取正在扫描的制单状态的采购退料信息（制单流程）
+     *
+     * @param params
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("api/services/wpda/PurReturn/GetMakePurReturnScannedTotal")
+    Observable<CommonResult<BuyReturnMaterialByMaterialCodeData>> buyReturnMaterialByMaterialCodeData(@FieldMap Map<String, Object> params);
+
+    /**
+     * 采购退料明细列表（制单）
+     *
+     * @param params
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("api/services/wpda/PurReturn/GetMakePurReturnScannedDetail")
+    Observable<CommonResult<List<ReturnDetailResult>>> getMakePurReturnScannedDetail(@FieldMap Map<String, Object> params);
     /**
      * 提交条码出库(普通)
      *

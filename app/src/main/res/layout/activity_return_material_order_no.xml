@@ -88,7 +88,53 @@
                     android:textColor="#000"
                     android:textSize="13sp"/>
             </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20px"
+                android:orientation="horizontal">
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="20px"
+                    android:text="@string/item_supplier"
+                    android:textColor="#333"
+                    android:textSize="13sp"/>
+
+                <TextView
+                    android:id="@+id/tv_supplier"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="70px"
+                    android:text=""
+                    android:textColor="#000"
+                    android:textSize="13sp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20px"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="20px"
+                    android:text="@string/buyer_tip"
+                    android:textColor="#333"
+                    android:textSize="13sp"/>
+
+                <TextView
+                    android:id="@+id/tv_buyer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="70px"
+                    android:text=""
+                    android:textColor="#000"
+                    android:textSize="13sp"/>
+            </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

@@ -48,7 +48,7 @@ public class BuyReturnMaterialOrderNoPresenter extends MvpBasePresenter<BuyRetur
 
                 @Override
                 public void onError(String errorMsg) {
-                    ToastUtils.showShort(errorMsg);
+//                    ToastUtils.showShort(errorMsg);
                     getView().setBarcodeSelect();
                 }
             });
@@ -72,7 +72,7 @@ public class BuyReturnMaterialOrderNoPresenter extends MvpBasePresenter<BuyRetur
 
                 @Override
                 public void onError(String errorMsg) {
-                    ToastUtils.showShort(errorMsg);
+//                    ToastUtils.showShort(errorMsg);
                 }
             });
         }
@@ -95,7 +95,7 @@ public class BuyReturnMaterialOrderNoPresenter extends MvpBasePresenter<BuyRetur
 
                 @Override
                 public void onError(String errorMsg) {
-                    ToastUtils.showShort(errorMsg);
+//                    ToastUtils.showShort(errorMsg);
                 }
             });
         }

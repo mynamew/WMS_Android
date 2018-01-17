@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.timi.sz.wms_android.R;
@@ -45,6 +46,7 @@ import com.timi.sz.wms_android.http.message.event.SubmitCreateBillEvent;
 import com.timi.sz.wms_android.mvp.UI.stock_out.batch_normal.BatchNormalActivity;
 import com.timi.sz.wms_android.mvp.UI.stock_out.batch_point.BatchPointActivity;
 import com.timi.sz.wms_android.mvp.base.BaseActivity;
+import com.timi.sz.wms_android.view.MyDialog;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -928,6 +930,7 @@ public class BatchPointListActivity extends BaseActivity<BatchPointListView, Bat
         }
     }
 
+
     /**
      * 设置 头部的内容
      *
@@ -1131,6 +1134,7 @@ public class BatchPointListActivity extends BaseActivity<BatchPointListView, Bat
                     getPresenter().getMaterialLotData(bean);
                 }
             });
+
         } else {
             adapterMaterial.notifyDataSetChanged();
         }
@@ -1174,12 +1178,5 @@ public class BatchPointListActivity extends BaseActivity<BatchPointListView, Bat
             tvWaitPointNum.setText(String.valueOf(Integer.parseInt(tvBuyNum.getText().toString()) - result.getTotalScanQty()));
             tvHaveCountNum.setText(String.valueOf(result.getTotalScanQty()));
         }
-    }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
     }
 }

@@ -1,43 +1,43 @@
 -- Merging decision tree log ---
 manifest
-ADDED from D:\WorkProjects\WMS_Android\DateSelectlibrary\src\main\AndroidManifest.xml:16:1-22:12
-INJECTED from D:\WorkProjects\WMS_Android\DateSelectlibrary\src\main\AndroidManifest.xml:16:1-22:12
-INJECTED from D:\WorkProjects\WMS_Android\DateSelectlibrary\src\main\AndroidManifest.xml:16:1-22:12
-INJECTED from D:\WorkProjects\WMS_Android\DateSelectlibrary\src\main\AndroidManifest.xml:16:1-22:12
-INJECTED from D:\WorkProjects\WMS_Android\DateSelectlibrary\src\main\AndroidManifest.xml:16:1-22:12
-INJECTED from D:\WorkProjects\WMS_Android\DateSelectlibrary\src\main\AndroidManifest.xml:16:1-22:12
-INJECTED from D:\WorkProjects\WMS_Android\DateSelectlibrary\src\main\AndroidManifest.xml:16:1-22:12
+ADDED from D:\WMS_Android\DateSelectlibrary\src\main\AndroidManifest.xml:16:1-22:12
+INJECTED from D:\WMS_Android\DateSelectlibrary\src\main\AndroidManifest.xml:16:1-22:12
+INJECTED from D:\WMS_Android\DateSelectlibrary\src\main\AndroidManifest.xml:16:1-22:12
+INJECTED from D:\WMS_Android\DateSelectlibrary\src\main\AndroidManifest.xml:16:1-22:12
+INJECTED from D:\WMS_Android\DateSelectlibrary\src\main\AndroidManifest.xml:16:1-22:12
+INJECTED from D:\WMS_Android\DateSelectlibrary\src\main\AndroidManifest.xml:16:1-22:12
+INJECTED from D:\WMS_Android\DateSelectlibrary\src\main\AndroidManifest.xml:16:1-22:12
 	package
-		ADDED from D:\WorkProjects\WMS_Android\DateSelectlibrary\src\main\AndroidManifest.xml:17:5-50
-		INJECTED from D:\WorkProjects\WMS_Android\DateSelectlibrary\src\main\AndroidManifest.xml
-		INJECTED from D:\WorkProjects\WMS_Android\DateSelectlibrary\src\main\AndroidManifest.xml
+		ADDED from D:\WMS_Android\DateSelectlibrary\src\main\AndroidManifest.xml:17:5-50
+		INJECTED from D:\WMS_Android\DateSelectlibrary\src\main\AndroidManifest.xml
+		INJECTED from D:\WMS_Android\DateSelectlibrary\src\main\AndroidManifest.xml
 	android:versionName
-		INJECTED from D:\WorkProjects\WMS_Android\DateSelectlibrary\src\main\AndroidManifest.xml
-		ADDED from D:\WorkProjects\WMS_Android\DateSelectlibrary\src\main\AndroidManifest.xml:16:1-22:12
-		INJECTED from D:\WorkProjects\WMS_Android\DateSelectlibrary\src\main\AndroidManifest.xml
+		INJECTED from D:\WMS_Android\DateSelectlibrary\src\main\AndroidManifest.xml
+		ADDED from D:\WMS_Android\DateSelectlibrary\src\main\AndroidManifest.xml:16:1-22:12
+		INJECTED from D:\WMS_Android\DateSelectlibrary\src\main\AndroidManifest.xml
 	android:versionCode
-		INJECTED from D:\WorkProjects\WMS_Android\DateSelectlibrary\src\main\AndroidManifest.xml
-		ADDED from D:\WorkProjects\WMS_Android\DateSelectlibrary\src\main\AndroidManifest.xml:16:1-22:12
-		INJECTED from D:\WorkProjects\WMS_Android\DateSelectlibrary\src\main\AndroidManifest.xml
+		INJECTED from D:\WMS_Android\DateSelectlibrary\src\main\AndroidManifest.xml
+		ADDED from D:\WMS_Android\DateSelectlibrary\src\main\AndroidManifest.xml:16:1-22:12
+		INJECTED from D:\WMS_Android\DateSelectlibrary\src\main\AndroidManifest.xml
 	xmlns:android
-		ADDED from D:\WorkProjects\WMS_Android\DateSelectlibrary\src\main\AndroidManifest.xml:16:11-69
+		ADDED from D:\WMS_Android\DateSelectlibrary\src\main\AndroidManifest.xml:16:11-69
 uses-permission#android.permission.VIBRATE
-ADDED from D:\WorkProjects\WMS_Android\DateSelectlibrary\src\main\AndroidManifest.xml:19:5-66
+ADDED from D:\WMS_Android\DateSelectlibrary\src\main\AndroidManifest.xml:19:5-66
 	android:name
-		ADDED from D:\WorkProjects\WMS_Android\DateSelectlibrary\src\main\AndroidManifest.xml:19:22-63
+		ADDED from D:\WMS_Android\DateSelectlibrary\src\main\AndroidManifest.xml:19:22-63
 application
-ADDED from D:\WorkProjects\WMS_Android\DateSelectlibrary\src\main\AndroidManifest.xml:21:5-20
+ADDED from D:\WMS_Android\DateSelectlibrary\src\main\AndroidManifest.xml:21:5-20
 uses-sdk
-INJECTED from D:\WorkProjects\WMS_Android\DateSelectlibrary\src\main\AndroidManifest.xml reason: use-sdk injection requested
-INJECTED from D:\WorkProjects\WMS_Android\DateSelectlibrary\src\main\AndroidManifest.xml
-INJECTED from D:\WorkProjects\WMS_Android\DateSelectlibrary\src\main\AndroidManifest.xml
-INJECTED from D:\WorkProjects\WMS_Android\DateSelectlibrary\src\main\AndroidManifest.xml
-INJECTED from D:\WorkProjects\WMS_Android\DateSelectlibrary\src\main\AndroidManifest.xml
+INJECTED from D:\WMS_Android\DateSelectlibrary\src\main\AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from D:\WMS_Android\DateSelectlibrary\src\main\AndroidManifest.xml
+INJECTED from D:\WMS_Android\DateSelectlibrary\src\main\AndroidManifest.xml
+INJECTED from D:\WMS_Android\DateSelectlibrary\src\main\AndroidManifest.xml
+INJECTED from D:\WMS_Android\DateSelectlibrary\src\main\AndroidManifest.xml
 	android:targetSdkVersion
-		INJECTED from D:\WorkProjects\WMS_Android\DateSelectlibrary\src\main\AndroidManifest.xml
-		ADDED from D:\WorkProjects\WMS_Android\DateSelectlibrary\src\main\AndroidManifest.xml
-		INJECTED from D:\WorkProjects\WMS_Android\DateSelectlibrary\src\main\AndroidManifest.xml
+		INJECTED from D:\WMS_Android\DateSelectlibrary\src\main\AndroidManifest.xml
+		ADDED from D:\WMS_Android\DateSelectlibrary\src\main\AndroidManifest.xml
+		INJECTED from D:\WMS_Android\DateSelectlibrary\src\main\AndroidManifest.xml
 	android:minSdkVersion
-		INJECTED from D:\WorkProjects\WMS_Android\DateSelectlibrary\src\main\AndroidManifest.xml
-		ADDED from D:\WorkProjects\WMS_Android\DateSelectlibrary\src\main\AndroidManifest.xml
-		INJECTED from D:\WorkProjects\WMS_Android\DateSelectlibrary\src\main\AndroidManifest.xml
+		INJECTED from D:\WMS_Android\DateSelectlibrary\src\main\AndroidManifest.xml
+		ADDED from D:\WMS_Android\DateSelectlibrary\src\main\AndroidManifest.xml
+		INJECTED from D:\WMS_Android\DateSelectlibrary\src\main\AndroidManifest.xml

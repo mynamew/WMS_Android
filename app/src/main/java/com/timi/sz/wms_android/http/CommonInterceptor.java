@@ -22,7 +22,7 @@ import okhttp3.Response;
  */
 public class CommonInterceptor implements Interceptor {
     @Override
-    public Response intercept(Interceptor.Chain chain) throws IOException {
+    public Response intercept(Chain chain) throws IOException {
         Request oldRequest = chain.request();
         /**
          * 请求中的Url

@@ -118,7 +118,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10px"
-            android:paddingLeft="10px"
             android:text=""
             android:textColor="#666"
             android:textSize="11sp"/>

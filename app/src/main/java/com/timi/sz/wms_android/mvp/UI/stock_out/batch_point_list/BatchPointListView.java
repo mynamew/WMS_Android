@@ -13,4 +13,5 @@ public interface BatchPointListView extends MvpBaseView {
     void submitMakeOrAuditBill();
 
     void getMaterialLotData(GetMaterialLotData data);
+
 }

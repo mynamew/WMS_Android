@@ -23,6 +23,7 @@ import com.timi.sz.wms_android.base.uils.LogUitls;
 import com.timi.sz.wms_android.base.uils.PackageUtils;
 import com.timi.sz.wms_android.base.uils.SpUtils;
 import com.timi.sz.wms_android.base.uils.ToastUtils;
+import com.timi.sz.wms_android.bean.outstock.SetBatchExpRequstBean;
 import com.timi.sz.wms_android.bean.outstock.outsource.GetMaterialLotData;
 import com.timi.sz.wms_android.bean.outstock.outsource.RequestGetMaterialLotBean;
 import com.timi.sz.wms_android.bean.outstock.outsource.SubmitBarcodeLotPickOutResult;
@@ -32,6 +33,7 @@ import com.timi.sz.wms_android.bean.outstock.outsource.common.MaterialResultsBea
 import com.timi.sz.wms_android.http.message.BaseMessage;
 import com.timi.sz.wms_android.http.message.event.StockOutSubmitScanMaterialEvent;
 import com.timi.sz.wms_android.http.message.event.SubmitBarcodeLotPickOutSplitEvent;
+import com.timi.sz.wms_android.mvp.UI.stock_out.batch_point_list.BatchPointListActivity;
 import com.timi.sz.wms_android.mvp.UI.stock_out.divide_print.SplitPrintActivity;
 import com.timi.sz.wms_android.mvp.base.BaseActivity;
 import com.timi.sz.wms_android.view.MyDialog;
@@ -344,10 +346,10 @@ public class BatchPointActivity extends BaseActivity<BatchPointView, BatchPointP
          */
         if (isCarton) {
             findViewById(R.id.ll_carton).setVisibility(View.VISIBLE);
-            setTextViewContent(tvCartonNum,cartonNum);
-            if(cartonNum>0){
+            setTextViewContent(tvCartonNum, cartonNum);
+            if (cartonNum > 0) {
                 tvCartonNum.setTextColor(getResources().getColor(R.color.login_txt_color));
-            }else {
+            } else {
                 tvCartonNum.setTextColor(getResources().getColor(R.color.color_333));
             }
         } else {
@@ -413,7 +415,6 @@ public class BatchPointActivity extends BaseActivity<BatchPointView, BatchPointP
         bean.setMaterialCode(materialCode);
         bean.setMaterialAttribute(materialAttribute);
         LogUitls.e("上传的参数---->", new Gson().toJson(bean));
-        showProgressDialog();
         getPresenter().getMaterialLotData(bean);
     }
 
@@ -531,10 +532,10 @@ public class BatchPointActivity extends BaseActivity<BatchPointView, BatchPointP
                  */
                 if (isCarton) {
                     cartonNum = result.getCartonNo();
-                    setTextViewContent(tvCartonNum,cartonNum);
-                    if(cartonNum>0){
+                    setTextViewContent(tvCartonNum, cartonNum);
+                    if (cartonNum > 0) {
                         tvCartonNum.setTextColor(getResources().getColor(R.color.login_txt_color));
-                    }else {
+                    } else {
                         tvCartonNum.setTextColor(getResources().getColor(R.color.color_333));
                     }
                 }
@@ -554,10 +555,30 @@ public class BatchPointActivity extends BaseActivity<BatchPointView, BatchPointP
                 bean.setMaterialCode(materialCode);
                 bean.setMaterialAttribute(materialAttribute);
                 LogUitls.e("上传的参数---->", new Gson().toJson(bean));
-                showProgressDialog();
                 getPresenter().getMaterialLotData(bean);
             }
         }
+    }
+
+    @Override
+    public void setMaterialLotData() {
+        ToastUtils.showShort("指定批次异常成功！");
+        /**
+         * 重新获取批次
+         */
+        RequestGetMaterialLotBean bean = new RequestGetMaterialLotBean();
+        bean.setMAC(PackageUtils.getMac());
+        bean.setUserId(SpUtils.getInstance().getUserId());
+        bean.setOrgId(SpUtils.getInstance().getOrgId());
+        bean.setBillId(billId);
+        bean.setSrcBillType(srcBillType);
+        bean.setDestBillType(destBillType);
+        bean.setWarehouseId(warehouseId);
+        bean.setMaterialId(materialId);
+        bean.setMaterialCode(materialCode);
+        bean.setMaterialAttribute(materialAttribute);
+        LogUitls.e("上传的参数---->", new Gson().toJson(bean));
+        getPresenter().getMaterialLotData(bean);
     }
 
     @Override
@@ -662,7 +683,44 @@ public class BatchPointActivity extends BaseActivity<BatchPointView, BatchPointP
             rlvOrdernoInfo.setAdapter(adapter);
             rlvOrdernoInfo.setLayoutManager(new LinearLayoutManager(this));
             rlvOrdernoInfo.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST, R.drawable.item_badness_divider));
-
+            adapter.setOnItemLongClickListener(new BaseRecyclerAdapter.OnItemLongClickListener() {
+                @Override
+                public void onItemLongClick(View itemView, final int pos) {
+                    new MyDialog(BatchPointActivity.this, R.layout.dialog_set_material_exp)
+                            .setTextViewContent(R.id.tv_datecode, mDatas.get(pos).getDateCode())
+                            .setButtonListener(R.id.btn_set_batch_exp_cancel, null, new MyDialog.DialogClickListener() {
+                                @Override
+                                public void dialogClick(MyDialog dialog) {
+                                    dialog.dismiss();
+                                }
+                            })
+                            .setImageViewListener(R.id.iv_close, new MyDialog.DialogClickListener() {
+                                @Override
+                                public void dialogClick(MyDialog dialog) {
+                                    dialog.dismiss();
+                                }
+                            })
+                            .setButtonListener(R.id.btn_confirm, null, new MyDialog.DialogClickListener() {
+                                @Override
+                                public void dialogClick(MyDialog dialog) {
+                                    dialog.dismiss();
+                                    /**
+                                     * 设置批次异常
+                                     */
+                                    SetBatchExpRequstBean bean = new SetBatchExpRequstBean();
+                                    bean.setUserId(SpUtils.getInstance().getUserId());
+                                    bean.setOrgId(SpUtils.getInstance().getOrgId());
+                                    bean.setMAC(PackageUtils.getMac());
+                                    bean.setDateCode(mData.getLotDetail().get(pos).getDateCode());
+                                    bean.setMaterialId(null != detailResultsBean ? detailResultsBean.getMaterialId() : materialResultsBean.getMaterialId());
+                                    bean.setMaterialAttribute(null != detailResultsBean ? detailResultsBean.getMaterialAttribute() : materialResultsBean.getMaterialAttribute());
+                                    bean.setWarehouseId(warehouseId);
+                                    getPresenter().setMaterialLotData(bean);
+                                }
+                            })
+                            .show();
+                }
+            });
         } else
             adapter.notifyDataSetChanged();
     }
@@ -749,7 +807,6 @@ public class BatchPointActivity extends BaseActivity<BatchPointView, BatchPointP
             bean.setMaterialCode(materialCode);
             bean.setMaterialAttribute(materialAttribute);
             LogUitls.e("上传的参数---->", new Gson().toJson(bean));
-            showProgressDialog();
             getPresenter().getMaterialLotData(bean);
         }
     }
@@ -767,10 +824,10 @@ public class BatchPointActivity extends BaseActivity<BatchPointView, BatchPointP
     public void onViewClicked() {
         cartonNum = 0;
         //箱号置0
-        setTextViewContent(tvCartonNum,cartonNum);
-        if(cartonNum>0){
+        setTextViewContent(tvCartonNum, cartonNum);
+        if (cartonNum > 0) {
             tvCartonNum.setTextColor(getResources().getColor(R.color.login_txt_color));
-        }else {
+        } else {
             tvCartonNum.setTextColor(getResources().getColor(R.color.color_333));
         }
     }

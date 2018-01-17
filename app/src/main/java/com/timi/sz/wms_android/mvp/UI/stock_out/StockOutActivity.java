@@ -4,22 +4,31 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.google.gson.Gson;
 import com.timi.sz.wms_android.R;
 import com.timi.sz.wms_android.base.uils.Constants;
+import com.timi.sz.wms_android.base.uils.PackageUtils;
 import com.timi.sz.wms_android.base.uils.SpUtils;
+import com.timi.sz.wms_android.bean.outstock.buy.BuyReturnMaterialByMaterialCodeData;
 import com.timi.sz.wms_android.mvp.UI.list.BuyInStockListActivity;
 import com.timi.sz.wms_android.mvp.UI.stock_in.StockInActivity;
 import com.timi.sz.wms_android.mvp.UI.stock_in_work.StockInWorkActivity;
 import com.timi.sz.wms_android.mvp.UI.stock_in_work.query.StockInWorkQueryActivity;
 import com.timi.sz.wms_android.mvp.UI.stock_out.buy_return_material.BuyReturnMaterialActivity;
+import com.timi.sz.wms_android.mvp.UI.stock_out.buy_return_material.material.ScanReturnMaterialActivity;
 import com.timi.sz.wms_android.mvp.UI.stock_out.other.scan.OtherOutStockScanActivity;
 import com.timi.sz.wms_android.mvp.UI.stock_out.pick.PickActivity;
 import com.timi.sz.wms_android.mvp.UI.stock_out.query.StockOutSearchActivity;
+import com.timi.sz.wms_android.mvp.base.BaseActivity;
 import com.timi.sz.wms_android.mvp.base.view.BaseNoMvpActivity;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_BUY_RETURN_ORDERNO_BEAN;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_ALLOT_OUT_PICK;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_CODE_STR;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_FINISH_GOODS_PICK;
@@ -46,7 +55,7 @@ import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_SEND_OUT_PIC
  * author: timi
  * create at: 2017/8/17 14:42
  */
-public class StockOutActivity extends BaseNoMvpActivity {
+public class StockOutActivity extends BaseActivity<StockOutView, StockOutPresenter> implements StockOutView {
     @Override
     public int setLayoutId() {
         return R.layout.activity_stock_out;
@@ -65,6 +74,16 @@ public class StockOutActivity extends BaseNoMvpActivity {
     @Override
     public void initData() {
 
+    }
+
+    @Override
+    public StockOutPresenter createPresenter() {
+        return new StockOutPresenter(this);
+    }
+
+    @Override
+    public StockOutView createView() {
+        return this;
     }
 
     /**
@@ -90,7 +109,8 @@ public class StockOutActivity extends BaseNoMvpActivity {
             R.id.activity_stock_out,
             R.id.tv_stock_out_pick_send,
             R.id.tv_stock_out_pick_sale,
-            R.id.tv_allot_outstock})
+            R.id.tv_allot_outstock,
+            R.id.tv_stock_out_other_buy_return_bill})
     public void onViewClicked(View view) {
         Intent intent = new Intent();
         switch (view.getId()) {
@@ -246,6 +266,7 @@ public class StockOutActivity extends BaseNoMvpActivity {
                     intent.setClass(StockOutActivity.this, BuyInStockListActivity.class);
                 } else {
                     intent.setClass(this, BuyReturnMaterialActivity.class);
+                    intent.putExtra("isCreateBill", false);
                 }
                 intent.putExtra(STOCK_OUT_CODE_STR, STOCK_OUT_PURCHASE_MATERIAL_RETURN);
                 break;
@@ -288,6 +309,16 @@ public class StockOutActivity extends BaseNoMvpActivity {
 //                break;
             case R.id.activity_stock_out:
                 break;
+            case R.id.tv_stock_out_other_buy_return_bill://采购退料 制单
+                /**
+                 * 扫物料码的网络请求
+                 */
+                Map<String, Object> params = new HashMap<>();
+                params.put("UserId", SpUtils.getInstance().getUserId());
+                params.put("OrgId", SpUtils.getInstance().getOrgId());
+                params.put("MAC", PackageUtils.getMac());
+                getPresenter().buyReturnMaterialByMaterialCodeData(params);
+                return;
             case R.id.tv_allot_outstock://调拨调出
                 /**
                  * 如果是无纸化作业
@@ -299,6 +330,21 @@ public class StockOutActivity extends BaseNoMvpActivity {
                 }
                 intent.putExtra(Constants.STOCK_OUT_CODE_STR, Constants.STOCK_OUT_ALLOT_OUT);
                 break;
+        }
+        startActivity(intent);
+    }
+
+    @Override
+    public void buyReturnMaterialByMaterialCodeData(BuyReturnMaterialByMaterialCodeData materialBean) {
+        Intent intent = new Intent();
+        if(0!=materialBean.getScanId()){
+            intent.setClass(this, ScanReturnMaterialActivity.class);
+            intent.putExtra(STOCK_OUT_CODE_STR, STOCK_OUT_PURCHASE_MATERIAL_RETURN);
+            intent.putExtra(OUT_STOCK_BUY_RETURN_ORDERNO_BEAN, new Gson().toJson(materialBean));
+        }else {
+            intent.setClass(this, BuyReturnMaterialActivity.class);
+            intent.putExtra("isCreateBill", true);
+            intent.putExtra(STOCK_OUT_CODE_STR, STOCK_OUT_PURCHASE_MATERIAL_RETURN);
         }
         startActivity(intent);
     }

@@ -185,116 +185,32 @@
                     android:textSize="13sp"/>
             </LinearLayout>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="2px"
-                android:layout_marginLeft="30px"
-                android:background="@color/tab_txt_unselect"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:paddingLeft="20px"
-                android:paddingTop="20px">
+                >
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/item_material_code"
+                    android:text="@string/return_material_num_format"
                     android:textColor="#333"
                     android:textSize="13sp"/>
 
                 <TextView
-                    android:id="@+id/tv_material_code"
+                    android:id="@+id/tv_return_num"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="30px"
+                    android:layout_marginLeft="60px"
                     android:gravity="center_vertical"
                     android:text=""
-                    android:textColor="#000"
+                    android:textColor="@color/login_txt_color"
                     android:textSize="13sp"
                     />
             </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingLeft="20px"
-                android:paddingTop="20px">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/item_material_name"
-                    android:textColor="#333"
-                    android:textSize="13sp"/>
-
-                <TextView
-                    android:id="@+id/tv_material_name"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="30px"
-                    android:gravity="center_vertical"
-                    android:text=""
-                    android:textColor="#000"
-                    android:textSize="13sp"
-                    />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingLeft="20px"
-                android:paddingTop="20px">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/item_material_code"
-                    android:textColor="#333"
-                    android:textSize="13sp"/>
-
-                <TextView
-                    android:id="@+id/tv_material_model"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="30px"
-                    android:gravity="center_vertical"
-                    android:text=""
-                    android:textColor="#000"
-                    android:textSize="13sp"
-                    />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingLeft="20px"
-                android:paddingTop="20px">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/item_material_attr"
-                    android:textColor="#333"
-                    android:textSize="13sp"/>
-
-                <TextView
-                    android:id="@+id/tv_material_attr"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="30px"
-                    android:gravity="center_vertical"
-                    android:text=""
-                    android:textColor="#000"
-                    android:textSize="13sp"
-                    />
-            </LinearLayout>
-
             <View
                 android:layout_width="match_parent"
                 android:layout_height="24px"
@@ -361,6 +277,31 @@
                     android:paddingLeft="60px"
                     android:src="@mipmap/ic_scan"/>
             </RelativeLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="30px"
+                android:paddingTop="20px">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/item_material_code"
+                    android:textColor="#333"
+                    android:textSize="13sp"/>
+
+                <TextView
+                    android:id="@+id/tv_material_code"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30px"
+                    android:gravity="center_vertical"
+                    android:text=""
+                    android:textColor="#000"
+                    android:textSize="13sp"
+                    />
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -372,21 +313,74 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/return_material_num_format"
+                    android:text="@string/item_material_name"
                     android:textColor="#333"
                     android:textSize="13sp"/>
 
                 <TextView
-                    android:id="@+id/tv_return_num"
+                    android:id="@+id/tv_material_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="30px"
                     android:gravity="center_vertical"
                     android:text=""
-                    android:textColor="@color/login_txt_color"
+                    android:textColor="#000"
                     android:textSize="13sp"
                     />
             </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="30px"
+                android:paddingTop="20px">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/item_material_code"
+                    android:textColor="#333"
+                    android:textSize="13sp"/>
+
+                <TextView
+                    android:id="@+id/tv_material_model"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30px"
+                    android:gravity="center_vertical"
+                    android:text=""
+                    android:textColor="#000"
+                    android:textSize="13sp"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="30px"
+                android:paddingTop="20px">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/item_material_attr"
+                    android:textColor="#333"
+                    android:textSize="13sp"/>
+
+                <TextView
+                    android:id="@+id/tv_material_attr"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30px"
+                    android:gravity="center_vertical"
+                    android:text=""
+                    android:textColor="#000"
+                    android:textSize="13sp"
+                    />
+            </LinearLayout>
+
         </LinearLayout>
     </ScrollView>
 
@@ -396,7 +390,7 @@
         android:layout_height="100px"
         android:layout_alignParentBottom="true"
         android:background="@drawable/selector_btn_bg_login"
-        android:text="@string/commit_check"
+        android:text="@string/confirm_commit"
         android:textColor="#fff"
         android:textSize="18sp"/>
 

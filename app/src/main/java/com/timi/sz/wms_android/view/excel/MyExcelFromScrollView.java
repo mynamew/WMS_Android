@@ -193,8 +193,8 @@ public class MyExcelFromScrollView extends LinearLayout {
                     textView.setText(rowDatas.get(j));
                     textView.setGravity(Gravity.CENTER);
                     //设置布局
-                    LinearLayout.LayoutParams textViewParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
-                            LinearLayout.LayoutParams.WRAP_CONTENT);
+                    LayoutParams textViewParams = new LayoutParams(LayoutParams.WRAP_CONTENT,
+                            LayoutParams.WRAP_CONTENT);
                     textView.setPadding(10, 10, 10, 10);
                     textView.setLayoutParams(textViewParams);
                     if (i == 0) {
@@ -223,8 +223,8 @@ public class MyExcelFromScrollView extends LinearLayout {
                 textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, mTextViewSize);
                 textView.setGravity(Gravity.CENTER);
                 //设置布局
-                LinearLayout.LayoutParams textViewParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
-                        LinearLayout.LayoutParams.WRAP_CONTENT);
+                LayoutParams textViewParams = new LayoutParams(LayoutParams.WRAP_CONTENT,
+                        LayoutParams.WRAP_CONTENT);
                 textView.setPadding(10, 10, 10, 10);
                 textView.setLayoutParams(textViewParams);
                 int maxHeight = measureTextHeight(textView, rowDatas.get(0));
@@ -258,7 +258,7 @@ public class MyExcelFromScrollView extends LinearLayout {
         lockScrollViewParent.setHorizontalScrollBarEnabled(false);
         //构造滚动视图
         LinearLayout scollViewItemContentView = new LinearLayout(mContext);
-        LinearLayout.LayoutParams scollViewItemContentViewParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+        LayoutParams scollViewItemContentViewParams = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT);
         scollViewItemContentView.setLayoutParams(scollViewItemContentViewParams);
         scollViewItemContentView.setOrientation(LinearLayout.VERTICAL);
@@ -275,8 +275,8 @@ public class MyExcelFromScrollView extends LinearLayout {
             ArrayList<String> datas = mTableDatas.get(i);
             //设置LinearLayout
             LinearLayout linearLayout = new LinearLayout(mContext);
-            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT);
+            LayoutParams layoutParams = new LayoutParams(LayoutParams.WRAP_CONTENT,
+                    LayoutParams.WRAP_CONTENT);
             linearLayout.setLayoutParams(layoutParams);
             linearLayout.setGravity(Gravity.CENTER);
             linearLayout.setOrientation(LinearLayout.HORIZONTAL);
@@ -311,8 +311,8 @@ public class MyExcelFromScrollView extends LinearLayout {
                 textView.setGravity(Gravity.CENTER);
                 textView.setText(datas.get(j));
                 //设置布局
-                LinearLayout.LayoutParams textViewParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
-                        LinearLayout.LayoutParams.WRAP_CONTENT);
+                LayoutParams textViewParams = new LayoutParams(LayoutParams.WRAP_CONTENT,
+                        LayoutParams.WRAP_CONTENT);
                 textView.setPadding(20, 20, 20, 20);
                 textView.setLayoutParams(textViewParams);
                 ViewGroup.LayoutParams textViewParamsCopy = textView.getLayoutParams();
@@ -410,8 +410,8 @@ public class MyExcelFromScrollView extends LinearLayout {
                     textView.setText(rowDatas.get(j));
                     textView.setGravity(Gravity.CENTER);
                     //设置布局
-                    LinearLayout.LayoutParams textViewParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
-                            LinearLayout.LayoutParams.WRAP_CONTENT);
+                    LayoutParams textViewParams = new LayoutParams(LayoutParams.WRAP_CONTENT,
+                            LayoutParams.WRAP_CONTENT);
                     textView.setPadding(10, 10, 10, 10);
                     textView.setLayoutParams(textViewParams);
                     if (i == 0) {
@@ -440,8 +440,8 @@ public class MyExcelFromScrollView extends LinearLayout {
                 textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, mTextViewSize);
                 textView.setGravity(Gravity.CENTER);
                 //设置布局
-                LinearLayout.LayoutParams textViewParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
-                        LinearLayout.LayoutParams.WRAP_CONTENT);
+                LayoutParams textViewParams = new LayoutParams(LayoutParams.WRAP_CONTENT,
+                        LayoutParams.WRAP_CONTENT);
                 textView.setPadding(10, 10, 10, 10);
                 textView.setLayoutParams(textViewParams);
                 int maxHeight = measureTextHeight(textView, rowDatas.get(0));
@@ -487,7 +487,7 @@ public class MyExcelFromScrollView extends LinearLayout {
      */
     private int measureTextWidth(TextView textView, String text) {
         if (textView != null) {
-            LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) textView.getLayoutParams();
+            LayoutParams layoutParams = (LayoutParams) textView.getLayoutParams();
             int width = DisplayUtil.px2dip(mContext, layoutParams.leftMargin) +
                     DisplayUtil.px2dip(mContext, layoutParams.rightMargin) + textView.getPaddingLeft() + textView.getPaddingRight() +
                     getTextViewWidth(textView, text);
@@ -511,7 +511,7 @@ public class MyExcelFromScrollView extends LinearLayout {
      */
     private int measureTextHeight(TextView textView, String text) {
         if (textView != null) {
-            LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) textView.getLayoutParams();
+            LayoutParams layoutParams = (LayoutParams) textView.getLayoutParams();
             int height = getTextViewHeight(textView, text) + textView.getPaddingTop() + textView.getPaddingBottom();
             if (height < minRowHeight) {
                 return minRowHeight;

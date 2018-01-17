@@ -1,5 +1,6 @@
 package com.timi.sz.wms_android.mvp.UI.stock_out.buy_return_material.material;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Selection;
 import android.text.TextUtils;
@@ -22,6 +23,7 @@ import com.timi.sz.wms_android.bean.outstock.buy.BuyReturnMaterialByMaterialCode
 import com.timi.sz.wms_android.bean.outstock.buy.CommitMaterialScanToOredernoBean;
 import com.timi.sz.wms_android.bean.outstock.buy.SubmitBarcodeOutAuditData;
 import com.timi.sz.wms_android.bean.outstock.buy.SubmitBarcodePurReturnData;
+import com.timi.sz.wms_android.mvp.UI.stock_out.detail.return_detial.ReturnDetailActivity;
 import com.timi.sz.wms_android.mvp.base.BaseActivity;
 
 import java.util.HashMap;
@@ -32,6 +34,7 @@ import butterknife.OnClick;
 
 import static com.timi.sz.wms_android.base.uils.Constants.BUY_ORDE_NUM;
 import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_BUY_RETURN_ORDERNO_BEAN;
+import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_POINT_DETIAIL_BILLID;
 
 /**
  * 扫退料获取到的采购单信息 进行采购退料的界面
@@ -92,33 +95,32 @@ public class ScanReturnMaterialActivity extends BaseActivity<ScanReturnMaterialV
 
     @Override
     public void initView() {
-        etMaterialScan.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+        setRightImg(R.mipmap.stockin_detail, new View.OnClickListener() {
             @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                    /**
-                     * 输入的内容
-                     */
-                    String inputStr = etMaterialScan.getText().toString().trim();
-                    if (TextUtils.isEmpty(inputStr)) {
-                        ToastUtils.showShort(getString(R.string.please_input_return_matrial_code_or_scan));
-                    } else {
-                        /**
-                         * 退料单号的 网络请求
-                         */
-                        Map<String, Object> params = new HashMap<>();
-                        params.put("UserId", SpUtils.getInstance().getUserId());
-                        params.put("OrgId", SpUtils.getInstance().getOrgId());
-                        params.put("MAC", PackageUtils.getMac());
-                        params.put("BillId", ordernoBean.getBillId());
-                        params.put("SrcBillType", ordernoBean.getBillType());
-                        params.put("BillDetailId", ordernoBean.getBillDetailId());
-                        params.put("ScanId", ordernoBean.getScanId());
-                        params.put("BarcodeNo", inputStr);
-                        getPresenter().submitBarcodePurReturn(params);
-                    }
-                }
-                return false;
+            public void onClick(View view) {
+                Intent it = new Intent(ScanReturnMaterialActivity.this, ReturnDetailActivity.class);
+                it.putExtra(OUT_STOCK_POINT_DETIAIL_BILLID, ordernoBean.getScanId());
+                startActivity(it);
+            }
+        });
+        setEdittextListener(etMaterialScan, Constants.REQUEST_SCAN_CODE_MATERIIAL, R.string.please_input_return_matrial_code_or_scan, 0, new EdittextInputListener() {
+            @Override
+            public void verticalSuccess(String result) {
+                materialCode=result;
+                /**
+                 * 扫物料码的网络请求
+                 */
+                Map<String, Object> params = new HashMap<>();
+                params.put("UserId", SpUtils.getInstance().getUserId());
+                params.put("OrgId", SpUtils.getInstance().getOrgId());
+                params.put("MAC", PackageUtils.getMac());
+                params.put("BillId", ordernoBean.getBillId());
+                params.put("BillType", ordernoBean.getBillType());
+                params.put("BillDetailId", ordernoBean.getBillDetailId());
+                params.put("ScanId", ordernoBean.getScanId());
+                params.put("BarcodeNo", materialCode);
+                getPresenter().submitBarcodePurReturn(params);
+
             }
         });
     }
@@ -126,6 +128,7 @@ public class ScanReturnMaterialActivity extends BaseActivity<ScanReturnMaterialV
     @Override
     public void initData() {
         ordernoBean = new Gson().fromJson(getIntent().getStringExtra(OUT_STOCK_BUY_RETURN_ORDERNO_BEAN), BuyReturnMaterialByMaterialCodeData.class);
+        //设置bean
         /**
          * 上个界面传过来的数据
          */
@@ -139,8 +142,7 @@ public class ScanReturnMaterialActivity extends BaseActivity<ScanReturnMaterialV
         tvMaterialName.setText(ordernoBean.getMaterialName());
         tvMaterialModel.setText(ordernoBean.getMaterialStandard());
         tvMaterialAttr.setText(((TextUtils.isEmpty(ordernoBean.getMaterialAttribute())) ? getString(R.string.none) : ordernoBean.getMaterialAttribute()));
-        tvReturnNum.setText(ordernoBean.getReturnQty() + "/" + ordernoBean.getUsedQty());
-
+        setTextViewContent(tvReturnNum,ordernoBean.getScanQty());
     }
 
     @Override
@@ -160,14 +162,7 @@ public class ScanReturnMaterialActivity extends BaseActivity<ScanReturnMaterialV
                 scan(Constants.REQUEST_SCAN_CODE_MATERIIAL, this);
                 break;
             case R.id.btn_commit://退料出库扫描 将扫描结果提交到服务器
-                if(TextUtils.isEmpty(etMaterialScan.getText().toString().trim())){
-                    ToastUtils.showShort(getString(R.string.please_input_return_matrial_code_or_scan));
-                    return;
-                }
-                if(ordernoBean.getScanId()==0){//scanid 为0  证明未扫过条码或者条码已经入库 或者出库过了
-                    ToastUtils.showShort(getString(R.string.please_inpiut_or_scan_visible_material_code));
-                    return;
-                }
+
                 Map<String, Object> params = new HashMap<>();
                 params.put("UserId", SpUtils.getInstance().getUserId());
                 params.put("MAC", PackageUtils.getMac());
@@ -193,19 +188,20 @@ public class ScanReturnMaterialActivity extends BaseActivity<ScanReturnMaterialV
          * 设置已退数量
          */
         ordernoBean.setReturnQty(ordernoBean.getReturnQty() + bean.getBarcodeQty());
-        tvReturnNum.setText(ordernoBean.getReturnQty() + "/" + ordernoBean.getUsedQty());
+        setTextViewContent(tvReturnNum,bean.getReturnQty());
         //设置 scanId
         ordernoBean.setScanId(bean.getScanId());
     }
 
     @Override
     public void submitMakeOrAuditBill() {
-        ToastUtils.showShort(getString(R.string.commit_check_success));
+        ToastUtils.showShort(getString(R.string.commit_success));
         onBackPressed();
     }
 
     @Override
     public void setBarcodeSelect() {
+        etMaterialScan.setText(etMaterialScan.getText());
         etMaterialScan.setFocusable(true);
         etMaterialScan.setFocusableInTouchMode(true);
         etMaterialScan.requestFocus();

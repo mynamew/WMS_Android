@@ -41,11 +41,13 @@ public class BuyReturnMaterialPresenter extends MvpBasePresenter<BuyReturnMateri
                 @Override
                 public void onSuccess(BuyReturnMaterialByMaterialCodeData materialBean) {
                     getView().materialScanResult(materialBean);
+                    getView().setMaterialEdittextSelect();
                 }
 
                 @Override
                 public void onError(String errorMsg) {
 //                     ToastUtils.showShort(errorMsg);
+                    getView().setMaterialEdittextSelect();
                 }
             });
         }
@@ -64,11 +66,13 @@ public class BuyReturnMaterialPresenter extends MvpBasePresenter<BuyReturnMateri
                 @Override
                 public void onSuccess(BuyReturnMaterialByOrdernoData materialBean) {
                     getView().ReturnMaterialOrderNoScanResult(materialBean);
+                    getView().setReturnMaterialOrderNoSelect();
                 }
 
                 @Override
                 public void onError(String errorMsg) {
 //                    ToastUtils.showShort(errorMsg);
+                    getView().setReturnMaterialOrderNoSelect();
                 }
             });
         }

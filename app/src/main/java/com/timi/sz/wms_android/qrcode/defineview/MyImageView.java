@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.support.v7.widget.AppCompatImageView;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.widget.ImageView;
@@ -12,7 +13,7 @@ import android.widget.ImageView;
  * 作者：王敏 on 2015/8/21 17:31
  * 类说明：画出扫描框的四个脚的脚边框，也可以直接用一张图片代替
  */
-public class MyImageView extends ImageView {
+public class MyImageView extends AppCompatImageView {
     private Context context;
     public MyImageView(Context context, AttributeSet attrs) {
         super(context, attrs);

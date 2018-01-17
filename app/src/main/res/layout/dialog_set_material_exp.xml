@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                       android:layout_width="match_parent"
+                                       android:layout_height="match_parent"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:background="@drawable/bg_rectangle_login_server"
+        android:orientation="vertical"
+        android:padding="20px">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <View
+                android:layout_width="260px"
+                android:layout_height="2px"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="85px"
+                android:background="#999"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="60px"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="55px"
+                android:background="#fff"
+                android:gravity="center"
+                android:paddingLeft="20px"
+                android:paddingRight="20px"
+                android:text="指定批次异常"
+                android:textColor="#333"
+                android:textSize="16sp"/>
+
+            <ImageView
+                android:id="@+id/iv_close"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:padding="30px"
+                android:src="@mipmap/quality_badness_close"/>
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20px"
+                android:layout_marginLeft="20px"
+                android:layout_marginTop="20px"
+                android:text="@string/set_batch_exp_tip1"/>
+            <TextView
+                android:id="@+id/tv_datecode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20px"
+                android:layout_marginLeft="20px"
+                android:textColor="@color/login_txt_color"
+                android:layout_marginTop="20px"
+                android:text="2017-10-9"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20px"
+                android:layout_marginLeft="20px"
+                android:layout_marginTop="20px"
+                android:text="@string/set_batch_exp_tip2"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="80px"
+            android:layout_marginBottom="30px"
+            android:layout_marginLeft="20px"
+            android:layout_marginRight="20px"
+            android:orientation="horizontal">
+
+
+            <Button
+                android:id="@+id/btn_set_batch_exp_cancel"
+                android:layout_width="0dp"
+                android:layout_height="80px"
+                android:layout_weight="1"
+                android:background="@drawable/bg_rectangle_gray"
+                android:text="@string/cancel"
+                android:textColor="#999"
+                android:textSize="16sp"/>
+
+            <Button
+                android:id="@+id/btn_confirm"
+                android:layout_width="0dp"
+                android:layout_height="80px"
+                android:layout_alignParentRight="true"
+                android:layout_marginLeft="10px"
+                android:layout_marginRight="10px"
+                android:layout_weight="1"
+                android:background="@drawable/selector_btn_bg_login"
+                android:text="@string/confirm"
+                android:textColor="#fff"
+                android:textSize="16sp"/>
+        </LinearLayout>
+    </LinearLayout>
+</com.zhy.autolayout.AutoRelativeLayout>

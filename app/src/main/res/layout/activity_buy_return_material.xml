@@ -28,6 +28,7 @@
         android:layout_height="1px"
         android:background="@color/divide_color"/>
     <RelativeLayout
+        android:id="@+id/rl_return_material"
         android:layout_width="match_parent"
         android:layout_height="100px">
 
@@ -68,14 +69,17 @@
             android:layout_marginRight="30px"
             android:paddingLeft="60px"
             android:src="@mipmap/ic_scan"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_alignParentBottom="true"
+            android:background="@color/divide_color"/>
     </RelativeLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="24px"
-        android:background="@color/divide_color"/>
+
 
     <RelativeLayout
+        android:id="@+id/rl_return_material_orderno"
         android:layout_width="match_parent"
         android:layout_height="100px">
 
@@ -116,5 +120,10 @@
             android:layout_marginRight="30px"
             android:paddingLeft="60px"
             android:src="@mipmap/ic_scan"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_alignParentBottom="true"
+            android:background="@color/divide_color"/>
     </RelativeLayout>
 </LinearLayout>

@@ -4,9 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Selection;
 import android.text.TextUtils;
-import android.view.KeyEvent;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -23,7 +21,6 @@ import com.timi.sz.wms_android.bean.outstock.buy.BuyReturnMaterialByOrdernoData;
 import com.timi.sz.wms_android.bean.outstock.buy.SubmitBarcodeOutAuditData;
 import com.timi.sz.wms_android.bean.outstock.buy.SubmitBarcodeOutSplitAuditData;
 import com.timi.sz.wms_android.mvp.UI.stock_in.detail.StockInDetailActivity;
-import com.timi.sz.wms_android.mvp.UI.stock_in.putaway.PutAwayActivity;
 import com.timi.sz.wms_android.mvp.base.BaseActivity;
 import com.timi.sz.wms_android.view.MyDialog;
 
@@ -36,7 +33,6 @@ import butterknife.OnClick;
 
 import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_BUY_RETURN_ORDERNO_BEAN;
 import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_CODE_STR;
-import static com.timi.sz.wms_android.base.uils.Constants.STOCK_OUT_OTHER_OUT_BILL;
 
 /**
  * 通过退料单单号  查询获取到的退料单信息，  进行退料操作
@@ -76,6 +72,10 @@ public class BuyReturnMaterialOrderNoActivity extends BaseActivity<BuyReturnMate
     TextView tvMaterialAttr;
     @BindView(R.id.btn_commit_check)
     Button btnCommitCheck;
+    @BindView(R.id.tv_supplier)
+    TextView tvSupplier;
+    @BindView(R.id.tv_buyer)
+    TextView tvBuyer;
     private BuyReturnMaterialByOrdernoData orderBoBean = null;
     private int intentCode;
 
@@ -99,18 +99,18 @@ public class BuyReturnMaterialOrderNoActivity extends BaseActivity<BuyReturnMate
                  * 查看详情
                  */
                 Intent it = new Intent(BuyReturnMaterialOrderNoActivity.this, StockInDetailActivity.class);
-                it.putExtra("BillId", orderBoBean.getPurReturnId());
+                it.putExtra(Constants.STOCKIN_BILLID, orderBoBean.getPurReturnId());
                 it.putExtra(STOCK_OUT_CODE_STR, intentCode);
                 startActivity(it);
             }
         });
-        setEdittextListener(etMaterialScan, Constants.REQUEST_SCAN_CODE_MATERIIAL,R.string.please_input_return_matrial_code_or_scan, 0, new EdittextInputListener() {
+        setEdittextListener(etMaterialScan, Constants.REQUEST_SCAN_CODE_MATERIIAL, R.string.please_input_return_matrial_code_or_scan, 0, new EdittextInputListener() {
             @Override
             public void verticalSuccess(String result) {
                 if (orderBoBean.getWaitQty() == 0) {
                     ToastUtils.showShort(getString(R.string.have_scan_all_materail));
                     setBarcodeSelect();
-                }else {
+                } else {
                     /**
                      * 扫物料码的网络请求
                      */
@@ -121,6 +121,7 @@ public class BuyReturnMaterialOrderNoActivity extends BaseActivity<BuyReturnMate
                     params.put("BillId", orderBoBean.getPurReturnId());
                     params.put("SrcBillType", 15);
                     params.put("DestBillType", 15);
+                    params.put("BarcodeNo", result);
                     params.put("ScanId", orderBoBean.getScanId());
                     getPresenter().submitBarcodeOutAudit(params);
                 }
@@ -138,6 +139,8 @@ public class BuyReturnMaterialOrderNoActivity extends BaseActivity<BuyReturnMate
             tvHaveScanTotalNum.setText(String.valueOf(orderBoBean.getScanQty()));
             tvWaitScanTotalNum.setText(String.valueOf(orderBoBean.getWaitQty()));
             tvReturnMaterialTotalNum.setText(String.valueOf(orderBoBean.getPurReturnQty()));
+            tvSupplier.setText(orderBoBean.getSupplierName());
+            tvBuyer.setText(orderBoBean.getCreaterName());
         }
     }
 
@@ -203,6 +206,7 @@ public class BuyReturnMaterialOrderNoActivity extends BaseActivity<BuyReturnMate
         params.put("SrcBillType", 15);
         params.put("DestBillType", 15);
         params.put("ScanId", orderBoBean.getScanId());
+        params.put("BarcodeNo", result);
         getPresenter().submitBarcodeOutAudit(params);
     }
 
@@ -213,6 +217,8 @@ public class BuyReturnMaterialOrderNoActivity extends BaseActivity<BuyReturnMate
         tvMaterialCode.setText(data.getMaterialCode());
         tvMaterialAttr.setText(TextUtils.isEmpty(data.getMaterialAttribute()) ? getString(R.string.none) : data.getMaterialAttribute());
         tvMaterialModel.setText(data.getMaterialStandard());
+
+        orderBoBean.setScanId(data.getScanId());
         /***
          * 设置退了数量，  包含三个数字， （10）20/38
          *  1、 10 ：当前扫码的物料的数量
@@ -225,6 +231,10 @@ public class BuyReturnMaterialOrderNoActivity extends BaseActivity<BuyReturnMate
          */
         if (data.getExceedQty() > 0) {
             showDivideBarcodeDialog(data);
+        } else {
+            setTextViewContent(tvHaveScanTotalNum, data.getTotalScanQty());
+            setTextViewContent(tvWaitScanTotalNum, orderBoBean.getPurReturnQty() - data.getTotalScanQty());
+            tvReturnNum.setText("(" + data.getBarcodeQty() + ")" + data.getTotalScanQty() + "/" + orderBoBean.getPurReturnQty());
         }
     }
 
@@ -236,10 +246,6 @@ public class BuyReturnMaterialOrderNoActivity extends BaseActivity<BuyReturnMate
     private void showDivideBarcodeDialog(SubmitBarcodeOutAuditData data) {
         if (null == divideBarcodeDialog) {
             divideBarcodeDialog = new MyDialog(this, R.layout.dialog_divide_barcode);
-            divideBarcodeDialog.setTextViewContent(R.id.tv_divide_barcode, data.getMaterialCode());
-            divideBarcodeDialog.setTextViewContent(R.id.tv_barcode_contain_total_num, data.getBarcodeQty());
-            divideBarcodeDialog.setTextViewContent(R.id.tv_should_return_num, data.getBarcodeQty() - data.getExceedQty());
-            divideBarcodeDialog.setTextViewContent(R.id.et_divide_num, data.getBarcodeQty() - data.getExceedQty());
             divideBarcodeDialog.setButtonListener(R.id.btn_confirm, null, new MyDialog.DialogClickListener() {
                 @Override
                 public void dialogClick(MyDialog dialog) {
@@ -256,7 +262,7 @@ public class BuyReturnMaterialOrderNoActivity extends BaseActivity<BuyReturnMate
                     params.put("ScanId", orderBoBean.getScanId());
                     params.put("BarcodeNo", BarcodeNo);
                     params.put("SplitQty", SplitQty);
-                    getPresenter().submitBarcodeOutAudit(params);
+                    getPresenter().submitBarcodeOutSplitAudit(params);
                 }
             });
             divideBarcodeDialog.setImageViewListener(R.id.iv_close, new MyDialog.DialogClickListener() {
@@ -272,6 +278,12 @@ public class BuyReturnMaterialOrderNoActivity extends BaseActivity<BuyReturnMate
                 }
             });
         }
+        divideBarcodeDialog.setTextViewContent(R.id.tv_divide_barcode, data.getMaterialCode());
+        divideBarcodeDialog.setTextViewContent(R.id.tv_barcode_contain_total_num, data.getBarcodeQty());
+        divideBarcodeDialog.setTextViewContent(R.id.tv_should_return_num, data.getBarcodeQty() - data.getExceedQty());
+        EditText edittext = divideBarcodeDialog.getEdittext(R.id.et_divide_num);
+        divideBarcodeDialog.setTextViewContent(R.id.et_divide_num, data.getBarcodeQty() - data.getExceedQty());
+        Selection.selectAll(edittext.getText());
         divideBarcodeDialog.show();
     }
 
@@ -283,13 +295,18 @@ public class BuyReturnMaterialOrderNoActivity extends BaseActivity<BuyReturnMate
         tvMaterialCode.setText(data.getMaterialCode());
         tvMaterialAttr.setText(TextUtils.isEmpty(data.getMaterialAttribute()) ? getString(R.string.none) : data.getMaterialAttribute());
         tvMaterialModel.setText(data.getMaterialStandard());
+
+        orderBoBean.setScanId(data.getScanId());
         /***
          * 设置退了数量，  包含三个数字， （10）20/38
          *  1、 10 ：当前扫码的物料的数量
          *  2、 20：当前物料所需要退料的数量
          *  3、38：退料的总数量
          */
-        tvReturnNum.setText("("+data.getBarcodeQty()+")"+data.getTotalScanQty()+"/"+orderBoBean.getPurReturnQty());
+        tvReturnNum.setText("(" + data.getBarcodeQty() + ")" + data.getTotalScanQty() + "/" + orderBoBean.getPurReturnQty());
+        setTextViewContent(tvHaveScanTotalNum, data.getTotalScanQty());
+        setTextViewContent(tvWaitScanTotalNum, orderBoBean.getPurReturnQty() - data.getTotalScanQty());
+
     }
 
     @Override
@@ -300,10 +317,12 @@ public class BuyReturnMaterialOrderNoActivity extends BaseActivity<BuyReturnMate
 
     @Override
     public void setBarcodeSelect() {
+        etMaterialScan.setText(etMaterialScan.getText());
         etMaterialScan.setFocusable(true);
         etMaterialScan.setFocusableInTouchMode(true);
         etMaterialScan.requestFocus();
         etMaterialScan.findFocus();
         Selection.selectAll(etMaterialScan.getText());
     }
+
 }

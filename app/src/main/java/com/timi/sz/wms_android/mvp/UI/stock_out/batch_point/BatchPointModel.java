@@ -1,5 +1,6 @@
 package com.timi.sz.wms_android.mvp.UI.stock_out.batch_point;
 
+import com.timi.sz.wms_android.bean.outstock.SetBatchExpRequstBean;
 import com.timi.sz.wms_android.bean.outstock.outsource.GetMaterialLotData;
 import com.timi.sz.wms_android.bean.outstock.outsource.RequestGetMaterialLotBean;
 import com.timi.sz.wms_android.bean.outstock.outsource.SubmitBarcodeLotPickOutResult;
@@ -35,7 +36,19 @@ public class BatchPointModel extends MvpBaseModel {
             }
         });
     }
-
+    /**
+     * 指定批次异常
+     *
+     * @param observer
+     */
+    public void setMaterialLotData(final SetBatchExpRequstBean params, Observer<Object> observer) {
+        HttpManager.getInstance().HttpManagerRequest(observer, new ApiServiceMethodCallBack<Object>() {
+            @Override
+            public Observable<CommonResult<Object>> createObservable(ApiService apiService) {
+                return apiService.setMaterialLotData(params);
+            }
+        });
+    }
     /**
      * 提交条码出库(批次拣货)。
      *

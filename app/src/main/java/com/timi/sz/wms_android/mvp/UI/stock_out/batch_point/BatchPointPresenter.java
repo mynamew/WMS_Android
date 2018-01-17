@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.timi.sz.wms_android.base.uils.Constants;
 import com.timi.sz.wms_android.base.uils.ToastUtils;
+import com.timi.sz.wms_android.bean.outstock.SetBatchExpRequstBean;
 import com.timi.sz.wms_android.bean.outstock.outsource.GetMaterialLotData;
 import com.timi.sz.wms_android.bean.outstock.outsource.RequestGetMaterialLotBean;
 import com.timi.sz.wms_android.bean.outstock.outsource.SubmitBarcodeLotPickOutResult;
@@ -24,6 +25,7 @@ public class BatchPointPresenter extends MvpBasePresenter<BatchPointView> {
     private HttpSubscriber<GetMaterialLotData> getMaterialLotDataHttpSubscriber;
     private HttpSubscriber<SubmitBarcodeLotPickOutResult> submitBarcodeLotPickOutResultHttpSubscriber;
     private HttpSubscriber<SubmitBarcodeLotPickOutSplitResult> submitBarcodeLotPickOutSplitResultHttpSubscriber;
+    private HttpSubscriber<Object> setMaterialLotDataHttpSubscriber;
     private BatchPointModel model;
 
     public BatchPointPresenter(Context context) {
@@ -37,6 +39,7 @@ public class BatchPointPresenter extends MvpBasePresenter<BatchPointView> {
      * @param params
      */
     public void getMaterialLotData(RequestGetMaterialLotBean params) {
+        getView().showProgressDialog();
         if (null == getMaterialLotDataHttpSubscriber) {
             getMaterialLotDataHttpSubscriber = new HttpSubscriber<>(new OnResultCallBack<GetMaterialLotData>() {
                 @Override
@@ -51,6 +54,28 @@ public class BatchPointPresenter extends MvpBasePresenter<BatchPointView> {
             });
         }
         model.getMaterialLotData(params, getMaterialLotDataHttpSubscriber);
+    }
+    /**
+     * 指定批次异常
+     *
+     * @param params
+     */
+    public void setMaterialLotData(SetBatchExpRequstBean params) {
+        getView().showProgressDialog();
+        if (null == setMaterialLotDataHttpSubscriber) {
+            setMaterialLotDataHttpSubscriber = new HttpSubscriber<>(new OnResultCallBack<Object>() {
+                @Override
+                public void onSuccess(Object bean) {
+                    getView().setMaterialLotData();
+                }
+
+                @Override
+                public void onError(String errorMsg) {
+//                    ToastUtils.showShort(errorMsg);
+                }
+            });
+        }
+        model.setMaterialLotData(params, setMaterialLotDataHttpSubscriber);
     }
 
     /**
@@ -121,6 +146,9 @@ public class BatchPointPresenter extends MvpBasePresenter<BatchPointView> {
         if (null != submitBarcodeLotPickOutSplitResultHttpSubscriber) {
             submitBarcodeLotPickOutSplitResultHttpSubscriber.unSubscribe();
             submitBarcodeLotPickOutSplitResultHttpSubscriber = null;
+        } if (null != setMaterialLotDataHttpSubscriber) {
+            setMaterialLotDataHttpSubscriber.unSubscribe();
+            setMaterialLotDataHttpSubscriber = null;
         }
     }
 }

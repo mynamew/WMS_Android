@@ -3,6 +3,7 @@ package com.timi.sz.wms_android.mvp.UI.stock_out.buy_return_material.material;
 import android.content.Context;
 
 import com.timi.sz.wms_android.base.uils.ToastUtils;
+import com.timi.sz.wms_android.bean.outstock.buy.BuyReturnMaterialByMaterialCodeData;
 import com.timi.sz.wms_android.bean.outstock.buy.SubmitBarcodeOutAuditData;
 import com.timi.sz.wms_android.bean.outstock.buy.SubmitBarcodePurReturnData;
 import com.timi.sz.wms_android.http.callback.OnResultCallBack;
@@ -20,6 +21,7 @@ import java.util.Map;
 public class ScanReturnMaterialPresenter extends MvpBasePresenter<ScanReturnMaterialView> {
     ScanReturnMaterialMdel model = null;
     HttpSubscriber<SubmitBarcodeOutAuditData> subscriber = null;
+
     HttpSubscriber<SubmitBarcodePurReturnData> commitMaterialScanToOredernoBeanHttpSubscriber;
     HttpSubscriber<Object> submitMakeOrAuditBillHttpSubscriber = null;
 
@@ -65,11 +67,13 @@ public class ScanReturnMaterialPresenter extends MvpBasePresenter<ScanReturnMate
                 @Override
                 public void onSuccess(SubmitBarcodePurReturnData bean) {
                     getView().submitBarcodePurReturn(bean);
+                    getView().setBarcodeSelect();
                 }
 
                 @Override
                 public void onError(String errorMsg) {
 //                    ToastUtils.showShort(errorMsg);
+                    getView().setBarcodeSelect();
                 }
             });
         }

@@ -1,5 +1,6 @@
 package com.timi.sz.wms_android.mvp.UI.stock_out.buy_return_material.material;
 
+import com.timi.sz.wms_android.bean.outstock.buy.BuyReturnMaterialByMaterialCodeData;
 import com.timi.sz.wms_android.bean.outstock.buy.SubmitBarcodeOutAuditData;
 import com.timi.sz.wms_android.bean.outstock.buy.SubmitBarcodePurReturnData;
 import com.timi.sz.wms_android.http.HttpManager;
@@ -20,8 +21,9 @@ import io.reactivex.Observer;
  */
 
 public class ScanReturnMaterialMdel extends MvpBaseModel {
+
     /**
-     * 物料扫码 获取采购退货单
+     * 提交物料条码
      * @param params
      * @param observer
      */

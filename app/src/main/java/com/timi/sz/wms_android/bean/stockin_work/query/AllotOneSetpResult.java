@@ -12,6 +12,7 @@ import java.util.List;
 
 public class AllotOneSetpResult {
 
+
     /**
      * summaryResults : {"isLotPick":false,"isRegion":false,"billId":176,"billCode":"0000000218","billDate":"2015-05-19","outOwner":"","inOwner":"","createrName":"方艳冬","scanId":0,"qty":50,"waitQty":50,"scanQty":0,"warehouseId":0,"warehouseName":null,"regionId":0,"regionName":null,"isSplitPrint":false}
      * detailResults : [{"detailId":3240,"line":1,"materialId":69,"materialCode":"10101010069","materialName":"贴片电阻","materialStandard":"24K/0603/±5%","materialAttribute":"","warehouseId":1,"warehouseName":"原材料仓","qty":38,"waitQty":38,"scanQty":0},{"detailId":3241,"line":2,"materialId":155,"materialCode":"10101010155","materialName":"贴片电阻","materialStandard":"9.1K/0805/±5%","materialAttribute":"","warehouseId":1,"warehouseName":"原材料仓","qty":12,"waitQty":12,"scanQty":0}]

@@ -23,4 +23,13 @@ public interface BuyReturnMaterialView extends MvpBaseView {
      */
      void ReturnMaterialOrderNoScanResult(BuyReturnMaterialByOrdernoData bean);
 
+    /**
+     * 设置物料条码选中
+     */
+    void setMaterialEdittextSelect();
+
+    /**
+     * 设置单号选中
+     */
+    void setReturnMaterialOrderNoSelect();
 }

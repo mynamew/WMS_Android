@@ -14,6 +14,21 @@
                     }
                 }
             ]
+        },
+        {
+            "outputFile": "D:\\WMS_Android\\DateSelectlibrary\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-fr\\values-fr.xml",
+            "map": [
+                {
+                    "source": "D:\\WMS_Android\\DateSelectlibrary\\build\\intermediates\\bundles\\debug\\res\\values-fr\\values-fr.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "105,168,250,345,397,438,524,631,720,775,851,921,994,1062,1101",
+                        "endColumns": "62,81,94,51,40,85,106,88,54,75,69,72,67,38,73",
+                        "endOffsets": "163,245,340,392,433,519,626,715,770,846,916,989,1057,1096,1170"
+                    }
+                }
+            ]
         }
     ]
 }

@@ -28,6 +28,7 @@ public class BatchPointListPresenter extends MvpBasePresenter<BatchPointListView
     HttpSubscriber<Object> submitMakeOrAuditBillHttpSubscriber = null;
     private HttpSubscriber<GetMaterialLotData> getMaterialLotDataHttpSubscriber;
 
+
     /**
      * 提交制单
      *
@@ -50,6 +51,7 @@ public class BatchPointListPresenter extends MvpBasePresenter<BatchPointListView
         }
         model.submitMakeOrAuditBill(params, submitMakeOrAuditBillHttpSubscriber);
     }
+
     /**
      * 获取批次信息
      *
@@ -71,6 +73,8 @@ public class BatchPointListPresenter extends MvpBasePresenter<BatchPointListView
         }
         model.getMaterialLotData(params, getMaterialLotDataHttpSubscriber);
     }
+
+
     @Override
     public void dettachView() {
         super.dettachView();

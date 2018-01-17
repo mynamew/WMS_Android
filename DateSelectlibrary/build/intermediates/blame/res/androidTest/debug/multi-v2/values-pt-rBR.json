@@ -1,6 +1,21 @@
 {
     "logs": [
         {
+            "outputFile": "D:\\WMS_Android\\DateSelectlibrary\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-pt-rBR\\values-pt-rBR.xml",
+            "map": [
+                {
+                    "source": "D:\\WMS_Android\\DateSelectlibrary\\build\\intermediates\\bundles\\debug\\res\\values-pt-rBR\\values-pt-rBR.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "105,168,246,341,391,432,515,622,709,764,819,887,950,1019,1080,1121",
+                        "endColumns": "62,77,94,49,40,82,106,86,54,54,67,62,68,60,40,71",
+                        "endOffsets": "163,241,336,386,427,510,617,704,759,814,882,945,1014,1075,1116,1188"
+                    }
+                }
+            ]
+        },
+        {
             "outputFile": "D:\\WorkProjects\\WMS_Android\\DateSelectlibrary\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-pt-rBR\\values-pt-rBR.xml",
             "map": [
                 {

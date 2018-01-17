@@ -28,7 +28,7 @@ public interface OtherScanView extends MvpBaseView {
     /**
      * 创建入库单
      */
-    void createInStockOrderno( );
+    void createInStockOrderno();
 
     /**
      * 设置物料条码选中

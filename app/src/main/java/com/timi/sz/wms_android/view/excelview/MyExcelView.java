@@ -62,7 +62,7 @@ public class MyExcelView extends PullToRefreshRecyclerView {
     public void setRefreshListener(final OnRefreshListener refreshListener) {
         if (null != refreshListener) {
             this.setRefreshing(true);
-            this.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<RecyclerView>() {
+            this.setOnRefreshListener(new OnRefreshListener2<RecyclerView>() {
                 @Override
                 public void onPullDownToRefresh(PullToRefreshBase<RecyclerView> refreshView) {
                     isRefresh = true;
@@ -196,11 +196,11 @@ public class MyExcelView extends PullToRefreshRecyclerView {
                 textView.setText(text);
                 textView.setGravity(Gravity.CENTER);
                 //设置布局
-                LinearLayout.LayoutParams textViewParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
-                        LinearLayout.LayoutParams.WRAP_CONTENT);
+                LayoutParams textViewParams = new LayoutParams(LayoutParams.WRAP_CONTENT,
+                        LayoutParams.WRAP_CONTENT);
                 textView.setPadding(10, 10, 10, 10);
                 textView.setLayoutParams(textViewParams);
-                LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) textView.getLayoutParams();
+                LayoutParams layoutParams = (LayoutParams) textView.getLayoutParams();
                 int width = DisplayUtil.px2dip(mContext, layoutParams.leftMargin) +
                         DisplayUtil.px2dip(mContext, layoutParams.rightMargin) + textView.getPaddingLeft() + textView.getPaddingRight() +
                         getTextViewWidth(textView, text);

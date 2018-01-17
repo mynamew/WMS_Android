@@ -71,6 +71,7 @@ public class Constants {
     public static final int REQUEST_SCAN_CODE_RETURN_MATERIAL = 1004;//退料单号  扫码
     public static final int REQUEST_SCAN_CODE_BARCODE = 1005;//条码
     public static final int REQUEST_SCAN_CODE_CONTAINER = 1006;//容器
+    public static final int REQUEST_SCAN_CODE_ORDERNO = 1007;//单号
     /***********
      * SharePerference存储token   key /  value的前缀
      *********************************************************************************************/
