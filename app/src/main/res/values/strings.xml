@@ -247,7 +247,7 @@
     <string name="please_input_orderno_barcode_department_one">请输入单号或条码或部门至少一个</string>
     <string name="please_input_orderno_startdate_barcode_one">请输入单号或启动日期或条码至少一个</string>
     /**====== 来料入库 ======**/
-    <string name="should_instock_qty">库存：</string>
+    <string name="should_instock_qty">应入：</string>
     <string name="in_stock_num_title">入库上架(来料入库)</string>
     <string name="receive_pro_num">到货单号</string>
     <string name="create_orderno_date">到货日期</string>
@@ -569,6 +569,8 @@
     <string name="order_detial_other_out_audit_title">其他出库(审核)单据详情</string>
     <string name="order_detial_other_in_bill_title">其他入库(制单)单据详情</string>
     <string name="return_material_order_detial">采购退料(制单)单据详情</string>
+    <string name="should_outstock_qty">应出：</string>
+    <string name="item_repertory">库存：</string>
     <!--物品清点-->
     /**====== 物品清点 ======**/
     <string name="goods_point_outsource_feed_title">物品清点(委外补料)</string>
@@ -997,7 +999,11 @@
     <string name="error_title">错误提示</string>
     <string name="current_material_no_datecode_please_repeat_in">当前物料没有批次信息，请重新进入！</string>
     <string name="set_pda_code_success">设置PDA参数成功！</string>
-
+    /******************************************************************************************************************************************************/
+    /**====== 蓝牙 ======**/
+    <string name="notifyTitle">提示</string>
+    <string name="gpsNotifyMsg">当前手机扫描蓝牙需要打开定位功能。</string>
+    <string name="setting">前往设置</string>
 
 
 </resources>

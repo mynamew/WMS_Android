@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.timi.sz.wms_android.R;
 import com.timi.sz.wms_android.http.message.BaseMessage;
 import com.timi.sz.wms_android.http.message.event.HomeEvent;
+import com.timi.sz.wms_android.mvp.UI.bluetooth.BluetoothActivity;
 import com.timi.sz.wms_android.mvp.UI.query.QueryActivity;
 import com.timi.sz.wms_android.mvp.UI.quity.QulityActivity;
 import com.timi.sz.wms_android.mvp.UI.stock_in.StockInActivity;
@@ -94,7 +95,7 @@ public class HomeFragment extends Fragment {
         unbinder.unbind();
     }
 
-    @OnClick({R.id.tv_home_todayin_num, R.id.tv_home_todayout_num, R.id.tv_home_instock, R.id.tv_home_outstock, R.id.tv_home_stock_in, R.id.tv_home_quilty, R.id.tv_home_query})
+    @OnClick({R.id.tv_home_todayin_num, R.id.rl_today_in, R.id.tv_home_todayout_num, R.id.tv_home_instock, R.id.tv_home_outstock, R.id.tv_home_stock_in, R.id.tv_home_quilty, R.id.tv_home_query})
     public void onViewClicked(View view) {
         Intent it=new Intent();
         switch (view.getId()) {
@@ -117,8 +118,9 @@ public class HomeFragment extends Fragment {
             case R.id.tv_home_query:
                 it.setClass(getActivity(), QueryActivity.class);
                 break;
-//            case R.id.rl_today_in://今日入库
-//                break;
+            case R.id.rl_today_in://今日入库
+                it.setClass(getActivity(), BluetoothActivity.class);
+                break;
 //            case R.id.rl_today_out://进入出库
 //                break;
         }

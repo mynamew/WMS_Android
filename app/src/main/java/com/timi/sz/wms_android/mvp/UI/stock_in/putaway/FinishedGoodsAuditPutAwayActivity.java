@@ -113,7 +113,7 @@ public class FinishedGoodsAuditPutAwayActivity extends BaseActivity<PutAwayView,
                 /**
                  * 查看详情
                  */
-                Intent it = new Intent(FinishedGoodsAuditPutAwayActivity.this, DetailActivity.class);
+                Intent it = new Intent(FinishedGoodsAuditPutAwayActivity.this, StockInDetailActivity.class);
                 it.putExtra(Constants.CODE_STR, intentCode);
                 it.putExtra(Constants.STOCKIN_BILLID, mFinishBean.getBillId());
                 startActivity(it);

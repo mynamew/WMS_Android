@@ -98,7 +98,8 @@ public class StockInActivity extends BaseNoMvpActivity {
                         tvStockinInlib.setVisibility(View.VISIBLE);
                     }
                     //其他入库
-                    if (childPermissionsMenu.get(j).getPermissionCode().equals(Constants.PERMISSION_STOCKIN_OTHER_PUTAWAY)) {
+                    if (childPermissionsMenu.
+                            get(j).getPermissionCode().equals(Constants.PERMISSION_STOCKIN_OTHER_PUTAWAY)) {
                         tvStockinOtherInlibCheck.setVisibility(View.VISIBLE);
                         tvStockinOtherInlibCreateOrder.setVisibility(View.VISIBLE);
                     }

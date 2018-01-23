@@ -76,10 +76,10 @@ public class StockInDetailActivity extends BaseActivity<StockInDetailView, Stock
                 tvTip.setText(R.string.order_detail_come_material_title);
                 break;
             case Constants.CREATE_PRO_CHECK_NUM://产成品(审核)单据详情
-                tvTip.setText(R.string.order_detial_finish_goods_audit_title);
+                tvTip.setText(R.string.order_detial_finish_googs_audit_title);
                 break;
             case Constants.CREATE_PRO_CREATE_ORDER_NUM://产成品(生单)单据详情
-                tvTip.setText(R.string.order_detial_finish_goods_bill_title);
+                tvTip.setText(R.string.order_detial_finish_googs_bill_title);
                 break;
             case Constants.OTHER_IN_STOCK_SELECT_ORDERNO://其他入库(选单)单据详情
                 tvTip.setText(R.string.order_detail_other_select_bill_title);
@@ -170,14 +170,17 @@ public class StockInDetailActivity extends BaseActivity<StockInDetailView, Stock
                         case Constants.OUT_RETURN_MATERAIL:
                         case Constants.CREATE_RETURN_MATERAIL:
                         case Constants.SALE_RETURN_MATERAIL:
-                            holder.setTextView(R.id.tv_should_return_num_tip,getString(R.string.should_return_material_qty));
+                            holder.setTextView(R.id.tv_should_return_num_tip, getString(R.string.should_return_material_qty));
+                            break;
+                        case Constants.STOCK_OUT_PURCHASE_MATERIAL_RETURN://采购退料  库存
+                            holder.setTextView(R.id.tv_should_return_num_tip, getString(R.string.item_repertory));
                             break;
                     }
                     holder.setTextView(R.id.tv_wait_count_num, item.getWaitQty());
                     holder.setTextView(R.id.tv_should_return_num, item.getQty());
                     holder.setTextView(R.id.tv_scan_num, item.getScanQty());
-                    holder.setTextView(R.id.tv_material_code, item.getMaterialCode() +"  "+ item.getMaterialName());//合格数？ 应退数
-                    holder.setTextView(R.id.tv_material_model, item.getMaterialAttribute() +"  "+ item.getMaterialStandard());
+                    holder.setTextView(R.id.tv_material_code, item.getMaterialCode() + "  " + item.getMaterialName());//合格数？ 应退数
+                    holder.setTextView(R.id.tv_material_model, item.getMaterialAttribute() + "  " + item.getMaterialStandard());
                 }
             };
             rlvUnInstock.setAdapter(adapter);

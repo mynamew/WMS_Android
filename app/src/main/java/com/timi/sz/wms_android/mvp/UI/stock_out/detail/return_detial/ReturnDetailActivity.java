@@ -30,7 +30,7 @@ import butterknife.ButterKnife;
 import static android.support.v7.widget.RecyclerView.SCROLL_STATE_IDLE;
 import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_POINT_DETIAIL_BILLID;
 
-public class ReturnDetailActivity extends BaseActivity<ReturnDetailView,ReturnDetailPresenter> implements ReturnDetailView {
+public class ReturnDetailActivity extends BaseActivity<ReturnDetailView, ReturnDetailPresenter> implements ReturnDetailView {
 
     @BindView(R.id.tv_tip)
     TextView tvTip;
@@ -51,6 +51,7 @@ public class ReturnDetailActivity extends BaseActivity<ReturnDetailView,ReturnDe
 
     private List<ReturnDetailResult> mDatas = new ArrayList<>();
     private List<ReturnDetailResult> mOldDatas = new ArrayList<>();
+
     @Override
     public int setLayoutId() {
         return R.layout.activity_return_detail;
@@ -90,9 +91,10 @@ public class ReturnDetailActivity extends BaseActivity<ReturnDetailView,ReturnDe
 
     @Override
     public void getMakePurReturnScannedDetail(List<ReturnDetailResult> o) {
-            mDatas.addAll(o);
-            initAdapter();
+        mDatas.addAll(o);
+        initAdapter();
     }
+
     /**
      * 初始化adapter
      */
@@ -105,14 +107,14 @@ public class ReturnDetailActivity extends BaseActivity<ReturnDetailView,ReturnDe
             adapter = new BaseRecyclerAdapter<ReturnDetailResult>(this, mDatas) {
                 @Override
                 protected int getItemLayoutId(int viewType) {
-                    return R.layout.item_instock_detail;
+                    return R.layout.item_buy_return_detail;
                 }
 
                 @Override
                 protected void bindData(RecyclerViewHolder holder, int position, ReturnDetailResult item) {
                     holder.getView(R.id.ll_wait_total).setVisibility(View.GONE);
                     holder.getView(R.id.ll_repetory_total).setVisibility(View.GONE);
-                    setTextViewText(holder.getTextView(R.id.tv_line_name), R.string.item_line_num, position+1);
+                    setTextViewText(holder.getTextView(R.id.tv_line_name), R.string.item_line_num, position + 1);
                     holder.setTextView(R.id.tv_scan_num, item.getScanQty());
                     holder.setTextView(R.id.tv_material_code, item.getMaterialCode() + "  " + item.getMaterialName());//合格数？ 应退数
                     holder.setTextView(R.id.tv_material_model, item.getMaterialAttribute() + "  " + item.getMaterialStandard());

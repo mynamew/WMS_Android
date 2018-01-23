@@ -339,7 +339,7 @@
                             android:id="@+id/tv_stock_out_other_buy_return_bill"
                             style="@style/stock_in_tab"
                             android:layout_weight="1"
-                            android:drawableTop="@mipmap/stock_out_other_buy_return"
+                            android:drawableTop="@mipmap/stock_out_other_buy_return_bill"
                             android:text="@string/stock_out_other_buy_return"/>
                     </LinearLayout>
 

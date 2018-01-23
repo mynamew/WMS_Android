@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context="com.timi.sz.wms_android.mvp.UI.bluetooth.BluetoothActivity">
+
+    <include layout="@layout/title_head"/>
+
+    <RelativeLayout
+        android:id="@+id/rl_show_print"
+        android:layout_width="match_parent"
+        android:layout_height="88px"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="30px"
+            android:gravity="center_vertical"
+            android:text="打印机"
+            android:textColor="#333"
+            android:textSize="13sp"/>
+
+        <ImageView
+            android:id="@+id/iv_print"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="30px"
+            android:src="@drawable/selector_divide_print"/>
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2px"
+        android:background="@color/divide_color"/>
+    <LinearLayout
+        android:id="@+id/ll_print_device"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="visible">
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="54px"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:background="@color/divide_color"
+            android:gravity="center_vertical"
+            android:paddingLeft="30px"
+            android:text="已搜索到的打印机"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rlv_print"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+</LinearLayout>

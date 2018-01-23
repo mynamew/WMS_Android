@@ -73,6 +73,13 @@ public class Constants {
     public static final int REQUEST_SCAN_CODE_CONTAINER = 1006;//容器
     public static final int REQUEST_SCAN_CODE_ORDERNO = 1007;//单号
     /***********
+     * 蓝牙相关
+     *********************************************************************************************/
+
+    public static final int REQUEST_CODE_BLUETOOTH_ON = 1008;//打开蓝牙
+    public static final int REQUEST_CODE_OPEN_GPS = 1009;//打开GPS
+    public static final int REQUEST_CODE_PERMISSION_LOCATION = 1010;//定位
+    /***********
      * SharePerference存储token   key /  value的前缀
      *********************************************************************************************/
     public static final String AUTHORIZATION = "Authorization";

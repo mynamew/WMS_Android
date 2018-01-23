@@ -3,13 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/DateSelectlibrary/DateSelectlibrary.iml" filepath="$PROJECT_DIR$/DateSelectlibrary/DateSelectlibrary.iml" />
-      <module fileurl="file://D:\WMS_Android\DateSelectlibrary\DateSelectlibrary.iml" filepath="D:\WMS_Android\DateSelectlibrary\DateSelectlibrary.iml" />
       <module fileurl="file://$PROJECT_DIR$/PullToRefresh/PullToRefresh.iml" filepath="$PROJECT_DIR$/PullToRefresh/PullToRefresh.iml" />
-      <module fileurl="file://D:\WMS_Android\PullToRefresh\PullToRefresh.iml" filepath="D:\WMS_Android\PullToRefresh\PullToRefresh.iml" />
       <module fileurl="file://$PROJECT_DIR$/WMS_Android.iml" filepath="$PROJECT_DIR$/WMS_Android.iml" />
-      <module fileurl="file://D:\WMS_Android\WMS_Android.iml" filepath="D:\WMS_Android\WMS_Android.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://D:\WMS_Android\app\app.iml" filepath="D:\WMS_Android\app\app.iml" />
     </modules>
   </component>
 </project>

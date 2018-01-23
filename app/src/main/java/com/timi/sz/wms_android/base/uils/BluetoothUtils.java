@@ -7,6 +7,8 @@ import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
 import android.content.Intent;
 
+import com.timi.sz.wms_android.qrcode.utils.Constant;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -76,8 +78,11 @@ public class BluetoothUtils {
 	 * 弹出系统对话框，请求打开蓝牙
 	 */
 	public static void openBluetooth(Activity activity) {
-		Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
-		activity.startActivityForResult(enableBtIntent, 666);
+		Intent requestBluetoothOn = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+		requestBluetoothOn.setAction(BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE);
+		requestBluetoothOn.putExtra(BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, 1000);
+		activity.startActivityForResult(requestBluetoothOn, Constants.REQUEST_CODE_BLUETOOTH_ON);
+
 	}
 
 	public static BluetoothSocket connectDevice(BluetoothDevice device) {

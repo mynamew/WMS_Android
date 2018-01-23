@@ -69,7 +69,6 @@
             android:name=".qrcode.CommonScanActivity"
             android:launchMode="standard"
             android:screenOrientation="portrait"/>
-
         <activity android:name=".mvp.UI.login_success.LoginSuccessActivity">
         </activity>
         <activity android:name=".mvp.UI.stock_in.StockInActivity">
@@ -105,11 +104,15 @@
             android:name=".mvp.UI.stock_out.buy_return_material.orderno.BuyReturnMaterialOrderNoActivity"
             android:windowSoftInputMode="adjustPan|stateHidden">
         </activity>
-        <activity android:name=".mvp.UI.stock_out.other.scan.OtherOutStockScanActivity">
+        <activity
+            android:name=".mvp.UI.stock_out.other.scan.OtherOutStockScanActivity"
+            android:windowSoftInputMode="adjustPan|stateHidden">
         </activity>
         <activity android:name=".mvp.UI.stock_in.other_scan.OtherScanActivity">
         </activity>
         <activity android:name=".mvp.UI.stock_out.query.StockOutSearchActivity">
+        </activity>
+        <activity android:name=".mvp.UI.stock_out.detail.return_detial.ReturnDetailActivity">
         </activity>
         <activity android:name=".mvp.UI.quity.quality.QualityCheckActivity">
         </activity>
@@ -230,6 +233,8 @@
         <activity
             android:name=".mvp.UI.stock_in_work.goods_query.GoodsQueryActivity"
             android:windowSoftInputMode="adjustPan|stateHidden">
+        </activity>
+        <activity android:name=".mvp.UI.bluetooth.BluetoothActivity">
         </activity>
     </application>
 

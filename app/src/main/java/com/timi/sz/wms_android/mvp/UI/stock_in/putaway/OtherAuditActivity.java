@@ -126,7 +126,7 @@ public class OtherAuditActivity extends BaseActivity<PutAwayView, PutAwayPresent
                 /**
                  * 查看详情
                  */
-                Intent it = new Intent(OtherAuditActivity.this, DetailActivity.class);
+                Intent it = new Intent(OtherAuditActivity.this, StockInDetailActivity.class);
                 it.putExtra(Constants.CODE_STR, intentCode);
                 it.putExtra(Constants.STOCKIN_BILLID, otherBean.getSummaryResults().getBillId());
                 startActivity(it);

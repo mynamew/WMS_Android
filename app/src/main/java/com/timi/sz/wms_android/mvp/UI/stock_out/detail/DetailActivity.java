@@ -200,12 +200,17 @@ public class DetailActivity extends BaseActivity<DetailView, DetailPresenter> im
             adapter = new BaseRecyclerAdapter<MaterialDetailResult>(this, mDatas) {
                 @Override
                 protected int getItemLayoutId(int viewType) {
-                    return R.layout.item_instock_detail;
+                    return R.layout.item_outstock_detail;
                 }
 
                 @Override
                 protected void bindData(RecyclerViewHolder holder, int position, MaterialDetailResult item) {
                     setTextViewText(holder.getTextView(R.id.tv_line_name), R.string.item_line_num, item.getLine());
+                    //其他出入库 制单  单据详情显示只有扫描数
+                    if(intentCode==Constants.OTHER_IN_STOCK_SCAN||intentCode==Constants.STOCK_OUT_OTHER_OUT_BILL){
+                        holder.getView(R.id.ll_wait_total).setVisibility(View.GONE);
+                        holder.getView(R.id.ll_repetory_total).setVisibility(View.GONE);
+                    }
                     holder.setTextView(R.id.tv_wait_count_num, item.getWaitQty());
                     holder.setTextView(R.id.tv_scan_num, item.getScanQty());
                     holder.setTextView(R.id.tv_should_return_num, item.getQty());
