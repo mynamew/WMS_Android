@@ -110,9 +110,10 @@ public class Constants {
     public static  final String PERMISSION_QUALITY="Pages.WPDA.IQC";//来料质检
     public static  final String PERMISSION_BarcodeEdit="Pages.WPDA.BarcodeEdit";//无质检条码修改
 
-
+    public static  final String PERMISSION_STOCKOUT="Pages.WPDA.OutStock";//出库作业
     public static  final String PERMISSION_STOCKOUT_PURRETURN="Pages.WPDA.PurReturn";//采购退料
-    public static  final String PERMISSION_STOCKOUT_OUT_FEED="Pages.WPDA.WWPick";    //委外发料
+    public static  final String PERMISSION_STOCKOUT_OUT_FEED="Pages.WPDA.WWFeed";    //委外补料
+    public static  final String PERMISSION_STOCKOUT_OUT_SEND="Pages.WPDA.WWPick";    //委外发料
     public static  final String PERMISSION_STOCKOUT_OUT_ALLOT="Pages.WPDA.WPDA_WWTransfer";//委外调拨
     public static  final String PERMISSION_STOCKOUT_PRODUCTION_PICK="Pages.WPDA.PrdPick";//生产领料
     public static  final String PERMISSION_STOCKOUT_PRODUCTION_ALLOT="Pages.WPDA.PrdTransfer";//生产调拨

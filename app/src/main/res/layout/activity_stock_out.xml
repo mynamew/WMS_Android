@@ -39,6 +39,7 @@
 
             <!--调拨调整-->
             <android.support.v7.widget.CardView
+                android:id="@+id/card_out"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20px"
@@ -71,24 +72,28 @@
                         <TextView
                             android:id="@+id/tv_stock_out_out_check"
                             style="@style/stock_in_tab"
+                            android:visibility="invisible"
                             android:drawableTop="@mipmap/stock_out_out_check"
                             android:text="@string/stock_out_out_check"/>
 
                         <TextView
                             android:id="@+id/tv_stock_out_out_create_order"
                             style="@style/stock_in_tab"
+                            android:visibility="invisible"
                             android:drawableTop="@mipmap/stock_out_out_create_order"
                             android:text="@string/stock_out_out_create_order"/>
 
                         <TextView
                             android:id="@+id/tv_stock_out_out_allot"
                             style="@style/stock_in_tab"
+                            android:visibility="invisible"
                             android:drawableTop="@mipmap/outsource_allot"
                             android:text="@string/outsource_allot"/>
 
                         <TextView
                             android:id="@+id/tv_stock_out_out_add_materail"
                             style="@style/stock_in_tab"
+                            android:visibility="invisible"
                             android:drawableTop="@mipmap/stock_out_out_add_materail"
                             android:text="@string/stock_out_out_add_materail"/>
                     </LinearLayout>
@@ -96,6 +101,7 @@
             </android.support.v7.widget.CardView>
             <!--退货-->
             <android.support.v7.widget.CardView
+                android:id="@+id/card_production"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20px"
@@ -120,6 +126,7 @@
                         android:text="@string/stock_out_create"/>
 
                     <LinearLayout
+                        android:id="@+id/ll_production"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="#fff"
@@ -129,25 +136,29 @@
                         <TextView
                             android:id="@+id/tv_stock_out_create_check"
                             style="@style/stock_in_tab"
+                            android:visibility="invisible"
                             android:drawableTop="@mipmap/stock_out_create_check"
                             android:text="@string/stock_out_create_check"/>
 
                         <TextView
                             android:id="@+id/tv_stock_out_create_create_order"
                             style="@style/stock_in_tab"
+                            android:visibility="invisible"
                             android:drawableTop="@mipmap/stock_out_create_create_order"
                             android:text="@string/stock_out_create_create_order"/>
-
                         <TextView
-                            android:id="@+id/tv_stock_out_apply_bill"
+                            android:id="@+id/tv_stock_out_create_add_materail"
                             style="@style/stock_in_tab"
                             android:layout_weight="1"
-                            android:drawableTop="@mipmap/stock_out_apply_bill"
-                            android:text="@string/stock_out_apply_bill"/>
+                            android:visibility="invisible"
+                            android:drawableTop="@mipmap/stock_out_create_add_materail"
+                            android:text="@string/stock_out_create_add_materail"/>
+
 
                         <TextView
                             android:id="@+id/tv_stock_out_create_allot"
                             style="@style/stock_in_tab"
+                            android:visibility="invisible"
                             android:drawableTop="@mipmap/production_allot"
                             android:text="@string/production_allot"/>
 
@@ -160,11 +171,11 @@
 
 
                         <TextView
-                            android:id="@+id/tv_stock_out_create_add_materail"
+                            android:id="@+id/tv_stock_out_apply_bill"
                             style="@style/stock_in_tab"
                             android:layout_weight="1"
-                            android:drawableTop="@mipmap/stock_out_create_add_materail"
-                            android:text="@string/stock_out_create_add_materail"/>
+                            android:drawableTop="@mipmap/stock_out_apply_bill"
+                            android:text="@string/stock_out_apply_bill"/>
 
                         <TextView
                             style="@style/stock_in_tab"
@@ -191,6 +202,7 @@
                 </LinearLayout>
             </android.support.v7.widget.CardView>  <!--退货-->
             <android.support.v7.widget.CardView
+                android:id="@+id/card_sale"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20px"
@@ -224,6 +236,7 @@
                             android:id="@+id/tv_stock_out_sale_check"
                             style="@style/stock_in_tab"
                             android:drawableTop="@mipmap/stock_out_sale_check"
+
                             android:text="@string/stock_out_sale_check"/>
 
                         <TextView
@@ -286,6 +299,7 @@
 
             <!--调拨调整-->
             <android.support.v7.widget.CardView
+                android:id="@+id/card_synthesize"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20px"
@@ -319,12 +333,14 @@
                             android:id="@+id/tv_stock_out_other_check"
                             style="@style/stock_in_tab"
                             android:drawableTop="@mipmap/stock_out_other_check"
+                            android:visibility="invisible"
                             android:text="@string/stock_out_other_check"/>
 
                         <TextView
                             android:id="@+id/tv_stock_out_other_create_order"
                             style="@style/stock_in_tab"
                             android:drawableTop="@mipmap/stock_out_other_create_order"
+                            android:visibility="invisible"
                             android:text="@string/stock_out_other_create_order"/>
 
 
@@ -333,6 +349,7 @@
                             style="@style/stock_in_tab"
                             android:layout_weight="1"
                             android:drawableTop="@mipmap/stock_out_other_buy_return"
+                            android:visibility="invisible"
                             android:text="@string/stock_out_other_buy_return"/>
 
                         <TextView
@@ -340,6 +357,7 @@
                             style="@style/stock_in_tab"
                             android:layout_weight="1"
                             android:drawableTop="@mipmap/stock_out_other_buy_return_bill"
+                            android:visibility="invisible"
                             android:text="@string/stock_out_other_buy_return"/>
                     </LinearLayout>
 
@@ -365,14 +383,14 @@
                             android:layout_weight="1"
                             android:drawableTop="@mipmap/stock_out_sale_trans"
                             android:text="@string/stock_out_pick_sale_tab"
-                            android:visibility="invisible"/>
+                            android:visibility="gone"/>
 
                         <TextView
                             style="@style/stock_in_tab"
                             android:layout_weight="1"
                             android:drawableTop="@mipmap/stock_out_sale_trans"
                             android:text="@string/stock_out_pick_tab"
-                            android:visibility="invisible"/>
+                            android:visibility="gone"/>
                     </LinearLayout>
 
                 </LinearLayout>

@@ -901,7 +901,11 @@ public class BuyInStockListActivity extends BaseActivity<BuyInStockListView, Buy
         intent.putExtra(STOCK_OUT_BEAN, new Gson().toJson(bean));
         intent.putExtra(STOCK_OUT_CODE_STR, intentCode);
         if (bean.getSummaryResults().isIsLotPick()) {//批次拣货
-            intent.setClass(this, BatchPointListActivity.class);
+            if (bean.getSummaryResults().isIsMerge()) {//是否是合并拣货
+                intent.setClass(this, BatchPointListActivity.class);
+            } else {
+                intent.setClass(this, OutsourceBillDetailActivity.class);
+            }
         } else {
             intent.setClass(this, NormalOutStockActivity.class);
         }

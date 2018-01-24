@@ -1,6 +1,7 @@
 package com.timi.sz.wms_android.mvp.UI.stock_in;
 
 import android.content.Intent;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v4.widget.NestedScrollView;
 import android.view.View;
