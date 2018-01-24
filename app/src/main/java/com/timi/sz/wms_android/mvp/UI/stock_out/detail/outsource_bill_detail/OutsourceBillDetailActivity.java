@@ -38,6 +38,7 @@ import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_PRINT_BATCh_DETAILID;
@@ -87,6 +88,30 @@ public class OutsourceBillDetailActivity extends BaseActivity<OutsourceBillDetai
     View viewDivide;
     @BindView(R.id.rlv_orderno_info)
     RecyclerView rlvOrdernoInfo;
+    @BindView(R.id.tv_supplier_tip)
+    TextView tvSupplierTip;
+    @BindView(R.id.ll_outsource)
+    LinearLayout llOutsource;
+    @BindView(R.id.tv_production_orderno_tip)
+    TextView tvProductionOrdernoTip;
+    @BindView(R.id.tv_production_orderno_orderno)
+    TextView tvProductionOrdernoOrderno;
+    @BindView(R.id.tv_production_date)
+    TextView tvProductionDate;
+    @BindView(R.id.tv_department_tip)
+    TextView tvDepartmentTip;
+    @BindView(R.id.tv_department)
+    TextView tvDepartment;
+    @BindView(R.id.ll_production)
+    LinearLayout llProduction;
+    @BindView(R.id.tv_out_allot_orderno)
+    TextView tvOutAllotOrderno;
+    @BindView(R.id.tv_out_allot_date)
+    TextView tvOutAllotDate;
+    @BindView(R.id.tv_out_allot_supplier)
+    TextView tvOutAllotSupplier;
+    @BindView(R.id.ll_allot_out)
+    LinearLayout llAllotOut;
     private BaseRecyclerAdapter<DetailResultsBean> adapter;
     //adapter的数据源
     private List<DetailResultsBean> mDatas = new ArrayList<>();
@@ -114,7 +139,7 @@ public class OutsourceBillDetailActivity extends BaseActivity<OutsourceBillDetai
     public void initBundle(Bundle savedInstanceState) {
         BaseMessage.register(this);
         intentCode = getIntent().getIntExtra(STOCK_OUT_CODE_STR, STOCK_OUT_OUTSOURCE_FEED_SUPLLIEMENT);
-        isFromNormalOutStock=getIntent().getBooleanExtra(OUT_STOCK_TO_DETAIL_FORM_NORMAL,false);
+        isFromNormalOutStock = getIntent().getBooleanExtra(OUT_STOCK_TO_DETAIL_FORM_NORMAL, false);
         switch (intentCode) {
             case STOCK_OUT_OUTSOURCE_BILL://委外生单
             case STOCK_OUT_OUTSOURCE_ALLOT://委外调拨
@@ -128,7 +153,15 @@ public class OutsourceBillDetailActivity extends BaseActivity<OutsourceBillDetai
                 //billId
                 billId = summaryResultsBill.getBillId();
                 //
-                setHeaderContent(summaryResultsBill.getBillCode(), summaryResultsBill.getBillDate(), summaryResultsBill.getSupplierName());
+                if (intentCode == STOCK_OUT_OUTSOURCE_ALLOT) {//调拨单
+                    //设置委外可见
+                    llAllotOut.setVisibility(View.VISIBLE);
+                    setOutAllotHeaderContent(summaryResultsBill.getBillCode(), summaryResultsBill.getBillDate(), summaryResultsBill.getSupplierName());
+                } else {
+                    //设置委外可见
+                    llOutsource.setVisibility(View.VISIBLE);
+                    setHeaderContent(summaryResultsBill.getBillCode(), summaryResultsBill.getBillDate(), summaryResultsBill.getSupplierName());
+                }
                 break;
             case STOCK_OUT_PRODUCTION_BILL://生产生单
             case STOCK_OUT_PRODUCTION_ALLOT://生产调拨
@@ -144,12 +177,28 @@ public class OutsourceBillDetailActivity extends BaseActivity<OutsourceBillDetai
                 destBillType = 23;
                 //billId
                 billId = summaryResultsProductionAllot.getBillId();
-                setHeaderContent(summaryResultsProductionAllot.getBillCode(), summaryResultsProductionAllot.getBillDate(), summaryResultsProductionAllot.getSupplierName());
-
+                //设置生产可见
+                llProduction.setVisibility(View.VISIBLE);
+                setProductionHeaderContent(summaryResultsProductionAllot.getBillCode(), summaryResultsProductionAllot.getBillDate(), summaryResultsProductionAllot.getDeptName());
+                if (intentCode == STOCK_OUT_PRODUCTION_ALLOT) {//调拨单
+                    tvProductionOrdernoOrderno.setText(R.string.goods_point_production_allot_orderno);
+                }
                 break;
             default:
                 break;
         }
+    }
+
+    /**
+     * 设置委外调拨
+     * @param billCode
+     * @param billDate
+     * @param supplierName
+     */
+    private void setOutAllotHeaderContent(String billCode, String billDate, String supplierName) {
+        tvOutAllotOrderno.setText(billCode);
+        tvOutAllotDate.setText(billDate);
+        tvOutAllotSupplier.setText(supplierName);
     }
 
     @Override
@@ -250,7 +299,7 @@ public class OutsourceBillDetailActivity extends BaseActivity<OutsourceBillDetai
                     holder.setTextView(R.id.tv_material_code, item.getMaterialCode());
                     holder.setTextView(R.id.tv_send_material_num, item.getPoQty());
                     holder.setTextView(R.id.tv_scan_num, item.getWipQty());
-                    holder.setTextView(R.id.tv_material_name, item.getMaterialName() + "  "+item.getMaterialAttribute());
+                    holder.setTextView(R.id.tv_material_name, item.getMaterialName() + "  " + item.getMaterialAttribute());
                 }
             };
             adapter.setOnItemClickListener(new BaseRecyclerAdapter.OnItemClickListener() {
@@ -260,23 +309,23 @@ public class OutsourceBillDetailActivity extends BaseActivity<OutsourceBillDetai
                      * 来自普通出库明细跳转的时候不进行点击事件的设置，
                      * 即不从明细列表进入到物料清单的界面
                      */
-                   if(!isFromNormalOutStock){
-                       currentPosition = pos;
-                       /**
-                        * 退料单号的 网络请求
-                        */
-                       Map<String, Object> params = new HashMap<>();
-                       params.put("UserId", SpUtils.getInstance().getUserId());
-                       params.put("OrgId", SpUtils.getInstance().getOrgId());
-                       params.put("MAC", PackageUtils.getMac());
-                       params.put("MainId", billId);
-                       params.put("DetailId", mDatas.get(pos).getDetailId());
-                       //是否传入目标单据类型
-                       if (destBillType != -1) {
-                           params.put("DestBillType", destBillType);
-                       }
-                       getPresenter().getDetailData(params, intentCode);
-                   }
+                    if (!isFromNormalOutStock) {
+                        currentPosition = pos;
+                        /**
+                         * 退料单号的 网络请求
+                         */
+                        Map<String, Object> params = new HashMap<>();
+                        params.put("UserId", SpUtils.getInstance().getUserId());
+                        params.put("OrgId", SpUtils.getInstance().getOrgId());
+                        params.put("MAC", PackageUtils.getMac());
+                        params.put("MainId", billId);
+                        params.put("DetailId", mDatas.get(pos).getDetailId());
+                        //是否传入目标单据类型
+                        if (destBillType != -1) {
+                            params.put("DestBillType", destBillType);
+                        }
+                        getPresenter().getDetailData(params, intentCode);
+                    }
                 }
             });
             rlvOrdernoInfo.setAdapter(adapter);
@@ -300,6 +349,19 @@ public class OutsourceBillDetailActivity extends BaseActivity<OutsourceBillDetai
         tvSupplier.setText(supplier);
     }
 
+    /**
+     * 设置生产的头部信息
+     *
+     * @param orderno
+     * @param date
+     * @param department
+     */
+    public void setProductionHeaderContent(String orderno, String date, String department) {
+        tvProductionOrdernoOrderno.setText(orderno);
+        tvProductionDate.setText(date);
+        tvDepartment.setText(department);
+    }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -315,6 +377,7 @@ public class OutsourceBillDetailActivity extends BaseActivity<OutsourceBillDetai
             }
         }
     }
+
     /**
      * 设置scanid
      *
@@ -327,6 +390,7 @@ public class OutsourceBillDetailActivity extends BaseActivity<OutsourceBillDetai
             queryWWPickDataByOutSourceResult.getSummaryResults().setScanId(result.getScanId());
         }
     }
+
     /**
      * 设置scanid
      *
@@ -338,5 +402,12 @@ public class OutsourceBillDetailActivity extends BaseActivity<OutsourceBillDetai
             SubmitBarcodeLotPickOutSplitResult result = event.getResult();
             queryWWPickDataByOutSourceResult.getSummaryResults().setScanId(result.getScanId());
         }
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
     }
 }
