@@ -504,6 +504,8 @@
     <string name="header_have_count_num">已点</string>
     <string name="header_can_useful_life">有效</string>
     <string name="batch_tip">批次</string>
+    <string name="set_batch_exp_tip1">是否指定批次日期</string>
+    <string name="set_batch_exp_tip2">为批次异常？</string>
     /**====== 委外调拨 ======**/
     <string name="outsource_allot_info_tip">委外调拨单信息</string>
     <string name="should_send_num_tip">应发数：</string>
@@ -567,6 +569,8 @@
     <string name="order_detial_other_out_audit_title">其他出库(审核)单据详情</string>
     <string name="order_detial_other_in_bill_title">其他入库(制单)单据详情</string>
     <string name="return_material_order_detial">采购退料(制单)单据详情</string>
+    <string name="should_outstock_qty">应出：</string>
+    <string name="item_repertory">库存：</string>
     <!--物品清点-->
     /**====== 物品清点 ======**/
     <string name="goods_point_outsource_feed_title">物品清点(委外补料)</string>
@@ -984,6 +988,11 @@
     <string name="light_check">明盘</string>
     <string name="dark_check">盲盘</string>
     <string name="check_qty_no_less_zero">盘点数量不能小于等于0！</string>
+    /**====== 库内详情 ======**/
+    <string name="stockin_work_form_change_in_title">形态转换入库详情</string>
+    <string name="stockin_work_form_change_out_title">形态转换出库详情</string>
+    <string name="stockin_work_check_title">盘点详情</string>
+    <string name="stockin_work_allot_in_title">调入详情</string>
     /******************************************************************************************************************************************************/
     /******************************************************************************************************************************************************/
     /**====== 综合查询 ======**/
@@ -995,18 +1004,12 @@
     <string name="error_title">错误提示</string>
     <string name="current_material_no_datecode_please_repeat_in">当前物料没有批次信息，请重新进入！</string>
     <string name="set_pda_code_success">设置PDA参数成功！</string>
-    <string name="set_batch_exp_tip1">是否指定批次日期</string>
-    <string name="set_batch_exp_tip2">为批次异常？</string>
-
     /******************************************************************************************************************************************************/
     /**====== 蓝牙 ======**/
     <string name="notifyTitle">提示</string>
     <string name="gpsNotifyMsg">当前手机扫描蓝牙需要打开定位功能。</string>
     <string name="setting">前往设置</string>
-    <string name="item_repertory">库存：</string>
-    <string name="should_outstock_qty">应出：</string>
-    <string name="stockin_work_form_change_in_title">形态转换入库详情</string>
-    <string name="stockin_work_form_change_out_title">形态转换出库详情</string>
-    <string name="stockin_work_check_title">盘点详情</string>
-    <string name="stockin_work_allot_in_title">调入详情</string>
+
+
+
 </resources>

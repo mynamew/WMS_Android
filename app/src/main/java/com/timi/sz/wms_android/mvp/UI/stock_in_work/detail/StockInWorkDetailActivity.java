@@ -77,8 +77,7 @@ public class StockInWorkDetailActivity extends BaseActivity<StockInWorkDetailVie
                 break;
             case Constants.STOCK_IN_WORK_FORM_CHANGE_OUT://形态转换出库
                 tvTip.setText(R.string.form_change_outstock_detial_info_tip);
-                setActivityTitle(R.string.stockin_work_form_change_out_title);
-                setActivityTitle(getString(R.string.stock_in_work_detial));
+                setActivityTitle(getString(R.string.stockin_work_form_change_out_title));
                 break;
             case Constants.STOCK_IN_WORK_POINT://盘点
                 tvTip.setText(R.string.check_orderno_info);
