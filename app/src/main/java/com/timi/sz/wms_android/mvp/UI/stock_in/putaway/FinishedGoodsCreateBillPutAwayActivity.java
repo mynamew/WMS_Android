@@ -181,7 +181,7 @@ public class FinishedGoodsCreateBillPutAwayActivity extends BaseActivity<PutAway
                 /**
                  * 查看详情
                  */
-                Intent it = new Intent(FinishedGoodsCreateBillPutAwayActivity.this, StockInDetailActivity.class);
+                Intent it = new Intent(FinishedGoodsCreateBillPutAwayActivity.this, DetailActivity.class);
                 it.putExtra(Constants.CODE_STR, intentCode);
                 it.putExtra(Constants.STOCKIN_BILLID,finishGoodsCreateBillBean.getBillId());
                 startActivity(it);

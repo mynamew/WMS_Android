@@ -29,6 +29,10 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 import static android.support.v7.widget.RecyclerView.SCROLL_STATE_IDLE;
+import static com.timi.sz.wms_android.base.uils.Constants.CREATE_PRO_CHECK_NUM;
+import static com.timi.sz.wms_android.base.uils.Constants.CREATE_PRO_CREATE_ORDER_NUM;
+import static com.timi.sz.wms_android.base.uils.Constants.OTHER_IN_STOCK_SCAN;
+import static com.timi.sz.wms_android.base.uils.Constants.OTHER_IN_STOCK_SELECT_ORDERNO;
 import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_POINT_DETIAIL_BILLID;
 import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_POINT_REGIONID;
 import static com.timi.sz.wms_android.base.uils.Constants.OUT_STOCK_POINT_WAREHOUSEID;
@@ -90,13 +94,13 @@ public class DetailActivity extends BaseActivity<DetailView, DetailPresenter> im
     @Override
     public void initView() {
         switch (intentCode) {
-            case Constants.CREATE_PRO_CHECK_NUM://产成品 审核
+            case CREATE_PRO_CHECK_NUM://产成品 审核
                 tvTip.setText(R.string.order_detial_finish_googs_audit_title);
                 break;
-            case Constants.CREATE_PRO_CREATE_ORDER_NUM://产成品 制单
+            case CREATE_PRO_CREATE_ORDER_NUM://产成品 制单
                 tvTip.setText(R.string.order_detial_finish_googs_bill_title);
                 break;
-            case Constants.OTHER_IN_STOCK_SELECT_ORDERNO://其他 选单
+            case OTHER_IN_STOCK_SELECT_ORDERNO://其他 选单
                 tvTip.setText(R.string.order_detial_other_audit_title);
                 break;
             case Constants.STOCK_OUT_PRODUCTION_APPLY_BILL://领料 申请
@@ -125,7 +129,7 @@ public class DetailActivity extends BaseActivity<DetailView, DetailPresenter> im
                 ivShowMore.setSelected(true);
                 ivShowMore.setVisibility(View.GONE);//其他出入库 制单不显示显示全部
                 break;
-            case Constants.OTHER_IN_STOCK_SCAN://其他入库制单
+            case OTHER_IN_STOCK_SCAN://其他入库制单
                 tvTip.setText(R.string.order_detial_other_in_bill_title);
                 ivShowMore.setSelected(true);
                 ivShowMore.setVisibility(View.GONE);
@@ -207,9 +211,18 @@ public class DetailActivity extends BaseActivity<DetailView, DetailPresenter> im
                 protected void bindData(RecyclerViewHolder holder, int position, MaterialDetailResult item) {
                     setTextViewText(holder.getTextView(R.id.tv_line_name), R.string.item_line_num, item.getLine());
                     //其他出入库 制单  单据详情显示只有扫描数
-                    if(intentCode==Constants.OTHER_IN_STOCK_SCAN||intentCode==Constants.STOCK_OUT_OTHER_OUT_BILL){
+                    if(intentCode== OTHER_IN_STOCK_SCAN||intentCode==Constants.STOCK_OUT_OTHER_OUT_BILL){
                         holder.getView(R.id.ll_wait_total).setVisibility(View.GONE);
                         holder.getView(R.id.ll_repetory_total).setVisibility(View.GONE);
+                    }
+                    /**
+                     * 如果intentcode 为 产成品入库审核、生单，其他入库审核、生单， 则显示应入
+                     */
+                    if(intentCode==CREATE_PRO_CHECK_NUM
+                            ||intentCode==CREATE_PRO_CREATE_ORDER_NUM
+                            ||intentCode==OTHER_IN_STOCK_SELECT_ORDERNO
+                            ||intentCode==OTHER_IN_STOCK_SCAN){
+                         holder.setTextView(R.id.tv_should_return_num_tip,getString(R.string.should_instock_qty));
                     }
                     holder.setTextView(R.id.tv_wait_count_num, item.getWaitQty());
                     holder.setTextView(R.id.tv_scan_num, item.getScanQty());
