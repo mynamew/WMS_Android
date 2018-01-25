@@ -67,22 +67,27 @@ public class StockInWorkDetailActivity extends BaseActivity<StockInWorkDetailVie
 
     @Override
     public void initBundle(Bundle savedInstanceState) {
-        setActivityTitle(getString(R.string.stock_in_work_detial));
         intentCode = getIntent().getIntExtra(STOCK_IN_WORK_CODE_STR, 0);
         billId = getIntent().getIntExtra(STOCK_IN_WORK_BILLID, 0);
         switch (intentCode) {
 
             case Constants.STOCK_IN_WORK_FORM_CHANGE_IN://形态转换入库
                 tvTip.setText(R.string.form_change_instock_detial_info_tip);
+                setActivityTitle(R.string.stockin_work_form_change_in_title);
                 break;
             case Constants.STOCK_IN_WORK_FORM_CHANGE_OUT://形态转换出库
                 tvTip.setText(R.string.form_change_outstock_detial_info_tip);
+                setActivityTitle(R.string.stockin_work_form_change_out_title);
+                setActivityTitle(getString(R.string.stock_in_work_detial));
                 break;
             case Constants.STOCK_IN_WORK_POINT://盘点
                 tvTip.setText(R.string.check_orderno_info);
+                setActivityTitle(R.string.stockin_work_check_title);
+                setActivityTitle(getString(R.string.stock_in_work_detial));
                 break;
             case Constants.STOCK_IN_WORK_ALLOT_SCAN://扫描调入
                 tvTip.setText(R.string.scan_allot_in_orderno_detail);
+                setActivityTitle(R.string.stockin_work_allot_in_title);
                 break;
         }
 

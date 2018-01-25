@@ -1005,4 +1005,8 @@
     <string name="setting">前往设置</string>
     <string name="item_repertory">库存：</string>
     <string name="should_outstock_qty">应出：</string>
+    <string name="stockin_work_form_change_in_title">形态转换入库详情</string>
+    <string name="stockin_work_form_change_out_title">形态转换出库详情</string>
+    <string name="stockin_work_check_title">盘点详情</string>
+    <string name="stockin_work_allot_in_title">调入详情</string>
 </resources>
