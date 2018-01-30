@@ -125,8 +125,25 @@ public class HttpSubscriber<T> implements Observer<T> {
                  * 如果返回的tocken 失效 跳转到登录的界面
                  */
                 if (httpResultBean.isUnAuthorizedRequest()) {
-                    BaseActivity currentActivty = (BaseActivity) BaseActivity.getCurrentActivty();
-                    currentActivty.jumpToLoginActivity();
+                    /**
+                     * 显示 错误提示的对话框
+                     */
+                    new MyDialog(BaseActivity.getCurrentActivty(), R.layout.dialog_go_login_tip)
+                            .setButtonListener(R.id.btn_cancel, null, new MyDialog.DialogClickListener() {
+                        @Override
+                        public void dialogClick(MyDialog dialog) {
+                            BaseActivity currentActivty = (BaseActivity) BaseActivity.getCurrentActivty();
+                            currentActivty.jumpToLoginActivity();
+                        }})
+                            .setTextViewContent(R.id.tv_content, messageStr)
+                            .setImageViewListener(R.id.iv_close, new MyDialog.DialogClickListener() {
+                        @Override
+                        public void dialogClick(MyDialog dialog) {
+                            dialog.dismiss();
+                        }})
+                            .show();
+                    //登录提示 要直接return  防止弹出下面的dialog
+                    return;
                 }
                 mOnResultListener.onError(messageStr);
                 LogUitls.e("打印输出错误代码httpResultBean---->", httpResultBean.getError().getMessage().toString());
@@ -144,6 +161,7 @@ public class HttpSubscriber<T> implements Observer<T> {
              */
             if (e.getMessage().equals(CODE_REQUEST_SUCCESS_EXCEPTION)) {
                 mOnResultListener.onSuccess(null);
+                return;
             }
             /**
              * 弹出提示 所有的后台返回的提示
@@ -160,22 +178,22 @@ public class HttpSubscriber<T> implements Observer<T> {
         /**
          * 排除网络请求成功的情况
          */
-       if(!messageStr.equals(CODE_REQUEST_SUCCESS_EXCEPTION)){
-           /**
-            * 显示 错误提示的对话框
-            */
-           new MyDialog(BaseActivity.getCurrentActivty(), R.layout.dialog_error_tip).setButtonListener(R.id.btn_cancel, null, new MyDialog.DialogClickListener() {
-               @Override
-               public void dialogClick(MyDialog dialog) {
-                   dialog.dismiss();
-               }
-           }).setTextViewContent(R.id.tv_content, messageStr).setImageViewListener(R.id.iv_close, new MyDialog.DialogClickListener() {
-               @Override
-               public void dialogClick(MyDialog dialog) {
-                   dialog.dismiss();
-               }
-           }).show();
-       }
+        if (!messageStr.equals(CODE_REQUEST_SUCCESS_EXCEPTION)) {
+            /**
+             * 显示 错误提示的对话框
+             */
+            new MyDialog(BaseActivity.getCurrentActivty(), R.layout.dialog_error_tip).setButtonListener(R.id.btn_cancel, null, new MyDialog.DialogClickListener() {
+                @Override
+                public void dialogClick(MyDialog dialog) {
+                    dialog.dismiss();
+                }
+            }).setTextViewContent(R.id.tv_content, messageStr).setImageViewListener(R.id.iv_close, new MyDialog.DialogClickListener() {
+                @Override
+                public void dialogClick(MyDialog dialog) {
+                    dialog.dismiss();
+                }
+            }).show();
+        }
     }
 
     @Override

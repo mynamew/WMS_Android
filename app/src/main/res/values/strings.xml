@@ -147,6 +147,7 @@
     <string name="set_userinfo">用户信息</string>
     <string name="server_set">服务设置</string>
     <string name="set_team">组织切换</string>
+    <string name="go_login">去登录</string>
     /**====== 清点 ======**/
     <string name="dialog_update_material_point">修改清点</string>
     <string name="order_no">\t订单号：%1$s</string>
@@ -235,7 +236,7 @@
     <string name="sale_out_stock_list_title">销售出库单列表</string>
     <string name="dont_query_data_please_repeat_input">未查询到数据，请重新输入！</string>
     <string name="production_return_list_title">生产退料单列表</string>
-    <string name="sale_return_orderno_list_title">销售退料单列表</string>
+    <string name="sale_return_orderno_list_title">销售退货单列表</string>
     <string name="form_change_list_title">形态转换单列表</string>
     <string name="department_tip">部门</string>
     <string name="please_input_department">请输入部门</string>

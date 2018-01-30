@@ -44,7 +44,6 @@ public class NormalQualityPresenter extends MvpBasePresenter<NormalQualityView> 
 
                 @Override
                 public void onError(String errorMsg) {
-                    ToastUtils.showShort(errorMsg);
                 }
             });
         }
@@ -67,7 +66,6 @@ public class NormalQualityPresenter extends MvpBasePresenter<NormalQualityView> 
 
                 @Override
                 public void onError(String errorMsg) {
-                    ToastUtils.showShort(errorMsg);
                 }
             });
         }
@@ -89,7 +87,6 @@ public class NormalQualityPresenter extends MvpBasePresenter<NormalQualityView> 
 
                 @Override
                 public void onError(String errorMsg) {
-                    ToastUtils.showShort(errorMsg);
                 }
             });
         }

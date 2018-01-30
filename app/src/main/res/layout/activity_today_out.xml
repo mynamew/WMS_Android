@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context="com.timi.sz.wms_android.mvp.UI.query.todayout.TodayOutActivity">
+
+    <include layout="@layout/title_head"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="180px"
+        android:background="#fffef4"
+        android:orientation="vertical"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="74px"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:id="@+id/ll_today_instock"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="52px"
+                    android:drawablePadding="10px"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="30px"
+                    android:text="出库总笔数"
+                    android:textSize="14sp"
+                    />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="20px"
+                    android:src="@mipmap/home_today_out_stock"/>
+
+            </LinearLayout>
+
+            <View
+                android:id="@+id/divider_vertical1"
+                android:layout_width="1px"
+                android:layout_height="match_parent"
+                android:layout_gravity="bottom"
+                android:layout_marginTop="20px"
+                android:background="@color/divide_color"/>
+
+            <LinearLayout
+                android:id="@+id/ll_today_outstock"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="52px"
+                    android:drawablePadding="10px"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="30px"
+                    android:text="出库总数"
+                    android:textSize="14sp"
+                    />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="20px"
+                    android:src="@mipmap/home_today_in_stock"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/divider_horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_marginEnd="20px"
+            android:layout_marginLeft="20px"
+            android:layout_marginRight="20px"
+            android:layout_marginStart="20px"
+            android:background="@color/divide_color"
+            />
+
+        <LinearLayout
+            android:id="@+id/ll_today_num"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+            <RelativeLayout
+                android:id="@+id/rl_today_in"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/tv_todayout_pen_qty"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="2"
+                    android:textColor="#ff7200"
+                    android:textSize="24sp"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="20dp"
+                    android:text="笔"
+                    android:textColor="#333"
+                    android:textSize="14sp"
+                    />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="1px"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="10px"
+                android:background="@color/divide_color"
+                />
+
+            <RelativeLayout
+                android:id="@+id/rl_today_out"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/tv_todayout_total_qty"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="10"
+                    android:textColor="#ff7200"
+                    android:textSize="24sp"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="22dp"
+                    android:layout_marginRight="22dp"
+                    android:text="笔"
+                    android:textColor="#333"
+                    android:textSize="14sp"/>
+            </RelativeLayout>
+        </LinearLayout>
+    </LinearLayout>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rlv_todayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+</LinearLayout>

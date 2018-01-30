@@ -236,6 +236,10 @@
         </activity>
         <activity android:name=".mvp.UI.bluetooth.BluetoothActivity">
         </activity>
+        <activity android:name=".mvp.UI.query.todayin.TodayInActivity">
+        </activity>
+        <activity android:name=".mvp.UI.query.todayout.TodayOutActivity">
+        </activity>
     </application>
 
 </manifest>

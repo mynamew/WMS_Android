@@ -235,7 +235,7 @@
     <string name="sale_out_stock_list_title">销售出库单列表</string>
     <string name="dont_query_data_please_repeat_input">未查询到数据，请重新输入！</string>
     <string name="production_return_list_title">生产退料单列表</string>
-    <string name="sale_return_orderno_list_title">销售退料单列表</string>
+    <string name="sale_return_orderno_list_title">销售退货单列表</string>
     <string name="form_change_list_title">形态转换单列表</string>
     <string name="department_tip">部门</string>
     <string name="please_input_department">请输入部门</string>
@@ -1009,4 +1009,5 @@
     <string name="stockin_work_form_change_out_title">形态转换出库详情</string>
     <string name="stockin_work_check_title">盘点详情</string>
     <string name="stockin_work_allot_in_title">调入详情</string>
+    <string name="go_login">去登录</string>
 </resources>

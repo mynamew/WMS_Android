@@ -308,16 +308,14 @@ public class Advance2Activity extends BaseActivity<AdvanceQualityView, AdvanceQu
          * 提交质检成功后 清空选择的链表（即提交时的数据链表）
          */
         mSelectFaultData.clear();
-//        /**
-//         * 参数
-//         */
-//        Map<String, Object> params = new HashMap<>();
-//        params.put("UserId", SpUtils.getInstance().getUserId());
-//        params.put("OrgId", SpUtils.getInstance().getOrgId());
-//        params.put("mac", PackageUtils.getMac());
-//        params.put("ReceiptId", receiptId);
-//        params.put("ReceiptDetailId", receiptDetailId);
-//        getPresenter().getAdvanceCheckItemData(params);
+        //设置质检结果
+        if (qcResult == 2) {//待定的状态
+            qualityAdavance2.setQualityResult(QualityResultView.QUALITY_RESULT_WAIT_DEAL);
+        } else if (qcResult == 3) {
+            qualityAdavance2.setQualityResult(QualityResultView.QUALITY_RESULT_FAIL);
+        } else {
+            qualityAdavance2.setQualityResult(QualityResultView.QUALITY_RESULT_SUCCESS);
+        }
         /**
          * 高检2 数据处理
          */
@@ -723,7 +721,7 @@ public class Advance2Activity extends BaseActivity<AdvanceQualityView, AdvanceQu
         /**
          * 如果是最后一个样品编码
          */
-        if (sampleCode >mData.getNormalSummary().getSampleQty()) {
+        if (sampleCode > mData.getNormalSummary().getSampleQty()) {
             tvSampleCode.setText(R.string.none);
         } else {
             /**
@@ -1294,6 +1292,7 @@ public class Advance2Activity extends BaseActivity<AdvanceQualityView, AdvanceQu
             }
         });
     }
+
     /**
      * 隐藏不良原因
      */
@@ -1354,7 +1353,7 @@ public class Advance2Activity extends BaseActivity<AdvanceQualityView, AdvanceQu
                 /**
                  * 如果样品全部质检完成
                  */
-                if (sampleCode >mData.getNormalSummary().getSampleQty()) {
+                if (sampleCode > mData.getNormalSummary().getSampleQty()) {
                     ToastUtils.showShort(getString(R.string.quality_complete_tip));
                 } else {
                     /**
@@ -1415,22 +1414,22 @@ public class Advance2Activity extends BaseActivity<AdvanceQualityView, AdvanceQu
                             }
                         }
                     }
-                    updateCommitData(sampleCode,measureValue,qcResult,checkItemId,faultId);
+                    updateCommitData(sampleCode, measureValue, qcResult, checkItemId, faultId);
                     //刷新适配器
                     adapterCheckItem.notifyDataSetChanged();
                 } else {
                     //现更改数据
-                    updateCommitData(sampleCode,measureValue,qcResult,checkItemId,faultId);
+                    updateCommitData(sampleCode, measureValue, qcResult, checkItemId, faultId);
                     //网络请求
-                    RequestUpdateCheckitemBean bean=new RequestUpdateCheckitemBean();
+                    RequestUpdateCheckitemBean bean = new RequestUpdateCheckitemBean();
                     bean.setMAC(PackageUtils.getMac());
                     bean.setQCQty(listCheckItemBean.getSampleSeq());
                     bean.setOrgId(SpUtils.getInstance().getOrgId());
-                    bean.setUserId( SpUtils.getInstance().getUserId());
+                    bean.setUserId(SpUtils.getInstance().getUserId());
                     bean.setReceiptId(receiptId);
                     bean.setReceiptDetailId(receiptDetailId);
 
-                    RequestUpdateCheckitemBean.ItemDataBean itemBean=new RequestUpdateCheckitemBean.ItemDataBean();
+                    RequestUpdateCheckitemBean.ItemDataBean itemBean = new RequestUpdateCheckitemBean.ItemDataBean();
                     itemBean.setRemark(listCheckItemBean.getRemark());
                     itemBean.setCheckItemId(listCheckItemBean.getCheckItemId());
                     itemBean.setQCResult(qcResult);
@@ -1449,17 +1448,17 @@ public class Advance2Activity extends BaseActivity<AdvanceQualityView, AdvanceQu
     /**
      * 更改提交的数据（即做质检时需要提交的数据）
      */
-    public void  updateCommitData(int sampleCode, String measureValue, int qcResult, int checkItemId, int faultId){
-        if(null!=checkItemDatas.get(sampleCode)){
+    public void updateCommitData(int sampleCode, String measureValue, int qcResult, int checkItemId, int faultId) {
+        if (null != checkItemDatas.get(sampleCode)) {
             List<GetAdvance2Data.CheckItemBean> checkItemBeen = checkItemDatas.get(sampleCode);
-            for (int i = 0; i <checkItemBeen.size() ; i++) {
-                if(checkItemBeen.get(i).getCheckItemId()==checkItemId){
+            for (int i = 0; i < checkItemBeen.size(); i++) {
+                if (checkItemBeen.get(i).getCheckItemId() == checkItemId) {
                     GetAdvance2Data.CheckItemBean checkItemBean = checkItemBeen.get(i);
                     List<GetAdvance2Data.CheckItemBean.FaultDataBean> faultData = checkItemBean.getFaultData();
                     for (int j = 0; j < faultData.size(); j++) {
-                        if(faultData.get(j).getFaultId()==faultId){
+                        if (faultData.get(j).getFaultId() == faultId) {
                             faultData.get(j).setFaultQty(1);
-                        }else {
+                        } else {
                             faultData.get(j).setFaultQty(0);
                         }
                     }
@@ -1468,8 +1467,8 @@ public class Advance2Activity extends BaseActivity<AdvanceQualityView, AdvanceQu
             /**
              * 设置选择的数据
              */
-            for (int i = 0; i <mSelectFaultData.size() ; i++) {
-                if (mSelectFaultData.get(i).getCheckItemId()==checkItemId) {
+            for (int i = 0; i < mSelectFaultData.size(); i++) {
+                if (mSelectFaultData.get(i).getCheckItemId() == checkItemId) {
                     mSelectFaultData.get(i).setFaultId(faultId);
                     mSelectFaultData.get(i).setQCResult(qcResult);
                     mSelectFaultData.get(i).setQCValue(measureValue);

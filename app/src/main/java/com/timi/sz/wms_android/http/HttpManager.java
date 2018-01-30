@@ -105,7 +105,7 @@ public class HttpManager {
                         if (t.isSuccess()) {//请求成功的返回
 //                            if (t.isUnAuthorizedRequest()) {
 
-                            if (null == t.getResult()) {
+                            if (null == t.getResult()) {//防止返回数据为null的情况
                                 throw new ApiException(CODE_REQUEST_SUCCESS_EXCEPTION);
                             }
                             return t.getResult();
