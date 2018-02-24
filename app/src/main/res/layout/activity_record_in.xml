@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context="com.timi.sz.wms_android.mvp.UI.query.recode_in.RecordInActivity">
+
+    <include layout="@layout/title_head"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="70px"
+        android:layout_marginLeft="70px"
+        android:layout_marginRight="30px"
+        android:layout_marginTop="20px"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="入库类型："
+            android:textColor="@color/color_666"
+            android:textSize="13sp"/>
+
+        <EditText
+            android:id="@+id/et_instock_type"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/selector_et"
+            android:hint="请选择查询的入库类型"
+            android:padding="10px"
+            android:textColor="@color/color_333"
+            android:textSize="14sp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginLeft="10px"
+        android:layout_marginRight="30px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:textSize="13sp"
+                android:textColor="@color/color_666"
+                android:layout_height="wrap_content"
+                android:text="单据编号："/>
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="单据日期："
+                android:textColor="@color/color_666"
+                android:textSize="13sp"/>
+        </RadioGroup>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:textSize="13sp"
+            android:layout_marginLeft="75px"
+            android:textColor="@color/color_666"
+            android:layout_height="wrap_content"
+            android:text="物料编码："/>
+    </LinearLayout>
+</LinearLayout>

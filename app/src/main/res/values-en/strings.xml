@@ -1010,4 +1010,10 @@
     <string name="stockin_work_check_title">盘点详情</string>
     <string name="stockin_work_allot_in_title">调入详情</string>
     <string name="go_login">去登录</string>
+    <string name="barcode_state">条码状态</string>
+    <string name="in_pack">所在容器</string>
+    <string name="in_lib">所在仓库</string>
+    <string name="in_lib_location">所在库位</string>
+    <string name="query_material_code">物料代码</string>
+    <string name="batch_date">批次日期</string>
 </resources>

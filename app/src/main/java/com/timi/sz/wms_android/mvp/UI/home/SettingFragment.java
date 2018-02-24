@@ -191,6 +191,12 @@ public class SettingFragment extends BaseFragment<SetFragmentView, SetFragmentPr
                             dialog.dismiss();
                         }
                     })
+                    .setImageViewListener(R.id.iv_close, new MyDialog.DialogClickListener() {
+                        @Override
+                        public void dialogClick(MyDialog dialog) {
+                            dialog.dismiss();
+                        }
+                    })
                     .setButtonListener(R.id.tv_logout_confirm, getString(R.string.confirm), new MyDialog.DialogClickListener() {
                         @Override
                         public void dialogClick(MyDialog dialog) {

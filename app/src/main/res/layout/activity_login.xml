@@ -66,6 +66,7 @@
                     android:hint="@string/login_input_username"
                     android:inputType="text"
                     android:paddingLeft="20px"
+                    android:textSize="14sp"
                     android:paddingRight="20px"
                     android:textColorHint="#999"/>
 
@@ -105,6 +106,7 @@
                     android:layout_weight="1"
                     android:background="@null"
                     android:hint="@string/login_inpiut_psw"
+                    android:textSize="14sp"
                     android:inputType="textPassword"
                     android:paddingLeft="20px"
                     android:paddingRight="20px"

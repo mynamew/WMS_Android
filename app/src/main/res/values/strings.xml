@@ -1005,12 +1005,18 @@
     <string name="error_title">错误提示</string>
     <string name="current_material_no_datecode_please_repeat_in">当前物料没有批次信息，请重新进入！</string>
     <string name="set_pda_code_success">设置PDA参数成功！</string>
+    /**====== SN追溯查询 ======**/
+    <string name="barcode_state">条码状态</string>
+    <string name="in_pack">所在容器</string>
+    <string name="in_lib">所在仓库</string>
+    <string name="in_lib_location">所在库位</string>
+    <string name="query_material_code">物料代码</string>
+    <string name="batch_date">批次日期</string>
     /******************************************************************************************************************************************************/
     /**====== 蓝牙 ======**/
     <string name="notifyTitle">提示</string>
     <string name="gpsNotifyMsg">当前手机扫描蓝牙需要打开定位功能。</string>
     <string name="setting">前往设置</string>
-
 
 
 </resources>

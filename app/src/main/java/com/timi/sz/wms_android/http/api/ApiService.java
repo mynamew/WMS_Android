@@ -14,7 +14,6 @@ import com.timi.sz.wms_android.bean.instock.outsource_return_material.QueryOutSo
 import com.timi.sz.wms_android.bean.instock.search.BuyOrdernoBean;
 import com.timi.sz.wms_android.bean.instock.search.FinishGoodsCreateBillBean;
 import com.timi.sz.wms_android.bean.instock.search.QueryPrdInstockByInputResult;
-import com.timi.sz.wms_android.bean.instock.search.OtherAuditSelectOrdernoBean;
 import com.timi.sz.wms_android.bean.instock.search.QueryPrdReturnByInputResult;
 import com.timi.sz.wms_android.bean.instock.search.ReceiveOrdernoBean;
 import com.timi.sz.wms_android.bean.instock.search.SaleGoodsReturnBean;
@@ -30,10 +29,7 @@ import com.timi.sz.wms_android.bean.outstock.buy.SubmitBarcodeOutSplitAuditData;
 import com.timi.sz.wms_android.bean.outstock.buy.SubmitBarcodePurReturnData;
 import com.timi.sz.wms_android.bean.outstock.detail.BillMaterialDetailResult;
 import com.timi.sz.wms_android.bean.outstock.detail.MaterialDetailResult;
-import com.timi.sz.wms_android.bean.outstock.other.QueryOtherOutStockByInputResult;
 import com.timi.sz.wms_android.bean.outstock.outsource.GetMaterialLotData;
-import com.timi.sz.wms_android.bean.outstock.outsource.GetOutSourcePickDetailResult;
-import com.timi.sz.wms_android.bean.outstock.outsource.GetWWDetailPickDataResult;
 import com.timi.sz.wms_android.bean.outstock.outsource.QueryOutSourceFeedByInputResult;
 import com.timi.sz.wms_android.bean.outstock.outsource.QueryOutSourcePickByInputResult;
 import com.timi.sz.wms_android.bean.outstock.outsource.QueryWWPickDataByOutSourceResult;
@@ -44,9 +40,6 @@ import com.timi.sz.wms_android.bean.outstock.pick.GetSalesOutSotckByInputForPick
 import com.timi.sz.wms_android.bean.outstock.pick.QueryDNByInputForPickResult;
 import com.timi.sz.wms_android.bean.outstock.pick.QuerySalesOutSotckByInputForPickResult;
 import com.timi.sz.wms_android.bean.outstock.pick.QueryTransferByInputForPickResult;
-import com.timi.sz.wms_android.bean.outstock.product.GetPrdDetailPickDataResult;
-import com.timi.sz.wms_android.bean.outstock.product.GetPrdFeedDetailResult;
-import com.timi.sz.wms_android.bean.outstock.product.GetProductPickDetailResult;
 import com.timi.sz.wms_android.bean.outstock.product.QueryPrdFeedByInputResult;
 import com.timi.sz.wms_android.bean.outstock.product.QueryProductPickByInputResult;
 import com.timi.sz.wms_android.bean.outstock.sale.QueryDNByInputForOutStockResult;
@@ -65,14 +58,15 @@ import com.timi.sz.wms_android.bean.quality.mrp.MrpReviewData;
 import com.timi.sz.wms_android.bean.quality.normal.CommitNormalData;
 import com.timi.sz.wms_android.bean.quality.normal.NormalQualityData;
 import com.timi.sz.wms_android.bean.quality.update_barcode.BarEditGetUnInstockBarcodeData;
+import com.timi.sz.wms_android.bean.query.request.RequestBean;
+import com.timi.sz.wms_android.bean.query.response.StockSummeryResult;
+import com.timi.sz.wms_android.bean.query.response.TodayInStockDetailResult;
+import com.timi.sz.wms_android.bean.query.response.TodayOutStockDetailResult;
 import com.timi.sz.wms_android.bean.stockin_work.CheckRecordResult;
 import com.timi.sz.wms_android.bean.stockin_work.ContainerAdjustResult;
-import com.timi.sz.wms_android.bean.stockin_work.FormChangeDetailResult;
 import com.timi.sz.wms_android.bean.stockin_work.LibraryAdjustResult;
 import com.timi.sz.wms_android.bean.stockin_work.MaterialDataBean;
 import com.timi.sz.wms_android.bean.stockin_work.ReturnDetailResult;
-import com.timi.sz.wms_android.bean.stockin_work.ScanLocationResult;
-import com.timi.sz.wms_android.bean.stockin_work.ScanMaterialResult;
 import com.timi.sz.wms_android.bean.stockin_work.StockInWorkDetailResult;
 import com.timi.sz.wms_android.bean.stockin_work.allot_out.QueryAllotOutResult;
 import com.timi.sz.wms_android.bean.stockin_work.check.RequestSubmitCheckDataBean;
@@ -84,7 +78,6 @@ import com.timi.sz.wms_android.bean.stockin_work.query.AllotScanResult;
 import com.timi.sz.wms_android.bean.stockin_work.query.FormChangeInResult;
 import com.timi.sz.wms_android.bean.stockin_work.query.FormChangeOutResult;
 import com.timi.sz.wms_android.bean.stockin_work.query.PointResult;
-import com.timi.sz.wms_android.bean.stockin_work.query.StockQueryResult;
 import com.timi.sz.wms_android.bean.stockin_work.stock_query.MaterialQueryResult;
 import com.timi.sz.wms_android.bean.stockin_work.stock_query.QueryStockContainerResult;
 
@@ -1278,7 +1271,7 @@ public interface ApiService {
      */
     @FormUrlEncoded
     @POST("api/services/wpda/IQC/IQCGetDefaultReceiptForIQC")
-    Observable<CommonResult<List<QualityListBean>>> getQualityList(@FieldMap Map<String, Object> params);
+    Observable<CommonResult<List<QualityListBean>>> getQualityList(@FieldMap  Map<String,Object> params);
 
     /**
      * 查询来料质检列表
@@ -1737,5 +1730,29 @@ public interface ApiService {
     Observable<CommonResult<SubmitCheckDataResult>> submitCheckData(@Body RequestSubmitCheckDataBean params);
     /************************************************************************************************************/
     /**************************************************************************************************************/
+    /**
+     * 今日入库和今日出库总揽
+     *
+     * @param params
+     * @return
+     */
+    @POST("api/services/wpda/StockSummary/GetStockSummary")
+    Observable<CommonResult<StockSummeryResult>> getStockSummary(@Body RequestBean params);
+   /**
+     * 今日入库明细
+     *
+     * @param params
+     * @return
+     */
+    @POST("api/services/wpda/InStockDetailSummary/GetInStockDetailSummary")
+    Observable<CommonResult<List<TodayInStockDetailResult>>> getInStockDetailSummary(@Body RequestBean params);
+    /**
+     * 今日入库明细
+     *
+     * @param params
+     * @return
+     */
+    @POST("api/services/wpda/OutStockDetailSummary/GetOutStockDetailSummary")
+    Observable<CommonResult<List<TodayOutStockDetailResult>>> getOutStockDetailSummary(@Body RequestBean params);
 
 }

@@ -1,0 +1,381 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context="com.timi.sz.wms_android.mvp.UI.query.orderno_barcode.OrdernoBarcodeActivity">
+
+    <include layout="@layout/title_head"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="70px"
+        android:layout_marginTop="10px"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30px"
+            android:text="业务类型："
+            android:textColor="@color/color_666"
+            android:textSize="14sp"/>
+
+           <LinearLayout
+               android:padding="1px"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:layout_marginLeft="30px"
+               android:layout_marginRight="30px"
+               android:background="@drawable/bg_rectangle_et_unfocused">
+               <Spinner
+                   android:id="@+id/spinner_select_type"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                 />
+           </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="70px"
+        android:layout_marginTop="10px"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30px"
+            android:text="单据编号："
+            android:textColor="@color/color_666"
+            android:textSize="14sp"/>
+
+        <EditText
+            android:id="@+id/et_barcode_num"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30px"
+            android:layout_marginRight="30px"
+            android:background="@drawable/selector_et"
+            android:hint="请输入要查询的来源单据编号"
+            android:padding="10px"
+            android:textSize="13sp"/>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginBottom="10px"
+        android:layout_marginTop="10px"
+        android:background="@color/divide_color"/>
+
+    <LinearLayout
+        android:id="@+id/ll_query_result"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30px"
+            android:layout_marginRight="30px"
+            android:layout_marginTop="10px"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="业务类型："
+                    android:textSize="13sp"/>
+
+                <TextView
+                    android:id="@+id/tv_businness_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="成品入库"
+                    android:textSize="13sp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="出入类型："
+                    android:textSize="13sp"/>
+
+                <TextView
+                    android:id="@+id/tv_out_in_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="入库"
+                    android:textSize="13sp"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30px"
+            android:layout_marginRight="30px"
+            android:layout_marginTop="10px"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="单据编号："
+                    android:textSize="13sp"/>
+
+                <TextView
+                    android:id="@+id/tv_barcode_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="CP14020302131"
+                    android:textSize="13sp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="单据日期："
+                    android:textSize="13sp"/>
+
+                <TextView
+                    android:id="@+id/tv_barcode_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="2017/11/20"
+                    android:textSize="13sp"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30px"
+            android:layout_marginRight="30px"
+            android:layout_marginTop="10px"
+            android:background="@color/color_333"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="1px"
+                android:layout_weight="1"
+                android:background="@color/divide_color"
+                android:gravity="center"
+                android:text="行号"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="1px"
+                android:layout_weight="4"
+                android:background="@color/divide_color"
+                android:gravity="center"
+                android:text="操作时间"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="1px"
+                android:layout_weight="3"
+                android:background="@color/divide_color"
+                android:gravity="center"
+                android:text="物料代码"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="1px"
+                android:layout_weight="2"
+                android:background="@color/divide_color"
+                android:gravity="center"
+                android:text="数量"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30px"
+            android:layout_marginRight="30px"
+            android:background="@color/color_333"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="1px"
+                android:layout_weight="4"
+                android:background="@color/divide_color"
+                android:gravity="center"
+                android:text="条码"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="1px"
+                android:layout_weight="2"
+                android:background="@color/divide_color"
+                android:gravity="center"
+                android:text="条码类型"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="1px"
+                android:layout_weight="2"
+                android:background="@color/divide_color"
+                android:gravity="center"
+                android:text="库位"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="1px"
+                android:layout_weight="2.5"
+                android:background="@color/divide_color"
+                android:gravity="center"
+                android:text="批次日期"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30px"
+            android:layout_marginRight="30px"
+            android:background="@color/color_333"
+            android:orientation="horizontal"
+            android:padding="1px">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/white"
+                android:gravity="center"
+                android:text="#1"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="4"
+                android:background="@color/white"
+                android:gravity="center"
+                android:text="2017-12-09 15:34:01"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:background="@color/white"
+                android:gravity="center"
+                android:text="10401010001"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:background="@color/white"
+                android:gravity="center"
+                android:text="10"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30px"
+            android:layout_marginRight="30px"
+            android:background="@color/color_333"
+            android:orientation="horizontal"
+            android:padding="1px">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="4"
+                android:background="@color/white"
+                android:gravity="center"
+                android:text="CT2017121400006"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:background="@color/white"
+                android:gravity="center"
+                android:text="SN"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:background="@color/white"
+                android:gravity="center"
+                android:text="01D02115"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2.5"
+                android:background="@color/white"
+                android:gravity="center"
+                android:text="2017-12-14"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30px"
+            android:layout_marginRight="30px"
+            android:background="@color/color_333"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="1px"
+                android:paddingLeft="10px"
+                android:background="@color/white"
+                android:gravity="left"
+                android:text="压缩弹簧"/>
+
+        </LinearLayout>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rlv_barcode_query"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30px"
+            android:layout_marginRight="30px"/>
+    </LinearLayout>
+</LinearLayout>

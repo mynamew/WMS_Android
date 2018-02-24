@@ -1,1 +1,1 @@
-include ':app', ':PullToRefresh', ':DateSelectlibrary'
+include ':app', ':PullToRefresh', ':DateSelectlibrary', ':MPChartLib'
