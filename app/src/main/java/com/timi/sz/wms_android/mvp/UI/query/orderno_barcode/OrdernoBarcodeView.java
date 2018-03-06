@@ -1,5 +1,6 @@
 package com.timi.sz.wms_android.mvp.UI.query.orderno_barcode;
 
+import com.timi.sz.wms_android.bean.query.response.QueryBillBarcodeResult;
 import com.timi.sz.wms_android.mvp.base.view.iml.MvpBaseView;
 
 /**
@@ -10,4 +11,5 @@ import com.timi.sz.wms_android.mvp.base.view.iml.MvpBaseView;
 
 public interface OrdernoBarcodeView extends MvpBaseView {
 
+    void queryBillBarcode(QueryBillBarcodeResult o);
 }

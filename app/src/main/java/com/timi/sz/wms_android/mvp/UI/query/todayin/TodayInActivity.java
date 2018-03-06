@@ -3,6 +3,7 @@ package com.timi.sz.wms_android.mvp.UI.query.todayin;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.method.MultiTapKeyListener;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import com.timi.sz.wms_android.R;
 import com.timi.sz.wms_android.base.adapter.BaseRecyclerAdapter;
 import com.timi.sz.wms_android.base.adapter.RecyclerViewHolder;
+import com.timi.sz.wms_android.base.uils.LogUitls;
 import com.timi.sz.wms_android.base.uils.PackageUtils;
 import com.timi.sz.wms_android.base.uils.SpUtils;
 import com.timi.sz.wms_android.bean.query.request.RequestBean;
@@ -48,8 +50,9 @@ public class TodayInActivity extends BaseActivity<TodayInView, TodayInPresenter>
     @BindView(R.id.rlc_todayin)
     RecyclerView rlcTodayin;
 
-    private BaseRecyclerAdapter<TodayInStockDetailResult>  adapter;
+    private BaseRecyclerAdapter<TodayInStockDetailResult> adapter;
     private List<TodayInStockDetailResult> mData;
+
     @Override
     public int setLayoutId() {
         return R.layout.activity_today_in;
@@ -67,11 +70,11 @@ public class TodayInActivity extends BaseActivity<TodayInView, TodayInPresenter>
 
     @Override
     public void initData() {
-        mData=new ArrayList<>();
+        mData = new ArrayList<>();
         RequestBean requestBean = new RequestBean();
-        requestBean.setMAC( PackageUtils.getMac());
-        requestBean.setOrgId( SpUtils.getInstance().getOrgId());
-        requestBean.setUserId( SpUtils.getInstance().getOrgId());
+        requestBean.setMAC(PackageUtils.getMac());
+        requestBean.setOrgId(SpUtils.getInstance().getOrgId());
+        requestBean.setUserId(SpUtils.getInstance().getUserId());
         getPresenter().getTodayInSummeryTotal(requestBean);
     }
 
@@ -87,38 +90,40 @@ public class TodayInActivity extends BaseActivity<TodayInView, TodayInPresenter>
 
     @Override
     public void getTodayInSummeryTotal(StockSummeryResult o) {
-        setTextViewContent(tvTodayinTotalQty,o.getInstockCount());
+        setTextViewContent(tvTodayinTotalQty, o.getInstockCount());
         RequestBean requestBean = new RequestBean();
-        requestBean.setMAC( PackageUtils.getMac());
-        requestBean.setOrgId( SpUtils.getInstance().getOrgId());
-        requestBean.setUserId( SpUtils.getInstance().getOrgId());
+        requestBean.setMAC(PackageUtils.getMac());
+        requestBean.setOrgId(SpUtils.getInstance().getOrgId());
+        requestBean.setUserId(SpUtils.getInstance().getUserId());
         getPresenter().getTodayInSummeryDetail(requestBean);
     }
 
     @Override
     public void getTodayInSummeryDetail(List<TodayInStockDetailResult> o) {
-           if(null!=o){
-               mData.addAll(o) ;
-           }
-           if(null==adapter){
-               adapter=new BaseRecyclerAdapter<TodayInStockDetailResult>(this,mData) {
-                   @Override
-                   protected int getItemLayoutId(int viewType) {
-                       return R.layout.item_todayin;
-                   }
+        LogUitls.e("链表的大小---->", o.size());
+        if (null != o) {
+            mData.addAll(o);
+        }
+        LogUitls.e("链表的大小---->", mData.size());
+        if (null == adapter) {
+            adapter = new BaseRecyclerAdapter<TodayInStockDetailResult>(this, mData) {
+                @Override
+                protected int getItemLayoutId(int viewType) {
+                    return R.layout.item_todayin;
+                }
 
-                   @Override
-                   protected void bindData(RecyclerViewHolder holder, int position, TodayInStockDetailResult item) {
-                       holder.setTextView(R.id.tv_line_num,"#"+item.getLine());
-                       holder.setTextView(R.id.tv_material_code,item.getMatetialCode());
-                       holder.setTextView(R.id.tv_material_num,item.getQty());
-                       holder.setTextView(R.id.tv_material_name,item.getMaterialName()+" "+item.getMaterialAttribute());
-                       holder.setTextView(R.id.tv_supplier,item.getMaterialStandard());
-                   }
-               };
-               rlcTodayin.setAdapter(adapter);
-               rlcTodayin.setLayoutManager(new LinearLayoutManager(this));
-           }else adapter.notifyDataSetChanged();
+                @Override
+                protected void bindData(RecyclerViewHolder holder, int position, TodayInStockDetailResult item) {
+                    holder.setTextView(R.id.tv_line_num, "#" + item.getLine());
+                    holder.setTextView(R.id.tv_material_code, item.getMaterialCode());
+                    holder.setTextView(R.id.tv_material_num, item.getQty());
+                    holder.setTextView(R.id.tv_material_name, item.getMaterialName() + " " + item.getMaterialAttribute());
+                    holder.setTextView(R.id.tv_supplier, item.getMaterialStandard());
+                }
+            };
+            rlcTodayin.setAdapter(adapter);
+            rlcTodayin.setLayoutManager(new LinearLayoutManager(this));
+        } else adapter.notifyDataSetChanged();
     }
 
 }

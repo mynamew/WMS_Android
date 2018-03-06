@@ -7,85 +7,99 @@ package com.timi.sz.wms_android.bean.query.response;
  */
 
 public class TodayInStockDetailResult {
-    private int instockCode;
-    private int Line;
-    private int DetailId;
-    private int MaterialId;
-    private String MatetialCode;
-    private String MaterialName;
-    private String MaterialStandard;
-    private String MaterialAttribute;
-    private int Qty;
-    public int getLine() {
-        return Line;
-    }
 
-    public void setLine(int line) {
-        Line = line;
-    }
 
-    public int getInstockCode() {
+    /**
+     * instockCode : CP140711008
+     * detailId : 0
+     * line : 1
+     * materialId : 5360
+     * materialCode : 30201010006
+     * materialName : MS-643RSD无线后视系统
+     * materialStandard : 客户：M43WRLDG/643D后视镜+610发射盒+309摄像头+6*配件
+     * materialAttribute : null
+     * qty : 20
+     */
+
+    private String instockCode;
+    private int detailId;
+    private int line;
+    private int materialId;
+    private String materialCode;
+    private String materialName;
+    private String materialStandard;
+    private Object materialAttribute;
+    private int qty;
+
+    public String getInstockCode() {
         return instockCode;
     }
 
-    public void setInstockCode(int instockCode) {
+    public void setInstockCode(String instockCode) {
         this.instockCode = instockCode;
     }
 
     public int getDetailId() {
-        return DetailId;
+        return detailId;
     }
 
     public void setDetailId(int detailId) {
-        DetailId = detailId;
+        this.detailId = detailId;
+    }
+
+    public int getLine() {
+        return line;
+    }
+
+    public void setLine(int line) {
+        this.line = line;
     }
 
     public int getMaterialId() {
-        return MaterialId;
+        return materialId;
     }
 
     public void setMaterialId(int materialId) {
-        MaterialId = materialId;
+        this.materialId = materialId;
     }
 
-    public String getMatetialCode() {
-        return MatetialCode;
+    public String getMaterialCode() {
+        return materialCode;
     }
 
-    public void setMatetialCode(String matetialCode) {
-        MatetialCode = matetialCode;
+    public void setMaterialCode(String materialCode) {
+        this.materialCode = materialCode;
     }
 
     public String getMaterialName() {
-        return MaterialName;
+        return materialName;
     }
 
     public void setMaterialName(String materialName) {
-        MaterialName = materialName;
+        this.materialName = materialName;
     }
 
     public String getMaterialStandard() {
-        return MaterialStandard;
+        return materialStandard;
     }
 
     public void setMaterialStandard(String materialStandard) {
-        MaterialStandard = materialStandard;
+        this.materialStandard = materialStandard;
     }
 
-    public String getMaterialAttribute() {
-        return MaterialAttribute;
+    public Object getMaterialAttribute() {
+        return materialAttribute;
     }
 
-    public void setMaterialAttribute(String materialAttribute) {
-        MaterialAttribute = materialAttribute;
+    public void setMaterialAttribute(Object materialAttribute) {
+        this.materialAttribute = materialAttribute;
     }
 
     public int getQty() {
-        return Qty;
+        return qty;
     }
 
     public void setQty(int qty) {
-        Qty = qty;
+        this.qty = qty;
     }
-
 }

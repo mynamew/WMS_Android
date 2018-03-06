@@ -20,7 +20,7 @@ public class RecordInActivity extends BaseActivity<RecordInView,RecordInPresente
 
     @Override
     public void initBundle(Bundle savedInstanceState) {
-      setActivityTitle("入库统计");
+      setActivityTitle("入库记录");
     }
 
     @Override

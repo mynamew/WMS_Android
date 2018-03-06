@@ -250,6 +250,8 @@
         </activity>
         <activity android:name=".mvp.UI.query.recode_in.RecordInActivity">
         </activity>
+        <activity android:name=".mvp.UI.query.recode_out.RecordOutActivity">
+        </activity>
     </application>
 
 </manifest>

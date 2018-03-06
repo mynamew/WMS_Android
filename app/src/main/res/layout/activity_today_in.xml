@@ -101,7 +101,7 @@
         <LinearLayout
             android:id="@+id/ll_today_num"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             >
 
             <RelativeLayout
@@ -170,10 +170,9 @@
                     android:textSize="14sp"/>
             </RelativeLayout>
         </LinearLayout>
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rlc_todayin"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
     </LinearLayout>
-
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rlc_todayin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 </LinearLayout>

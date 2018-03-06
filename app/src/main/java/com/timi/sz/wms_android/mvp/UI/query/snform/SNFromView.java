@@ -1,5 +1,6 @@
 package com.timi.sz.wms_android.mvp.UI.query.snform;
 
+import com.timi.sz.wms_android.bean.query.response.QueryBarcodeTracesResult;
 import com.timi.sz.wms_android.mvp.base.view.iml.MvpBaseView;
 
 /**
@@ -9,4 +10,5 @@ import com.timi.sz.wms_android.mvp.base.view.iml.MvpBaseView;
  */
 
 public interface SNFromView extends MvpBaseView {
+    void queryBarcodeTraces(QueryBarcodeTracesResult o);
 }

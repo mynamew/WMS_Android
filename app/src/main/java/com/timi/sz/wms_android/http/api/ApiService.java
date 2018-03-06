@@ -58,7 +58,13 @@ import com.timi.sz.wms_android.bean.quality.mrp.MrpReviewData;
 import com.timi.sz.wms_android.bean.quality.normal.CommitNormalData;
 import com.timi.sz.wms_android.bean.quality.normal.NormalQualityData;
 import com.timi.sz.wms_android.bean.quality.update_barcode.BarEditGetUnInstockBarcodeData;
+import com.timi.sz.wms_android.bean.query.request.QueryBillBarcodeBean;
+import com.timi.sz.wms_android.bean.query.request.QueryInStockDetailBean;
 import com.timi.sz.wms_android.bean.query.request.RequestBean;
+import com.timi.sz.wms_android.bean.query.request.SNRequsetBean;
+import com.timi.sz.wms_android.bean.query.response.QueryBarcodeTracesResult;
+import com.timi.sz.wms_android.bean.query.response.QueryBillBarcodeResult;
+import com.timi.sz.wms_android.bean.query.response.QueryInStockDetailResult;
 import com.timi.sz.wms_android.bean.query.response.StockSummeryResult;
 import com.timi.sz.wms_android.bean.query.response.TodayInStockDetailResult;
 import com.timi.sz.wms_android.bean.query.response.TodayOutStockDetailResult;
@@ -1754,5 +1760,28 @@ public interface ApiService {
      */
     @POST("api/services/wpda/OutStockDetailSummary/GetOutStockDetailSummary")
     Observable<CommonResult<List<TodayOutStockDetailResult>>> getOutStockDetailSummary(@Body RequestBean params);
-
+    /**
+     * SN 追溯
+     *
+     * @param params
+     * @return
+     */
+    @POST("api/services/wpda/BarcodeTraces/QueryBarcodeTraces")
+    Observable<CommonResult<QueryBarcodeTracesResult>> queryBarcodeTraces(@Body SNRequsetBean params);
+    /**
+     * 单据条码查询
+     *
+     * @param params
+     * @return
+     */
+    @POST("api/services/wpda/BillBarcode/QueryBillBarcode")
+    Observable<CommonResult<QueryBillBarcodeResult>> queryBillBarcode(@Body QueryBillBarcodeBean params);
+    /**
+     * 入库记录查询
+     *
+     * @param params
+     * @return
+     */
+    @POST("api/services/wpda/InStockDetail/QueryInStockDetail")
+    Observable<CommonResult<List<QueryInStockDetailResult>>> queryInStockDetail(@Body QueryInStockDetailBean params);
 }

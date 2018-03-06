@@ -1,5 +1,7 @@
 package com.timi.sz.wms_android.base.uils;
 
+import com.timi.sz.wms_android.R;
+import com.timi.sz.wms_android.mvp.base.BaseActivity;
 import com.timi.sz.wms_android.mvp.base.BaseApplication;
 
 import java.util.HashMap;
@@ -308,5 +310,57 @@ public class Constants {
     public static final int EDITTEXT_MATERIAL = 5304;//物料码
     public static final int EDITTEXT_CONTAINER = 5305;//容器码
     public static final int EDITTEXT_BARCODE = 5306;//最小包装码
+    /***********
+     *  单据类型
+     *********************************************************************************************/
+    public static final int BILL_TYPE_SEND = 10;//送货单
+    public static final int BILL_TYPE_BUY = 11;//采购订单
+    public static final int BILL_TYPE_OUT= 12;//委外单
+    public static final int BILL_TYPE_ARRIVE = 13;//到货单
+    public static final int BILL_TYPE_COME_IN_LIB= 14;//来料入库单
+    public static final int BILL_TYPE_BUY_RETURN= 15;//采购退料单
+    public static final int BILL_TYPE_REFUSE=16;//拒收单
 
+    public static final int BILL_TYPE_OUT_SEND=20;//委外发料单
+    public static final int BILL_TYPE_OUT_FEED=21;//委外补料单
+    public static final int BILL_TYPE_OUT_RETURN=22;//委外退料单
+
+    public static final int BILL_TYPE_PRODUCTION_GET=23;//生产领料单
+    public static final int BILL_TYPE_PRODUCTION_FEED=24;//生产补料单
+    public static final int BILL_TYPE_PRODUCTION_RETURN=25;//生产退料单
+    public static final int BILL_TYPE_PRODUCTION_WORK=30;//生产工单，生产任务单
+    public static final int BILL_TYPE_PRODUCTION_GET_APPLY=31;//领料申请单
+
+    public static final int BILL_TYPE_FINISH_IN_LIB=40;//产成品入库
+    public static final int BILL_TYPE_SEND_NOTICE=41;//发货通知单
+    public static final int BILL_TYPE_SALE_OUT_STOCK=42;//销售出库单
+    public static final int BILL_TYPE_SALE_RETURN=43;//销售退货单
+    public static final int BILL_TYPE_SALE=44;//销售订单
+    public static final int BILL_TYPE_NETWORK=45;//网上订单
+
+    public static final int BILL_TYPE_ALLOT=50;//调拨单
+    public static final int BILL_TYPE_OTHER_INSTOCK=51;//其他入库单
+    public static final int BILL_TYPE_OTHER_OUTSTOCK=52;//其他出库单
+    public static final int BILL_TYPE_FORM_CHANGE=53;//形态转换单
+
+    public static final int BILL_TYPE_CHECK=60;//盘点单
+    public static final int BILL_TYPE_PCIK=61;//拣货单
+
+    /**
+     * 获取单据类型
+     * @param billType
+     * @return
+     */
+    public String   getBillType(int billType){
+        String  billTypeStr="";
+        switch (billType){
+            case BILL_TYPE_SEND:
+                billTypeStr= BaseActivity.getCurrentActivty().getString(R.string.stock_in_send_order);
+                break;
+            case BILL_TYPE_BUY:
+                billTypeStr=BaseActivity.getCurrentActivty().getString(R.string.stock_in_buy_order);;
+                break;
+        }
+        return billTypeStr;
+    }
 }

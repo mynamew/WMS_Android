@@ -307,6 +307,7 @@
 
         <LinearLayout
             android:layout_width="0dp"
+            android:visibility="gone"
             android:layout_height="wrap_content"
             android:layout_weight="1">
 
@@ -326,7 +327,28 @@
                 android:textSize="13sp"
                 />
         </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:visibility="visible"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/item_material_attr"
+                android:textColor="@color/color_666"
+                android:textSize="13sp"/>
+
+            <TextView
+                android:id="@+id/tv_material_attr"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20px"
+                android:textColor="#333"
+                android:textSize="13sp"
+                />
+        </LinearLayout>
     </LinearLayout>
 
     <View

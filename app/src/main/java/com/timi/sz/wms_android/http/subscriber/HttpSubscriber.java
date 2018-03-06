@@ -132,6 +132,7 @@ public class HttpSubscriber<T> implements Observer<T> {
                             .setButtonListener(R.id.btn_cancel, null, new MyDialog.DialogClickListener() {
                         @Override
                         public void dialogClick(MyDialog dialog) {
+                            dialog.dismiss();
                             BaseActivity currentActivty = (BaseActivity) BaseActivity.getCurrentActivty();
                             currentActivty.jumpToLoginActivity();
                         }})

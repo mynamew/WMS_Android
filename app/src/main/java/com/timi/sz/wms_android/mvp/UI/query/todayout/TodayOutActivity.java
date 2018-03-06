@@ -76,7 +76,7 @@ public class TodayOutActivity extends BaseActivity<TodayOutView, TodayOutPresent
         RequestBean requestBean = new RequestBean();
         requestBean.setMAC(PackageUtils.getMac());
         requestBean.setOrgId(SpUtils.getInstance().getOrgId());
-        requestBean.setUserId(SpUtils.getInstance().getOrgId());
+        requestBean.setUserId(SpUtils.getInstance().getUserId());
         getPresenter().getTodayOutSummeryTotal( requestBean);
     }
 
@@ -97,7 +97,7 @@ public class TodayOutActivity extends BaseActivity<TodayOutView, TodayOutPresent
         RequestBean requestBean = new RequestBean();
         requestBean.setMAC(PackageUtils.getMac());
         requestBean.setOrgId(SpUtils.getInstance().getOrgId());
-        requestBean.setUserId(SpUtils.getInstance().getOrgId());
+        requestBean.setUserId(SpUtils.getInstance().getUserId());
         getPresenter().getTodayOutSummeryDetail(requestBean);
     }
 
